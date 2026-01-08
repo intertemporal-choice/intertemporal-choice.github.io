@@ -74,17 +74,6 @@ Derivations and methods useful for macroeconomics:
 - Aggregation methods
 - Approximation techniques for lognormal distributions
 
-## Building the Book
-
-This book is built using [MyST Markdown](https://mystmd.org/). To build locally:
-
-```bash
-uv sync
-uv run myst build --html
-```
-
-The live version is available at the project website.
-
 ## License
 
 - Content: [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
