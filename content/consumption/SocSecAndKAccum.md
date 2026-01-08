@@ -83,7 +83,7 @@ Thus the capital accumulation curve is shifted down. The dynamics of the introdu
 
 % Figure is generated in the Mathematica notebook OLGModel.nb
 
-:::{figure} /content/consumption/SocSecAndKAccum/LaTeX/Figures/SocSecAndKAccum.png
+:::{figure} /sources/consumption/SocSecAndKAccum/LaTeX/Figures/SocSecAndKAccum.png
 :name: fig:SocSecAndKAccum
 
 Convergence of OLG Economy After Intro of Social Security

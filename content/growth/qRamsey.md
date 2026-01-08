@@ -196,7 +196,7 @@ are not very large, those costs can have a large effect in
 
 changing behavior away from the frictionless optimum.
 
-:::{figure} /content/growth/qRamsey/LaTeX/Figures/PolFuncAdjCost0VsBase.png
+:::{figure} /sources/growth/qRamsey/LaTeX/Figures/PolFuncAdjCost0VsBase.png
 :name: fig:PolFuncAdjCost0VsBase
 :align: center
 
@@ -227,7 +227,7 @@ thus leading to a smaller reduction in investment and a more gradual
 
 return to equilibrium.
 
-:::{figure} /content/growth/qRamsey/LaTeX/Figures/PolFuncRRALoVsHi.png
+:::{figure} /sources/growth/qRamsey/LaTeX/Figures/PolFuncRRALoVsHi.png
 :name: fig:PolFuncRRALoVsHi
 :align: center
 
@@ -282,7 +282,7 @@ the model with investment costs, consumption can be higher initially (the first
 
 red consumption dot is above the first black one, post-shock).
 
-:::{figure} /content/growth/qRamsey/LaTeX/Figures/kDropCostAdj0VsBase.png
+:::{figure} /sources/growth/qRamsey/LaTeX/Figures/kDropCostAdj0VsBase.png
 :name: fig:kDropCostAdj0VsBase
 :align: center
 
@@ -341,7 +341,7 @@ capital (which is always 1). This can be interpreted as a boom in
 
 asset prices.
 
-:::{figure} /content/growth/qRamsey/LaTeX/Figures/PatRiseCostAdj0VsBase.png
+:::{figure} /sources/growth/qRamsey/LaTeX/Figures/PatRiseCostAdj0VsBase.png
 :name: fig:PatRiseCostAdj0VsBase
 :align: center
 
@@ -383,7 +383,7 @@ adjustment eventually asymptotes to the same equilibrium as the
 
 frictionless economy.
 
-:::{figure} /content/growth/qRamsey/LaTeX/Figures/DeprRiseCostAdj0VsBase.png
+:::{figure} /sources/growth/qRamsey/LaTeX/Figures/DeprRiseCostAdj0VsBase.png
 :name: fig:DeprRiseCostAdj0VsBase
 :align: center
 

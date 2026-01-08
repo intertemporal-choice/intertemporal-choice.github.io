@@ -699,7 +699,7 @@ designate this model's steady-state {math}`K`.)
 > \end{aligned}\end{gathered}
 > ```
 >
-> :::{figure} /content/growth/BlanchardFiniteHorizon/LaTeX/Figures/BlanchardFiniteHorizPhase1.png
+> :::{figure} /sources/growth/BlanchardFiniteHorizon/LaTeX/Figures/BlanchardFiniteHorizPhase1.png
 > :::
 >
 > In the infinite horizon economy we have {math}`\pDies = 0` and so the
@@ -919,7 +919,7 @@ of the policy on different generations in the economy.
 >
 > generations.
 >
-> :::{figure} /content/growth/BlanchardFiniteHorizon/LaTeX/Figures/BlanchardFiniteHorizPhase2.png
+> :::{figure} /sources/growth/BlanchardFiniteHorizon/LaTeX/Figures/BlanchardFiniteHorizPhase2.png
 > :::
 >
 > The next figure shows the path of consumption per capita in this
@@ -940,7 +940,7 @@ of the policy on different generations in the economy.
 >
 > approaches a new, lower equilibrium level of consumption {math}`C'`.
 >
-> :::{figure} /content/growth/BlanchardFiniteHorizon/LaTeX/Figures/BlanchardCDynamics.png
+> :::{figure} /sources/growth/BlanchardFiniteHorizon/LaTeX/Figures/BlanchardCDynamics.png
 > :::
 
 :::
@@ -1042,7 +1042,7 @@ experiment examined above?
 >
 > from a state of dynamic inefficiency.
 >
-> :::{figure} /content/growth/BlanchardFiniteHorizon/LaTeX/Figures/BlanchardFiniteHorizPhase3.png
+> :::{figure} /sources/growth/BlanchardFiniteHorizon/LaTeX/Figures/BlanchardFiniteHorizPhase3.png
 > :::
 
 :::

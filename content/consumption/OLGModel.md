@@ -125,7 +125,7 @@ Then the steady-state will be the point where {math}`\kLev_{t+1}=\kLev_{t}=\bar{
 
 Dynamics of the model can be analyzed using a simple figure relating the capital stock per capita in period {math}`t+1` to that in period {math}`t`. The solid locus is a graph of equation {eq}`eq:ktp1`. We depict the 45 degree line because it indicates the set of "steady-state" points where {math}`\kLev_{t+1}=\kLev_{t}` and thus any intersection of the 45 degree line with the {math}`\kLev_{t+1}(\kLev_{t})` function indicates a steady-state of the model.
 
-:::{figure} /content/consumption/OLGModel/LaTeX/Figures/OLGModelDynamics.png
+:::{figure} /sources/consumption/OLGModel/LaTeX/Figures/OLGModelDynamics.png
 :name: fig:OLGModelDynamics
 
 Convergence of OLG Economy to Steady State
@@ -257,7 +257,7 @@ Note further that there is actually a {math}`\bar{\kLev}` so large that consumpt
 
 These points are illustrated graphically in the remaining figure.
 
-:::{figure} /content/consumption/OLGModel/LaTeX/Figures/fnkBoth.png
+:::{figure} /sources/consumption/OLGModel/LaTeX/Figures/fnkBoth.png
 :name: fig:fnkBoth
 
 Gross and Net Per Capita Output as a Function of {math}`\kLev`

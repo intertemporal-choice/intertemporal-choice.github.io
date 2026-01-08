@@ -411,13 +411,13 @@ but since a change in {math}`\TaxFree` does not change {math}`\kPriceAfterITC` i
 and an increase in {math}`\TaxFree` has no effect on {math}`\fFunc^{k}(\check{k})` and therefore no effect on {math}`\check{k}`.
 :::
 
-:::{figure} /content/investment/EntrepreneurPF/LaTeX/Figures/lPhaseDiag.png
+:::{figure} /sources/investment/EntrepreneurPF/LaTeX/Figures/lPhaseDiag.png
 :name: fig:qMod-lPhaseDiag
 
 Phase Diagram for {math}`\vk`
 :::
 
-:::{figure} /content/investment/EntrepreneurPF/LaTeX/Figures/qPhaseDiag.png
+:::{figure} /sources/investment/EntrepreneurPF/LaTeX/Figures/qPhaseDiag.png
 :name: fig:PhaseDiag
 
 Phase Diagram for {math}`\q`

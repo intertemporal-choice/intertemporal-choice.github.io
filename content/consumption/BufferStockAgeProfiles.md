@@ -6,13 +6,13 @@ This section reproduces figures from {cite:t}`carroll:bslcpih` showing the profi
 
 In practice, there seems to be a strong connection between the income and consumption profiles. The second set of figures shows the implications of a "buffer stock" model of optimizing life cycle behavior in which consumers are modestly impatient, have a standard CRRA utility function with a precautionary saving motive, and face uncertain income. Consumers in this model optimally engage in buffer stock saving behavior until 10-15 years before retirement, as a result of their combination of impatience and prudence. This model is thus capable of matching the broad pattern of the data.
 
-:::{figure} /content/consumption/BufferStockAgeProfiles/LaTeX/Figures/AgeProfilesData.png
+:::{figure} /sources/consumption/BufferStockAgeProfiles/LaTeX/Figures/AgeProfilesData.png
 :name: fig:AgeProfilesData
 
 Age Profiles of Income and Consumption in Data
 :::
 
-:::{figure} /content/consumption/BufferStockAgeProfiles/LaTeX/Figures/AgeProfilesTheory.png
+:::{figure} /sources/consumption/BufferStockAgeProfiles/LaTeX/Figures/AgeProfilesTheory.png
 :name: fig:AgeProfilesTheory
 
 Age Profiles of Income and Consumption in Theory (Buffer Stock Model)

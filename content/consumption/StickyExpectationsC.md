@@ -72,13 +72,13 @@ In principle, we could allow each individual in this economy to experience a dif
 
 Assuming (here and henceforth) that the growth factor for permanent income is {math}`\WGro=1`, the figures below show the path of consumption and bank balances (the solid dots) for an economy populated by omniscient consumers who in periods {math}`t-n` for {math}`n>0` had experienced {math}`\TShkEmp_{t-n}=1` (**PermShks=true:** {math}`=\Psi_{t-n}`); that is, this economy has had no shocks to income in the past. (For convenience, the consumer is assumed to have arrived in period {math}`t` with {math}`\BLev_{t}=0`). In period {math}`t` the consumer draws {math}`\TShkEmp_{t}=2` (**PermShks=true:** and {math}`\Psi_{t}=1`); thereafter {math}`\TShkEmp_{t+n}=1` (**PermShks=true:** {math}`\Psi_{t+n}=`). The figures show {math}`\CLev_{t-2},\CLev_{t-1},\CLev_{t},\Ex_{t}[\CLev_{t+1}],\Ex_{t}[\CLev_{t+2}],\ldots` and the corresponding values for {math}`\BLev`.
 
-:::{figure} /content/consumption/StickyExpectationsC/LaTeX/Figures/cPlot.png
+:::{figure} /sources/consumption/StickyExpectationsC/LaTeX/Figures/cPlot.png
 :name: fig:aftershock
 
 Path of {math}`\CLev` after a shock {math}`\TShkEmp_{t}=2`, Omniscient Consumers
 :::
 
-:::{figure} /content/consumption/StickyExpectationsC/LaTeX/Figures/bPlot.png
+:::{figure} /sources/consumption/StickyExpectationsC/LaTeX/Figures/bPlot.png
 :name: fig:epidshock
 
 Path of {math}`\BLev` after a shock {math}`\TShkEmp_{t}=2`, Omniscient Consumers
@@ -242,13 +242,13 @@ We are finally in position to show how aggregate consumption and wealth would re
 
 Consider the case of a positive shock of size {math}`\hat{\TShkEmp}_{t}=1`, as before. In the first period consumption rises only by {math}`\Pi \MPC`, rather than the full amount corresponding to the permanent income associated with the new level of wealth. Therefore aggregate wealth in period {math}`t+1` will be greater than it would have been in the omniscient model. Similarly for all subsequent periods. Thus, in contrast with the omniscient model, the sluggish adjustment of consumption to the shock means that the shock has a permanent effect on the level of aggregate wealth, and therefore on the level of aggregate consumption. (The figures below depict the results.)
 
-:::{figure} /content/consumption/StickyExpectationsC/LaTeX/Figures/StickyExpectationsCc.png
+:::{figure} /sources/consumption/StickyExpectationsC/LaTeX/Figures/StickyExpectationsCc.png
 :name: fig:StickyExpectationsCc
 
 Path of {math}`\CLev` after a shock {math}`\TShkEmp_{t}=2`; Sticky Expectations in Red/Gray
 :::
 
-:::{figure} /content/consumption/StickyExpectationsC/LaTeX/Figures/StickyExpectationsCb.png
+:::{figure} /sources/consumption/StickyExpectationsC/LaTeX/Figures/StickyExpectationsCb.png
 :name: fig:StickyExpectationsCb
 
 Path of {math}`\BLev` after a shock {math}`\TShkEmp_{t}=2`; Sticky Expectations in Red/Gray

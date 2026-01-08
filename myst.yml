@@ -141,11 +141,6 @@ project:
     - format: tex
       output: exports/intertemporal-choice-tex/
 
-  # Downloads available on the site
-  downloads:
-    - file: exports/intertemporal-choice.pdf
-      title: Download PDF
-
   # Exclude source LaTeX files and build artifacts (only notes/ gets built)
   exclude:
     - "content/**"
@@ -201,7 +196,5 @@ site:
     - title: JHU Economics
       url: https://econ.jhu.edu
   actions:
-    - title: Download PDF
-      url: exports/intertemporal-choice.pdf
     - title: GitHub
       url: https://github.com/jhu-econ/intertemporal-choice

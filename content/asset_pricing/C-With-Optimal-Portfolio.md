@@ -230,7 +230,7 @@ This analysis has been entirely in partial equilibrium. General equilibrium cons
 
 A final important observation is that the assumption that the consumer has no labor income means that perhaps the largest "classical" effect of interest rates on consumption and saving is entirely omitted from the analysis here: The human wealth effect. (See {cite:t}`summersCapTax` for a statement of the argument that the human wealth effect of interest rates is likely in practice to be much larger than the income and substitution effects.) The general equilibrium decline in riskfree rates attendant upon an increase in riskiness of the risky asset should boost human wealth, increase consumption, and reduce saving. For careful and insightful treatments of the general equilibrium problem, see {cite:t}`paEntrep` and {cite:t}`corneliImbalances`.
 
-:::{figure} /content/asset_pricing/C-With-Optimal-Portfolio/LaTeX/Figures/MPCApproxVsExactVsSigma.png
+:::{figure} /sources/asset_pricing/C-With-Optimal-Portfolio/LaTeX/Figures/MPCApproxVsExactVsSigma.png
 :name: fig:CwOP-MPCvsSigma
 
 MPC as a Function of {math}`\sigma` Calculated Using (Numerically) Exact and Approximate Methods

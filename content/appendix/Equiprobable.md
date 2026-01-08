@@ -228,7 +228,7 @@ to the CDF above the conditional mean values for {math}`\ShkMeanOne_{1}` and {ma
 
 regions.
 
-:::{figure} /content/consumption/Equiprobable/LaTeX/Figures/CDFPlot.png
+:::{figure} /sources/consumption/Equiprobable/LaTeX/Figures/CDFPlot.png
 :name: fig:corr0p5
 
 ‘True’ CDF With Approximation Points in Red for {math}`\omega=0.5`

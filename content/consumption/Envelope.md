@@ -124,7 +124,7 @@ The general principle can be condensed into a rule of thumb by realizing that th
 \end{aligned}
 ```
 
-:::{figure} /content/consumption/Envelope/LaTeX/Figures/Envelope.png
+:::{figure} /sources/consumption/Envelope/LaTeX/Figures/Envelope.png
 :name: fig:Envelope
 
 Illustration of the Envelope Theorem at Alternative Values of {math}`\mRat`
