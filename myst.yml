@@ -89,6 +89,9 @@ project:
         - jhu-ksas
         - econ-ark
       github: alanlujan91
+      email: alujan@jhu.edu
+      orcid: 0000-0002-5289-7054
+      corresponding: true
       roles:
         - Software
         - Writing – review & editing
