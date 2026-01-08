@@ -65,13 +65,11 @@ and we can use the law of iterated expectations to substitute repeatedly, obtain
 
 We usually assume the "no-bubbles" condition that says that {math}`\lim_{T \rightarrow \infty} \mathbb{E}_{t}[\mathbf{R}^{-(T+1-t)}\mathsf{P}_{T+1}] = 0`. In this case it is clear that the equilibrium price must equal the present discounted value of dividends:
 
-:::{margin}
-Compare this to the Lucas Asset Pricing model, which is very similar.
-:::
-
 ```{math}
 \mathsf{P}_{t}^{*} = \mathbb{E}_{t}\left[\sum_{s=t+1}^{\infty} \mathbf{R}^{t-s}\mathbf{r}_{s}\right]
 ```
+
+This result is very similar to what emerges from the [Lucas Asset Pricing model](#sec:LucasAssetPrice), though there the stochastic discount factor plays the role that {math}`\mathbf{R}` plays here.
 
 Suppose now that dividends are expected to grow by a constant factor {math}`\Gamma` henceforth. In that case we have
 
@@ -84,7 +82,7 @@ Suppose now that dividends are expected to grow by a constant factor {math}`\Gam
 \end{aligned}
 ```
 
-which is known as the "Gordon formula." The tricky thing in applying the formula is to know what to assume for {math}`\mathbf{R}` and {math}`\Gamma`. The interest rate {math}`\mathbf{R}` should be the interest rate "appropriate" for discounting risky quantities. The usual assumption is that {math}`\mathbf{R} = \mathsf{R}+\Phi` where {math}`\mathsf{R}` is the rate of return on perfectly safe (riskfree) assets and {math}`\Phi` is the rate-of-return premium that people demand as compensation for the risk inherent in future dividends.
+where the final approximation uses log rates: {math}`\mathbf{r} \equiv \log \mathbf{R}` and {math}`\gamma \equiv \log \Gamma`. This is known as the "Gordon formula." The tricky thing in applying the formula is to know what to assume for {math}`\mathbf{R}` and {math}`\Gamma`. The interest rate {math}`\mathbf{R}` should be the interest rate "appropriate" for discounting risky quantities. The usual assumption is that {math}`\mathbf{R} = \mathsf{R}+\Phi` where {math}`\mathsf{R}` is the rate of return on perfectly safe (riskfree) assets and {math}`\Phi` is the rate-of-return premium that people demand as compensation for the risk inherent in future dividends.
 
 ## The Random Walk of Asset Pricing
 

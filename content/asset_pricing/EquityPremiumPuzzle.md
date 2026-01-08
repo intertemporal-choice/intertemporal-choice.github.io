@@ -157,10 +157,6 @@ Using the same "facts" and approximations as above, we get the standard approxim
 \Delta \log c_{t+1} \approx (1/\CRRA) (\rfree - \timeRate)
 ```
 
-The "riskfree rate puzzle" is that average consumption growth per capita has been about 1.5 percent (in the US in the postwar period) while real riskfree interest rates have been at most 1 percent.
+The "riskfree rate puzzle" is that average consumption growth per capita has been about 1.5 percent (in the US in the postwar period) while real riskfree interest rates have been at most 1 percent. Even if we assume a time preference rate of {math}`\timeRate=0` (no impatience at all, e.g. {math}`\beta=1`), the only way this equation can hold is if {math}`\CRRA` is a very small number (maybe even less than one). Of course, this is precisely the opposite of the conclusion of the equity premium puzzle, which implies the {math}`\CRRA` must be very large.
 
-:::{margin}
-In principle, the riskfree rate puzzle might be explicable by overlapping generations. In practice, it's hard to make this work well. Note also that a precautionary saving motive reduces the riskfree rate puzzle by adding the variance term to consumption growth.
-:::
-
-Even if we assume a time preference rate of {math}`\timeRate=0` (no impatience at all, e.g. {math}`\beta=1`), the only way this equation can hold is if {math}`\CRRA` is a very small number (maybe even less than one). Of course, this is precisely the opposite of the conclusion of the equity premium puzzle, which implies the {math}`\CRRA` must be very large.
+In principle, the riskfree rate puzzle might be explicable by overlapping generations models, though in practice it has proven difficult to make this mechanism work quantitatively. A precautionary saving motive can also help reduce the puzzle by adding a variance term to consumption growth, which would allow the Euler equation to hold even with low riskfree rates.

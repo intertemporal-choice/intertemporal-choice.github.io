@@ -2,28 +2,6 @@
 
 # The Lucas Asset Pricing Model
 
-<!-- By CDC, first draft while walking dogs, on the occasion of reading Sargent's lecture notes praising the Lucas model as "beautiful"
-
-Truth is not beauty, nor is beauty truth,
-despite Plato and Keats, pace Barro and Muth;
-
-When brought to real data, all theories unravel;
-like fairytale princes, they just cannot travel
-from bastions of mathland, all tidy and clean,
-where nobody ever asks "what does it all mean?"
-
-The recent debacle in macro and finance
-has tempered the ardor, has cooled the romance
-so why haven't theorists deserted the field,
-at least till their wounds have started to heal?
-
-Because changes in thinking are often quite slow,
-even when the real world serves a body blow.
-
-But progress does happen, in fits and in starts,
-[something about how we're getting to a much better place, eventually -- maybe ending in smarts]...
--->
-
 ## Introduction/Setup
 
 {cite:t}`lucas:assetpricing` considers an economy populated by infinitely many[^aggregation-note] identical individual consumers, in which the only assets are a set of identical infinitely-lived trees. Aggregate output is the fruit that falls from the trees, and cannot be stored (it would rot!); because {math}`\uFunc^{\prime}(\cRat)>0~\forall~\cRat`, the fruit is all eaten:
@@ -36,28 +14,16 @@ But progress does happen, in fits and in starts,
 \cRat_{t}\Pop_{t} = \dvdnd_{t}\Kap_{t}
 ```
 
-where {math}`\cRat_{t}` is consumption of fruit per person, {math}`\Pop_{t}` is the population, {math}`\Kap_{t}` measures the stock of trees, and {math}`\dvdnd_{t}` is the exogenous output of fruit that drops from each tree.
-
-:::{margin}
-Crucial assumption: the stock of trees is *exogenous*; you can't consume a little less fruit and have more trees next period.
-:::
+where {math}`\cRat_{t}` is consumption of fruit per person, {math}`\Pop_{t}` is the population, {math}`\Kap_{t}` measures the stock of trees, and {math}`\dvdnd_{t}` is the exogenous output of fruit that drops from each tree. A crucial assumption is that the stock of trees is exogenous: you cannot consume a little less fruit and have more trees next period.
 
 (In a given year, each tree produces exactly the same amount of fruit as every other tree, but {math}`\dvdnd_{t}` varies from year to year depending on the weather.) An economy like this, in which output arrives without any deliberate actions on the part of residents, is called an "endowment" economy (or, sometimes, an "exchange" economy).[^production-economy]
 
 [^production-economy]: The alternative is a "production" economy, in which factors of production (labor, capital, maybe land, maybe knowledge) combine somehow to generate the output.
 
-:::{margin}
-Market for buying and selling trees by individual consumers.
-:::
-
-:::{margin}
-Model requires mental gymnastics: lots of identical individual consumers must be satisfied.
-:::
-
 (The-Market-for-Trees)=
 ## The Market for Trees
 
-If there is a perfect capital market for trees, the price of trees {math}`\Price_{t}` must be such that, each period, each (identical) consumer does not want either to increase or to decrease their holding of trees.[^equilibrium-price]
+We now consider a market in which individual consumers can buy and sell trees. This requires some mental gymnastics: with infinitely many identical consumers, we must find a price at which every one of them is simultaneously satisfied. If there is a perfect capital market for trees, the price of trees {math}`\Price_{t}` must be such that, each period, each (identical) consumer does not want either to increase or to decrease their holding of trees.[^equilibrium-price]
 
 [^equilibrium-price]: If, at a hypothesized equilibrium price, every identical consumer wanted (say) to increase their holdings, that price could not be an equilibrium price, because with a fixed supply of trees everyone cannot increase their holding of trees at once!
 
@@ -100,13 +66,11 @@ Rewriting in the form of Bellman's equation,
 
 the first order condition tells us that
 
-:::{margin}
-The {math}`d/dc` term corresponds to {math}`\Risky`.
-:::
-
 ```{math}
 0 = \uFunc^{\prime}(c_{t}^{i})+\DiscFac \Ex_{t}^{i}\left[\vFunc^{\prime}({m}_{t+1}^{i})\frac{d}{dc_{t}^{i}}\left(\overbrace{({\Price}_{t+1}+\dvdnd_{t+1})\underbrace{\left((1+\dvdnd_{t}/\Price_{t})\kap_{t}^{i}-c_{t}^{i}/\Price_{t}\right)}_{\kap_{t+1}^{i}}}^{{m}_{t+1}^{i}}\right)\right]
 ```
+
+where the {math}`d/dc_{t}^{i}` derivative term will yield the return factor {math}`\Risky_{t+1}`.
 
 (FOCwithRisky)=
 so
@@ -273,7 +237,7 @@ says that the only risk in the rate of return is attributable to unpredictable v
 :::{admonition} Empirical reality check
 :class: dropdown
 
-Empirically, this is a bad assumption: Using, e.g., quarterly data from the S&P 500 stock index in the U.S., the variation in total returns that reflects changes in dividends is only about [5?] percent. Note further that the logarithmic utility model has an explicit prediction: since {math}`\Price_{t}/\dvdnd_{t} = \timeRate`, that model says that the size of *fluctuations* in prices is identical to the size of fluctuations in dividends: {math}`\Delta \Price_{t+1}/\Price_{t} = \Delta \dvdnd_{t+1}/\dvdnd_{t}`. Oops!
+Empirically, this is a bad assumption: Using quarterly data from the S&P 500 stock index in the U.S., the vast majority of variation in total returns reflects changes in prices rather than changes in dividends. Note further that the logarithmic utility model has an explicit prediction: since {math}`\Price_{t}/\dvdnd_{t} = \timeRate`, that model says that the size of *fluctuations* in prices is identical to the size of fluctuations in dividends: {math}`\Delta \Price_{t+1}/\Price_{t} = \Delta \dvdnd_{t+1}/\dvdnd_{t}`. Empirically, price fluctuations are far larger than dividend fluctuations.
 :::
 
 ## Aggregate Returns Versus Individual Returns
@@ -457,7 +421,7 @@ so since {math}`\Price_{t+1}/\dvdnd_{t+1}` is a finite number we should have tha
 \dvdnd_{t}^{2}  \lim_{\dvdnd_{t} \downarrow 0} \left(\frac{\Price_{t}}{\dvdnd_{t}}\right) = \DiscFac  \left[\left(\left(\frac{(1-\CRRA)}{1}\right)^{2}\sigma^{2}/2\right)\left(\frac{\Price_{t+1}}{\dvdnd_{t+1}}+1\right)\right]
 ```
 
-which should imply that {math}`\Price_{t} \dvdnd_{t}` is a finite number even as {math}`\dvdnd_{t} \downarrow 0`. To have both limits be finite, we might be able to use a trick like the ones proposed by {cite:t}`boyd:weighted`. This would involve multiplying by some {math}`f(\dvdnd)` that approaches {math}`\dvdnd_{t}^{2}` as {math}`\dvdnd_{t}` approaches zero but approaches 1 as {math}`\dvdnd_{t}` approaches infinity. Like, {math}`f(d) = \dvdnd^{2} \left(\frac{1}{1+\dvdnd^{2}}\right)`? (The idea is that {math}`f(\dvdnd) \Price_{t}/\dvdnd_{t}` might be finite in both limits (and everywhere in between) even if {math}`\Price_{t}/\dvdnd_{t}` is not). [Think more about this later].
+which should imply that {math}`\Price_{t} \dvdnd_{t}` is a finite number even as {math}`\dvdnd_{t} \downarrow 0`. To have both limits be finite, we might be able to use a trick like the ones proposed by {cite:t}`boyd:weighted`. This would involve multiplying by some {math}`f(\dvdnd)` that approaches {math}`\dvdnd_{t}^{2}` as {math}`\dvdnd_{t}` approaches zero but approaches 1 as {math}`\dvdnd_{t}` approaches infinity. Like, {math}`f(d) = \dvdnd^{2} \left(\frac{1}{1+\dvdnd^{2}}\right)`? (The idea is that {math}`f(\dvdnd) \Price_{t}/\dvdnd_{t}` might be finite in both limits (and everywhere in between) even if {math}`\Price_{t}/\dvdnd_{t}` is not).
 
 **Alternative**. The solution to the AR(1) case is surely somewhere between the solutions to the IID and RW cases. That means that it is between {eq}`eq:PtLogIID` and {eq}`eq:PtLogRW` which can surely somehow be used to produce a reasonable limit. Actually, it seems pretty clear that the relevant comparison is to the IID case.
 :::

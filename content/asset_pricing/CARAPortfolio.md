@@ -10,10 +10,6 @@ will earn a normally distributed stochastic return {math}`\Risky_{T} \sim
 \mathcal{N}(\Risky,\sigma)` versus a safe asset that will earn return
 {math}`\Rfree < \Risky` (the risky asset gets a bold font because you must be a bold person to invest in a risky asset!).[^fn1][^fn2]
 
-:::{margin}
-Note that {math}`\EPrem_{T}` could be a negative number, which means that someone swoops down on the other assets of shareholders and takes some of them.
-:::
-
 [^fn1]: The seminal paper examining this problem (in continuous time) was by {cite:t}`merton:restat`; that paper also examines the case with CRRA utility and lognormal returns.
 
 [^fn2]: The assumption that returns are normally distributed is highly implausible. This means that with some positive probability, {math}`\Risky_{T} < 0`. So, owning a \$1 of the risky asset in period {math}`T-1` could result in *negative* wealth in period {math}`T`. You can lose *more than everything*, which is a violation of the legal principle of limited liability. (For a detailed history of limited liability, see {cite:t}`micklethwaitWooldridgeCompany`.) Lognormally distributed returns are therefore much more plausible.
@@ -30,9 +26,7 @@ of resources. If the consumer invests an absolute amount of money \${math}`\Stoc
 
 % \\ & = \aLev_{T-1}\Rfree + \EPrem_{T} \Stocks
 
-where {math}`\EPrem_{T}` is the "excess return" realized in period {math}`T`. Given
-{math}`\Stocks` and defining the expected risk premium as the expected value of the expected return {math}`\EPrem =
-\Ex_{T-1}[\Risky_{T}-\Rfree]`, the expectation as of time {math}`T-1` is:
+where {math}`\EPrem_{T}` is the "excess return" realized in period {math}`T`. Note that {math}`\EPrem_{T}` could be negative: if the risky asset performs badly enough, shareholders lose not just the excess return they hoped to earn, but part of what they would have earned from the safe asset. Given {math}`\Stocks` and defining the expected risk premium as the expected value of the expected return {math}`\EPrem = \Ex_{T-1}[\Risky_{T}-\Rfree]`, the expectation as of time {math}`T-1` is:
 
 ```{math}
 :label: eq:last
