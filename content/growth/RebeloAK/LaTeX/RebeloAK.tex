@@ -1,0 +1,98 @@
+\documentclass{handout}
+\usepackage{handoutSetup}\usepackage{handoutShortcuts}  
+\usepackage[noheads,nolists,nomarkers]{endfloat}
+
+\begin{document}
+\handoutHeader
+
+\begin{verbatimwrite}{\jobname.title}
+The Rebelo AK Growth Model
+\end{verbatimwrite}
+
+\handoutNameMake
+
+
+
+\cite{rebelo:long} examines a model in which a social planner maximizes the discounted sum of utility
+in an economy with an $AK$ production function:
+\begin{equation}
+  \label{eq:maxutil}
+  \max_{\{C\}_{0}^{\infty}} \int_0^{\infty} \util(C) e^{-\timeRate t} dt
+\end{equation}
+subject to
+\begin{equation}
+  \label{eq:kdot}
+  \dot{K} = AK - C,
+\end{equation}
+where we have assumed zero population growth and zero depreciation
+to make the analysis less cluttered.
+
+This problem can be solved with the same Hamiltonian apparatus we used
+to solve the Ramsey/Cass-Koopmans model.  In particular, with CRRA
+utility with risk aversion $\CRRA$ one can show that optimal behavior
+requires
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:cgrow}
+  \dot{C}/C & =  \CRRA^{-1}(A - \timeRate).
+\end{aligned}\end{gathered}\end{equation}
+
+Note that this equation comes about because the marginal product of
+capital in this model is always $A = \rProd$, because $\fFunc^{\prime}(K) = A$.  Note 
+further that according to this equation, the growth rate of consumption
+is always the same; unlike the Cass-Koopmans model with a normal
+production function, this model has no transitional dynamics.
+
+We can also use \eqref{eq:kdot} to obtain an expression for the
+steady-state growth rate:
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:ssg}
+  \dot{K}/K & =  A - C/K.
+\end{aligned}\end{gathered}\end{equation}
+
+If the model has a steady-state growth rate of $\gamma = \dot{K}/K$,
+this equation implies that
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:1}
+  C/K & =  A - \gamma.
+\end{aligned}\end{gathered}\end{equation}
+
+This is a model with a constant saving rate, because
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:2}
+  S/AK & =  (AK - C)/AK
+\\ & =  1 - A^{-1} (C/K)
+\\ & =  \gamma/A
+\\ \gamma & =  A (S/AK).
+\end{aligned}\end{gathered}\end{equation}
+
+Thus, the steady-state growth rate in a Rebelo economy is 
+directly proportional to the saving rate.  
+
+A further requirement for the Rebelo model to have a well-defined
+solution is that 
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:impatience}
+  \CRRA^{-1}(A-\timeRate) & <  A.
+\end{aligned}\end{gathered}\end{equation}
+
+Recalling that $A$ is effectively the real interest rate 
+in this model, this equation can be interpreted as the 
+`impatience' condition that we imposed in the infinite 
+horizon perfect foresight consumption model.  In fact, 
+the Rebelo $AK$ model is essentially just a way of 
+reinterpreting the perfect foresight infinite horizon
+consumption problem as a model for economic growth.
+The principal distinction is that we usually use the
+perfect foresight infinite horizon model to analyze 
+circumstances where the agent has both labor and 
+capital income, whereas the Rebelo model rules out
+labor income by assumption.
+
+%\begin{table}[bh]
+%\input texhtml.tex
+
+ 
+\input handoutBibMake
+%\end{table}
+
+\end{document}

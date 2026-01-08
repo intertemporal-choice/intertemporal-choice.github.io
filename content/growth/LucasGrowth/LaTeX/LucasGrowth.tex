@@ -1,0 +1,330 @@
+\documentclass{handout}
+\usepackage{handoutSetup}\usepackage{handoutShortcuts}  
+\usepackage[noheads,nolists,nomarkers]{endfloat}
+
+\begin{document}
+\handoutHeader
+
+\begin{verbatimwrite}{\jobname.title}
+The Lucas Growth Model
+\end{verbatimwrite}
+
+\handoutNameMake
+
+
+% \section{Setup}
+
+\newcommand{\hLucas}{h}
+
+\cite{lucasGrowth} presents a growth model in which output is generated via a production function of the form
+\begin{equation}
+  \label{eq:aggY}
+  \YLev = \PtyLev \Kap^{\kapShare} (\labor \hLucas \Labor)^{1-\kapShare}
+\end{equation}
+where $\YLev, \PtyLev,$ and $\KLev$ are as usually defined and $0 < \kapShare < 1$, where $\labor$ is defined as the proportion of total labor time
+spent working, and $\hLucas$ is what Lucas calls the stock of `human 
+capital.'  
+
+The production function can be rewritten in per-capita terms as
+\begin{equation}
+  \label{eq:pcy}
+  \yRat = \PtyLev \kRat^\kapShare (\labor \hLucas)^{1-\kapShare}
+\end{equation}
+which is a constant returns to scale production function in 
+$\kap$ and $\labor \hLucas$.  
+
+Capital accumulation proceeds via the usual differential equation,
+\begin{equation}
+  \label{eq:kdot}
+  \dot{k} = \yRat - \cRat - (\popGro+\depr) \kap,
+\end{equation}
+while $\hLucas$ accumulates according to
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:hdot}
+  \dot{\hLucas} & =  \phi \hLucas (1-\labor)
+\\ \dot{\hLucas}/h & =  \phi (1-\labor).
+\end{aligned}\end{gathered}\end{equation}
+
+\section{Discussion}
+
+Before analyzing the model, an aside.  \cite{mankiw:growth} has persuasively 
+argued for defining `knowledge' as the sum
+total of technological and scientific discoveries (what is
+written in textbooks, scholarly journals, websites, and the like),
+and defining `human capital' as the stock of knowledge
+that has been transmitted from those sources into human brains via
+studying.
+
+Recall \cite{rebelo:long}'s key insight about endogenous growth models: In order
+to produce perpetual growth, there must be a factor or a combination
+of factors that can be accumulated indefinitely without diminishing
+returns.  Mankiw points out that since lifetimes are finite, there is a
+maximum limit to the amount of human capital that an individual can accumulate.
+Thus, while increasing human capital (with more years of schooling,
+for example) may be able to extend the length of the transition period
+in a growth model, human capital accumulation cannot be the source of
+perpetual growth.  It is more plausible to think that scientific knowledge can be
+accumulated indefinitely (though presumably there is some limit even
+to the accumulation of knowledge).  These considerations
+suggest that models of endogenous growth should focus more on
+understanding the process of fundamental research and technological
+development than on human capital accumulation as Mankiw defines it.
+
+With this distinction in mind, there are (at least) two
+interpretations of the Lucas model.  One is at the aggregate level.
+Here we can think of $\labor$ as the fraction of the population
+engaged in useful work to produce goods and services, while proportion
+$1-\labor$ is not working in conventional boring jobs that require 
+asking customers questions like ``Would you like
+fries with that?'' but instead is producing `knowledge' by
+conducting scientific and technological research.
+
+The other interpretation is at the level of an individual agent.  Such
+an agent can be thought of as operating his or her own production
+function of the form in \eqref{eq:pcy}, where $(1-\labor)$ is now
+interpreted as the proportion of the time this individual spends
+studying and $\labor$ is the time spent working.  
+
+From the point of view of
+Mankiw's distinction, it is hard to interpret Lucas's model as being
+either about human capital accumulation or about knowledge.  It can't
+be about human capital because $\hLucas$ can be accumulated without bound,
+and without diminishing returns, neither of which makes sense for an
+individual.  It can't be about generalized knowledge, because the
+optimization problem reflects the return for an individual, while only
+a trivial proportion of total knowledge (in Mankiw's sense) is
+contributed by any single individual.
+
+Given these considerations, it probably makes more sense to think of the
+model as a tool for normative than for positive analysis.
+
+\section{The Solow Version}
+
+We analyze first the `Solow' version of the model, in which
+the saving rate is exogenously fixed at $s$.  Thus the 
+capital accumulation equation becomes
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:kdots}
+  \dot{\kap} & =  \save \yRat - (\popGro+\depr) \kap
+\\ \dot{\kap}/\kap & =  \save (\yRat/\kap) - (\popGro+\depr)
+\\ & =  \save \kRat^{\kapShare - 1} (\labor \hLucas)^{1-\kapShare}-(\popGro+\depr)
+\\ & =  \save (\kap/\hLucas)^{\kapShare-1} \labor^{1-\kapShare} -(\popGro+\depr).
+\end{aligned}\end{gathered}\end{equation}
+
+This equation tells us that the steady-state growth 
+rate in this model (if one exists) requires a constant
+ratio of $\kap$ to $\hLucas$.  Thus, $\kap$ and $\hLucas$ must be growing
+at the same rate in equilibrium.
+
+Further insight can be obtained by defining $\hat{A} = \PtyLev \labor^{1-\kapShare}$
+and rewriting the per-capita production function as 
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:CRSprodfunc}
+  \yRat & =  \hat{\PtyLev} \kRat^{\kapShare} \hLucas^{1-\kapShare}.
+\end{aligned}\end{gathered}\end{equation}
+
+If we define a measure of `broad capital' as the combination
+of physical capital and human capital,
+\begin{equation}
+  \label{eq:kappa}
+  \kappa \equiv \kRat^\kapShare \hLucas^{1-\kapShare},
+\end{equation}
+the model becomes
+\begin{equation}
+  \label{eq:ak}
+  \yRat = \hat{\PtyLev} \kappa.
+\end{equation}
+
+So if $\labor$ is constant and if $\kap$ and $\hLucas$ are growing at the same rate,
+then the exponent on `broad capital' is 1, and we are effectively back
+at the usual Rebelo $\PtyLev \Kap$ model.
+
+The key assumption that permits this to work is the accumulation
+equation for human capital, which is itself like an $\PtyLev \Kap$ model, in the
+sense that the exponent on human capital in the accumulation equation
+for human capital is one.  Human capital can be accumulated without
+bound and without diminishing returns.
+
+\section{The Ramsey/Cass-Koopmans Version}
+
+Lucas does not examine the Solow version of the model with a constant
+saving rate, but instead the version in which a social planner solves
+for the optimal perfect foresight paths of the two state variables $\kap$
+and $\hLucas$.  It's not worth going through the math here; I'll just
+present the conclusion, which is that the steady-state growth rate is
+\begin{equation}
+  \label{eq:ssg}
+  \dot{c}/c = \CRRA^{-1}(\phi - \theta).
+\end{equation}
+
+Note that this confirms the crucial role of the CRS accumulation 
+equation for human capital: The key parameter that corresponds to
+the interest rate is $\phi$, the parameter that determines the efficiency
+of human capital accumulation in equation \eqref{eq:hdot}.
+
+Lucas also solves a version of the model in which there is an 
+externality to human capital.  The idea here is that each person
+is more productive if they are surrounded by other people with high
+levels of human capital.  Specifically, in this version of the model
+the individual's production function is 
+\begin{equation}
+  \label{eq:pcyext}
+  \yRat_i = \PtyLev \kap_{i}^{\kapShare} (\labor _{i}\hLucas_{i})^{1-\kapShare} \bar{\hLucas}^{\psi}
+\end{equation}
+where $\bar{\hLucas}$ is average human wealth in the population (and the
+other variables reflect the values for the individual).
+
+Working through the decentralized solution, Lucas shows that the
+steady-state growth rate of human capital for an individual consumer 
+will be
+\begin{equation}\begin{gathered}\begin{aligned}
+  %\label{eq:gammah}
+%   \gamma_\hLucas & =  \left(\frac{(\phi-\theta)(1-\kapShare)}{\CRRA(1+\psi-\kapShare)-\psi}\right)
+%\\   \gamma_\hLucas & =  \left(\frac{(\phi-\theta)(1-\kapShare)}{\CRRA(1+\psi-\kapShare-\psi/\CRRA)}\right)
+%\\  \gamma_\hLucas &  =  \left(\frac{\CRRA^{-1}(\phi-\theta)(1-\kapShare)}{1-\kapShare+\psi(1-1/\CRRA)}\right) \\
+  \gamma_\hLucas &  =  \left(\frac{\CRRA^{-1}(\phi-\theta)}{1+\psi(1-1/\CRRA)/(1-\kapShare)}\right) \label{eq:indgrow}.
+\end{aligned}\end{gathered}\end{equation}
+
+Since every individual is assumed to be identical, the growth rate
+of aggregate human capital (and everything else) is the same as
+the rate for this individual.
+
+It is easy to see that if there is no externality to human capital
+accumulation (that is, if $\psi = 0$), this solution is identical to
+\eqref{eq:ssg}.  If there is an externality, its effect depends on
+whether $1/\CRRA$ is greater than, equal to, or less than 1.  This is
+because the effect depends on whether the externality causes the
+saving rate to rise or to fall (since in endogenous growth models,
+saving is the source of all growth).  The $\bar{\hLucas}$ externality is like an
+increase in the interest rate, and thus its effect will be determined
+by the balance between the income and substitution effects.  We know
+that for $\CRRA=1$ the income and substitution effects exactly offset
+each other, leaving consumption unchanged in response to an
+increase in the interest rate, which is why \eqref{eq:indgrow}
+collapses to \eqref{eq:ssg} for $\CRRA=1$.  If consumers are very
+willing to cut current consumption in exchange for higher future
+consumption (that is, if the intertemporal elasticity of substitution
+$(1/\CRRA)$ is greater than 1), then the externality boosts saving
+and therefore growth.  If consumers have an intertemporal elasticity
+of less than one, the income effect outweighs the substitution effect,
+saving falls, and growth is slower.
+
+Lucas also shows that this decentralized solution is suboptimal,
+because individual consumers do not obtain the full benefits to
+society of increasing their own stock of knowledge.  Devoting more
+time to $\hLucas_i$ accumulation they increase $\bar{\hLucas}$, which benefits all
+others in the economy in addition to themselves.  Lucas shows,
+unsurprisingly, that the socially optimal solution requires greater
+investment in human capital accumulation than is obtained in the
+decentralized model.  He also derives an optimal subsidy to human
+capital accumulation that corrects the externality and induces
+households to invest the socially optimal amount in human capital.
+
+
+%\begin{table}[bh]
+ 
+\input handoutBibMake
+%\end{table}
+
+\end{document}
+
+rewrite \eqref{eq:indgro} as
+\begin{equation}\begin{gathered}\begin{aligned}
+%  \label{eq:gammah2}
+to   \gamma_\hLucas &  =  \left(\frac{(\phi-\theta)(1-\kapShare)}{\CRRA(1-\kapShare)+\psi(\CRRA-1)}\right)
+\\ & =  \left(\frac{\CRRA^{-1}(\phi-\theta)}{1+\psi(\CRRA-1)/(\CRRA(1-\kapShare))}\right)
+\end{aligned}\end{gathered}\end{equation}
+and it is obvious that if $\CRRA>1$ as we usually assume, 
+
+
+
+
+The bottom line is that there are only two configurations of the model
+that are capable of generating perpetual growth in a way that makes any
+sense: 1.b. (the Rebelo $AK$ model) and 2.a.ii
+
+What this means is that any model that aims to permit perpetual
+long-run growth must ultimately boil down to a structure in which
+there are constant returns to scale for some set of factors that can
+jointly be accumulated forever.
+
+\medskip\medskip
+
+
+Consider a social planner maximizing the discounted sum of utility
+in an economy with an $AK$ production function:
+\begin{equation}
+  \label{eq:maxutil}
+  \max_{\{c\}} \int_0^{\infty} u(C) e^{-\theta t} dt
+\end{equation}
+subject to
+\begin{equation}
+  \label{eq:kdot}
+  \dot{K} = \PtyLevK - C,
+\end{equation}
+where we have assumed zero population growth and zero depreciation
+to make the analysis less cluttered.
+
+This problem can be solved with the same Hamiltonian apparatus we used
+to solve the Ramsey/Cass-Koopmans model.  In particular, with CRRA
+utility with risk aversion $\CRRA$ one can show that optimal behavior
+requires
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:cgrow}
+  \dot{\CLev}/\CLev & =  \CRRA^{-1}(\PtyLev - \theta).
+\end{aligned}\end{gathered}\end{equation}
+
+Note that this equation comes about because the marginal product of
+capital in this model is always $A = r$, because $f'(K) = \PtyLev$.  Note 
+further that according to this equation, the growth rate of consumption
+is always the same; unlike the Cass-Koopmans model with a normal
+production function, this model has no transitional dynamics.
+
+We can also use \eqref{eq:kdot} to obtain an expression for the
+steady-state growth rate:
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:ssg}
+  \dot{K}/K & =  \PtyLev - C/K.
+\end{aligned}\end{gathered}\end{equation}
+
+If the model has a steady-state growth rate of $\gamma = \dot{K}/K$,
+this equation implies that
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:1}
+  C/K & =  \PtyLev - \gamma.
+\end{aligned}\end{gathered}\end{equation}
+
+Thus, this is a model with a constant saving rate, because
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:2}
+  S/AK & =  (\PtyLev K - C)/AK
+\\ & =  1 - \PtyLev^{-1} (C/K)
+\\ & =  \gamma/A
+\\ \gamma & =  \PtyLev (S/AK).
+\end{aligned}\end{gathered}\end{equation}
+
+Thus, the steady-state growth rate in a Rebelo economy is 
+directly proportional to the saving rate.  
+
+A further requirement for the Rebelo model to have a well-defined
+solution is that 
+\begin{equation}\begin{gathered}\begin{aligned}
+  \label{eq:impatience}
+  \CRRA^{-1}(\PtyLev -\theta) & <  \PtyLev.
+\end{aligned}\end{gathered}\end{equation}
+
+Recalling that $A$ is effectively the real interest rate 
+in this model, this equation can be interpreted as the 
+'impatience' condition that we imposed in the infinite 
+horizon perfect foresight consumption model.  In fact, 
+the Rebelo $AK$ model is essentially just a way of 
+reinterpreting the perfect foresight infinite horizon
+consumption problem as a model for economic growth.
+The principal distinction is that we usually use the
+perfect foresight infinite horizon model to analyze 
+circumstances where the agent has both labor and 
+capital income, whereas the Rebelo model rules out
+labor income by assumption.
+\begin{figure}
+\includegraphics[width=6in]{LucasGrowthFig.eps}
+\end{figure}

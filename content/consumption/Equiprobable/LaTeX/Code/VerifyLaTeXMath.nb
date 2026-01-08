@@ -1,0 +1,429 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     13193,        420]
+NotebookOptionsPosition[     11959,        373]
+NotebookOutlinePosition[     12436,        392]
+CellTagsIndexPosition[     12393,        389]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "Illustrate", " ", "the", " ", "operation", " ", "of", " ", "the", " ", 
+   "Expectation", " ", "and", " ", "NormalDistribution", " ", "objects"}], 
+  " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.528935058383993*^9, 3.5289350981718473`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{"l\[Theta]", ",", 
+   RowBox[{"l\[Theta]", " ", "\[Distributed]", " ", 
+    RowBox[{"NormalDistribution", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "0.5"}], " ", 
+       SuperscriptBox["\[Sigma]\[Theta]", "2"]}], ",", "\[Sigma]\[Theta]"}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.528895837380665*^9, 3.528895948987521*^9}, {
+  3.528900308951845*^9, 3.528900339973742*^9}, {3.528971295674646*^9, 
+  3.5289712957229137`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", "0.5`"}], " ", 
+  SuperscriptBox["\[Sigma]\[Psi]", "2"]}]], "Output",
+ CellChangeTimes->{{3.528895884732411*^9, 3.528895950032176*^9}, {
+  3.5289003175628767`*^9, 3.528900340965785*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"l\[Theta]", ",", "l\[Epsilon]"}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l\[Theta]", ",", "l\[Epsilon]"}], "}"}], "\[Distributed]", 
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]", "2"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["\[Sigma]\[Theta]", "2"], ",", "0."}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0.", ",", 
+          SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}], "}"}]}], "}"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.528899954268198*^9, 3.528900092436431*^9}, {
+  3.5289001570693207`*^9, 3.528900279008477*^9}, {3.528900399390482*^9, 
+  3.528900406471023*^9}, {3.528902755730916*^9, 3.52890276194506*^9}, {
+  3.528971295773245*^9, 3.528971295841577*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "0.5`"}], " ", 
+    SuperscriptBox["\[Sigma]\[Psi]", "2"]}], ",", 
+   RowBox[{
+    RowBox[{"-", "0.5`"}], " ", 
+    SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.528900093632728*^9, {3.528900161262067*^9, 3.528900188412292*^9}, 
+   3.528900223217575*^9, 3.528900281229179*^9, 3.528900408495473*^9, 
+   3.5289027639509773`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Exp", "[", "l\[Theta]", "]"}], ",", 
+     RowBox[{"Exp", "[", "l\[Epsilon]", "]"}]}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l\[Theta]", ",", "l\[Epsilon]"}], "}"}], "\[Distributed]", 
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]", "2"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["\[Sigma]\[Theta]", "2"], ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}], "}"}]}], "}"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.528900419814151*^9, 3.5289004305576153`*^9}, {
+  3.528902773226389*^9, 3.528902782121402*^9}, {3.528971295891313*^9, 
+  3.528971295955708*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1.`", ",", "1.`"}], "}"}]], "Output",
+ CellChangeTimes->{3.528900432383407*^9, 3.528902783699279*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"l\[Theta]", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"\[Sigma]\[Epsilon]", "/", "\[Sigma]\[Theta]"}], ")"}], 
+       "\[Omega]", " ", "l\[Theta]"}], " ", "+", " ", "l\[Epsilon]"}]}], 
+    "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l\[Theta]", ",", "l\[Epsilon]"}], "}"}], "\[Distributed]", 
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]", "2"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["\[Sigma]\[Theta]", "2"], ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}], "}"}]}], "}"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.528900475427725*^9, 3.528900528891692*^9}, {
+  3.528902793481427*^9, 3.528902798441111*^9}, {3.528971295992167*^9, 
+  3.528971296089469*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "0.5`"}], " ", 
+    SuperscriptBox["\[Sigma]\[Psi]", "2"]}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "0.5`"}], " ", 
+     SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}], "-", 
+    RowBox[{
+    "0.5`", " ", "\[Sigma]\[Epsilon]", " ", "\[Sigma]\[Psi]", " ", 
+     "\[Omega]"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{3.528900531978956*^9, 3.528902799332569*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Omega]Hat", "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"\[Sigma]\[Epsilon]", "/", "\[Sigma]\[Theta]"}], ")"}], 
+    "\[Omega]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.5289005929885197`*^9, 3.528900664239183*^9}, {
+   3.528901346312868*^9, 3.528901347896953*^9}, 3.528971296140976*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"l\[Theta]", ",", 
+     RowBox[{
+      RowBox[{"\[Omega]Hat", " ", "l\[Theta]"}], " ", "+", " ", 
+      "l\[Epsilon]"}]}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l\[Theta]", ",", "l\[Epsilon]"}], "}"}], "\[Distributed]", 
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]", "2"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["\[Sigma]\[Theta]", "2"], ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}], "}"}]}], "}"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.528900697193576*^9, 3.5289007081254263`*^9}, 
+   3.528901360961926*^9, {3.528901580924079*^9, 3.528901595907625*^9}, 
+   3.5289017106589527`*^9, 3.528902113016624*^9, {3.528902825154161*^9, 
+   3.5289028449831*^9}, {3.528971296172574*^9, 3.528971296257861*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "0.5`"}], " ", 
+    SuperscriptBox["\[Sigma]\[Psi]", "2"]}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "0.5`"}], " ", 
+     SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}], "-", 
+    RowBox[{
+    "0.5`", " ", "\[Sigma]\[Epsilon]", " ", "\[Sigma]\[Psi]", " ", 
+     "\[Omega]"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.52890071021227*^9, 3.528901363144526*^9, 3.528901623757971*^9, 
+   3.528901762286007*^9, 3.5289021395830317`*^9, {3.528902829302936*^9, 
+   3.528902845999713*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Log", "[", 
+  RowBox[{"Expectation", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Exp", "[", "l\[Theta]", "]"}], ",", 
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"\[Omega]Hat", " ", "l\[Theta]"}], " ", "+", " ", 
+        "l\[Epsilon]"}], "]"}]}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"l\[Theta]", ",", "l\[Epsilon]"}], "}"}], "\[Distributed]", 
+     RowBox[{"MultinormalDistribution", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "0.5"}], " ", 
+          SuperscriptBox["\[Sigma]\[Theta]", "2"]}], ",", 
+         RowBox[{
+          RowBox[{"-", "0.5"}], " ", 
+          SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           SuperscriptBox["\[Sigma]\[Theta]", "2"], ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", 
+           SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}], "}"}]}], "}"}]}], 
+      "]"}]}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5289029775253563`*^9, 3.528902987139926*^9}, 
+   3.5289044732426567`*^9, {3.528971296308261*^9, 3.528971296392415*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.`", ",", 
+   RowBox[{"Log", "[", 
+    RowBox[{"0.9999999999999998`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "1.`"}], " ", "\[Sigma]\[Epsilon]", " ", "\[Omega]", " ", 
+       
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"0.5`", " ", "\[Sigma]\[Psi]"}], "-", 
+         RowBox[{"0.5`", " ", "\[Sigma]\[Epsilon]", " ", "\[Omega]"}]}], 
+        ")"}]}]]}], "]"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.528902989081264*^9, 3.528904475017416*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Zeta]", "=", 
+   RowBox[{"0.5", " ", "\[Omega]Hat", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", "\[Omega]Hat"}], ")"}], " ", 
+    SuperscriptBox["\[Sigma]\[Theta]", "2"]}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.5289052571505203`*^9, {3.5289054832258263`*^9, 3.52890548934558*^9}, 
+   3.528971296441121*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Exp", "[", "l\[Theta]", "]"}], ",", 
+     RowBox[{"Exp", "[", 
+      RowBox[{"\[Zeta]", " ", "+", " ", 
+       RowBox[{"\[Omega]Hat", " ", "l\[Theta]"}], " ", "+", " ", 
+       "l\[Epsilon]"}], "]"}]}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l\[Theta]", ",", "l\[Epsilon]"}], "}"}], "\[Distributed]", 
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]", "2"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["\[Sigma]\[Theta]", "2"], ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          SuperscriptBox["\[Sigma]\[Epsilon]", "2"]}], "}"}]}], "}"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5289050937970877`*^9, 3.528905096611393*^9}, {
+  3.5289712964720907`*^9, 3.528971296494625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1.`", ",", "0.9999999999999998`"}], "}"}]], "Output",
+ CellChangeTimes->{3.52890509974997*^9, 3.5289052614975452`*^9, 
+  3.528905493234898*^9}]
+}, Open  ]]
+},
+WindowSize->{1096, 899},
+WindowMargins->{{25, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 1.5, 1.5 Inherited],
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 289, 6, 64, "Input"],
+Cell[CellGroupData[{
+Cell[871, 30, 506, 12, 49, "Input"],
+Cell[1380, 44, 225, 5, 44, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1642, 54, 1136, 30, 79, "Input"],
+Cell[2781, 86, 438, 12, 49, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3256, 103, 1106, 31, 79, "Input"],
+Cell[4365, 136, 141, 3, 40, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4543, 144, 1223, 35, 79, "Input"],
+Cell[5769, 181, 436, 13, 49, "Output"]
+}, Open  ]],
+Cell[6220, 197, 331, 8, 40, "Input"],
+Cell[CellGroupData[{
+Cell[6576, 209, 1246, 33, 79, "Input"],
+Cell[7825, 244, 560, 16, 49, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8422, 265, 1233, 34, 79, "Input"],
+Cell[9658, 301, 537, 14, 49, "Output"]
+}, Open  ]],
+Cell[10210, 318, 346, 9, 44, "Input"],
+Cell[CellGroupData[{
+Cell[10581, 331, 1176, 33, 79, "Input"],
+Cell[11760, 366, 183, 4, 40, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

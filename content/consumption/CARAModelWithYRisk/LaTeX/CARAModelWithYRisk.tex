@@ -1,0 +1,608 @@
+\documentclass{handout}
+\usepackage{handoutSetup}\usepackage{handoutShortcuts}
+
+\newtheorem{Fact}{Fact}
+
+\begin{document}
+
+\begin{verbatimwrite}{\jobname.title}
+Consumption with Constant Absolute Risk Aversion (CARA) Utility
+\end{verbatimwrite}
+
+\handoutHeader
+
+\centerline{\Large \input \jobname.title}\vspace{.15in}
+
+Consider the optimization problem of a consumer with a constant
+absolute risk aversion instantaneous utility function $\uFunc(\CRat)=
+-(1/\CARA) e^{-\CARA \CRat}$ implying $\uFunc^{\prime}(\CRat) =
+e^{-\CARA \CRat}$ facing an interest rate that is constant at
+$\rfree=\Rfree-1$.\footnote{A problem like this was considered in a well-known paper by \cite{caballero:jme}.}  The consumer's optimization problem is
+\begin{equation}
+\max_{\{\CFunc\}_{t}^{T}}~~ \Ex_{t}\left\{\sum_{s=t}^{T} \Discount^{s-t} \uFunc(\CRat_{s})\right\}            \label{eq:maxprob}
+\end{equation}
+subject to the constraints \opt{MarginNotes}{\marginpar{\tiny Introducing $K$ and $X$ because useful to have a term for non-income resources at beginning of period.}}{}
+\begin{equation}\begin{gathered}\begin{aligned}
+    B_{t+1} & =  ({M}_{t}-\CRat_{t})\Rfree
+\\      {M}_{t+1} & =  B_{t+1}+Y_{t+1}
+\end{aligned}\end{gathered}\end{equation}
+where $Y_{t+1}$ is the consumer's idiosyncratic income, which exhibits a
+random-walk deviation from an exogenously-growing trend:
+\begin{equation*}\begin{gathered}\begin{aligned}
+        \bar{\PLev}_{t+1} & =  \PGro \bar{\PLev}_{t}  \\
+        Y_{t+1} & =  \bar{\PLev}_{t+1}+\PLev_{t+1}
+\\      \PLev_{t+1} & =  \PLev_{t}+\PShk_{t+1}.
+\end{aligned}\end{gathered}\end{equation*}
+
+\noindent Bellman's equation for this problem is \opt{MarginNotes}{\marginpar{\tiny Bellman's eqn relates $\VFunc_{t}$ and $\VFunc_{t+1}$ through the controls and states.  Doesn't necessarily require writing bud constr.}}{}
+\begin{equation}\begin{gathered}\begin{aligned}
+        \VFunc_{t}({M}_{t},\bar{\PLev}_{t},\PLev_{t}) & =  \max_{\{\CFunc\}_{t}^{T}} ~~ \uFunc(\CRat_{t}) + \Ex_{t}[\Discount \VFunc_{t+1}({M}_{t+1},\bar{\PLev}_{t+1},{\PLev}_{t+1})]    \label{eq:vmax}.
+\end{aligned}\end{gathered}\end{equation}
+
+The first order condition (FOC) for the CARA utility problem is
+\begin{equation}\begin{gathered}\begin{aligned}
+        \uFunc^{\prime}(\CRat_{t}) & =  \Rfree \Discount \Ex_{t}[\VFunc_{t+1}^{M}]
+\end{aligned}\end{gathered}\end{equation}
+and the \handoutC{Envelope} theorem tells us that
+\begin{equation}\begin{gathered}\begin{aligned}
+        \VFunc^{M}_{t} & =  \Rfree \Discount \Ex_{t}[\VFunc_{t+1}^{M}].
+\end{aligned}\end{gathered}\end{equation}
+
+In the perfect foresight version of the model in
+which $\PShk_{t} = 0 ~\forall~t$, the Euler equation will be
+\begin{equation}\begin{gathered}\begin{aligned}
+        \uFunc^{\prime}(\CRat_{t}) & =  \Rfree\Discount \uFunc^{\prime}(\CRat_{t+1}) \\
+    \exp[-\CARA \CRat_{t}] & =  \Rfree \Discount \exp[-\CARA \CRat_{t+1}]
+\\      1 & =  \Rfree\Discount \exp[-\CARA (\CRat_{t+1}-\CRat_{t})]
+\\  \exp[\CARA (\CRat_{t+1}-\CRat_{t})] & =  \Rfree\Discount \label{eq:cgrow}
+\\ \CARA (\CRat_{t+1}-\CRat_{t})  & =  \log \Rfree\Discount
+\\  \CRat_{t+1} & =  \CRat_{t}+\log (\Rfree\Discount)^{1/\CARA}
+.
+\end{aligned}\end{gathered}\end{equation}
+
+The $\log (\Rfree\Discount)^{1/\CARA}$ term reflects the intertemporal 
+substitution factor in consumption.  Notice that intertemporal 
+substitution takes the form of {\it additive} changes in the {\it 
+level} of consumption in the CARA utility model, rather than 
+multiplicative changes that affect the growth rate of consumption, as 
+in the CRRA model.
+
+Now suppose we are interested in the case where permanent income shocks are distributed 
+normally, $\PShk_{t} \sim \mathcal{N}(0,\sigma_{\PShk}^{2})$.  Then it turns
+out that the process
+\begin{equation}\begin{gathered}\begin{aligned}
+        \CRat_{t+1} & =  \CRat_{t} + \log (\Rfree\Discount)^{1/\CARA} + \CARA \sigma^{2}_{\PShk}/2+\PShk_{t+1} \label{eq:soln}
+\end{aligned}\end{gathered}\end{equation}
+satisfies the FOC under uncertainty:
+\begin{equation}\begin{gathered}\begin{aligned}
+    1 & =  \Rfree \Discount \Ex_{t}[\exp[-\CARA ({c}_{t+1}-c_{t})]]
+\\  1 & =  \Rfree \Discount \Ex_{t}[\exp[-\CARA (\CARA \sigma_{\PShk}^{2}/2+{\PShk}_{t+1}+(1/\CARA)\log (\Rfree\Discount) +c_{t}-c_{t})]]    
+\\  1 & =  \Rfree \Discount \exp[-\CARA^{2} \sigma_{\PShk}^{2}/2] \Ex_{t} \{\exp[-\CARA {\PShk}_{t+1}]\}\exp[-\CARA (1/\CARA) \log \Rfree\Discount]
+\\  1 & =  \Rfree \Discount \exp[-\CARA^{2}(\sigma_{\PShk}^{2}/2)]\exp[\CARA^{2}(\sigma_{\PShk}^{2}/2)]\exp[\log (\Rfree\Discount)^{-1}]
+\\  1 & =  \Rfree \Discount (\Rfree\Discount)^{-1}
+\\  1 & =  1.
+\end{aligned}\end{gathered}\end{equation}
+
+Define $\kappa = \log (\Rfree\Discount)^{1/\CARA} + \CARA \sigma^{2}_{\PShk}/2$, so that
+\eqref{eq:soln} becomes:
+ \begin{equation}\begin{gathered}\begin{aligned}
+        \CRat_{t+1} & =  \CRat_{t} + \PShk_{t+1} + \kappa.
+\end{aligned}\end{gathered}\end{equation}
+
+The expected present discounted value of consumption is \opt{MarginNotes}{\marginpar{\tiny The $\PShk_{t+n}$ terms disappear when expectations are taken.}}{}
+\begin{equation}\begin{gathered}\begin{aligned}
+        \PDV_{t}(\CRat) & =  \CRat_{t}+(\CRat_{t}+\PShk_{t+1}+\kappa)/\Rfree + (\CRat_{t}+\PShk_{t+1}+\kappa + \PShk_{t+2} + \kappa)/\Rfree^{2} + \ldots  \nonumber
+\\      \Ex_{t}[\PDV_{t}(\CRat)] & =  \CRat_{t}+\CRat_{t}/\Rfree+\CRat_{t}/\Rfree^{2}+ \ldots + \kappa/\Rfree + 2\kappa/\Rfree^{2} + 3\kappa/\Rfree^{3} + \ldots
+\\       & =  \CRat_{t}(1+\Rfree^{-1}+\Rfree^{-2}+\ldots) + \kappa \sum_{i=1}^{\infty} i/\Rfree^{i} .
+\end{aligned}\end{gathered}\end{equation}
+
+Now we need the following fact:
+\begin{Fact} If $\Rfree > 1$, then $\displaystyle \sum_{i=0}^{\infty} i/\Rfree^{i} = \left(\frac{\Rfree}{(\Rfree-1)^{2}}\right)$ \label{fact:fact3}
+\end{Fact}
+
+
+Thus, the expectation of the infinite horizon PDV of consumption is:
+\begin{equation}\begin{gathered}\begin{aligned}
+        \Ex_{t}[\PDV_{t}(\CRat)] & =  \CRat_{t}\left(\frac{1}{1-1/\Rfree}\right)+\left(\frac{\kappa \Rfree}{(1-\Rfree)^{2}}\right)  .
+\end{aligned}\end{gathered}\end{equation}
+
+Given the process for income described above, we have
+\begin{equation}\begin{gathered}\begin{aligned}
+        \PDV_{t}(Y) & =  Y_{t}+Y_{t+1}/\Rfree+Y_{t+2}/\Rfree^{2}+\ldots  \\
+         & =  \bar{\PLev}_{t}+\PLev_{t}+(\PGro\bar{\PLev}_{t}+\PLev_{t+1})/\Rfree + (\PGro^{2}\bar{\PLev}_{t}+\PLev_{t+2})/\Rfree^{2}+ \ldots
+\\   & =  \bar{\PLev}_{t}\left(1+\PGro/\Rfree + (\PGro/\Rfree)^{2} + \ldots \right)+
+\\   &    \PLev_{t}+(\PLev_{t}+\PShk_{t+1})/\Rfree+(\PLev_{t}+\PShk_{t+1}+\PShk_{t+2})/\Rfree^{2}+\ldots    
+\\ \Ex_{t}[\PDV_{t}(Y)]   & =  \left(\frac{\bar{\PLev}_{t}}{1-\PGro/\Rfree}\right)+\PLev_{t}\sum_{s=0}^{\infty} \Rfree^{-s}
+\\   & =  \left(\frac{\bar{\PLev}_{t}}{1-\PGro/\Rfree}\right)+\left(\frac{ \PLev_{t}}{1-1/\Rfree}\right)
+\end{aligned}\end{gathered}\end{equation}
+
+The IBC says
+\begin{equation}\begin{gathered}\begin{aligned}
+        \PDV_{t}(\CRat) & =  B_{t}+\PDV_{t}(Y),
+\end{aligned}\end{gathered}\end{equation}
+
+Because the intertemporal budget constraint must hold in every state 
+of the world, the expectation of the PDV of consumption must equal current
+wealth plus the expectation of the PDV of income.  Thus,
+\begin{equation}\begin{gathered}\begin{aligned}
+        \Ex_{t}[\PDV_{t}(\CRat)] & =  B_{t}+\Ex_{t}[\PDV_{t}(Y)  ]
+\\ \CRat_{t}\left(\frac{1}{1-1/\Rfree}\right)    & =  B_{t}+ \left(\frac{\bar{\PLev}_{t}}{1-\PGro/\Rfree}\right)+\left(\frac{ \PLev_{t}}{1-1/\Rfree}\right)-\left(\frac{\kappa \Rfree}{(1-\Rfree)^{2}}\right) 
+\\ \CRat_{t}        & =  \PLev_{t} + \left(\frac{\rfree}{\Rfree}\right)\left[ B_{t}+ \left(\frac{\bar{\PLev}_{t}}{1-\PGro/\Rfree}\right)-\left(\frac{\kappa \Rfree}{(1-\Rfree)^{2}}\right)  \right]
+\\ & =  \PLev_{t} + \left(\frac{\rfree}{\Rfree}\right)\left[ B_{t}+ \left(\frac{\bar{\PLev}_{t}}{1-\PGro/\Rfree}\right)\right] -\rfree\left(\frac{\log (\Rfree\Discount)^{1/\CARA} + \CARA \sigma^{2}_{\PShk}/2 }{(1-\Rfree)^{2}}\right)  \nonumber
+\end{aligned}\end{gathered}\end{equation}
+
+The $\PLev_{t}$ term reflects the consumer's idiosyncratic level of 
+permanent income, which has no systematic growth (or decline).  The 
+next term reflects the MPC out of total `certain' wealth, human and 
+nonhuman.  The final term reflects the combination of the 
+intertemporal substitution motive (in the $\log (\Rfree\Discount)^{1/\CARA}$ 
+term) and the precautionary motive in the $\CARA 
+\sigma^{2}_{\PShk}$ term, as is evident from the fact that it 
+equals zero if either there is no precautionary motive ($\CARA=0$) or 
+there is no uncertainty $\sigma^{2}_{\PShk}=0$.
+
+Note some peculiar aspects of this solution.  First, observe that, marginally, the 
+consumer spends exactly the interest income on capital, $d \CRat_{t}/d 
+B_{t} = \rfree/\Rfree$.  The reason this is peculiar is that the MPC out of 
+capital {\it does not depend on how impatient the consumer is}.  
+Impatience is reflected in the change in consumption over time, but 
+not in the level of consumption except as that is affected by the 
+budget constraint.
+
+Second, notice that the effect of income uncertainty on saving is the 
+same in absolute dollars regardless of the level of resources or 
+permanent income.
+
+\input handoutBibMake.tex
+
+\end{document}
+
+If $t+1 = T$ so that $c_{t+1} = (m_{t}-c_{t})\Rfree+\PShk_{t+1}$ then
+the Euler equation becomes
+\begin{equation}\begin{gathered}\begin{aligned}
+        \uFunc^{\prime}(c_{t}) & =  \Rfree\Discount \Ex_{t}[\uFunc^{\prime}(c_{t+1})] \\
+    \exp[-\CARA c_{t}] & =  \Rfree \Discount \Ex_{t}[\exp[-\CARA {c}_{t+1}]]
+\\  1 & =  \Rfree \Discount \Ex_{t}[\exp[-\CARA ((m_{t}-c_{t})\Rfree+{\PShk}_{t+1}-c_{t})]]
+\\  0 & =  \log (\Rfree\Discount) + \log \Ex_{t}[\exp[-\CARA (-c_{t}(1+\Rfree) + Rm_{t})]\exp[-\CARA {\PShk}_{t+1}]]
+\\  0 & =  \log (\Rfree\Discount) + (\CARA c_{t}(1+\Rfree) - \CARA \Rfree m_{t})+ \log \Ex_{t}[\exp[-\CARA {\PShk}_{t+1}]] \nonumber
+\\ c_{t} \CARA (1+\Rfree) & =  - \log (\Rfree\Discount) + \CARA \Rfree m_{t} - (\CARA^{2} \sigma^{2}_{\PShk}/2)
+\\ c_{t}  & =  \left(\frac{1}{1+\Rfree}\right)\left[\log (\Rfree\Discount)^{-1/\CARA} + \Rfree m_{t} - \CARA \sigma^{2}_{\PShk}/2 \right]
+%\\ \CARA (c_{t+1}-c_{t})  & \approx  r - \tau
+%\\ \Delta c_{t+1} & \approx  \CARA^{-1}(\rfree - \tau)
+\end{aligned}\end{gathered}\end{equation}
+
+\begin{equation}\begin{gathered}\begin{aligned}
+        \uFunc^{\prime}(c_{t}) & =  \Rfree\Discount \Ex_{t}[\uFunc^{\prime}(c_{t+1})] \\
+    \exp[-\CARA c_{t}] & =  \Rfree \Discount \Ex_{t}[\exp[-\CARA {c}_{t+1}]]
+\\  1 & =  \Rfree \Discount \Ex_{t}[\exp[-\CARA (\left(\frac{1}{1+\Rfree}\right)\left[\log (\Rfree\Discount)^{-1/\CARA} + \Rfree ((m_{t}-c_{t})\Rfree+\PShk_{t+1}) - \CARA \sigma^{2}_{\PShk}/2 \right]-c_{t})]] \nonumber
+\\  1 & =  \Rfree\Discount \Ex_{t}\left\{\exp[-\CARA (\left(\frac{1}{1+\Rfree}\right)\left[\log (\Rfree\Discount)^{-1/\CARA} + \Rfree ((m_{t}-c_{t})\Rfree) - \CARA \sigma^{2}_{\PShk}/2 \right]-c_{t})]\exp[\left(\frac{-\CARA \Rfree {\PShk}_{t+1}}{1+\Rfree}\right)] \right\} \nonumber
+\\  1 & =  \Rfree\Discount \Ex_{t}\exp[-\CARA (\left(\frac{\log (\Rfree\Discount)^{-1/\CARA} + \Rfree ((m_{t}-c_{t})\Rfree) - \CARA \sigma^{2}_{\PShk}/2}{1+\Rfree}\right)-c_{t})]\exp[\left(\frac{-\CARA \Rfree }{1+\Rfree}\right)^{2}(\sigma_{\PShk}^{2}/2)]  \nonumber
+\\  1 & =  \Rfree\Discount \Ex_{t}\exp[-\CARA (\left(\frac{\log (\Rfree\Discount)^{-1/\CARA} + \Rfree^{2} m_{t} - \CARA \sigma^{2}_{\PShk}/2}{1+\Rfree}\right)-c_{t}(1+\frac{\Rfree^{2}}{1+\Rfree})]\exp[\left(\frac{-\CARA \Rfree }{1+\Rfree}\right)^{2}(\sigma_{\PShk}^{2}/2)]  \nonumber
+\\  1 & =  \Rfree\Discount \Ex_{t}\exp[-\CARA (\left(\frac{\log (\Rfree\Discount)^{-1/\CARA} + \Rfree^{2} m_{t} - \CARA \sigma^{2}_{\PShk}/2}{1+\Rfree}\right)-c_{t}\left(\frac{1+\Rfree+\Rfree^{2}}{1+\Rfree}\right)]\exp[\left(\frac{-\CARA \Rfree }{1+\Rfree}\right)^{2}(\sigma_{\PShk}^{2}/2)]  \nonumber
+\\  0 & =  \log (\Rfree\Discount) + (\CARA c_{t}\left(\frac{1+\Rfree+\Rfree^{2}}{1+\Rfree}\right) - \CARA \left(\frac{\log (\Rfree\Discount)^{-1/\CARA} + \Rfree^{2} m_{t} - \CARA \sigma^{2}_{\PShk}/2}{1+\Rfree}\right) + \left(\frac{-\CARA \Rfree }{1+\Rfree}\right)^{2}(\sigma_{\PShk}^{2}/2) \nonumber
+\\  c_{t} & =  \log (\Rfree\Discount)^{-1/\CARA}\left(\frac{1+\Rfree}{1+\Rfree+\Rfree^{2}}\right)  + \CARA \left(\frac{\log (\Rfree\Discount)^{-1/\CARA} + \Rfree^{2} m_{t} - \CARA \sigma^{2}_{\PShk}/2}{1+\Rfree+\Rfree^{2}}\right) - \left(\frac{\CARA \Rfree^{2} (\sigma^{2}_{\PShk})/2}{(1+\Rfree)(1+\Rfree+\Rfree^{2})}\right) \nonumber
+\\  c_{t} & =  \log (\Rfree\Discount)^{-1/\CARA}\left(\frac{1+\Rfree}{1+\Rfree+\Rfree^{2}}\right)  + \CARA \left(\frac{\log (\Rfree\Discount)^{-1/\CARA} + \Rfree^{2} m_{t} - \CARA \sigma^{2}_{\PShk}/2}{1+\Rfree+\Rfree^{2}}\right) - \left(\frac{\CARA \Rfree^{2} (\sigma^{2}_{\PShk})/2}{(1+\Rfree)(1+\Rfree+\Rfree^{2})}\right) \nonumber
+\\ c_{t} \CARA (1+\Rfree) & =  - \log (\Rfree\Discount) + \CARA \Rfree m_{t} - (\CARA^{2} \sigma^{2}_{\PShk}/2)
+\\ c_{t}  & =  \left(\frac{1}{1+\Rfree}\right)\left[\log (\Rfree\Discount)^{-1/\CARA} + \Rfree m_{t} - \CARA \sigma^{2}_{\PShk}/2 \right]
+\end{aligned}\end{gathered}\end{equation}
+
+Based on this, let's postulate a consumption rule of the form $c_{t} = 
+\mu + \omega m_{t}$ and see whether we can determine coefficients 
+$\mu, \omega, $ such that the equation holds in the infinite horizon 
+case.
+
+\begin{equation*}\begin{gathered}\begin{aligned}
+        0  & =  \log (\Rfree \Discount)+ \log \Ex_{t}\left\{ \exp[-\CARA ({c}_{t+1}-c_{t})]\right\}  \\
+        c_{t+1}-c_{t} & =  \mu + \omega((m_{t}-c_{t})\Rfree+y_{t+1})-c_{t}  \\
+         & =  \mu + \omega(\Rfree m_{t}+y_{t+1}) - c_{t}(\omega \Rfree + 1)
+\\   & =  \mu + \omega \Rfree m_{t} + \omega y_{t+1} - c_{t}(\omega \Rfree + 1)   
+\\ \Ex_{t}\left[\exp[-\CARA ({c}_{t+1}-c_{t})]\right] & = \Ex_{t}\left[ \exp[-\CARA (\mu + \omega \Rfree m_{t} + \omega {y}_{t+1} - c_{t}(\omega \Rfree + 1)    ]\right]
+\\  & =  \Ex_{t}\left\{ \exp[-\CARA (\mu + \omega \Rfree m_{t} - c_{t}(\omega \Rfree + 1)) -\CARA        \omega {y}_{t+1}  ]\right\}
+\\  & =  \exp[-\CARA (\mu + \omega \Rfree m_{t} - c_{t}(\omega \Rfree + 1))]\Ex_{t}\left\{\exp[ -\CARA   \omega {y}_{t+1}  ]\right\}
+\\  & =  \exp[-\CARA (\mu + \omega \Rfree m_{t} - c_{t}(\omega \Rfree + 1))]\exp[(\CARA \omega \sigma_{y})^{2}/2]
+\\      0  & =  \log (\Rfree \Discount)-\CARA (\mu + \omega \Rfree m_{t} - c_{t}(\omega \Rfree + 1))+(\CARA \omega \sigma_{y})^{2}/2
+\\      c_{t}  & =  \left(\frac{-\CARA}{\omega \Rfree + 1}\right)\log (\Rfree \Discount)-\CARA (\mu + \omega \Rfree m_{t} - c_{t}(\omega \Rfree + 1))+(\CARA \omega \sigma_{y})^{2}/2
+\end{aligned}\end{gathered}\end{equation*}
+
+\begin{equation*}\begin{gathered}\begin{aligned}
+        0  & =  \log (\Rfree \Discount)+ \log \Ex_{t}\left\{ \exp[-\CARA ({c}_{t+1}-c_{t})]\right\}  
+\\      c_{t+1}-c_{t} & =  \omega(m_{t+1}-m_{t})
+\\       & =  \omega((m_{t}-c_{t})R+y_{t+1}-m_{t})
+\\   & =  \omega(\rfree m_{t} - \Rfreec_{t})+\omega y_{t+1}
+\\   & =  \omega(\rfree m_{t} - \Rfree(\mu + \omega m_{t})) + \omega y_{t+1}
+\\   & =  \omega(m_{t}(\rfree - \Rfree\omega) - \Rfree\mu) + \omega y_{t+1}
+\\ c_{t+1} & =  c_{t} + \omega(m_{t}(\rfree - \Rfree\omega) - \Rfree\mu) + \omega y_{t+1}
+\\         & =  c_{t} + \omega((c_{t}-\mu)/\omega)(\rfree - \Rfree\omega) - \Rfree\mu) + \omega y_{t+1}
+\\         & =  c_{t} + (c_{t}-\mu)(\rfree - \Rfree\omega) - \Rfree\omega\mu + \omega y_{t+1}
+\\         & =  c_{t}(1 + (\rfree-\Rfree\omega)) -\m\uFunc(\rfree-\Rfree\omega) -\Rfree\omega\mu + \omega y_{t+1}
+\\         & =  c_{t}(1 + (\rfree-\Rfree\omega)) -\mu r + \omega y_{t+1}
+\\ c_{t+2} & =  c_{t+1} + \omega(m_{t+1}(\rfree - \omega) - \mu) + \omega y_{t+2}
+\\         & =  c_{t}+ \omega(m_{t}(\rfree - \omega) - \mu) + \omega y_{t+1} + \omega(((m_{t}-c_{t})R+y_{t+1})(\rfree - \omega) - \mu) + \omega y_{t+2}
+\end{aligned}\end{gathered}\end{equation*}
+
+\begin{equation*}\begin{gathered}\begin{aligned}
+        0  & =  \log (\Rfree \Discount)+ \log \Ex_{t}\left\{ \exp[-\CARA ({c}_{t+1}-c_{t})]\right\}  \\
+        c_{t+1}-c_{t} & =  \mu + \omega((m_{t}-c_{t})R+y_{t+1})-c_{t}  \\
+         & =  \mu + \omega(\Rfree m_{t}+y_{t+1}) - c_{t}(\omega \Rfree + 1)
+\\ c_{t} & =    \left(\frac{\mu + \omega( \Rfree m_{t}+y_{t+1})}{\omega \Rfree + 1}\right)
+\\       & =    \left(\frac{\mu + \omega \Rfree m_{t}}{\omega \Rfree + 1}\right)+\left(\frac{\omega}{\omega \Rfree + 1}\right)y_{t+1}
+\end{aligned}\end{gathered}\end{equation*}
+
+
+Now for period $t = T-2$ we have
+\begin{equation}\begin{gathered}\begin{aligned}
+        \uFunc^{\prime}(c_{t}) & =  \Rfree\Discount \Ex_{t}[\uFunc^{\prime}(c_{t+1})] \\
+    \exp[-\CARA c_{t}] & =  \Rfree \Discount \Ex_{t}[\exp[-\CARA {c}_{t+1}]]
+\\  1 & =  \Rfree \Discount \Ex_{t}[\exp[-\CARA ((m_{t}-c_{t})R+{y}_{t})-c_{t})]]
+\\  1 & =  \Rfree\Discount \Ex_{t}[\exp[-\CARA (-c_{t}(1+\Rfree) + Rm_{t})]\exp[-\CARA {y}_{t+1}]]
+%\\  1 & =  \log (\Rfree\Discount) + (\CARA c_{t}(1+\Rfree) - \CARA \Rfree m_{t})+ \log \Ex_{t}[\exp[-\CARA {y}_{t+1}]] \nonumber
+\\ c_{t} \CARA (1+\Rfree) & =  - \log (\Rfree\Discount) + \CARA \Rfree m_{t} - (\CARA^{2} \sigma^{2}_{y}/2)
+\\ c_{t}  & =  \left(\frac{1}{1+\Rfree}\right)\left[\log (\Rfree\Discount)^{-1/\CARA} + \Rfree m_{t} - \CARA \sigma^{2}_{y}/2 \right]
+%\\ \CARA (c_{t+1}-c_{t})  & \approx  r - \tau
+%\\ \Delta c_{t+1} & \approx  \CARA^{-1}(\rfree - \tau)
+\end{aligned}\end{gathered}\end{equation}
+
+
+\pagebreak Now we need a couple of facts:
+\begin{Fact} $\displaystyle \sum_{i=0}^{T} \gamma^{i} = \left(\frac{1-\gamma^{T+1}}{1-\gamma}\right)$ 
+\end{Fact}
+
+\begin{Fact} If $0 < \gamma < 1$, then $\displaystyle \sum_{i=0}^{\infty} \gamma^{i} = \left(\frac{1}{1-\gamma}\right)$ \label{fact:fact2}
+\end{Fact}
+
+\begin{Fact} If $1 < R$, then $\displaystyle \sum_{i=0}^{\infty} i/\Rfree^{i} = \left(\frac{\Rfree}{(\Rfree-1)^{2}}\right)$ \label{fact:fact3}
+\end{Fact}
+
+
+The Intertemporal Budget Constraint tells us that the present discounted \opt{MarginNotes}{\marginpar{\tiny Note that fact 2 is an obvious implication of fact 1 as $T \rightarrow \infty$.}}{}
+value of consumption must be equal to the PDV of total resources:
+\begin{equation}\begin{gathered}\begin{aligned}
+        \PDV_{t}(\CRat) & =  B_{t}+\PDV_{t}(P)
+        \label{eq:ibc}
+\end{aligned}\end{gathered}\end{equation}
+
+Using Fact 1, the PDV of labor income (also called `human wealth' $H_{t}$) is
+\begin{equation}\begin{gathered}\begin{aligned}
+        H_{t} = \PDV_{t}(P) & =  \sum_{s=t}^{T} \Rfree^{-(s-t)}\PLev_{s}
+\\       & =  \PLev_{t}\sum_{s=t}^{T} \Rfree^{-(s-t)}\PGro^{(s-t)}
+\\       & =  \PLev_{t}\sum_{s=t}^{T} (\PGro/\Rfree)^{(s-t)}
+\\   & =  \PLev_{t}\left(\frac{1-(\PGro/\Rfree)^{T-t+1}}{1-(\PGro/\Rfree)}\right)    \label{eq:yfin}
+\end{aligned}\end{gathered}\end{equation}
+while the PDV of consumption is
+\begin{equation}\begin{gathered}\begin{aligned}
+        \PDV_{t}(\CRat) & =  \sum_{s=t}^{T} \Rfree^{-(s-t)}\CRat_{s}
+\\       & =  \CRat_{t}+(\CRat_{t}+ \log (\Rfree\Discount)^{-1/\CARA})/\Rfree +(\CRat_{t}+ 2 \log (\Rfree\Discount)^{-1/\CARA})/\Rfree^{2} + \ldots
+\\       & =  \CRat_{t}(1+1/\Rfree+1/\Rfree^{2}+\ldots) + \log (\Rfree\Discount)^{-1/\CARA}/\Rfree + 2 \log (\Rfree\Discount)^{-1/\CARA}/\Rfree^{2} + \ldots \nonumber
+\\       & =  \left(\frac{\CRat_{t}}{1-1/\Rfree}\right) +  \log (\Rfree\Discount)^{-1/\CARA}(1/\Rfree + 2/\Rfree^{2} + 3/\Rfree^{3} + \ldots)
+\\   & =  \left(\frac{\CRat_{t}}{1-1/\Rfree}\right) +  \log (\Rfree\Discount)^{-1/\CARA}\left(\frac{\Rfree}{(\Rfree-1)^{2}}\right)
+\end{aligned}\end{gathered}\end{equation}
+
+Therefore we can solve the model by combining \eqref{eq:cfin} and \eqref{eq:yfin} using 
+\eqref{eq:ibc}:
+\begin{equation*}\begin{gathered}\begin{aligned}
+        \left(\frac{\CRat_{t}}{1-1/\Rfree}\right) +  \log (\Rfree\Discount)^{-1/\CARA}\left(\frac{\Rfree}{(\Rfree-1)^{2}}\right) & =  B_{t}+\left(\frac{\PLev_{t}}{1-\PGro/\Rfree}\right)  \\
+        \left(\frac{\CRat_{t}}{1-1/\Rfree}\right) & =  B_{t}+\left(\frac{\PLev_{t}}{1-\PGro/\Rfree}\right) -\log (\Rfree\Discount)^{-1/\CARA}\left(\frac{\Rfree}{(\Rfree-1)^{2}}\right) \\     
+        \CRat_{t} & =  \left(\frac{\Rfree}{\rfree}\right)\left[B_{t}+\left(\frac{\PLev_{t}}{1-\PGro/\Rfree}\right) -\log (\Rfree\Discount)^{-1/\CARA}\left(\frac{\Rfree}{(\Rfree-1)^{2}}\right)\right]
+\end{aligned}\end{gathered}\end{equation*}
+\begin{equation}\begin{gathered}\begin{aligned}
+        \CRat_{t} & =  \left(\frac{1-[\Rfree^{-1}(\Rfree\Discount)^{1/\CARA}]}{1-[\Rfree^{-1}(\Rfree\Discount)^{1/\CARA}]^{T+1}}\right)\left[B_{t}+\PLev_{t}\left(\frac{1-(\PGro/\Rfree)^{T+1}}{1-(\PGro/\Rfree)}\right)\right] \label{eq:cfinhoriz}
+\end{aligned}\end{gathered}\end{equation}
+
+Now recall that in the infinite-horizon case ($T=\infty$), Fact 2 
+requires that for human wealth to be well-defined we need the 
+condition
+\begin{equation}\begin{gathered}\begin{aligned}
+        \PGro/\Rfree & <  1
+\\  \PGro   & <  R.  \label{eq:pdvyinf}
+\end{aligned}\end{gathered}\end{equation}
+Why is this?  Because if income will grow faster than the interest 
+rate forever, then the PDV of future income is infinite and the 
+problem has no well-defined solution.
+
+Similarly, in order for the PDV of consumption to be finite we must
+impose:
+\begin{equation}\begin{gathered}\begin{aligned}
+        \Rfree^{-1}(\Rfree\Discount)^{1/\CARA}& < 1
+\\      (\Rfree\Discount)^{1/\CARA} & <  R. \label{eq:pdvcinf}
+\end{aligned}\end{gathered}\end{equation}
+What this says is that the growth rate of consumption must be less 
+than the interest rate in order for the model to have a well-defined 
+solution.  Otherwise, the PDV of future consumption is infinite, and 
+the model does not have a well-defined solution.  Note that this 
+amounts to a requirement that there be at least a certain degree of 
+`impatience.'
+
+If these conditions do hold, then the model has a well-defined 
+infinite horizon solution, as can be seen by realizing that if 
+$(\PGro/\Rfree)<1$ then $\lim_{T \rightarrow \infty} (\PGro/\Rfree)^{T-t+1} = 0$ and if 
+$\Rfree^{-1}(\Rfree\Discount)^{1/\CARA} < 1$ then $\displaystyle \lim_{T \rightarrow 
+\infty} (\Rfree^{-1}(\Rfree\Discount)^{1/\CARA})^{T-t+1} = 0$.  Substituting these 
+zeros into \eqref{eq:cfinhoriz} yields 
+\begin{equation}\begin{gathered}\begin{aligned}
+        \CRat_{t} & =  \left(1-\Rfree^{-1}(\Rfree\Discount)^{1/\CARA}\right)\left[B_{t}+\left(\frac{\PLev_{t}}{1-(\PGro/\Rfree)}\right)\right] \label{eq:cinfhor}
+\\      & =  \left(1-\Rfree^{-1}(\Rfree\Discount)^{1/\CARA}\right)\left[B_{t}+H_{t}\right]  \label{eq:cmpk}
+\\      & =  \left(\frac{\Rfree-(\Rfree\Discount)^{1/\CARA}}{\Rfree}\right)W_{t} \label{eq:cOfw}
+\end{aligned}\end{gathered}\end{equation}
+where $W_{t}$ is the consumer's `total wealth,' the sum of human and 
+nonhuman wealth.
+
+Now consider the question `What is the level of $\CRat_{t}$ that will 
+leave total wealth intact, allowing the same value of consumption in 
+period $t+1$ and forever after?'
+
+The intuitive answer is that if one wants to leave one's wealth 
+\opt{MarginNotes}{\marginpar{\tiny Note that this was 
+interpreted as `permanent income' in the 1960s and 70s, but will not 
+be called such in this class.  Point out that wealth here is exactly 
+like an asset that yields a dividend $P$.}}{} intact, that is possible 
+only if spending is exactly equal to the dividend and interest 
+earnings on one's total wealth.
+
+Because human wealth is exactly like any other kind of wealth in this 
+framework, it is possible to work directly with the level of total 
+wealth $W$.  Suppose we assume the consumer will spend fraction 
+$\kappa$ of total wealth in each period, and we want to find the 
+$\kappa$ that leaves wealth intact.
+\begin{equation}\begin{gathered}\begin{aligned}
+        W_{t+1} & =  (W_{t}-\CRat_{t})R
+\\  \bar{W} & =  (\bar{W}-\kappa \bar{W})R     
+\\      1 & =  \Rfree(1-\kappa)  
+\\      1/\Rfree & =  (1-\kappa)
+\\  \kappa & =  1-1/\Rfree
+\\  & =  \left(\frac{\Rfree-1}{\Rfree}\right)
+\\  & =  \rfree/\Rfree \label{eq:kappa}
+\end{aligned}\end{gathered}\end{equation}
+Thus, the consumer can spend only the interest earnings $\rfree$ on their 
+wealth, divided by the gross return $\Rfree$.  (The division occurs because 
+we assume that interest is earned between periods rather than within 
+periods; the right intuition is that if you want to preserve your 
+wealth, you can only spend the interest on it and none of the 
+principal).
+
+
+Note that the coefficient multiplying total wealth in \eqref{eq:cOfw} 
+is also divided by $\Rfree$.  Thus, whether the consumer is spending more 
+than his total income, exactly his total income, or less than his 
+total income depends upon whether the numerator in \eqref{eq:cOfw} is
+greater than, equal to, or less than $\rfree$.  If we call a consumer 
+who is spending more than his income `impatient,' the consumer will be
+impatient if
+\begin{equation}\begin{gathered}\begin{aligned}
+        R-(\Rfree\Discount)^{1/\CARA} & >  r  \\
+        1-(\Rfree\Discount)^{1/\CARA} & >  0  \\
+        1 & >  (\Rfree\Discount)^{1/\CARA}
+\end{aligned}\end{gathered}\end{equation}
+
+Now note that if $\Rfree\Discount=1$ (which is to say, the interest rate is 
+exactly equal to the time preference rate so that they offset each 
+other), then $(\Rfree\Discount)^{1/\CARA}=1$ regardless of the value of $\CARA$ 
+so that the consumer is precisely poised on the balance between 
+patience and impatience and exactly spends his income.\opt{MarginNotes}{\marginpar{\tiny Income here means inclusive of interest income on total wealth.}}{}
+
+The consumer will be impatient, spending more than his income, if 
+$\Rfree\Discount>1$, and patient, spending less than his income, if $\Rfree\Discount<1$.
+
+Equation \eqref{eq:cinfhor} can be simplified into something a bit 
+easier to handle by making some approximations.  If $\Discount = 
+1/(1+\tau)$, then we can use 
+\begin{Fact} $\log (1+\PShk) \approx 
+\PShk$
+\end{Fact}
+and its inverse
+\begin{Fact} $\exp(\PShk) \approx 1+\PShk$
+\end{Fact}
+to discover that
+\begin{equation}\begin{gathered}\begin{aligned}
+        \log (\Rfree\Discount)^{1/\CARA}/\Rfree & =  (1/\CARA) (\log \Rfree + \log [1/(1+\tau) ]) - \log \Rfree  \\
+     & =  (1/\CARA) (\log(1+r) + \log 1 - \log (1+\tau) ) - \log \Rfree  \\
+         & \approx  \CARA^{-1}(\rfree -\tau) ) - r 
+\\      (\Rfree\Discount)^{1/\CARA}/\Rfree & \approx  1+(\CARA^{-1}(\rfree-\tau)-\rfree)
+\end{aligned}\end{gathered}\end{equation}
+
+Substituting this into \eqref{eq:cmpk} gives
+\begin{equation}\begin{gathered}\begin{aligned}
+        \CRat_{t} & \approx  \left(\rfree-\CARA^{-1}(\rfree-\tau)\right)W_{t} \label{eq:capprox}
+\end{aligned}\end{gathered}\end{equation}
+
+Now we can see again that whether the consumer is patient or impatient 
+depends on the relationship between $\rfree$ and $\tau$.  Note also that 
+if $\CARA = \infty$ then the consumer is infinitely averse to changing 
+the level of consumption, and so once again the consumer spends 
+exactly his income.
+
+
+Now a  brief note on what `income' means in this model.  Suppose
+for simplicity that the consumer had no capital assets $K$, and suppose
+that income was expected to stay constant at level $\bar{Y}$ forever.
+In this case human wealth would be:
+\begin{equation}\begin{gathered}\begin{aligned}
+        H_{t} & =  \bar{Y}+\bar{Y}/\Rfree+\bar{Y}/\Rfree^{2}+\ldots  \\
+         & =  \bar{Y}(1+1/\Rfree+1/\Rfree^{2}+\ldots)  \\
+         & =  \bar{Y}\left(\frac{1}{1-1/\Rfree}\right)
+\\   & =  \bar{Y}\left(\frac{\Rfree}{\Rfree-1}\right)
+\\   & =  \bar{Y}\left(\frac{\Rfree}{\rfree}\right)
+\end{aligned}\end{gathered}\end{equation}
+
+Now recall that we found in equation \eqref{eq:kappa} that 
+the level of consumption that leaves `wealth' $W_{t}$ intact
+was
+\begin{equation}\begin{gathered}\begin{aligned}
+        \CRat_{t} & =  \kappa W_{t}  \\
+         & =  \kappa [B_{t}+H_{t}] \\
+         & =  \kappa \bar{Y}\left(\frac{\Rfree}{\rfree}\right)
+\\   & =  \left(\frac{\rfree}{\Rfree}\right)     \bar{Y} \left(\frac{\Rfree}{\rfree}\right)
+\\   & =  \bar{Y}.
+\end{aligned}\end{gathered}\end{equation}
+
+So in this case, spending the `interest income on human wealth' 
+corresponds to spending exactly your labor income.  This seems less 
+mysterious if you think of income $Y_{t}$ as the `return' on your 
+human capital asset $H_{t}$.  If you `capitalize' your stream of 
+income at rate $\Rfree$ and then spend the interest income on the 
+capitalized stream, it stands to reason that you are spending the flow 
+of income from that source.
+
+Note also that in this case we can rewrite \eqref{eq:capprox} as
+\begin{equation}\begin{gathered}\begin{aligned}
+        \CRat_{t} & \approx  \left(\rfree-\CARA^{-1}(\rfree-\tau)\right)\left[B_{t}+ \bar{Y}\left(\frac{\Rfree}{\rfree}\right)\right].
+\end{aligned}\end{gathered}\end{equation}
+
+Note that $\rfree$ appears three times in this equation, which correspond 
+(in order) to the income effect, the substitution effect, and the 
+human wealth effect.  To see this, note that an increase in the first 
+$\rfree$ basically corresponds to an increase in the payout rate on total 
+wealth (to see this, set $\bar{Y} = 0$ and refer to our formula above 
+for $\kappa$, realizing that for small $\rfree$, $\rfree/\Rfree \approx \rfree$.)  The 
+second term corresponds to the subsitution effect, as can be seen from 
+its dependence on the intertemporal elasticity of substitution $\CARA^{-1}$.  
+Finally, the $\bar{Y}/\rfree$ term clearly corresponds to human wealth, and 
+therefore the sensitivity of consumption to $\rfree$ coming through this 
+term corresponds to the human wealth effect.  \opt{MarginNotes}{\marginpar{\tiny This is why I introduced the concept of the human wealth effect in my original treatment in the Fisher diagram.}}{}
+
+
+
+\vspace{.3in} \noindent {\bf Renormalizing by $P$}
+
+Finally, note that we can restate the whole problem by `dividing 
+through' by the level of permanent income before solving.  That is, 
+define small-letter variables as the capital-letter equivalent, 
+divided by the level of permanent labor income in the corresponding 
+period, e.g.  $c_{t}=\CRat_{t}/\PLev_{t}$, and note that if $\PLev_{s+1}=\PGro 
+\PLev_{s}~\forall~s$ then from the standpoint of time $t$ we have that
+\begin{equation}\begin{gathered}\begin{aligned}
+        \uFunc(\CRat_{s}) & =  \frac{\CRat_{s}^{1-\CARA}}{1-\CARA}  \\
+         & =  \frac{(c_{s}\PLev_{s})^{1-\CARA}}{1-\CARA}  \\
+         & =  (\PLev_{t}\PGro^{s-t})^{1-\CARA}\frac{c_{s}^{1-\CARA}}{1-\CARA}
+\end{aligned}\end{gathered}\end{equation}
+which means that 
+\begin{equation}\begin{gathered}\begin{aligned}
+        \sum_{s=t}^{T} \Discount^{(s-t)}\frac{\CRat_{s}^{1-\CARA}}{1-\CARA} & =  \PLev_{t}^{1-\CARA}\sum_{s=t}^{T} (\PGro^{1-\CARA}\Discount)^{(s-t)} \frac{c_{s}^{1-\CARA}}{1-\CARA}  \label{eq:maxc2}
+\end{aligned}\end{gathered}\end{equation}
+
+Furthermore, the accumulation equations can be rewritten by dividing
+both sides by $\PLev_{t+1}$:
+\begin{equation}\begin{gathered}\begin{aligned}
+        B_{t+1}/\PLev_{t+1} & =  \frac{({M}_{t}-\CRat_{t})\Rfree}{\PLev_{t+1}}  \\
+        k_{t+1} & =   \left(\frac{({M}_{t}-\CRat_{t})\Rfree}{\PLev_{t}}\right)\left(\frac{\PLev_{t}}{\PLev_{t+1}}\right) \\
+         & =  (\Rfree/\PGro)[m_{t}-c_{t}]
+\end{aligned}\end{gathered}\end{equation}
+\begin{equation}\begin{gathered}\begin{aligned}
+        {M}_{t+1} & =  B_{t+1}+\PLev_{t+1}
+\\      m_{t+1} & =  k_{t+1}+1
+\end{aligned}\end{gathered}\end{equation}
+
+Now if we define $\hat{\Discount} = \PGro^{1-\CARA}\Discount$ and $\hat{\Rfree} = \Rfree/\PGro$, and 
+$\hat{\PGro}=1$, it is clear that the original problem can be rewritten as:
+
+
+\begin{equation}
+\max \PLev_{t}\sum_{s=t}^{T} \hat{\Discount}^{s-t} \uFunc(c_{s})             \label{eq:scaledmaxprob}
+\end{equation}
+subject to the constraints
+\begin{equation}\begin{gathered}\begin{aligned}
+    k_{t+1} & =  \hat{\Rfree}[m_{t}-c_{t}]
+\\      m_{t+1} & =  k_{t+1}+1
+\end{aligned}\end{gathered}\end{equation}
+and we can go through the same steps as above to find that the solution
+is
+\begin{equation}\begin{gathered}\begin{aligned}
+        c_{t} & =  (1-\hat{\Rfree}^{-1}(\hat{\Rfree}\hat{\Discount})^{1/\CARA})\left[k_{t}+\left(\frac{1}{1-\hat{\PGro}/\hat{\Rfree}}\right)\right] \label{eq:lowerc}
+\end{aligned}\end{gathered}\end{equation}
+subject to the `finite human wealth' condition
+\begin{equation}\begin{gathered}\begin{aligned}
+        \hat{\PGro} & <  \hat{\Rfree}
+\\  1 & <  \Rfree/\PGro 
+\end{aligned}\end{gathered}\end{equation}
+which is the same condition as above \eqref{eq:pdvyinf}, and the `impatience condition'
+\begin{equation}\begin{gathered}\begin{aligned}
+                (\hat{\Rfree}\hat{\Discount})^{1/\CARA} & <  \hat{\Rfree}  
+\\              \left(\frac{\Rfree}{\PGro}\Discount \PGro^{1-\CARA}\right)^{1/\CARA} & <  \Rfree/\PGro  
+\\              (\Rfree\Discount)^{1/\CARA} & <  \Rfree
+\end{aligned}\end{gathered}\end{equation}  
+which is the same as \eqref{eq:pdvcinf}.
+
+Now note that \eqref{eq:lowerc} can be rewritten
+\begin{equation}\begin{gathered}\begin{aligned}
+        c_{t} & =  \left(\frac{\hat{\Rfree}-(\hat{\Rfree}\hat{\Discount})^{1/\CARA}}{\hat{\Rfree}}\right)w_{t}
+\end{aligned}\end{gathered}\end{equation}
+where $w_{t}$ is the consumer's total wealth-to-permanent-labor-income 
+ratio, human and nonhuman.
+
+As before, whether $w$ is rising or falling depends upon the 
+relationship between $\hat{\rfree}$ and 
+$\hat{\Rfree}-(\hat{\Rfree}\hat{\Discount})^{1/\CARA}$.  If we call a consumer who is 
+drawing down his wealth-to-income ratio `impatient,' the consumer will 
+be impatient if
+\begin{equation}\begin{gathered}\begin{aligned}
+        R-(\Rfree\Discount)^{1/\CARA} & >  r  \\
+        1-(\Rfree\Discount)^{1/\CARA} & >  0  \\
+        1 & >  (\hat{\Rfree}\hat{\Discount})^{1/\CARA}
+\end{aligned}\end{gathered}\end{equation}
+
+Now substituting the definitions of $\hat{\Rfree}$ and $\hat{\Discount}$
+we see that whether $w$ is rising or falling depends on whether
+\begin{equation}\begin{gathered}\begin{aligned}
+        1 & >  (\frac{\Rfree}{\PGro}\Discount \PGro^{1-\CARA})^{1/\CARA}
+\\  1 & >  (\Rfree\Discount \PGro^{-\CARA})^{1/\CARA}
+\\  1 & >  \PGro^{-1}(\Rfree\Discount)^{1/\CARA}
+\\  \PGro & >  (\Rfree\Discount)^{1/\CARA}
+\end{aligned}\end{gathered}\end{equation}
+
+Thus, whether the consumer is patient or impatient in the sense of 
+building up or drawing down a wealth-to-income ratio depends on 
+whether the growth rate of labor income is less than, equal to, or 
+greater than the growth rate of consumption.  
+
+To get the intuition for this, consider the case of a consumer with no 
+nonhuman wealth, $k_{t}=0$.  This consumer's absolute level of 
+consumption will grow at $(\Rfree\Discount)^{1/\CARA}$ and absolute level of 
+income at $\PGro$, but the PDV of future consumption and future income are 
+equal.  Thus, if income is growing faster than consumption but has the 
+same PDV, consumption must be starting out at a level higher than 
+income - which is to say, if the impatience condition holds, the 
+consumer has a high level of consumption but slow consumption growth.
+
+A final point about the human wealth effect.  For simplicity, assume 
+that $k_{t} = 0$.  Then the original version of the formula informs
+us that the {\it level} of consumption will be given by:
+\begin{equation}\begin{gathered}\begin{aligned}
+        \CRat_{t} & \approx  \left[\rfree - \CARA^{-1}(\rfree-\tau)\right]\left(\frac{\bar{Y}}{1-\Rfree/\PGro}\right)  \\
+         & \approx  \left[\rfree - \CARA^{-1}(\rfree-\tau)\right]\left(\frac{\bar{Y}}{\rfree-g}\right). \label{eq:cofw2}
+\end{aligned}\end{gathered}\end{equation}
+
+Now suppose we choose plausible values for $(\rfree, \tau, g, \CARA) = (.04,.04,.02,2)$.
+Then \eqref{eq:cofw2} becomes:
+\begin{equation}\begin{gathered}\begin{aligned}
+        \CRat_{t} & \approx  .04 (\bar{Y}/.02) \\
+         & =  2 \bar{Y}.
+\end{aligned}\end{gathered}\end{equation}
+
+Now suppose the interest rate changes to $\rfree=.03$, while all other parameters
+remain the same.  Then \eqref{eq:cofw2} becomes:
+\begin{equation}\begin{gathered}\begin{aligned}
+        \CRat_{t} & \approx  .025 (\bar{Y}/.01)  \\
+         & =  2.5 \bar{Y}.
+\end{aligned}\end{gathered}\end{equation}
+
+The point of this analysis is that for plausible parameter values, the 
+human wealth effect is enormously stronger than the income and 
+substitution effects, so that we should see large drops in consumption 
+when interest rates rise and conversely strong gains when interest 
+rates fall.  This is a summary of the main point of the paper by 
+Summers~\cite{summersCapTax} on your syllabus; Summers derives 
+formulas for an economy with overlapping generations of 
+finite-lifetime consumers, but those complications do not change the 
+basic message.
+
+%\input texhtml.tex
+\bibliographystyle{econometrica}
+\input handoutBibMake
+
+
+\end{document}
+
+  \\
+         & \mbox{s.t.}  \nonumber \\
+        {M}_{t+1} & =  ({M}_{t}-\CRat_{t})R+Y_{t+1}
+        \label{eq:budconstr}
+\end{aligned}\end{gathered}\end{equation}

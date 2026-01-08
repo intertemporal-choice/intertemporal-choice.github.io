@@ -1,0 +1,21 @@
+\documentclass{handout}
+
+\usepackage{handoutSetup}\usepackage{handoutShortcuts} 
+
+ 
+
+ 
+
+\provideboolean{examVersion}\setboolean{examVersion}{true}\newcommand{\ifExam}{\ifthenelse{\boolean{examVersion}}}
+
+\setboolean{AnswersTF}{true}
+
+\begin{document}
+
+\begin{enumerate}
+\item \input ./body.tex
+\end{enumerate}
+
+\input handoutBibMake
+
+\end{document}

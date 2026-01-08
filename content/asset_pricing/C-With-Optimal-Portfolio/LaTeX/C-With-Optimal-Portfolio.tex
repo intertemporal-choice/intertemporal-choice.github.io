@@ -1,0 +1,316 @@
+\documentclass{handout}
+
+\provideboolean{examVersion}\setboolean{examVersion}{true}\newcommand{\ifExam}{\ifthenelse{\boolean{examVersion}}}
+
+\setboolean{examVersion}{false}
+%\setboolean{examVersion}{true}
+
+\usepackage{subfigure}
+
+\usepackage{handoutSetup}\usepackage{handoutShortcuts} 
+
+ 
+ 
+
+
+\begin{document}
+\handoutHeader
+
+\begin{verbatimwrite}{\jobname.title}
+Consumption with Optimal Portfolio Choice
+\end{verbatimwrite}
+\medskip\medskip\medskip
+
+\handoutNameMake
+
+\setboolean{AnswersTF}{true}
+\setboolean{AnswersTF}{false}
+
+
+\begin{verbatimwrite}{./body.tex}
+\ifExam{{\bf Consumption with Optimal Portfolio Choice.~~}}{}\handoutC{CRRA-RateRisk} shows that for a 
+\cite{merton:restat}-\cite{samuelson:portfolio} consumer facing return
+$\log \RiskyAlt_{t+1} \sim \mathcal{N}(\riskyAlt -
+\sigma^{2}_{\riskyAlt}/2,\sigma^{2}_{\riskyAlt})$ on the only financial
+asset available, the optimal marginal propensity
+to consume is approximately
+\begin{equation}\begin{gathered}\begin{aligned}
+        \MPC & \approx  {\riskyAlt}-\CRRA^{-1}(\riskyAlt-\DiscRate) - (\CRRA-1)\left(\sigma_{\riskyAlt}^{2}/2\right) \label{eq:MPC}
+\end{aligned}\end{gathered}\end{equation}
+\ifExam{
+\begin{enumerate}
+\item Use this equation to discuss the parametric restriction(s) under which an increase in 
+unavoidable financial risk $\sigma_{\riskyAlt}^{2}/2$ will cause a (precautionary) decline in consumption (the risk is unavoidable because we have assumed the risky asset is the only financial asset available).
+Explain whether, under such parameter value(s), the income effect of an increase in $\riskyAlt$ outweighs
+the substitution effect, {\it and explain in words the intution for both the income effect and the substitution effect.}
+\answer{The restriction is $\CRRA>1$, which guarantees that an increase in $\sigma_{\riskyAlt}^{2}$ reduces $\MPC$.  Under this restriction, the income effect outweighs the substitution effect.  For a discussion of the two effects, see \handoutC{PerfForesightCRRA}.}{\vspace{0.1in}} % end answer
+}{where the precautionary effect of financial risk on the MPC is
+captured by the $-(\CRRA-1)\left(\sigma_{\riskyAlt}^{2}/2\right)$ term.  
+Since $\CRRA > 1$ by assumption, this equation yields the plausible 
+conclusion that an increase in {\it unavoidable} financial risk $\sigma_{\riskyAlt}^{2}$ reduces
+the level of consumption.} % end \ifExam
+
+\renewenvironment{quote}{%
+  \list{}{%
+    \leftmargin-0.75cm   % this is the adjusting screw
+    \rightmargin\leftmargin
+  }
+  \item\relax
+}
+{\endlist}
+
+
+\ifExam{
+\begin{quote}
+For the remainder of the question, assume that the consumer}{We are interested here in understanding how the results change when the consumer} can choose how much to invest in the risky asset, so that financial risk can be avoided by reducing the share of the portfolio allocated to the risky asset.  \handoutA{Portfolio-CRRA} derives the portfolio share $\riskyshare$
+  that an optimizing consumer will invest in a risky asset earning
+  return $\log \RiskyAlt_{t+1} \sim \mathcal{N}(\riskyAlt -
+  \sigma^{2}_{\riskyAlt}/2,\sigma^{2}_{\riskyAlt})$ -- so that $\log \RiskyAlt =
+  \riskyAlt$ (where the subscriptless version of a variable denotes
+  its expectation unless otherwise noted, e.g.\ $\RiskyAlt \equiv \Ex_{t}[\RiskyAlt_{t+1}]$.\footnote{\ifExam{}{(See
+  \LogMeanMPS, and note that $\RiskyAlt=\Risky$ under the given assumptions; that is, an increase in the degree of risk $\sigma^{2}_{\riskyAlt}$ does not change the expected return factor in levels).}. Note that the subscriptless version of the log of the risky return, $\riskyAlt_{t+1}$, is {\it not} equal to its mean: $\Ex_{t}[\riskyAlt_{t+1}] = \riskyAlt-\sigma^{2}_{\riskyAlt}/2$.}  The remaining proportion $(1-\riskyshare)$
+  of the portfolio earns a riskless return $\rfree = \log \Rfree$,\footnote{The bold
+    font is used for the risky return and the narrow font for the safe
+    return.} and we write the log  expected return premium factor as
+  $\EPrem \equiv \RiskyAlt/\Rfree$ with log expected return premium $\EpremLog
+  \equiv \log \EPrem = \riskyAlt-\rfree = \log \RiskyAlt/\Rfree$; 
+  optimal choice of $\riskyshare$ yields a portfolio whose realized return factor is written
+$\Rport$
+\ifExam{}{and the log of whose realization is well approximated by\footnote{See \handoutA{Portfolio-CRRA} for a figure examining the quality of the approximation.}
+\begin{equation}\begin{gathered}\begin{aligned} 
+    \rport_{t+1}-\rfree & \approx  \riskyshare \overbrace{(\riskyAlt_{t+1}-\rfree)}^{\equiv \EpremLog_{t+1}} + \riskyshare(1-\riskyshare)\sigma^{2}_{\riskyAlt}/2 
+\\   & =   \riskyshare (\riskyAlt_{t+1}-\rfree+\sigma^{2}_{\riskyAlt}/2) - \riskyshare^{2} \sigma^{2}_{\riskyAlt}/2, \label{eq:portLogPrem}
+\end{aligned}\end{gathered}\end{equation}
+whose variance (using \SumNormsIsNorm~and \NormTimes) is
+\begin{equation}\begin{gathered}\begin{aligned}
+\sigma^{2}_{\rport} & =  \riskyshare^{2} \sigma^{2}_{\riskyAlt},   \label{rportVar}
+\end{aligned}\end{gathered}\end{equation}
+and since $\Ex_{t}[\riskyAlt_{t+1}]=\riskyAlt-\sigma^{2}_{\riskyAlt}/2$ the expectation of \eqref{eq:portLogPrem} 
+will be
+\begin{equation}\begin{gathered}\begin{aligned} 
+    \Ex_{t}[\rport_{t+1}-\rfree] & \approx  (\riskyAlt- \sigma^{2}_{\riskyAlt}/2 - \rfree + \sigma^{2}_{\riskyAlt}/2)\riskyshare-\riskyshare^{2}\sigma^{2}_{\riskyAlt}/2
+\\   & =   \EpremLog \riskyshare -\riskyshare^{2}\sigma^{2}_{\riskyAlt}/2
+\end{aligned}\end{gathered}\end{equation}
+so that, using \SumNormsIsNorm,
+\begin{equation}\begin{gathered}\begin{aligned}
+  \rport_{t+1}-\rfree & \sim  \mathcal{N}(\EpremLog \riskyshare -\riskyshare^{2}\sigma^{2}_{\riskyAlt}/2,\riskyshare^{2}\sigma^{2}_{\riskyAlt}) \label{eq:rportDist}
+\end{aligned}\end{gathered}\end{equation}
+yielding, using \LogELogNormTimes, }
+\begin{equation}\begin{gathered}\begin{aligned}
+ \log \Rport \equiv \log \Ex_{t}[\Rport_{t+1}] & =  \riskyshare \EpremLog + \rfree \label{LogERport},
+\end{aligned}\end{gathered}\end{equation}
+and \handoutA{Portfolio-CRRA} shows that under these circumstances the optimal risky
+portfolio share is well approximated by
+\begin{equation}\begin{gathered}\begin{aligned}
+         \riskyshare  & \approx  \left(\frac{\EpremLog}{\CRRA \sigma^{2}_{\riskyAlt}}\right)
+ \label{eq:riskyshareMS}
+\end{aligned}\end{gathered}\end{equation}
+\ifExam{while the variance of the return on the optimally-chosen risky portfolio is approximately
+\begin{equation}\begin{gathered}\begin{aligned}
+\sigma^{2}_{\rport} & =  \riskyshare^{2} \sigma^{2}_{\riskyAlt}.   \label{rportVar}
+\end{aligned}\end{gathered}\end{equation}
+\end{quote}}{} % end ifExam
+
+\renewenvironment{quote}{%
+  \list{}{%
+    \leftmargin+0.75cm   % this is the adjusting screw
+    \rightmargin\leftmargin
+  }
+  \item\relax
+}
+{\endlist}
+
+
+\newcommand{\ExplainWhyRiskShrinksC}{The way to understand this is to break down the response to the
+increase in riskiness into two components. The first is the direct
+precautionary effect examined in \handoutM{CRRA-RateRisk}, which works
+in the way intuition suggests (more risk implies lower consumption);
+the second effect is the `portfolio rebalancing' effect, examined in
+\handoutA{Portfolio-CRRA}: An increase in riskiness makes the consumer
+cchoose to invest less in the risky asset.  What \eqref{eq:PrecEffectRaw}
+tells us is that the consumer's `flight from risk' is so effective in
+reducing riskiness (because the portfolio share $\riskyshare$ enters
+as a {\it squared} term in \eqref{eq:PrecEffectRaw}) that the
+riskiness of the {\it portfolio} actually {\it declines} as the riskiness of
+the risky asset increases.  (This result was also derived in
+\handoutM{Portfolio-CRRA}).  Now the overall reduction in consumption
+coming through the precautionary term makes sense: Precautionary
+saving is less than before {\it because the consumer optimally chooses less
+  exposure to risk} than before.}
+
+
+\ifExam{
+\item Show that the precautionary effect of rate-of-return risk on the precautionary contribution to the MPC, 
+after taking account of optimal portfolio adjustment, is
+\begin{equation}
+ -(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)  \label{eq:PrecEffect}.
+\end{equation}
+and explain the intuition for the result that the size of the precautionary effect {\it shrinks} as the risk grows larger.
+\answer{
+\noindent so that substituting from \eqref{eq:riskyshareMS}, the precautionary effect on consumption after taking account of optimal portfolio adjustment is
+\begin{equation}\begin{gathered}\begin{aligned}
+ -(\CRRA-1)\left(\sigma_{\rport}^{2}/2\right) & =  -(\CRRA-1)\left(\frac{\overbrace{\riskyshare^{2}\sigma_{\riskyAlt}^{2}}^{\text{from \eqref{rportVar}}}}{2}\right) 
+\\ & =  -(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)  
+\end{aligned}\end{gathered}\end{equation}
+
+\ExplainWhyRiskShrinksC
+}{} % end answer
+}{\noindent so that substituting from \eqref{eq:riskyshareMS}, the precautionary effect after taking account of optimal portfolio adjustment is
+\begin{equation}\begin{gathered}\begin{aligned}
+ -(\CRRA-1)\left(\sigma_{\rport}^{2}/2\right) & =  -(\CRRA-1)\left(\frac{\overbrace{\riskyshare^{2}\sigma_{\riskyAlt}^{2}}^{\text{from \eqref{rportVar}}}}{2}\right) \label{eq:PrecEffectRaw}
+\\ & =  -(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) 
+\end{aligned}\end{gathered}\end{equation}
+which says that (for $\CRRA>1$) the absolute size of the precautionary term \textit{shrinks} as the risk grows larger.
+} % end ifExam
+
+\ifExam{}{
+To put it another way, when $\CRRA>1$ the effect of the precautionary
+motive in reducing consumption gets {\it smaller} as the risk gets
+larger (just to confirm that you read that right, I'll say it a third
+way: an {\it increase} in the riskiness of the risky asset causes
+consumption to {\it rise}).  At first, this seems bizarre: Intuition
+suggests that in reality that people {\it cut back} on consumption in
+the face of greater risk (financial or nonfinancial).
+
+\ExplainWhyRiskShrinksC
+} % end ifExam 
+
+
+\ifExam{
+\item Now use the foregoing results to show that the MPC $\MPC$ can be rewritten in terms of 
+exogenous parameters (including the riskfree interest factor $\rfree$) as 
+\begin{equation}\begin{gathered}\begin{aligned}
+        \MPC & \approx  \rfree-\CRRA^{-1}(\rfree-\DiscRate)+ (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\end{aligned}\end{gathered}\end{equation}
+and use this equation to explain why the total effect of an increase in risk on consumption is {\it positive} and {\it explain why this result comes about.}
+\answer{See \handoutA{C-With-Optimal-Portfolio} for the result and the logic.}{}
+}{
+The fact that precautionary saving diminishes when risk is larger does
+not, by itself, tell us whether consumption increases in response to
+an increase in risk; in addition to the precautionary channel, the MPC
+is also affected by the decline in the portfolio's expected rate of return
+that results from the consumer's choice to invest less in the
+high-expected-return risky asset and more in the low-return safe asset.
+Substituting \eqref{eq:riskyshareMS} into \eqref{LogERport} indicates
+that the log of the expected portfolio excess return factor becomes
+\begin{equation}\begin{gathered}\begin{aligned}
+ \log \Rport/\Rfree \equiv \log \Ex_{t}[\Rport_{t+1}/\Rfree] & =  \frac{\EpremLog^{2}}{\CRRA \sigma^{2}_{\riskyAlt}}
+\end{aligned}\end{gathered}\end{equation}
+so an increase in $\sigma^{2}_{\riskyAlt}$ can have quite a powerful effect in reducing the consumer's
+expected portfolio return.
+
+As with the change in the riskfree rate analyzed in \handoutC{PerfForesightCRRA}, this change in the portfolio
+return has two consequences: An income and a substitution effect,
+captured respectively by the first and second terms of \eqref{eq:MPC}.
+Substituting $\rport = \EpremLog^{2}/\CRRA \sigma^{2}_{\riskyAlt}+\rfree$ and $\sigma_{\rport}^{2}=(\EpremLog/\CRRA)^2/\sigma_{\riskyAlt}^{2}$ into \eqref{eq:MPC} yields
+\begin{equation}\begin{gathered}\begin{aligned}
+        \MPC & \approx  {\rport}-\CRRA^{-1}(\rport-\DiscRate) - (\CRRA-1)\left(\sigma_{\rport}^{2}/2\right) \label{eq:MPCsub}
+\\      & =  \CRRA^{-1}\DiscRate+{\rport}(1-\CRRA^{-1}) - (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\\      & =  \CRRA^{-1}\DiscRate+(\rfree+\EpremLog^{2}/\CRRA \sigma^{2}_{\riskyAlt})(1-\CRRA^{-1}) - (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\\      & =  \rfree-\CRRA^{-1}(\rfree-\DiscRate)+\underbrace{(\CRRA-1)(\EpremLog^{2}/\CRRA^{2} \sigma^{2}_{\riskyAlt})}_{\text{net inc and sub effect}} - (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+.
+%\\      & =  \rfree-\CRRA^{-1}(\rfree-\DiscRate)+ (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\end{aligned}\end{gathered}\end{equation}
+
+Thus, for $\CRRA > 1$ the income effect outweighs the substitution
+effect so that when an increase in financial risk causes consumers to
+shy away from the risky asset the reduction in consumption from the
+drop in income (`the income effect') is larger than the increase in
+consumption from the lowering of the incentive to delay consumption
+(`the substitution effect').
+
+Note, finally, that the net of the income and substitution effects is (remarkably) of exactly the same functional
+form as the precautionary effect, but of opposite sign and twice as large.  So the combination of all 
+three effects (income, substitution, precautionary) yields:
+\begin{equation}\begin{gathered}\begin{aligned}
+        \MPC & \approx  \rfree-\CRRA^{-1}(\rfree-\DiscRate)+ (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\end{aligned}\end{gathered}\end{equation}
+and we can see that the overall effect of the increase in financial
+risk is to reduce the marginal propensity to consume because the net
+of the income and substitution effects channels outweighs the precautionary effect (see
+\handoutM{PerfForesightCRRA} for a refresher on income and
+substitution effects, as well as human wealth effects (which are
+absent here but could easily be added by giving the consumer an
+expected stream of future noncapital income)).
+
+Figure~\ref{fig:MPCvsSigma} confirms, both using the approximate formulas
+derived above and using a numerically exact solution, that the MPC declines
+as risk increases.  
+
+} % end ifExam
+
+
+
+\ifExam{
+\item Now show that the effect of an increase in risk on saving is given by 
+\begin{equation}\begin{gathered}\begin{aligned}
+  \rport - \MPC & =  \CRRA^{-1}(\rfree-\DiscRate) + \left(\frac{\CRRA+1}{2}\right)\left(\frac{\EpremLog^{2}}{\sigma^{2}_{\riskyAlt}\CRRA^{2}}\right)
+\end{aligned}\end{gathered}\end{equation}
+and {\it explain how this result relates to the results obtained earlier}.  Comment, in particular, on the role 
+played by our assumption that the consumer has no labor income (Hint: What further effect of interest rates is omitted when the consumer has no labor income?)
+\answer{See the discussion in \handoutA{C-With-Optimal-Portfolio}.}{}
+\end{enumerate}
+}{
+Finally, in addition to the effects on consumption, we are interested in the 
+effects on saving.  Since saving is income minus consumption, this means
+we need to know the effects on income.  But income for our consumer is 
+entirely from his portfolio investments, so the income effect is captured
+simply by $\rport$.  The `saving effect' is therefore captured by
+\begin{equation}\begin{gathered}\begin{aligned}
+  \rport - \MPC & \approx  \CRRA^{-1}(\rport-\DiscRate)+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\\ & =  \CRRA^{-1}\left(\frac{\EpremLog^{2}}{\CRRA \sigma^{2}_{\riskyAlt}}+\rfree-\DiscRate\right)+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\\ & =  \CRRA^{-1}(\rfree-\DiscRate) + \frac{\EpremLog^{2}}{\CRRA^{2} \sigma^{2}_{\riskyAlt}}+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\\ & =  \CRRA^{-1}(\rfree-\DiscRate) + \frac{\EpremLog^{2}/\CRRA^{2}}{ \sigma^{2}_{\riskyAlt}}+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\\ & =  \CRRA^{-1}(\rfree-\DiscRate) + \left(\frac{\CRRA+1}{2}\right)\left(\frac{\EpremLog^{2}}{\sigma^{2}_{\riskyAlt}\CRRA^{2}}\right)
+\end{aligned}\end{gathered}\end{equation}
+which indicates that an increase in the riskiness of the financial
+asset will reduce net saving; although the increase in risk diminishes
+consumption, the decline in expected income from the decline in the
+consumer's investment in the high-return asset is greater, and so
+expected saving declines despite the decline in consumption.  It is
+worth emphasizing again, though, that this decline in saving is {\it
+  not} properly called a precautionary saving effect; it is a
+consequence of the portfolio rebalancing which actually reduces the
+size of the precautionary effect.  It would be confusing to refer to
+this simply as a precautionary effect, when in fact the ultimate
+outcome (increased saving) depends also on portfolio rebalancing,
+income, and substitution effects.  This can be seen most clearly in
+the case of logarithmic utility, where the precautionary effect is
+precisely zero (see the discussion in \handoutM{CRRA-Portfolio}), yet
+the portfolio and other effects exist and still generate the
+conclusion that the increase in risk increases saving.
+
+This analysis has been entirely in partial equilibrium.  General
+equilibrium considerations (which arise, for example, in attempting to
+use models of this kind to understand global imbalances) complicate
+the picture further.  In particular, consumers' efforts to flee the
+risky asset result in a lower equilibrium price for that asset (and a
+correspondingly higher price for the riskless asset, and therefore a lower 
+riskfree rate).  This induces
+yet a {\it third} round of responses to the increase in risk.  
+
+A final important observation is that the assumption that the
+consumer has no labor income means that perhaps the largest
+`classical' effect of interest rates on consumption and saving is
+entirely omitted from the analysis here: The human wealth effect.
+(See~\cite{summersCapTax} for a statement of the argument that the
+human wealth effect of interest rates is likely in practice to be much
+larger than the income and substitution effects.)  The general
+equilibrium decline in riskfree rates attendant upon an increase in
+riskiness of the risky asset should boost human wealth, increase
+consumption, and reduce saving.  For careful and insightful treatments
+of the general equilibrium problem, see \cite{paEntrep} and
+\cite{corneliImbalances}.
+
+\begin{figure}
+\caption{$\MPC$ as a Function of $\sigma$ Calculated Using (Numerically) Exact and Approximate Methods} \label{fig:MPCvsSigma}
+\includegraphics[width=6in]{../Figures/MPCApproxVsExactVsSigma}
+\end{figure}
+
+} % end ifExam
+
+\end{verbatimwrite}
+\input ./body.tex
+\input handoutBibMake
+\end{document}
+

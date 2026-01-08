@@ -1,0 +1,85 @@
+
+\centerline{\Large Numerical Solution} \vspace{0.5in}
+
+
+
+The solution code uses the following definitions for the production and adjustment cost functions:\footnote{The slight modification to the cost-of-adjustment function (relative to the formulation in \handoutI{qModel}) reflects the changed timing of depreciation in \eqref{eq:kAccum} compared to the corresponding equation in \handoutI{qModel}.  In the continuous-time limit the two equations become the same, but the formulation here makes the representation of the problem slightly more transparent in the discrete-time computer code.}
+\begin{equation}\begin{gathered}\begin{aligned}
+\fFunc(k,\labor)&= \Psi k^\kapShare \labor^{1-\kapShare} \label{eq:fjFuncs} \\
+\jFunc(i,\kap)&=\frac{\omega k}{2}\left(\frac{i}{k}-\frac{\depr}{\DeprFac}\right)^2 
+\end{aligned}\end{gathered}\end{equation}
+where $\Psi$ is the firm's productivity and $\labor$ is the labor supplied by the entrepreneur (assumed equal to 1).\ifTax{}{\footnote{The code also includes the parameters $\kPriceAfterITC$ and $\TaxFree$ (respectively the investment cost after the Investment Tax Credit and the untaxed portion of earnings) in order to study the impact of tax policies. Both parameters are however assumed equal to 1 and thus the equations in the code are equivalent to the simpler ones described in this handout.}}
+
+The policy functions are obtained using the method of \textit{reverse
+  shooting}, which is based on recovering for a given $k_{t+1}$ and
+$\vFirm_{t+1}(k_{t+1})$ the values of $k_t$, $i_t$ and
+$\vFirm_{t}(k_{t})$ consistent with the first order conditions and
+transition equations. 
+
+The reverse-shooting equation for capital comes from a combination of the 
+dynamic budget constraint and the Euler equation.  
+For convenience defining 
+\begin{equation}\begin{gathered}\begin{aligned}
+  z_t& \equiv k_{t+1}/\DeprFac
+\end{aligned}\end{gathered}\end{equation}
+so that 
+\begin{equation}\begin{gathered}\begin{aligned}
+  i_{t} = z_{t}-k_{t} \label{eq:izk},
+\end{aligned}\end{gathered}\end{equation}
+we can rewrite the investment Euler equation as
+\begin{equation*}\begin{gathered}\begin{aligned}
+\ifTax{\kPriceAfterITC}{} (1+j_{t}^{i}) & = \DeprFac\Discount \left( \ifTax{\TaxFree}{}\fFunc^{k}(k_{t+1})+\ifTax{\kPriceAfterITC}{}(1+j_{t+1}^{i}-j_{t+1}^{k})\right)\\
+\ifTax{\kPriceAfterITC}{} \left(1+\omega\left(\frac{\overbrace{i_t}^{z_{t}-k_{t}}}{k_t}-\frac{\depr}{\DeprFac}\right)\right) & = \DeprFac\Discount \left( \ifTax{\TaxFree}{}\fFunc^{k}(k_{t+1})+\ifTax{\kPriceAfterITC}{}(1+j_{t+1}^{i}-j_{t+1}^{k})\right)
+\end{aligned}\end{gathered}\end{equation*}
+so that
+\begin{equation*}\begin{gathered}\begin{aligned}
+\frac{z_t}{k_t}-1 & =\DeprFac\Discount\left( \ifTax{\TaxFree}{}\fFunc^{k}(k_{t+1})+\ifTax{\kPriceAfterITC}{}(1+j_{t+1}^{i}-j_{t+1}^{k})\right)/\ifTax{\kPriceAfterITC\omega}{\omega}-1/\omega+\depr/\DeprFac\\
+k_t&=\frac{z_t}{\DeprFac\Discount\left( \ifTax{\TaxFree}{}\fFunc^{k}(k_{t+1})+\ifTax{\kPriceAfterITC}{}(1+j_{t+1}^{i}-j_{t+1}^{k})\right)/\ifTax{\kPriceAfterITC\omega}{\omega}-1/\omega+\depr/\DeprFac+1}.
+\end{aligned}\end{gathered}\end{equation*}
+
+With the values of $i_{t}$ and $j_{t}$ obtained from these
+reverse-shooting equations, the reverse-shooting equation for value
+is very simple: It is the Bellman equation
+\begin{equation}\begin{gathered}\begin{aligned}
+  \vFirm_{t}(k_{t})&=\ifTax{\rev_t}{f_{t}}-\ifTax{\xpend_t}{i_{t}-j_{t}}+\vFirm_{t+1}(k_{t+1})/\Rfree,
+\end{aligned}\end{gathered}\end{equation}
+where note that $\rev_{t}$ and $\ifTax{\xpend_t}{i_{t}-j_{t}}$ are direct functions of $k_{t}$ and $i_{t}$ which we have 
+already computed.
+
+The steady-state level of capital can be obtained from \eqref{kSSimplicit}:
+\begin{equation}\begin{gathered}\begin{aligned}
+ \ifTax{\kPriceAfterITC}{}\Rfree/\DeprFac -\ifTax{\kPriceAfterITC}{} & =   \ifTax{\TaxFree}{}\fFunc^{k}(\check{k})
+\\ \frac{\ifTax{\kPriceAfterITC}{1}}{\ifTax{\TaxFree}{}\alpha} \left(\Rfree/\DeprFac -1\right) & =   \check{k}^{\kapShare-1}
+\\ \left(\frac{\ifTax{\kPriceAfterITC}{1}}{\ifTax{\TaxFree}{}\alpha} \left(\Rfree/\DeprFac -1\right)\right)^{1/(\kapShare-1)} & =   \check{k} \label{eq:kSS}
+\end{aligned}\end{gathered}\end{equation}
+while the steady-state value of $\ek$ comes from substituting $\check{\kap}$ into \eqref{eq:lamNearSS}.  Steady-state value 
+is straightforward to compute, given that in the steady state the capital stock and amount of investment are constant:
+\begin{equation}\begin{gathered}\begin{aligned}
+  \check{\vFirm} & =  \sum_{n=0}^{\infty} (\ifTax{\TaxFree}{} \fFunc(\check{\kap})-\ifTax{\kPriceAfterITC}{}\check{i})\Discount^{n}
+\\ & =  (\Rfree/\rfree)(\ifTax{\TaxFree}{} \fFunc(\check{\kap}) - \ifTax{\kPriceAfterITC}{}\check{i}).
+\end{aligned}\end{gathered}\end{equation}
+
+
+The reverse shooting routine starts its backwards iterations from a $k_{\hat{t}}$ level very close to the steady state of the model and, as discussed in the methodological appendix to \handoutC{TractableBufferStock}, the accuracy of the solution is improved if we approximate $i_{\hat{t}}$ with a first order Taylor expansion using the derivative of investment at the steady state:
+\begin{equation}\begin{gathered}\begin{aligned}
+    i_{\hat{t}}&=\check{i}+\check{i}^k\epsilon
+\end{aligned}\end{gathered}\end{equation}
+where the~~$\check{}$~~identifies variables at the steady state and $\epsilon$ is the deviation from the steady state. $\check{i}^k$ is computed by differentiating the Euler equation with respect to $\kap$:
+\begin{equation*}\begin{gathered}\begin{aligned}
+    \lefteqn{\ifTax{\kPriceAfterITC}{}(j^{ii}_t i^k_t+j^{ik}_t) = } &  \\
+&  \DeprFac\Discount\left(\ifTax{\TaxFree}{}f^{kk}_{\hat{t}}\DeprFac(1+i^k_t)+\ifTax{\kPriceAfterITC}{}(j^{ik}_{\hat{t}}\DeprFac(1+i^k_t)+j^{ii}_{\hat{t}}i^k_{\hat{t}}
+-j^{kk}_{\hat{t}}\DeprFac(1+i^k_t)-j^{ki}_{\hat{t}}i^k_{\hat{t}})\right)
+\end{aligned}\end{gathered}\end{equation*}
+which at the steady-state where $i^{k}_{\hat{t}}=i^{k}_{t}=\check{i}^{k}$ becomes:
+\begin{equation*}\begin{gathered}\begin{aligned}
+    \ifTax{\kPriceAfterITC}{}(j^{ii}_t \check{i}^k+j^{ik}_t)=\DeprFac\Discount\left(\ifTax{\TaxFree}{}f^{kk}_{\hat{t}}\DeprFac(1+\check{i}^k)+\ifTax{\kPriceAfterITC}{}(j^{ik}_{\hat{t}}\DeprFac(1+\check{i}^k)+j^{ii}_{\hat{t}}\check{i}^k-j^{kk}_{\hat{t}}\DeprFac(1+\check{i}^k)
+    -j^{ki}_{\hat{t}}\check{i}^k)\right) \label{eq:iEulerSS}
+\end{aligned}\end{gathered}\end{equation*}
+and given any particular set of parameter values $\check{i}^k$ can be found using standard numerical rootfinding methods.
+
+Finally since the problem is solved under perfect foresight the entrepreneur's consumption function is simply:
+\begin{equation}\begin{gathered}\begin{aligned}
+    \cons_t=\left(\frac{\Rfree-(\Rfree\Discount)^{1/\CRRA}}{\Rfree}\right)(m_t+\vFirm_{t}(k_{t})-\ifTax{\rev_t}{f_t})
+\end{aligned}\end{gathered}\end{equation}
+because this corresponds to the solution to a perfect foresight consumption problem in which the consumer has monetary resources $m_{t}$ and net nonmonetary financial resources $\vFirm_{t}(k_{t})-\ifTax{\rev_t}{f_t}$ (see \handoutC{PerfForesightCRRA}).
+

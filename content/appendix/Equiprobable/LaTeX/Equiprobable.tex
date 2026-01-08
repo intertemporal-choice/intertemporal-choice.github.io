@@ -1,0 +1,158 @@
+\documentclass{handout} 
+% See also Equiprobable-Returns, Portfolio-CRRA, Portfolio-Multi-CRRA, and C-With-Optimal-Portfolio
+\usepackage{handoutSetup}\usepackage{handoutShortcuts} 
+ 
+\begin{document}
+
+\handoutHeader
+
+\begin{verbatimwrite}{\jobname.title}
+An Equiprobable Approximation to the Bivariate Lognormal 
+\end{verbatimwrite}
+
+\handoutNameMake
+
+\providecommand{\eVar}{\sigma^{2}_{2}}
+\providecommand{\eStd}{\sigma_{2}}
+
+\providecommand{\SolvingMicroDSOPs}{\href{http://www.econ2.jhu.edu/people/ccarroll/SolvingMicroDSOPs/}{SolvingMicroDSOPs}}
+
+Economic agents face risks of many kinds, which may mutually
+covary.  A stock broker, for example, is likely to earn a salary
+bonus that is positively related to the performance of the stock
+market; if that broker also has personal stock investments, his
+financial wealth and labor income will be positively correlated.
+
+The first part of this handout presents a convenient (and empirically
+realistic) formulation in which a consumer faces two shocks (which can
+be interpreted as a shock to noncapital income and a shock to the rate
+of return) that are distributed according to a multivariate lognormal
+that allows for correlation between them.  The second part describes a
+computationally simple and convenient method for approximating that joint
+distribution.
+
+\section{Theory}
+
+Consider a consumer who faces both a risk to transitory noncapital income\footnote{The assumed distribution has the property $\Ex[\ShkMeanOne_{1,t+1}]=1$, cf.\ \MathFactsList.}
+\begin{equation}\begin{gathered}\begin{aligned}
+   \ShkMeanOneLog_{1,t+1} \equiv \log \ShkMeanOne_{1,t+1}  & \sim  \mathcal{N}(-0.5\sigma^{2}_{1},\sigma^{2}_{1})
+\end{aligned}\end{gathered}\end{equation}
+and a risky log rate-of-return that is affected by following factors: the riskless rate $\rfree$; 
+a risk premium $\EpremLog$; an additional constant $\zeta$ (whose purpose will become clear below); a component
+that is linearly related to $\ShkMeanOneLog_{1,t+1} $; and an independent shock $\ShkMeanOneLog_{2} \sim
+\mathcal{N}(-0.5 \sigma^{2}_{2},\sigma^{2}_{2})$:
+\begin{equation}\begin{gathered}\begin{aligned}
+  {\risky}_{t+1} \equiv \log {\Risky}_{t+1} & =  \rfree+\EpremLog+\zeta + \omega \ShkMeanOneLog_{1,t+1} (\sigma_{2}/\sigma_{1})   + \ShkMeanOneLog_{2,t+1} \label{corrToCov}
+\end{aligned}\end{gathered}\end{equation}
+for some constant $\omega$.  Since $(\sigma_{2}/\sigma_{1}) \omega \ShkMeanOneLog_{1,t+1} $ is the only component of $\risky_{t+1}$ that covaries with $\ShkMeanOneLog_{1,t+1}$,
+\begin{equation*}\begin{gathered}\begin{aligned}
+  \cov(\ShkMeanOneLog_{1,t+1} ,\risky_{t+1}) & =  \cov(\ShkMeanOneLog_{1,t+1} , (\sigma_{2}/\sigma_{1}) \omega \ShkMeanOneLog_{1,t+1} )
+\\ & =  \omega (\sigma_{2}/\sigma_{1}) \underbrace{\cov(\ShkMeanOneLog_{1,t+1} ,\ShkMeanOneLog_{1,t+1} )}_{=\sigma^{2}_{1}}
+\\ & =  \omega \sigma_{2}\sigma_{1}
+.
+%\\ \text{corr}(\ShkMeanOneLog_{1,t+1} ,\risky) & \equiv  \cov(\ShkMeanOneLog_{1,t+1} ,\risky)/\sigma_{2}\sigma_{1}
+%\\ & =  \omega.
+\end{aligned}\end{gathered}\end{equation*}
+
+Equation \eqref{corrToCov} yields a description of the return process
+in which the parameter $\omega$ controls the correlation between the
+risky log return shock and the risky log labor income shock.  If
+$\omega = 0$ the processes are independent.
+
+Now we want to find the value of $\zeta$ such that the mean risky
+return is unaffected by $\sigma^{2}_{1}$ (so that we will be able to
+understand clearly the distinct effects of labor income risk, the
+independent component of rate-of-return risk $\sigma^{2}_{2}$, and the
+correlation between labor income risk and rate-of-return risk,
+$\omega$).  Thus, we want to find the $\zeta$ such that
+\begin{equation}\begin{gathered}\begin{aligned}
+  \Ex_{t}[\Risky_{t+1}] & =  e^{\rfree+\EpremLog}
+\end{aligned}\end{gathered}\end{equation}
+regardless of the values of $\sigma^{2}_{1}$ and $\sigma^{2}_{2}$.  We therefore need:
+\begin{equation}\begin{gathered}\begin{aligned}
+         \Ex[e^{\zeta+ (\sigma_{2}/\sigma_{1}) \omega \ShkMeanOneLog_{1,t+1}  + \ShkMeanOneLog_{2,t+1}}] & =  1.
+\\ \log  \Ex[e^{\zeta+ (\sigma_{2}/\sigma_{1}) \omega \ShkMeanOneLog_{1,t+1}  + \ShkMeanOneLog_{2,t+1}}] & =  0.
+\end{aligned}\end{gathered}\end{equation}
+
+Using standard facts about lognormals (cf. \MathFactsList), and for convenience 
+defining $\hat{\omega}= (\sigma_{2}/\sigma_{1}) \omega$, we have 
+\begin{equation}\begin{gathered}\begin{aligned}
+  0. & =  \zeta - 0.5 \hat{\omega} \sigma^{2}_{1} - 0.5 \sigma^{2}_{2} + 0.5\hat{\omega}^{2}\sigma^{2}_{1}+0.5  \sigma^{2}_{2}
+\\ & =  \zeta -0.5 \sigma^{2}_{1} \hat{\omega}(1-\hat{\omega})
+\\ \zeta & =  0.5 (\hat{\omega}-\hat{\omega}^{2}) \sigma^{2}_{1} = 0.5 (\omega \sigma_{2} \sigma_{1}-\omega^{2} \sigma^{2}_{2}).
+\end{aligned}\end{gathered}\end{equation}
+
+\begin{comment}
+One way to represent the joint distribution would be to stack the two
+variables $\ShkMeanOneLog_{1,t+1}$ and $\ShkMeanOneLog_{2,t+1}$ into a vector $\vec{\ShkMeanOneLog}$ and to write
+\begin{equation}\begin{gathered}\begin{aligned}
+  \vec{\ShkMeanOneLog} & \sim  \mathcal{N}(\vec{\mu},\Sigma)
+\end{aligned}\end{gathered}\end{equation}
+where $\mu= \{-0.5 \sigma^{2}_{1},-0.5 \sigma^{2}_{2}\}'$ and the covariance matrix
+$\Sigma$ is diagonal with variances $\sigma^{2}_{1}$ and $\sigma^{2}_{2}$.\footnote{An
+  alternative would be to work with $\ShkMeanOneLog_{1,t+1}$ and $\risky$ directly,
+  which would require a multivariate normal with nonzero off-diagonal
+  elements (covariances).  The two approaches are mathematically
+  indistinguishable, but the IID representation has certain
+  conveniences for our purposes.}
+\end{comment}
+
+\section{Computation}
+
+A key step in the computational solution of any model with uncertainty is the calculation 
+of expectations.  Writing $\tilde{\ShkMeanOne}_{1} \equiv \tilde{\ShkMeanOne}_{1,t+1}$ and $\tilde{\Risky} \equiv \Risky_{t+1}$ and $\Ex[\bullet] = \Ex_{t}[\bullet_{t+1}]$, the expectation of some function $\hFunc$ that depends on the realization of
+the risky return $\tilde{\Risky}$ and the labor income shock is:
+\begin{equation}\begin{gathered}\begin{aligned}
+  \Ex[\hFunc(\tilde{\ShkMeanOne}_{1},\tilde{\Risky})] & =  \int_{\underline{\ShkMeanOne}_{1}}^{\bar{\ShkMeanOne}_{1}}\int_{\underline{\Risky}}^{\bar{\Risky}} \hFunc(\tilde{\ShkMeanOne}_{1},\tilde{\Risky}) d\FFunc(\tilde{\ShkMeanOne}_{1},\tilde{\Risky})
+\end{aligned}\end{gathered}\end{equation}
+where $\FFunc(\tilde{\ShkMeanOne}_{1},\tilde{\Risky})$ is the joint cumulative distribution
+function.  Standard numerical computation software can compute this
+double integral, but at such a slow speed as to be almost unusable.
+Computation of the expectation can be massively speeded up by
+advance construction of a numerical approximation to
+$\FFunc(\tilde{\ShkMeanOne}_{1},\tilde{\Risky})$.
+
+Such approximations generally take the approach of replacing the distribution function
+with a discretized approximation to it; appropriate weights $w_{i,j}$ are attached to
+each of a finite set of points indexed by $i$ and $j$, and 
+the approximation to the integral is given by:
+\begin{equation}\begin{gathered}\begin{aligned}
+  \Ex[\hFunc(\tilde{\ShkMeanOne}_{1},\tilde{\Risky})] & \approx  \sum_{i=1}^{n}\sum_{j=1}^{m} \hFunc(\hat{\ShkMeanOne}_{1}[i,j],\hat{\Risky}[i,j])w[i,j]  \label{eq:wtdAvg}
+\end{aligned}\end{gathered}\end{equation}
+where the $\hat{\ShkMeanOne}_{1}$ and $\hat{\Risky}$ matrices contain the conditional means of the two variables in each of the $\{i,j\}$ regions.  Various methods are used for constructing the weights $w[i,j]$ and the nodes (the $i$ and $j$ points for
+$\ShkMeanOne_{1}$ and $\Risky$).  
+
+Perhaps the most popular such method is Gauss-Hermite interpolation (see
+\cite{judd:book} for an exposition, or \cite{kopecky2010finite} for
+some alternatives).  Here, we will pursue a particularly intuitive
+alternative: Equiprobable discretization.  In this method, $m=n$ and
+boundaries on the joint CDF are determined in such a way as to divide
+up the total probability mass into submasses of equal size (each of
+which therefore has a mass of $n^{-2}$).  This is conceptually easier
+if we represent the underlying shocks as statistically
+independent, as with $\ShkMeanOneLog_{1,t+1}$ and $\ShkMeanOneLog_{2,t+1}$ above; in that case, each submass is a square region
+in the $\ShkMeanOne_{1}$ and $\ShkMeanOne_{2}$ grid.  We then compute the average
+value of $\ShkMeanOne_{1}$ and $\Risky$ {\it conditional} on their being
+located in each of the subdivisions of the range of the CDF.  Since,
+in this specification, $\Risky$ is a function of $\ShkMeanOne_{1}$, the
+$\Risky$ values are indexed by both $i$ and $j$, but since we have
+written $\ShkMeanOne_{1}$ as IID, the representation of the approximating
+summation is even simpler than \eqref{eq:wtdAvg}:
+\begin{equation}\begin{gathered}\begin{aligned}
+  \Ex[\hFunc(\tilde{\ShkMeanOne}_{1},\tilde{\Risky})] & \approx  n^{-2} \sum_{i=1}^{n}\sum_{j=1}^{n} \hFunc(\hat{\ShkMeanOne}_{1}[i],\Risky(\hat{\ShkMeanOne}_{1}[i],\hat{\ShkMeanOne}_{2}[j])) \label{eq:wtdAvgMod}
+\end{aligned}\end{gathered}\end{equation}
+where the function $\Risky(\ShkMeanOne_{1},\ShkMeanOne_{2})$ is implicitly defined by \eqref{corrToCov}.
+
+Details can be found in the {\it Mathematica} notebook associated with this 
+handout.  A particular example, in which $\sigma^{2}_{2} = \sigma^{2}_{1}$ and $\omega = 0.5$, 
+is illustrated in figure~\ref{fig:corr0p5}; the red dots reflect the height of the approximation 
+to the CDF above the conditional mean values for $\ShkMeanOne_{1}$ and $\Risky$ within each of the equiprobable
+regions.
+
+\begin{figure}\caption{`True' CDF With Approximation Points in Red for $\omega=0.5$}\label{fig:corr0p5}
+\includegraphics[width=6in]{../Figures/CDFPlot}
+\end{figure}
+
+\input handoutBibMake.tex
+
+\end{document}

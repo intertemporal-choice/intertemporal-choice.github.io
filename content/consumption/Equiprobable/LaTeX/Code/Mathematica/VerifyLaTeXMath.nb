@@ -1,0 +1,348 @@
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "Illustrate", " ", "the", " ", "operation", " ", "of", " ", "the", " ", 
+   "Expectation", " ", "function", " ", "and", " ", "the", " ", 
+   "NormalDistribution", " ", "and", " ", "MultinormalDistribution", " ", 
+   "objects"}], " ", "*)"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{"l\[Theta]1", ",", 
+   RowBox[{"l\[Theta]1", " ", "\[Distributed]", " ", 
+    RowBox[{"NormalDistribution", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "0.5"}], " ", 
+       SuperscriptBox["\[Sigma]\[Theta]1", "2"]}], ",", "\[Sigma]\[Theta]1"}],
+      "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.528895837380665*^9, 3.528895948987521*^9}, {
+  3.528900308951845*^9, 3.528900339973742*^9}, {3.528971295674646*^9, 
+  3.5289712957229137`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", "0.5`"}], " ", 
+  SuperscriptBox["\[Sigma]\[Theta]1", "2"]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"l\[Theta]1", ",", "l\[Theta]2"}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l\[Theta]1", ",", "l\[Theta]2"}], "}"}], "\[Distributed]", 
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]1", "2"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]2", "2"]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["\[Sigma]\[Theta]1", "2"], ",", "0."}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0.", ",", 
+          SuperscriptBox["\[Sigma]\[Theta]2", "2"]}], "}"}]}], "}"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.528899954268198*^9, 3.528900092436431*^9}, {
+  3.5289001570693207`*^9, 3.528900279008477*^9}, {3.528900399390482*^9, 
+  3.528900406471023*^9}, {3.528902755730916*^9, 3.52890276194506*^9}, {
+  3.528971295773245*^9, 3.528971295841577*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "0.5`"}], " ", 
+    SuperscriptBox["\[Sigma]\[Theta]1", "2"]}], ",", 
+   RowBox[{
+    RowBox[{"-", "0.5`"}], " ", 
+    SuperscriptBox["\[Sigma]\[Theta]2", "2"]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Exp", "[", "l\[Theta]1", "]"}], ",", 
+     RowBox[{"Exp", "[", "l\[Theta]2", "]"}]}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l\[Theta]1", ",", "l\[Theta]2"}], "}"}], "\[Distributed]", 
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]1", "2"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]2", "2"]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["\[Sigma]\[Theta]1", "2"], ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          SuperscriptBox["\[Sigma]\[Theta]2", "2"]}], "}"}]}], "}"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.528900419814151*^9, 3.5289004305576153`*^9}, {
+  3.528902773226389*^9, 3.528902782121402*^9}, {3.528971295891313*^9, 
+  3.528971295955708*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1.`", ",", "1.`"}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"l\[Theta]1", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"\[Sigma]\[Theta]2", "/", "\[Sigma]\[Theta]1"}], ")"}], 
+       "\[Omega]", " ", "l\[Theta]1"}], " ", "+", " ", "l\[Theta]2"}]}], 
+    "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l\[Theta]1", ",", "l\[Theta]2"}], "}"}], "\[Distributed]", 
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]1", "2"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]2", "2"]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["\[Sigma]\[Theta]1", "2"], ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          SuperscriptBox["\[Sigma]\[Theta]2", "2"]}], "}"}]}], "}"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.528900475427725*^9, 3.528900528891692*^9}, {
+  3.528902793481427*^9, 3.528902798441111*^9}, {3.528971295992167*^9, 
+  3.528971296089469*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "0.5`"}], " ", 
+    SuperscriptBox["\[Sigma]\[Theta]1", "2"]}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "0.5`"}], " ", 
+     SuperscriptBox["\[Sigma]\[Theta]2", "2"]}], "-", 
+    RowBox[{
+    "0.5`", " ", "\[Sigma]\[Theta]1", " ", "\[Sigma]\[Theta]2", " ", 
+     "\[Omega]"}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Omega]Hat", "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"\[Sigma]\[Theta]2", "/", "\[Sigma]\[Theta]1"}], ")"}], 
+    "\[Omega]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.5289005929885197`*^9, 3.528900664239183*^9}, {
+   3.528901346312868*^9, 3.528901347896953*^9}, 3.528971296140976*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"l\[Theta]1", ",", 
+     RowBox[{
+      RowBox[{"\[Omega]Hat", " ", "l\[Theta]1"}], " ", "+", " ", 
+      "l\[Theta]2"}]}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l\[Theta]1", ",", "l\[Theta]2"}], "}"}], "\[Distributed]", 
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]1", "2"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]2", "2"]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["\[Sigma]\[Theta]1", "2"], ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          SuperscriptBox["\[Sigma]\[Theta]2", "2"]}], "}"}]}], "}"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.528900697193576*^9, 3.5289007081254263`*^9}, 
+   3.528901360961926*^9, {3.528901580924079*^9, 3.528901595907625*^9}, 
+   3.5289017106589527`*^9, 3.528902113016624*^9, {3.528902825154161*^9, 
+   3.5289028449831*^9}, {3.528971296172574*^9, 3.528971296257861*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "0.5`"}], " ", 
+    SuperscriptBox["\[Sigma]\[Theta]1", "2"]}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "0.5`"}], " ", 
+     SuperscriptBox["\[Sigma]\[Theta]2", "2"]}], "-", 
+    RowBox[{
+    "0.5`", " ", "\[Sigma]\[Theta]1", " ", "\[Sigma]\[Theta]2", " ", 
+     "\[Omega]"}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Log", "[", 
+  RowBox[{"Expectation", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Exp", "[", "l\[Theta]1", "]"}], ",", 
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"\[Omega]Hat", " ", "l\[Theta]1"}], " ", "+", " ", 
+        "l\[Theta]2"}], "]"}]}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"l\[Theta]1", ",", "l\[Theta]2"}], "}"}], "\[Distributed]", 
+     RowBox[{"MultinormalDistribution", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "0.5"}], " ", 
+          SuperscriptBox["\[Sigma]\[Theta]1", "2"]}], ",", 
+         RowBox[{
+          RowBox[{"-", "0.5"}], " ", 
+          SuperscriptBox["\[Sigma]\[Theta]2", "2"]}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           SuperscriptBox["\[Sigma]\[Theta]1", "2"], ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", 
+           SuperscriptBox["\[Sigma]\[Theta]2", "2"]}], "}"}]}], "}"}]}], 
+      "]"}]}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5289029775253563`*^9, 3.528902987139926*^9}, 
+   3.5289044732426567`*^9, {3.528971296308261*^9, 3.528971296392415*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.`", ",", 
+   RowBox[{"Log", "[", 
+    RowBox[{"0.9999999999999998`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "1.`"}], " ", "\[Sigma]\[Theta]2", " ", "\[Omega]", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"0.5`", " ", "\[Sigma]\[Theta]1"}], "-", 
+         RowBox[{"0.5`", " ", "\[Sigma]\[Theta]2", " ", "\[Omega]"}]}], 
+        ")"}]}]]}], "]"}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Zeta]", "=", 
+   RowBox[{"0.5", " ", "\[Omega]Hat", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", "\[Omega]Hat"}], ")"}], " ", 
+    SuperscriptBox["\[Sigma]\[Theta]1", "2"]}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.5289052571505203`*^9, {3.5289054832258263`*^9, 3.52890548934558*^9}, 
+   3.528971296441121*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expectation", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Exp", "[", "l\[Theta]1", "]"}], ",", 
+     RowBox[{"Exp", "[", 
+      RowBox[{"\[Zeta]", " ", "+", " ", 
+       RowBox[{"\[Omega]Hat", " ", "l\[Theta]1"}], " ", "+", " ", 
+       "l\[Theta]2"}], "]"}]}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l\[Theta]1", ",", "l\[Theta]2"}], "}"}], "\[Distributed]", 
+    RowBox[{"MultinormalDistribution", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]1", "2"]}], ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], " ", 
+         SuperscriptBox["\[Sigma]\[Theta]2", "2"]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["\[Sigma]\[Theta]1", "2"], ",", "0"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          SuperscriptBox["\[Sigma]\[Theta]2", "2"]}], "}"}]}], "}"}]}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5289050937970877`*^9, 3.528905096611393*^9}, {
+  3.5289712964720907`*^9, 3.528971296494625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1.`", ",", "0.9999999999999998`"}], "}"}]], "Output"]
+}, Open  ]]
+},
+WindowSize->{1096, 899},
+WindowMargins->{{25, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 1.5, 1.5 Inherited],
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 6, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+

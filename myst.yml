@@ -1,0 +1,88 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+
+# Import external configuration files
+# See https://mystmd.org/guide/configuration#compose-and-extend-configuration-yml-files
+extends:
+  - macros.yml  # LaTeX math macros (extracted from econtexShortcuts.sty)
+  - toc.yml     # Table of contents
+
+project:
+  id: 33d6fdec-239b-42b2-b545-e58f5177428a
+  title: A Gentle Introduction to Intertemporal Choice
+  short_title: Intertemporal Choice
+  description: Graduate macroeconomics notes on consumption, saving, growth, and asset pricing
+  subject: Macroeconomics
+  keywords:
+    - macroeconomics
+    - intertemporal choice
+    - consumption
+    - growth
+    - asset pricing
+  license:
+    content: CC-BY-4.0
+    code: Apache-2.0
+  open_access: true
+  venue:
+    title: Johns Hopkins University
+    url: https://www.jhu.edu/
+  funding:
+    - statement: Development supported by the Econ-ARK project
+      awards:
+        - id: econ-ark
+          source:
+            name: Alfred P. Sloan Foundation
+          investigators:
+            - name: Christopher D. Carroll
+              roles:
+                - Supervision
+                - Funding acquisition
+            - name: Alan E. Lujan Solis
+              roles:
+                - Project administration
+                - Software
+  authors:
+    - name: Christopher D. Carroll
+      email: ccarroll@jhu.edu
+      affiliations:
+        - id: jhu-econ
+          institution: Johns Hopkins University
+          department: Department of Economics
+        - id: econ-ark
+          institution: Econ-ARK
+          url: https://econ-ark.org
+      url: https://www.econ2.jhu.edu/people/ccarroll/
+      orcid: 0000-0003-3732-9312
+    - name: Alan E. Lujan Solis
+      affiliations:
+        - id: jhu-ksas
+          institution: Johns Hopkins University
+          department: Krieger School of Arts and Sciences
+        - econ-ark
+  github: https://github.com/jhu-aap-econ/dsge
+  # Exclude source LaTeX files and build artifacts (only notes/ gets built)
+  bibliography:
+    - content/minimal_bibliography.bib
+  exclude:
+    - 'content/**'
+    - '_build/**'
+  error_rules:
+    - rule: image-exists
+      severity: ignore
+    - rule: citation-exists
+      severity: ignore
+    - rule: link-exists
+      severity: warn
+    - rule: xref-target-not-found
+      severity: ignore
+
+site:
+  template: book-theme
+  options:
+    #   favicon: favicon.ico
+    #   logo: site_logo.png
+    # Add launch buttons for interactive sessions
+    launch_buttons:
+      notebook: true
+      jupyterhub: false
+      binder: true
