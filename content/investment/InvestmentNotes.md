@@ -86,7 +86,7 @@ The implication of capital market imperfections that has been most vigorously ex
 
 <!-- Figure from Torsten Slok at DB, in presentation for 2011/10, email from torsten.slok@db.com, Slok_Presentation_Oct.pdf -->
 
-:::{figure} ../sources/investment/InvestmentNotes/LaTeX/Figures/InvestmentDrivesCycle.png
+:::{figure} ../../sources/investment/InvestmentNotes/LaTeX/Figures/InvestmentDrivesCycle.png
 :name: fig:InvestmentDrivesCycle
 
 Investment Drives the Cycle

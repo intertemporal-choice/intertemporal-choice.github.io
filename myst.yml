@@ -32,8 +32,8 @@ project:
     - dynamic macroeconomics
     - computational economics
 
-  # Thumbnail for social media previews
-  thumbnail: thumbnails/intertemporal-choice.png
+  # Thumbnail for social media previews (create this file for link previews)
+  # thumbnail: thumbnails/intertemporal-choice.png
 
   license:
     content: CC-BY-4.0
@@ -140,21 +140,22 @@ project:
     - format: tex
       output: exports/intertemporal-choice-tex/
 
-  # Exclude source LaTeX files and build artifacts (only notes/ gets built)
+  # Exclude patterns (TOC-listed files are still built even if matched)
+  # sources/ contains LaTeX originals, exports/ is build output
   exclude:
-    - "content/**"
+    - "sources/**"
     - "_build/**"
     - "exports/**"
 
   error_rules:
     - rule: image-exists
-      severity: ignore
+      severity: warn
     - rule: citation-exists
-      severity: ignore
+      severity: warn
     - rule: link-exists
       severity: warn
     - rule: xref-target-not-found
-      severity: ignore
+      severity: warn
 
   # Numbering configuration
   numbering:
@@ -179,21 +180,57 @@ project:
 site:
   template: book-theme
   title: Intertemporal Choice
+
+  # Site options for book-theme
+  # See https://mystmd.org/guide/website-templates#site-options
   options:
+    # Branding
     # favicon: favicon.ico
     # logo: site_logo.png
-    hide_outline: false
-    outline_maxdepth: 3
-    # Add launch buttons for interactive sessions
-    launch_buttons:
-      notebook: true
-      jupyterhub: false
-      binder: true
+    # logo_dark: site_logo_dark.png
+    logo_text: Intertemporal Choice
+
+    # Navigation behavior
+    hide_toc: false # Show table of contents in primary sidebar
+    hide_outline: false # Show document outline in secondary sidebar
+    hide_footer_links: false # Show previous/next links in footer
+    hide_title_block: false # Show document title on pages
+    hide_search: false # Enable search functionality
+    outline_maxdepth: 3 # Show up to H3 in document outline
+
+    # URL structure
+    folders: true # Respect nested folder structure in URLs
+
+    # References style
+    numbered_references: false # Use APA-style citations (not numbered)
+
+    # Analytics (uncomment and add your keys to enable)
+    # analytics_google: G-XXXXXXXXXX
+    # analytics_plausible: your-domain.com
+
+    # Custom CSS (uncomment to add custom styles)
+    # style: css/custom.css
+
+  # Top-level navigation links in header
+  # See https://mystmd.org/guide/website-navigation
   nav:
     - title: Econ-ARK
       url: https://econ-ark.org
+    - title: JHU Applied Economics
+      url: https://advanced.jhu.edu/academics/graduate/ms-applied-economics/
     - title: JHU Economics
       url: https://econ.jhu.edu
+
+  # Action buttons in header
   actions:
     - title: GitHub
       url: https://github.com/jhu-econ/intertemporal-choice
+
+  # Site parts for custom footer and sidebar
+  # See https://mystmd.org/guide/document-parts#add-website-parts
+  parts:
+    footer: |
+      Built with [MyST Markdown](https://mystmd.org) • 
+      Part of the [Econ-ARK](https://econ-ark.org) ecosystem • 
+      [Johns Hopkins University](https://www.jhu.edu)
+    # primary_sidebar_footer: sidebar-footer.md

@@ -1,9 +1,14 @@
 [project]
 name = "intertemporal-choice"
 version = "0.1.0"
-description = "Add your description here"
+description = "Graduate macroeconomics lecture notes on consumption, saving, growth, and asset pricing"
 readme = "README.md"
 requires-python = ">=3.11"
+license = {text = "CC-BY-4.0"}
+authors = [
+    {name = "Christopher D. Carroll", email = "ccarroll@jhu.edu"},
+    {name = "Alan E. Lujan Solis"},
+]
 dependencies = [
     "mystmd>=1.7.1",
 ]
