@@ -1,5 +1,4 @@
 (sec:OLGModel)=
-
 # The Diamond OLG Model
 This section and the associated Jupyter notebook, [DiamondOLG](https://econ-ark.org/materials/diamondolg?launch), present a canonical overlapping generations (OLG) model, like the one originally proposed by {cite:t}`diamond:olg`, building on {cite:t}`samuelson:olg`.[^olg-references]
 

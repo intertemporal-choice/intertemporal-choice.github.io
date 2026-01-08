@@ -1,5 +1,4 @@
 (sec:Bubbles)=
-
 # Canonical Asset Pricing and Rational Bubbles
 
 ## Prices as the PDV of Dividends

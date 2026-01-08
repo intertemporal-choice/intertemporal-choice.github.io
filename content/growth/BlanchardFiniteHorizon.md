@@ -1,5 +1,4 @@
 (sec:BlanchardFiniteHorizon)=
-
 # The Blanchard (1985) Model of Perpetual Youth
 
 This section analyzes a way to relax the standard assumption of infinite

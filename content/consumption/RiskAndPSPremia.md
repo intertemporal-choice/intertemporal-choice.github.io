@@ -1,5 +1,4 @@
 (sec:RiskAndPSPremia)=
-
 # Risk Premia and Precautionary Premia
 
 :::{figure} /sources/consumption/RiskAndPSPremia/LaTeX/Figures/RiskAndPSPremiaFigs.png

@@ -1,5 +1,4 @@
 (sec:Habits)=
-
 # Consumption Models with Habit Formation
 
 ## The Problem

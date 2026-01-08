@@ -1,5 +1,4 @@
 (sec:SocSecAndKAccum)=
-
 # Social Security and Capital Accumulation
 
 Consider a household with a 2-period lifetime, whose optimization problem is written in the most general way possible, with the last line reflecting the assumption that no labor income is earned in period 2:

@@ -1,5 +1,4 @@
 (sec:qModel)=
-
 # The Abel (1981)-Hayashi (1982) Marginal q Model
 This section presents a discrete-time version of the Abel {cite:t}`abel:q`-Hayashi {cite:t}`hayashi:q` marginal {math}`\q` model of investment.
 

@@ -1,5 +1,4 @@
 (sec:C-CAPM)=
-
 # The Consumption Capital Asset Pricing Model (C-CAPM)
 
 Consider a representative agent solving the joint consumption and portfolio allocation problem:

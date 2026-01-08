@@ -1,5 +1,4 @@
 (sec:CARAModelWithYRisk)=
-
 # Consumption with Constant Absolute Risk Aversion (CARA) Utility
 
 Consider the optimization problem of a consumer with a constant absolute risk aversion instantaneous utility function {math}`\uFunc(\CRat)= -(1/\CARA) e^{-\CARA \CRat}` implying {math}`\uFunc^{\prime}(\CRat) = e^{-\CARA \CRat}` facing an interest rate that is constant at {math}`\rfree=\Rfree-1`.[^caballero-ref] The consumer's optimization problem is

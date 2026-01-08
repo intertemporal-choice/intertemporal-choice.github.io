@@ -1,5 +1,4 @@
 (sec:HallJorgenson)=
-
 # The Hall-Jorgenson Model of Investment
 {cite:t}`hall&jorgenson:i` consider the problem of a firm that produces output using capital {math}`\kap` as its only input,
 

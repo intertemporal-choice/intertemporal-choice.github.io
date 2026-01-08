@@ -1,5 +1,4 @@
 (sec:CampManCRRAWithTimeVaryingR)=
-
 # Dynamics of Consumption with Time Varying R
 
 The intertemporal budget constraint for an infinite-horizon representative agent can be written as

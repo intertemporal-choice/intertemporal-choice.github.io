@@ -1,5 +1,4 @@
 (sec:RamseyCassKoopmans)=
-
 # The Ramsey/Cass-Koopmans (RCK) Model
 <!-- \newboolean{NumericalSolution} -->
 <!-- \setboolean{NumericalSolution}{true} -->

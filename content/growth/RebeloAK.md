@@ -1,5 +1,4 @@
 (sec:RebeloAK)=
-
 # The Rebelo AK Growth Model
 
 {cite:t}`rebelo:long` examines a model in which a social planner maximizes the discounted sum of utility

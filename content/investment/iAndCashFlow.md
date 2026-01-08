@@ -1,5 +1,4 @@
 (sec:iAndCashFlow)=
-
 # Investment and Cash Flow With Imperfect Capital Markets
 Many models of capital market imperfections reach the conclusion that financing an investment project is cheaper with "internal" than with "external" funds. (Internal funds are those that the firm owns, for example, in its bank account; external funds are obtained from outsiders like banks or new investors). For a lucid exposition of an example of models of this kind, see the discussion of financial market imperfections in {cite:t}`romer:text`.
 

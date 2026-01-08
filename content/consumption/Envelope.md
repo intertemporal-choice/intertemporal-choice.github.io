@@ -1,5 +1,4 @@
 (sec:Envelope)=
-
 # The Envelope Theorem and the Euler Equation
 This section shows how the Envelope theorem is used to derive the consumption Euler equation in a multiperiod optimization problem with geometric discounting and intertemporally separable utility.
 

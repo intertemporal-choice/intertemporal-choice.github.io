@@ -1,5 +1,4 @@
 (sec:Romer86)=
-
 # The Romer (1986) Model of Growth
 
 {cite:t}`romer:growth` relaunched the growth literature with a paper that

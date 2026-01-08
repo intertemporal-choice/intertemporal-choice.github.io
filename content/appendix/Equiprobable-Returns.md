@@ -1,5 +1,4 @@
 (sec:Equiprobable-Returns)=
-
 # Equiprobable Approximation to Bivariate Lognormal Returns
 
 %  Chosen to be consistent with the Mathematica code, in which lower case sigma is a reserved variable

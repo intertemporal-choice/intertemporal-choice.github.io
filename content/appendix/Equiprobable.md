@@ -1,5 +1,4 @@
 (sec:Equiprobable)=
-
 # An Equiprobable Approximation to the Bivariate Lognormal
 Economic agents face risks of many kinds, which may mutually
 

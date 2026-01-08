@@ -1,5 +1,4 @@
 (sec:2PeriodLCModel)=
-
 # The Fisher Two-Period Optimal Consumption Problem
 Irving {cite:t}`fisherInterestTheory` first analyzed the optimization problem of a consumer who faces no uncertainty and lives for two periods.
 

@@ -1014,7 +1014,7 @@ Cell[BoxData[
          RowBox[{"Text", "[", 
           RowBox[{
           "\"\<\!\(\*SubscriptBox[\(\[CapitalDelta]\[ScriptK]\), \(t + \
-1\)]\)=0\>\"", ",", 
+1\)])=0\>\"", ",", 
            RowBox[{"{", 
             RowBox[{"2.5", ",", ".8"}], "}"}]}], "]"}], ",", 
          RowBox[{"Text", "[", 
@@ -1113,7 +1113,7 @@ rJvY7QZ9BIYGegUr6khgmros8H830291z6mqJeE/8lpJpQ==
       StripOnInput->False,
       FontSize->Large], {4.5, 1.18}], 
     InsetBox["\<\"\\!\\(\\*SubscriptBox[\\(\[CapitalDelta]\[ScriptK]\\), \\(t \
-+ 1\\)]\\)=0\"\>", {2.5, 0.8}], InsetBox[
++ 1\\)]\)=0\"\>", {2.5, 0.8}], InsetBox[
      StyleBox["\<\"\[UpperRightArrow]\"\>",
       StripOnInput->False,
       FontSize->Large], {2.7, 1}]}},
@@ -1238,7 +1238,7 @@ Cell[BoxData[
          RowBox[{"Text", "[", 
           RowBox[{
           "\"\<\!\(\*SubscriptBox[\(\[CapitalDelta]\[ScriptK]\), \(t + \
-1\)]\)=0\>\"", ",", 
+1\)])=0\>\"", ",", 
            RowBox[{"{", 
             RowBox[{"2.5", ",", ".7"}], "}"}]}], "]"}], ",", 
          RowBox[{"Text", "[", 
@@ -1337,7 +1337,7 @@ XNuNewicOu9FCJ1JYFl4OXB6Cbx73zYo24mE/wAD7VB/
       StripOnInput->False,
       FontSize->Large], {4.5, 1.02}], 
     InsetBox["\<\"\\!\\(\\*SubscriptBox[\\(\[CapitalDelta]\[ScriptK]\\), \\(t \
-+ 1\\)]\\)=0\"\>", {2.5, 0.7}], InsetBox[
++ 1\\)]\)=0\"\>", {2.5, 0.7}], InsetBox[
      StyleBox["\<\"\[UpperRightArrow]\"\>",
       StripOnInput->False,
       FontSize->Large], {2.7, 0.9}]}},

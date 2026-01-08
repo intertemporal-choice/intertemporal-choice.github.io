@@ -1,5 +1,4 @@
 (sec:GrowthAndGrossSaving)=
-
 # Gross Saving and Growth in the RCK Model
 
 In the neoclassical growth model with labor-augmenting technological

@@ -1,5 +1,4 @@
 (sec:InvestmentNotes)=
-
 # Investment Notes
 ## Broad Comments
 

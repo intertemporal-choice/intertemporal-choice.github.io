@@ -1,5 +1,4 @@
 (sec:ConsAndLaborSupply)=
-
 # Consumption and Labor Supply
 
 Consider a consumer who has a utility function

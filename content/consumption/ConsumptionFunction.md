@@ -1,5 +1,4 @@
 (sec:ConsumptionFunction)=
-
 # Consumption Functions and the Permanent Income Hypothesis
 This section derives the consumption function (the relation between consumption spending and the consumer's economic circumstances) for an optimizing consumer with Certainty Equivalent (CEQ) preferences like those assumed by {cite:t}`hallRandomWalk` and with an income process that has a purely transitory and a purely permanent component.
 

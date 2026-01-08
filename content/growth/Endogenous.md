@@ -1,5 +1,4 @@
 (sec:Endogenous)=
-
 # Generic Analysis of Endogenous Growth Models
 
 The neoclassical theory of economic growth, as formulated

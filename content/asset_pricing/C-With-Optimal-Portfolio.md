@@ -1,5 +1,4 @@
 (sec:C-With-Optimal-Portfolio)=
-
 # Consumption with Optimal Portfolio Choice
 
 The [](#sec:CRRA-RateRisk) shows that for a {cite:t}`merton:restat`-{cite:t}`samuelson:portfolio` consumer facing return {math}`\log \RiskyAlt_{t+1} \sim \mathcal{N}(\riskyAlt - \sigma^{2}_{\riskyAlt}/2,\sigma^{2}_{\riskyAlt})` on the only financial asset available, the optimal marginal propensity to consume is approximately

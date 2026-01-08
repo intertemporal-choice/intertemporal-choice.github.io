@@ -1,5 +1,4 @@
 (sec:BrockMirman)=
-
 # The Brock-Mirman Stochastic Growth Model
 
 {cite:t}`brockmirman:growth` provided the first optimizing growth model with unpredictable (stochastic) shocks.

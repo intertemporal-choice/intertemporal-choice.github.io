@@ -1,5 +1,4 @@
 (sec:decentralizingrck)=
-
 # Decentralizing the Ramsey/Cass-Koopmans Model
 <!-- \newboolean{NumericalSolution} -->
 <!-- \setboolean{NumericalSolution}{true} -->

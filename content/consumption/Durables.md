@@ -1,5 +1,4 @@
 (sec:Durables)=
-
 # Durables
 
 A durable good is one that provides utility over multiple periods rather than being consumed immediately. The consumer's goal is to

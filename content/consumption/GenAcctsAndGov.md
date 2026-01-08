@@ -1,5 +1,4 @@
 (sec:GenAcctsAndGov)=
-
 # Generational Accounts and the Government
 ## The Government Budget Constraint
 

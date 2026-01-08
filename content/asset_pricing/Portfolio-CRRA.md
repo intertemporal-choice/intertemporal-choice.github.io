@@ -1,5 +1,4 @@
 (sec:Portfolio-CRRA)=
-
 # Portfolio Choice with CRRA Utility (Merton-Samuelson)
 {cite:t}`merton:restat` and {cite:t}`samuelson:portfolio` study the optimal portfolio choice of a consumer with constant relative risk aversion {math}`\CRRA`.[^fn-utility] This consumer has assets at the end of period {math}`t` equal to {math}`a_{t}` and is deciding how much to invest in a risky asset[^fn-multi-asset] with a lognormally distributed return factor {math}`\Risky_{t+1}` whose log can be written in either of two ways:
 

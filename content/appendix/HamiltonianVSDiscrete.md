@@ -1,5 +1,4 @@
 (sec:HamiltonianVSDiscrete)=
-
 # Ramsey Growth in Discrete and Continuous Time
 This section solves a continuous-time version of the Ramsey/Cass-Koopmans (RCK) model using the Hamiltonian method, and shows the relationship between that method and the discrete-time approach.
 

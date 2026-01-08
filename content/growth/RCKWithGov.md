@@ -1,5 +1,4 @@
 (sec:RCKWithGov)=
-
 # The Ramsey/Cass-Koopmans (RCK) Model with Government
 
 This section solves the Ramsey/Cass-Koopmans (RCK) model with government.[^HjCxMX4C0F]

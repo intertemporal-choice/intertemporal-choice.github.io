@@ -1,5 +1,4 @@
 (sec:LucasGrowth)=
-
 # The Lucas Growth Model
 
 <!-- \section{Setup} -->

@@ -1,5 +1,4 @@
 (sec:LucasAssetPrice)=
-
 # The Lucas Asset Pricing Model
 
 ## Introduction/Setup

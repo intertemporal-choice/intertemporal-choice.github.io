@@ -1,5 +1,4 @@
 (sec:EquityPremiumPuzzle)=
-
 # The Equity Premium Puzzle and the Riskfree Rate
 
 This section derives the equity premium puzzle ({cite:t}`mehraPrescottPuzzle`). Consider a representative agent solving the joint consumption and portfolio allocation problem:

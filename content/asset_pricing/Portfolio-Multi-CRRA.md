@@ -1,5 +1,4 @@
 (sec:Portfolio-Multi-CRRA)=
-
 # CRRA Portfolio Choice with Two Risky Assets
 {cite:t}`merton:restat` and {cite:t}`samuelson:portfolio` study optimal portfolio allocation for a consumer with Constant Relative Risk Aversion utility {math}`\uFunc(c) = (1-\CRRA)^{-1}c^{1-\CRRA}` who can choose among many risky investment options.
 

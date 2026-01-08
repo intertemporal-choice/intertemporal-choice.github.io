@@ -1,5 +1,4 @@
 (sec:qRamsey)=
-
 # A q-Ramsey Model
 
 <!-- \usepackage{endfloat}  % uncomment to put figures at the end -->

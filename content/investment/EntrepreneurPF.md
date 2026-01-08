@@ -1,5 +1,4 @@
 (sec:EntrepreneurPF)=
-
 # An Entrepreneur's Problem Under Perfect Foresight
 Consider a firm characterized by the following:
 
@@ -188,7 +187,7 @@ Show that in the vicinity of the steady state, assuming that adjustment costs ar
 and use this equation along with the transition equation for capital to draw a phase diagram in {math}`(\kap,\ek)` space for this model. Be sure to explain why the {math}`\Delta \ek_{t+1}=0` locus is downward sloping in the vicinity of the steady state.
 :::
 
-:::{solution} ex:phase-diagram
+::::{solution} ex:phase-diagram
 :class: dropdown
 Rewrite {eq}`eq:iEnvelope` as
 
@@ -221,7 +220,7 @@ The phase diagram is depicted in {numref}`fig:Entrep-lPhaseDiag`.
 
 Phase diagram showing the {math}`\Delta \ek=0` and {math}`\Delta \kap=0` loci.
 :::
-:::
+::::
 
 The steady state of the model will be the point at which {math}`\kap_{t+1}=\kap_{t}=\check{\kap}`, implying from {eq}`eq:kAccum` a steady-state investment rate of
 
@@ -269,6 +268,12 @@ That is, next period the firm's money is next period's profits plus the return f
 :::{exercise}
 :label: ex:ent-bellman
 Show that the entrepreneur's Bellman equation can now be written
+
+```{math}
+\begin{gathered}\begin{aligned}
+  \vFunc_{t}(\kap_{t},m_{t}) & =  \max_{\{\inv_{t},\cRat_{t}\}}~~\utilFunc(\cRat_{t}) +\Discount \vFunc_{t+1}(\kap_{t+1},m_{t+1})
+\end{aligned}\end{gathered}
+```
 :::
 
 :::{solution} ex:ent-bellman
@@ -517,7 +522,7 @@ Suppose that a thief steals all the firm's monetary assets.
 Use the investment and consumption Euler equations to show the consequences for monetary assets, capital, dividends, and investment subsequently.
 :::
 
-:::{solution} ex:irf-monetary
+::::{solution} ex:irf-monetary
 :class: dropdown
 The consequences for the firm are depicted in {numref}`fig:mlossIRF`.
 
@@ -531,7 +536,7 @@ Impulse response to a negative shock to {math}`m_t` (monetary assets stolen).
 Dividends follow a random walk. Thus, there is a one-time downward adjustment to the level of dividends to reflect the stolen money. Thereafter dividends are constant, as are monetary assets (which are constant at zero forever).
 
 The theft of the money has no effect on investment or the capital stock, because the firm's investment decisions are made on the basis of whether they are profitable and the theft of the money has no effect on the profitability of investments.
-:::
+::::
 
 ## Impulse Responses: Capital Shock
 
@@ -542,7 +547,7 @@ Now consider another kind of shock: The firm's main building gets hit by a meteo
 Again show dynamics of monetary assets, capital, consumption, and investment.
 :::
 
-:::{solution} ex:irf-capital
+::::{solution} ex:irf-capital
 :class: dropdown
 The results are depicted in {numref}`fig:klossIRF`.
 
@@ -556,7 +561,7 @@ Impulse response to a negative shock to {math}`k_t` (capital destroyed by meteor
 Again, because dividends follow a random walk, what the firm's managers do is to assess the effect of the meteor shock on the firm's total value and they adjust the level of dividends downward immediately to the sustainable new level of dividends. Thereafter there is no change in the level of dividends.
 
 Investment is more complicated. The firm's capital stock is obviously reduced below its steady-state value by the meteor, so there must be a period of high investment expenditures to bring capital back toward its steady state. However, the firm started out with monetary assets of zero. Therefore the high initial investment expenditures will be paid for by borrowing, driving the firm's monetary assets to a permanent negative value (the firm goes into debt to pay for its rebuilding). Gradually over time the capital stock is rebuilt back to its target level, and investment expenditures return to zero (or the level consistent with replacing depreciated capital).
-:::
+::::
 
 ## Numerical Solution
 

@@ -1,5 +1,4 @@
 (sec:StickyExpectationsC)=
-
 # Sticky Expectations and Consumption Dynamics
 
 Consider a consumer subject to the dynamic budget constraint

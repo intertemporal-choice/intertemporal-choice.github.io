@@ -1,5 +1,4 @@
 (sec:Aggregation)=
-
 # Aggregation For Dummies (Macroeconomists)
 %  \section{Infinitely Lived Households}
 

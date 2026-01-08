@@ -1,5 +1,4 @@
 (sec:CARAPortfolio)=
-
 # Portfolio Choice With CARA Utility
 
 Consider a consumer with Constant Absolute Risk Aversion

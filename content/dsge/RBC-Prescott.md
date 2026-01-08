@@ -1,5 +1,4 @@
 (sec:RBC-Prescott)=
-
 # The Prescott Real Business Cycle Model
 
 This section presents the elements of the original

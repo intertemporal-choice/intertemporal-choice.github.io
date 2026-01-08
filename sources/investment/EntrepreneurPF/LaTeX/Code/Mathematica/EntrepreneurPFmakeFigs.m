@@ -56,7 +56,7 @@ Show[
 Graphics[{
 Text["\!\(\*SubscriptBox[\(\[DoubleStruckCapitalE]\), \(t\)]\)[\!\(\*SubscriptBox[\(\[CapitalDelta]\[Lambda]\), \(t + 1\)]\)]=0",{2.8,1.9}],Text[Style["\[LowerLeftArrow]",Large],{2.6,1.7}],
 Text["saddle path",{4.6,1.3}],Text[Style["\[LowerLeftArrow]",Large],{4.5,1.18}],
-Text["\!\(\*SubscriptBox[\(\[CapitalDelta]\[ScriptK]\), \(t + 1\)]\)=0",{2.5,.8}],Text[Style["\[UpperRightArrow]",Large],{2.7,1}]}]]];
+Text["\!\(\*SubscriptBox[\(\[CapitalDelta]\[ScriptK]\), \(t + 1\)])=0",{2.5,.8}],Text[Style["\[UpperRightArrow]",Large],{2.7,1}]}]]];
 
 
 Export["../../Figures/lPhaseDiag.pdf",lPhaseDiag];
@@ -69,7 +69,7 @@ Plot[{\[Koppa]Saddle[\[ScriptK]Plot],\[CapitalDelta]\[ScriptK]Equals0In\[Koppa]S
 Graphics[{
 Text["\!\(\*SubscriptBox[\(\[DoubleStruckCapitalE]\), \(t\)]\)[\!\(\*SubscriptBox[\(\[CapitalDelta]\[Koppa]\), \(t + 1\)]\)]=0",{2.8,1.7}],Text[Style["\[LowerLeftArrow]",Large],{2.6,1.5}],
 Text["saddle path",{4.6,1.15}],Text[Style["\[LowerLeftArrow]",Large],{4.5,1.02}],
-Text["\!\(\*SubscriptBox[\(\[CapitalDelta]\[ScriptK]\), \(t + 1\)]\)=0",{2.5,.7}],Text[Style["\[UpperRightArrow]",Large],{2.7,.9}]}]]];
+Text["\!\(\*SubscriptBox[\(\[CapitalDelta]\[ScriptK]\), \(t + 1\)])=0",{2.5,.7}],Text[Style["\[UpperRightArrow]",Large],{2.7,.9}]}]]];
 
 
 Export["../../Figures/qPhaseDiag.pdf",qPhaseDiag];

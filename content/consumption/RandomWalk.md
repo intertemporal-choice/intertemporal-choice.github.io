@@ -1,5 +1,4 @@
 (sec:RandomWalk)=
-
 # The Random Walk Model of Consumption
 This section derives the {cite:t}`hallRandomWalk` random walk proposition for consumption.
 

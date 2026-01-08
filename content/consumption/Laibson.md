@@ -1,5 +1,4 @@
 (sec:Laibson)=
-
 # The Laibson Model of Time Inconsistency
 
 This section provides a simple example of a discrete-time solution to the problem of a consumer with a self-control problem *a la* {cite:t}`laibson:goldeneggs`.[^laibson-notes]

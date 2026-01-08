@@ -1,5 +1,4 @@
 (sec:BufferStockAgeProfiles)=
-
 # Age Consumption/Income Profiles In Data and Theory
 
 This section reproduces figures from {cite:t}`carroll:bslcpih` showing the profiles of income and consumption by age across different occupation groups from the 1960-61 *Consumer Expenditure Survey*. The unconstrained perfect foresight/certainty equivalent life cycle model implies that there should be no relationship between the pattern of the consumption profile and the income profile, since the shape of the consumption profile is determined by tastes independently of the shape of the income profile.

@@ -1,5 +1,4 @@
 (sec:PerfForesightCRRA)=
-
 # Consumption Under Perfect Foresight and CRRA Utility
 ## The Problem
 
@@ -69,7 +68,7 @@ But the right hand sides of {eq}`eq:upeqrbv` and {eq}`eq:vpeqrbv` are identical,
 \vFunc_{\tNow}^{\mLevBF}(\mLevBF_{\tNow},\pLevBF_{\tNow}) = \uFunc^{\prime}(\cLevBF_{\tNow})
 ```
 
-and similar logic tells us that {math}`\vFunc_{\tNow+1}^{\mLevBF}(\mLevBF_{\tNow+1},\pLevBF_{\tNow+1})=\uFunc^{\prime}(\cLevBF_{\tNow+1}),` which (substituting {math}`\uFunc^{\prime}` for {math}`\vFunc^{\mLevBF}` in {eq}`eq:vpeqrbv`) gives us the (EulerCGroFac)=Euler equation for consumption:
+and similar logic tells us that {math}`\vFunc_{\tNow+1}^{\mLevBF}(\mLevBF_{\tNow+1},\pLevBF_{\tNow+1})=\uFunc^{\prime}(\cLevBF_{\tNow+1}),` which (substituting {math}`\uFunc^{\prime}` for {math}`\vFunc^{\mLevBF}` in {eq}`eq:vpeqrbv`) gives us the Euler equation for consumption:
 
 ```{math}
 :label: eq:PFCRRA-cgrow
@@ -485,7 +484,7 @@ The level of saving can be defined as total income minus total consumption:
 \sLevBF_{\tNow} \approx \rfree \aLevBF_{\tNow-1} + \pLevBF_{\tNow} - \cLevBF_{\tNow}
 ```
 
-but substituting from {eq}`eq:CvsP` and {eq}`eq:capprox`,
+but substituting from {eq}`eq:CvsP` and {eq}`eq:PFCRRA-capprox`,
 
 ```{math}
 :label: eq:cFromHandB
@@ -599,7 +598,7 @@ but since {math}`\DiscFac \Pat^{1-\CRRA} = \PatR`,[^patr-derivation]
     \end{aligned}
     ```
 
-this reduces to (vFuncAnalytical)=
+this reduces to
 
 ```{math}
 :label: eq:vFuncAnalytical
@@ -621,7 +620,7 @@ where {math}`\cPDVFunc_{t}` is the discounted value of future consumption growth
 
 ### Additional Derivations
 
-If consumption is simply a function of overall wealth bank balances {math}`\oRat_{t}`, we can derive a convenient recursive formula for the inverse of the MPC: (MPCrecursive)=
+If consumption is simply a function of overall wealth bank balances {math}`\oRat_{t}`, we can derive a convenient recursive formula for the inverse of the MPC:
 
 ```{math}
 :label: eq:MPCrecursive
