@@ -14,10 +14,6 @@ Consider the optimization problem of a consumer with a constant absolute risk av
 
 subject to the constraints
 
-:::{margin}
-Introducing {math}`K` and {math}`X` because useful to have a term for non-income resources at beginning of period.
-:::
-
 ```{math}
 \begin{aligned}
 B_{t+1} & = ({M}_{t}-\CRat_{t})\Rfree \\
@@ -25,7 +21,7 @@ B_{t+1} & = ({M}_{t}-\CRat_{t})\Rfree \\
 \end{aligned}
 ```
 
-where {math}`Y_{t+1}` is the consumer's idiosyncratic income, which exhibits a random-walk deviation from an exogenously-growing trend:
+Here {math}`M_t` denotes "market resources," the consumer's total resources available for consumption at the beginning of period {math}`t`, combining beginning-of-period bank balances {math}`B_t` with current income. The consumer's idiosyncratic income {math}`Y_{t+1}` exhibits a random-walk deviation from an exogenously-growing trend:
 
 ```{math}
 \begin{aligned}
@@ -35,11 +31,7 @@ Y_{t+1} & = \bar{\PLev}_{t+1}+\PLev_{t+1} \\
 \end{aligned}
 ```
 
-Bellman's equation for this problem is
-
-:::{margin}
-Bellman's eqn relates {math}`\VFunc_{t}` and {math}`\VFunc_{t+1}` through the controls and states. Doesn't necessarily require writing bud constr.
-:::
+Bellman's equation relates the value function at time {math}`t` to the value function at {math}`t+1` through the choice variables and state variables:
 
 ```{math}
 :label: eq:CARA-vmax
@@ -115,11 +107,7 @@ The expected present discounted value of consumption is[^pshk-disappears]
 \end{aligned}
 ```
 
-Now we need [InfSumMult](#fact:infsummult): if {math}`\Rfree > 1`, then {math}`\displaystyle \sum_{i=0}^{\infty} i/\Rfree^{i} = \left(\frac{\Rfree}{(\Rfree-1)^{2}}\right)`
-
-:::{margin}
-The {math}`\PShk_{t+n}` terms disappear when expectations are taken.
-:::
+Now we need [InfSumMult](#fact:infsummult): if {math}`\Rfree > 1`, then {math}`\displaystyle \sum_{i=0}^{\infty} i/\Rfree^{i} = \left(\frac{\Rfree}{(\Rfree-1)^{2}}\right)`.
 
 Thus, the expectation of the infinite horizon PDV of consumption is:
 
@@ -165,48 +153,9 @@ Note some peculiar aspects of this solution. First, observe that, marginally, th
 
 Second, notice that the effect of income uncertainty on saving is the same in absolute dollars regardless of the level of resources or permanent income.
 
----
+## Finite Horizon Solution
 
-**Content after document end (draft/scratch work):**
-
-If {math}`t+1 = T` so that {math}`c_{t+1} = (m_{t}-c_{t})\Rfree+\PShk_{t+1}` then the Euler equation becomes
-
-```{math}
-\begin{aligned}
-\uFunc^{\prime}(c_{t}) & = \Rfree\Discount \Ex_{t}[\uFunc^{\prime}(c_{t+1})] \\
-\exp[-\CARA c_{t}] & = \Rfree \Discount \Ex_{t}[\exp[-\CARA {c}_{t+1}]] \\
-1 & = \Rfree \Discount \Ex_{t}[\exp[-\CARA ((m_{t}-c_{t})\Rfree+{\PShk}_{t+1}-c_{t})]] \\
-0 & = \log (\Rfree\Discount) + \log \Ex_{t}[\exp[-\CARA (-c_{t}(1+\Rfree) + Rm_{t})]\exp[-\CARA {\PShk}_{t+1}]] \\
-0 & = \log (\Rfree\Discount) + (\CARA c_{t}(1+\Rfree) - \CARA \Rfree m_{t})+ \log \Ex_{t}[\exp[-\CARA {\PShk}_{t+1}]] \\
-c_{t} \CARA (1+\Rfree) & = - \log (\Rfree\Discount) + \CARA \Rfree m_{t} - (\CARA^{2} \sigma^{2}_{\PShk}/2) \\
-c_{t} & = \left(\frac{1}{1+\Rfree}\right)\left[\log (\Rfree\Discount)^{-1/\CARA} + \Rfree m_{t} - \CARA \sigma^{2}_{\PShk}/2 \right]
-\end{aligned}
-```
-
-**Additional derivations (continued draft work):**
-
-```{math}
-\begin{aligned}
-\uFunc^{\prime}(c_{t}) & = \Rfree\Discount \Ex_{t}[\uFunc^{\prime}(c_{t+1})] \\
-\exp[-\CARA c_{t}] & = \Rfree \Discount \Ex_{t}[\exp[-\CARA {c}_{t+1}]] \\
-1 & = \Rfree \Discount \Ex_{t}[\exp[-\CARA (\left(\frac{1}{1+\Rfree}\right)\left[\log (\Rfree\Discount)^{-1/\CARA} + \Rfree ((m_{t}-c_{t})\Rfree+\PShk_{t+1}) - \CARA \sigma^{2}_{\PShk}/2 \right]-c_{t})]] \\
-1 & = \Rfree\Discount \Ex_{t}\left\{\exp[-\CARA (\left(\frac{1}{1+\Rfree}\right)\left[\log (\Rfree\Discount)^{-1/\CARA} + \Rfree ((m_{t}-c_{t})\Rfree) - \CARA \sigma^{2}_{\PShk}/2 \right]-c_{t})]\exp[\left(\frac{-\CARA \Rfree {\PShk}_{t+1}}{1+\Rfree}\right)] \right\}
-\end{aligned}
-```
-
-**Postulated consumption rule:**
-
-Based on this, let's postulate a consumption rule of the form {math}`c_{t} = \mu + \omega m_{t}` and see whether we can determine coefficients {math}`\mu, \omega,` such that the equation holds in the infinite horizon case.
-
-```{math}
-\begin{aligned}
-0 & = \log (\Rfree \Discount)+ \log \Ex_{t}\left\{ \exp[-\CARA ({c}_{t+1}-c_{t})]\right\} \\
-c_{t+1}-c_{t} & = \mu + \omega((m_{t}-c_{t})\Rfree+y_{t+1})-c_{t} \\
-& = \mu + \omega(\Rfree m_{t}+y_{t+1}) - c_{t}(\omega \Rfree + 1)
-\end{aligned}
-```
-
-**Finite horizon facts:** See [FinSum](#fact:finsum), [InfSum](#fact:infsum), and [InfSumMult](#fact:infsummult) in the Math Facts appendix.
+The following derivations use several results from the [Math Facts appendix](#fact:mathfactslist): [FinSum](#fact:finsum), [InfSum](#fact:infsum), and [InfSumMult](#fact:infsummult).
 
 The Intertemporal Budget Constraint tells us that the present discounted value of consumption must be equal to the PDV of total resources:
 

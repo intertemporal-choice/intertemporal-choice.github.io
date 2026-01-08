@@ -11,31 +11,15 @@ The economy has the following features:
 
 1. Two generations are alive at any point in time, the young (age 1) and old (age 2).
 
-2. The size of the *young* generation in period {math}`t` is given by {math}`\PopLev_{t}=\PopLev_{0}\PopGro^{t}`.
-
-:::{margin}
-Note that {math}`\PopLev` is not the whole population, just the young.
-:::
-
-:::{margin}
-That is, constant population growth since time 0.
-:::
+2. The size of the *young* generation in period {math}`t` is given by {math}`\PopLev_{t}=\PopLev_{0}\PopGro^{t}` (note that {math}`\PopLev` denotes only the young population, not the entire population, and this formula assumes constant population growth since time 0).
 
 3. Households work only in the first period of life, earning income {math}`Y_{1,t}`. They earn no income in the second period of life ({math}`Y_{2,t+1}=0`).
 
 4. They consume part of their first-period income and save the rest to finance their consumption when old.
 
-5. The assets of the young at the end of period {math}`t` are the source of the capital used for aggregate production in period {math}`t+1`, {math}`\KLev_{t+1} = \PopLev_{t}{\aLev}_{1,t}` where {math}`{\aLev}_{1,t}` is the assets per young household *after* their consumption in period 1. (For convenience, we assume that there is no depreciation).
+5. The assets of the young at the end of period {math}`t` are the source of the capital used for aggregate production in period {math}`t+1`, {math}`\KLev_{t+1} = \PopLev_{t}{\aLev}_{1,t}` where {math}`{\aLev}_{1,t}` is the assets per young household *after* their consumption in period 1. (For convenience, we assume that there is no depreciation). Note that lower-case letters denote per-capita quantities, a convention used throughout.
 
-:::{margin}
-First example of convention that will be used repeatedly in this class: lower-case letter is per-capita.
-:::
-
-6. The old in period {math}`t` own the entire capital stock and (because they have no bequest motive) will consume it all, so dissaving by the old in period {math}`t` will be {math}`\PopLev_{t-1}{\aLev}_{1,t-1} = \KLev_{t}`. (The old do receive interest on their capital, so their consumption will be {math}`\KLev_{t}` plus the interest income {math}`\rfree \KLev_{t}`, but the {math}`\rfree \KLev_{t}` component does not affect saving because it is part of both income and consumption).
-
-:::{margin}
-It's {math}`\PopLev_{t-1}` because old in {math}`t` were young in {math}`t-1` and {math}`\PopLev_{t-1}` is the size of the population of young in {math}`t-1`.
-:::
+6. The old in period {math}`t` own the entire capital stock and (because they have no bequest motive) will consume it all, so dissaving by the old in period {math}`t` will be {math}`\PopLev_{t-1}{\aLev}_{1,t-1} = \KLev_{t}` (it is {math}`\PopLev_{t-1}` because the old in {math}`t` were young in {math}`t-1`). The old do receive interest on their capital, so their consumption will be {math}`\KLev_{t}` plus the interest income {math}`\rfree \KLev_{t}`, but the {math}`\rfree \KLev_{t}` component does not affect saving because it is part of both income and consumption.
 
 7. Labor and capital markets are perfectly competitive and the aggregate production technology is CRS, {math}`\YLev=\FFunc(\KLev,\LLev)` (recall that this implies that {math}`\FFunc(\KLev,\LLev) = \FFunc_{L}\LLev + \FFunc_{K}\KLev`, which is ["Euler's Theorem"](#fact:eulerstheorem)).
 
@@ -71,21 +55,13 @@ In this case we can solve for wages and interest rates:
 \end{aligned}
 ```
 
-The individual's maximization problem yields the Euler equation:
-
-:::{margin}
-Recall that {math}`R=1+r`, an example where lower-case does not signify per-capita.
-:::
+The individual's maximization problem yields the Euler equation (recall that {math}`R=1+r`, an exception to the convention where lower-case does not signify per-capita):
 
 ```{math}
 \uFunc^{\prime}(\cLev_{1,t}) = \Discount \Rfree_{t+1} \uFunc^{\prime}(\cLev_{2,t+1}).
 ```
 
-Now let's assume that utility is logarithmic, {math}`\CRRA = 1`, which implies that
-
-:::{margin}
-Begin with consumption in levels, not per-capita, and move to per-capita in {eq}`eq:ktp1`.
-:::
+Now let's assume that utility is logarithmic, {math}`\CRRA = 1`. Beginning with consumption in levels and then moving to per-capita, this implies
 
 ```{math}
 :label: eq:ktp1

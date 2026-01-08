@@ -94,7 +94,7 @@ Now, assume there is an "outer" utility function {math}`{f}(\bullet)` which depe
 
 :::{exercise}
 :label: ex:cobb-douglas
-Show that
+Show that with Cobb-Douglas preferences, optimal leisure satisfies {math}`\leisure_{t} \Wage_{t} = c_{t} \eta` for {math}`\eta=\leiShare/(1-\leiShare)`, and that utility can therefore be written as {math}`{f}((\Wage_{t}/\eta)^{-\leiShare}c_{t})`.
 :::
 
 :::{solution} ex:cobb-douglas

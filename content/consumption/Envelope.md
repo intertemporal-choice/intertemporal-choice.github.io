@@ -3,11 +3,7 @@
 # The Envelope Theorem and the Euler Equation
 This section shows how the Envelope theorem is used to derive the consumption Euler equation in a multiperiod optimization problem with geometric discounting and intertemporally separable utility.
 
-The consumer's goal from the perspective of date {math}`\tNow` is to
-
-:::{margin}
-Define "geometric discounting."
-:::
+The consumer's goal from the perspective of date {math}`\tNow` is to maximize the sum of discounted utilities, where geometric discounting means that utility {math}`n` periods in the future is weighted by {math}`\Discount^{n}`:
 
 ```{math}
 \max \sum_{n=0}^{\TEnd-\tNow} \Discount^{n} \uFunc(c_{\tNow+n})
@@ -48,11 +44,7 @@ where the derivative {math}`d {m}_{\tNow+1}/d {c}_{\tNow} = -\Rfree` follows fro
 \uFunc^{\prime}(\cFunc_{\tNow}({m}_{\tNow})) - \Rfree \Discount \vFunc_{\tNow+1}^{\prime}(({m}_{\tNow}-\cFunc_{\tNow}({m}_{\tNow}))\Rfree+{y}_{\tNow+1}) = 0.
 ```
 
-Now define a function
-
-:::{margin}
-The underscore indicates it's a (weak) lower bound.
-:::
+Now define a function {math}`\underline{\vFunc}_{\tNow}` (where the underscore indicates a weak lower bound on value, achieved only when {math}`c` is chosen optimally):
 
 ```{math}
 \underline{\vFunc}_{\tNow}({m}_{\tNow},{c}_{\tNow}) = \uFunc({c}_{\tNow})+\Discount \vFunc_{\tNow+1}(({m}_{\tNow}-{c}_{\tNow})\Rfree+{y}_{\tNow+1})
@@ -86,7 +78,7 @@ The Chain Rule of differentiation tells us that
 \vFunc^{\prime}_{\tNow}({m}_{\tNow})\equiv \vFunc_{\tNow}^{{m}}({m}_{\tNow}) \equiv \left(\frac{d \vFunc_{\tNow}}{d {m}_{\tNow}}\right) = \underline{\vFunc}_{\tNow}^{{m}}({m}_{\tNow},\cFunc_{\tNow}({m}_{\tNow})) + \left(\frac{\partial \cFunc_{\tNow}({m}_{\tNow})}{\partial {m}_{\tNow}}\right)\underline{\vFunc}_{\tNow}^{c}({m}_{\tNow},\cFunc_{\tNow}({m}_{\tNow})).
 ```
 
-Here's the key insight: The assumption that consumers are optimizing means that we will always be evaluating the value function and its derivatives at a {math}`{c}_{\tNow}` that satisfies the first-order optimality condition {eq}`eq:cstarfoc`.[^liquidity-constraint] Thus we have from {eq}`eq:nuc` that
+Here's the key insight: The assumption that consumers are optimizing means that we will always be evaluating the value function and its derivatives at a {math}`{c}_{\tNow}` that satisfies the first-order optimality condition {eq}`eq:cstarfoc` (this reasoning would need modification if a liquidity constraint were binding). Thus we have from {eq}`eq:nuc` that
 
 ```{math}
 \begin{aligned}
@@ -130,6 +122,4 @@ The general principle can be condensed into a rule of thumb by realizing that th
 Illustration of the Envelope Theorem at Alternative Values of {math}`\mRat`
 :::
 
-:::{margin}
-Using the figure, discuss the consequences of an increase in {math}`m`, and show that the increase in utility is about the same whether you consume all or none of it.
-:::
+The figure illustrates why the Envelope theorem works: when {math}`m` increases, the increase in attainable utility is approximately the same whether the extra resources are consumed immediately or saved entirely. This is precisely because the first-order condition equates the marginal utility of consumption to the marginal value of saving, so at the optimum the consumer is indifferent at the margin between these alternatives.

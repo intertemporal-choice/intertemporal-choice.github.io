@@ -15,11 +15,7 @@ Start with the standard Euler equation for consumption under CRRA utility:
 1 = \Discount \Ex_{t}\left[\RiskyAlt_{t+1}\left(\frac{c_{t+1}}{c_{t}}\right)^{-\CRRA}\right]
 ```
 
-and postulate a solution of the form {math}`c_{t} = \MPC {m}_{t}`:
-
-:::{margin}
-Note that the crucial thing that makes this work is that the equation contains {math}`{m}_{t}` in numerator and denominator; if we had labor income in numerator, we wouldn't be able to divide through by {math}`{m}_{t}`, so that is where the "guess and verify" method would fail.
-:::
+and postulate a solution of the form {math}`c_{t} = \MPC {m}_{t}`. The guess-and-verify method works here because market resources {math}`m_t` appear in both numerator and denominator, allowing them to cancel; if labor income appeared in the numerator, this approach would fail.
 
 ```{math}
 \begin{aligned}

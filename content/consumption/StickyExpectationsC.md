@@ -84,18 +84,6 @@ Path of {math}`\CLev` after a shock {math}`\TShkEmp_{t}=2`, Omniscient Consumers
 Path of {math}`\BLev` after a shock {math}`\TShkEmp_{t}=2`, Omniscient Consumers
 :::
 
-:::{admonition} Normalization by permanent income (commented out)
-:class: dropdown
-
-A convenient feature of this model is that the problem can be normalized by the level of permanent income. Using nonbold variables to represent the normalized version of bold variables, and for convenience defining {math}`\hat{\TShkEmp}_{t}=\TShkEmp_{t}-1` the consumption rule becomes
-
-```{math}
-:label: eq:cratio
-
-\cLev_{t} = (\bLev_{t}+\hat{\TShkEmp}_{t} + \hLev_{t}) \MPC.
-```
-:::
-
 Now suppose that not every consumer updates expectations in every period. Instead, expectations are "sticky": each consumer updates with probability {math}`\Pi` in each period. Whether the consumer at location {math}`i` updates in period {math}`t` is determined by the realization of the dichotomous random variable
 
 ```{math}
@@ -113,47 +101,17 @@ and each period's updaters are chosen randomly such that a constant proportion {
 \int_{0}^{1} \pi^{i}_{\tau} di = \Pi ~\forall~\tau.
 ```
 
-It will also be convenient to define the date of consumer {math}`i`'s most recent update; we call this object {math}`\tau^{i}_{t}`.
+It will also be convenient to define the date of consumer {math}`i`'s most recent update; we call this object {math}`\tau^{i}_{t}`. We designate the value of a variable {math}`\bullet` at date {math}`t` for a consumer who last updated his expectations at date {math}`t-n` by {math}`\bullet_{t|=t-n}`, where the part of the subscript following {math}`|` indicates criteria that must be matched by the consumer's (or group's) {math}`\tau`. To illustrate, consider a consumer who updated his expectations most recently in period {math}`t-3` so that {math}`n(i)=3`. This consumer's actual consumption in period {math}`t` will be {math}`\cLev^{i}_{t} = \cLev_{t-3|=t-3}`, the level of consumption that was chosen in period {math}`t-3` given beliefs at that time.
 
-:::{admonition} Notation definition (commented out)
-:class: dropdown
-
-We designate the value of a variable {math}`\bullet` at date {math}`t` for a consumer who last updated his expectations at date {math}`t-n` by {math}`\bullet_{t|=t-n}` where the part of the subscript following {math}`|` indicates criteria that must be matched by the consumer's (or group's) {math}`\tau`.
-:::
-
-:::{admonition} Consumer example (commented out)
-:class: dropdown
-
-For example, consider a consumer who updated his expectations most recently in period {math}`t-3` so that {math}`n(i)=3`. This consumer's actual consumption in period {math}`t` will be
-
-```{math}
-\cLev^{i}_{t} = \cLev_{t-3|=t-3}.
-```
-:::
-
-:::{admonition} Probability assumption (commented out)
-:class: dropdown
-
-We are assuming that the probability of adjusting one's expectations is independent of the level of income or wealth; therefore, the average levels of wealth and income among those consumers who adjust their expectations this period will be the same as the average levels of wealth and income in the economy as a whole.
-:::
-
-:::{admonition} Per capita consumption (commented out)
-:class: dropdown
-
-Dropping the {math}`i` superscript for notational simplicity, the level of consumption per capita that would prevail if all consumers were to update in period {math}`t` is
-
-```{math}
-\CLev_{t|=t} = \int_{0}^{1} \cLev_{t|=t} di.
-```
-
-But since the set of consumers who updated was randomly selected from the population, the average level of consumption-per-capita for the updaters must equal the average level of consumption-per-capita that would characterize the population as a whole if everyone in the economy were to update. Thus, an alternative measure of the same thing is given by...
-:::
+We are assuming that the probability of adjusting one's expectations is independent of the level of income or wealth; therefore, the average levels of wealth and income among those consumers who adjust their expectations this period will be the same as the average levels of wealth and income in the economy as a whole. This independence assumption is crucial for aggregation: it ensures that the subset of consumers who update in any period is representative of the population.
 
 We need a notation to represent sets of consumers defined by the period of their most recent update. We denote such a set by the condition on {math}`\tau^{i}_{t}`; for example, the set of consumers whose most recent update, as of date {math}`t`, was prior to period {math}`t-1` would be {math}`\mathcal{T} = \{\tau^{i}_{t} < t-1\}`. We denote the per-capita value of a variable {math}`\bullet`, among consumers in a set {math}`\mathcal{T}` as of date {math}`t`, by {math}`\bullet_{t|\mathcal{T}}`. Dropping the {math}`i` superscripts to reduce clutter, per-capita consumption among households who have updated in period {math}`t` is therefore
 
 ```{math}
 \CLev_{t|\tau_{t}=t} = \Pi^{-1} \int_{0}^{1} \pi_{t} \cLev_{t} di.
 ```
+
+Dropping the {math}`i` superscript for notational simplicity, the level of consumption per capita that would prevail if all consumers were to update in period {math}`t` is {math}`\CLev_{t|=t} = \int_{0}^{1} \cLev_{t|=t} di`. But since the set of consumers who updated was randomly selected from the population, the average level of consumption-per-capita for the updaters must equal the average level of consumption-per-capita that would characterize the population as a whole if everyone in the economy were to update. This is the key step that allows aggregation to work analytically.
 
 In periods when expectations are not updated, the consumer continues to spend the same amount as in the most recent period when his expectations **were** updated.[^random-walk-assumption] If the economy is large the proportion of consumers who update their expectations every period will be {math}`\Pi`.[^non-updaters-integral] Average consumption among those who are not updating in the current period (for whom {math}`1-\pi_{t}=1`) is then
 

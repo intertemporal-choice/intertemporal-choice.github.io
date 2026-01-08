@@ -2,11 +2,7 @@
 
 # Durables
 
-The consumer's goal is to
-
-:::{margin}
-Define "durable."
-:::
+A durable good is one that provides utility over multiple periods rather than being consumed immediately. The consumer's goal is to
 
 ```{math}
 \max \sum_{s=t}^{T} \beta^{s-t} \uFunc(c_{s},d_{s})
@@ -16,27 +12,17 @@ where {math}`d_{s}` is the stock of the durable good, and all other variables ar
 
 We will assume that the stock of the durable good evolves over time according to
 
-:::{margin}
-Discuss alternative: "one-hoss-shay" depreciation: small prob in each period that durable completely dies. Harder to analyze, though there is a lit that does it.
-:::
-
 ```{math}
 :label: eq:zeqn
 
 d_{t+1} = (1-\delta)d_{t}+{x}_{t+1},
 ```
 
-where {math}`{x}_{t}` is period-t eXpenditure on the durable good and {math}`\delta` is the durable good's depreciation rate (a good with a lower value of {math}`\delta` is said to be "more durable").
+where {math}`{x}_{t}` is period-t eXpenditure on the durable good and {math}`\delta` is the durable good's depreciation rate (a good with a lower value of {math}`\delta` is said to be "more durable"). This geometric depreciation assumption contrasts with alternatives like "one-hoss-shay" depreciation, where each period there is some probability that the durable completely fails.
 
-:::{margin}
-Note features of reality left out: no asymmetry between buying and selling the durable good (i.e. there is no restriction saying {math}`{x}_{t}>0`).
-:::
+For simplicity, we abstract from asymmetries between buying and selling the durable good (there is no restriction requiring {math}`{x}_{t}>0`).
 
-The dynamic budget constraint is
-
-:::{margin}
-Only difference is must subtract expenditures on durables.
-:::
+The dynamic budget constraint subtracts expenditures on durables from available resources:
 
 ```{math}
 :label: eq:Dur-xaccum
@@ -46,19 +32,11 @@ Only difference is must subtract expenditures on durables.
 
 Bellman's equation is
 
-:::{margin}
-The reason {math}`d_{t-1}` is the state is that the level of durables in period {math}`t` is not determined until you choose spending on durables in that period.
-:::
-
 ```{math}
 \vFunc_{t}({m}_{t},d_{t-1}) = \max_{\{c_{t},{x}_{t}\}} \left[\uFunc(c_{t},d_{t}) + \beta \vFunc_{t+1}({m}_{t+1},d_{t})\right],
 ```
 
-or, equivalently,
-
-:::{margin}
-Difference is that in second version {math}`d_{t}` is treated as control.
-:::
+where {math}`d_{t-1}` is the state variable because the level of durables in period {math}`t` is not determined until you choose spending on durables in that period. Equivalently, treating {math}`d_{t}` directly as the control variable:
 
 ```{math}
 :label: eq:bell
@@ -167,11 +145,7 @@ and {math}`\Rfree \beta \vFunc^{{m}}_{t+1} = \uFunc^{c}_{t}` and from {eq}`eq:vd
 \end{aligned}
 ```
 
-Assuming {math}`\delta<1`, this equation tells us that the marginal utility *in the current period* of a unit of spending on the durable good is lower than the marginal utility of spending on the nondurable. Why? Because the durable good will yield utility in the future as well as in the present. What should be equated to the marginal utility of nondurables consumption is the total discounted lifetime utility from an extra unit of the durable good, not simply the marginal utility it yields right now.
-
-:::{margin}
-You're going to own this thing for a long time. You don't buy a car because it is worth \$20,000 to you on the day you buy it; you buy a car because its *expected discounted* value to you over its lifetime is \$20,000 (or more).
-:::
+Assuming {math}`\delta<1`, this equation tells us that the marginal utility *in the current period* of a unit of spending on the durable good is lower than the marginal utility of spending on the nondurable. Why? Because the durable good will yield utility in the future as well as in the present. What should be equated to the marginal utility of nondurables consumption is the total discounted lifetime utility from an extra unit of the durable good, not simply the marginal utility it yields right now. You don't buy a car because it is worth \$20,000 to you on the day you buy it; you buy a car because its expected discounted value over its lifetime is \$20,000 or more.
 
 Now assume the utility function is of the Cobb-Douglas form: {math}`\uFunc(c,d)=\frac{({c^{1-\alpha }d^{\alpha })}^{1-\rho }}{1-\rho }.` This implies that the instantaneous marginal utilities with respect to {math}`c` and {math}`d` are:
 
@@ -183,21 +157,6 @@ Now assume the utility function is of the Cobb-Douglas form: {math}`\uFunc(c,d)=
 \\ \uFunc^{d} & = (c^{1-\alpha}d^{\alpha})^{-\rho} \alpha c^{1-\alpha}
 d^{\alpha-1} \\
       & = (c^{1-\alpha}d^{\alpha})^{-\rho}  \alpha (d/c)^{\alpha-1}
-\end{aligned}
-```
-
-**Commented-out alternative derivations and second-order derivatives:**
-
-```{math}
-\begin{aligned}
-% \uFunc^{c} & = \left(c(d/c)^{\alpha}\right)^{-\rho} (1-\alpha)(d/c)^{\alpha} \\
-% & = c^{-\rho} (1-\alpha)(d/c)^{\alpha(1-\rho)} \\
-% \uFunc^{cc} & = c^{-\rho} (1-\alpha)(\alpha(1-\rho))(d/c)^{\alpha(1-\rho)-1}(-dc^{-2})-\rho c^{-\rho-1}(1-\alpha)(d/c)^{\alpha(1-\rho)} \\
-% \uFunc^{cc} & = c^{-\rho} (1-\alpha)(\alpha(1-\rho))(d/c)^{\alpha(1-\rho)-1}(-d/c)c^{-1}) \\
-% \uFunc^{cc} & = c^{-\rho-1} (1-\alpha)(\alpha(1-\rho))(d/c)^{\alpha(1-\rho)-1}(-d/c) \\
-% \uFunc^{cc} & = -\rho(c^{0.5}d^{0.5})^{-\rho-1}0.5(d/c)^{0.5}+(c^{1-\alpha}d^{\alpha})^{-\rho} 0.5 (d/c)^{-0.5}(-d/c)/c \\
-% \uFunc^{cd} & = -\rho(c^{0.5}d^{0.5})^{-\rho-1}0.5(d/c)^{-0.5}(c^{-1}-d c^{-2}) \\
-% \uFunc^{dd} & = -\rho(c^{0.5}d^{0.5})^{-\rho-1}0.5(c/d)^{0.5}+(c^{1-\alpha}d^{\alpha})^{-\rho} 0.5 (d/c)^{-0.5}c^{-1}
 \end{aligned}
 ```
 
@@ -234,12 +193,8 @@ c_{t-1}]\\
 \end{aligned}
 ```
 
-Assuming {math}`\delta < 1`, this equation implies that *spending on durable goods should be more variable than spending on nondurable goods.*[^volatility-discussion] For goods with a low depreciation rate, spending should be much more variable. This is true because the ratio of the stock of durables to income is much larger than the ratio of the average level of spending on durables to income.
-
-[^volatility-discussion]: Briefly discuss meaning: your house is 3 times your perm income; so fluctuations in perm income mean you will be perpetually buying new chunks of house (when P goes up) or selling off chunks of your house (when P goes down). Obviously missing transactions costs; take class next year to learn about those! (Also point out that durables spending is in fact much more volatile than nondurables.)
+Assuming {math}`\delta < 1`, this equation implies that *spending on durable goods should be more variable than spending on nondurable goods*. For goods with a low depreciation rate, spending should be much more variable. This is true because the ratio of the stock of durables to income is much larger than the ratio of the average level of spending on durables to income. Consider housing: a house might be worth 3 times permanent income, so fluctuations in permanent income mean perpetually buying new "chunks" of house (when {math}`P` rises) or selling off portions (when {math}`P` falls). This model abstracts from transactions costs, which are important in reality; durables spending is in fact empirically much more volatile than nondurables spending.
 
 A further implication of this model is that the degree of correlation between nondurables spending growth and durables spending growth depends on the frequency under consideration. For a given quarterly depreciation rate (say, 5 percent per quarter), the durable good will have almost completely depreciated over the course of 10 years = 40 quarters because {math}`0.95^{40}=0.12`. According to the model, over an interval long enough for the durable to have completely depreciated, the rate of growth of spending on the durable should match the rate of growth of spending of the nondurable, because over such a long interval they are really both nondurable.
 
 Some evidence on this proposition is provided in the Jupyter notebook available [here](https://github.com/llorracc/Jupyter/blob/master/notebooks/Durables-vs-Nondurables-At-Low-And-High-Frequencies.ipynb).
-
-**Commented-out:** The notebook was previously also runnable via [mybinder](https://mybinder.org/v2/gh/llorracc/Jupyter/master?filepath=notebooks%2FDurables-vs-Nondurables-10y-vs-1q.ipynb), but as of 2018-12-06 this was disabled because it requires too many dependencies (matplotlib, seaborn, pandas) that are not part of requirements.txt and are large.

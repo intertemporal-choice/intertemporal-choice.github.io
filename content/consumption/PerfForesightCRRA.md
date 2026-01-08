@@ -666,24 +666,3 @@ which is linear, and makes it very easy to compute
 ```{math}
 \vFunc_{t}(\mRat) = \uFunc\left((m-\underline{m})\MPC_{t}^{-\CRRA/(1-\CRRA)}\right)
 ```
-
-:::{admonition} Scraps/draft material
-:class: dropdown
-
-Additional derivations for the inverse value function:
-
-```{math}
-\begin{aligned}
-  \texttt{vFuncNvrs}(\nabla m) & =   \MPC^{-\CRRA/(1-\CRRA)} (\nabla m) \\
-  \texttt{vFuncNvrs}(\nabla m) & =   \MPC^{-\CRRA/(1-\CRRA)+1/(1-\CRRA)-1/(1-\CRRA)} (\nabla m) \\
-  \texttt{vFuncNvrs}(\nabla m) & =   \MPC^{1-1/(1-\CRRA)} (\nabla m) \\
-  \uFunc(\texttt{vFuncNvrs}(\nabla m)) & = \frac{\left(\MPC^{1-1/(1-\CRRA)} (\nabla m)\right)^{1-\CRRA}}{1-\CRRA} \\
-  \uFunc(\texttt{vFuncNvrs}(\nabla m)) & = \MPC^{-1}\frac{\left(\MPC^{1-\CRRA} (\nabla m)\right)^{1-\CRRA}}{1-\CRRA} \\
-  \uFunc(\texttt{vFuncNvrs}(\nabla m)) & = \MPC^{-1}\frac{\left(\MPC (\nabla m)\right)^{1-\CRRA}}{1-\CRRA} \\
-  \uFunc(\texttt{vFuncNvrs}(\nabla m)) & = \frac{\left(\MPC^{-\CRRA/(1-\CRRA)} (\nabla m)\right)^{1-\CRRA}}{1-\CRRA} \\
-  & = \frac{\left(\MPC^{-\CRRA} (\nabla m)\right)^{1-\CRRA}}{1-\CRRA} \\
-  & = \frac{\left(\MPC (\nabla m)\right)^{-\CRRA}(\nabla m)}{1-\CRRA} \\
-  & = c^{-\CRRA}(\nabla m)(1-\CRRA)^{-1}
-\end{aligned}
-```
-:::

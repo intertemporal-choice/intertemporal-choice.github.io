@@ -7,15 +7,3 @@
 
 Risk Premia and Precautionary Saving Premia
 :::
-
----
-
-**Commented-out figure:**
-
-The following figure was commented out in the LaTeX source:
-
-:::{figure} /sources/consumption/RiskAndPSPremia/LaTeX/Figures/RiskAndPSPremiaPrec.png
-:name: fig:RiskAndPSPremiaPrec
-
-Precautionary Premium Figure (commented out)
-:::

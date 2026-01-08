@@ -2,11 +2,7 @@
 
 # Social Security and Capital Accumulation
 
-Consider a household with a 2-period lifetime, whose optimization problem is
-
-:::{margin}
-Written in the most general way possible. Last line indicates assumption that no labor income is earned in period 2.
-:::
+Consider a household with a 2-period lifetime, whose optimization problem is written in the most general way possible, with the last line reflecting the assumption that no labor income is earned in period 2:
 
 ```{math}
 \begin{aligned}
@@ -29,11 +25,7 @@ Under logarithmic utility, section [](#sec:2PeriodLCModel) shows that the soluti
 
 The only role of government in this economy is to run a Social Security program. Suppose that initially this economy had no Social Security system and we are interested in the effects of introducing a Pay-As-You-Go Social Security system that is expected to remain a constant size from generation to generation from now on: {math}`\taxNetTrans_{2,t+1} = -\taxNetTrans_{1,t+1}` while {math}`\taxNetTrans_{1,t+1} = \taxNetTrans_{1,t}`, so that taxes are greater than transfers when young and transfers are greater than taxes when old.
 
-The effects of Social Security on first period consumption can be seen by writing out explicitly the value for {math}`\cRat_{1,t}` from equation {eq}`eq:c1`,
-
-:::{margin}
-Substitute definitions of {math}`\yRat_{1,t}` and {math}`\yRat_{2,t+1}`.
-:::
+The effects of Social Security on first period consumption can be seen by writing out explicitly the value for {math}`\cRat_{1,t}` from equation {eq}`eq:c1`, substituting the definitions of {math}`\yRat_{1,t}` and {math}`\yRat_{2,t+1}`:
 
 ```{math}
 \begin{aligned}
@@ -42,11 +34,7 @@ Substitute definitions of {math}`\yRat_{1,t}` and {math}`\yRat_{2,t+1}`.
 \end{aligned}
 ```
 
-where the expression with the underbrace comes from the effect of introducing a constant-sized PAYG Social Security system in section [](#sec:GenAcctsAndGov). If taxes paid when young {math}`\taxNetTrans_{1,t}` are positive (as they are after the introduction of the Social Security system) and the interest rate is positive, the expression with the underbrace is a positive number, and since it is being subtracted from {math}`\Wage_{1,t}` it is clear that consumption in the first period of life will *decline* with the introduction of the Social Security system.
-
-:::{margin}
-Consumption declines because you are poorer in a lifetime sense.
-:::
+where the expression with the underbrace comes from the effect of introducing a constant-sized PAYG Social Security system in section [](#sec:GenAcctsAndGov). If taxes paid when young {math}`\taxNetTrans_{1,t}` are positive (as they are after the introduction of the Social Security system) and the interest rate is positive, the expression with the underbrace is a positive number, and since it is being subtracted from {math}`\Wage_{1,t}` it is clear that consumption in the first period of life will *decline* with the introduction of the Social Security system. The reason is that the household is poorer in a lifetime sense: the rate of return on Social Security contributions is lower than the market interest rate.
 
 Does the decline in consumption mean the saving rate rises? No - because saving is *after-tax* income minus consumption, and net taxes on the young have risen. For saving we have
 
@@ -75,13 +63,7 @@ K_{t+1} & = \aRat_{1,t} \\
 
 where {math}`\mathcal{Q}=(1-\varepsilon)\Discount/(1+\Discount)` as before in the [](#sec:OLGModel) section.
 
-:::{margin}
-Admit the slight bogusness of the figure caused by the fact that {math}`\Rfree_{t+1}` is a function of {math}`k_{t+1}` while the figure assumes that the {math}`K_{t+1}` curve is shifted down a constant amount.
-:::
-
-Thus the capital accumulation curve is shifted down. The dynamics of the introduction of Social Security are captured in the figure, under the assumption that the economy was at its steady-state equilibrium level {math}`\bar{k}` before the Social Security system was introduced. The effect of introduction is an immediate increase in consumption, as the old generation spends everything it gets and the young generation doesn't need to do as much retirement saving as before. Over time the economy will converge to its new, lower level of capital {math}`\bar{\bar{k}}`.
-
-% Figure is generated in the Mathematica notebook OLGModel.nb
+Thus the capital accumulation curve is shifted down (the figure simplifies by assuming a constant downward shift, though strictly speaking {math}`\Rfree_{t+1}` depends on {math}`k_{t+1}`). The dynamics of the introduction of Social Security are captured in the figure, under the assumption that the economy was at its steady-state equilibrium level {math}`\bar{k}` before the Social Security system was introduced. The effect of introduction is an immediate increase in consumption, as the old generation spends everything it gets and the young generation doesn't need to do as much retirement saving as before. Over time the economy will converge to its new, lower level of capital {math}`\bar{\bar{k}}`.
 
 :::{figure} /sources/consumption/SocSecAndKAccum/LaTeX/Figures/SocSecAndKAccum.png
 :name: fig:SocSecAndKAccum

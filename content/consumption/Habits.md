@@ -4,29 +4,13 @@
 
 ## The Problem
 
-Consider a consumer whose goal at date {math}`t` is to solve the problem
-
-:::{margin}
-This section is a simplified version of {cite:t}`carroll:solvinghabits`.
-:::
-
-:::{margin}
-This is not necessarily the first idea that the term "habit formation" brings to mind. Often people speak of forming the "habit" of saving, and what is meant seems to be a rule of thumb for behavior.
-:::
+Consider a consumer whose goal at date {math}`t` is to solve the problem (this section is a simplified version of {cite:t}`carroll:solvinghabits`):
 
 ```{math}
 \max \sum_{n=0}^{T-\tNow} \Discount^{n} \uFunc(c_{t+n},\habit_{t+n})
 ```
 
-where {math}`\habit_{t+n}` is the habit stock, and all other variables are as usually defined. The DBC is
-
-:::{margin}
-{math}`\uFunc^{h}<0`.
-:::
-
-:::{margin}
-This utility function is not "time separable" in the sense originally discussed, but *once habits are included* it becomes time-separable.
-:::
+where {math}`\habit_{t+n}` is the habit stock, and all other variables are as usually defined. Note that here "habit formation" refers to something different from the colloquial usage of the term: it is not about developing behavioral routines or rules of thumb for saving. Rather, it refers to preferences in which past consumption affects current utility. Utility is decreasing in the habit stock ({math}`\uFunc^{h}<0`): higher past consumption raises the reference point against which current consumption is compared, making any given level of current consumption less satisfying. This utility function is not "time separable" in the original sense, but once habits are included as a state variable it becomes time-separable. The DBC is
 
 ```{math}
 :label: eq:Hab-xaccum
@@ -56,9 +40,7 @@ Bellman's equation for this problem is therefore
 \vFunc_{t}(\mRat_{t},\habit_{t}) = \max_{\{c_{t}\}} ~~\uFunc(c_{t},\habit_{t}) + \Discount \vFunc_{t+1}((\mRat_{t}-c_{t})\Rfree+y_{t+1},c_{t}).
 ```
 
-To clarify the workings of the Envelope theorem in the case with two state variables, let's define a function[^vfunc-notation]
-
-[^vfunc-notation]: {math}`\underline{\vFunc}` looks like {math}`\vFunc` but is curved.
+To clarify the workings of the Envelope theorem in the case with two state variables, let's define a function {math}`\underline{\vFunc}_{t}` that represents value for any choice of {math}`c_{t}`, not just the optimal one:
 
 ```{math}
 \underline{\vFunc}_{t}(\mRat_{t},\habit_{t},c_{t}) = \uFunc(c_{t},\habit_{t}) +\Discount \vFunc_{t+1}((\mRat_{t}-c_{t})\Rfree+y_{t+1},c_{t})
@@ -177,8 +159,6 @@ Whichever way you do it, substituting {eq}`eq:envelopex` into the FOC equation {
 The intuition for this is as follows. The marginal value of wealth must be equal to the marginal value associated with a tiny bit more consumption. In the presence of habits, the extra consumption yields extra utility today {math}`\uFunc^{c}_{t}` but affects value next period by {math}`\vFunc^{h}_{t+1}` (which is a negative number), the discounted consequence of which from today's perspective is the {math}`\Discount \vFunc^{h}_{t+1}` term.
 
 ### Envelope Theorem for {math}`\habit_{t}`
-
-<!-- Original LaTeX had this as a commented-out subsection: %\subsubsection{Envelope Theorem for $\habit_{t}$} -->
 
 In a problem with two state variables, the Envelope theorem can be applied to each state (and indeed in general must be applied in order to solve the model).
 

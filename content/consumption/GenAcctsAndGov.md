@@ -3,11 +3,7 @@
 # Generational Accounts and the Government
 ## The Government Budget Constraint
 
-Consider a government that raises taxes {math}`\TaxLev_{t}`, makes expenditures {math}`\GovSpend_{t}`, and has an outstanding stock of debt {math}`\Debt_{t}` at the beginning of period {math}`t`, on which it must pay interest at rate {math}`\rfree_{t}`. The government can run a deficit only by raising funds via the issuing of new bonds.
-
-:::{margin}
-Other way would be to print money - see Larry Ball's class for this.
-:::
+Consider a government that raises taxes {math}`\TaxLev_{t}`, makes expenditures {math}`\GovSpend_{t}`, and has an outstanding stock of debt {math}`\Debt_{t}` at the beginning of period {math}`t`, on which it must pay interest at rate {math}`\rfree_{t}`. The government can run a deficit only by raising funds via the issuing of new bonds (the alternative, printing money, leads to inflation and is the subject of monetary economics).
 
 The government's Dynamic Budget Constraint (DBC) is given by
 
@@ -23,12 +19,6 @@ The government's Dynamic Budget Constraint (DBC) is given by
 
 But we can obtain a similar formula for {math}`\Debt_{t+1}` in terms of {math}`\Debt_{t+2}`, and substitute it into {eq}`eq:recurse`. Continued substitution gives
 
-:::{aside}
-This equation just says gov must plan to repay its debts. No constraint on what gov can do in any one or 2 periods. Diff from HHs in this way. Because gov has {math}`\infty` horizon, can obligate future generations to pay for spending of current generations. Quite a trick! (Japan 100 year mortgage).
-:::
-
-[^debt-repayment]: This equation just says gov must plan to repay its debts. No constraint on what gov can do in any one or 2 periods. Diff from HHs in this way. Because gov has {math}`\infty` horizon, can obligate future generations to pay for spending of current generations. Quite a trick! (Japan 100 year mortgage).
-
 ```{math}
 :label: eq:govibc
 
@@ -40,7 +30,7 @@ This equation just says gov must plan to repay its debts. No constraint on what 
 \end{aligned}
 ```
 
-where {math}`\mathbb{P}` denotes the present discounted value; this can be rewritten
+where {math}`\mathbb{P}` denotes the present discounted value. This equation says the government must plan to repay its debts, but places no constraint on what the government can do in any single period. Unlike households, the government has an infinite horizon and can obligate future generations to pay for the spending of current generations (Japan once offered 100-year mortgages, illustrating how intergenerational obligations can extend across multiple lifetimes). This can be rewritten
 
 ```{math}
 :label: eq:govibc2
@@ -50,37 +40,19 @@ where {math}`\mathbb{P}` denotes the present discounted value; this can be rewri
 
 Equation {eq}`eq:govibc2` should look familiar: recall that in the consumption problem we had an Intertemporal Budget Constraint that said
 
-:::{margin}
-{math}`\mathbb{P}_{t}(Y) = H_{t}`.
-:::
-
 ```{math}
 \mathbb{P}_{t}(C) = \mathbb{P}_{t}(Y)+\Rfree_{t} \Kap_{t}
 ```
 
-where {math}`\Kap_{t}` is the beginning-of-period level of capital wealth (before interest has been earned).
+where {math}`\Kap_{t}` is the beginning-of-period level of capital wealth (before interest has been earned), and {math}`\mathbb{P}_{t}(Y) = H_{t}` is human wealth.
 
-In each case, the PDV of expenditures must be equal to the PDV of income plus current wealth. Thus, equations {eq}`eq:govibc` and {eq}`eq:govibc2` are different ways to express the Government Intertemporal Budget Constraint (GIBC).[^gibc-footnote]
+In each case, the PDV of expenditures must be equal to the PDV of income plus current wealth. Thus, equations {eq}`eq:govibc` and {eq}`eq:govibc2` are different ways to express the Government Intertemporal Budget Constraint (GIBC). The {math}`\Rfree_{t}` multiplying debt reflects the timing convention that interest payments occur at the beginning of the period; for the consumer we were thinking about the situation after any interest income was received. The sign difference reflects the fact that {math}`D` is debt while {math}`B` represents asset balances.
 
-:::{margin}
-It's {math}`RB` rather than {math}`B` because we set up budget constraint with timing of interest payments at beginning of period rather than end. Note that as time interval goes to zero, {math}`R \approx 1`.
-:::
-
-[^gibc-footnote]: The {math}`\Rfree_{t}` is present in the government's problem because for the consumer we were thinking about the situation after any interest income was received; if we were to think of the consumer's beginning-of-period capital as {math}`K_{t}` then we would have {math}`B_{t} = \Rfree_{t} K_{t}`; and note that the sign difference reflects the fact that {math}`D` is debt while {math}`B` is balances.
-
-Now let's suppose that the only kind of expenditures the government engages in are transfers, so that {math}`\GovSpend_{t}` simply reflects money handed out to some members of the population in period {math}`t`. Then {math}`\Surplus_{t}` will be equal to total net transfers among the members of the population at period {math}`t`. Note that there is nothing that says that {math}`\Surplus_{t}` must be positive or negative in any particular period. The GIBC only places restrictions on the present discounted value of net transfers.
-
-:::{margin}
-This is net transfers in year {math}`t` (if we are only thinking of SS), 'primary surplus' if we think of govt activities more generally.
-:::
+Now let's suppose that the only kind of expenditures the government engages in are transfers, so that {math}`\GovSpend_{t}` simply reflects money handed out to some members of the population in period {math}`t`. Then {math}`\Surplus_{t}` will be equal to total net transfers among the members of the population at period {math}`t` (this is the primary surplus if we think of government activities more generally). Note that there is nothing that says that {math}`\Surplus_{t}` must be positive or negative in any particular period. The GIBC only places restrictions on the present discounted value of net transfers.
 
 The fact that government only has to satisfy the GIBC means that the government can potentially treat different generations very differently from each other. It is therefore useful to have a mechanism to keep track of how different generations are treated. The standard way of doing this is to construct a set of 'generational accounts,' as initially proposed by {cite:t}`akg:genaccts`.
 
 If we assume that consumers live two-period lives, the generational account for the generation born at time {math}`t` is:
-
-:::{margin}
-Point out that either of these {math}`Z`'s can be negative, which would signify net transfers to households.
-:::
 
 ```{math}
 \begin{aligned}
@@ -89,22 +61,15 @@ Point out that either of these {math}`Z`'s can be negative, which would signify 
 \end{aligned}
 ```
 
-In the US and most other countries, working-age people pay more in taxes than they receive in transfers, so {math}`\Surplus_{1,t}` is positive, while old people receive more in transfers than they pay in taxes, so {math}`\Surplus_{2,t}` is negative.
+Note that either of these {math}`Z` terms can be negative, which would signify net transfers to households rather than taxes collected.
 
-:::{margin}
-Largest transfers are Social Security and Medicare in US.
-:::
+In the US and most other countries, working-age people pay more in taxes than they receive in transfers, so {math}`\Surplus_{1,t}` is positive, while old people receive more in transfers than they pay in taxes, so {math}`\Surplus_{2,t}` is negative. The largest such transfers in the US are Social Security and Medicare.
 
 Note now that the aggregate total of net transfers can be subdivided into the net transfers of the two age groups in the population,
 
 ```{math}
 \Surplus_{t} = \Surplus_{1,t}+\Surplus_{2,t}.
 ```
-
-% and note further that the GIBC can be rewritten as
-% \begin{equation}\begin{gathered}\begin{aligned}
-%         \Rfree_{t}\Debt_{t} & =  \mathbb{P}_{t}(T) - \mathbb{P}_{t}(X) = \mathbb{P}_{t}(T-X) = \mathbb{P}_{t}(Z)
-% \end{aligned}\end{gathered}\end{equation}
 
 Now write out the GIBC {eq}`eq:govibc` explicitly:
 
@@ -140,13 +105,9 @@ Consider the generation born at time {math}`s-1`. It paid nothing into the Socia
 \end{aligned}
 ```
 
-so this generation benefits from the introduction of SS because it paid no taxes yet receives benefits.
+so this generation benefits from the introduction of SS because it paid no taxes yet receives benefits. Since {math}`\Surplus_{2,s}` is negative (a transfer to the old), this generation is better off than without Social Security.
 
-:::{margin}
-Since {math}`\Surplus_{2,s}` is a neg number, they are better off than without SS.
-:::
-
-The GA's for succeeding generations are
+The generational accounts for succeeding generations are
 
 ```{math}
 :label: eq:SScost
@@ -158,11 +119,7 @@ The GA's for succeeding generations are
 \end{aligned}
 ```
 
-so future generations are worse off by this amount.
-
-:::{margin}
-Taxes are positive; effect on lifetime budget constraint is the negative of the expression on RHS of {eq}`eq:SScost`. Next revert to class notes for discussion of Ponzi Schemes.
-:::
+so future generations are worse off by this amount. Since taxes are positive, the effect on the lifetime budget constraint is the negative of the expression on the RHS of {eq}`eq:SScost`.
 
 The reason the introduction of Social Security makes future generations worse off is that without SS they could have invested the amount {math}`\Surplus_{1,t}` and earned interest on it of {math}`\rfree_{t+1}\Surplus_{1,t}` in period 2. Now the money is taken away from them when young and returned *without interest* when old. Thus, the loss is precisely the loss in interest income on {math}`\Surplus_{1,t}` in period {math}`t+1`, discounted back to the present.
 
@@ -174,11 +131,7 @@ Note that if there is zero population growth, the foregoing analysis all holds i
 
 ### Effects of Population Growth
 
-If there is perpetual population growth, it is possible to finance a positive rate of return on Social Security contributions. Define
-
-:::{margin}
-Note that the definition of {math}`\surplus_{2,t+1}` is slightly different from usual because we divide by {math}`L_{t}` rather than {math}`L_{t+1}`.
-:::
+If there is perpetual population growth, it is possible to finance a positive rate of return on Social Security contributions. It will often be convenient to write generational accounts in per-capita terms rather than in aggregate terms, using lower-case letters for per-capita quantities. Define per capita contributions as (note that {math}`\surplus_{2,t+1}` is divided by {math}`L_{t}` rather than {math}`L_{t+1}` to express the return from the perspective of the contributing generation):
 
 ```{math}
 :label: eq:zdef
@@ -197,11 +150,7 @@ and assume there is constant population growth, {math}`\PopGro=L_{t+1}/L_{t}`. I
 \end{aligned}
 ```
 
-Not only does this prove that it is *possible* for the Social Security system to pay a rate of return equal to the rate of population growth - it proves that the *only* rate of return that is consistent with constant per-capita taxes on the young is a rate of return of {math}`\PopGro`.
-
-:::{margin}
-It is not only possible, but *necessary* to pay a positive return in an economy with perpetual population growth.
-:::
+Not only does this prove that it is *possible* for the Social Security system to pay a rate of return equal to the rate of population growth - it proves that the *only* rate of return that is consistent with constant per-capita taxes on the young is a rate of return of {math}`\PopGro`. In an economy with perpetual population growth, it is not only possible but *necessary* to pay a positive return.
 
 ### Effects of Productivity Growth and Population Growth
 
@@ -235,16 +184,3 @@ Now consider the per-capita generational accounts in an economy with constant po
 ```
 
 Note that this expression will be *negative* if {math}`{\WGro}\PopGro>\Rfree_{t+1}`, meaning that the introduction of a Social Security system with a positive tax rate {math}`\zeta` actually *improves* the lifetime budget constraint! This is another way of seeing that an economy is *dynamically inefficient* if the return factor for capital {math}`\Rfree` is less than the product of the population growth and productivity growth factors. (Or, using approximations, the rate of return is less than the sum of the population growth rate and the productivity growth rate).
-
-:::{admonition} Scraps/draft material
-:class: dropdown
-
-It will often be convenient to write generation accounts in per-capita terms rather than in aggregate terms. Thus define
-
-```{math}
-\begin{aligned}
-\surplus_{1,t} & = \Surplus_{1,t}/L_{t} \\
-\surplus_{2,t+1} & = \Surplus_{2,t+1}/L_{t+1}.
-\end{aligned}
-```
-:::
