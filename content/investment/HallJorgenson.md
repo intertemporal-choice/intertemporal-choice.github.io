@@ -11,11 +11,7 @@
 
 and which obtains its capital {math}`\kap` from a market in which a unit of capital can be rented for a unit of time at rate {math}`\kapRent_{t}`.
 
-In period {math}`t`, the firm maximizes profit,
-
-:::{margin}
-This implicitly normalizes the price of output to 1.
-:::
+In period {math}`t`, the firm maximizes profit (implicitly normalizing the price of output to 1),
 
 ```{math}
 \max_{\kap_{t}} ~ \kap_{t}^{\kapShare}-\kapRent_{t}\kap_{t}
@@ -36,17 +32,9 @@ yielding first order conditions
 
 This equation says the level of capital is always instantly adjusted to {math}`\inc_{t}` and {math}`\kapRent_{t}`, with no costs of adjustment.
 
-:::{margin}
-This equation says level of capital is always instantly adjusted to {math}`\inc_{t}` and {math}`\kapRent_{t}` - no costs of adjustment.
-:::
-
 What determines the cost of capital? In the simple case with no taxes and no capital market frictions of any kind, an investor must be indifferent between putting his money in the bank and earning interest at rate {math}`\rfree`, and buying a unit of capital, renting it out at rate {math}`\kapRent_{t}`, and then reselling it the next period.
 
-The price at which capital goods can be bought at date {math}`t` is:
-
-:::{margin}
-Purchase price is distinct from rental rate - much larger.
-:::
+The purchase price at which capital goods can be bought at date {math}`t` (distinct from the rental rate, and typically much larger) is:
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -65,10 +53,6 @@ and in continuous time, the rate of change of {math}`\Price_{t}` is {math}`\dot{
 
 Thus, the no-arbitrage condition is
 
-:::{margin}
-LHS is what you get from putting money in a bank at rate {math}`\rfree`, which we assume is perfectly certain and time-invariant.
-:::
-
 ```{math}
 :label: eq:ctarb
 
@@ -77,6 +61,8 @@ LHS is what you get from putting money in a bank at rate {math}`\rfree`, which w
 \\  (\rfree+\depr) \Price_{t} & =  \kapRent_{t}+\dot{\Price}_{t}     .
 \end{aligned}\end{gathered}
 ```
+
+where the left-hand side is the return from putting money in the bank at rate {math}`\rfree`, which we assume is perfectly certain and time-invariant.
 
 Now to simplify our lives we will assume constant capital goods prices, {math}`\dot{\Price}_{t}=0`. Thus, substituting the value for {math}`\kapRent_{t}` from {eq}`eq:ctarb` into {eq}`eq:khj` we have:
 
@@ -88,10 +74,6 @@ Now to simplify our lives we will assume constant capital goods prices, {math}`\
 ```
 
 Now let's introduce taxes, defined as follows:
-
-:::{margin}
-Apologize for stupidity of {math}`k` as ITC. Note also that if the tax treatment of depreciation does not change over time, then {math}`z_{t}=z` is a constant; we will assume it is constant henceforth.
-:::
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -110,11 +92,7 @@ The net, discounted, after-tax price of capital to the firm is[^footnote1]
 \end{aligned}\end{gathered}
 ```
 
-Now let's rewrite the arbitrage equation {eq}`eq:ctarb` taking account of taxes:
-
-:::{margin}
-Must multiply {math}`\kapRent_{t}` by {math}`(1-\taxCorp)` because the capital-rental business must pay taxes too.
-:::
+Now let's rewrite the arbitrage equation {eq}`eq:ctarb` taking account of taxes. The rental income {math}`\kapRent_{t}` must be multiplied by {math}`(1-\taxCorp)` because the capital-rental business must pay taxes too:
 
 ```{math}
 \begin{gathered}\begin{aligned}

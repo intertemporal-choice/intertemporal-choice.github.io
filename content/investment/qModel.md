@@ -147,11 +147,7 @@ which measures how much investment differs from the proportion {math}`\depr` nec
 \end{aligned}
 ```
 
-We now specify a convex (quadratic) adjustment cost function as
-
-:::{margin}
-Explain why; draw diagram centered around {math}`\depr`.
-:::
+We now specify a convex (quadratic) adjustment cost function centered around the depreciation rate {math}`\depr`. The rationale for this centering is that when {math}`i_{t} = \depr k_{t}` (investment exactly replaces depreciated capital), the firm is simply maintaining its existing capital stock and incurs no adjustment costs. Adjustment costs arise only when the firm deviates from this "replacement investment" benchmark:
 
 ```{math}
 \begin{aligned}
@@ -257,11 +253,9 @@ This says that an extra unit of capital is more valuable inside the firm than ou
 
 [^rising-prices-symmetric]: The case with rising share prices is symmetric.
 
-Now define "marginal {math}`\q`" as the value of an additional unit of capital inside the firm divided by the after-tax purchase price of an additional unit of capital,
+Now define "marginal {math}`\q`" as the value of an additional unit of capital inside the firm divided by the after-tax purchase price of an additional unit of capital,[^romer-notation]
 
-:::{margin}
-Warn them that choices of variable names are subtly different from Romer's; what I call {math}`\vk` Romer calls {math}`\q`, and Romer also makes a different assumption about the production function.
-:::
+[^romer-notation]: The variable naming conventions here differ subtly from those in {cite:t}`romer:text`: what we call {math}`\vk` Romer calls {math}`\q`. Romer also makes different assumptions about the production function.
 
 ```{math}
 \begin{aligned}
@@ -323,16 +317,6 @@ To construct a phase diagram involving {math}`\q`, we need to transform our equa
 \end{aligned}
 ```
 
-:::{admonition} Commented alternative definition
-:class: dropdown
-
-```{math}
-\begin{aligned}
-\iCost_{t} & = \kPriceAfterITC_{t}/\cancel{\Omega}_{t}.
-\end{aligned}
-```
-:::
-
 Recalling that {math}`\kPriceAfterITC_{t+1}=\Delta \kPriceAfterITC_{t+1} + \kPriceAfterITC_{t}`, dividing both sides of {eq}`eq:lambdadyn` by {math}`\kPriceAfterITC_{t}` yields
 
 ```{math}
@@ -375,7 +359,7 @@ where
 \end{aligned}
 ```
 
-combines the effects of the corporate tax and the investment tax credit into a single tax term.
+combines the effects of the corporate tax and the investment tax credit into a single tax term. Its inverse, {math}`\TaxCombInv_{t} = \TaxFree_{t}/\PostITC_{t}`, appears in subsequent analysis where it is convenient to express the tax-adjusted marginal product of capital as {math}`\TaxCombInv \fFunc^{k}`.
 
 ### Results
 
@@ -463,10 +447,6 @@ Dynamically, the story is as follows. Equation {eq}`eq:qdyn` implies that follow
 In contrast to the case with a productivity shock, the equilibrium marginal product of capital will be lower than before. Arbitrage equalizes the *after-tax* marginal product of capital with the interest rate, but with a lower tax rate, that equilibration will occur at a higher level of capital.
 
 Notice that the qualitative story is the same whether the change in {math}`\TaxComb` is due to a permanent reduction in the corporate tax rate (increase in {math}`\TaxFree`) or a permanent increase in the investment tax credit (reduction in {math}`\PostITC`). In either case, {math}`\q` and investment jump upward at time {math}`t` and then gradually decline back downward (though the equilibrium level of investment is higher than before the change).
-
-:::{margin}
-Read this carefully and work out the diagrams before lecture.
-:::
 
 There is, however, one interesting distinction between a decrease in {math}`\TaxComb` due to a reduction in corporate taxes and a decrease caused by an increase in {math}`\itc`. Since {math}`\vk=\PostITC\q`, an increase in {math}`\itc` reduces {math}`\PostITC` and therefore reduces the equilibrium value of {math}`\vk`, while a change in {math}`\TaxFree` has no effect on equilibrium {math}`\vk`. This reflects a subtle distinction. {math}`\vk` is the after-tax marginal value of extra capital, and the equilibrium in this model will occur at the point where that marginal value is equal to the marginal cost. Changing {math}`\itc` changes that marginal cost, so it changes the equilibrium after-tax marginal value. Changing {math}`\TaxFree` does not change the marginal cost of capital, so the equilibrium *after-tax* marginal value of capital is unchanged. The marginal *product* of capital is lower after a tax cut (equilibrium {math}`\fFunc^{k}` is smaller), but that is exactly counterbalanced by the larger value of {math}`\TaxFree` so that {math}`\TaxFree\fFunc^{k}` is unchanged in the long run by the change in {math}`\TaxFree`.
 
