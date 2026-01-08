@@ -4,68 +4,154 @@ version: 1
 # Import external configuration files
 # See https://mystmd.org/guide/configuration#compose-and-extend-configuration-yml-files
 extends:
-  - macros.yml  # LaTeX math macros (extracted from econtexShortcuts.sty)
-  - toc.yml     # Table of contents
+  - macros.yml # LaTeX math macros (extracted from econtexShortcuts.sty)
+  - toc.yml # Table of contents
 
 project:
   id: 33d6fdec-239b-42b2-b545-e58f5177428a
   title: A Gentle Introduction to Intertemporal Choice
   short_title: Intertemporal Choice
-  description: Graduate macroeconomics notes on consumption, saving, growth, and asset pricing
+  description: >-
+    Graduate macroeconomics lecture notes covering consumption theory, asset pricing,
+    investment theory, growth models, and DSGE frameworks. Developed for advanced
+    economics courses at Johns Hopkins University.
   subject: Macroeconomics
+  date: "2024-01-01"
   keywords:
     - macroeconomics
     - intertemporal choice
-    - consumption
-    - growth
+    - consumption theory
     - asset pricing
+    - growth theory
+    - DSGE models
+    - investment theory
+    - Euler equation
+    - dynamic optimization
+  tags:
+    - graduate economics
+    - lecture notes
+    - dynamic macroeconomics
+    - computational economics
+
+  # Thumbnail for social media previews
+  thumbnail: thumbnails/intertemporal-choice.png
+
   license:
     content: CC-BY-4.0
     code: Apache-2.0
   open_access: true
-  venue:
-    title: Johns Hopkins University
-    url: https://www.jhu.edu/
-  funding:
-    - statement: Development supported by the Econ-ARK project
-      awards:
-        - id: econ-ark
-          source:
-            name: Alfred P. Sloan Foundation
-          investigators:
-            - name: Christopher D. Carroll
-              roles:
-                - Supervision
-                - Funding acquisition
-            - name: Alan E. Lujan Solis
-              roles:
-                - Project administration
-                - Software
+
+  # Affiliations defined separately for reuse
+  affiliations:
+    - id: jhu-econ
+      institution: Johns Hopkins University
+      department: Department of Economics
+      city: Baltimore
+      state: Maryland
+      country: United States
+      ror: https://ror.org/00za53h95
+      url: https://econ.jhu.edu
+    - id: jhu-ksas
+      institution: Johns Hopkins University
+      department: Krieger School of Arts and Sciences
+      city: Washington
+      state: District of Columbia
+      country: United States
+      ror: https://ror.org/00za53h95
+      url: https://advanced.jhu.edu
+    - id: econ-ark
+      name: Econ-ARK
+      url: https://econ-ark.org
+      github: econ-ark
+
   authors:
-    - name: Christopher D. Carroll
+    - id: ccarroll
+      name:
+        given: Christopher D.
+        surname: Carroll
       email: ccarroll@jhu.edu
+      corresponding: true
       affiliations:
-        - id: jhu-econ
-          institution: Johns Hopkins University
-          department: Department of Economics
-        - id: econ-ark
-          institution: Econ-ARK
-          url: https://econ-ark.org
+        - jhu-econ
+        - econ-ark
       url: https://www.econ2.jhu.edu/people/ccarroll/
       orcid: 0000-0003-3732-9312
-    - name: Alan E. Lujan Solis
+      github: llorracc
+      roles:
+        - Conceptualization
+        - Writing – original draft
+        - Supervision
+        - Funding acquisition
+    - id: alujan
+      name:
+        given: Alan E.
+        surname: Lujan Solis
       affiliations:
-        - id: jhu-ksas
-          institution: Johns Hopkins University
-          department: Krieger School of Arts and Sciences
+        - jhu-ksas
         - econ-ark
-  github: https://github.com/jhu-aap-econ/dsge
-  # Exclude source LaTeX files and build artifacts (only notes/ gets built)
+      github: alanlujan91
+      roles:
+        - Software
+        - Writing – review & editing
+        - Project administration
+
+  # Reviewers and editors (if applicable)
+  # reviewers:
+  #   - name: Reviewer Name
+  # editors:
+  #   - name: Editor Name
+
+  venue:
+    title: Johns Hopkins University
+    short_title: JHU
+    url: https://www.jhu.edu/
+
+  funding:
+    - statement: >-
+        Development of these materials has been supported by the Econ-ARK project,
+        funded by the Alfred P. Sloan Foundation.
+      open_access: These materials are freely available under open access terms.
+      awards:
+        - id: sloan-econ-ark
+          name: Econ-ARK Infrastructure Development
+          sources:
+            - name: Alfred P. Sloan Foundation
+              url: https://sloan.org
+          investigators:
+            - ccarroll
+          recipients:
+            - ccarroll
+            - alujan
+
+  github: https://github.com/jhu-econ/intertemporal-choice
+
+  # Social links for the project
+  social:
+    github: jhu-econ/intertemporal-choice
+    # twitter: mystmarkdown
+
   bibliography:
     - content/minimal_bibliography.bib
+
+  # Exports configuration for PDF/LaTeX generation
+  exports:
+    - format: pdf
+      template: plain-latex-book
+      output: exports/intertemporal-choice.pdf
+    - format: tex
+      output: exports/intertemporal-choice-tex/
+
+  # Downloads available on the site
+  downloads:
+    - file: exports/intertemporal-choice.pdf
+      title: Download PDF
+
+  # Exclude source LaTeX files and build artifacts (only notes/ gets built)
   exclude:
-    - 'content/**'
-    - '_build/**'
+    - "content/**"
+    - "_build/**"
+    - "exports/**"
+
   error_rules:
     - rule: image-exists
       severity: ignore
@@ -76,13 +162,46 @@ project:
     - rule: xref-target-not-found
       severity: ignore
 
+  # Numbering configuration
+  numbering:
+    headings: true
+    equations: true
+    figures: true
+    tables: true
+
+  # Abbreviations used throughout the text
+  abbreviations:
+    CRRA: Constant Relative Risk Aversion
+    CARA: Constant Absolute Risk Aversion
+    DSGE: Dynamic Stochastic General Equilibrium
+    RBC: Real Business Cycle
+    OLG: Overlapping Generations
+    FOC: First Order Condition
+    MPC: Marginal Propensity to Consume
+    PDV: Present Discounted Value
+    C-CAPM: Consumption Capital Asset Pricing Model
+    RCK: Ramsey-Cass-Koopmans
+
 site:
   template: book-theme
+  title: Intertemporal Choice
   options:
-    #   favicon: favicon.ico
-    #   logo: site_logo.png
+    # favicon: favicon.ico
+    # logo: site_logo.png
+    hide_outline: false
+    outline_maxdepth: 3
     # Add launch buttons for interactive sessions
     launch_buttons:
       notebook: true
       jupyterhub: false
       binder: true
+  nav:
+    - title: Econ-ARK
+      url: https://econ-ark.org
+    - title: JHU Economics
+      url: https://econ.jhu.edu
+  actions:
+    - title: Download PDF
+      url: exports/intertemporal-choice.pdf
+    - title: GitHub
+      url: https://github.com/jhu-econ/intertemporal-choice
