@@ -152,8 +152,8 @@ capital accumulation equation becomes
   
   \dot{\kap} & =  \save \yRat - (\popGro+\depr) \kap
 \\ \dot{\kap}/\kap & =  \save (\yRat/\kap) - (\popGro+\depr)
-\\ & =  \save \kRat^{\kapShare - 1} (\labor \hLucas)^{1-\kapShare}-(\popGro+\depr)
-\\ & =  \save (\kap/\hLucas)^{\kapShare-1} \labor^{1-\kapShare} -(\popGro+\depr).
+\\ & =  \save \PtyLev \kRat^{\kapShare - 1} (\labor \hLucas)^{1-\kapShare}-(\popGro+\depr)
+\\ & =  \save \PtyLev (\kap/\hLucas)^{\kapShare-1} \labor^{1-\kapShare} -(\popGro+\depr).
 \end{aligned}\end{gathered}
 ```
 
