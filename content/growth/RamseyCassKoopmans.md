@@ -336,7 +336,7 @@ the phases in the phase diagram, as illustrated in {numref}`fig:RamseySSPlot`.
 There's an inconsistency between the programs, in the Ramsey directory, that generated these figures and the notes here: the programs assume {math}`\util(\cons \Labor)/\Labor` and here we assume {math}`\util(c)`.
 :::
 
-:::{figure} /sources/growth/RamseyCassKoopmans/LaTeX/Figures/RamseySSPlot.png
+:::{figure} /content/figures/RamseyCassKoopmans/RamseySSPlot.png
 :name: fig:RamseySSPlot
 
 {math}`\dot{\cons}/\cons =0` and {math}`\dot{\kap}=0` Loci
@@ -395,7 +395,7 @@ both {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot` as well as the TVC
 
 {eq}`eq:tvc`.
 
-:::{figure} /sources/growth/RamseyCassKoopmans/LaTeX/Figures/RamseySaddlePlot.png
+:::{figure} /content/figures/RamseyCassKoopmans/RamseySaddlePlot.png
 :name: fig:RamseySaddlePlot
 
 Transition to the Steady State

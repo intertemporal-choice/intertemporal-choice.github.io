@@ -3,10 +3,10 @@
 
 These figures are from Chapter 3 of Matthew Raskin's 2013 JHU dissertation.
 
-:::{figure} ../../sources/investment/Imperfections/LaTeX/Figures/FinancialBonds.png
+:::{figure} /content/figures/Imperfections/FinancialBonds.png
 :align: center
 :::
 
-:::{figure} ../../sources/investment/Imperfections/LaTeX/Figures/NonfinancialBonds.png
+:::{figure} /content/figures/Imperfections/NonfinancialBonds.png
 :align: center
 :::

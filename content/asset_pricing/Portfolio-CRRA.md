@@ -183,14 +183,14 @@ Finally, we can ask what effect an exogenous increase in the risk of the risky a
 
 which is actually *smaller* when {math}`\sigma^{2}_{\risky}` is larger. Upon reflection, maybe this makes sense. Imagine that the consumer had adjusted his portfolio share in the risky asset downward just enough to restore the portfolio's riskiness to its original level before the increase in risk. The consumer would now be bearing the same degree of risk but for a lower (mean) rate of return (because of his reduction in exposure to the risky asset). It makes intuitive sense that the consumer will not be satisfied with this "same riskiness, lower return" outcome and therefore that the undesirableness of the risky asset must have increased enough to make him want to hold even less than the amount that would return his portfolio's riskiness to its original value.
 
-:::{figure} /sources/asset_pricing/Portfolio-CRRA/LaTeX/Figures/ShareVsCRRA.png
+:::{figure} /content/figures/Portfolio-CRRA/ShareVsCRRA.png
 :name: fig:Port:a
 :align: center
 
 The Approximate Risky Portfolio Share {math}`\riskyshare` Declines as Relative Risk Aversion {math}`\CRRA` Increases
 :::
 
-:::{figure} /sources/asset_pricing/Portfolio-CRRA/LaTeX/Figures/ShareApproxErr.png
+:::{figure} /content/figures/Portfolio-CRRA/ShareApproxErr.png
 :name: fig:Port:b
 :align: center
 

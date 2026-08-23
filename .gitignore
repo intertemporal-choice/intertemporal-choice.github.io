@@ -337,3 +337,18 @@ TSWLatexianTemp*
 
 # Agent working directory; .claude/memory symlinks to a machine-local store
 .claude/
+
+# macOS directory metadata
+.DS_Store
+
+# dvipdfmx bounding-box artifacts generated alongside included graphics
+*.xbb
+
+# sources/ is a purely local mirror of Carroll's per-handout source zips, reproducible
+# by mirror.py from his website, which is the canonical copy. Nothing in the build
+# depends on it: the 40 figures the book renders live in content/figures/, because CI
+# does a bare checkout and `myst build --html` exits 0 even when images are missing, so
+# an ignored build input would publish a book with silently broken figures.
+#
+# Not backed up anywhere but this machine. See project memory before relying on it.
+sources/

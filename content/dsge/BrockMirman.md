@@ -159,7 +159,7 @@ and so on, as depicted in {numref}`fig:zRandWalk`.
 
 % \end{figure}
 
-:::{figure} /sources/dsge/BrockMirman/LaTeX/Figures/yPlotBrockMirman.png
+:::{figure} /content/figures/BrockMirman/yPlotBrockMirman.png
 :name: fig:zRandWalk
 
 Dynamics of Output With a Random Walk Shock
@@ -177,7 +177,7 @@ technology follows a white noise process,
 
 The dynamics of income in this case are depicted in {numref}`fig:zWhiteNoise`.
 
-:::{figure} /sources/dsge/BrockMirman/LaTeX/Figures/zWhiteNoise.png
+:::{figure} /content/figures/BrockMirman/zWhiteNoise.png
 :name: fig:zWhiteNoise
 
 Dynamics of Output With A White Noise Shock

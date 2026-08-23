@@ -93,13 +93,13 @@ The other way to see the precautionary effect is to examine the effect on the MP
 
 ## Relation Between MPC and Parameters
 
-:::{figure} /sources/consumption/CRRA-RateRisk/LaTeX/Figures/MPCvsCRRA.png
+:::{figure} /content/figures/CRRA-RateRisk/MPCvsCRRA.png
 :name: fig:MPCvsCRRA
 
 Marginal Propensity to Consume Falls as Relative Risk Aversion {math}`\CRRA` Rises
 :::
 
-:::{figure} /sources/consumption/CRRA-RateRisk/LaTeX/Figures/MPCvsSigma.png
+:::{figure} /content/figures/CRRA-RateRisk/MPCvsSigma.png
 :name: fig:CRRARisk-MPCvsSigma
 
 Marginal Propensity to Consume Falls as Risk {math}`\sigma` Rises

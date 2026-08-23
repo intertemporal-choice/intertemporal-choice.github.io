@@ -268,7 +268,7 @@ where {math}`\Risky_{i}(\ShkMeanOne_{1},\ShkMeanOne_{2})` are the (linear) funct
 
 ## Computational Results
 
-:::{figure} /sources/appendix/Equiprobable-Returns/LaTeX/Figures/ShareVsCovByMethod.png
+:::{figure} /content/figures/Equiprobable-Returns/ShareVsCovByMethod.png
 :name: fig:ShareVsCovByMethod
 
 Portfolio Share By Method as a Function of {math}`\omega`

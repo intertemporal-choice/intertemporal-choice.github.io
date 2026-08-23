@@ -214,7 +214,7 @@ which implies (since {math}`\fFunc^{\kap}(\kap_{t})` is downward sloping in {mat
 
 The phase diagram is depicted in {numref}`fig:Entrep-lPhaseDiag`.
 
-:::{figure} ../../sources/investment/EntrepreneurPF/LaTeX/Figures/lPhaseDiag.png
+:::{figure} /content/figures/EntrepreneurPF/lPhaseDiag.png
 :name: fig:Entrep-lPhaseDiag
 :width: 80%
 
@@ -526,7 +526,7 @@ Use the investment and consumption Euler equations to show the consequences for 
 :class: dropdown
 The consequences for the firm are depicted in {numref}`fig:mlossIRF`.
 
-:::{figure} ../../sources/investment/EntrepreneurPF/LaTeX/Figures/mlossIRF.png
+:::{figure} /content/figures/EntrepreneurPF/mlossIRF.png
 :name: fig:mlossIRF
 :width: 80%
 
@@ -551,7 +551,7 @@ Again show dynamics of monetary assets, capital, consumption, and investment.
 :class: dropdown
 The results are depicted in {numref}`fig:klossIRF`.
 
-:::{figure} ../../sources/investment/EntrepreneurPF/LaTeX/Figures/klossIRF.png
+:::{figure} /content/figures/EntrepreneurPF/klossIRF.png
 :name: fig:klossIRF
 :width: 80%
 

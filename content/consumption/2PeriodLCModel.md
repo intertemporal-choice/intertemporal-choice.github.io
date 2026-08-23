@@ -301,10 +301,10 @@ The terminology here is a modification (refinement) of the terminology often emp
 
 The reason to make this distinction is that it is important to distinguish between effects on behavior caused by the fact that the discounted value of future income is changed, and effects caused by the fact that the income that will be earned on savings is different. {cite:t}`summersCapTax` vigorously made the point that in standard life cycle models, the quantitative magnitude of the human wealth effect dwarfs the size of either the income or the substitution effects, because for most people most of their lifetime income is in the future.
 
-:::{figure} /sources/consumption/2PeriodLCModel/LaTeX/Figures/FisherFigureY1.png
+:::{figure} /content/figures/2PeriodLCModel/FisherFigureY1.png
 :name: fig:Fisher
 
-![](/sources/consumption/2PeriodLCModel/LaTeX/Figures/FisherFigureY2.png)
+![](/content/figures/2PeriodLCModel/FisherFigureY2.png)
 
 Fisher Figure Analysis
 :::

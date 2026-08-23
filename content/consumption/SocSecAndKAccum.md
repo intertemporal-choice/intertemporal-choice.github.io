@@ -64,7 +64,7 @@ where {math}`\mathcal{Q}=(1-\varepsilon)\Discount/(1+\Discount)` as before in th
 
 Thus the capital accumulation curve is shifted down (the figure simplifies by assuming a constant downward shift, though strictly speaking {math}`\Rfree_{t+1}` depends on {math}`k_{t+1}`). The dynamics of the introduction of Social Security are captured in the figure, under the assumption that the economy was at its steady-state equilibrium level {math}`\bar{k}` before the Social Security system was introduced. The effect of introduction is an immediate increase in consumption, as the old generation spends everything it gets and the young generation doesn't need to do as much retirement saving as before. Over time the economy will converge to its new, lower level of capital {math}`\bar{\bar{k}}`.
 
-:::{figure} /sources/consumption/SocSecAndKAccum/LaTeX/Figures/SocSecAndKAccum.png
+:::{figure} /content/figures/SocSecAndKAccum/SocSecAndKAccum.png
 :name: fig:SocSecAndKAccum
 
 Convergence of OLG Economy After Intro of Social Security
