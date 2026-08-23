@@ -9,6 +9,7 @@ project:
     - title: Consumption Theory
       children:
         - file: content/consumption/2PeriodLCModel.md
+        - file: code/consumption/FisherTwoPeriod.ipynb
         - file: content/consumption/ConsAndLaborSupply.md
         - file: content/consumption/OLGModel.md
         - file: content/consumption/GenAcctsAndGov.md
