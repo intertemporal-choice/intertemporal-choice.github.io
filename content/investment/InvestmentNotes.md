@@ -81,5 +81,5 @@ The implication of capital market imperfections that has been most vigorously ex
 :::{figure} /content/figures/InvestmentNotes/InvestmentDrivesCycle.png
 :name: fig:InvestmentDrivesCycle
 
-Investment Drives the Cycle
+Investment Drives the Cycle. Source: Torsten Sløk, Deutsche Bank, October 2011.
 :::

@@ -3,7 +3,9 @@
 
 Consider a Ramsey economy in which the capital stock
 cannot be freely adjusted; instead, as in the {math}`\q` model of investment,
-capital is subject to quadratic costs of adjustment.
+capital is subject to quadratic costs of adjustment.[^qramsey-provenance]
+
+[^qramsey-provenance]: This section descends from a handout Ilhan Ozen wrote up from a 2005 final exam question, revised by Damiano Sandri in 2009 for the growth sequence.
 
 The dynamic budget constraint is
 
