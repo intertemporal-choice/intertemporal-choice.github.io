@@ -1,5 +1,6 @@
 (sec:CRRA-RateRisk)=
 # Consumption out of Risky Assets
+
 Consider a consumer with CRRA utility whose only available financial asset has a risky return factor {math}`\RiskyAlt` which is lognormally distributed, {math}`\log \RiskyAlt_{t+1} \sim \mathcal{N}({\riskyAlt} - \sigma_{\risky}^{2}/2,\sigma_{\risky}^{2})`.
 
 With market assets {math}`\mRat`, the dynamic budget constraint is:

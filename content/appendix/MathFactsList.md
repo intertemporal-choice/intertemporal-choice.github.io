@@ -1,5 +1,6 @@
 (fact:mathfactslist)=
 # Math Facts Useful for Graduate Macroeconomics
+
 The following collection of facts is useful in many macroeconomic models. No proof is offered in most cases because the derivations are standard elements of prerequisite mathematics or microeconomics classes; this section is offered as an aide memoire and for reference purposes.
 
 Throughout this document, typographical distinctions should be interpreted as meaningful; for example, the variables {math}`\risky` and {math}`\rport` are different from each other, like {math}`x` and {math}`y`.

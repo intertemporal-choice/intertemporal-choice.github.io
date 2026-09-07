@@ -1,5 +1,6 @@
 (sec:PerfForesightCRRA)=
 # Consumption Under Perfect Foresight and CRRA Utility
+
 ## The Problem
 
 This section solves the problem of a perfect foresight consumer with intertemporally separable CRRA utility {math}`\uFunc(\bullet)= \bullet^{1-\CRRA}/(1-\CRRA)` who discounts future utility geometrically by a factor {math}`\Discount` per period. The finite horizon solution, whose last period is {math}`\TEnd`, extends to the infinite horizon case if intuitive "impatience" and "finite human wealth" conditions hold.
@@ -191,7 +192,7 @@ Now consider the question "What is the level of {math}`\cLevBF_{\tNow}` that wil
 The intuitive answer is that the wealth-preserving level of spending is exactly equal to the (properly conceived) interest earnings on one's total wealth. We call this the "sustainable" level of consumption.
 
 :::{margin}
-Note that this was interpreted as "permanent income" in the 1970s and 80s, but will not be called such in this class. Point out that wealth here is exactly like an asset that yields a dividend {math}`P`.
+This was interpreted as "permanent income" in the 1970s and 80s, but that term will not be used here. Wealth in this framework is exactly like an asset that yields a dividend {math}`P`.
 :::
 
 Because human wealth is exactly like any other kind of wealth in this perfect foresight framework, it is possible to work directly with the level of total wealth {math}`\oLev` to find the sustainable level of spending. Suppose we assume the consumer will spend fraction {math}`\PIHMPC` of total wealth in each period; the {math}`\PIHMPC` that leaves wealth intact will be given by {math}`\PIHMPC` in
@@ -286,10 +287,10 @@ With constant {math}`\pLevBF` we can rewrite {eq}`eq:PFCRRA-capprox` as
 \cLevBF_{\tNow} \approx \left(\rfree-\CRRA^{-1}(\rfree-\timeRate)\right)\left(\bLevBF_{\tNow}+ \pLevBF\left(\frac{\Rfree}{\rfree}\right)\right).
 ```
 
-{math}`\rfree` appears three times in this equation, which correspond (in order) to the income effect, the substitution effect, and the human wealth effect. To see this, note that an increase in the first {math}`\rfree` reflects an increase in the payout rate on total wealth (set {math}`\pLevBF = 0` and refer to our formula above for {math}`\PIHMPC`, realizing that for small {math}`\rfree`, {math}`\rfree/\Rfree \approx \rfree`.) That is, it simply reflects the consequence for consumption of an increase in interest income -- so it captures the "income effect" of interest rates. The second term corresponds to the substitution effect, as can be seen from its dependence on the intertemporal elasticity of substitution {math}`\CRRA^{-1}`. Finally, the {math}`\pLevBF(\Rfree/\rfree)` term clearly corresponds to human wealth, and therefore the sensitivity of consumption to {math}`\rfree` coming through this term corresponds to the human wealth *effect*.
+{math}`\rfree` appears three times in this equation, which correspond (in order) to the income effect, the substitution effect, and the human wealth effect. To see this, note that an increase in the first {math}`\rfree` reflects an increase in the payout rate on total wealth (set {math}`\pLevBF = 0` and refer to our formula above for {math}`\PIHMPC`, realizing that for small {math}`\rfree`, {math}`\rfree/\Rfree \approx \rfree`.) That is, it simply reflects the consequence for consumption of an increase in interest income, so it captures the "income effect" of interest rates. The second term corresponds to the substitution effect, as can be seen from its dependence on the intertemporal elasticity of substitution {math}`\CRRA^{-1}`. Finally, the {math}`\pLevBF(\Rfree/\rfree)` term clearly corresponds to human wealth, and therefore the sensitivity of consumption to {math}`\rfree` coming through this term corresponds to the human wealth *effect*.
 
 :::{margin}
-This is why I introduced the concept of the human wealth effect in my original treatment in the Fisher diagram.
+The human wealth effect was introduced using the Fisher diagram in the [two-period model](#sec:2PeriodLCModel) section.
 :::
 
 ## Normalizing By {math}`\pLevBF`
@@ -415,7 +416,7 @@ where {math}`\PatWGro` is the "growth patience factor." We call {eq}`eq:PatWGroC
 
 Thus, whether the consumer is patient or impatient in the sense of building up or drawing down a wealth-to-income *ratio* depends on whether the growth rate of labor income is less than, equal to, or greater than the growth rate of consumption. Analogously to our earlier usages, a consumer for whom {math}`\PatWGro=1` (equivalently, {math}`\patwGro= 0`) would be "growth poised."
 
-To get the intuition for this, consider the case of a consumer with no nonhuman wealth, {math}`\bRat_{\tNow}=0`. This consumer's absolute level of consumption will grow at {math}`(\Rfree\Discount)^{1/\CRRA}` and absolute level of income grows at {math}`{\WGro}`, but the PDV of future consumption and future income must be equal. If income is growing faster than consumption but has the same PDV, consumption must be *starting out* at a level *higher* than income - which is the sense in which this consumer is impatient (spending more than his income). "Growth impatience" is therefore the condition that causes consumers with no assets to want to borrow.
+To get the intuition for this, consider the case of a consumer with no nonhuman wealth, {math}`\bRat_{\tNow}=0`. This consumer's absolute level of consumption will grow at {math}`(\Rfree\Discount)^{1/\CRRA}` and absolute level of income grows at {math}`{\WGro}`, but the PDV of future consumption and future income must be equal. If income is growing faster than consumption but has the same PDV, consumption must be *starting out* at a level *higher* than income, which is the sense in which this consumer is impatient (spending more than his income). "Growth impatience" is therefore the condition that causes consumers with no assets to want to borrow.
 
 ## Applications
 
@@ -546,7 +547,7 @@ Consider first a circumstance in which the RIC holds ({math}`\PatR<1`). In this 
 
 #### When the RIC Fails
 
-The alternative case is when the RIC fails ({math}`\PatR=1`). Here, the only way to make sense of the model is to think about the limit of the finite horizon model as the horizon extends to infinity. This is because behavior reflects a competition between two pathologies that characterize the infinite horizon solution: It exhibits a limiting MPC of zero out of total wealth, which includes human wealth -- which approaches infinity. A limiting solution of {math}`\cFunc(\mRat) = 0 \times \infty` is even less useful than {math}`\cFunc(\mRat) = \infty`!
+The alternative case is when the RIC fails ({math}`\PatR>1`). Here, the only way to make sense of the model is to think about the limit of the finite horizon model as the horizon extends to infinity. This is because behavior reflects a competition between two pathologies that characterize the infinite horizon solution: It exhibits a limiting MPC of zero out of total wealth, which includes human wealth, which approaches infinity. A limiting solution of {math}`\cFunc(\mRat) = 0 \times \infty` is even less useful than {math}`\cFunc(\mRat) = \infty`!
 
 It turns out that the limiting solution is not ambiguous, however. The finite horizon solution implies that consumption out of human wealth when the end of life is {math}`n` periods in the future is
 
@@ -564,7 +565,7 @@ whose limit is given by
 \end{aligned}
 ```
 
-since if the FHWC condition fails ({math}`\WGro > \Rfree`) then if the RIC {math}`\Pat/\Rfree < 1` holds, the GIC {math}`\Pat < \WGro` must hold, which guarantees {math}`\PatWGro < 1` so that {math}`\PatWGro^{n+1}` approaches zero as {math}`n \uparrow \infty`.
+since when the RIC fails and the FHWC also fails ({math}`\WGro > \Rfree`), both the numerator and the denominator diverge, so the limit is governed by the ratio of the dominant terms. That ratio is infinite as long as the growth patience factor satisfies {math}`\PatWGro < 1`, in which case {math}`\PatWGro^{n+1}` approaches zero as {math}`n \uparrow \infty`. (In the case treated above, where the RIC holds rather than fails, {math}`\PatWGro<1` follows automatically, because {math}`\Pat < \Rfree` and {math}`\Rfree < \WGro` together imply the GIC {math}`\Pat < \WGro`.)
 
 (Useful-Analytical-Results)=
 ### Useful Analytical Results
@@ -581,14 +582,15 @@ we can rewrite the value function as
 \begin{aligned}
   v_{\tNow} & =  \uFunc(c_{t}) + \DiscFac \uFunc(c_{t}\Pat) + \DiscFac^{2} \uFunc(c_{t} \Pat^{2}) + ...
   \\ & =  (1-\CRRA)^{-1}\left(c_{t}^{1-\CRRA} + \DiscFac (c_{t}\Pat)^{1-\CRRA} + \DiscFac^{2} (c_{t} \Pat^{2})^{1-\CRRA} + ...\right)
-  \\ & =  (1-\CRRA)^{-1}\left(c_{t}^{1-\CRRA}(1+\DiscFac \Pat^{1-\CRRA} + \left(\DiscFac \Pat^{1-\CRRA})^{2} + ... \right) \right)
+  \\ & =  (1-\CRRA)^{-1}\left(c_{t}^{1-\CRRA}\left(1+\DiscFac \Pat^{1-\CRRA} + (\DiscFac \Pat^{1-\CRRA})^{2} + ... \right) \right)
 \\ & =  \uFunc(c_{t})\left(1+\DiscFac \Pat^{1-\CRRA} + (\DiscFac \Pat^{1-\CRRA})^{2} + ... \right)
 \end{aligned}
 ```
 
-but since {math}`\DiscFac \Pat^{1-\CRRA} = \PatR`,[^patr-derivation]
+but since {math}`\DiscFac \Pat^{1-\CRRA} = \PatR`,[^patr-derivation] this reduces to
 
 [^patr-derivation]:
+
     ```{math}
     \begin{aligned}
       \DiscFac \Pat^{1-\CRRA} & =  \DiscFac (\Rfree \DiscFac)^{\frac{1-\CRRA}{\CRRA}}
@@ -598,7 +600,6 @@ but since {math}`\DiscFac \Pat^{1-\CRRA} = \PatR`,[^patr-derivation]
     \end{aligned}
     ```
 
-this reduces to
 
 ```{math}
 :label: eq:vFuncAnalytical

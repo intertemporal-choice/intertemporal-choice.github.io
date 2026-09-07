@@ -24,7 +24,6 @@ where {math}`\Wmid_{t}` is the consumer's beginning-of-period stock of physical 
 
 ```{math}
 \begin{aligned}
-% \WRat_{t+1} & = \Rfree_{t+1}\left(\WRat_{t}-\CRat_{t}\right) \\
 \left(\frac{\WRat_{t+1}}{\WRat_{t}}\right) & = \left(1-\frac{\CRat_{t}}{\WRat_{t}}\right)\Rfree_{t+1} \\
 \Delta \wRat_{t+1} & \approx \rfree_{t+1}+ \log(1-\exp(c_{t}-\wRat_{t})),
 \end{aligned}

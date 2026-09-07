@@ -1,10 +1,11 @@
 (sec:RandomWalk)=
 # The Random Walk Model of Consumption
+
 This section derives the {cite:t}`hallRandomWalk` random walk proposition for consumption.
 
 The consumption Euler equation when future consumption is uncertain takes the form[^euler-derivation]
 
-[^euler-derivation]: See the [](#sec:Envelope) for the derivation of the Euler equation in the perfect foresight case; we will show later that the consequence of uncertainty is simply to insert the expectations operator.
+[^euler-derivation]: See the [Envelope theorem](#sec:Envelope) section for the derivation of the Euler equation in the perfect foresight case; we will show later that the consequence of uncertainty is simply to insert the expectations operator.
 
 ```{math}
 :label: eq:uPEuler

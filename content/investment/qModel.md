@@ -1,6 +1,7 @@
 (sec:qModel)=
 # The Abel (1981)-Hayashi (1982) Marginal q Model
-This section presents a discrete-time version of the Abel {cite:t}`abel:q`-Hayashi {cite:t}`hayashi:q` marginal {math}`\q` model of investment.
+
+This section presents a discrete-time version of the Abel-Hayashi marginal {math}`\q` model of investment ({cite:p}`abel:q`; {cite:p}`hayashi:q`).
 
 A corresponding [Jupyter Notebook](https://github.com/econ-ark/DARKolo/blob/master/chimeras/qModel/qModel-Template-Section-Figures.ipynb) implements numerical solutions to the model using [HARK](https://github.com/econ-ark/HARK) and [dolo](https://dolo.readthedocs.io/en/doc/).
 
@@ -15,7 +16,7 @@ Adjustment costs are priced the same way.[^itc-resale] We repeatedly make approx
 
 [^itc-resale]: To avoid arbitrage opportunities, assume that if you claimed an investment tax credit on a unit of investment in period {math}`t`, then if you resell the portion that remains after depreciation in a future period, you must repay the ITC corresponding to the remaining capital. Actual tax treatment of depreciation is too complicated be worth incorporating into the model; these assumptions capture the core of it.
 
-[^tax-depreciation]: We neglect tax depreciation because, as shown in the [](#sec:HallJorgenson) section, it matters only insofar as it affects the cost of capital; since the investment tax credit has a more transparent and direct effect on the cost of capital, including tax depreciation would add complication without adding any fundamental insights to the analysis. In the perfect foresight framework analyzed here, any attempt to analyze the effects of changes in tax depreciation should be translatable into an equivalent modification to the ITC. See {cite:t}`hsITC` for elaboration.
+[^tax-depreciation]: We neglect tax depreciation because, as shown in the [Hall-Jorgenson](#sec:HallJorgenson) section, it matters only insofar as it affects the cost of capital; since the investment tax credit has a more transparent and direct effect on the cost of capital, including tax depreciation would add complication without adding any fundamental insights to the analysis. In the perfect foresight framework analyzed here, any attempt to analyze the effects of changes in tax depreciation should be translatable into an equivalent modification to the ITC. See {cite:t}`hsITC` for elaboration.
 
 | Symbol | | Definition |
 | --- | --- | --- |
@@ -30,14 +31,11 @@ Adjustment costs are priced the same way.[^itc-resale] We repeatedly make approx
 | {math}`\itc` | - | Investment tax credit (ITC) |
 | {math}`\PostITC` | - | {math}`=1-\itc` = Cost of investment after ITC |
 
-**With time-varying price:** {math}`\kPrice_{t}` denotes the price of one unit of investment, and {math}`\kPriceAfterITC_{t}=\PostITC \kPrice_{t}` is the effective after-tax price of 1 unit of investment.
-
-**With constant price:** When {math}`\kPrice_{t}=1`, the after-tax price simplifies to {math}`\PostITC`.
+The price of one unit of investment is {math}`\kPrice_{t}`, so {math}`\kPriceAfterITC_{t}=\PostITC \kPrice_{t}` is the effective after-tax price of one unit of investment. (In the special case of a constant price {math}`\kPrice_{t}=1`, this collapses to {math}`\PostITC`.)
 
 | Symbol | | Definition |
 | --- | --- | --- |
-| {math}`\xpend_{t} = (i_{t}+j_{t})\kPriceAfterITC_{t+1}\Discount` | - | Total after-tax period-{math}`t` spending on investment (with time-varying price) |
-| {math}`\xpend_{t} = (i_{t}+j_{t})\PostITC_{t+1}\Discount` | - | Total after-tax period-{math}`t` spending on investment (with constant price) |
+| {math}`\xpend_{t} = (i_{t}+j_{t})\kPriceAfterITC_{t+1}\Discount` | - | Total after-tax period-{math}`t` spending on investment |
 | {math}`\depr` | - | Depreciation rate |
 | {math}`\daleth` | - | Depreciation factor {math}`=(1-\depr)` |
 | {math}`\omega` | - | Adjustment cost parameter |
@@ -104,7 +102,7 @@ and defining {math}`j_{t}^{i}=\adj^{i}(i_{t},k_{t})` as the derivative of adjust
 
 Thus: The PDV of the marginal cost (after tax, including adjustment costs) of an additional unit of investment should match the discounted expected marginal value of the resulting extra capital. (Recall that investment performed today {math}`i_{t}` is paid for tomorrow at price {math}`\kPriceAfterITC_{t+1}` so today's cost is {math}`\kPriceAfterITC_{t+1}\Discount`.)
 
-Recalling that {math}`\pi_{t} = \TaxFree\fFunc(k_{t})`, the [](#sec:Envelope) theorem for this problem can be used on either {eq}`eq:nudef` or {eq}`eq:nuequiv`:
+Recalling that {math}`\pi_{t} = \TaxFree\fFunc(k_{t})`, the [Envelope theorem](#sec:Envelope) for this problem can be used on either {eq}`eq:nudef` or {eq}`eq:nuequiv`:
 
 ```{math}
 \begin{aligned}
@@ -186,7 +184,6 @@ To begin interpreting this equation, consider first the case where the costs of 
 
 ```{math}
 \begin{aligned}
-% \kPriceAfterITC_{t+1}\Discount & = \Discount \daleth \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) + \kPriceAfterITC_{t+2}\Discount].
 \kPriceAfterITC_{t+1} & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) + \daleth \kPriceAfterITC_{t+2}\Discount].
 \end{aligned}
 ```
@@ -202,7 +199,7 @@ Simplifying further, suppose that capital prices are constant at {math}`\kPrice_
 \end{aligned}
 ```
 
-This says that the cost of buying one unit of capital, {math}`\kPriceAfterITC`, is equal to the opportunity cost in lost interest plus the value lost to depreciation, {math}`(\rfree+\depr)`, which must match the (after-tax) payoff from ownership of that capital. This corresponds exactly to the formula for the equilibrium cost of capital in the [](#sec:HallJorgenson) model: In the presence of an investment tax credit at rate {math}`\itc`, the after-tax price of capital is {math}`\kPriceAfterITC=\PostITC`, and the firm will adjust its holdings of capital to the point where
+This says that the cost of buying one unit of capital, {math}`\kPriceAfterITC`, is equal to the opportunity cost in lost interest plus the value lost to depreciation, {math}`(\rfree+\depr)`, which must match the (after-tax) payoff from ownership of that capital. This corresponds exactly to the formula for the equilibrium cost of capital in the [Hall-Jorgenson](#sec:HallJorgenson) model: In the presence of an investment tax credit at rate {math}`\itc`, the after-tax price of capital is {math}`\kPriceAfterITC=\PostITC`, and the firm will adjust its holdings of capital to the point where
 
 ```{math}
 \begin{aligned}
@@ -218,13 +215,12 @@ Now define {math}`\vk_{t} \equiv \vFirm_{t}^{k}` as the marginal value to the fi
 \begin{aligned}
 \vk_{t} & = \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\Discount+\Discount \daleth \Ex_{t}[\vk_{t+1}] \\
 & \approx \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\Discount+(1-\depr-\rfree) \Ex_{t}[\vk_{t}+\vk_{t+1}-\vk_{t}] \\
-% & = \TaxFree\fFunc^{k}(k_{t})+\Discount \Ex_{t}[\vk_{t}+(\vk_{t+1}-\vk_{t})] + (\daleth+j_{t}^{k})\kPriceAfterITC_{t+1}\Discount
 & = \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\Discount+(1-\depr-\rfree) (\vk_{t}+\Ex_{t}[\Delta \vk_{t+1}] ) \\
 (\rfree+\depr) \vk_{t} & \approx \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\Discount + \Ex_{t}[\Delta \vk_{t+1}]
 \end{aligned}
 ```
 
-where the last approximation uses {math}`\mathtt{SmallSmallZero}` in the form {math}`(\rfree+\depr) \Ex_{t}[\Delta \vk_{t+1}] \approx 0`. Equation {eq}`eq:lambdadyn` can be rearranged as
+where the last approximation uses [SmallSmallZero](#fact:smallsmallzero) in the form {math}`(\rfree+\depr) \Ex_{t}[\Delta \vk_{t+1}] \approx 0`. Equation {eq}`eq:lambdadyn` can be rearranged as
 
 ```{math}
 :label: eq:Edl
@@ -275,7 +271,6 @@ which constitutes the implicit definition of a function
 
 ```{math}
 \begin{aligned}
-% 1+\iota_{t}\omega & = \q_{t+1}
 \pmb{\iota}(\q_{t+1}) & \equiv (\q_{t+1}-1)/\omega \\
 i_{t} & = (\pmb{\iota}(\q_{t+1})+\depr)k_{t}
 \end{aligned}
@@ -334,7 +329,6 @@ Now assuming that {math}`\Delta \q_{t+1}`, {math}`\nabla \kPriceAfterITC_{t+1}`,
 :label: eq:dq
 
 \begin{aligned}
-% (\rfree+\depr) \q_{t} & \approx \TaxFree\fFunc^{k}(k_{t})/\kPriceAfterITC_{t} + \q_{t+1} \nabla \kPriceAfterITC_{t+1} + \Ex_{t} \left[ \Delta \q_{t+1}\right]
 \Ex_{t} \left[ \Delta \q_{t+1}\right] & \approx (\rfree+\depr-\nabla \kPriceAfterITC_{t+1}) \q_{t} - [\TaxFree\fFunc^{k}(k_{t})/\kPriceAfterITC_{t}-j^{k}_{t}\Discount].
 \end{aligned}
 ```
@@ -346,7 +340,6 @@ Simplifying further, if the ITC is unchanging, and the pretax price of capital i
 
 \begin{aligned}
 \Ex_{t}[\Delta \q_{t+1}] & \approx \rfree \q_{t} - \fFunc^{k}(k_{t})/\TaxComb_{t} + j_{t}^{k}\Discount
-% \Delta k_{t+1} & = k_{t} \pmb{\iota}(\q_{t})
 \end{aligned}
 ```
 
@@ -362,7 +355,7 @@ combines the effects of the corporate tax and the investment tax credit into a s
 
 ### Results
 
-Figure {ref}`fig:PhaseDiag` presents two phase diagrams, one for {math}`k` and {math}`\vk` and one for {math}`k` and {math}`\q`.
+{numref}`fig:qMod-lPhaseDiag` and {numref}`fig:qMod-qPhaseDiag` present two phase diagrams, one for {math}`k` and {math}`\vk` and one for {math}`k` and {math}`\q`.
 
 For most purposes, {math}`\q` diagram is simpler, because our facts about the {math}`\iota` function imply that the {math}`\Delta k_{t+1} = 0` locus is always a horizontal line at {math}`\q = 1`. This is because {math}`\q=1` always corresponds to the circumstance in which the value of a unit of capital inside the firm, {math}`\vk`, matches the after-tax cost of a unit of capital, {math}`\kPriceAfterITC`; {math}`\q=1` is the only value of {math}`\q` at which the firm does not wish to change size ({math}`\Delta k_{t+1}=0`).
 
@@ -374,36 +367,17 @@ For appropriate choices of parameter values the problem satisfies the usual cond
 
 The {math}`\vk` diagram is virtually indistinguishable from the {math}`\q` diagram; the only difference is that the {math}`\Delta k_{t+1}` locus is located at the point {math}`\vk = \kPriceAfterITC` (i.e. the marginal value of investment is equal to the price of a unit of investment). The distinction between the diagrams reflects the fact that an increase in the investment tax credit will result in a rise in the steady-state value of {math}`k` which implies a fall in the pretax marginal product of capital.
 
-:::{note} Corporate Tax and Steady-State Capital
-Notice the interesting and important result that a change in the corporate tax rate {math}`\TaxFree` does *not* affect the steady-state marginal product of capital because it does not change the price of investment: That is, at the steady-state where {math}`j^{k}=0`, neglecting depreciation {eq}`eq:lambdadyn` implies that {math}`\Ex_{t}[\Delta \vk_{t+1}]=0` requires
 
-```{math}
-\begin{aligned}
-\rfree \vk & = \TaxFree \fFunc^{k}(\check{k})
-\end{aligned}
-```
-
-but since a change in {math}`\TaxFree` does not change {math}`\kPriceAfterITC` it must change the equilibrium {math}`\vk` one-for-one. Thus,
-
-```{math}
-\begin{aligned}
-\check{\vk} & = (\TaxFree/\rfree) \fFunc^{k}(\check{k})
-\end{aligned}
-```
-
-and an increase in {math}`\TaxFree` has no effect on {math}`\fFunc^{k}(\check{k})` and therefore no effect on {math}`\check{k}`.
-:::
-
-:::{figure} /content/figures/EntrepreneurPF/lPhaseDiag.png
+:::{figure} /content/figures/qModel/lPhaseDiag.png
 :name: fig:qMod-lPhaseDiag
 
-Phase Diagram for {math}`\vk`
+Phase diagram for {math}`\vk`
 :::
 
-:::{figure} /content/figures/EntrepreneurPF/qPhaseDiag.png
-:name: fig:PhaseDiag
+:::{figure} /content/figures/qModel/qPhaseDiag.png
+:name: fig:qMod-qPhaseDiag
 
-Phase Diagram for {math}`\q`
+Phase diagram for {math}`\q`
 :::
 
 (Dynamics)=
@@ -425,9 +399,13 @@ Obviously in order to get from an initial capital stock of {math}`\check{k}_{<}`
 
 So we can tell the story as follows. Suppose that leading up to period {math}`t` the firm was in its steady-state. When the productivity shock occurs, {math}`\fFunc^{k}` jumps up. {math}`j_{t}^{k}` had been zero (because the firm was at steady state), but now the firm wishes it had more capital because extra capital would reduce future adjustment costs (the firm knows that its old steady-state capital stock is now too small, so it will have to be engaging in {math}`\iota > 0` for a while), so {math}`j_{t}^{k}` becomes negative (that is, the firm knows that having more capital will reduce the adjustment costs associated with the higher investment that it will be undertaking). The combination {math}`\TaxCombInv \fFunc^{k}_{t} - j^{k}_{t} \Discount` therefore becomes a larger positive number, so at the initial level of {math}`\q` the RHS of {eq}`eq:qdyn` would imply {math}`\Ex_{t}[\Delta \q_{t+1}]` less than zero, so the new {math}`\Ex_{t}[\Delta \q_{t+1}]=0` locus must be higher (because the equilibrating value of {math}`\q` is higher for any {math}`k`). The saddle path is therefore also higher. So {math}`\q`, and therefore {math}`\iota`, jump up instantly when the new higher level of productivity is revealed, corresponding also to an immediate increase in the firm's share price (the marginal valuation of an additional unit of capital), since {math}`\TaxComb` has not changed.
 
-The phase diagrams with the saddle paths before and after the productivity increase together with the impulse response functions would be plotted here.
+The phase diagrams with the saddle paths before and after the productivity increase together with the impulse response functions are plotted in {numref}`fig:ProductivityIncrease`.
 
-<!-- Figure placeholder: ProductivityIncrease.png - to be generated from notebook -->
+:::{figure} /content/figures/qModel/ProductivityIncrease.png
+:name: fig:ProductivityIncrease
+
+Increase in productivity. Phase diagrams with saddle paths (dashed black and continuous red lines respectively pre and post the productivity increase) and impulse response functions.
+:::
 
 (Permanent-Tax-Cut)=
 ### A Permanent Tax Cut
@@ -449,13 +427,21 @@ Notice that the qualitative story is the same whether the change in {math}`\TaxC
 
 There is, however, one interesting distinction between a decrease in {math}`\TaxComb` due to a reduction in corporate taxes and a decrease caused by an increase in {math}`\itc`. Since {math}`\vk=\PostITC\q`, an increase in {math}`\itc` reduces {math}`\PostITC` and therefore reduces the equilibrium value of {math}`\vk`, while a change in {math}`\TaxFree` has no effect on equilibrium {math}`\vk`. This reflects a subtle distinction. {math}`\vk` is the after-tax marginal value of extra capital, and the equilibrium in this model will occur at the point where that marginal value is equal to the marginal cost. Changing {math}`\itc` changes that marginal cost, so it changes the equilibrium after-tax marginal value. Changing {math}`\TaxFree` does not change the marginal cost of capital, so the equilibrium *after-tax* marginal value of capital is unchanged. The marginal *product* of capital is lower after a tax cut (equilibrium {math}`\fFunc^{k}` is smaller), but that is exactly counterbalanced by the larger value of {math}`\TaxFree` so that {math}`\TaxFree\fFunc^{k}` is unchanged in the long run by the change in {math}`\TaxFree`.
 
-The phase diagrams with the saddle paths before and after the corporate tax reduction and the ITC increase, together with the impulse response functions, would be plotted here. Note that the {math}`\vk` saddle path actually jumps *downward* after the ITC increase. This is not an error; rather, recall that {math}`\vk` reflects marginal value of a unit of capital inside the firm, and recall that the *price* of purchasing that capital has gone down. Remembering that we are assuming that capital can move in and out of the firm, this has the surprising consequence that, for the original owners of the firm, the ITC is *bad* news because it means that the capital they own has a lower value (its value is ultimately tied to the price of capital, which has gone down). For a potential new shareholder, the investment tax credit means that you can obtain ownership of a share of the firm's capital by buying the capital at the ITC-discounted price, paying the adjustment costs, then giving the capital to the firm. Thus, the ITC has the effect of increasing the absolute value of a dollar of money relative to the value of a unit of capital inside the firm. So in this special case, you should think of the ITC as something that provides a discount to purchasing shares or capital {math}`\vk`. While the new saddle path for {math}`\vk` is lower than the old one, that does not reflect the adjustment for the fact that the new capital is being purchased at a cheaper price. The dynamics of {math}`\q`, in this case, are more intuitive than those of {math}`\vk`: {math}`\q` unambiguously increases, reflecting the fact that the value of capital to the firm exceeds its new (cheaper) cost.
+The phase diagrams with the saddle paths before and after the corporate tax reduction and the ITC increase, together with the impulse response functions, are plotted respectively in {numref}`fig:CorporateTaxReduction` and {numref}`fig:ITCIncrease`. Note that the {math}`\vk` saddle path actually jumps *downward* after the ITC increase. This is not an error; rather, recall that {math}`\vk` reflects marginal value of a unit of capital inside the firm, and recall that the *price* of purchasing that capital has gone down. Remembering that we are assuming that capital can move in and out of the firm, this has the surprising consequence that, for the original owners of the firm, the ITC is *bad* news because it means that the capital they own has a lower value (its value is ultimately tied to the price of capital, which has gone down). For a potential new shareholder, the investment tax credit means that you can obtain ownership of a share of the firm's capital by buying the capital at the ITC-discounted price, paying the adjustment costs, then giving the capital to the firm. Thus, the ITC has the effect of increasing the absolute value of a dollar of money relative to the value of a unit of capital inside the firm. So in this special case, you should think of the ITC as something that provides a discount to purchasing shares or capital {math}`\vk`. While the new saddle path for {math}`\vk` is lower than the old one, that does not reflect the adjustment for the fact that the new capital is being purchased at a cheaper price. The dynamics of {math}`\q`, in this case, are more intuitive than those of {math}`\vk`: {math}`\q` unambiguously increases, reflecting the fact that the value of capital to the firm exceeds its new (cheaper) cost.
 
 In sum: In terms of effects on capital, the outcome from a corporate tax cut and an ITC tax cut are similar, but the analytics of {math}`\vk` are different, because the former affects the after-tax interest rate while the latter affects the after-tax cost of capital.
 
-<!-- Figure placeholder: CorporateTaxReduction.png - to be generated from notebook -->
+:::{figure} /content/figures/qModel/CorporateTaxReduction.png
+:name: fig:CorporateTaxReduction
 
-<!-- Figure placeholder: ITCIncrease.png - to be generated from notebook -->
+Corporate tax reduction. Phase diagrams with saddle paths (dashed black and continuous red lines respectively pre and post the corporate tax reduction) and impulse response functions.
+:::
+
+:::{figure} /content/figures/qModel/ITCIncrease.png
+:name: fig:ITCIncrease
+
+ITC increase. Phase diagrams with saddle paths (dashed black and continuous red lines respectively pre and post the ITC increase) and impulse response functions.
+:::
 
 (Future-Shock-To-Productivity)=
 ### A Future Shock to Productivity
@@ -495,4 +481,4 @@ The steady-state effects on {math}`\vk` are of course determined by the same con
 
 ## More Figures
 
-Figures for a variety of other experiments have been constructed using the [notebook](https://github.com/econ-ark/DARKolo/blob/master/chimeras/qModel/qModel-Template-Section-Figures.ipynb). Such figures are contained in the "Figures" subdirectory.
+Figures for a variety of other experiments, including changes in the interest rate, can be constructed using the [notebook](https://github.com/econ-ark/DARKolo/blob/master/chimeras/qModel/qModel-Template-Section-Figures.ipynb).

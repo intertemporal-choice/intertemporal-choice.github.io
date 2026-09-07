@@ -1,5 +1,6 @@
 (sec:GenAcctsAndGov)=
 # Generational Accounts and the Government
+
 ## The Government Budget Constraint
 
 Consider a government that raises taxes {math}`\TaxLev_{t}`, makes expenditures {math}`\GovSpend_{t}`, and has an outstanding stock of debt {math}`\Debt_{t}` at the beginning of period {math}`t`, on which it must pay interest at rate {math}`\rfree_{t}`. The government can run a deficit only by raising funds via the issuing of new bonds (the alternative, printing money, leads to inflation and is the subject of monetary economics).
@@ -149,11 +150,11 @@ and assume there is constant population growth, {math}`\PopGro=L_{t+1}/L_{t}`. I
 \end{aligned}
 ```
 
-Not only does this prove that it is *possible* for the Social Security system to pay a rate of return equal to the rate of population growth - it proves that the *only* rate of return that is consistent with constant per-capita taxes on the young is a rate of return of {math}`\PopGro`. In an economy with perpetual population growth, it is not only possible but *necessary* to pay a positive return.
+Not only does this prove that it is *possible* for the Social Security system to pay a rate of return equal to the rate of population growth; it proves that the *only* rate of return that is consistent with constant per-capita taxes on the young is a rate of return of {math}`\PopGro`. In an economy with perpetual population growth, it is not only possible but *necessary* to pay a positive return.
 
 ### Effects of Productivity Growth and Population Growth
 
-Suppose there is wage growth {math}`{\WGro}` betwen {math}`t` and {math}`t+1`, and suppose that workers contribute a constant *percentage* of their incomes to the Social Security system, {math}`\surplus_{1,t} = \zeta \Wage_{1,t}`. In this case it is possible to earn a rate of return on SS contributions equal to the product of the growth factor for wages and the growth factor for population:
+Suppose there is wage growth {math}`{\WGro}` between {math}`t` and {math}`t+1`, and suppose that workers contribute a constant *percentage* of their incomes to the Social Security system, {math}`\surplus_{1,t} = \zeta \Wage_{1,t}`. In this case it is possible to earn a rate of return on SS contributions equal to the product of the growth factor for wages and the growth factor for population:
 
 ```{math}
 \begin{aligned}

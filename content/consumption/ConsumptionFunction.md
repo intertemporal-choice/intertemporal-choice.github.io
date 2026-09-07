@@ -1,5 +1,6 @@
 (sec:ConsumptionFunction)=
 # Consumption Functions and the Permanent Income Hypothesis
+
 This section derives the consumption function (the relation between consumption spending and the consumer's economic circumstances) for an optimizing consumer with Certainty Equivalent (CEQ) preferences like those assumed by {cite:t}`hallRandomWalk` and with an income process that has a purely transitory and a purely permanent component.
 
 The consumer wants to
@@ -16,7 +17,7 @@ subject to the constraint
 
 where {math}`\bRat_{t}` is the consumer's beginning-of-period bank balances, {math}`\yRat_{t}` is current labor income, {math}`\Rfree=(1+\rfree)` is the constant interest factor and {math}`\Discount` is the time preference factor. Suppose the consumer has quadratic utility {math}`\uFunc({c}) = -(1/2)(\cancel{c}-c)^{2}` where {math}`\cancel{c}` is the "bliss point" level of consumption. Assume further that {math}`\Discount \Rfree=1`.
 
-Under these circumstances, the [](#sec:RandomWalk) shows that consumption will follow a random walk,
+Under these circumstances, the [random walk](#sec:RandomWalk) section shows that consumption will follow a random walk,
 
 ```{math}
 :label: eq:ConsFunc-rwc

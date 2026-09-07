@@ -34,15 +34,6 @@ where {math}`x_{t}` can differ from income {math}`y_{t}` because this might be a
 
 The price of leisure is {math}`\Wage_{t}` (your income is lower by this amount for every extra unit of time you spend not working) and the price of consumption is 1, so the first order condition from the optimal choice of leisure says that the ratio of the marginal utility of leisure to the marginal utility of consumption should be
 
-:::{exercise}
-:label: ex:foc-derive
-Derive and explain the first order condition
-:::
-
-:::{solution} ex:foc-derive
-:class: dropdown
-The price of leisure is {math}`\Wage_{t}` (your income is lower by this amount for every extra unit of time you spend not working) and the price of consumption is 1, so the first order condition from the optimal choice of leisure says that the ratio of the marginal utility of leisure to the marginal utility of consumption should be
-
 ```{math}
 :label: eq:CLS-focwucul
 
@@ -83,7 +74,6 @@ for which the FOC is
 ```
 
 This is just the classic condition that says that the ratio of prices of two goods should equal the ratio of their marginal utilities, which applies in any standard microeconomic problem. For a quantitative comparison of how this condition manifests itself in the U.S. and Europe, see {cite:t}`zwiebelLeisure`.
-:::
 
 Now, assume there is an "outer" utility function {math}`{f}(\bullet)` which depends on a Cobb-Douglas aggregate of consumption and leisure
 
@@ -91,13 +81,6 @@ Now, assume there is an "outer" utility function {math}`{f}(\bullet)` which depe
 \uFunc(c_{t},\leisure_{t}) = {f}\left(c_{t}^{1-\leiShare}\leisure_{t}^{\leiShare}\right)
 ```
 
-:::{exercise}
-:label: ex:cobb-douglas
-Show that with Cobb-Douglas preferences, optimal leisure satisfies {math}`\leisure_{t} \Wage_{t} = c_{t} \eta` for {math}`\eta=\leiShare/(1-\leiShare)`, and that utility can therefore be written as {math}`{f}((\Wage_{t}/\eta)^{-\leiShare}c_{t})`.
-:::
-
-:::{solution} ex:cobb-douglas
-:class: dropdown
 The inner function has the property that {math}`\leisure_{t} \Wage_{t} = c_{t} \eta` for {math}`\eta=\leiShare/(1-\leiShare)`, which implies utility can be written
 
 ```{math}
@@ -131,20 +114,14 @@ so
 & = {f}((\Wage_{t}/\eta)^{-\leiShare}c_{t})
 \end{aligned}
 ```
-:::
 
 Over long periods of time as wages have risen in the U.S., the proportion of time spent working has not changed very much (an old stylized fact recently reconfirmed by {cite:t}`rameyFrancisLeisure`). Similarly, across countries with vastly different levels of per capita income, or across people with vastly different levels of wages, the amount of variation in {math}`\leisure_{t}` is small compared to the size of the difference in wages.
 
 These facts motivate the choice of utility function; {cite:t}`kpr:prodn` show that other choices of utility functions produce trends, but no such trends are evident in the data.
 
-:::{exercise}
-:label: ex:trends-leisure
-Explain how these facts motivate the choice of utility function; {cite:t}`kpr:prodn` show that other choices of utility functions produce trends, but no such trends are evident in the data. Hint: To see why the trends are produced, think about a model in which the lifetime lasts only a single period, with a lifetime budget constraint {math}`\Wage_{t} = c_{t}+\leisure_{t}\Wage_{t}`.
-:::
+To see why the trends are produced, think about a model in which the lifetime lasts only a single period, with a lifetime budget constraint {math}`\Wage_{t} = c_{t}+\leisure_{t}\Wage_{t}`.
 
-:::{solution} ex:trends-leisure
-:class: dropdown
-Using the hint along with the result, we can solve for the level of consumption over the lifetime as
+We can solve for the level of consumption over the lifetime as
 
 ```{math}
 \begin{aligned}
@@ -163,7 +140,6 @@ implying that leisure is
 ```
 
 which is a constant (i.e. the amount of leisure does not trend up or down with the level of wages). Obviously this is what motivates the choice of an "inner" utility function that is Cobb-Douglas: For such a function, people will choose to spend constant proportions of their resources on consumption and leisure as wages rise.
-:::
 
 Now consider a two period lifetime version of the model in which each period of life is characterized by a utility function of the same form and the lifetime optimization problem is
 
@@ -181,9 +157,11 @@ subject to a lifetime budget constraint
 c_{2} = (\Wage_{1}(1-\leisure_{1})-c_{1})\Rfree + (1-\leisure_{2}) \Wage_{2}
 ```
 
-If the "outer" utility function is of the CRRA form {math}`{f}(\chi) = \chi^{1-\CRRA}/(1-\CRRA)` then the FOC with respect to {math}`c_{1}` implies that
+If the "outer" utility function is of the CRRA form {math}`{f}(\chi) = \chi^{1-\CRRA}/(1-\CRRA)`, the first order condition with respect to {math}`c_{1}` implies that
 
 ```{math}
+:label: eq:CLS-CRRAEuler
+
 \begin{aligned}
 (\Wage_{1}/\eta)^{-\leiShare} {f}^{\prime}_{1} & = \Rfree \DiscFac (\Wage_{2}/\eta)^{-\leiShare} {f}^{\prime}_{2} \\
 \Wage_{1}^{-\leiShare} (c_{1}(\Wage_{1}/\eta)^{-\leiShare})^{-\CRRA} & = \Rfree\DiscFac \Wage_{2}^{-\leiShare} (c_{2}(\Wage_{2}/\eta)^{-\leiShare})^{-\CRRA} \\
@@ -192,17 +170,20 @@ c_{2}/c_{1} & = (\Rfree\DiscFac)^{1/\CRRA} (\Wage_{2}/\Wage_{1})^{-\leiShare(1-\
 \end{aligned}
 ```
 
-:::{exercise}
-:label: ex:log-utility
-Show that this implies that {math}`c_{2}/c_{1} = \Rfree\DiscFac`. To see why, start by noting that the budget constraint can be rewritten
-:::
+so in general the growth rate of consumption depends on the growth rate of wages. From now on, assume that the "outer" utility function is logarithmic, {math}`{f}(\chi) = \log \chi`, which is the {math}`\CRRA \rightarrow 1` limit of {eq}`eq:CLS-CRRAEuler`. The wage term then drops out and consumption growth depends only on the interest factor and the time preference factor,
 
-:::{solution} ex:log-utility
-:class: dropdown
+```{math}
+:label: eq:CLS-logEuler
+
+c_{2}/c_{1} = \Rfree\DiscFac.
+```
+
+To obtain this result directly, start by noting that the lifetime budget constraint can be rewritten
+
 ```{math}
 \begin{aligned}
 c_{2} & = (\Wage_{1}-\overbrace{\leisure_{1}\Wage_{1}}^{=\eta c_{1}}-c_{1})\Rfree + \Wage_{2} - \overbrace{\Wage_{2}\leisure_{2}}^{\eta c_{2}} \\
-0 & = (\Wage_{1}-(1+\eta) c_{1})R+\Wage_{2}-(1+\eta) c_{2} \\
+0 & = (\Wage_{1}-(1+\eta) c_{1})\Rfree+\Wage_{2}-(1+\eta) c_{2} \\
 c_{2} & = (\Rfree \Wage_{1}+\Wage_{2})/(1+\eta)- \Rfree c_{1}
 \end{aligned}
 ```
@@ -221,49 +202,39 @@ with FOC
 c_{2}/c_{1} & = \Rfree\DiscFac.
 \end{aligned}
 ```
-:::
 
-:::{exercise}
-:label: ex:solve-consumption
-Use IBC to solve for the level of consumption {math}`c_{1}`
-:::
+The *level* of consumption follows from the intertemporal budget constraint. Substituting {eq}`eq:CLS-logEuler`, the present discounted value of consumption spending is
 
-:::{solution} ex:solve-consumption
-:class: dropdown
 ```{math}
 \begin{aligned}
-PD\VFunc_{1}(c) & = c_{1}(1+R^{-1}(\Rfree \DiscFac)) \\
+\PDV_{1}(c) & = c_{1}(1+\Rfree^{-1}(\Rfree \DiscFac)) \\
 & = c_{1}(1+\DiscFac)
 \end{aligned}
 ```
 
-```{math}
-\begin{aligned}
-PD\VFunc_{1}(y) & = \Wage_{1}(1-\leisure_{1}) + R^{-1}(\Wage_{2}(1-\leisure_{2})) \\
-& = \Wage_{1}+R^{-1}\Wage_{2}-\eta (c_{1}+R^{-1} c_{2})
-\end{aligned}
-```
+while the present discounted value of labor income is
 
 ```{math}
 \begin{aligned}
-PD\VFunc_{1}(c) & = PD\VFunc_{1}(y) \\
-c_{1}(1+\DiscFac)(1+\eta) & = \Wage_{1}+R^{-1}\Wage_{2} \equiv h_{1} \\
+\PDV_{1}(y) & = \Wage_{1}(1-\leisure_{1}) + \Rfree^{-1}(\Wage_{2}(1-\leisure_{2})) \\
+& = \Wage_{1}+\Rfree^{-1}\Wage_{2}-\eta (c_{1}+\Rfree^{-1} c_{2})
+\end{aligned}
+```
+
+where the second line uses {math}`\Wage_{t}\leisure_{t} = \eta c_{t}` to replace spending on leisure. Equating the two and defining human wealth {math}`h_{1}` as the present discounted value of the wage stream,
+
+```{math}
+\begin{aligned}
+\PDV_{1}(c) & = \PDV_{1}(y) \\
+c_{1}(1+\DiscFac)(1+\eta) & = \Wage_{1}+\Rfree^{-1}\Wage_{2} \equiv h_{1} \\
 c_{1} & = h_{1}/((1+\DiscFac)(1+\eta))
 \end{aligned}
 ```
-:::
 
-:::{exercise}
-:label: ex:fisherian-separation
-Show that in this model, the profile of labor supply satisfies
-```{math}
-(1-\labor_{2})/(1-\labor_{1}) = \Rfree\DiscFac \Wage_{1}/\Wage_{2}
-```
-and explain why this makes sense in economic terms.
-:::
+so consumption when young is a fixed fraction of human wealth, and the {math}`(1+\eta)` term in the denominator appears because a constant share of resources goes to leisure rather than to consumption goods.
 
-:::{solution} ex:fisherian-separation
-:class: dropdown
+Now we want to compare this to the two period lifetime model with no labor supply decision. In that model, the profile of consumption was unrelated to the profile of labor income over the lifetime, so "Fisherian Separation" held. In this model, the Fisherian Separation proposition is that the profile of {math}`c` is unrelated to the profile of wages {math}`\Wage`; however, the lifetime profile of *leisure spending* is identical to the lifetime profile of consumption spending,
+
 ```{math}
 :label: eq:LabSup
 
@@ -274,21 +245,12 @@ and explain why this makes sense in economic terms.
 \end{aligned}
 ```
 so leisure moves in the opposite direction from wages, which means labor supply {math}`\labor = 1-z` moves in the same direction as wages. This makes intuitive sense: You want to work harder when work pays better.
-:::
 
-To make further progress, assume {math}`\Rfree\DiscFac=1` and define wage growth as {math}`\WGro=\Wage_{2}/\Wage_{1}=(1+\wGro)`. Assume that young people tend to work about half of their waking hours {math}`\labor_{1}=(1/2)` (remember vacations, weekends, etc!).
+To make further progress, assume {math}`\Rfree\DiscFac=1` and define wage growth as {math}`\WGro=\Wage_{2}/\Wage_{1}=(1+\wGro)`. Assume that young people tend to work about half of their waking hours {math}`\labor_{1}=(1/2)` (remember vacations, weekends, etc!). Note that under these assumptions we can rewrite {eq}`eq:LabSup` as
 
-:::{exercise}
-:label: ex:rewrite-labsup
-Show that under these assumptions we can rewrite {eq}`eq:LabSup` as
 ```{math}
-\labor_{2} = (2 \wGro + 1)/2(1+\wGro)
-```
-:::
+:label: eq:LabSupNewer
 
-:::{solution} ex:rewrite-labsup
-:class: dropdown
-```{math}
 \begin{aligned}
 (1-\labor_{2})\WGro & = (1-\labor_{1}) \\
 \wGro & = (1+\wGro) \labor_{2} - \labor_{1} \\
@@ -296,36 +258,20 @@ Show that under these assumptions we can rewrite {eq}`eq:LabSup` as
 & = (2 \wGro + 1)/2(1+\wGro)
 \end{aligned}
 ```
-:::
 
 Empirically, wages in the U.S. tend to grow between youth and middle age by a factor of {math}`\WGro \approx 2-4` (depending on occupation and education), so {math}`\wGro \approx 1-3`, but labor supply is about the same for 55 year olds as for 25 year olds, {math}`\labor_{2} \approx \labor_{1}`.
 
-:::{exercise}
-:label: ex:wgro-2
-Suppose for analysis that {math}`\wGro=2`. Discuss the consistency of the theory with this evidence.
-:::
-
-:::{solution} ex:wgro-2
-:class: dropdown
-Suppose for analysis that {math}`\wGro=2`. Then {eq}`eq:LabSup` becomes
+Suppose for analysis that {math}`\wGro=2`. Then {eq}`eq:LabSupNewer` becomes
 ```{math}
 \labor_{2} = (5/6)
 ```
-so the theory says middle aged people work more than young people by {math}`(2/6)/(3/6)=2/3`. This is of course absurd - it implies that middle aged people would barely have time to breathe because they were working so hard.
-:::
+so the theory says middle aged people work more than young people by {math}`(2/6)/(3/6)=2/3`. This is of course absurd: it implies that middle aged people would barely have time to breathe because they were working so hard.
 
 One objection to this analysis is that it assumed {math}`\Rfree\DiscFac=1`, which implies that consumption when young equals consumption when middle aged. In fact, on average consumption grows by about the same amount as wages between youth and middle age. So perhaps the right assumption is {math}`\Rfree\DiscFac/\WGro = 1`. Under this assumption, we obviously have {math}`\labor_{2}=\labor_{1}`, matching the empirical fact.
 
 However, there is predictably different wage growth across occupations and education groups. Write {math}`\WGro_{i}=\WGro\Gamma_{i}`, where {math}`\Gamma_{i}` now will differ for people in different occupations indexed by {math}`i`, and plausible values range from {math}`\Gamma=0.5` (manual laborers) to {math}`\Gamma=1.5` (doctors), leaving the average value of {math}`\Gamma` across the two groups at {math}`\Gamma=1`. It is an empirical fact that the magnitude of variations in labor supply across these groups is rather small, both in youth and in middle age.
 
-:::{exercise}
-:label: ex:varying-categories
-Assuming {math}`\Rfree\DiscFac/\WGro=1`, discuss whether the theory can now explain this fact.
-:::
-
-:::{solution} ex:varying-categories
-:class: dropdown
-rewrite {eq}`eq:LabSup` for each occupation as
+Assuming {math}`\Rfree\DiscFac/\WGro=1`, rewrite {eq}`eq:LabSup` for each occupation as
 ```{math}
 (1-\labor_{2})\Gamma_{i} = (1-\labor_{1})
 ```
@@ -343,4 +289,3 @@ implying {math}`\labor_{2} = 0` - manual laborers would work zero hours. However
 \end{aligned}
 ```
 so doctors would be working much harder when middle aged than when young. Thus, the theory says that if labor supplies are equal when young (which is approximately true), they should differ drastically by middle age (which is not remotely true). That is, lifetime labor supply does not seem to respond very much to predictable variation in lifetime wages. This is described in the literature as a "small intertemporal elasticity of labor supply."
-:::

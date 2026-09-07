@@ -1,5 +1,6 @@
 (sec:EntrepreneurPF)=
 # An Entrepreneur's Problem Under Perfect Foresight
+
 Consider a firm characterized by the following:
 
 | Symbol | Description |
@@ -11,9 +12,7 @@ Consider a firm characterized by the following:
 | {math}`\xpend_{t} = \inv_{t}+\adj_{t}` | Expenditures (purchases plus adjustment costs) on investment |
 | {math}`\Discount=1/\Rfree` | Discount factor for future profits (inverse of interest factor) |
 
-**With taxes:**[^tax-version]
-
-[^tax-version]: The model can include corporate taxes. With taxes, additional parameters are: {math}`\TaxCorp` (tax rate on corporate earnings), {math}`\TaxFree = 1-\TaxCorp` (portion of earnings untaxed), {math}`\rev_{t} = \fFunc(\kap_{t})\TaxFree` (after tax revenues), {math}`\itc` (investment tax credit), {math}`\kPriceAfterITC=\PostITC = 1-\itc` (cost of 1 unit of investment after ITC), and {math}`\xpend_{t} = (\inv_{t}+\adj_{t})\kPriceAfterITC` (after-tax expenditures on investment).
+Taxes are left out here to keep the algebra transparent; the [{math}`\q` model](#sec:qModel) section works through the same problem with corporate taxes and an investment tax credit.
 
 Suppose that the firm's goal is to pick the sequence {math}`\iFunc_{t}` that solves:
 
@@ -22,8 +21,6 @@ Suppose that the firm's goal is to pick the sequence {math}`\iFunc_{t}` that sol
   \vFirm(\kap_{t}) & =  \max_{\{\iFunc\}_{t}^{\infty}}~\sum_{n=0}^{\infty} \Discount^{n} \left(f_{t+n}-\inv_{t+n}-\adj_{t+n}\right)
 \end{aligned}\end{gathered}
 ```
-
-**With taxes:** {math}`\vFirm(\kap_{t}) = \max_{\{\iFunc\}_{t}^{\infty}}~\sum_{n=0}^{\infty} \Discount^{n} \left(\rev_{t+n}-\xpend_{t+n}\right)`
 
 subject to the transition equation for capital,
 
@@ -37,21 +34,8 @@ subject to the transition equation for capital,
 
 where {math}`\DeprFac = (1-\depr)` is the amount of capital left after one period of depreciation at rate {math}`\depr`.[^timing-note] {math}`\vFirm_{t}` is the value of the profit-maximizing firm: If capital markets are efficient this is the equity value that the firm would command if somebody wanted to buy it.
 
-[^timing-note]: There are some small differences between the formulation of the model here and in the [](#sec:qModel). Here, investment costs are paid at the time of investment and the depreciation factor applies to {math}`(\kap_{t}+\inv_{t})` rather than just {math}`\kap_{t}`. These changes simplify the computational solution without changing any key results.
+[^timing-note]: There are some small differences between the formulation of the model here and in the [marginal q model](#sec:qModel) section. Here, investment costs are paid at the time of investment and the depreciation factor applies to {math}`(\kap_{t}+\inv_{t})` rather than just {math}`\kap_{t}`. These changes simplify the computational solution without changing any key results.
 
-:::{exercise}
-:label: ex:firm-bellman
-Show that the Bellman equation for the firm can be derived as follows:
-
-```{math}
-\begin{gathered}\begin{aligned}
-  \vFirm_{t}(\kap_{t}) & =  \max_{\{\inv_{t}\}}~ f_{t}-\inv_{t}-\adj_{t}+\Discount \vFirm_{t+1}\left((\kap_{t}+\inv_{t})\DeprFac\right)
-\end{aligned}\end{gathered}
-```
-:::
-
-:::{solution} ex:firm-bellman
-:class: dropdown
 The firm's Bellman equation can be written:
 
 ```{math}
@@ -61,25 +45,9 @@ The firm's Bellman equation can be written:
 \\ & =  \max_{\{\inv_{t}\}}~ f_{t}-\inv_{t}-\jFunc(\inv_{t},\kap_{t})+\Discount \vFirm_{t+1}\left((\kap_{t}+\inv_{t})\DeprFac\right)
 \end{aligned}\end{gathered}
 ```
-:::
 
 Define {math}`\adj_{t}^{\inv}` as the derivative of adjustment costs with respect to the level of investment.
 
-:::{exercise}
-:label: ex:inv-foc
-Show that the first order condition for optimal investment implies
-
-```{math}
-\begin{gathered}\begin{aligned}
-1+j^{\inv}_{t} & =  \DeprFac\Discount \vFirm_{t+1}^{\kap}(\kap_{t+1})
-\end{aligned}\end{gathered}
-```
-
-and provide a verbal interpretation of the condition.
-:::
-
-:::{solution} ex:inv-foc
-:class: dropdown
 The first order condition for optimal investment implies:
 
 ```{math}
@@ -92,23 +60,7 @@ The first order condition for optimal investment implies:
 ```
 
 In words: The marginal cost of an additional unit of investment (the LHS) should be equal to the discounted marginal value of the resulting extra capital (the RHS).
-:::
 
-**With taxes:** {math}`(1+j^{\inv}_{t})\kPriceAfterITC = \DeprFac\Discount \vFirm_{t+1}^{\kap}(\kap_{t+1})`, where the LHS is the after-tax marginal cost of investment.
-
-:::{exercise}
-:label: ex:inv-euler
-Now use the Envelope theorem to derive the Euler equation for investment
-
-```{math}
-\begin{gathered}\begin{aligned}
- (1+\adj_{t}^{\inv})  & = \DeprFac\Discount \left[ \fFunc^{\kap}(\kap_{t+1})+(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap})\right]
-\end{aligned}\end{gathered}
-```
-:::
-
-:::{solution} ex:inv-euler
-:class: dropdown
 The Envelope theorem says
 
 ```{math}
@@ -131,29 +83,11 @@ where the underbraced term follows from {eq}`eq:Entrep-iFOC`. So the correspondi
 ```
 
 which is the Euler equation for investment.
-:::
-
-**With taxes:** {math}`(1+\adj_{t}^{\inv})\kPriceAfterITC = \DeprFac\Discount \left[ \TaxFree\fFunc^{\kap}(\kap_{t+1})+(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap})\kPriceAfterITC\right]`
 
 ## Steady State
 
 Now suppose that a steady state exists in which the capital stock is at its optimal level and is not adjusting, so costs of adjustment are zero: {math}`\adj_{t}=\adj_{t+1}=j^{\inv}_{t}=j^{\inv}_{t+1}=j^{\kap}_{t}=j^{\kap}_{t+1}=0`.
 
-:::{exercise}
-:label: ex:ss-capital
-Use the investment Euler equation to show that the steady state level of the capital stock {math}`\check{k}` satisfies the equation below, and provide an intuitive interpretation of the equation.
-
-```{math}
-:label: eq:sskbar
-
-\begin{gathered}\begin{aligned}
- \Rfree & =  \DeprFac (1+\fFunc^{\kap}(\check{k}))
-\end{aligned}\end{gathered}
-```
-:::
-
-:::{solution} ex:ss-capital
-:class: dropdown
 If {math}`j^{\inv}_{t} = j^{\inv}_{t+1} = j^{\kap}_{t+1}` then {eq}`eq:Entrep-iEuler` reduces to
 
 ```{math}
@@ -166,29 +100,11 @@ If {math}`j^{\inv}_{t} = j^{\inv}_{t+1} = j^{\kap}_{t+1}` then {eq}`eq:Entrep-iE
 ```
 
 so that the capital stock is equal to the value that causes its marginal product to match the interest factor, after compensating for depreciation.
-:::
-
-**With taxes:** {math}`\kPriceAfterITC\Rfree = \DeprFac (\kPriceAfterITC+\TaxFree\fFunc^{\kap}(\check{k}))`, so the capital stock equals the value that causes its after-tax marginal product to match the interest factor.
 
 ## Phase Diagram Analysis
 
 Another way to analyze this problem is in terms of the marginal value of capital, {math}`\ek_{t} \equiv \vFirm_{t}^{\kap}(\kap_{t})`.
 
-:::{exercise}
-:label: ex:phase-diagram
-Show that in the vicinity of the steady state, assuming that adjustment costs are approximately zero, the equation for {math}`\ek` will be
-
-```{math}
-\begin{gathered}\begin{aligned}
-\ek_{t} & =  \frac{\fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Delta \ek_{t+1}}{(1-\Discount\DeprFac)}
-\end{aligned}\end{gathered}
-```
-
-and use this equation along with the transition equation for capital to draw a phase diagram in {math}`(\kap,\ek)` space for this model. Be sure to explain why the {math}`\Delta \ek_{t+1}=0` locus is downward sloping in the vicinity of the steady state.
-:::
-
-::::{solution} ex:phase-diagram
-:class: dropdown
 Rewrite {eq}`eq:iEnvelope` as
 
 ```{math}
@@ -220,7 +136,6 @@ The phase diagram is depicted in {numref}`fig:Entrep-lPhaseDiag`.
 
 Phase diagram showing the {math}`\Delta \ek=0` and {math}`\Delta \kap=0` loci.
 :::
-::::
 
 The steady state of the model will be the point at which {math}`\kap_{t+1}=\kap_{t}=\check{\kap}`, implying from {eq}`eq:kAccum` a steady-state investment rate of
 
@@ -263,21 +178,6 @@ We call the maximizer running this firm the "entrepreneur." The entrepreneur's l
 
 That is, next period the firm's money is next period's profits plus the return factor on the money at the beginning of this period, minus this period's investment and associated adjustment costs, minus dividends paid out (which, having been paid out, are no longer part of the firm's money).
 
-**With taxes:** {math}`m_{t+1} = \rev_{t+1}+\left(m_{t}-\xpend_{t}-\cRat_{t}\right)\Rfree`
-
-:::{exercise}
-:label: ex:ent-bellman
-Show that the entrepreneur's Bellman equation can now be written
-
-```{math}
-\begin{gathered}\begin{aligned}
-  \vFunc_{t}(\kap_{t},m_{t}) & =  \max_{\{\inv_{t},\cRat_{t}\}}~~\utilFunc(\cRat_{t}) +\Discount \vFunc_{t+1}(\kap_{t+1},m_{t+1})
-\end{aligned}\end{gathered}
-```
-:::
-
-:::{solution} ex:ent-bellman
-:class: dropdown
 The entrepreneur's Bellman equation can now be written
 
 ```{math}
@@ -295,28 +195,14 @@ The entrepreneur's Bellman equation can now be written
 \\ & =  \max_{\{\inv_{t},\cRat_{t}\}}~~\utilFunc(\cRat_{t})+\Discount \vFunc_{t+1}(\kap_{t+1},m_{t+1}).
 \end{aligned}\end{gathered}
 ```
-:::
 
 Assume that {math}`\fFunc` and {math}`\jFunc` do not depend directly on {math}`m_{t}`. That is, their partial derivatives with respect to {math}`m_{t}` are zero.
 
 ## Euler Equation for Dividends
 
-:::{exercise}
-:label: ex:div-euler
-Use the first order condition with respect to dividends and the Envelope theorem with respect to money to show that the Euler equation for dividends is
-
-```{math}
-\begin{gathered}\begin{aligned}
- \uP(\cRat_{t}) & =  \Rfree\Discount \uP(\cRat_{t+1}) .
-\end{aligned}\end{gathered}
-```
-:::
-
-:::{solution} ex:div-euler
-:class: dropdown
 Then we will have
 
-<!-- Version where it's $\uP(d)$: -->
+(Here {math}`\cRat_{t}` is the firm's dividend payout, so {math}`\uP(\cRat_{t})` is the marginal utility of a dividend dollar.)
 
 FOC wrt {math}`\cRat_{t}`:
 
@@ -346,17 +232,9 @@ and combining the FOC with the Envelope theorem we get the usual
 ```
 
 where the last line follows because we have assumed {math}`\Rfree\Discount=1`.
-:::
 
 ## Alternative Formulation
 
-:::{exercise}
-:label: ex:alt-formulation
-Next explain why the value function can be rewritten as shown below.
-:::
-
-:::{solution} ex:alt-formulation
-:class: dropdown
 Now note that the value function can be rewritten as
 
 ```{math}
@@ -368,23 +246,9 @@ Now note that the value function can be rewritten as
 ```
 
 This holds because maximizing with respect to {math}`m_{t+1}` (subject to the accumulation equation) is equivalent to maximizing with respect to the components of {math}`m_{t+1}`.
-:::
 
 ## Investment FOC for Entrepreneur
 
-:::{exercise}
-:label: ex:inv-foc-ent
-Now show that for the version in {eq}`eq:vOfmtp1` the FOC with respect to {math}`\inv_{t}` is
-
-```{math}
-\begin{gathered}\begin{aligned}
-  \uP(\cRat_{t})((1+\adj_{t}^{\inv})-f_{t+1}^{\kap}\DeprFac/\Rfree)& =  \DeprFac\Discount \vNum_{t+1}^{\kap}
-\end{aligned}\end{gathered}
-```
-:::
-
-:::{solution} ex:inv-foc-ent
-:class: dropdown
 For the version in {eq}`eq:vOfmtp1` the FOC with respect to {math}`\inv_{t}` is
 
 ```{math}
@@ -412,25 +276,9 @@ For the version in {eq}`eq:vOfmtp1` the FOC with respect to {math}`\inv_{t}` is
 ```
 
 which reduces to {eq}`eq:iFOCGen`.
-:::
-
-**With taxes:** {math}`\uP(\cRat_{t})(\kPriceAfterITC(1+\adj_{t}^{\inv})-\TaxFree f_{t+1}^{\kap}\DeprFac/\Rfree) = \DeprFac\Discount \vNum_{t+1}^{\kap}`
 
 ## Envelope Theorem for Capital
 
-:::{exercise}
-:label: ex:env-capital
-Now use the envelope theorem with respect to {math}`\kap_{t}` to show that
-
-```{math}
-\begin{gathered}\begin{aligned}
-  \vNum_{t}^{\kap} & =  \uP(\cRat_t)(f_{t+1}^{\kap}\DeprFac/\Rfree-\adj_{t}^{\kap})+\Discount \DeprFac \vNum_{t+1}^{\kap}
-\end{aligned}\end{gathered}
-```
-:::
-
-:::{solution} ex:env-capital
-:class: dropdown
 Now we can use the envelope theorem with respect to {math}`\kap_{t}` to show that
 
 ```{math}
@@ -450,17 +298,9 @@ This can be seen by directly taking the derivative of the RHS of {eq}`eq:vOfmtp1
 ```
 
 and noting that the Envelope theorem tells us the derivatives with respect to the controls {math}`m_{t+1}` and {math}`\inv_{t}` are zero while {math}`\partial \kap_{t+1}/\partial \kap_{t} = \DeprFac`.
-:::
 
 ## Euler Equation for Investment (Entrepreneur)
 
-:::{exercise}
-:label: ex:inv-euler-ent
-Next show how to combine {eq}`eq:iFOCGen` and {eq}`eq:kEnvelopeGen` to derive the Euler equation for investment.
-:::
-
-:::{solution} ex:inv-euler-ent
-:class: dropdown
 Now we can combine {eq}`eq:iFOCGen` and {eq}`eq:kEnvelopeGen` to derive the Euler equation for investment
 
 ```{math}
@@ -495,21 +335,10 @@ which means that we can rewrite {eq}`eq:iFOCGen` substituting the rolled-forward
 ```
 
 where the last line follows because with {math}`\Rfree\Discount=1` we know that {math}`\cRat_{t+1}=\cRat_{t}` implying {math}`\uP(\cRat_{t+1})=\uP(\cRat_{t})`.
-:::
-
-**With taxes:** {math}`\kPriceAfterITC (1+\adj_{t}^{\inv}) = \DeprFac\Discount \left[ \TaxFree\fFunc^{\kap}(\kap_{t+1})+\kPriceAfterITC(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap})\right]`
 
 ## Observational Equivalence
 
-:::{exercise}
-:label: ex:obs-equiv
-Comment on the fact that the Euler equation for investment for the firm being run by a utility-maximizing manager, {eq}`eq:iEulerGen`, is identical to the Euler equation for the profit maximizing manager, {eq}`eq:Entrep-iEuler`, to discuss whether it matters, in this model, whether managers maximize profits or utility. Similarly comment on whether there would be any evidence from consumption dynamics that the consumer was running a business with costly capital adjustment.
-:::
-
-:::{solution} ex:obs-equiv
-:class: dropdown
 Since behavior (for either a firm manager or a consumer) is determined by Euler equations, and the Euler equations for both consumption and investment are identical in this model to the Euler equations for the standard models, there is no observable consequence for investment of the fact that the firm is being run by a utility maximizer, and there is no observable consequence for consumption of the fact that the consumer owns a business enterprise with costly capital adjustment.
-:::
 
 ## Impulse Responses: Monetary Shock
 
@@ -517,13 +346,6 @@ Now consider a firm of this kind that happens to have arrived in period {math}`t
 
 Suppose that a thief steals all the firm's monetary assets.
 
-:::{exercise}
-:label: ex:irf-monetary
-Use the investment and consumption Euler equations to show the consequences for monetary assets, capital, dividends, and investment subsequently.
-:::
-
-::::{solution} ex:irf-monetary
-:class: dropdown
 The consequences for the firm are depicted in {numref}`fig:mlossIRF`.
 
 :::{figure} /content/figures/EntrepreneurPF/mlossIRF.png
@@ -536,19 +358,11 @@ Impulse response to a negative shock to {math}`m_t` (monetary assets stolen).
 Dividends follow a random walk. Thus, there is a one-time downward adjustment to the level of dividends to reflect the stolen money. Thereafter dividends are constant, as are monetary assets (which are constant at zero forever).
 
 The theft of the money has no effect on investment or the capital stock, because the firm's investment decisions are made on the basis of whether they are profitable and the theft of the money has no effect on the profitability of investments.
-::::
 
 ## Impulse Responses: Capital Shock
 
 Now consider another kind of shock: The firm's main building gets hit by a meteor, destroying some of the firm's capital stock.
 
-:::{exercise}
-:label: ex:irf-capital
-Again show dynamics of monetary assets, capital, consumption, and investment.
-:::
-
-::::{solution} ex:irf-capital
-:class: dropdown
 The results are depicted in {numref}`fig:klossIRF`.
 
 :::{figure} /content/figures/EntrepreneurPF/klossIRF.png
@@ -561,13 +375,12 @@ Impulse response to a negative shock to {math}`k_t` (capital destroyed by meteor
 Again, because dividends follow a random walk, what the firm's managers do is to assess the effect of the meteor shock on the firm's total value and they adjust the level of dividends downward immediately to the sustainable new level of dividends. Thereafter there is no change in the level of dividends.
 
 Investment is more complicated. The firm's capital stock is obviously reduced below its steady-state value by the meteor, so there must be a period of high investment expenditures to bring capital back toward its steady state. However, the firm started out with monetary assets of zero. Therefore the high initial investment expenditures will be paid for by borrowing, driving the firm's monetary assets to a permanent negative value (the firm goes into debt to pay for its rebuilding). Gradually over time the capital stock is rebuilt back to its target level, and investment expenditures return to zero (or the level consistent with replacing depreciated capital).
-::::
 
 ## Numerical Solution
 
 The solution code uses the following definitions for the production and adjustment cost functions:[^numerical-note]
 
-[^numerical-note]: The slight modification to the cost-of-adjustment function (relative to the formulation in the [](#sec:qModel)) reflects the changed timing of depreciation in {eq}`eq:kAccum` compared to the corresponding equation in qModel. In the continuous-time limit the two equations become the same, but the formulation here makes the representation of the problem slightly more transparent in the discrete-time computer code. The code also includes the parameters {math}`\kPriceAfterITC` and {math}`\TaxFree` (respectively the investment cost after the Investment Tax Credit and the untaxed portion of earnings) in order to study the impact of tax policies. Both parameters are however assumed equal to 1 and thus the equations in the code are equivalent to the simpler ones described in this section.
+[^numerical-note]: The slight modification to the cost-of-adjustment function (relative to the formulation in the [marginal q model](#sec:qModel) section) reflects the changed timing of depreciation in {eq}`eq:kAccum` compared to the corresponding equation in the [marginal q model](#sec:qModel) section. In the continuous-time limit the two equations become the same, but the formulation here makes the representation of the problem slightly more transparent in the discrete-time computer code.
 
 ```{math}
 :label: eq:fjFuncs
@@ -578,7 +391,9 @@ The solution code uses the following definitions for the production and adjustme
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\Psi` is the firm's productivity and {math}`\labor` is the labor supplied by the entrepreneur (assumed equal to 1).
+where {math}`\Psi` is the firm's productivity and {math}`\labor` is the labor supplied by the entrepreneur (assumed equal to 1).[^tax-parameters]
+
+[^tax-parameters]: The code also includes the parameters {math}`\kPriceAfterITC` and {math}`\TaxFree` (respectively the investment cost after the Investment Tax Credit and the untaxed portion of earnings) in order to study the impact of tax policies. Both parameters are however assumed equal to 1 and thus the equations in the code are equivalent to the simpler ones described in this section.
 
 The policy functions are obtained using the method of *reverse shooting*, which is based on recovering for a given {math}`k_{t+1}` and {math}`\vFirm_{t+1}(k_{t+1})` the values of {math}`k_t`, {math}`i_t` and {math}`\vFirm_{t}(k_{t})` consistent with the first order conditions and transition equations.
 
@@ -649,7 +464,7 @@ while the steady-state value of {math}`\ek` comes from substituting {math}`\chec
 \end{aligned}\end{gathered}
 ```
 
-The reverse shooting routine starts its backwards iterations from a {math}`k_{\hat{t}}` level very close to the steady state of the model and, as discussed in the methodological appendix to the TractableBufferStock section, the accuracy of the solution is improved if we approximate {math}`i_{\hat{t}}` with a first order Taylor expansion using the derivative of investment at the steady state:
+The reverse shooting routine starts its backwards iterations from a {math}`k_{\hat{t}}` level very close to the steady state of the model. The accuracy of the solution is improved if we approximate {math}`i_{\hat{t}}` with a first order Taylor expansion using the derivative of investment at the steady state:
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -687,4 +502,4 @@ Finally since the problem is solved under perfect foresight the entrepreneur's c
 \end{aligned}\end{gathered}
 ```
 
-because this corresponds to the solution to a perfect foresight consumption problem in which the consumer has monetary resources {math}`m_{t}` and net nonmonetary financial resources {math}`\vFirm_{t}(k_{t})-f_t` (see the [](#sec:PerfForesightCRRA)).
+because this corresponds to the solution to a perfect foresight consumption problem in which the consumer has monetary resources {math}`m_{t}` and net nonmonetary financial resources {math}`\vFirm_{t}(k_{t})-f_t` (see the [perfect foresight CRRA](#sec:PerfForesightCRRA) section).

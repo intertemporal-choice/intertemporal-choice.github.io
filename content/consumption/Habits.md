@@ -19,16 +19,14 @@ where {math}`\habit_{t+n}` is the habit stock, and all other variables are as us
 
 However, when habits affect utility we must also specify a process that describes how habits evolve over time. Our assumption will be:
 
-**FirstYearVersion=true:**
+```{math}
+\habit_{t+1} = \habit_{t} + \lambda (c_{t} - \habit_{t}),
+```
+
+where {math}`\lambda \in (0,1]` governs how fast the habit stock adjusts toward current consumption. The derivations below adopt the limiting case {math}`\lambda=1`, in which the habit stock is simply last period's consumption:
 
 ```{math}
 \habit_{t+1} = c_{t}.
-```
-
-**FirstYearVersion=false:**
-
-```{math}
-\habit_{t+1} = \habit_{t} + \lambda (c_{t} - \habit_{t}).
 ```
 
 Bellman's equation for this problem is therefore

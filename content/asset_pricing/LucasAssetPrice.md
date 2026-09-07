@@ -5,7 +5,7 @@
 
 {cite:t}`lucas:assetpricing` considers an economy populated by infinitely many[^aggregation-note] identical individual consumers, in which the only assets are a set of identical infinitely-lived trees. Aggregate output is the fruit that falls from the trees, and cannot be stored (it would rot!); because {math}`\uFunc^{\prime}(\cRat)>0~\forall~\cRat`, the fruit is all eaten:
 
-[^aggregation-note]: As in the [](#sec:Aggregation) section.
+[^aggregation-note]: As in the [Aggregation](#sec:Aggregation) section.
 
 ```{math}
 :label: eq:CeqY
@@ -56,7 +56,6 @@ subject to
 {m}_{t+1}^{i} = (\Price_{t+1}+\dvdnd_{t+1})\kap_{t+1}^{i}.
 ```
 
-(Bellman)=
 Rewriting in the form of Bellman's equation,
 
 ```{math}
@@ -66,13 +65,16 @@ Rewriting in the form of Bellman's equation,
 the first order condition tells us that
 
 ```{math}
-0 = \uFunc^{\prime}(c_{t}^{i})+\DiscFac \Ex_{t}^{i}\left[\vFunc^{\prime}({m}_{t+1}^{i})\frac{d}{dc_{t}^{i}}\left(\overbrace{({\Price}_{t+1}+\dvdnd_{t+1})\underbrace{\left((1+\dvdnd_{t}/\Price_{t})\kap_{t}^{i}-c_{t}^{i}/\Price_{t}\right)}_{\kap_{t+1}^{i}}}^{{m}_{t+1}^{i}}\right)\right]
+0 = \uFunc^{\prime}(c_{t}^{i})+\DiscFac \Ex_{t}^{i}\left[\vFunc^{\prime}({m}_{t+1}^{i})\frac{\partial}{\partial c_{t}^{i}}\left(\overbrace{({\Price}_{t+1}+\dvdnd_{t+1})\underbrace{\left((1+\dvdnd_{t}/\Price_{t})\kap_{t}^{i}-c_{t}^{i}/\Price_{t}\right)}_{\kap_{t+1}^{i}}}^{{m}_{t+1}^{i}}\right)\right]
 ```
 
-where the {math}`d/dc_{t}^{i}` derivative term will yield the return factor {math}`\Risky_{t+1}`.
+Spending one more unit of consumption today buys {math}`1/\Price_{t}` fewer trees, each of which would have paid off {math}`{\Price}_{t+1}+\dvdnd_{t+1}` tomorrow, so the derivative inside the expectation is
 
-(FOCwithRisky)=
-so
+```{math}
+\frac{\partial {m}_{t+1}^{i}}{\partial c_{t}^{i}} = -\frac{{\Price}_{t+1}+\dvdnd_{t+1}}{\Price_{t}} \equiv -\Risky_{t+1}.
+```
+
+Substituting this and moving the resulting negative term to the left-hand side,
 
 ```{math}
 :label: eq:FOCwithRisky
@@ -82,8 +84,7 @@ so
 
 where {math}`\Risky_{t+1}` is the return factor that measures the resources in period {math}`t+1` that are the reward for owning a unit of trees at the end of {math}`t`.
 
-(pofci)=
-The [](#sec:Envelope) theorem tells us that {math}`\vFunc^{\prime}({m}_{t+1}^{i})=\uFunc^{\prime}(c_{t+1}^{i})`, so {eq}`eq:FOCwithRisky` becomes
+The [Envelope theorem](#sec:Envelope) tells us that {math}`\vFunc^{\prime}({m}_{t+1}^{i})=\uFunc^{\prime}(c_{t+1}^{i})`, so {eq}`eq:FOCwithRisky` becomes
 
 ```{math}
 :label: eq:pofci
@@ -109,7 +110,6 @@ Since all consumers are identical, {math}`c_{t}^{i} = c_{t}^{j}~\forall~i,j`, so
 \cRat_{t} = \dvdnd_{t}.
 ```
 
-(pofd)=
 Substituting {math}`\cRat_{t}` and {math}`\cRat_{t+1}` for {math}`c_{t}^{i}` and {math}`c_{t+1}^{i}` in {eq}`eq:pofci` and then substituting {math}`\dvdnd_{t}` for {math}`\cRat_{t}` we get
 
 ```{math}
@@ -127,7 +127,6 @@ We can rewrite this more simply if we define
 ```
 
 which is called the "stochastic discount factor" because (a) it is stochastic (thanks to the shocks between {math}`t` and {math}`t+n` that determine the value of {math}`\dvdnd_{t+n}`); and (b) it measures the rate at which all agents in this economy in period {math}`t` will discount a unit of value received in a future period, e.g. {math}`t+1`:
-
 
 ```{math}
 :label: eq:Pt
@@ -180,6 +179,7 @@ and the particularly special case of logarithmic utility (which Lucas emphasizes
 \frac{\Price_{t}}{\dvdnd_{t}} & = \DiscFac \Ex_{t}\left[\dvdnd_{t+1}^{-1}(\Price_{t+1}+\dvdnd_{t+1})\right] \\
 & = \DiscFac \left(1+\Ex_{t} \left[\frac{{\Price}_{t+1}}{\dvdnd_{t+1}}\right]\right) \\
 & = \DiscFac \left(1+\DiscFac \left(1+\Ex_{t}\left[\frac{{\Price}_{t+2}}{\dvdnd_{t+2}}\right]\right)\right) \\
+& = \DiscFac \left(1 + \DiscFac + \DiscFac^{2} + \ldots + \Ex_{t} \left[\lim_{n\rightarrow \infty}\DiscFac^{n-1}\left[\frac{\Price_{t+n}}{\dvdnd_{t+n}}\right]\right]\right) \\
 & = \frac{\DiscFac}{1-\DiscFac} + \DiscFac \Ex_{t}\left\{\lim_{n\rightarrow \infty}\DiscFac^{n-1}\left[\frac{\Price_{t+n}}{\dvdnd_{t+n}}\right]\right\}.
 \end{aligned}
 ```
@@ -210,7 +210,6 @@ We can decompose the return factor attributable to ownership of a share of capit
 :label: eq:RiskyDecomposeFactor
 
 \Risky_{t+1} = \left(\frac{{\Price}_{t+1}+{\Price}_{t}-{\Price}_{t}+\dvdnd_{t+1}}{\Price_{t}}\right) = \left(1+\frac{\Delta {\Price}_{t+1}}{\Price_{t}}+\frac{\dvdnd_{t+1}}{\Price_{t}}\right)
-
 ```
 
 so the "rate of return" is
@@ -232,12 +231,6 @@ In models that do not explicitly discuss asset pricing, the implicit assumption 
 ```
 
 says that the only risk in the rate of return is attributable to unpredictable variation in the size of dividend/interest payments. Indeed, if additional assumptions are made (e.g., perfect capital markets) that yield the conclusion that the interest rate matches the marginal product of capital, then such models generally imply that variation in returns (at least at high frequencies) is very small, because aggregate capital typically is very stable from one period to the next in such models, and, if the aggregate production function is stable, this implies great stability in the marginal product of capital.
-
-:::{admonition} Empirical reality check
-:class: dropdown
-
-Empirically, this is a bad assumption: Using quarterly data from the S&P 500 stock index in the U.S., the vast majority of variation in total returns reflects changes in prices rather than changes in dividends. Note further that the logarithmic utility model has an explicit prediction: since {math}`\Price_{t}/\dvdnd_{t} = \timeRate`, that model says that the size of *fluctuations* in prices is identical to the size of fluctuations in dividends: {math}`\Delta \Price_{t+1}/\Price_{t} = \Delta \dvdnd_{t+1}/\dvdnd_{t}`. Empirically, price fluctuations are far larger than dividend fluctuations.
-:::
 
 ## Aggregate Returns Versus Individual Returns
 
@@ -365,62 +358,3 @@ so that we obtain a formula for {math}`\risky^{-1} = \Price_{t}/\dvdnd_{t}`
 ```
 
 The difference with {eq}`eq:PtLogIID` is only the absence of the {math}`\CRRA` multiplying {math}`\log \dvdnd_{t}`. The main substantive difference is therefore that the variance of (log) prices and the variance of (log) dividends is now the same. The surprising result that the price-dividend ratio increases when risk aversion increases continues to hold.
-
-:::{admonition} When Dividends Follow an AR(1) Process
-:class: dropdown
-
-Start with {eq}`eq:pofdCRRAWdvdndGro` and substitute for {math}`\dvdnd_{t+1}=\alpha \dvdnd_{t} + \err_{t+1}`:
-
-```{math}
-\left(\frac{\Price_{t}}{\dvdnd_{t}}\right) = \DiscFac  \Ex_{t}\left[\left(\frac{\alpha \dvdnd_{t}+\err_{t+1}}{\dvdnd_{t}}\right)^{1-\CRRA}\left(\frac{\Price_{t+1}}{\dvdnd_{t+1}}+1\right)\right]
-```
-
-We cannot make further analytical progress so long as the {math}`\err_{t+1}` term is present.
-
-Numerical solutions tend to work best when it is possible to define the limits as the state variables approach their maximum possible values, so the next step is to try to compute such limits.
-
-**As {math}`\dvdnd~\uparrow~\infty`**
-
-In the limit as {math}`\dvdnd_{t}` approaches {math}`\infty`, the {math}`\err_{t+1}` term becomes arbitrarily small (relative to {math}`\dvdnd_{t}`). Thus,
-
-```{math}
-\begin{aligned}
-\lim_{\dvdnd_{t} \uparrow \infty} \left(\frac{\Price_{t}}{\dvdnd_{t}}\right) & = \DiscFac  \left[\alpha^{1-\CRRA}\left(\frac{\Price_{t+1}}{\dvdnd_{t+1}}+1\right)\right] \\
-& = \left(\frac{\DiscFac \alpha^{1-\CRRA}}{1-(\DiscFac \alpha^{1-\CRRA})}\right) \\
-& = \left(\frac{1}{\DiscFac^{-1} \alpha^{\CRRA-1} - 1}\right)
-\end{aligned}
-```
-
-**As {math}`\dvdnd~\downarrow~0`**
-
-Suppose that {math}`\log \err_{t+1} \sim \mathcal{N}(-\sigma^{2}/2,\sigma^{2})`. Then [ELogNormTimes](#fact:elognormtimes) says:
-
-```{math}
-\begin{aligned}
-\log \Ex_{t}[\err_{t+1}\dvdnd_{t}^{-1}] & = -(1-\CRRA)\dvdnd_{t}^{-1} \sigma^{2}/2 + \left(\frac{(1-\CRRA)}{\dvdnd_{t}^{-1}}\right)^{2}\sigma^{2}/2 \\
-& = \dvdnd_{t}^{-1}\left(-(1-\CRRA) \sigma^{2}/2 + \left(\frac{(1-\CRRA)^{2}}{\dvdnd_{t}}\right)\sigma^{2}/2\right)
-\end{aligned}
-```
-
-whose limit is
-
-```{math}
-\lim_{\dvdnd_{t} \downarrow 0} \log \Ex_{t}[\err_{t+1}\dvdnd_{t}^{-1}] = \left(\left(\frac{(1-\CRRA)}{\dvdnd_{t}}\right)^{2}\sigma^{2}/2\right)
-```
-
-so
-
-```{math}
-\lim_{\dvdnd_{t} \downarrow 0} \left(\frac{\Price_{t}}{\dvdnd_{t}}\right) = \DiscFac  \left[\left(\left(\frac{(1-\CRRA)}{\dvdnd_{t}}\right)^{2}\sigma^{2}/2\right)\left(\frac{\Price_{t+1}}{\dvdnd_{t+1}}+1\right)\right]
-```
-
-so since {math}`\Price_{t+1}/\dvdnd_{t+1}` is a finite number we should have that
-
-```{math}
-\dvdnd_{t}^{2}  \lim_{\dvdnd_{t} \downarrow 0} \left(\frac{\Price_{t}}{\dvdnd_{t}}\right) = \DiscFac  \left[\left(\left(\frac{(1-\CRRA)}{1}\right)^{2}\sigma^{2}/2\right)\left(\frac{\Price_{t+1}}{\dvdnd_{t+1}}+1\right)\right]
-```
-
-which should imply that {math}`\Price_{t} \dvdnd_{t}` is a finite number even as {math}`\dvdnd_{t} \downarrow 0`. To have both limits be finite, we might be able to use a trick like the ones proposed by {cite:t}`boyd:weighted`. This would involve multiplying by some {math}`f(\dvdnd)` that approaches {math}`\dvdnd_{t}^{2}` as {math}`\dvdnd_{t}` approaches zero but approaches 1 as {math}`\dvdnd_{t}` approaches infinity. Like, {math}`f(d) = \dvdnd^{2} \left(\frac{1}{1+\dvdnd^{2}}\right)`? (The idea is that {math}`f(\dvdnd) \Price_{t}/\dvdnd_{t}` might be finite in both limits (and everywhere in between) even if {math}`\Price_{t}/\dvdnd_{t}` is not).
-
-**Alternative**. The solution to the AR(1) case is surely somewhere between the solutions to the IID and RW cases. That means that it is between {eq}`eq:PtLogIID` and {eq}`eq:PtLogRW` which can surely somehow be used to produce a reasonable limit. Actually, it seems pretty clear that the relevant comparison is to the IID case.
-:::

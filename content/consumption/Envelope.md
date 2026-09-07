@@ -1,5 +1,6 @@
 (sec:Envelope)=
 # The Envelope Theorem and the Euler Equation
+
 This section shows how the Envelope theorem is used to derive the consumption Euler equation in a multiperiod optimization problem with geometric discounting and intertemporally separable utility.
 
 The consumer's goal from the perspective of date {math}`\tNow` is to maximize the sum of discounted utilities, where geometric discounting means that utility {math}`n` periods in the future is weighted by {math}`\Discount^{n}`:
@@ -121,4 +122,4 @@ The general principle can be condensed into a rule of thumb by realizing that th
 Illustration of the Envelope Theorem at Alternative Values of {math}`\mRat`
 :::
 
-The figure illustrates why the Envelope theorem works: when {math}`m` increases, the increase in attainable utility is approximately the same whether the extra resources are consumed immediately or saved entirely. This is precisely because the first-order condition equates the marginal utility of consumption to the marginal value of saving, so at the optimum the consumer is indifferent at the margin between these alternatives.
+Each curve in the figure plots {math}`\underline{\vFunc}({m},{c})` against {math}`{c}` for a fixed value of {math}`{m}`, with the dot marking the {math}`{c}` that maximizes it; higher curves correspond to higher {math}`{m}`, and the locus of dots traces out {math}`\vFunc({m})`. The figure makes the Envelope theorem visible in the flatness of each curve at its peak. Consider the consequences of an increase in {math}`{m}`: because the curve is flat where the dot sits, the consumer who spends the extra resources reaches almost exactly the same height as the consumer who saves all of them, so the rise in attainable utility is about the same whether the increment is consumed or not. The term involving {math}`\partial \cFunc_{\tNow}/\partial {m}_{\tNow}` can therefore be dropped.

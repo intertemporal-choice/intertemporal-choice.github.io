@@ -18,7 +18,7 @@ As usual, the objective can be rewritten in recursive form:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \vFunc(\mRat_{t}) & =  \max_{\{c_{t},\omega_{1,t},\omega_{2,t},\ldots\}} \uFunc(c_{t}) +\beta \Ex_{t}\left[\vFunc(\Rport_{t+1}(\mRat_{t}-c_{t})+{y}_{t+1})\right]
+        \vFunc(\mRat_{t}) & =  \max_{\{c_{t},\omega_{1,t},\omega_{2,t},\ldots\}} \uFunc(c_{t}) +\Discount \Ex_{t}\left[\vFunc(\Rport_{t+1}(\mRat_{t}-c_{t})+{y}_{t+1})\right]
 \end{aligned}\end{gathered}
 ```
 
@@ -28,7 +28,7 @@ The first order condition with respect to {math}`c_{t}` is
 :label: eq:CCAPM-cfoc
 
 \begin{gathered}\begin{aligned}
-        \uFunc^{\prime}(c_{t}) & =  \beta \Ex_{t}[\Rport_{t+1}\vFunc^{\prime}({m}_{t+1})].
+        \uFunc^{\prime}(c_{t}) & =  \Discount \Ex_{t}[\Rport_{t+1}\vFunc^{\prime}(\mRat_{t+1})].
 \end{aligned}\end{gathered}
 ```
 
@@ -38,7 +38,7 @@ and the FOC with respect to {math}`\omega_{t,i}` is
 :label: eq:CCAPM-gamfoc
 
 \begin{gathered}\begin{aligned}
-        \Ex_{t}[(\Risky_{t+1,i}-\Rfree)\vFunc^{\prime}({m}_{t+1})] & =  0
+        \Ex_{t}[(\Risky_{t+1,i}-\Rfree)\vFunc^{\prime}(\mRat_{t+1})] & =  0
 \end{aligned}\end{gathered}
 ```
 
@@ -55,33 +55,40 @@ But the usual logic of the Envelope theorem tells us that
 so, substituting {eq}`eq:CCAPM-envelope` into {eq}`eq:CCAPM-cfoc` and {eq}`eq:CCAPM-gamfoc` we have
 
 ```{math}
-:label: eq:gameuler
+:label: eq:CCAPM-ceuler
 
 \begin{gathered}\begin{aligned}
-        \uFunc^{\prime}(c_{t}) & =  \Ex_{t}\left[\beta \Rport_{t+1} \uFunc^{\prime}({c}_{t+1})\right]
-\\      \Ex_{t}[(\Risky_{t+1,i}-\Rfree)\uFunc^{\prime}({c}_{t+1})] & =  0
+        \uFunc^{\prime}(c_{t}) & =  \Ex_{t}\left[\Discount \Rport_{t+1} \uFunc^{\prime}({c}_{t+1})\right]
+\end{aligned}\end{gathered}
+```
+
+```{math}
+:label: eq:CCAPM-gameuler
+
+\begin{gathered}\begin{aligned}
+        \Ex_{t}[(\Risky_{t+1,i}-\Rfree)\uFunc^{\prime}({c}_{t+1})] & =  0
 .
 \end{aligned}\end{gathered}
 ```
 
-Now assume CRRA utility, {math}`\uFunc(c) \equiv c^{1-\rho}/(1-\rho)` and divide both sides of {eq}`eq:gameuler` by {math}`c_{t}^{-\rho}` to get
+Now assume CRRA utility, {math}`\uFunc(c) \equiv c^{1-\CRRA}/(1-\CRRA)` and divide both sides of {eq}`eq:CCAPM-gameuler` by {math}`c_{t}^{-\CRRA}` to get
 
 ```{math}
 :label: eq:CCAPM-gameulernew
 
 \begin{gathered}\begin{aligned}
-        \Ex_{t}[(c_{t+1}/c_{t})^{-\rho}(\Risky_{t+1,i}-\Rfree)] & =  0
+        \Ex_{t}[(c_{t+1}/c_{t})^{-\CRRA}(\Risky_{t+1,i}-\Rfree)] & =  0
 \end{aligned}\end{gathered}
 ```
 
-We can now follow the same steps as in the "Equity Premium Puzzle" section to obtain the relation that *for every asset {math}`i`*
+We can now follow the same steps as in the [Equity Premium Puzzle](#sec:EquityPremiumPuzzle) section to obtain the relation that *for every asset {math}`i`*
 
 ```{math}
 :label: eq:CCAPM-eqprem
 
 \begin{gathered}\begin{aligned}
-        \Ex_{t}[\Risky_{t+1,i}]-\Rfree & \approx  \frac{\rho \text{cov}_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i})}{1-\rho \Ex_{t}[ \Delta \log {c}_{t+1}]}
-\\                             & \approx  \rho \text{cov}_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i})
+        \Ex_{t}[\Risky_{t+1,i}]-\Rfree & \approx  \frac{\CRRA \text{cov}_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i})}{1-\CRRA \Ex_{t}[ \Delta \log {c}_{t+1}]}
+\\                             & \approx  \CRRA \text{cov}_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i})
 \end{aligned}\end{gathered}
 ```
 

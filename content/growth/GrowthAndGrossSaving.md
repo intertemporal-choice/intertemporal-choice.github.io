@@ -2,15 +2,10 @@
 # Gross Saving and Growth in the RCK Model
 
 In the neoclassical growth model with labor-augmenting technological
-
 progress at rate {math}`\pGro`, utility function {math}`\util(c) = c^{1-\CRRA}/(1-\CRRA)`,
-
 time preference rate {math}`\DiscRate` and depreciation rate {math}`\delta` the
-
 steady-state will be at the point where the growth rate of consumption
-
 is equal to the growth rate of labor-augmenting technological
-
 progress, {math}`\pGro`,
 
 ```{math}
@@ -80,7 +75,6 @@ This can be substituted into {eq}`eq:grossavrate` to obtain
 ```
 
 and the expression for the steady-state level of capital per capita
-
 can be substituted in to yield
 
 ```{math}
@@ -112,13 +106,8 @@ This will be positive if its numerator is positive, i.e. if
 ```
 
 A typical assumption is {math}`\DiscRate = .04` and {math}`\delta = .08`, implying that
-
 the steady-state relationship between saving and growth in the neoclassical
-
 model is positive only if the coefficient of relative risk aversion {math}`\CRRA`
-
 is less than 1.5. Typically we assume values of {math}`\CRRA` in the range from
-
 2 to 5, so the model leads us to expect a negative relationship between saving
-
 and growth.

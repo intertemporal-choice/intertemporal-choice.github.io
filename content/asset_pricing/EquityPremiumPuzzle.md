@@ -17,7 +17,7 @@ where {math}`\Rfree` denotes the return on a perfectly riskless asset and {math}
 As usual, the objective can be rewritten in recursive form:
 
 ```{math}
-\vFunc(m_{t}) = \max_{\{c_{t},\riskyshare_{t}\}} ~\uFunc(c_{t}) +\beta \Ex_{t}\left[\vFunc\left(\underbrace{[\riskyshare_{t}\Risky_{t+1}+(1-\riskyshare_{t})\Rfree]}_{{\Rport}_{t+1}}(m_{t}-c_{t})+{y}_{t+1}\right)\right]
+\vFunc(m_{t}) = \max_{\{c_{t},\riskyshare_{t}\}} ~\uFunc(c_{t}) +\Discount \Ex_{t}\left[\vFunc\left(\underbrace{[\riskyshare_{t}\Risky_{t+1}+(1-\riskyshare_{t})\Rfree]}_{{\Rport}_{t+1}}(m_{t}-c_{t})+{y}_{t+1}\right)\right]
 ```
 
 The first order condition with respect to {math}`c_{t}` is
@@ -25,7 +25,7 @@ The first order condition with respect to {math}`c_{t}` is
 ```{math}
 :label: eq:EPP-cfoc
 
-\uFunc^{\prime}(c_{t}) = \beta \Ex_{t}[ \Rport_{t+1}\vFunc^{\prime}({m}_{t+1})]
+\uFunc^{\prime}(c_{t}) = \Discount \Ex_{t}[ \Rport_{t+1}\vFunc^{\prime}({m}_{t+1})]
 ```
 
 and the FOC with respect to {math}`\riskyshare_{t}` is
@@ -39,7 +39,7 @@ and the FOC with respect to {math}`\riskyshare_{t}` is
 \end{aligned}
 ```
 
-But the usual logic of the [](#sec:Envelope) theorem tells us that
+But the usual logic of the [Envelope theorem](#sec:Envelope) tells us that
 
 ```{math}
 :label: eq:EPP-envelope
@@ -53,7 +53,7 @@ so, substituting {eq}`eq:EPP-envelope` into {eq}`eq:EPP-cfoc` and {eq}`eq:EPP-ga
 :label: eq:EPP-ceuler
 
 \begin{aligned}
-\uFunc^{\prime}(c_{t}) & = \Ex_{t}\left[\beta \Rport_{t+1} \uFunc^{\prime}({c}_{t+1})\right] \\
+\uFunc^{\prime}(c_{t}) & = \Ex_{t}\left[\Discount \Rport_{t+1} \uFunc^{\prime}({c}_{t+1})\right] \\
 \Ex_{t}[(\Risky_{t+1}-\Rfree)\uFunc^{\prime}({c}_{t+1})] & = 0
 \end{aligned}
 ```
@@ -109,7 +109,7 @@ The equity premium puzzle is essentially that {math}`\text{cov}(\Delta \log c,\R
 
 How do we know what plausible values of {math}`\CRRA` are? Consider the following. You must choose between a gamble in which you consume \$50,000 for the rest of your life with probability 0.5 and \$100,000 with probability 0.5, or consuming some amount {math}`X` with certainty. The coefficient of relative risk aversion determines the {math}`X` which would make you indifferent between consuming X or being exposed to the gamble. For example, if {math}`\CRRA = 0`, then you have no risk aversion at all and you will be indifferent between \$75,000 with certainty and the 50/50 gamble with expected value of \$75,000. Here are the values of X associated with different values of {math}`\CRRA` (table taken from {cite:t}`mankiw&zeldes:stockholders`).
 
-:::{list-table} Certainty Equivalent Values for Different Risk Aversion Coefficients
+:::{list-table} Certainty equivalent {math}`X` for different coefficients of relative risk aversion
 :header-rows: 1
 :name: tbl:crra-certainty-equiv
 
@@ -138,15 +138,15 @@ Rewrite the consumption Euler equation {eq}`eq:EPP-ceuler` as
 ```{math}
 :label: eq:EPP-newgam
 
-\uFunc^{\prime}(c_{t}) = \Ex_{t}\left[\beta (\Rfree + \riskyshare_{t} [\Risky_{t+1} - \Rfree])\uFunc^{\prime}({c}_{t+1})\right]
+\uFunc^{\prime}(c_{t}) = \Ex_{t}\left[\Discount (\Rfree + \riskyshare_{t} [\Risky_{t+1} - \Rfree])\uFunc^{\prime}({c}_{t+1})\right]
 ```
 
-and note that from {eq}`eq:EPP-gameulernew` we know that {math}`\Ex_{t}[\beta \riskyshare_{t}(\Risky_{t+1}-\Rfree)\uFunc^{\prime}({c}_{t+1})] = 0` so that {eq}`eq:EPP-newgam` reduces to the ordinary Euler equation
+and note that from {eq}`eq:EPP-gameulernew` we know that {math}`\Ex_{t}[\Discount \riskyshare_{t}(\Risky_{t+1}-\Rfree)\uFunc^{\prime}({c}_{t+1})] = 0` so that {eq}`eq:EPP-newgam` reduces to the ordinary Euler equation
 
 ```{math}
 \begin{aligned}
-\uFunc^{\prime}(c_{t}) & = \Ex_{t}[\beta \Rfree \uFunc^{\prime}({c}_{t+1})] \\
-1 & = \beta \Rfree \Ex_{t}[ ({c}_{t+1}/c_{t})^{-\CRRA}]
+\uFunc^{\prime}(c_{t}) & = \Ex_{t}[\Discount \Rfree \uFunc^{\prime}({c}_{t+1})] \\
+1 & = \Discount \Rfree \Ex_{t}[ ({c}_{t+1}/c_{t})^{-\CRRA}]
 \end{aligned}
 ```
 
@@ -156,6 +156,6 @@ Using the same "facts" and approximations as above, we get the standard approxim
 \Delta \log c_{t+1} \approx (1/\CRRA) (\rfree - \timeRate)
 ```
 
-The "riskfree rate puzzle" is that average consumption growth per capita has been about 1.5 percent (in the US in the postwar period) while real riskfree interest rates have been at most 1 percent. Even if we assume a time preference rate of {math}`\timeRate=0` (no impatience at all, e.g. {math}`\beta=1`), the only way this equation can hold is if {math}`\CRRA` is a very small number (maybe even less than one). Of course, this is precisely the opposite of the conclusion of the equity premium puzzle, which implies the {math}`\CRRA` must be very large.
+The "riskfree rate puzzle" is that average consumption growth per capita has been about 1.5 percent (in the US in the postwar period) while real riskfree interest rates have been at most 1 percent. Even if we assume a time preference rate of {math}`\timeRate=0` (no impatience at all, e.g. {math}`\Discount=1`), the only way this equation can hold is if {math}`\CRRA` is a very small number (maybe even less than one). Of course, this is precisely the opposite of the conclusion of the equity premium puzzle, which implies the {math}`\CRRA` must be very large.
 
-In principle, the riskfree rate puzzle might be explicable by overlapping generations models, though in practice it has proven difficult to make this mechanism work quantitatively. A precautionary saving motive can also help reduce the puzzle by adding a variance term to consumption growth, which would allow the Euler equation to hold even with low riskfree rates.
+The riskfree rate puzzle might in principle be explicable by overlapping generations, though in practice it is hard to make that work well. A precautionary saving motive also cuts against the puzzle, by adding a variance term to consumption growth.

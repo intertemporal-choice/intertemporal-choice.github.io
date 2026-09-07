@@ -3,28 +3,17 @@
 
 This section solves the Ramsey/Cass-Koopmans (RCK) model with government.[^HjCxMX4C0F]
 
-[^HjCxMX4C0F]: The treatment is similar to that in {cite:t}`blanchard&fischer:text`; see that source for more details. For simplicity we assume
+For simplicity we assume no technological progress, population growth, or depreciation, and a continuum of consumers with mass 1 distributed on the unit interval as per the [Aggregation](#sec:Aggregation) appendix.
 
-no technological progress, population growth, or depreciation, and a
-
-continuum of consumers with mass 1 distributed on the unit interval
-
-as per [](#sec:Aggregation).
+[^HjCxMX4C0F]: The treatment is similar to that in {cite:t}`blanchard&fischer:text`; see that source for more details.
 
 Consider first the case where government is financed by constant
-
 lump-sum taxes of amount {math}`\Tax` per period, and spending is at rate
-
 {math}`\mathbf{x}` per period, and suppose the government has a balanced budget
-
 requirement so that {math}`\mathbf{x} = \Tax` in every period and there is no
-
 government debt. We suppose further that government spending yields
-
-no utility. The individual’s optimization problem (leaving out the {math}`i`
-
+no utility. The individual's optimization problem (leaving out the {math}`i`
 subscripts that we used in the previous section, but understanding that
-
 they are implicitly present) is now
 
 ```{math}
@@ -71,8 +60,7 @@ The second Hamiltonian optimization condition requires:
 \end{aligned}\end{gathered}
 ```
 
-Finally, the household’s behavior must satisfy a transversality
-
+Finally, the household's behavior must satisfy a transversality
 constraint, which is equivalent to the intertemporal budget constraint:
 
 ```{math}
@@ -83,16 +71,12 @@ constraint, which is equivalent to the intertemporal budget constraint:
 ```
 
 which says that the present discounted value of consumption must equal
-
 the current net physical wealth plus human wealth minus the PDV of
-
 taxes.
 
 Now consider the problem from the standpoint of a social planner who has the same utility function as the
-
 individual consumers. If the social planner wants to spend a constant
-
-amount {math}`\mathbf{x}` per period, the social planner’s budget constraint is
+amount {math}`\mathbf{x}` per period, the social planner's budget constraint is
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -101,7 +85,6 @@ amount {math}`\mathbf{x}` per period, the social planner’s budget constraint i
 ```
 
 which reflects the fact that the social planner divides total net output
-
 between consumption and government spending. This leads to Hamiltonian
 
 ```{math}
@@ -114,12 +97,11 @@ yielding the first order condition
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \dot{c}_{t}/c_{t} & =  \rho^{-1}(\fFunc(k_{t})-\depr-\timeRate).
+        \dot{c}_{t}/c_{t} & =  \rho^{-1}(\fFunc'(k_{t})-\depr-\timeRate).
 \end{aligned}\end{gathered}
 ```
 
-Now recall from the section on [](#sec:decentralizingrck)
-
+Now recall from the section on [decentralizing the RCK model](#sec:decentralizingrck)
 that
 
 ```{math}
@@ -129,10 +111,9 @@ that
 ```
 
 where the gross return on capital {math}`\hat{r}_t` is equal to the net
-
 return {math}`r_t` plus the depreciation rate.
 
-Thus, the social planner’s DBC is:
+Thus, the social planner's DBC is:
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -143,32 +124,39 @@ Thus, the social planner’s DBC is:
 ```
 
 which is equivalent to the household's budget constraint
-
 {eq}`eq:hhbc` when {math}`a_{t}=k_{t}` and {math}`\Tax=\mathbf{x}`. As discussed
-
-in [](#sec:decentralizingrck), {math}`a_t=k_{t}` must hold in equilibrium for identical households,
-
+in the [decentralizing the RCK model](#sec:decentralizingrck) section, {math}`a_t=k_{t}` must hold in equilibrium for identical households,
 and {math}`\Tax = \mathbf{x}` was the balanced budget assumption that we started
-
 off with.
 
+The same equivalence holds for the lifetime constraints. Integrating the
+planner's DBC gives
+
+```{math}
+\begin{gathered}\begin{aligned}
+        \int_{0}^{\infty} c_{t} \mathfrak{R}^{-1}_{t} & =  k_{0}+\mathbf{Y}_{0}-\int_{0}^{\infty} \mathbf{x} \mathfrak{R}^{-1}_{t}
+\\       & =  k_{0}+\mathbf{Y}_{0}-\mathbf{X}_{0},
+\end{aligned}\end{gathered}
+```
+
+where {math}`\mathbf{X}_{0}` is the PDV of government spending. Under the two
+conditions just imposed, this is the household's IBC. The initial stocks
+coincide, {math}`k_{0}=a_{0}`, because households hold no government debt in the
+balanced budget case; and the two PDVs coincide, {math}`\mathbf{T}_{0}=\mathbf{X}_{0}`,
+because a government that balances its budget in every period collects taxes
+worth exactly what it spends. Planner and household therefore face the same
+lifetime constraint as well as the same flow constraint.
+
 Note that the {math}`\dot{c}_t=0` locus in the phase diagram is unchanged by
-
 changing {math}`\Tax` and {math}`\mathbf{x}`. However, the {math}`\dot{k}_{t}=0` locus is
-
 shifted down by amount {math}`\Tax = \mathbf{x}`.
 
 Now what happens if the government does not face a balanced budget
-
 requirement? Specifically, suppose we continue to have the same
-
 constant amount of spending per period but now want to consider the
-
 effect of allowing taxes to vary over time, which we denote by a
-
 subscript on {math}`\Tax_{t}`. Suppose {math}`d` is the level of government bonds
-
-(debt); the government’s Dynamic Budget Constraint is
+(debt); the government's Dynamic Budget Constraint is
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -177,10 +165,9 @@ subscript on {math}`\Tax_{t}`. Suppose {math}`d` is the level of government bond
 ```
 
 which says that debt must rise by the amount by which spending exceeds
-
 taxes.
 
-The government’s IBC will be the integral of its DBC:
+The government's IBC will be the integral of its DBC:
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -190,15 +177,11 @@ The government’s IBC will be the integral of its DBC:
 ```
 
 and we assume {math}`{d}_{0}=0` so that the government starts out with no debt
-
 (to maintain comparability with the previous example).
 
 The DBC of the idiosyncratic family also changes. They can now own
-
 either capital {math}`k_{t}` or government debt {math}`{d}_{t}`. If the family is to be
-
 indifferent between the two forms of assets, the interest rate must be
-
 the same.
 
 ```{math}
@@ -208,7 +191,7 @@ the same.
 \end{aligned}\end{gathered}
 ```
 
-Now the family’s IBC becomes
+Now the family's IBC becomes
 
 ```{math}
 :label: eq:famibc
@@ -222,23 +205,16 @@ Now the family’s IBC becomes
 Note: Nowhere in this equation does the time path of taxes matter;
 
 all that matters is the PDV of taxes. And the time path of taxes
-
 also does not enter the {math}`\dot{c}/c` equation. Thus, the path
-
 of consumption over time is unaffected by the path of taxes over time!
 
 This is not so surprising when you realize that it is simply the
-
 Ricardian equivalence proposition in this perfect foresight framework.
 
 However, now consider the case where there is a tax on capital income
-
 at rate {math}`\tau`. Furthermore, for simplicity suppose that the
-
 government rebates all of the tax revenue in a lump sum per capita,
-
 and suppose depreciation {math}`\depr=0`. Thus the household budget
-
 constraint becomes
 
 ```{math}
@@ -255,7 +231,7 @@ where {math}`\mathbf{z}_{t}` is the per-capita size of the lump-sum rebates,
 \end{aligned}\end{gathered}
 ```
 
-The household’s Hamiltonian becomes
+The household's Hamiltonian becomes
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -264,13 +240,9 @@ The household’s Hamiltonian becomes
 ```
 
 The crucial difference between this situation and the previous one is
-
 that now the effective rate of return on saving has been decreased, so
-
 that {math}`\partial \Ham_{t}/\partial a_{t}` is now {math}`r_{t}(1-\tau)` rather
-
 than {math}`r_{t}`. Ultimately this produces a consumption Euler equation
-
 of
 
 ```{math}
@@ -289,13 +261,10 @@ which implies that the economy will be in equilibrium at
 ```
 
 so that the equilibrium level of the marginal product of capital is higher,
-
 and the capital stock must therefore be lower, than before the capital
-
 taxation was instituted.
 
 Notice, however, that because the taxes are being rebated, the *aggregate*
-
 budget constraint does not change when the tax is imposed:
 
 ```{math}
@@ -306,45 +275,16 @@ budget constraint does not change when the tax is imposed:
 ```
 
 Thus the social planner will choose exactly the same amount of
-
 consumption as before the tax was instituted.
 
 The crucial point is that if an individual household saves more and
-
 thus causes next year's capital stock to be a bit higher, the
-
 *personal* benefit to that household is essentially zero. The higher
-
 taxes that the household will pay next year will be distributed to the
-
 entire population in a lump sum, so the saver will get nothing. The
-
 higher saving of this individual household is basically a positive
-
 externality from the point of view of the other consumers in the
-
 economy. However, if the social planner forces the economy as a whole
-
 to save more, the social planner receives all of the extra tax
-
 revenue.
 
-
-:::{admonition} Scraps/draft material
-:class: dropdown
-
-Similarly, the social planner's IBC is
-
-```{math}
-\begin{gathered}\begin{aligned}
-        \int_{0}^{\infty} c_{t} \mathfrak{R}^{-1}_{t} & =  k_{0}+\mathbf{Y}_{0}-\int_{0}^{\infty} \mathbf{x}   \\
-\\       & =  k_{0}+\mathbf{Y}_{0}-\mathbf{X}_{0}
-\end{aligned}\end{gathered}
-```
-
-but since {math}`k_{0}=a_{0}` and since taxes equal spending in every period
-
-{math}`\mathbf{T}_{0}=\mathbf{X}_{0}` so that the social planner's IBC is identical to the
-
-household's IBC.
-:::

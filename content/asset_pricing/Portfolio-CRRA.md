@@ -1,10 +1,11 @@
 (sec:Portfolio-CRRA)=
 # Portfolio Choice with CRRA Utility (Merton-Samuelson)
+
 {cite:t}`merton:restat` and {cite:t}`samuelson:portfolio` study the optimal portfolio choice of a consumer with constant relative risk aversion {math}`\CRRA`.[^fn-utility] This consumer has assets at the end of period {math}`t` equal to {math}`a_{t}` and is deciding how much to invest in a risky asset[^fn-multi-asset] with a lognormally distributed return factor {math}`\Risky_{t+1}` whose log can be written in either of two ways:
 
 [^fn-utility]: {math}`\uFunc(\cRat) = (1-\CRRA)^{-1}\cRat^{1-\CRRA}`.
 
-[^fn-multi-asset]: Both papers present the solution in the case with multiple risky assets; for the two-asset case, see the [](#sec:Portfolio-Multi-CRRA).
+[^fn-multi-asset]: Both papers present the solution in the case with multiple risky assets; for the two-asset case, see the [two risky assets](#sec:Portfolio-Multi-CRRA) section.
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -17,7 +18,7 @@ where {math}`\ShkMeanOneLog_{1,t+1} \sim \mathcal{N}(-0.5 \sigma^{2}_{\risky},\s
 
 The alternative to the risky asset is a riskfree asset that earns return factor {math}`\Rfree=e^{\rfree}`.[^fn-expected-return] Importantly, the consumer is assumed to have no labor income and to face no risk except from the investment in the risky asset.[^fn-retired-investor][^fn-riskless-income]
 
-[^fn-expected-return]: The [MathFactsList](#fact:mathfactslist) tells us that a variable with this lognormal distribution has an expected return factor of {math}`\Ex_{t}[e^{\risky_{t+1}}]=e^{\risky}=\Risky` (where upper-case variables like {math}`\Risky` without a subscript are the time-invariant mean).
+[^fn-expected-return]: Fact [ELogNorm](#fact:elognorm) tells us that a variable with this lognormal distribution has an expected return factor of {math}`\Ex_{t}[e^{\risky_{t+1}}]=e^{\risky}=\Risky` (where upper-case variables like {math}`\Risky` without a subscript are the time-invariant mean).
 
 [^fn-retired-investor]: A common interpretation is that this is the problem of a retired investor who expects to receive no further labor income. Note however that all risks other than the returns from financial investments have been ruled out; for example, health expense risk is not possible in this model, though recent research has argued such risk is important (maybe even dominant) later in life (cf. {cite:t}`aclvJoy`).
 
@@ -137,17 +138,13 @@ Equation {eq}`eq:PortCRRA-riskyshareMS` says[^fn-cv-difference] that the consume
 
 If there is no excess return, nothing will be put in the risky asset. Similarly, if risk aversion or the variance of the risk is infinity, again nothing will be put in the risky asset.[^fn-approx-quality]
 
-[^fn-approx-quality]: See the appendix for a figure showing the quality of the approximation.
-
-:::{admonition} Connection to the equity premium puzzle
-:class: dropdown
+[^fn-approx-quality]: [](#fig:Port:b) below shows the quality of the approximation.
 
 This formula hints at the existence of an "equity premium puzzle" ({cite:t}`mehraPrescottPuzzle`). Interpreting the risky asset as the aggregate stock market, the annual standard deviation of the log of U.S. stock returns has historically been about {math}`\sigma_{\risky}=0.2` yielding {math}`\Evarr = 0.04`. The equity premium over historical periods has been something like {math}`\EpremLog = 0.08` (eight percent). With risk aversion of {math}`\CRRA=2` this formula implies that the share of risky assets in your portfolio should be {math}`0.08/0.08` or 100 percent! The fact that most people have less than 100 percent of their wealth invested in stocks is the "stockholding puzzle," the microeconomic manifestation of the equity premium puzzle ({cite:t}`haliassos&bertaut:fewholdstocks`).
 
 To avoid the problems caused by a prediction of a risky portfolio share greater than one, we can calibrate the model with more modest expectations for the equity premium. Some researchers have argued that when evidence for other countries and longer time periods is taken into account, a plausible average value of the premium might be as low as three percent. The figures show the relationship between the portfolio share and relative risk aversion for a calibration that assumes a modest premium of 3 percent and a large standard deviation of {math}`\sigma=0.2`. Even when risks are this high and the premium is this low, if relative risk aversion is close to logarithmic ({math}`\CRRA = 1`) the investor wants to put well over half of the portfolio in the risky asset. Only for values of risk aversion greater than 2 does the predicted portfolio share reach plausible small values.
 
 But remember that these calculations are all assuming that the consumer's *entire* consumption spending is financed by asset income. If the consumer has other income (for example, labor or transfer income) that is not perfectly correlated with returns on the risky asset, they should be willing to take more risk. Since, for most consumers, most of their future consumption will be financed from labor or transfer income, it is not surprising to learn that models calibrated to actual data on capital and noncapital income dynamics imply that people should be investing most of their non-human wealth in the risky asset (with reasonable values of {math}`\CRRA`).
-:::
 
 A final interesting question is what the expected rate of return on the consumer's portfolio will be once the portfolio share in risky assets has been chosen optimally. Note first that {eq}`eq:PortCRRA-rportDist` implies that
 
@@ -196,28 +193,9 @@ The Approximate Risky Portfolio Share {math}`\riskyshare` Declines as Relative R
 
 The Approximation Error for the Portfolio Share in Risky Assets {math}`\riskyshare` Is Small
 
-Note: The approximation error is computed by solving for the exactly optimal portfolio share numerically. See the `Portfolio-CRRA-Derivations.nb` Mathematica notebook for details.
+Note: The approximation error is computed by solving for the exactly optimal portfolio share numerically. See the `doAll.nb` Mathematica notebook for details.
 :::
 
-:::{admonition} Alternative subfigure implementation (commented out in original LaTeX due to HTML rendering issues)
-:class: dropdown
-
-```latex
-\begin{figure}[h]
-\caption{The Risky Portfolio Share $\riskyshare$ and Relative Risk Aversion $\CRRA$} \label{fig:Port}\centering
-\subfigure[The Approximate Risky Portfolio Share $\riskyshare$ Declines as Relative Risk Aversion $\CRRA$ Increases]{
-    \label{fig:Port:a}
-    \fbox{\includegraphics[width=6in]{./Figures/ShareVsCRRA}}
-}\\
-\vspace{.1in} \subfigure[The Approximation Error for the Portfolio Share in Risky Assets $\riskyshare$ Is Small] {
-    \label{fig:Port:b}
-    \fbox{\includegraphics[width=6in]{./Figures/ShareApproxErr}}
-} \begin{flushleft} \footnotesize Note: The approximation error is computed by solving for the exactly optimal
-portfolio share numerically.  See the \texttt{Portfolio-CRRA-Derivations.nb} Mathematica notebook for details.
-\end{flushleft}
-\end{figure}
-```
-:::
 
 ## Appendix: The {cite:t}`cvAppendix` Approximation
 

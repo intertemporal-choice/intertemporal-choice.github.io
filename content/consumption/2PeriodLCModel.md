@@ -1,5 +1,6 @@
 (sec:2PeriodLCModel)=
 # The Fisher Two-Period Optimal Consumption Problem
+
 Irving {cite:t}`fisherInterestTheory` first analyzed the optimization problem of a consumer who faces no uncertainty and lives for two periods.
 
 ## Mathematical Analysis
@@ -301,10 +302,13 @@ The terminology here is a modification (refinement) of the terminology often emp
 
 The reason to make this distinction is that it is important to distinguish between effects on behavior caused by the fact that the discounted value of future income is changed, and effects caused by the fact that the income that will be earned on savings is different. {cite:t}`summersCapTax` vigorously made the point that in standard life cycle models, the quantitative magnitude of the human wealth effect dwarfs the size of either the income or the substitution effects, because for most people most of their lifetime income is in the future.
 
-:::{figure} /content/figures/2PeriodLCModel/FisherFigureY1.png
-:name: fig:Fisher
+<!-- FisherFigure.png stacks FisherFigureY1 above FisherFigureY2, reproducing the single
+two-panel exhibit in Carroll's LaTeX. Carrying the second panel as a separate image
+inside this directive instead nests a float within a float, which LaTeX rejects and
+which moves the label onto the inner float, so references print "Figure ??". -->
 
-![](/content/figures/2PeriodLCModel/FisherFigureY2.png)
+:::{figure} /content/figures/2PeriodLCModel/FisherFigure.png
+:name: fig:Fisher
 
 Fisher Figure Analysis
 :::

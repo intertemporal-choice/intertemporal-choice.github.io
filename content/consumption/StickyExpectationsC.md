@@ -13,18 +13,10 @@ where {math}`\bLev_{t}` is beginning-of-period bank balances, {math}`\yLev_{t}` 
 \yLev_{t+1} = \pLevBF_{t+1} \tShkEmp_{t+1}
 ```
 
-where {math}`\Ex_{t}[\tShkEmp_{t+n}]=1~\forall~n>0`. Permanent labor income grows by a predictable factor {math}`\WGro` from period to period:
-
-**PermShks=true:**
+where {math}`\Ex_{t}[\tShkEmp_{t+n}]=1~\forall~n>0`. Permanent labor income grows by a predictable factor {math}`\WGro` from period to period, subject to a mean-one permanent shock {math}`\psi`:
 
 ```{math}
 \pLevBF_{t+1} = \WGro \pLevBF_{t}\psi_{t+1},
-```
-
-**PermShks=false:**
-
-```{math}
-\pLevBF_{t+1} = \WGro \pLevBF_{t},
 ```
 
 so that the expected present discounted value of permanent labor income ("human wealth") for an infinite-horizon consumer is
@@ -32,6 +24,8 @@ so that the expected present discounted value of permanent labor income ("human 
 ```{math}
 \hLev_{t} = \left(\frac{\pLevBF_{t}}{1-\WGro/\Rfree}\right).
 ```
+
+We carry permanent shocks throughout what follows. The simpler model without them is the restriction {math}`\psi_{t+1}=1~\forall~t`, under which permanent income grows deterministically as {math}`\pLevBF_{t+1} = \WGro \pLevBF_{t}`; because {math}`\hat{\Psi}_{t+1} \equiv \Psi_{t+1}-1` is then zero, every {math}`\hat{\Psi}` term drops out of the expressions derived below. Both cases are therefore covered by the general expressions.
 
 We will assume that the consumer behaves according to the consumption rule
 
@@ -43,9 +37,9 @@ We will assume that the consumer behaves according to the consumption rule
 
 where {math}`\MPC` is the "marginal propensity to consume" out of total wealth {math}`\wAllLev`.[^pih-derivation]
 
-[^pih-derivation]: This is the optimal consumption function for a utility-maximizing consumer with {math}`\Rfree \Discount = 1` if that consumer has quadratic utility ({cite:t}`hallRandomWalk`) or if the consumer has CRRA utility and perfect foresight and anticipates {math}`\tShkEmp_{t+n}=\pShk_{t+n}=1~\forall~n>0`. See the [](#sec:ConsumptionFunction) for a derivation of this consumption function under quadratic utility, and [](#sec:PerfForesightCRRA) for the derivation in the perfect foresight CRRA case. {cite:t}`deatonUnderstandingC` argues that the "Permanent Income Hypothesis" should be **defined** as the hypothesis that consumption is determined according to {eq}`eq:DeatonPIH`; but this differs sharply from {cite:t}`friedmanATheory`'s definition, and has not become universally accepted.
+[^pih-derivation]: This is the optimal consumption function for a utility-maximizing consumer with {math}`\Rfree \Discount = 1` if that consumer has quadratic utility ({cite:t}`hallRandomWalk`) or if the consumer has CRRA utility and perfect foresight and anticipates {math}`\tShkEmp_{t+n}=\pShk_{t+n}=1~\forall~n>0`. See the [consumption function](#sec:ConsumptionFunction) section for a derivation of this consumption function under quadratic utility, and the [perfect foresight CRRA](#sec:PerfForesightCRRA) section for the derivation in the perfect foresight CRRA case. {cite:t}`deatonUnderstandingC` argues that the "Permanent Income Hypothesis" should be **defined** as the hypothesis that consumption is determined according to {eq}`eq:DeatonPIH`; but this differs sharply from {cite:t}`friedmanATheory`'s definition, and has not become universally accepted.
 
-Under these circumstances, the [](#sec:RandomWalk) shows that consumption will follow a random walk,
+Under these circumstances, the [random walk](#sec:RandomWalk) section shows that consumption will follow a random walk,
 
 ```{math}
 :label: eq:StickyE-rwc
@@ -53,7 +47,7 @@ Under these circumstances, the [](#sec:RandomWalk) shows that consumption will f
 \Delta \cLev_{t+1} = \error_{t+1}, \quad \Ex_{t}[\error_{t+n}] = 0 ~\forall~n>0.
 ```
 
-Now assume that the economy is populated by a set of measure one of consumers indexed by a superscript {math}`i` distributed uniformly along the unit interval. Per capita values of all variables, designated by the upper case, are the integral over all individuals in the economy, as in the [](#sec:Aggregation), so that
+Now assume that the economy is populated by a set of measure one of consumers indexed by a superscript {math}`i` distributed uniformly along the unit interval. Per capita values of all variables, designated by the upper case, are the integral over all individuals in the economy, as in the [Aggregation](#sec:Aggregation) appendix, so that
 
 ```{math}
 \CLev_{t} = \int_{0}^{1} \cLev_{t}^{i} di = \int_{0}^{1} (\rfree/\Rfree)  \wAllLev_{t}^{i} di = \WAllLev_{t} \MPC.
@@ -67,9 +61,9 @@ This equation implies that an aggregate version of equation {eq}`eq:StickyE-rwc`
 \Delta \CLev_{t+1} = \error_{t+1}.
 ```
 
-In principle, we could allow each individual in this economy to experience a different transitory shock (and, **PermShks=true:** permanent shock) from every other individual in each period. However, for our purposes it is useful to assume that everyone experiences the same shocks in a given period; that is {math}`\tShkEmp_{t}^{i}=\TShkEmp_{t}~\forall~t` (**PermShks=true:** and {math}`\psi_{t}^{i} = \Psi_{t}~\forall~t`).
+In principle, we could allow each individual in this economy to experience a different transitory and permanent shock from every other individual in each period. However, for our purposes it is useful to assume that everyone experiences the same shocks in a given period; that is {math}`\tShkEmp_{t}^{i}=\TShkEmp_{t}~\forall~t` and {math}`\psi_{t}^{i} = \Psi_{t}~\forall~t`.
 
-Assuming (here and henceforth) that the growth factor for permanent income is {math}`\WGro=1`, the figures below show the path of consumption and bank balances (the solid dots) for an economy populated by omniscient consumers who in periods {math}`t-n` for {math}`n>0` had experienced {math}`\TShkEmp_{t-n}=1` (**PermShks=true:** {math}`=\Psi_{t-n}`); that is, this economy has had no shocks to income in the past. (For convenience, the consumer is assumed to have arrived in period {math}`t` with {math}`\BLev_{t}=0`). In period {math}`t` the consumer draws {math}`\TShkEmp_{t}=2` (**PermShks=true:** and {math}`\Psi_{t}=1`); thereafter {math}`\TShkEmp_{t+n}=1` (**PermShks=true:** {math}`\Psi_{t+n}=`). The figures show {math}`\CLev_{t-2},\CLev_{t-1},\CLev_{t},\Ex_{t}[\CLev_{t+1}],\Ex_{t}[\CLev_{t+2}],\ldots` and the corresponding values for {math}`\BLev`.
+Assuming (here and henceforth) that the growth factor for permanent income is {math}`\WGro=1`, the figures below show the path of consumption and bank balances (the solid dots) for an economy populated by omniscient consumers who in periods {math}`t-n` for {math}`n>0` had experienced {math}`\TShkEmp_{t-n}=\Psi_{t-n}=1`; that is, this economy has had no shocks to income in the past. (For convenience, the consumer is assumed to have arrived in period {math}`t` with {math}`\BLev_{t}=0`). In period {math}`t` the consumer draws {math}`\TShkEmp_{t}=2` and {math}`\Psi_{t}=1`; thereafter {math}`\Psi_{t+n}=\TShkEmp_{t+n}=1`. The figures show {math}`\CLev_{t-2},\CLev_{t-1},\CLev_{t},\Ex_{t}[\CLev_{t+1}],\Ex_{t}[\CLev_{t+2}],\ldots` and the corresponding values for {math}`\BLev`.
 
 :::{figure} /content/figures/StickyExpectationsC/cPlot.png
 :name: fig:aftershock
@@ -143,9 +137,7 @@ and
 (1-\Pi) \Delta \CLev_{t} = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t})
 ```
 
-while, defining {math}`\hat{\TShkEmp}=\TShkEmp-1` (**PermShks=true:** and {math}`\hat{\Psi}=\Psi-1`),
-
-**PermShks=true:**
+while, defining {math}`\hat{\TShkEmp}=\TShkEmp-1` and {math}`\hat{\Psi}=\Psi-1`,
 
 ```{math}
 :label: eq:DCtp1Gtp1
@@ -158,36 +150,11 @@ while, defining {math}`\hat{\TShkEmp}=\TShkEmp-1` (**PermShks=true:** and {math}
 \end{aligned}
 ```
 
-**PermShks=false:**
-
-```{math}
-\begin{aligned}
-\CLev_{t+1|\tau_{t+1}=t+1} & = \left(\overbrace{(\BLev_{t}+\hat{\TShkEmp}_{t}-\CLev_{t})\Rfree}^{=\BLev_{t+1}}+\hat{\TShkEmp}_{t+1}\right)\MPC+1
-\\ \CLev_{t+1|\tau_{t+1}=t+1} & = \left((\BLev_{t}+\hat{\TShkEmp}_{t}-\CLev_{t}+\CLev_{t|\tau_{t}=t}-\CLev_{t|\tau_{t}=t})\Rfree+\hat{\TShkEmp}_{t+1}\right)\MPC+1
-\\ & = \underbrace{\left((\BLev_{t}+\hat{\TShkEmp}_{t}-\CLev_{t|\tau_{t}=t})\Rfree+\hat{\TShkEmp}_{t+1}\right)\MPC+1}_{=\Ex_{t}[\CLev_{t+1|\tau_{t}=t}]+\hat{\TShkEmp}_{t+1}\MPC}+(\CLev_{t|\tau_{t}=t}-\CLev_{t})\Rfree\MPC
-\\ & = \CLev_{t|\tau_{t}=t}+\hat{\TShkEmp}_{t+1}\MPC+(\CLev_{t|\tau_{t}=t}-\CLev_{t})\MPC \Rfree
-\end{aligned}
-```
-
 where {eq}`eq:DCtp1Gtp1` follows its predecessor since, among consumers who have updated in period {math}`t`, the random walk proposition says that {math}`\Ex_{t}[\CLev_{t+1|\tau_{t}=t}]=\CLev_{t,\tau_{t}=t}`. Subtracting {math}`\CLev_{t|\tau_{t}=t}` from both sides of {eq}`eq:DCtp1Gtp1` and substituting the result into {eq}`eq:DCtp1`, and using {eq}`eq:DCvsCmC` to substitute for {math}`\Pi(\CLev_{t|\tau_{t}=t}-\CLev_{t})`, yields
-
-**PermShks=true:**
-
 ```{math}
 \begin{aligned}
 \Delta \CLev_{t+1} & = (1-\Pi) \Delta \CLev_{t}+
 \underbrace{\Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t})}_{=(1-\Pi)\Delta \CLev_{t}}\underbrace{\Rfree\MPC}_{=\rfree} + \underbrace{\Pi\left(\hat{\TShkEmp}_{t+1}\MPC+\hat{\Psi}_{t+1}\right)}_{\equiv \xi_{t+1}}
-\\ & = (1-\Pi) \Delta \CLev_{t}+ (1-\Pi) \rfree \Delta \CLev_{t} + \xi_{t+1}
-\\ & = (1-\Pi) \Rfree \Delta \CLev_{t} + \xi_{t+1}
-\end{aligned}
-```
-
-**PermShks=false:**
-
-```{math}
-\begin{aligned}
-\Delta \CLev_{t+1} & = (1-\Pi) \Delta \CLev_{t}+
-\underbrace{\Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t})}_{=(1-\Pi)\Delta \CLev_{t}}\underbrace{\Rfree\MPC}_{=\rfree} + \underbrace{\Pi\left(\hat{\TShkEmp}_{t+1}\MPC\right)}_{\equiv \xi_{t+1}}
 \\ & = (1-\Pi) \Delta \CLev_{t}+ (1-\Pi) \rfree \Delta \CLev_{t} + \xi_{t+1}
 \\ & = (1-\Pi) \Rfree \Delta \CLev_{t} + \xi_{t+1}
 \end{aligned}
@@ -249,7 +216,7 @@ To pursue this interpretation, it is useful to write the budget constraint more 
 \end{aligned}
 ```
 
-where we permit a time subscript on {math}`\Rfree` and {math}`\WGro` because we want to allow for the possibility that beliefs about the interest rate or growth rate might change over time. (**PermShks=false:** We also allow henceforth for the existence of permanent shocks to income, {math}`\Psi_{t}`.)
+where we permit a time subscript on {math}`\Rfree` and {math}`\WGro` because we want to allow for the possibility that beliefs about the interest rate or growth rate might change over time.
 
 Consider an economy that comes into existence in period {math}`0` with a population of consumers who are identical in every respect, including their beliefs about current and future values of the economy's variables.
 

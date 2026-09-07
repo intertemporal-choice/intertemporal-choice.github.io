@@ -23,8 +23,6 @@ of resources. If the consumer invests an absolute amount of money \${math}`\Stoc
 \end{aligned}\end{gathered}
 ```
 
-% \\ & = \aLev_{T-1}\Rfree + \EPrem_{T} \Stocks
-
 where {math}`\EPrem_{T}` is the "excess return" realized in period {math}`T`. Note that {math}`\EPrem_{T}` could be negative: if the risky asset performs badly enough, shareholders lose not just the excess return they hoped to earn, but part of what they would have earned from the safe asset. Given {math}`\Stocks` and defining the expected risk premium as the expected value of the expected return {math}`\EPrem = \Ex_{T-1}[\Risky_{T}-\Rfree]`, the expectation as of time {math}`T-1` is:
 
 ```{math}
@@ -38,8 +36,6 @@ where {math}`\EPrem_{T}` is the "excess return" realized in period {math}`T`. No
 e^{-\alpha(\Stocks\EPrem-\alpha\Stocks^{2}\sigma^{2}/2)}
 \end{aligned}\end{gathered}
 ```
-
-% \label{eq:removeconst}
 
 and the third line follows from the second because if {math}`z \sim \mathcal{N}(\EPrem_{z},\sigma_{z}^{2})`
 then {math}`\Ex[e^{z}] = e^{\EPrem_{z}+\sigma_{z}^{2}/2}.` (See [ELogNorm](#fact:elognorm)).

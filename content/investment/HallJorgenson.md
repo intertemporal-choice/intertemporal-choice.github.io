@@ -1,5 +1,6 @@
 (sec:HallJorgenson)=
 # The Hall-Jorgenson Model of Investment
+
 {cite:t}`hall&jorgenson:i` consider the problem of a firm that produces output using capital {math}`\kap` as its only input,
 
 ```{math}
@@ -22,7 +23,7 @@ yielding first order conditions
 :label: eq:khj
 
 \begin{gathered}\begin{aligned}
-\fFunc^{\prime}(k_{t}) & =  \kapRent_{t}
+\fFunc^{\prime}(\kap_{t}) & =  \kapRent_{t}
 \\        \kapShare \kap_{t}^{\kapShare-1} & =  \kapRent_{t}  \\
          (\inc_{t}/\kap_{t}) \kapShare & =  \kapRent_{t}  \\
         \kap_{t} & =  (\inc_{t}/\kapRent_{t})\kapShare .
@@ -68,7 +69,7 @@ Now to simplify our lives we will assume constant capital goods prices, {math}`\
 ```{math}
 \begin{gathered}\begin{aligned}
         \kap_{t} & =  \kapShare \inc_{t}/\kapRent_{t}  \\
-         & =  \kapShare \inc_{t}/(\rfree+\depr)\Price_{t}.
+         & =  \frac{\kapShare \inc_{t}}{(\rfree+\depr)\Price_{t}}.
 \end{aligned}\end{gathered}
 ```
 
@@ -108,7 +109,7 @@ If we simplify again by assuming that {math}`\dot{\hat{\Price}}_{t}=0`, we have
 \end{aligned}\end{gathered}
 ```
 
-Note that so far we have not derived a formula for investment - we have derived a formula for the *level* of the capital stock. But net investment is just the difference between the capital stock in periods {math}`t` and {math}`t-1`. Thus, the Hall-Jorgenson model of gross investment is
+Note that so far we have not derived a formula for investment; we have derived a formula for the *level* of the capital stock. But net investment is just the difference between the capital stock in periods {math}`t` and {math}`t-1`. Thus, the Hall-Jorgenson model of gross investment is
 
 ```{math}
 \begin{gathered}\begin{aligned}
