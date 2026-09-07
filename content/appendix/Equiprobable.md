@@ -90,6 +90,20 @@ defining {math}`\hat{\omega}= (\sigma_{2}/\sigma_{1}) \omega`, we have
 \end{aligned}\end{gathered}
 ```
 
+Because the two shocks are independent by construction, the joint distribution takes a
+convenient form. Stacking {math}`\ShkMeanOneLog_{1,t+1}` and {math}`\ShkMeanOneLog_{2,t+1}`
+into a vector {math}`\vec{\ShkMeanOneLog}`, we can write
+
+```{math}
+\vec{\ShkMeanOneLog} \sim \mathcal{N}(\vec{\mu},\Sigma)
+```
+
+where {math}`\vec{\mu}= \{-0.5 \sigma^{2}_{1},-0.5 \sigma^{2}_{2}\}^{\prime}` and the
+covariance matrix {math}`\Sigma` is diagonal, carrying {math}`\sigma^{2}_{1}` and
+{math}`\sigma^{2}_{2}`.[^independent-representation]
+
+[^independent-representation]: An alternative would be to work with {math}`\ShkMeanOneLog_{1,t+1}` and {math}`\risky_{t+1}` directly, which would require a multivariate normal with nonzero off-diagonal elements. The two approaches are mathematically indistinguishable, and we take the independent one because it is the more convenient to integrate against below.
+
 ## Computation
 
 A key step in the computational solution of any model with uncertainty is the calculation
