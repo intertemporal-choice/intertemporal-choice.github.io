@@ -358,3 +358,41 @@ so that we obtain a formula for {math}`\risky^{-1} = \Price_{t}/\dvdnd_{t}`
 ```
 
 The difference with {eq}`eq:PtLogIID` is only the absence of the {math}`\CRRA` multiplying {math}`\log \dvdnd_{t}`. The main substantive difference is therefore that the variance of (log) prices and the variance of (log) dividends is now the same. The surprising result that the price-dividend ratio increases when risk aversion increases continues to hold.
+
+## When Dividends Follow an AR(1) Process
+
+The two cases just examined are the polar ones, and the interesting territory lies between them. Dividends that are IID have no memory at all, while dividends that follow a random walk never forget. Actual dividends fall somewhere in the middle, high this year if they were high last year, though not permanently so.
+
+We must impose the persistence on the *log* of dividends rather than on their level, and it is worth being clear about why, because the tempting alternative fails in two separate ways. An AR(1) in levels, {math}`\dvdnd_{t+1} = \alpha \dvdnd_{t} + \err_{t+1}` with normal {math}`\err`, would put positive probability on a negative dividend, which is not a thing a tree can produce. It would also leave {math}`\dvdnd_{t}` sitting inside the expectation in {eq}`eq:pofdCRRAWdvdndGro` in a form admitting no constant price-dividend ratio, so the analytical thread would be lost at the first step.
+
+So write {math}`x_{t} \equiv \log \dvdnd_{t}` and assume
+
+```{math}
+:label: eq:AR1logs
+
+x_{t+1} = \alpha x_{t} + \err_{t+1}, \qquad \err_{t+1} \sim \mathcal{N}(-\sigma^{2}/2,\sigma^{2}),
+```
+
+which contains both earlier cases: {math}`\alpha=0` is the IID assumption and {math}`\alpha=1` is the random walk.
+
+Rather than guess at a price-dividend ratio, we price each future dividend separately and add up (the guess-and-verify route used above needs a constant ratio, and there is not one to find here). The Lucas price is the present discounted value of the dividend stream evaluated at the consumer's own marginal utility, so with {math}`\cRat=\dvdnd` and {math}`\uFunc^{\prime}(\cRat)=\cRat^{-\CRRA}`,
+
+```{math}
+:label: eq:strips
+
+\left(\frac{\Price_{t}}{\dvdnd_{t}}\right) = \sum_{n=1}^{\infty} \DiscFac^{n} \Ex_{t}\left[\left(\frac{\dvdnd_{t+n}}{\dvdnd_{t}}\right)^{1-\CRRA}\right].
+```
+
+Iterating {eq}`eq:AR1logs` gives {math}`x_{t+n}-x_{t} = (\alpha^{n}-1)x_{t} + \sum_{j=1}^{n}\alpha^{n-j}\err_{t+j}`, and because the {math}`\err` are independent and lognormal each strip can be evaluated with [ELogNorm](#fact:elognorm). Writing {math}`S_{n} = \sum_{k=0}^{n-1}\alpha^{k}` and {math}`Q_{n} = \sum_{k=0}^{n-1}\alpha^{2k}`,
+
+```{math}
+:label: eq:AR1strip
+
+\Ex_{t}\left[\left(\frac{\dvdnd_{t+n}}{\dvdnd_{t}}\right)^{1-\CRRA}\right] = \exp\left((1-\CRRA)(\alpha^{n}-1)x_{t} - \frac{\sigma^{2}}{2}(1-\CRRA)S_{n} + \frac{\sigma^{2}}{2}(1-\CRRA)^{2}Q_{n}\right).
+```
+
+Substituting {eq}`eq:AR1strip` into {eq}`eq:strips` gives the price-dividend ratio for any {math}`\alpha`. We know of no closed form for {math}`0<\alpha<1`, since {math}`\alpha^{n}` appears in an exponent and resists the geometric sum that rescues the polar cases, though the series itself converges geometrically and evaluating it costs a single line of code.
+
+The two polar cases fall out. Setting {math}`\alpha=1` makes {math}`S_{n}=Q_{n}=n` and kills the {math}`x_{t}` term, so every strip is {math}`\edvdnd^{n}` and the sum collapses to the constant ratio of {eq}`eq:PtLogRW`. Setting {math}`\alpha=0` makes {math}`S_{n}=Q_{n}=1` for every {math}`n\geq 1`, leaving {math}`\dvdnd_{t}^{\CRRA-1}\edvdnd \DiscFac/(1-\DiscFac)`, which is {eq}`eq:PtLogIID`.
+
+Between the poles the price-dividend ratio is no longer a constant. It depends on {math}`\dvdnd_{t}` through the {math}`(\alpha^{n}-1)x_{t}` term, and it is constant only in the random walk limit, where the level of dividends carries no information about their growth. Raising {math}`\alpha` raises the ratio, steeply as {math}`\alpha` nears one: at {math}`\CRRA=3`, {math}`\sigma=0.1`, {math}`\timeRate=0.04` and {math}`\dvdnd_{t}=1`, the ratio runs 25.8, 26.4, 29.5, 47.6 and 108 for {math}`\alpha=0, 0.6, 0.9, 0.99` and {math}`1`. Mean reversion is what keeps the ratio finite and modest. Remove it and the price of the tree rises sharply, because a high dividend today then forecasts high dividends forever (which is the sense in which the random walk case is the extreme one, not merely one case among several).
