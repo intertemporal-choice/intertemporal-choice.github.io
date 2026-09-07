@@ -6,10 +6,12 @@ version: 1
 project:
   toc:
     - file: README.md
-    - title: Consumption Theory
+    - file: content/consumption/index.md
       children:
         - file: content/consumption/2PeriodLCModel.md
-        - file: code/consumption/FisherTwoPeriod.ipynb
+          children:
+            # Executable companion to the chapter above; from Econ-ARK's DEMARK.
+            - file: content/consumption/FisherTwoPeriod.ipynb
         - file: content/consumption/ConsAndLaborSupply.md
         - file: content/consumption/OLGModel.md
         - file: content/consumption/GenAcctsAndGov.md
@@ -27,7 +29,7 @@ project:
         - file: content/consumption/CRRA-RateRisk.md
         - file: content/consumption/CARAModelWithYRisk.md
         - file: content/consumption/CampManCRRAWithTimeVaryingR.md
-    - title: Asset Pricing
+    - file: content/asset_pricing/index.md
       children:
         - file: content/asset_pricing/CARAPortfolio.md
         - file: content/asset_pricing/Portfolio-CRRA.md
@@ -37,7 +39,7 @@ project:
         - file: content/asset_pricing/Bubbles.md
         - file: content/asset_pricing/C-With-Optimal-Portfolio.md
         - file: content/asset_pricing/Portfolio-Multi-CRRA.md
-    - title: Investment Theory
+    - file: content/investment/index.md
       children:
         - file: content/investment/InvestmentNotes.md
         - file: content/investment/HallJorgenson.md
@@ -45,7 +47,7 @@ project:
         - file: content/investment/EntrepreneurPF.md
         - file: content/investment/Imperfections.md
         - file: content/investment/iAndCashFlow.md
-    - title: Growth Theory
+    - file: content/growth/index.md
       children:
         - file: content/growth/RamseyCassKoopmans.md
         - file: content/growth/RCKWithGov.md
@@ -57,11 +59,11 @@ project:
         - file: content/growth/LucasGrowth.md
         - file: content/growth/BlanchardFiniteHorizon.md
         - file: content/growth/GrowthAndGrossSaving.md
-    - title: DSGE Models
+    - file: content/dsge/index.md
       children:
         - file: content/dsge/BrockMirman.md
         - file: content/dsge/RBC-Prescott.md
-    - title: Appendix
+    - file: content/appendix/index.md
       children:
         - file: content/appendix/Aggregation.md
         - file: content/appendix/Equiprobable.md

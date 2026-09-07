@@ -83,6 +83,11 @@ project:
         - Funding acquisition
     - id: alujan
       name:
+        # A two-word surname does not survive MyST's round-trip check: it re-parses
+        # "Alan E. Lujan Solis" as family "Solis", disagrees with the declaration, and
+        # falls back to "Lujan Solis, Alan E." to keep the surname unambiguous. `literal`
+        # short-circuits that and prints verbatim; given/surname stay for metadata.
+        literal: Alan E. Lujan Solis
         given: Alan E.
         surname: Lujan Solis
       affiliations:
@@ -137,11 +142,128 @@ project:
 
   # Exports configuration for PDF/LaTeX generation
   exports:
-    - format: pdf
-      template: plain-latex-book
+    - format: tex+pdf
+      template: plain_latex_book
       output: exports/intertemporal-choice.pdf
-    - format: tex
-      output: exports/intertemporal-choice-tex/
+      articles:
+        - file: content/consumption/index.md
+          level: 0
+        - file: content/consumption/2PeriodLCModel.md
+          level: 1
+        - file: content/consumption/ConsAndLaborSupply.md
+          level: 1
+        - file: content/consumption/OLGModel.md
+          level: 1
+        - file: content/consumption/GenAcctsAndGov.md
+          level: 1
+        - file: content/consumption/SocSecAndKAccum.md
+          level: 1
+        - file: content/consumption/Envelope.md
+          level: 1
+        - file: content/consumption/PerfForesightCRRA.md
+          level: 1
+        - file: content/consumption/RandomWalk.md
+          level: 1
+        - file: content/consumption/ConsumptionFunction.md
+          level: 1
+        - file: content/consumption/StickyExpectationsC.md
+          level: 1
+        - file: content/consumption/Habits.md
+          level: 1
+        - file: content/consumption/Durables.md
+          level: 1
+        - file: content/consumption/RiskAndPSPremia.md
+          level: 1
+        - file: content/consumption/BufferStockAgeProfiles.md
+          level: 1
+        - file: content/consumption/Laibson.md
+          level: 1
+        - file: content/consumption/CRRA-RateRisk.md
+          level: 1
+        - file: content/consumption/CARAModelWithYRisk.md
+          level: 1
+        - file: content/consumption/CampManCRRAWithTimeVaryingR.md
+          level: 1
+        - file: content/asset_pricing/index.md
+          level: 0
+        - file: content/asset_pricing/CARAPortfolio.md
+          level: 1
+        - file: content/asset_pricing/Portfolio-CRRA.md
+          level: 1
+        - file: content/asset_pricing/LucasAssetPrice.md
+          level: 1
+        - file: content/asset_pricing/EquityPremiumPuzzle.md
+          level: 1
+        - file: content/asset_pricing/C-CAPM.md
+          level: 1
+        - file: content/asset_pricing/Bubbles.md
+          level: 1
+        - file: content/asset_pricing/C-With-Optimal-Portfolio.md
+          level: 1
+        - file: content/asset_pricing/Portfolio-Multi-CRRA.md
+          level: 1
+        - file: content/investment/index.md
+          level: 0
+        - file: content/investment/InvestmentNotes.md
+          level: 1
+        - file: content/investment/HallJorgenson.md
+          level: 1
+        - file: content/investment/qModel.md
+          level: 1
+        - file: content/investment/EntrepreneurPF.md
+          level: 1
+        - file: content/investment/Imperfections.md
+          level: 1
+        - file: content/investment/iAndCashFlow.md
+          level: 1
+        - file: content/growth/index.md
+          level: 0
+        - file: content/growth/RamseyCassKoopmans.md
+          level: 1
+        - file: content/growth/RCKWithGov.md
+          level: 1
+        - file: content/growth/qRamsey.md
+          level: 1
+        - file: content/growth/DecentralizingRCK.md
+          level: 1
+        - file: content/growth/Romer86.md
+          level: 1
+        - file: content/growth/Endogenous.md
+          level: 1
+        - file: content/growth/RebeloAK.md
+          level: 1
+        - file: content/growth/LucasGrowth.md
+          level: 1
+        - file: content/growth/BlanchardFiniteHorizon.md
+          level: 1
+        - file: content/growth/GrowthAndGrossSaving.md
+          level: 1
+        - file: content/dsge/index.md
+          level: 0
+        - file: content/dsge/BrockMirman.md
+          level: 1
+        - file: content/dsge/RBC-Prescott.md
+          level: 1
+        - file: content/appendix/index.md
+          level: 0
+        - file: content/appendix/Aggregation.md
+          level: 1
+        - file: content/appendix/Equiprobable.md
+          level: 1
+        - file: content/appendix/Equiprobable-Returns.md
+          level: 1
+        - file: content/appendix/HamiltonianVSDiscrete.md
+          level: 1
+        - file: content/appendix/MathFactsList.md
+          level: 1
+
+  # In-page execution, so the sliders in the Fisher notebook are live. mybinder builds
+  # the kernel from the repo named here and reads PUBLIC repos only, which this is not;
+  # DemARK is public, is where the notebook comes from, and already installs HARK.
+  jupyter:
+    binder:
+      repo: https://github.com/econ-ark/DemARK
+      ref: main
 
   # Exclude patterns (TOC-listed files are still built even if matched)
   # sources/ contains LaTeX originals, exports/ is build output
@@ -161,11 +283,17 @@ project:
       severity: warn
 
   # Numbering configuration
+  # MyST's real numbering keys are SINGULAR (equation, figure, table, subfigure,
+  # subequation, code, heading_1..6); only `headings` is a plural key. The plural
+  # `equations`/`figures`/`tables` written here before were silently ignored, and
+  # numbering came from the defaults. Do not set `equation: false` to unnumber
+  # equations: it does not produce equation*, it drops the \ref, so every reference
+  # prints as the bare word "Equation" with no number.
   numbering:
     headings: true
-    equations: true
-    figures: true
-    tables: true
+    equation: true
+    figure: true
+    table: true
 
   # Abbreviations used throughout the text
   abbreviations:

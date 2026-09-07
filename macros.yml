@@ -373,7 +373,10 @@ project:
     '\deprRte': '\delta'
     '\diePrb': '\mathsf{d}'
     '\discRte': '\vartheta'
-    '\div': 'd'
+    # '\div': 'd'  # dividends in econtexShortcuts.sty, but \div is LaTeX's division
+    # symbol, so the generated \newcommand aborts the PDF build with "Command \div
+    # already defined". Nothing in the book uses it. Restore under another name if a
+    # handout ever needs it.
     '\divGro': '\mathsf{g}'
     '\dvdnd': 'd'
     '\eFunc': '\mathrm{e}'
