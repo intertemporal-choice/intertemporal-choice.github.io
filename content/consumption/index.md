@@ -1,9 +1,9 @@
 # Consumption Theory
 
 Fisher's two-period problem opens the chapter. It exposes the logic of intertemporal
-choice in the simplest setting that contains anything interesting: a budget constraint
-trading current against future consumption, and a first-order condition equating the
-marginal rate of substitution between them to the interest factor.
+choice in the simplest setting that contains anything interesting, one in which a budget
+constraint trades current against future consumption and a first-order condition equates
+the marginal rate of substitution between them to the interest factor.
 
 Extending that problem in one direction gives the Diamond overlapping generations
 model, which lets us ask how public pensions and government debt shift resources across
@@ -11,7 +11,7 @@ cohorts. Extending Fisher's problem in the other direction,
 toward many periods and uncertain income, gives the perfect foresight CRRA consumption
 function and then the random walk result. Admitting a precautionary motive yields buffer
 stock behavior, which reconciles the theory with observed age profiles of consumption
-and income.
+and income (the hump the perfect foresight model cannot produce).
 
 The chapter closes with the leading departures from that benchmark: habit formation,
 durable goods, time inconsistent discounting, and expectations that respond only

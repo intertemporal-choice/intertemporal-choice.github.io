@@ -1,8 +1,9 @@
 # Investment Theory
 
-Investment is the firm's version of the consumption problem. The parallel is close
-enough that the Hall-Jorgenson user cost of capital reads directly off an intertemporal
-first-order condition. The trouble with that frictionless benchmark is what it leaves
+Investment is the firm's version of the consumption problem, and we exploit the parallel
+throughout. It is close enough that the Hall-Jorgenson user cost of capital reads
+directly off an intertemporal first-order condition (the same Euler equation, with the
+marginal product of capital where the interest factor stood). The trouble with that frictionless benchmark is what it leaves
 out. It pins down the desired capital *stock* but says nothing about the *rate* at which
 a firm approaches it, so whenever user cost falls below the marginal product of capital
 the implied investment rate is unbounded.

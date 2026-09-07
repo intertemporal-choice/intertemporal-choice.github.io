@@ -7,8 +7,9 @@ several handouts stay inside that framework and add pieces to it: government pur
 and taxation, adjustment costs on investment, and a decentralization that lets
 competitive markets reproduce the planner's allocation.
 
-Attention then turns to the model's central embarrassment. Unless productivity growth
-arrives from outside, the model predicts no long-run growth in per capita income at all.
+We then turn to the model's central embarrassment. Unless productivity growth arrives
+from outside, the model predicts no long-run growth in per capita income at all (the
+thing it was built to explain enters as an assumption).
 The endogenous growth literature answers by finding some factor that households can
 accumulate without bound, and the handouts on Romer, Rebelo, and Lucas each pick a
 different candidate. A final handout swaps the infinitely lived household for Blanchard's

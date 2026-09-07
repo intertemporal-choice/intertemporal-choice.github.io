@@ -9,8 +9,9 @@ is a dollar amount held in the risky asset, independent of wealth; under CRRA ut
 Merton-Samuelson result instead makes the risky *share* independent of wealth. The logic
 then reverses. Lucas takes consumption as exogenous and solves for the price that makes
 households willing to hold the market, which delivers the consumption CAPM and, applied
-to data, the equity premium puzzle: no plausible degree of risk aversion explains the
-historical excess return on equity.
+to data, the equity premium puzzle, since no plausible degree of risk aversion explains
+the historical excess return on equity (matching it takes a coefficient of relative risk
+aversion around 20, while the riskless rate over the same period wants one below one).
 
 Two further questions close the chapter. What prices are consistent with the absence of
 arbitrage even when they diverge from fundamentals, and what changes when the household
