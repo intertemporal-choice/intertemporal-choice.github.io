@@ -8,9 +8,9 @@ Lecture notes on consumption, saving, growth, and asset pricing for advanced mas
 
 ## About
 
-These lecture notes introduce the foundations of modern macroeconomic theory. Starting from first principles, we develop the mathematical tools and economic intuition needed to understand how agents make decisions over time under certainty and uncertainty.
+Almost every question in macroeconomics turns on how people trade off today against tomorrow. How much of a raise gets spent? Why do the rich save so much more than the poor? Why does the stock market move so much more than dividends do? These notes work through the theory that answers such questions, starting with a consumer who lives for two periods and knows everything, and ending with models rich enough to be taken to data.
 
-We derive results analytically while connecting theory to computational methods and empirical applications. Each topic proceeds from simple benchmark models to extensions that incorporate additional features.
+We keep the arithmetic in view throughout. Results are derived rather than asserted, each chapter starts from the simplest case that contains anything interesting, and the harder cases are reached by relaxing one assumption at a time. Where a model has no closed form we say so and compute instead, because a formula nobody can interpret teaches less than a number somebody can check.
 
 The notes originated from Christopher Carroll's [graduate macroeconomics lecture notes](https://www.econ2.jhu.edu/people/ccarroll/public/lecturenotes/) at Johns Hopkins University. Alan Lujan teaches from these materials in the advanced macroeconomics sequence of JHU's masters economics program.
 
