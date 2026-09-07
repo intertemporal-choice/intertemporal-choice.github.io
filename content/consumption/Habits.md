@@ -43,7 +43,9 @@ To clarify the workings of the Envelope theorem in the case with two state varia
 \underline{\vFunc}_{t}(\mRat_{t},\habit_{t},c_{t}) = \uFunc(c_{t},\habit_{t}) +\Discount \vFunc_{t+1}((\mRat_{t}-c_{t})\Rfree+y_{t+1},c_{t})
 ```
 
-and define the function {math}`\mathbf{c}_{t}(\mRat_{t},\habit_{t})` as the choice of {math}`c_{t}` that solves the maximization {eq}`eq:bellmanmax`, so that we have
+Viewed as a function of {math}`\mRat_{t}`, this {math}`\underline{\vFunc}_{t}` lies below {math}`\vFunc_{t}` everywhere except at the optimal {math}`c_{t}`, where the two touch. The Envelope theorem exploits that tangency.
+
+Now define the function {math}`\mathbf{c}_{t}(\mRat_{t},\habit_{t})` as the choice of {math}`c_{t}` that solves the maximization {eq}`eq:bellmanmax`, so that we have
 
 ```{math}
 \vFunc_{t}(\mRat_{t},\habit_{t}) = \underline{\vFunc}_{t}(\mRat_{t},\habit_{t},\mathbf{c}_{t}(\mRat_{t},\habit_{t})).

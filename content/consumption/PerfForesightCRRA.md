@@ -13,11 +13,7 @@ The consumer's problem in period {math}`t` is to
 \max \sum_{n=0}^{\TEnd-\tNow} \Discount^{n} \uFunc(\cLevBF_{\tNow+n})
 ```
 
-subject to the constraints
-
-:::{margin}
-Introducing {math}`\bLevBF` and {math}`\mLevBF` because useful to have a term for non-income resources at beginning of period.
-:::
+subject to the constraints below, in which we introduce {math}`\bLevBF` and {math}`\mLevBF` because it is useful to have a term for the consumer's non-income resources at the beginning of the period,
 
 ```{math}
 \begin{aligned}
@@ -35,11 +31,9 @@ where {math}`\pLevBF_{\tNow+1}` is "permanent labor income," which always grows 
 
 ## The Solution
 
-It will be convenient to think of both market resources {math}`\mLevBF_{\tNow}` and permanent noncapital (labor) income {math}`\pLevBF_{\tNow}` as state variables in this problem. Bellman's equation is
+It will be convenient to think of both market resources {math}`\mLevBF_{\tNow}` and permanent noncapital (labor) income {math}`\pLevBF_{\tNow}` as state variables in this problem. Bellman's equation is[^bellman-form]
 
-:::{margin}
-Bellman's equation relates {math}`\vFunc_{\tNow}` and {math}`\vFunc_{\tNow+1}` through the controls and states. It doesn't necessarily require writing out the budget constraint.
-:::
+[^bellman-form]: Bellman's equation relates {math}`\vFunc_{\tNow}` and {math}`\vFunc_{\tNow+1}` through the controls and the states, so it does not necessarily require writing out the budget constraint.
 
 ```{math}
 :label: eq:PFCRRA-vmax
@@ -91,11 +85,10 @@ Thus, consumption grows in every period by a factor {math}`\Pat \equiv (\Rfree\D
 
 we will say that the consumer exhibits "absolute impatience" because this is the condition that guarantees that the level of consumption will be falling (and what better definition of absolute impatience could there be than deliberately spending so much that you will have to cut your spending in the future?). If {math}`\Pat > 1` the consumer exhibits "absolute patience" (the consumer wants to defer resources into the future in order to achieve consumption growth).
 
-:::{margin}
-Note that [InfSum](#fact:infsum) is an obvious implication of [FinSum](#fact:finsum) as {math}`\TEnd \rightarrow \infty`.
-:::
+The Intertemporal Budget Constraint tells us[^infsum-note]
 
-The Intertemporal Budget Constraint tells us that the present discounted value of consumption must match the PDV of total resources:
+[^infsum-note]: [InfSum](#fact:infsum) is the immediate implication of [FinSum](#fact:finsum) as {math}`\TEnd \rightarrow \infty`.
+ that the present discounted value of consumption must match the PDV of total resources:
 
 ```{math}
 :label: eq:PFCRRA-ibc
@@ -189,11 +182,7 @@ where {math}`\oLev_{\tNow}` is the consumer's "**o**verall" or "total wealth," t
 
 Now consider the question "What is the level of {math}`\cLevBF_{\tNow}` that will leave total wealth intact, allowing the same value of consumption in period {math}`t+1` and forever after (that is, allowing {math}`\cLevBF_{\tNow+n}=\cLevBF_{\tNow}~\forall~n>0`)?"
 
-The intuitive answer is that the wealth-preserving level of spending is exactly equal to the (properly conceived) interest earnings on one's total wealth. We call this the "sustainable" level of consumption.
-
-:::{margin}
-This was interpreted as "permanent income" in the 1970s and 80s, but that term will not be used here. Wealth in this framework is exactly like an asset that yields a dividend {math}`P`.
-:::
+The intuitive answer is that the wealth-preserving level of spending is exactly equal to the (properly conceived) interest earnings on one's total wealth. We call this the "sustainable" level of consumption. The literature of the 1970s and 80s interpreted that quantity as "permanent income," but we reserve that term here for {math}`\pLevBF` itself. Wealth in this framework behaves exactly like an asset that yields a dividend {math}`\pLevBF`.
 
 Because human wealth is exactly like any other kind of wealth in this perfect foresight framework, it is possible to work directly with the level of total wealth {math}`\oLev` to find the sustainable level of spending. Suppose we assume the consumer will spend fraction {math}`\PIHMPC` of total wealth in each period; the {math}`\PIHMPC` that leaves wealth intact will be given by {math}`\PIHMPC` in
 
@@ -225,15 +214,9 @@ Note that the coefficient multiplying total wealth in {eq}`eq:PFCRRA-cOfw` is al
 
 Finally, if {math}`\Rfree\Discount=1` (which is to say, the interest rate exactly offsets the time preference rate), then {math}`(\Rfree\Discount)^{1/\CRRA}=1` regardless of the value of {math}`\CRRA` so that the consumer is "poised" on the knife-edge between patience and impatience. We refer to such a consumer as "absolutely poised." Similarly, we say that a consumer for whom {math}`\PatR=1` is "return poised."
 
-:::{margin}
-Income here means inclusive of interest income on total wealth.
-:::
+The two conditions do different work. Return impatience guarantees a positive marginal propensity to consume, while absolute impatience guarantees a falling level of consumption. Whenever {math}`\rfree > 0`, return impatience holds even for a consumer who is poised with respect to absolute patience.
 
-:::{margin}
-"Return impatience" guarantees a positive marginal propensity to consume; absolute impatience guarantees a falling level of consumption. If {math}`\rfree > 0`, return impatience will hold even if the consumer is "poised" with respect to absolute patience.
-:::
-
-(The consumer will be impatient, spending more than his income, if {math}`\Rfree\Discount<1`, and patient, spending less than his income, if {math}`\Rfree\Discount>1`.)
+(The consumer will be impatient, spending more than his income, if {math}`\Rfree\Discount<1`, and patient, spending less than his income, if {math}`\Rfree\Discount>1`. Income here means income inclusive of the interest earnings on total wealth.)
 
 Equation {eq}`eq:PFCRRA-cOfw` can be simplified into something a bit easier to handle by making some approximations. If {math}`\Discount = 1/(1+\timeRate)`, then we can use facts from the [MathFacts section](#fact:mathfactslist) to discover that
 
@@ -287,11 +270,7 @@ With constant {math}`\pLevBF` we can rewrite {eq}`eq:PFCRRA-capprox` as
 \cLevBF_{\tNow} \approx \left(\rfree-\CRRA^{-1}(\rfree-\timeRate)\right)\left(\bLevBF_{\tNow}+ \pLevBF\left(\frac{\Rfree}{\rfree}\right)\right).
 ```
 
-{math}`\rfree` appears three times in this equation, which correspond (in order) to the income effect, the substitution effect, and the human wealth effect. To see this, note that an increase in the first {math}`\rfree` reflects an increase in the payout rate on total wealth (set {math}`\pLevBF = 0` and refer to our formula above for {math}`\PIHMPC`, realizing that for small {math}`\rfree`, {math}`\rfree/\Rfree \approx \rfree`.) That is, it simply reflects the consequence for consumption of an increase in interest income, so it captures the "income effect" of interest rates. The second term corresponds to the substitution effect, as can be seen from its dependence on the intertemporal elasticity of substitution {math}`\CRRA^{-1}`. Finally, the {math}`\pLevBF(\Rfree/\rfree)` term clearly corresponds to human wealth, and therefore the sensitivity of consumption to {math}`\rfree` coming through this term corresponds to the human wealth *effect*.
-
-:::{margin}
-The human wealth effect was introduced using the Fisher diagram in the [two-period model](#sec:2PeriodLCModel) section.
-:::
+{math}`\rfree` appears three times in this equation, which correspond (in order) to the income effect, the substitution effect, and the human wealth effect. To see this, note that an increase in the first {math}`\rfree` reflects an increase in the payout rate on total wealth (set {math}`\pLevBF = 0` and refer to our formula above for {math}`\PIHMPC`, realizing that for small {math}`\rfree`, {math}`\rfree/\Rfree \approx \rfree`.) That is, it simply reflects the consequence for consumption of an increase in interest income, so it captures the "income effect" of interest rates. The second term corresponds to the substitution effect, as can be seen from its dependence on the intertemporal elasticity of substitution {math}`\CRRA^{-1}`. Finally, the {math}`\pLevBF(\Rfree/\rfree)` term clearly corresponds to human wealth, and therefore the sensitivity of consumption to {math}`\rfree` coming through this term corresponds to the human wealth *effect*, which we introduced using the Fisher diagram in the [two-period model](#sec:2PeriodLCModel) section.
 
 ## Normalizing By {math}`\pLevBF`
 
