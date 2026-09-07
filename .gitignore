@@ -352,3 +352,9 @@ TSWLatexianTemp*
 #
 # Not backed up anywhere but this machine. See project memory before relying on it.
 sources/
+
+# exports/ is where `myst build --pdf` lands. The PDF is the artifact worth having in
+# history; everything beside it is regenerable noise, currently 3.7M of LaTeX
+# intermediates in *_pdf_tex/ plus the logs. Ignore the directory and re-admit the PDF.
+exports/*
+!exports/*.pdf
