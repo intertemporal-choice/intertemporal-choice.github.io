@@ -45,6 +45,9 @@ project:
         - file: content/investment/HallJorgenson.md
         - file: content/investment/qModel.md
         - file: content/investment/EntrepreneurPF.md
+        # Converted from the DynanImperfCapMkts handout, which the local sources/
+        # mirror never pulled; the mechanism chapter for the two that follow.
+        - file: content/investment/DynanImperfCapMkts.md
         - file: content/investment/Imperfections.md
         - file: content/investment/iAndCashFlow.md
     - file: content/growth/index.md

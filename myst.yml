@@ -212,6 +212,8 @@ project:
           level: 1
         - file: content/investment/EntrepreneurPF.md
           level: 1
+        - file: content/investment/DynanImperfCapMkts.md
+          level: 1
         - file: content/investment/Imperfections.md
           level: 1
         - file: content/investment/iAndCashFlow.md
