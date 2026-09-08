@@ -130,7 +130,7 @@ Now suppose that the consumer's utility is *time-separable*, and the felicity fu
 
 where {math}`\DiscFac` is a *time preference factor* that specifies how the consumer trades off utility in period 1 against utility in period 2.[^samuelson]
 
-[^samuelson]: Paul {cite:t}`samuelson1937note,samuelson:olg` introduced the discounting of future utility into the problem. See {cite:t}`floDiscounting` for a comprehensive review of the still-controversial topic of time discounting.
+[^samuelson]: Paul {cite:t}`samuelson1937note,samuelsonOLG` introduced the discounting of future utility into the problem. See {cite:t}`floDiscounting` for a comprehensive review of the still-controversial topic of time discounting.
 
 From our assumptions {eq}`eq:uprimepos` and {eq}`eq:uprimeprimeneg` we know that the felicity function must satisfy
 
