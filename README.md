@@ -4,8 +4,6 @@ Lecture notes on consumption, saving, growth, and asset pricing for advanced mas
 
 **Authors:** Christopher D. Carroll and Alan E. Lujan Solis
 
-**Institution:** Johns Hopkins University
-
 ## About
 
 Almost every question in macroeconomics turns on how people trade off today against tomorrow. How much of a raise gets spent? Why do the rich save so much more than the poor? Why does the stock market move so much more than dividends do? These notes work through the theory that answers such questions, starting with a consumer who lives for two periods and knows everything, and ending with models rich enough to be taken to data.
@@ -91,4 +89,4 @@ The [HARK](https://docs.econ-ark.org/) toolkit provides computational implementa
 
 If you use these materials, please cite:
 
-> Carroll, Christopher D. and Alan E. Lujan Solis. *A Gentle Introduction to Intertemporal Choice*. Johns Hopkins University. https://github.com/jhu-econ/intertemporal-choice
+> Carroll, Christopher D. and Alan E. Lujan Solis. *A Gentle Introduction to Intertemporal Choice*. https://intertemporal-choice.github.io
