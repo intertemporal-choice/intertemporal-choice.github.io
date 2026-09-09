@@ -1,6 +1,10 @@
 (sec:PerfForesightCRRA)=
 # Consumption Under Perfect Foresight and CRRA Utility
 
+Two companion notebooks in the Econ-ARK DemARK collection work this model numerically:
+[Perfect Foresight CRRA Model - Approximation](https://econ-ark.org/materials/perfforesightcrra-approximation)
+and [Perfect Foresight CRRA Model - Saving Rate](https://econ-ark.org/materials/perfforesightcrra-savingrate).
+
 ## The Problem
 
 This section solves the problem of a perfect foresight consumer with intertemporally separable CRRA utility {math}`\uFunc(\bullet)= \bullet^{1-\CRRA}/(1-\CRRA)` who discounts future utility geometrically by a factor {math}`\Discount` per period. The finite horizon solution, whose last period is {math}`\TEnd`, extends to the infinite horizon case if intuitive "impatience" and "finite human wealth" conditions hold.

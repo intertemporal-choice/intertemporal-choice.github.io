@@ -1,6 +1,10 @@
 (sec:StickyExpectationsC)=
 # Sticky Expectations and Consumption Dynamics
 
+A companion replication in the Econ-ARK REMARK collection,
+[Sticky Expectations and Consumption Dynamics](https://econ-ark.org/materials/candcwithstickye),
+reproduces the results of the paper this section draws on.
+
 Consider a consumer subject to the dynamic budget constraint
 
 ```{math}

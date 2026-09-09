@@ -198,4 +198,4 @@ Assuming {math}`\delta < 1`, this equation implies that *spending on durable goo
 
 A further implication of this model is that the degree of correlation between nondurables spending growth and durables spending growth depends on the frequency under consideration. For a given quarterly depreciation rate (say, 5 percent per quarter), the durable good will have almost completely depreciated over the course of 10 years = 40 quarters because {math}`0.95^{40}=0.12`. According to the model, over an interval long enough for the durable to have completely depreciated, the rate of growth of spending on the durable should match the rate of growth of spending of the nondurable, because over such a long interval they are really both nondurable.
 
-Some evidence on this proposition is provided in the Jupyter notebook available [here](https://github.com/llorracc/Jupyter/blob/master/notebooks/Durables-vs-Nondurables-At-Low-And-High-Frequencies.ipynb).
+Some evidence on this proposition is provided in the Jupyter notebook available [here](https://github.com/econ-ark/DemARK/blob/main/notebooks/Durables-vs-Nondurables-At-Low-And-High-Frequencies.ipynb).
