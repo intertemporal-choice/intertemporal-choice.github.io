@@ -108,10 +108,8 @@ project:
   # editors:
   #   - name: Editor Name
 
-  venue:
-    title: Johns Hopkins University
-    short_title: JHU
-    url: https://www.jhu.edu/
+  # No `venue`. The authors are employed by JHU and say so in their affiliations,
+  # but the book is not a JHU publication and must not declare one as its venue.
 
   funding:
     - statement: >-
@@ -130,11 +128,11 @@ project:
             - ccarroll
             - alujan
 
-  github: https://github.com/jhu-econ/intertemporal-choice
+  github: https://github.com/intertemporal-choice/intertemporal-choice.github.io
 
   # Social links for the project
   social:
-    github: jhu-econ/intertemporal-choice
+    github: intertemporal-choice/intertemporal-choice.github.io
     # twitter: mystmarkdown
 
   bibliography:
@@ -349,10 +347,6 @@ site:
   nav:
     - title: Econ-ARK
       url: https://econ-ark.org
-    - title: JHU Applied Economics
-      url: https://advanced.jhu.edu/academics/graduate/ms-applied-economics/
-    - title: JHU Economics
-      url: https://econ.jhu.edu
 
   # Action buttons in header
   actions:
@@ -363,7 +357,6 @@ site:
   # See https://mystmd.org/guide/document-parts#add-website-parts
   parts:
     footer: |
-      Built with [MyST Markdown](https://mystmd.org) • 
-      Part of the [Econ-ARK](https://econ-ark.org) ecosystem • 
-      [Johns Hopkins University](https://www.jhu.edu)
+      Built with [MyST Markdown](https://mystmd.org) •
+      Part of the [Econ-ARK](https://econ-ark.org) ecosystem
     # primary_sidebar_footer: sidebar-footer.md
