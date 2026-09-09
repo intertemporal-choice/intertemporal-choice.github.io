@@ -38,7 +38,16 @@ jobs:
       - name: Install MyST
         run: npm install -g mystmd
       - name: Build HTML Assets
-        run: myst build --html
+        run: myst build --html --strict
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      # Gates the deploy on the OUTPUT, not the build's exit code: myst build exits 0
+      # on a site whose every stylesheet 404s. See code/verify_build.py.
+      - name: Verify the built site is servable
+        run: |
+          python code/verify_build.py --self-test
+          python code/verify_build.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

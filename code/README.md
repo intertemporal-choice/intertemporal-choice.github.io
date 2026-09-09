@@ -14,3 +14,15 @@ extracts whatever is absent.
 
 Verified 2026-08-23: 46 of the 47 handouts then in `sources/` were byte-identical (md5)
 to the `LaTeX/<stem>.tex` inside their source zip.
+
+## `verify_build.py`
+
+Gates the GitHub Pages deploy on the built output rather than the build's exit code,
+because `myst build` exits 0 on a site whose every stylesheet 404s. It checks that
+`index.html` carries real content, that no asset path is prefixed with the repository
+name (the signature of a project-site `BASE_URL` on a root-served site), and that the
+expected number of pages were emitted.
+
+`--self-test` runs each check against input it should reject, and fails if any check
+passes it. The deploy workflow runs the self-test first, so a check that has quietly
+stopped discriminating is caught rather than trusted.
