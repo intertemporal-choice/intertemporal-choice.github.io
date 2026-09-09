@@ -357,7 +357,7 @@ site:
   # Action buttons in header
   actions:
     - title: GitHub
-      url: https://github.com/jhu-econ/intertemporal-choice
+      url: https://github.com/intertemporal-choice/intertemporal-choice.github.io
 
   # Site parts for custom footer and sidebar
   # See https://mystmd.org/guide/document-parts#add-website-parts
