@@ -9,9 +9,6 @@ project:
     - file: content/consumption/index.md
       children:
         - file: content/consumption/2PeriodLCModel.md
-          children:
-            # Executable companion to the chapter above; from Econ-ARK's DEMARK.
-            - file: content/consumption/FisherTwoPeriod.ipynb
         - file: content/consumption/ConsAndLaborSupply.md
         - file: content/consumption/OLGModel.md
         - file: content/consumption/GenAcctsAndGov.md

@@ -257,13 +257,8 @@ project:
         - file: content/appendix/MathFactsList.md
           level: 1
 
-  # In-page execution, so the sliders in the Fisher notebook are live. mybinder builds
-  # the kernel from the repo named here and reads PUBLIC repos only, which this is not;
-  # DemARK is public, is where the notebook comes from, and already installs HARK.
-  jupyter:
-    binder:
-      repo: https://github.com/econ-ark/DemARK
-      ref: main
+  # No `jupyter` block. The book carries no executable pages; the Fisher notebook lives
+  # in Econ-ARK's DemARK and the two-period chapter links out to it.
 
   # Exclude patterns (TOC-listed files are still built even if matched)
   # sources/ contains LaTeX originals, exports/ is build output

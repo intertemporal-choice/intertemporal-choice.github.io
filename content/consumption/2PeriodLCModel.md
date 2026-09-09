@@ -313,4 +313,4 @@ which moves the label onto the inner float, so references print "Figure ??". -->
 Fisher Figure Analysis
 :::
 
-The analysis in {numref}`fig:Fisher` is redrawn with sliders in [](/content/consumption/FisherTwoPeriod.ipynb). Varying the interest factor and the two income endowments rotates the budget constraint and moves the optimal point, tracing the income, substitution, and human wealth effects decomposed above.
+The analysis in {numref}`fig:Fisher` is redrawn with sliders in the [Fisher two-period notebook](https://econ-ark.org/materials/fishertwoperiod) in the Econ-ARK DemARK collection. Varying the interest factor and the two income endowments rotates the budget constraint and moves the optimal point, tracing the income, substitution, and human wealth effects decomposed above.
