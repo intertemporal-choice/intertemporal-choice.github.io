@@ -18,6 +18,7 @@ Usage: uv run python code/mirror_check.py [--fetch]
 
 import argparse
 import io
+import itertools
 import logging
 import re
 import subprocess
@@ -104,19 +105,25 @@ ARTIFACT_EXT = {
 
 
 def curl(url, binary=False):
+    # -f and check=True: a failed or 404 fetch must raise, since an empty index reads
+    # as "nothing missing" and a 404 page would be saved as the handout's PDF.
     out = subprocess.run(
-        ["curl", "-sSL", "--max-time", "90", url],
+        ["curl", "-fsSL", "--max-time", "90", url],
         capture_output=True,
         text=not binary,
+        check=True,
     )
     return out.stdout
 
 
 def head_status(url):
     out = subprocess.run(
-        ["curl", "-sSI", "-L", "--max-time", "30", url], capture_output=True, text=True
+        ["curl", "-sSI", "-L", "--max-time", "30", url],
+        capture_output=True,
+        text=True,
+        check=False,
     ).stdout
-    codes = re.findall(r"^HTTP/[\d.]+ (\d+)", out, re.M)
+    codes = re.findall(r"^HTTP/[\d.]+ (\d+)", out, re.MULTILINE)
     return int(codes[-1]) if codes else 0
 
 
@@ -140,7 +147,7 @@ def excluded_from_zip(path, stem):
         return True
     if any(p.startswith("texmf") for p in parts):
         return True
-    if any(a == b for a, b in zip(parts, parts[1:])):
+    if any(a == b for a, b in itertools.pairwise(parts)):
         return True
     if path.suffix.lower() in ARTIFACT_EXT:
         return True
