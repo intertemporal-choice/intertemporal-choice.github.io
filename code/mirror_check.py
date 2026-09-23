@@ -117,14 +117,18 @@ def curl(url, binary=False):
 
 
 def head_status(url):
+    # No -f: curl exits 0 on an HTTP 404, which is an answer (a PDF-only handout), and
+    # non-zero only when the request itself fails, which must raise, not read as a 404.
     out = subprocess.run(
         ["curl", "-sSI", "-L", "--max-time", "30", url],
         capture_output=True,
         text=True,
-        check=False,
+        check=True,
     ).stdout
     codes = re.findall(r"^HTTP/[\d.]+ (\d+)", out, re.MULTILINE)
-    return int(codes[-1]) if codes else 0
+    if not codes:
+        raise RuntimeError(f"no HTTP status in the response for {url}")
+    return int(codes[-1])
 
 
 def handouts_on_site(section):
