@@ -6,7 +6,7 @@ kernelspec:
 ---
 
 (sec:KeynesFriedmanModigliani)=
-# Consumption Functions: Keynes, Duesenberry, and Friedman
+# Introduction: Keynes, Friedman, Modigliani
 
 ```{code-cell} ipython3
 # Some initial setup

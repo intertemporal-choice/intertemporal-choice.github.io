@@ -22,7 +22,7 @@ These materials are freely available under a CC-BY-4.0 license. Instructors at o
 
 From perfect foresight through OLG to buffer stock models:
 
-- The consumption functions of Keynes, Duesenberry, and Friedman against US data
+- Keynes, Friedman, Modigliani: early consumption functions against US data
 - Perfect foresight consumption under CRRA and CARA utility
 - The permanent income hypothesis and consumption smoothing
 - Precautionary saving and buffer-stock behavior
