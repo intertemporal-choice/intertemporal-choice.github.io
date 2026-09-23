@@ -6,7 +6,7 @@ kernelspec:
 ---
 
 (sec:KeynesFriedmanModigliani)=
-# Introduction: Keynes, Friedman, Modigliani
+# Consumption Functions: Keynes, Duesenberry, and Friedman
 
 ```{code-cell} ipython3
 # Some initial setup
@@ -15,18 +15,14 @@ import pandas_datareader.data as web
 import statsmodels.formula.api as sm
 import scipy.stats as stats
 import datetime as dt
-import pandas as pd
 from matplotlib import pyplot as plt
 import numpy as np
 
 plt.style.use("seaborn-v0_8-darkgrid")
-palette = plt.get_cmap("Dark2")
-
-
-pd.core.common.is_list_like = pd.api.types.is_list_like
+rng = np.random.default_rng(0)  # fixed seed, so the simulated estimates below are stable
 ```
 
-### 1. The Keynesian consumption function
+### The Keynesian consumption function
 
 Keynes:
 1. "The amount of aggregate consumption mainly depends on the amount of aggregate income."
@@ -61,7 +57,7 @@ class KeynesianConsumer:
     def __init__(self):
         Keynesian = (
             PerfForesightConsumerType()
-        )  # set up a consumer type and use default parameteres
+        )  # set up a consumer type and use default parameters
         Keynesian.cycles = 0  # Make this type have an infinite horizon
         Keynesian.DiscFac = 0.05
         Keynesian.PermGroFac = [0.7]
@@ -97,7 +93,7 @@ plt.show()
 ```
 
 ```{code-cell} ipython3
-# This looks like the first of the three equations, consumption as a linear function of income!
+# This looks like the first of the two equations above, consumption as a linear function of income!
 # This means that even in a microfounded model (that HARK provides), the consumption function can match Keynes reduced form
 # prediction (given the right parameterization).
 
@@ -119,7 +115,7 @@ Short-term aggregate time-series estimates of change in consumption on change in
 $c_t = a_0 + a_{1}y_t + a_{2}c_{t-1}$ finds significant $a_2$, near 1.
 
 ```{code-cell} ipython3
-# Lets have a look at some aggregate data
+# Let's have a look at some aggregate data
 
 sdt = dt.datetime(1990, 1, 1)  # set startdate
 edt = dt.datetime(2020, 1, 1)  # set end date
@@ -144,13 +140,14 @@ print("a_1 is {:.2f}".format(slope))
 ```{code-cell} ipython3
 # However, our consumption data is [non-stationary](https://www.reed.edu/economics/parker/312/tschapters/S13_Ch_4.pdf) and this drives the previous
 # estimate.
-df.DPIC96.plot()
+df.PCECC96.plot()
 plt.xlabel("Date")
 plt.ylabel("Consumption (c)")
+plt.show()
 ```
 
 ```{code-cell} ipython3
-# Lets use our second equation to try to find an estimate of a_1
+# Let's use our second equation to try to find an estimate of a_1
 
 df_diff = df.diff()  # create dataframe of differenced values
 
@@ -175,7 +172,7 @@ plt.show()
 print("a_1 is {:.2f}".format(slope))
 ```
 
-a_1 is now much lower, as we expected
+The estimate of $a_1$ is now much lower, as we expected.
 
 +++
 
@@ -185,19 +182,19 @@ Cross-section plots of consumption and income: very large and significant $a_0$,
 
 Further facts:
 1. Black households save more than whites at a given income level.<br>
-0. By income group:
+1. By income group:
    * low-income: Implausibly large dissaving (spend 2 or 3 times income)
    * high-income: Remarkably high saving
 
 +++
 
-### 2. Duesenberry
+### Duesenberry
 
 +++
 
 Habit formation may explain why $c_{t-1}$ affects $c_t$.<br>
 Relative Income Hypothesis suggests that you compare your consumption to consumption of ‘peers’.<br>
-May explain high saving rates of Black HHs.<br>
+May explain high saving rates of Black households.<br>
 
 Problems with Duesenberry: <br>
 No budget constraint<br>
@@ -205,7 +202,7 @@ No serious treatment of intertemporal nature of saving
 
 +++
 
-#### Dusenberry: Evidence
+#### Duesenberry: Evidence
 
 ```{code-cell} ipython3
 # Even if we control for income, past consumption seems to be significantly related to current consumption
@@ -213,18 +210,15 @@ No serious treatment of intertemporal nature of saving
 df_habit = df.copy()
 df_habit.columns = ["cons", "inc"]
 df_habit["cons_m1"] = df.PCECC96.shift()
-df_habit.dropna()
 
 result = sm.ols(formula="cons ~ inc + cons_m1", data=df_habit.dropna()).fit()
 result.summary()
 ```
 
-```{code-cell} ipython3
-# The coefficient on lagged consumption is very significant.
-# But regression may be statistically problematic for the usual [non-stationarity](https://towardsdatascience.com/stationarity-in-time-series-analysis-90c94f27322) reasons.
-```
+The coefficient on lagged consumption is very significant.
+But regression may be statistically problematic for the usual [non-stationarity](https://towardsdatascience.com/stationarity-in-time-series-analysis-90c94f27322) reasons.
 
-### 3. Friedman's Permanent Income Hypothesis
+### Friedman's Permanent Income Hypothesis
 
 +++
 
@@ -241,9 +235,9 @@ $$a_1 = \frac{s^2_{p}}{(s^2_{v} + s^2_{p})}$$
 
 #### Friedman's Permanent Income Hypothesis
 
-We begin by creating a class that class implements the Friedman PIH consumption function as a special case of the [Perfect Foresight CRRA](#sec:PerfForesightCRRA) model.
+We begin by creating a class that implements the Friedman PIH consumption function as a special case of the [Perfect Foresight CRRA](#sec:PerfForesightCRRA) model.
 
-As discussed in the lecture notes, it is often convenient to represent this type of models in variables that are normalized by permanent income. That is the case for the [HARK](https://github.com/econ-ark/HARK/) tools that we use below in the definition of our consumer. Therefore, the consumption function will expect
+As discussed in that chapter, it is often convenient to represent this type of models in variables that are normalized by permanent income. That is the case for the [HARK](https://github.com/econ-ark/HARK/) tools that we use below in the definition of our consumer. Therefore, the consumption function will expect
 \begin{equation*}
 y_{i,t} = \frac{Y_{i,t}}{P_{i,t}}
 \end{equation*}
@@ -269,7 +263,7 @@ class FriedmanPIHConsumer:
     def __init__(self, Rfree=1.001, CRRA=2):
         FriedmanPIH = (
             PerfForesightConsumerType()
-        )  # set up a consumer type and use default parameteres
+        )  # set up a consumer type and use default parameters
         FriedmanPIH.cycles = 0  # Make this type have an infinite horizon
         FriedmanPIH.DiscFac = 1 / Rfree
         FriedmanPIH.Rfree = [Rfree]
@@ -282,7 +276,7 @@ class FriedmanPIHConsumer:
         self.cFunc = FriedmanPIH.solution[0].cFunc
 ```
 
-Now, think of a consumer that has a permanent income of 1. What will be his consumption at different levels of total observed income?
+Now, think of a consumer that has a permanent income of 1. What will be their consumption at different levels of total observed income?
 
 ```{code-cell} ipython3
 # We can now create a PIH consumer
@@ -302,33 +296,44 @@ plt.legend()
 plt.show()
 ```
 
-We can see that regardless of the income our agent receives, they consume their permanent income, which is normalized to 1.
+We can see that whatever income our agent receives, they consume almost exactly their permanent income, which is normalized to 1. With $\Rfree\Discount = 1$ the marginal propensity to consume out of current income is $1 - 1/\Rfree$, about 0.001 at $\Rfree = 1.001$.
 
 +++
 
 We can also draw out some implications of the PIH that we can then test with evidence
 
-If we look at HH's who have very similar permanent incomes, we should get a small estimate of $a_1$, because $s^2_v$ is large relative to $s^2_p$.
+If we look at households who have very similar permanent incomes, we should get a small estimate of $a_1$, because $s^2_v$ is large relative to $s^2_p$.
 
-Lets simulate this using our consumer.
+We simulate this using our consumer. Permanent income is drawn from a lognormal
+distribution with mean 1, so that it is always positive, and consumption at total income
+$Y$ is $P \times \texttt{cFunc}(Y/P)$ as above.
+
+```{code-cell} ipython3
+def draw_perm_inc(sd, n=200):
+    """Lognormal permanent income with mean 1 and standard deviation sd."""
+    sigma = np.sqrt(np.log(1 + sd**2))
+    return rng.lognormal(-(sigma**2) / 2, sigma, n)
+
+
+def pih_consumption(total_inc, perm_inc):
+    """Consumption of the PIH consumer, in levels, at the given incomes."""
+    return PIHexample.cFunc(total_inc / perm_inc) * perm_inc
+```
 
 ```{code-cell} ipython3
 # Permanent income has the same variance
 # as transitory income.
 
-perm_inc = np.random.normal(1.0, 0.1, 200)
-trans_inc = np.random.normal(0.5, 0.1, 200)
+perm_inc = draw_perm_inc(0.1)
+trans_inc = rng.normal(0.5, 0.1, 200)
 
 total_inc = perm_inc + trans_inc
+cons = pih_consumption(total_inc, perm_inc)
 
-slope, intercept, r_value, p_value, std_err = stats.linregress(
-    total_inc, PIHexample.cFunc(total_inc / perm_inc) * perm_inc
-)
+slope, intercept, r_value, p_value, std_err = stats.linregress(total_inc, cons)
 
 plt.figure(figsize=(9, 6))
-plt.plot(
-    total_inc, PIHexample.cFunc(total_inc) * perm_inc, "go", label="Simulated data"
-)
+plt.plot(total_inc, cons, "go", label="Simulated data")
 plt.plot(total_inc, intercept + slope * total_inc, "k-", label="Line of best fit")
 plt.plot(np.linspace(1, 2, 5), np.linspace(1, 2, 5), "k--", label="C=Y")
 plt.xlabel("Income (y)")
@@ -345,19 +350,16 @@ print("a_1 is {:.2f}".format(slope))
 ```{code-cell} ipython3
 # Permanent income with higher variance
 
-perm_inc = np.random.normal(1.0, 0.5, 200)
-trans_inc = np.random.normal(0.5, 0.1, 200)
+perm_inc = draw_perm_inc(0.5)
+trans_inc = rng.normal(0.5, 0.1, 200)
 
 total_inc = perm_inc + trans_inc
+cons = pih_consumption(total_inc, perm_inc)
 
-slope, intercept, r_value, p_value, std_err = stats.linregress(
-    total_inc, PIHexample.cFunc(total_inc / perm_inc) * perm_inc
-)
+slope, intercept, r_value, p_value, std_err = stats.linregress(total_inc, cons)
 
 plt.figure(figsize=(9, 6))
-plt.plot(
-    total_inc, PIHexample.cFunc(total_inc) * perm_inc, "go", label="Simulated data"
-)
+plt.plot(total_inc, cons, "go", label="Simulated data")
 plt.plot(total_inc, intercept + slope * total_inc, "k-", label="Line of best fit")
 plt.plot(np.linspace(0, 2, 5), np.linspace(0, 2, 5), "k--", label="C=Y")
 plt.xlabel("Income (y)")
@@ -370,7 +372,7 @@ print("a_0 is {:.2f}".format(intercept))
 print("a_1 is {:.2f}".format(slope))
 ```
 
-We can see that as we increase the variance of permanent income, the estimate of a_1 rises
+We can see that as we increase the variance of permanent income, the estimate of $a_1$ rises.
 
 +++
 
@@ -380,14 +382,14 @@ We can see that as we increase the variance of permanent income, the estimate of
 
 We can now consider the empirical evidence for the claims our model made about the PIH.
 
-If we take a long time series, then the differences in permanent income should be the main driver of the variance in total income. This implies that a_1 should be high.
+If we take a long time series, then the differences in permanent income should be the main driver of the variance in total income. This implies that $a_1$ should be high.
 
 If we take higher frequency time series (or cross sectional data), transitory shocks should dominate, and our estimate of a_1 should be lower.
 
 Consider quarterly differences first:
 
 ```{code-cell} ipython3
-# Lets use the data from FRED that we used before.
+# Let's use the data from FRED that we used before.
 
 # Using quarterly data (copying from above), we had:
 
