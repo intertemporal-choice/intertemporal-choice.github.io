@@ -32,22 +32,22 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v3
+      # The uv-locked mystmd wrapper needs Node >= 20.
       - uses: actions/setup-node@v4
         with:
-          node-version: 18.x
-      - name: Install MyST
-        run: npm install -g mystmd
+          node-version: 22.x
+      - uses: astral-sh/setup-uv@v6
+      - name: Install the locked environment (MyST, HARK, Jupyter kernel)
+        run: uv sync --locked
+      # Executes every page with a kernelspec; KeynesFriedmanModigliani.md fetches FRED data.
       - name: Build HTML Assets
-        run: myst build --html --strict
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
+        run: uv run python code/build_site.py --html --strict
       # Gates the deploy on the OUTPUT, not the build's exit code: myst build exits 0
       # on a site whose every stylesheet 404s. See code/verify_build.py.
       - name: Verify the built site is servable
         run: |
-          python code/verify_build.py --self-test
-          python code/verify_build.py
+          uv run python code/verify_build.py --self-test
+          uv run python code/verify_build.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

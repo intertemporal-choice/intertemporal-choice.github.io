@@ -8,6 +8,7 @@ project:
     - file: README.md
     - file: content/consumption/index.md
       children:
+        - file: content/consumption/KeynesFriedmanModigliani.md
         - file: content/consumption/2PeriodLCModel.md
         - file: content/consumption/ConsAndLaborSupply.md
         - file: content/consumption/OLGModel.md

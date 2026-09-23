@@ -1,6 +1,8 @@
 # Consumption Theory
 
-Fisher's two-period problem opens the chapter. It exposes the logic of intertemporal
+The chapter opens with the consumption functions of Keynes, Duesenberry, and Friedman,
+each confronted with aggregate US data and simulated in Econ-ARK. Fisher's two-period
+problem follows. It exposes the logic of intertemporal
 choice in the simplest setting that contains anything interesting, one in which a budget
 constraint trades current against future consumption and a first-order condition equates
 the marginal rate of substitution between them to the interest factor.

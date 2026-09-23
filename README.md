@@ -6,7 +6,7 @@ Lecture notes on consumption, saving, growth, and asset pricing for advanced mas
 
 ## About
 
-Almost every question in macroeconomics turns on how people trade off today against tomorrow. How much of a raise gets spent? Why do the rich save so much more than the poor? Why does the stock market move so much more than dividends do? These notes work through the theory that answers such questions, starting with a consumer who lives for two periods and knows everything, and ending with models rich enough to be taken to data.
+Almost every question in macroeconomics turns on how people trade off today against tomorrow. How much of a raise gets spent? Why do the rich save so much more than the poor? Why does the stock market move so much more than dividends do? These notes work through the theory that answers such questions. They open with the consumption functions of Keynes, Duesenberry, and Friedman set against US data, then build the theory from a consumer who lives for two periods and knows everything up to models rich enough to be taken to data.
 
 We keep the arithmetic in view throughout, working each result through in full. Every chapter starts from the simplest case that contains anything interesting and reaches the harder ones by relaxing one assumption at a time. Where a model has no closed form we say so and compute instead, because a formula nobody can interpret teaches less than a number somebody can check.
 
@@ -22,6 +22,7 @@ These materials are freely available under a CC-BY-4.0 license. Instructors at o
 
 From perfect foresight through OLG to buffer stock models:
 
+- The consumption functions of Keynes, Duesenberry, and Friedman against US data
 - Perfect foresight consumption under CRRA and CARA utility
 - The permanent income hypothesis and consumption smoothing
 - Precautionary saving and buffer-stock behavior
