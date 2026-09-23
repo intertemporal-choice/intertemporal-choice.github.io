@@ -13,8 +13,8 @@ So the deploy gate cannot be the build's exit code. This checks the output inste
      BASE_URL meant for a project site being used on a root-served one
   3. the expected number of pages were emitted
   4. every page MyST records as a notebook (an .ipynb, or a .md with a `kernelspec`)
-     shows at least one cell output; a build run without `--execute` omits them all and
-     still exits 0 under `--strict`
+     carries at least one cell output; a build run without `--execute` omits them all
+     and still exits 0 under `--strict`
 
 `--self-test` runs every check against synthetic bad input and fails if any check passes
 it, so a check that has silently stopped discriminating is caught rather than trusted.
@@ -33,16 +33,15 @@ from pathlib import Path
 logging.basicConfig(level=logging.INFO, format="%(message)s", force=True)
 log = logging.getLogger(__name__)
 
+# The deployed site. Each page's <slug>.json holds its `location`, `kind` and every cell
+# output, tables too, which the static HTML leaves to the browser. Records of removed
+# pages linger on disk, so config.json decides which pages are current.
 BUILD = Path("_build/html")
-# MyST's per-page records: source `location`, URL `slug`, and `kind` ("Notebook"/"Article").
-# Records of pages since removed stay on disk, so config.json decides which are current.
-PAGES = Path("_build/site/content")
 REPO_SLUG = "intertemporal-choice.github.io"
 MIN_BYTES = 2000
 MIN_PAGES = 40
 
 ASSET = re.compile(r'(?:href|src)="(/[^"]*)"')
-OUTPUT = re.compile(r'data-name="safe-output-[a-z]+"')
 
 
 def bad_prefixes(html: str, slug: str) -> list[str]:
@@ -50,41 +49,54 @@ def bad_prefixes(html: str, slug: str) -> list[str]:
     return sorted({p for p in ASSET.findall(html) if p.startswith(f"/{slug}/")})
 
 
-def current_slugs(pages: Path) -> set[str]:
-    config = pages.parent / "config.json"
+def current_slugs(build: Path) -> set[str]:
+    config = build / "config.json"
     if not config.exists():
         return set()
     projects = json.loads(config.read_text())["projects"]
     return {p["slug"] for project in projects for p in project["pages"] if "slug" in p}
 
 
-def notebook_pages(pages: Path) -> dict[str, Path]:
-    """Source path of each current notebook page, mapped to its HTML file."""
-    current, found = current_slugs(pages), {}
-    for record in sorted(pages.glob("*.json")):
+def notebook_records(build: Path) -> dict[str, Path]:
+    """Source path of each current notebook page, mapped to its page record."""
+    current, found = current_slugs(build), {}
+    for record in sorted(build.glob("*.json")):
         page = json.loads(record.read_text())
-        if page.get("kind") == "Notebook" and page["slug"] in current:
-            found[page["location"]] = Path(*page["slug"].split("."), "index.html")
+        if (
+            isinstance(page, dict)
+            and page.get("kind") == "Notebook"
+            and page.get("slug") in current
+        ):
+            found[page["location"]] = record
     return found
 
 
-def missing_outputs(page: Path) -> list[str]:
-    """An executed page shows at least one cell output."""
-    if not page.exists():
-        return [f"{page} does not exist"]
-    if not OUTPUT.search(page.read_text(errors="ignore")):
-        return [f"{page} shows no cell output: built without --execute?"]
-    return []
+def has_output(node: object) -> bool:
+    """Whether the tree holds an output node carrying a kernel's result, of any type."""
+    stack = [node]
+    while stack:
+        item = stack.pop()
+        if isinstance(item, dict):
+            if item.get("type") == "output" and item.get("jupyter_data"):
+                return True
+            stack.extend(item.values())
+        elif isinstance(item, list):
+            stack.extend(item)
+    return False
 
 
-def unexecuted(build: Path, pages: Path) -> list[str]:
-    notebooks = notebook_pages(pages)
+def unexecuted(build: Path) -> list[str]:
+    notebooks = notebook_records(build)
     if not notebooks:
-        return [f"no notebook page recorded under {pages}"]
-    return [f for html in notebooks.values() for f in missing_outputs(build / html)]
+        return [f"no notebook page recorded in {build / 'config.json'}"]
+    return [
+        f"{location} carries no cell output: built without --execute?"
+        for location, record in notebooks.items()
+        if not has_output(json.loads(record.read_text()))
+    ]
 
 
-def check(build: Path, slug: str, pages: Path = PAGES) -> list[str]:
+def check(build: Path, slug: str) -> list[str]:
     failures = []
 
     index = build / "index.html"
@@ -107,7 +119,7 @@ def check(build: Path, slug: str, pages: Path = PAGES) -> list[str]:
             f"only {len(built)} html pages built, under the {MIN_PAGES} floor"
         )
 
-    failures.extend(unexecuted(build, pages))
+    failures.extend(unexecuted(build))
     return failures
 
 
@@ -122,34 +134,39 @@ def self_test_site() -> list[str]:
     return errors
 
 
+def page_record(kind: str, name: str, outputs: list[dict]) -> dict:
+    cell = {"type": "block", "children": [{"type": "outputs", "children": outputs}]}
+    return {"kind": kind, "location": f"/{name}.md", "slug": f"content.{name}",
+            "mdast": {"type": "root", "children": [cell]}}  # fmt: skip
+
+
 def self_test_execution(tmp: Path) -> list[str]:
     errors = []
-    records = tmp / "site" / "content"
-    records.mkdir(parents=True)
-    listed = [{"slug": "content.periodx"}, {"slug": "content.b"}, {"title": "part"}]
-    (tmp / "site" / "config.json").write_text(
-        json.dumps({"projects": [{"pages": listed}]})
+    # A table-only notebook, whose one output the static HTML does not render.
+    table = [{"type": "output", "jupyter_data": {"output_type": "execute_result"}}]
+    listed = ["table", "bare", "prose"]
+    (tmp / "config.json").write_text(
+        json.dumps(
+            {"projects": [{"pages": [{"slug": f"content.{n}"} for n in listed]}]}
+        )
     )
-    for name, kind, slug in [
-        ("a", "Notebook", "content.periodx"),
-        ("b", "Article", "content.b"),
-        ("stale", "Notebook", "content.removed"),
+    for name, kind, outputs in [
+        ("table", "Notebook", table),
+        ("bare", "Notebook", [{"type": "output", "children": []}]),
+        ("prose", "Article", []),
+        ("removed", "Notebook", []),
     ]:
-        record = {"kind": kind, "location": f"/{name}.md", "slug": slug}
-        (records / f"{name}.json").write_text(json.dumps(record))
-    if notebook_pages(records) != {"/a.md": Path("content/periodx/index.html")}:
-        errors.append("notebook_pages did not pick out exactly the current notebook")
+        record = page_record(kind, name, outputs)
+        (tmp / f"content.{name}.json").write_text(json.dumps(record))
+    (tmp / "myst.search.json").write_text("[]")
+    if set(notebook_records(tmp)) != {"/table.md", "/bare.md"}:
+        errors.append("notebook_records did not pick out exactly the current notebooks")
+    if unexecuted(tmp) != ["/bare.md carries no cell output: built without --execute?"]:
+        errors.append("output check did not flag exactly the unexecuted notebook")
     empty = tmp / "empty"
     empty.mkdir()
-    if unexecuted(tmp, empty) != [f"no notebook page recorded under {empty}"]:
+    if not unexecuted(empty):
         errors.append("an empty set of notebook pages passed")
-    page = tmp / "index.html"
-    page.write_text('<pre>import numpy as np</pre><div data-name="outputs-container">')
-    if not missing_outputs(page):
-        errors.append("output check did not fire on an unexecuted page")
-    page.write_text('<div data-name="safe-output-stream">a_1 is 0.78</div>')
-    if missing_outputs(page):
-        errors.append("output check fired on an executed page")
     return errors
 
 
