@@ -8,7 +8,10 @@ project:
     - file: README.md
     - file: content/consumption/index.md
       children:
-        - file: content/consumption/2PeriodLCModel.md
+        # Formerly 2PeriodLCModel.md. MyST drops a leading number from a page's URL
+        # (it reads 01-, 2- as ordering prefixes), which served this chapter at
+        # .../periodlcmodel. Keep digits out of the front of file names.
+        - file: content/consumption/Fisher2Period.md
         - file: content/consumption/ConsAndLaborSupply.md
         - file: content/consumption/OLGModel.md
         - file: content/consumption/GenAcctsAndGov.md

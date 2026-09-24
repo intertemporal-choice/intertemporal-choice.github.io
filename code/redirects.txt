@@ -1,0 +1,28 @@
+# Pages that have moved: old site path, then new site path.
+#
+# GitHub Pages has no server-side redirects, so code/write_redirects.py writes a small
+# page at each old path that forwards the browser (keeping any #anchor) to the new one.
+# When a page moves, add its old path here rather than letting the old URL 404.
+# Paths are MyST's URL slugs, not file names: lower case, underscores as hyphens, and
+# no leading digits (2PeriodLCModel.md was served at .../periodlcmodel).
+
+# 2026-09-24: renamed so the URL says what the chapter is
+/content/consumption/periodlcmodel              /content/consumption/fisher2period
+
+# 2026-09-24: notes outside the Choice course moved to Supplemental Notes
+/content/asset-pricing/c-with-optimal-portfolio /content/supplemental/c-with-optimal-portfolio
+/content/asset-pricing/portfolio-multi-crra     /content/supplemental/portfolio-multi-crra
+/content/consumption/crra-raterisk              /content/supplemental/crra-raterisk
+/content/consumption/caramodelwithyrisk         /content/supplemental/caramodelwithyrisk
+/content/consumption/campmancrrawithtimevaryingr /content/supplemental/campmancrrawithtimevaryingr
+/content/investment/entrepreneurpf              /content/supplemental/entrepreneurpf
+/content/growth/qramsey                         /content/supplemental/qramsey
+/content/growth/growthandgrosssaving            /content/supplemental/growthandgrosssaving
+/content/appendix/equiprobable                  /content/supplemental/equiprobable
+/content/appendix/equiprobable-returns          /content/supplemental/equiprobable-returns
+
+# 2026-09-24: the Appendix part renamed Numerical and moved to content/numerical
+/content/appendix                               /content/numerical
+/content/appendix/aggregation                   /content/numerical/aggregation
+/content/appendix/hamiltonianvsdiscrete         /content/numerical/hamiltonianvsdiscrete
+/content/appendix/mathfactslist                 /content/numerical/mathfactslist
