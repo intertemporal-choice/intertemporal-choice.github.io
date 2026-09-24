@@ -1,4 +1,4 @@
-# Table of Contents for DSGE course materials
+# Table of Contents for A Gentle Introduction to Intertemporal Choice
 # This file is referenced by myst.yml via the 'extends' key
 # See https://mystmd.org/guide/table-of-contents
 
@@ -63,7 +63,7 @@ project:
         - file: content/numerical/Aggregation.md
         - file: content/numerical/HamiltonianVSDiscrete.md
         - file: content/numerical/MathFactsList.md
-    # Lecture notes that are not part of the course. Listed for the website only; the
+    # Notes that supplement the main chapters. Listed for the website only; the
     # PDF export in myst.yml deliberately omits this part.
     - file: content/supplemental/index.md
       children:

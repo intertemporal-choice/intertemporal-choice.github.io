@@ -9,7 +9,7 @@
 # 2026-09-24: renamed so the URL says what the chapter is
 /content/consumption/periodlcmodel              /content/consumption/fisher2period
 
-# 2026-09-24: notes outside the Choice course moved to Supplemental Notes
+# 2026-09-24: notes moved to Supplemental Notes
 /content/asset-pricing/c-with-optimal-portfolio /content/supplemental/c-with-optimal-portfolio
 /content/asset-pricing/portfolio-multi-crra     /content/supplemental/portfolio-multi-crra
 /content/consumption/crra-raterisk              /content/supplemental/crra-raterisk
