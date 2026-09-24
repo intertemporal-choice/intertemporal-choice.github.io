@@ -72,7 +72,7 @@ Derivations and methods useful for macroeconomics:
 
 ### Supplemental Notes
 
-Lecture notes that are not part of the course, on the website only and not in the PDF:
+Notes that supplement the main chapters, on the website only and not in the PDF:
 
 - Consumption out of risky assets, and with optimal portfolio choice
 - Consumption under CARA utility with income risk
