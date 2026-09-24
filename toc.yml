@@ -55,11 +55,11 @@ project:
       children:
         - file: content/dsge/BrockMirman.md
         - file: content/dsge/RBC-Prescott.md
-    - file: content/appendix/index.md
+    - file: content/numerical/index.md
       children:
-        - file: content/appendix/Aggregation.md
-        - file: content/appendix/HamiltonianVSDiscrete.md
-        - file: content/appendix/MathFactsList.md
+        - file: content/numerical/Aggregation.md
+        - file: content/numerical/HamiltonianVSDiscrete.md
+        - file: content/numerical/MathFactsList.md
     # Lecture notes that are not part of the course. Listed for the website only; the
     # PDF export in myst.yml deliberately omits this part.
     - file: content/supplemental/index.md

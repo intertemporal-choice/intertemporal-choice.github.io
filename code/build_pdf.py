@@ -183,7 +183,7 @@ def build(root: Path) -> list[str]:
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
     ok = True
-    targets = {"fact:elognorm": f"{SITE}/content/appendix/mathfactslist#fact-elognorm"}
+    targets = {"fact:elognorm": f"{SITE}/content/numerical/mathfactslist#fact-elognorm"}
     text, n = rewrite_fact_links("fact [ELogNorm](#fact:elognorm) and [x](#sec:y)", targets)
     if n != 1 or targets["fact:elognorm"] not in text or "#sec:y" not in text:
         log.error("SELF-TEST FAIL: fact link rewrite missed its target or touched a sec link")
