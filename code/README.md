@@ -32,6 +32,17 @@ once the site carrying those pages has been deployed.
 `--self-test` checks the link rewriting, and the reimplementation of MyST's URL and
 anchor slugs, against cases they must handle.
 
+## `write_redirects.py`
+
+Writes a forwarding page at each old URL listed in `redirects.txt`, so links to a page
+that has been renamed or moved land on its new address instead of a 404. GitHub Pages
+has no server-side redirects, so the deploy workflow runs this after `myst build`. The
+forwarding keeps any `#anchor`.
+
+When a page moves, add its old path to `redirects.txt`. The script fails the deploy if a
+new path is not a page in the build, or if an old path is still a live page, which it
+would otherwise overwrite.
+
 ## `verify_build.py`
 
 Gates the GitHub Pages deploy on the built output rather than the build's exit code,

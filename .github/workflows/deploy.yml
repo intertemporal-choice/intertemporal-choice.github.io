@@ -42,6 +42,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      # Old URLs of moved pages forward to their new ones; see code/redirects.txt.
+      - name: Write redirects for moved pages
+        run: |
+          python code/write_redirects.py --self-test
+          python code/write_redirects.py
       # Gates the deploy on the OUTPUT, not the build's exit code: myst build exits 0
       # on a site whose every stylesheet 404s. See code/verify_build.py.
       - name: Verify the built site is servable
