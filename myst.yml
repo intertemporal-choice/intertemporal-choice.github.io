@@ -196,8 +196,6 @@ project:
           level: 1
         - file: content/asset_pricing/Bubbles.md
           level: 1
-        - file: content/asset_pricing/C-With-Optimal-Portfolio.md
-          level: 1
         - file: content/asset_pricing/Portfolio-Multi-CRRA.md
           level: 1
         - file: content/investment/index.md

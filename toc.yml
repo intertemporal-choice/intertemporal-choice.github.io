@@ -34,7 +34,6 @@ project:
         - file: content/asset_pricing/EquityPremiumPuzzle.md
         - file: content/asset_pricing/C-CAPM.md
         - file: content/asset_pricing/Bubbles.md
-        - file: content/asset_pricing/C-With-Optimal-Portfolio.md
         - file: content/asset_pricing/Portfolio-Multi-CRRA.md
     - file: content/investment/index.md
       children:
@@ -70,3 +69,8 @@ project:
         - file: content/appendix/Equiprobable-Returns.md
         - file: content/appendix/HamiltonianVSDiscrete.md
         - file: content/appendix/MathFactsList.md
+    # Lecture notes that are not part of the course. Listed for the website only; the
+    # PDF export in myst.yml deliberately omits this part.
+    - file: content/supplemental/index.md
+      children:
+        - file: content/supplemental/C-With-Optimal-Portfolio.md
