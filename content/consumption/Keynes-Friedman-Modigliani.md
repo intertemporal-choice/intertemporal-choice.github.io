@@ -2,7 +2,7 @@
 # Keynes, Friedman, Modigliani
 
 :::{tip} Run it yourself
-This chapter summarizes the Econ-ARK notebook [Keynes, Friedman, Modigliani](https://econ-ark.org/materials/keynesfriedmanmodigliani/). That page launches the notebook in your browser, with nothing to install, so you can rerun every estimate and simulation below and change the parameters. The figure links in this chapter go to the notebook's rendered copy on [DemARK](https://econ-ark.github.io/DemARK/keynesfriedmanmodigliani/).
+This chapter summarizes the Econ-ARK notebook [Keynes, Friedman, Modigliani](https://econ-ark.org/materials/keynesfriedmanmodigliani/). That page launches the notebook on Binder, a free service that runs it on a remote server and shows it in your browser, with nothing to install. It can take a minute or two to start. You can then rerun every estimate and simulation below and change the parameters. The figure links in this chapter go to the notebook's rendered copy on [DemARK](https://econ-ark.github.io/DemARK/keynesfriedmanmodigliani/).
 :::
 
 <!-- Figure links point at the notebook's cell anchors on the DemARK site (#kfm-<label>-outputs
