@@ -36,18 +36,35 @@ log = logging.getLogger(__name__)
 
 SITE = "https://intertemporal-choice.github.io"
 STAGE = Path("_build/pdf-src")
+MYST_LOG = Path("_build/pdf-src-myst.log")
+LATEXMK_LOG = Path("_build/pdf-src-latexmk.log")
 NAME = "intertemporal-choice"  # matches `output:` of the tex+pdf export in myst.yml
 TEX_DIR = Path("exports") / f"{NAME}_pdf_tex"
 LOG_DIR = Path("exports") / f"{NAME}_pdf_logs"
 PDF = Path("exports") / f"{NAME}.pdf"
 # The command MyST itself runs (jtex pdfTexExportCommand, plain_latex_book's engine).
 LATEXMK = [
-    "latexmk", "-f", "-xelatex", "-synctex=1", "-interaction=batchmode",
-    "-file-line-error", '-latexoption=-shell-escape', f"{NAME}.tex",
+    "latexmk",
+    "-f",
+    "-xelatex",
+    "-synctex=1",
+    "-interaction=batchmode",
+    "-file-line-error",
+    "-latexoption=-shell-escape",
+    f"{NAME}.tex",
 ]
-SKIP = {".git", "_build", ".venv", "exports", "sources", "node_modules", ".DS_Store"}
+SKIP = {
+    ".git",
+    ".claude",
+    "_build",
+    ".venv",
+    "exports",
+    "sources",
+    "node_modules",
+    ".DS_Store",
+}
 
-FACT_DEF = re.compile(r"^\((fact:[^)\s]+)\)=", re.M)
+FACT_DEF = re.compile(r"^\((fact:[^)\s]+)\)=", re.MULTILINE)
 # A label directly above a page's first heading names the page: MyST lifts that heading
 # into the page title, which has no anchor on the site.
 TITLE_LABEL = re.compile(r"\A\s*\((fact:[^)\s]+)\)=\s*\n#\s")
@@ -60,7 +77,7 @@ def slug(name: str) -> str:
     """MyST's URL slug for a file or folder name (mystmd createSlug).
 
     A leading enumeration is dropped unless it looks like a year or a five-digit
-    number, which is why 2PeriodLCModel.md is served at .../periodlcmodel.
+    number, so a page named 2PeriodLCModel.md would be served at .../periodlcmodel.
     """
     if not re.match(r"^[12][0-9]{3}([^0-9]|$)|^[0-9]{5}", name):
         name = re.sub(r"^[0-9_.-]+", "", name) or name
@@ -76,8 +93,13 @@ def html_id(label: str) -> str:
 
 
 def page_url(md: Path, root: Path) -> str:
-    """Site path of a Markdown page: content/asset_pricing/C-CAPM.md -> /content/asset-pricing/c-capm."""
+    """Site path of a Markdown page: content/asset_pricing/C-CAPM.md -> /content/asset-pricing/c-capm.
+
+    A part's index.md is served at the part's own path: content/growth/index.md -> /content/growth.
+    """
     parts = md.relative_to(root).with_suffix("").parts
+    if parts[-1] == "index":
+        parts = parts[:-1]
     return "/" + "/".join(slug(p) for p in parts)
 
 
@@ -100,41 +122,49 @@ def fact_targets(root: Path) -> dict[str, str]:
 
 def rewrite_fact_links(text: str, targets: dict[str, str]) -> tuple[str, int]:
     """Point `](#fact:x)` links at the site; an unknown label is an error, not a skip."""
+
     def sub(m):
         if m.group(1) not in targets:
             raise KeyError(f"link to undefined fact label {m.group(1)}")
         return f"]({targets[m.group(1)]})"
+
     return FACT_LINK.subn(sub, text)
 
 
 def absolutize(tex: str) -> tuple[str, int]:
     """Prefix site-relative \\href targets with the site's URL."""
-    return REL_HREF.subn(lambda m: "\\href{" + SITE + "/", tex)
+    return REL_HREF.subn(lambda _: "\\href{" + SITE + "/", tex)
 
 
 def unknown_pages(tex: str, pages: set[str]) -> list[str]:
     """Absolute site links whose path is not a page of the book."""
-    return sorted({p for p in SITE_HREF.findall(tex) if p.rstrip("/") not in pages and p != "/"})
+    return sorted(
+        {p for p in SITE_HREF.findall(tex) if p.rstrip("/") not in pages and p != "/"}
+    )
 
 
-def run(cmd, cwd: Path) -> None:
-    log.info("$ %s  (in %s)", " ".join(cmd), cwd)
-    subprocess.run(cmd, cwd=cwd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+def run(cmd, cwd: Path, output: Path) -> int:
+    """Run cmd in cwd with its output saved to output; return its exit code."""
+    log.info("$ %s  (in %s, output in %s)", " ".join(cmd), cwd, output)
+    with output.open("w") as out:
+        return subprocess.run(
+            cmd, cwd=cwd, stdout=out, stderr=subprocess.STDOUT, check=False
+        ).returncode
 
 
 def stage(root: Path) -> None:
     shutil.rmtree(STAGE, ignore_errors=True)
-    shutil.copytree(root, STAGE, ignore=lambda d, names: [n for n in names if n in SKIP])
+    shutil.copytree(
+        root, STAGE, ignore=lambda _, names: [n for n in names if n in SKIP]
+    )
     # Reuse the downloaded LaTeX template rather than fetching it again.
     templates = root / "_build" / "templates"
     if templates.exists():
         shutil.copytree(templates, STAGE / "_build" / "templates")
 
 
-def build(root: Path) -> list[str]:
-    failures = []
-    stage(root)
-
+def rewrite_staged_facts() -> None:
+    """Step 2: point every fact link in the staged Markdown at the site."""
     targets = fact_targets(STAGE)
     n_facts = 0
     for md in (STAGE / "content").rglob("*.md"):
@@ -144,86 +174,146 @@ def build(root: Path) -> list[str]:
             n_facts += n
     log.info("fact links pointed at the site: %d", n_facts)
 
-    run(["myst", "build", "--pdf"], STAGE)
 
+def absolutize_tex() -> list[str]:
+    """Step 4: make every page link absolute and check that each names a real page."""
     pages = {page_url(md, STAGE) for md in (STAGE / "content").rglob("*.md")}
-    tex_dir = STAGE / TEX_DIR
-    n_pages = 0
-    for tex_file in tex_dir.glob("*.tex"):
+    failures, n_pages = [], 0
+    for tex_file in (STAGE / TEX_DIR).glob("*.tex"):
         tex, n = absolutize(tex_file.read_text())
         n_pages += n
         if n:
             tex_file.write_text(tex)
         if REL_HREF.search(tex):
             failures.append(f"{tex_file.name} still has a site-relative \\href")
-        for p in unknown_pages(tex, pages):
-            failures.append(f"{tex_file.name} links to {SITE}{p}, which is not a page of the book")
+        failures += [
+            f"{tex_file.name} links to {SITE}{p}, which is not a page of the book"
+            for p in unknown_pages(tex, pages)
+        ]
     log.info("page links made absolute: %d", n_pages)
-    if failures:
-        return failures
+    return failures
 
-    old = tex_dir / f"{NAME}.pdf"
-    old.unlink(missing_ok=True)
-    try:
-        run(LATEXMK, tex_dir)
-    except subprocess.CalledProcessError:
-        pass  # latexmk -f exits non-zero on warnings; the PDF's existence is the test
-    if not old.exists():
-        return [f"latexmk produced no PDF; see {tex_dir}/{NAME}.log"]
 
+def compile_and_copy(root: Path) -> list[str]:
+    """Step 5: rerun latexmk on the fixed LaTeX and copy the results back to exports/."""
+    tex_dir = STAGE / TEX_DIR
+    pdf = tex_dir / f"{NAME}.pdf"
+    pdf.unlink(missing_ok=True)
+    # latexmk -f exits non-zero on warnings; the PDF's existence is the test.
+    run(LATEXMK, tex_dir, root / LATEXMK_LOG)
+    if not pdf.exists():
+        return [f"latexmk produced no PDF; see {tex_dir}/{NAME}.log and {LATEXMK_LOG}"]
     for rel in (TEX_DIR, LOG_DIR):
         shutil.rmtree(root / rel, ignore_errors=True)
         if (STAGE / rel).exists():
             shutil.copytree(STAGE / rel, root / rel)
-    shutil.copyfile(old, root / PDF)
+    shutil.copyfile(pdf, root / PDF)
     log.info("wrote %s", PDF)
     return []
 
 
+def build(root: Path) -> list[str]:
+    stage(root)
+    rewrite_staged_facts()
+    if run(["myst", "build", "--pdf"], STAGE, root / MYST_LOG):
+        return [f"myst build --pdf failed; see {MYST_LOG}"]
+    return absolutize_tex() or compile_and_copy(root)
+
+
+def raises_key_error(fn, *args) -> bool:
+    try:
+        fn(*args)
+    except KeyError:
+        return True
+    return False
+
+
+def fact_failures() -> list[str]:
+    """Failures of the fact-link rewrite and the label-to-URL mapping."""
+    targets = {"fact:elognorm": f"{SITE}/content/numerical/mathfactslist#fact-elognorm"}
+    text, n = rewrite_fact_links(
+        "fact [ELogNorm](#fact:elognorm) and [x](#sec:y)", targets
+    )
+    title = label_targets("(fact:page)=\n# Title\n\n(fact:x)=\n:::{note}\n", "U")
+    return [
+        msg
+        for bad, msg in [
+            (
+                n != 1 or targets["fact:elognorm"] not in text or "#sec:y" not in text,
+                "fact link rewrite missed its target or touched a sec link",
+            ),
+            (
+                not raises_key_error(rewrite_fact_links, "[Nope](#fact:nope)", targets),
+                "link to an undefined fact label was accepted",
+            ),
+            (
+                title != {"fact:page": "U", "fact:x": "U#fact-x"},
+                f"page-title and in-page labels mapped to {title}",
+            ),
+            (
+                html_id("fact:logelognormtimes") != "fact-logelognormtimes",
+                "html_id no longer matches MyST's anchors",
+            ),
+        ]
+        if bad
+    ]
+
+
+def href_failures() -> list[str]:
+    """Failures of the LaTeX \\href rewrite and the page check."""
+    tex, n = absolutize(
+        r"see \href{/content/consumption/envelope}{Envelope} and \href{https://x.org}{x}"
+    )
+    pages = {"/content/consumption/envelope"}
+    return [
+        msg
+        for bad, msg in [
+            (
+                n != 1 or REL_HREF.search(tex) or "https://x.org" not in tex,
+                "absolutize did not rewrite exactly the relative link",
+            ),
+            (
+                unknown_pages(tex, pages),
+                "a link to an existing page was reported unknown",
+            ),
+            (
+                not unknown_pages(rf"\href{{{SITE}/content/gone/page}}{{x}}", pages),
+                "a link to a missing page was not reported",
+            ),
+            (
+                unknown_pages(
+                    rf"\href{{{SITE}/content/consumption/envelope\#fact-x}}{{x}}", pages
+                ),
+                "an escaped anchor was read as part of the page path",
+            ),
+        ]
+        if bad
+    ]
+
+
+def url_failures() -> list[str]:
+    """Failures of the Markdown-path-to-URL mapping."""
+    return [
+        f"page_url({md}) no longer matches MyST's URL {want}"
+        for md, want in [
+            ("content/asset_pricing/C-CAPM.md", "/content/asset-pricing/c-capm"),
+            (
+                "content/consumption/2PeriodLCModel.md",
+                "/content/consumption/periodlcmodel",
+            ),
+            ("content/growth/index.md", "/content/growth"),
+        ]
+        if page_url(Path("r") / md, Path("r")) != want
+    ]
+
+
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
-    ok = True
-    targets = {"fact:elognorm": f"{SITE}/content/numerical/mathfactslist#fact-elognorm"}
-    text, n = rewrite_fact_links("fact [ELogNorm](#fact:elognorm) and [x](#sec:y)", targets)
-    if n != 1 or targets["fact:elognorm"] not in text or "#sec:y" not in text:
-        log.error("SELF-TEST FAIL: fact link rewrite missed its target or touched a sec link")
-        ok = False
-    try:
-        rewrite_fact_links("[Nope](#fact:nope)", targets)
-        log.error("SELF-TEST FAIL: link to an undefined fact label was accepted")
-        ok = False
-    except KeyError:
-        pass
-    tex, n = absolutize(r"see \href{/content/consumption/envelope}{Envelope} and \href{https://x.org}{x}")
-    if n != 1 or REL_HREF.search(tex) or "https://x.org" not in tex:
-        log.error("SELF-TEST FAIL: absolutize did not rewrite exactly the relative link")
-        ok = False
-    pages = {"/content/consumption/envelope"}
-    if unknown_pages(tex, pages):
-        log.error("SELF-TEST FAIL: a link to an existing page was reported unknown")
-        ok = False
-    if not unknown_pages(rf"\href{{{SITE}/content/gone/page}}{{x}}", pages):
-        log.error("SELF-TEST FAIL: a link to a missing page was not reported")
-        ok = False
-    if unknown_pages(rf"\href{{{SITE}/content/consumption/envelope\#fact-x}}{{x}}", pages):
-        log.error("SELF-TEST FAIL: an escaped anchor was read as part of the page path")
-        ok = False
-    for md, want in [
-        ("content/asset_pricing/C-CAPM.md", "/content/asset-pricing/c-capm"),
-        ("content/consumption/2PeriodLCModel.md", "/content/consumption/periodlcmodel"),
-    ]:
-        if page_url(Path("r") / md, Path("r")) != want:
-            log.error("SELF-TEST FAIL: page_url(%s) no longer matches MyST's slug %s", md, want)
-            ok = False
-    got = label_targets("(fact:page)=\n# Title\n\n(fact:x)=\n:::{note}\n", "U")
-    if got != {"fact:page": "U", "fact:x": "U#fact-x"}:
-        log.error("SELF-TEST FAIL: page-title and in-page labels mapped to %s", got)
-        ok = False
-    if html_id("fact:logelognormtimes") != "fact-logelognormtimes":
-        log.error("SELF-TEST FAIL: html_id no longer matches MyST's anchors")
-        ok = False
-    log.info("self-test %s", "passed" if ok else "FAILED")
-    return ok
+    failures = fact_failures() + href_failures() + url_failures()
+    for f in failures:
+        log.error("SELF-TEST FAIL: %s", f)
+    log.info("self-test %s", "FAILED" if failures else "passed")
+    return not failures
 
 
 if __name__ == "__main__":
