@@ -72,6 +72,10 @@ Derivations and methods useful for macroeconomics:
 - Aggregation methods
 - Approximation techniques for lognormal distributions
 
+### Supplemental Notes
+
+Lecture notes that are not part of the course, on the website only and not in the PDF.
+
 ## License
 
 - Content: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)

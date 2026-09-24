@@ -13,6 +13,5 @@ to data, the equity premium puzzle, since no plausible degree of risk aversion e
 the historical excess return on equity (matching it takes a coefficient of relative risk
 aversion around 20, while the riskless rate over the same period wants one below one).
 
-Two further questions close the chapter. What prices are consistent with the absence of
-arbitrage even when they diverge from fundamentals, and what changes when the household
-chooses consumption and portfolio share jointly rather than in sequence.
+The chapter closes by asking what prices are consistent with the absence of arbitrage
+even when they diverge from fundamentals.
