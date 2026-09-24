@@ -1,4 +1,4 @@
-# Mathematical Background
+# Numerical
 
 We use the results collected here repeatedly in the main chapters, but deriving them
 where they are first needed would interrupt the argument.
