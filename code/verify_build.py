@@ -11,7 +11,8 @@ So the deploy gate cannot be the build's exit code. This checks the output inste
   1. index.html exists and carries real content
   2. no asset path is prefixed with the repository name, which is the signature of a
      BASE_URL meant for a project site being used on a root-served one
-  3. the expected number of pages were emitted
+  3. the expected number of pages were emitted, not counting the forwarding pages that
+     code/write_redirects.py adds for moved URLs
 
 `--self-test` runs every check against synthetic bad input and fails if any check passes
 it, so a check that has silently stopped discriminating is caught rather than trusted.
@@ -34,11 +35,17 @@ MIN_BYTES = 2000
 MIN_PAGES = 40
 
 ASSET = re.compile(r'(?:href|src)="(/[^"]*)"')
+REFRESH = re.compile(r'<meta http-equiv="refresh"', re.IGNORECASE)
 
 
 def bad_prefixes(html: str, slug: str) -> list[str]:
     """Asset paths that start with the repository name, one directory too deep."""
     return sorted({p for p in ASSET.findall(html) if p.startswith(f"/{slug}/")})
+
+
+def is_redirect(html: str) -> bool:
+    """A forwarding page written by code/write_redirects.py, which is not a page of the book."""
+    return bool(REFRESH.search(html))
 
 
 def check(build: Path, slug: str) -> list[str]:
@@ -54,11 +61,19 @@ def check(build: Path, slug: str) -> list[str]:
 
     stale = bad_prefixes(html, slug)
     if stale:
-        failures.append(f"{len(stale)} asset paths prefixed with /{slug}/, e.g. {stale[0]}")
+        failures.append(
+            f"{len(stale)} asset paths prefixed with /{slug}/, e.g. {stale[0]}"
+        )
 
-    pages = list(build.rglob("*.html"))
+    pages = [
+        p
+        for p in build.rglob("*.html")
+        if not is_redirect(p.read_text(errors="ignore"))
+    ]
     if len(pages) < MIN_PAGES:
-        failures.append(f"only {len(pages)} html pages built, under the {MIN_PAGES} floor")
+        failures.append(
+            f"only {len(pages)} html pages built, under the {MIN_PAGES} floor"
+        )
 
     return failures
 
@@ -71,6 +86,14 @@ def self_test() -> bool:
         ok = False
     if bad_prefixes('<a href="/build/app.css">', REPO_SLUG):
         log.error("SELF-TEST FAIL: stale-prefix check fired on a correct root path")
+        ok = False
+    if not is_redirect(
+        '<meta http-equiv="refresh" content="0; url=/content/numerical">'
+    ):
+        log.error("SELF-TEST FAIL: a forwarding page was counted as a page of the book")
+        ok = False
+    if is_redirect('<meta charset="utf-8"><title>Envelope</title>'):
+        log.error("SELF-TEST FAIL: a page of the book was taken for a forwarding page")
         ok = False
     if not check(Path("/nonexistent"), REPO_SLUG):
         log.error("SELF-TEST FAIL: missing-index check did not fire")
