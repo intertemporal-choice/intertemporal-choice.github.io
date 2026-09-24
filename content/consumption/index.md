@@ -1,9 +1,13 @@
 # Consumption Theory
 
-Fisher's two-period problem opens the chapter. It exposes the logic of intertemporal
-choice in the simplest setting that contains anything interesting, one in which a budget
-constraint trades current against future consumption and a first-order condition equates
-the marginal rate of substitution between them to the interest factor.
+The chapter opens with the argument that started the modern theory: Keynes's
+consumption function, the evidence it could not explain, and Friedman's answer, that
+consumption follows permanent rather than current income.
+
+Fisher's two-period problem then lays the theoretical foundation. It exposes the logic
+of intertemporal choice in the simplest setting that contains anything interesting, one
+in which a budget constraint trades current against future consumption and a first-order
+condition equates the marginal rate of substitution between them to the interest factor.
 
 Extending that problem in one direction gives the Diamond overlapping generations
 model, which lets us ask how public pensions and government debt shift resources across

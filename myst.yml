@@ -146,6 +146,8 @@ project:
       articles:
         - file: content/consumption/index.md
           level: 0
+        - file: content/consumption/Keynes-Friedman-Modigliani.md
+          level: 1
         - file: content/consumption/Fisher2Period.md
           level: 1
         - file: content/consumption/ConsAndLaborSupply.md
