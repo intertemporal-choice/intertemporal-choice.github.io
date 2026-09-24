@@ -15,6 +15,23 @@ extracts whatever is absent.
 Verified 2026-08-23: 46 of the 47 handouts then in `sources/` were byte-identical (md5)
 to the `LaTeX/<stem>.tex` inside their source zip.
 
+## `build_pdf.py`
+
+Builds `exports/intertemporal-choice.pdf`. Use it instead of a bare `myst build --pdf`.
+
+MyST exports every link to another page as a site-relative `\href{/content/...}`, which
+goes nowhere in a PDF, and drops links to Math Facts entries altogether. The script
+builds from a staged copy in `_build/pdf-src`, points those links at the published site
+(`https://intertemporal-choice.github.io/...`, with the fact's anchor), and fails if any
+link names a page the book does not have. The Markdown keeps its `#label` links, so the
+website's cross-references stay internal and follow pages when they move.
+
+Links into Supplemental Notes, which the PDF omits, work the same way. They resolve
+once the site carrying those pages has been deployed.
+
+`--self-test` checks the link rewriting, and the reimplementation of MyST's URL and
+anchor slugs, against cases they must handle.
+
 ## `verify_build.py`
 
 Gates the GitHub Pages deploy on the built output rather than the build's exit code,
