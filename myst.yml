@@ -36,7 +36,7 @@ project:
   # thumbnail: thumbnails/intertemporal-choice.png
 
   license:
-    content: CC-BY-4.0
+    content: CC-BY-NC-ND-4.0
     code: Apache-2.0
   open_access: true
 

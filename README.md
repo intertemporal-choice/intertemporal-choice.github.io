@@ -13,7 +13,7 @@ We keep the arithmetic in view throughout, working each result through in full. 
 The notes originated from Christopher Carroll's [graduate macroeconomics lecture notes](https://www.econ2.jhu.edu/people/ccarroll/public/lecturenotes/) at Johns Hopkins University. Alan Lujan teaches from these materials in the advanced macroeconomics sequence of JHU's masters economics program.
 
 :::{tip} For Instructors
-These materials are freely available under a CC-BY-4.0 license. Instructors at other institutions are welcome to use, adapt, and redistribute them for teaching.
+These materials are free to read. Under their CC BY-NC-ND 4.0 license, instructors at other institutions are welcome to share them unchanged in non-commercial teaching. Adapted versions need the authors' permission.
 :::
 
 ## Contents
@@ -74,8 +74,10 @@ Derivations and methods useful for macroeconomics:
 
 ## License
 
-- Content: [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
+- Content: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 - Code: [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+Versions of the content published up to commit `603a071` (2026-09-23) were released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), and copies of those versions keep that license.
 
 ## Acknowledgments
 

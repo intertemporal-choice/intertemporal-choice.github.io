@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Graduate macroeconomics lecture notes on consumption, saving, growth, and asset pricing"
 readme = "README.md"
 requires-python = ">=3.11"
-license = {text = "CC-BY-4.0"}
+license = {text = "CC-BY-NC-ND-4.0 (content), Apache-2.0 (code)"}
 authors = [
     {name = "Christopher D. Carroll", email = "ccarroll@jhu.edu"},
     {name = "Alan E. Lujan Solis"},
