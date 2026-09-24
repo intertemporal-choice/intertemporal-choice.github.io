@@ -77,8 +77,6 @@ Derivations and methods useful for macroeconomics:
 - Content: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 - Code: [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
-Versions of the content published up to commit `603a071` (2026-09-23) were released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), and copies of those versions keep that license.
-
 ## Acknowledgments
 
 Development supported by the [Econ-ARK](https://econ-ark.org/) project with funding from the Alfred P. Sloan Foundation.
