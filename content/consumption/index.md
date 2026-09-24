@@ -6,8 +6,10 @@ consumption follows permanent rather than current income.
 
 Fisher's two-period problem then lays the theoretical foundation. It exposes the logic
 of intertemporal choice in the simplest setting that contains anything interesting, one
-in which a budget constraint trades current against future consumption and a first-order
-condition equates the marginal rate of substitution between them to the interest factor.
+in which a budget constraint trades current against future consumption and the Euler
+equation {math}`\uFunc^{\prime}(\cNbr_{1}) = \Rfree \DiscFac \uFunc^{\prime}(\cNbr_{2})`
+sets the ratio of current to future marginal utility equal to the interest factor times
+the time preference factor.
 
 Extending that problem in one direction gives the Diamond overlapping generations
 model, which lets us ask how public pensions and government debt shift resources across
