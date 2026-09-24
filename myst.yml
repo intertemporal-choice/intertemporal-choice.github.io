@@ -176,12 +176,6 @@ project:
           level: 1
         - file: content/consumption/Laibson.md
           level: 1
-        - file: content/consumption/CRRA-RateRisk.md
-          level: 1
-        - file: content/consumption/CARAModelWithYRisk.md
-          level: 1
-        - file: content/consumption/CampManCRRAWithTimeVaryingR.md
-          level: 1
         - file: content/asset_pricing/index.md
           level: 0
         - file: content/asset_pricing/CARAPortfolio.md
@@ -196,8 +190,6 @@ project:
           level: 1
         - file: content/asset_pricing/Bubbles.md
           level: 1
-        - file: content/asset_pricing/Portfolio-Multi-CRRA.md
-          level: 1
         - file: content/investment/index.md
           level: 0
         - file: content/investment/InvestmentNotes.md
@@ -205,8 +197,6 @@ project:
         - file: content/investment/HallJorgenson.md
           level: 1
         - file: content/investment/qModel.md
-          level: 1
-        - file: content/investment/EntrepreneurPF.md
           level: 1
         - file: content/investment/DynanImperfCapMkts.md
           level: 1
@@ -220,8 +210,6 @@ project:
           level: 1
         - file: content/growth/RCKWithGov.md
           level: 1
-        - file: content/growth/qRamsey.md
-          level: 1
         - file: content/growth/DecentralizingRCK.md
           level: 1
         - file: content/growth/Romer86.md
@@ -234,8 +222,6 @@ project:
           level: 1
         - file: content/growth/BlanchardFiniteHorizon.md
           level: 1
-        - file: content/growth/GrowthAndGrossSaving.md
-          level: 1
         - file: content/dsge/index.md
           level: 0
         - file: content/dsge/BrockMirman.md
@@ -245,10 +231,6 @@ project:
         - file: content/appendix/index.md
           level: 0
         - file: content/appendix/Aggregation.md
-          level: 1
-        - file: content/appendix/Equiprobable.md
-          level: 1
-        - file: content/appendix/Equiprobable-Returns.md
           level: 1
         - file: content/appendix/HamiltonianVSDiscrete.md
           level: 1

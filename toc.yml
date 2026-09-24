@@ -23,9 +23,6 @@ project:
         - file: content/consumption/RiskAndPSPremia.md
         - file: content/consumption/BufferStockAgeProfiles.md
         - file: content/consumption/Laibson.md
-        - file: content/consumption/CRRA-RateRisk.md
-        - file: content/consumption/CARAModelWithYRisk.md
-        - file: content/consumption/CampManCRRAWithTimeVaryingR.md
     - file: content/asset_pricing/index.md
       children:
         - file: content/asset_pricing/CARAPortfolio.md
@@ -34,13 +31,11 @@ project:
         - file: content/asset_pricing/EquityPremiumPuzzle.md
         - file: content/asset_pricing/C-CAPM.md
         - file: content/asset_pricing/Bubbles.md
-        - file: content/asset_pricing/Portfolio-Multi-CRRA.md
     - file: content/investment/index.md
       children:
         - file: content/investment/InvestmentNotes.md
         - file: content/investment/HallJorgenson.md
         - file: content/investment/qModel.md
-        - file: content/investment/EntrepreneurPF.md
         # Converted from the DynanImperfCapMkts handout, which the local sources/
         # mirror never pulled; the mechanism chapter for the two that follow.
         - file: content/investment/DynanImperfCapMkts.md
@@ -50,14 +45,12 @@ project:
       children:
         - file: content/growth/RamseyCassKoopmans.md
         - file: content/growth/RCKWithGov.md
-        - file: content/growth/qRamsey.md
         - file: content/growth/DecentralizingRCK.md
         - file: content/growth/Romer86.md
         - file: content/growth/Endogenous.md
         - file: content/growth/RebeloAK.md
         - file: content/growth/LucasGrowth.md
         - file: content/growth/BlanchardFiniteHorizon.md
-        - file: content/growth/GrowthAndGrossSaving.md
     - file: content/dsge/index.md
       children:
         - file: content/dsge/BrockMirman.md
@@ -65,12 +58,19 @@ project:
     - file: content/appendix/index.md
       children:
         - file: content/appendix/Aggregation.md
-        - file: content/appendix/Equiprobable.md
-        - file: content/appendix/Equiprobable-Returns.md
         - file: content/appendix/HamiltonianVSDiscrete.md
         - file: content/appendix/MathFactsList.md
     # Lecture notes that are not part of the course. Listed for the website only; the
     # PDF export in myst.yml deliberately omits this part.
     - file: content/supplemental/index.md
       children:
+        - file: content/supplemental/CRRA-RateRisk.md
+        - file: content/supplemental/CARAModelWithYRisk.md
+        - file: content/supplemental/CampManCRRAWithTimeVaryingR.md
         - file: content/supplemental/C-With-Optimal-Portfolio.md
+        - file: content/supplemental/Portfolio-Multi-CRRA.md
+        - file: content/supplemental/EntrepreneurPF.md
+        - file: content/supplemental/qRamsey.md
+        - file: content/supplemental/GrowthAndGrossSaving.md
+        - file: content/supplemental/Equiprobable.md
+        - file: content/supplemental/Equiprobable-Returns.md

@@ -36,7 +36,6 @@ Lucas, Mehra and Prescott, Blanchard, and others:
 - CRRA and CARA portfolio allocation
 - The consumption-based capital asset pricing model (C-CAPM)
 - The equity premium puzzle
-- Multi-asset portfolio optimization
 
 ### Growth
 
@@ -70,11 +69,18 @@ Derivations and methods useful for macroeconomics:
 
 - Useful facts for graduate macroeconomics
 - Aggregation methods
-- Approximation techniques for lognormal distributions
 
 ### Supplemental Notes
 
-Lecture notes that are not part of the course, on the website only and not in the PDF.
+Lecture notes that are not part of the course, on the website only and not in the PDF:
+
+- Consumption out of risky assets, and with optimal portfolio choice
+- Consumption under CARA utility with income risk
+- Consumption dynamics with a time-varying interest rate
+- CRRA portfolio choice with two risky assets
+- An entrepreneur's problem under perfect foresight
+- The q-Ramsey model, and gross saving and growth in the RCK model
+- Equiprobable approximations to lognormal distributions
 
 ## License
 
