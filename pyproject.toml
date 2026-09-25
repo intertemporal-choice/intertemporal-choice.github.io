@@ -11,10 +11,21 @@ authors = [
 ]
 dependencies = [
     "econ-ark>=0.17.0",
+    "ipykernel>=7.3.0",
     "ipywidgets>=8.1.8",
+    "jupyter-server>=2.21.0",
     "jupyterlab>=4.5.2",
     "jupytext>=1.18.1",
+    "matplotlib>=3.11.1",
     "mystmd>=1.10.1",
     "numpy>=2.3.5",
+    "pandas>=2.3",
+    "pyyaml>=6.0",
     "scipy>=1.17.0",
 ]
+
+# The figure notebooks import shared code from src/intertemporal_choice/, which `uv sync`
+# installs editable into the book's environment.
+[build-system]
+requires = ["uv_build>=0.8.13,<0.9"]
+build-backend = "uv_build"

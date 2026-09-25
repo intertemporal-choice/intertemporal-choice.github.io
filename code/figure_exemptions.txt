@@ -1,0 +1,95 @@
+# Static figures the build still allows. Every other figure a chapter shows must be embedded
+# from a notebook cell (:::{figure} #nb-<Chapter>-<Figure>), and code/verify_build.py fails
+# the build on any static figure not listed here, on any entry no page uses, and on any file
+# under content/figures/ missing from this list.
+#
+#   kind   exception: data that cannot be obtained; stays a cited static image
+#          pending:   not yet ported; the line is deleted by the PR that ports it
+#   path   exactly as the chapter's figure directive writes it
+#   reason required
+#
+# Kept in per-handout blocks, alphabetical, so the porting PRs rebase cleanly.
+
+
+# 2PeriodLCModel
+pending  /content/figures/2PeriodLCModel/FisherFigure.png                        port to content/notebooks/Fisher2Period.md
+
+# BlanchardFiniteHorizon
+pending  /content/figures/BlanchardFiniteHorizon/BlanchardCDynamics.png          port to content/notebooks/BlanchardFiniteHorizon.md
+pending  /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase1.png  port to content/notebooks/BlanchardFiniteHorizon.md
+pending  /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase2.png  port to content/notebooks/BlanchardFiniteHorizon.md
+pending  /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase3.png  port to content/notebooks/BlanchardFiniteHorizon.md
+
+# BrockMirman
+pending  /content/figures/BrockMirman/yPlotBrockMirman.png                       port to content/notebooks/BrockMirman.md
+pending  /content/figures/BrockMirman/zWhiteNoise.png                            port to content/notebooks/BrockMirman.md
+
+# BufferStockAgeProfiles
+pending  /content/figures/BufferStockAgeProfiles/AgeProfilesData.png             exception planned: Carroll (1997 QJE) Figure IV, 1960-61 CEX microdata not obtainable
+pending  /content/figures/BufferStockAgeProfiles/AgeProfilesTheory.png           port to content/notebooks/BufferStockAgeProfiles.md
+
+# C-With-Optimal-Portfolio
+pending  /content/figures/C-With-Optimal-Portfolio/MPCApproxVsExactVsSigma.png   port to content/notebooks/C-With-Optimal-Portfolio.md
+
+# CRRA-RateRisk
+pending  /content/figures/CRRA-RateRisk/MPCvsCRRA.png                            port to content/notebooks/CRRA-RateRisk.md
+pending  /content/figures/CRRA-RateRisk/MPCvsSigma.png                           port to content/notebooks/CRRA-RateRisk.md
+
+# EntrepreneurPF
+pending  /content/figures/EntrepreneurPF/klossIRF.png                            port to content/notebooks/EntrepreneurPF.md
+pending  /content/figures/EntrepreneurPF/lPhaseDiag.png                          port to content/notebooks/EntrepreneurPF.md
+pending  /content/figures/EntrepreneurPF/mlossIRF.png                            port to content/notebooks/EntrepreneurPF.md
+
+# Envelope
+pending  /content/figures/Envelope/Envelope.png                                  port to content/notebooks/Envelope.md
+
+# Equiprobable
+pending  /content/figures/Equiprobable/CDFPlot.png                               decision pending: may move to a HARK companion notebook instead
+
+# Equiprobable-Returns
+pending  /content/figures/Equiprobable-Returns/ShareVsCovByMethod.png            decision pending: may move to a HARK companion notebook instead
+
+# Imperfections
+pending  /content/figures/Imperfections/FinancialBonds.png                       exception planned: Raskin (2013) Figure 2, proprietary Merrill Lynch data
+pending  /content/figures/Imperfections/NonfinancialBonds.png                    exception planned: Raskin (2013) Figure 1, proprietary Merrill Lynch data
+
+# InvestmentNotes
+pending  /content/figures/InvestmentNotes/InvestmentDrivesCycle.png              port to content/notebooks/InvestmentNotes.md
+
+# OLGModel
+pending  /content/figures/OLGModel/OLGModelDynamics.png                          port to content/notebooks/OLGModel.md
+pending  /content/figures/OLGModel/fnkBoth.png                                   port to content/notebooks/OLGModel.md
+
+# Portfolio-CRRA
+pending  /content/figures/Portfolio-CRRA/ShareApproxErr.png                      port to content/notebooks/Portfolio-CRRA.md
+pending  /content/figures/Portfolio-CRRA/ShareVsCRRA.png                         port to content/notebooks/Portfolio-CRRA.md
+
+# qModel
+pending  /content/figures/qModel/CorporateTaxReduction.png                       port to content/notebooks/qModel.md
+pending  /content/figures/qModel/ITCIncrease.png                                 port to content/notebooks/qModel.md
+pending  /content/figures/qModel/ProductivityIncrease.png                        port to content/notebooks/qModel.md
+pending  /content/figures/qModel/lPhaseDiag.png                                  port to content/notebooks/qModel.md
+pending  /content/figures/qModel/qPhaseDiag.png                                  port to content/notebooks/qModel.md
+
+# qRamsey
+pending  /content/figures/qRamsey/PatRiseCostAdj0VsBase.png                      port to content/notebooks/qRamsey.md
+pending  /content/figures/qRamsey/PolFuncAdjCost0VsBase.png                      port to content/notebooks/qRamsey.md
+pending  /content/figures/qRamsey/PolFuncRRALoVsHi.png                           port to content/notebooks/qRamsey.md
+pending  /content/figures/qRamsey/kDropCostAdj0VsBase.png                        port to content/notebooks/qRamsey.md
+
+# RamseyCassKoopmans
+pending  /content/figures/RamseyCassKoopmans/RamseySSPlot.png                    port to content/notebooks/RamseyCassKoopmans.md
+pending  /content/figures/RamseyCassKoopmans/RamseySaddlePlot.png                port to content/notebooks/RamseyCassKoopmans.md
+
+# RiskAndPSPremia
+pending  /content/figures/RiskAndPSPremia/RiskAndPSPremiaPrec.png                port to content/notebooks/RiskAndPSPremia.md
+pending  /content/figures/RiskAndPSPremia/RiskAndPSPremiaRisk.png                port to content/notebooks/RiskAndPSPremia.md
+
+# SocSecAndKAccum
+pending  /content/figures/SocSecAndKAccum/SocSecAndKAccum.png                    port to content/notebooks/SocSecAndKAccum.md
+
+# StickyExpectationsC
+pending  /content/figures/StickyExpectationsC/StickyExpectationsCb.png           port to content/notebooks/StickyExpectationsC.md
+pending  /content/figures/StickyExpectationsC/StickyExpectationsCc.png           port to content/notebooks/StickyExpectationsC.md
+pending  /content/figures/StickyExpectationsC/bPlot.png                          port to content/notebooks/StickyExpectationsC.md
+pending  /content/figures/StickyExpectationsC/cPlot.png                          port to content/notebooks/StickyExpectationsC.md

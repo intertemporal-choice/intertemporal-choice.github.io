@@ -20,29 +20,55 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # The build executes every figure notebook; a hung kernel must not hold the runner.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+      # The uv-locked mystmd wrapper needs Node >= 20.
       - uses: actions/setup-node@v4
         with:
           node-version: 22.x
-      - name: Install MyST
-        run: npm install -g mystmd
-      - name: Build HTML Assets
-        run: myst build --html --strict
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v6
         with:
-          python-version: '3.13'
+          enable-cache: true
+      # MyST, the Jupyter kernel and the notebooks' dependencies, all from uv.lock.
+      - name: Install the locked environment
+        run: uv sync --locked
+      - name: Self-tests
+        run: |
+          uv run python code/build_site.py --self-test
+          uv run python code/verify_build.py --self-test
+          uv run python code/write_redirects.py --self-test
+          uv run python code/build_pdf.py --self-test
+          uv run python -m intertemporal_choice --self-test
+      # MyST caches executed notebooks in _build/execute. The key covers the cell code and
+      # IC_EXEC_ENV, a hash of uv.lock, src/ and data/ (see code/build_site.py); the cache
+      # key here carries the same hash so a stale directory is never restored. Pull requests
+      # restore it to save time; a push to main always executes from scratch.
+      - id: exec
+        name: Hash what the notebooks depend on
+        run: echo "env=$(uv run python code/build_site.py --print-env-hash)" >> "$GITHUB_OUTPUT"
+      - if: github.event_name == 'pull_request'
+        uses: actions/cache/restore@v4
+        with:
+          path: _build/execute
+          key: myst-exec-${{ steps.exec.outputs.env }}-${{ github.sha }}
+          restore-keys: myst-exec-${{ steps.exec.outputs.env }}-
+      - name: Build HTML, executing every figure notebook
+        run: uv run python code/build_site.py --html --strict
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: _build/execute
+          key: myst-exec-${{ steps.exec.outputs.env }}-${{ github.sha }}
       # Old URLs of moved pages forward to their new ones; see code/redirects.txt.
       - name: Write redirects for moved pages
-        run: |
-          python code/write_redirects.py --self-test
-          python code/write_redirects.py
+        run: uv run python code/write_redirects.py
       # Gates the deploy on the OUTPUT, not the build's exit code: myst build exits 0
-      # on a site whose every stylesheet 404s. See code/verify_build.py.
-      - name: Verify the built site is servable
-        run: |
-          python code/verify_build.py --self-test
-          python code/verify_build.py
+      # on a site whose every stylesheet 404s, and on a figure whose embed label matches
+      # no notebook cell. See code/verify_build.py.
+      - name: Verify the built site
+        run: uv run python code/verify_build.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
