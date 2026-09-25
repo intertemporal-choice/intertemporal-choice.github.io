@@ -358,3 +358,6 @@ sources/
 # intermediates in *_pdf_tex/ plus the logs. Ignore the directory and re-admit the PDF.
 exports/*
 !exports/*.pdf
+
+# Jupyter autosaves beside the figure notebooks
+.ipynb_checkpoints/

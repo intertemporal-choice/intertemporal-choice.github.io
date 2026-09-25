@@ -1,0 +1,4 @@
+# The figure notebooks (content/notebooks/*.md) are MyST-markdown notebooks. Opened in
+# JupyterLab with "Open With > Jupytext Notebook", they save back to the same text format;
+# this keeps the save from stamping a jupytext version into each file's header.
+notebook_metadata_filter = "-jupytext.text_representation.jupytext_version"
