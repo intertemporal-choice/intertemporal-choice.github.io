@@ -58,11 +58,11 @@ project:
       children:
         - file: content/dsge/BrockMirman.md
         - file: content/dsge/RBC-Prescott.md
-    - file: content/numerical/index.md
+    - file: content/appendices/mathematical/index.md
       children:
-        - file: content/numerical/Aggregation.md
-        - file: content/numerical/HamiltonianVSDiscrete.md
-        - file: content/numerical/MathFactsList.md
+        - file: content/appendices/mathematical/Aggregation.md
+        - file: content/appendices/mathematical/HamiltonianVSDiscrete.md
+        - file: content/appendices/mathematical/MathFactsList.md
     # Notes that supplement the main chapters. Listed for the website only; the
     # PDF export in myst.yml deliberately omits this part.
     - file: content/supplemental/index.md
