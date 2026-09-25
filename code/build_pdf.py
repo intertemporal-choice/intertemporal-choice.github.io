@@ -11,7 +11,9 @@ whenever a page moves, so the Markdown is left alone and the fix happens here:
   1. stage a copy of the project in _build/pdf-src
   2. in the staged Markdown only, rewrite each `](#fact:...)` link to the fact's anchor
      on the site, so the export keeps it as a link
-  3. run `myst build --pdf` in the staged copy
+  3. run `myst build --pdf --execute` in the staged copy through code/build_site.py, reusing
+     the execution cache the HTML build filled, so every figure is its notebook's output,
+     and check that every figure in the generated LaTeX includes an image that exists
   4. rewrite every `\\href{/` in the generated LaTeX to an absolute URL on the site, and
      check that each one names a page the book actually has
   5. rerun MyST's own latexmk command and copy the PDF (with its .tex and logs) back
@@ -30,6 +32,8 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+import build_site  # code/build_site.py: `myst build --execute` with its own Jupyter server
 
 logging.basicConfig(level=logging.INFO, format="%(message)s", force=True)
 log = logging.getLogger(__name__)
@@ -62,6 +66,7 @@ SKIP = {
     "sources",
     "node_modules",
     ".DS_Store",
+    ".ipynb_checkpoints",
 }
 
 FACT_DEF = re.compile(r"^\((fact:[^)\s]+)\)=", re.MULTILINE)
@@ -157,10 +162,12 @@ def stage(root: Path) -> None:
     shutil.copytree(
         root, STAGE, ignore=lambda _, names: [n for n in names if n in SKIP]
     )
-    # Reuse the downloaded LaTeX template rather than fetching it again.
-    templates = root / "_build" / "templates"
-    if templates.exists():
-        shutil.copytree(templates, STAGE / "_build" / "templates")
+    # Reuse the downloaded LaTeX template rather than fetching it again, and the executed
+    # notebooks: their cache key is the cell code plus IC_EXEC_ENV, which the staged build is
+    # given from the original tree, so nothing that the HTML build ran runs again.
+    for cached in ("templates", "execute"):
+        if (root / "_build" / cached).exists():
+            shutil.copytree(root / "_build" / cached, STAGE / "_build" / cached)
 
 
 def rewrite_staged_facts() -> None:
@@ -212,12 +219,45 @@ def compile_and_copy(root: Path) -> list[str]:
     return []
 
 
+FIGURE_ENV = re.compile(r"\\begin\{figure\}(.*?)\\end\{figure\}", re.S)
+INCLUDE = re.compile(r"\\includegraphics(?:\[[^\]]*\])?\{([^}]*)\}")
+
+
+def missing_graphics(tex: str, exists) -> list[str]:
+    """Figures in the LaTeX with no \\includegraphics, or one naming a file that is absent."""
+    problems = []
+    for n, body in enumerate(FIGURE_ENV.findall(tex), 1):
+        files = INCLUDE.findall(body)
+        if not files:
+            problems.append(f"figure {n} includes no image")
+        problems += [f"figure {n} includes {f}, which does not exist" for f in files if not exists(f)]
+    return problems
+
+
+def figure_failures() -> list[str]:
+    """Step 3's check: every figure in the generated LaTeX shows an image that exists."""
+    tex_dir = STAGE / TEX_DIR
+    return [
+        f"{tex_file.name}: {p}"
+        for tex_file in sorted(tex_dir.glob("*.tex"))
+        for p in missing_graphics(tex_file.read_text(), lambda f: (tex_dir / f).is_file())
+    ]
+
+
 def build(root: Path) -> list[str]:
     stage(root)
     rewrite_staged_facts()
-    if run(["myst", "build", "--pdf"], STAGE, root / MYST_LOG):
-        return [f"myst build --pdf failed; see {MYST_LOG}"]
-    return absolutize_tex() or compile_and_copy(root)
+    if build_site.build(
+        ["--pdf"],
+        root=STAGE,
+        exec_env=build_site.env_hash(root),
+        output=root / MYST_LOG,
+    ):
+        return [f"myst build --pdf --execute failed; see {MYST_LOG}"]
+    # Keep anything the staged build had to execute, so the next build need not.
+    if (STAGE / "_build" / "execute").exists():
+        shutil.copytree(STAGE / "_build" / "execute", root / "_build" / "execute", dirs_exist_ok=True)
+    return absolutize_tex() or figure_failures() or compile_and_copy(root)
 
 
 def raises_key_error(fn, *args) -> bool:
@@ -307,9 +347,30 @@ def url_failures() -> list[str]:
     ]
 
 
+def graphics_failures() -> list[str]:
+    """Failures of the figure check on LaTeX it must accept or reject."""
+    have = {"files/a.png"}.__contains__
+    good = "\\begin{figure}\\includegraphics[width=0.7\\linewidth]{files/a.png}\\end{figure}"
+    return [
+        msg
+        for bad, msg in [
+            (bool(missing_graphics(good, have)), "figure check rejected a figure with its image"),
+            (
+                not missing_graphics(good.replace("files/a.png", "files/b.png"), have),
+                "figure check accepted a figure whose image file is missing",
+            ),
+            (
+                not missing_graphics("\\begin{figure}\\caption{x}\\end{figure}", have),
+                "figure check accepted a figure with no image",
+            ),
+        ]
+        if bad
+    ]
+
+
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
-    failures = fact_failures() + href_failures() + url_failures()
+    failures = fact_failures() + href_failures() + url_failures() + graphics_failures()
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")

@@ -237,8 +237,9 @@ project:
         - file: content/numerical/MathFactsList.md
           level: 1
 
-  # No `jupyter` block. The book carries no executable pages; the Fisher notebook lives
-  # in Econ-ARK's DemARK and the two-period chapter links out to it.
+  # No `jupyter` block: that key configures in-browser execution (thebe), which the book
+  # does not use. Build-time execution is different: every figure is the output of a cell in
+  # a notebook under content/notebooks/, and code/build_site.py builds with --execute.
 
   # Exclude patterns (TOC-listed files are still built even if matched)
   # sources/ contains LaTeX originals, exports/ is build output
