@@ -77,3 +77,9 @@ project:
         - file: content/supplemental/GrowthAndGrossSaving.md
         - file: content/supplemental/Equiprobable.md
         - file: content/supplemental/Equiprobable-Returns.md
+    # The notebooks that draw the book's figures, one per chapter; see code/README.md.
+    # Listed for the website only; the PDF export in myst.yml omits this part, though its
+    # figures embed these notebooks' outputs.
+    - file: content/notebooks/index.md
+      children:
+        - file: content/notebooks/Envelope.md

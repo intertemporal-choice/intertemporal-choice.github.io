@@ -116,10 +116,10 @@ The general principle can be condensed into a rule of thumb by realizing that th
 \end{aligned}
 ```
 
-:::{figure} /content/figures/Envelope/Envelope.png
+:::{figure} #nb-Envelope-Envelope
 :name: fig:Envelope
 
 Illustration of the Envelope Theorem at Alternative Values of {math}`\mRat`
 :::
 
-Each curve in the figure plots {math}`\underline{\vFunc}({m},{c})` against {math}`{c}` for a fixed value of {math}`{m}`, with the dot marking the {math}`{c}` that maximizes it; higher curves correspond to higher {math}`{m}`, and the locus of dots traces out {math}`\vFunc({m})`. The figure makes the Envelope theorem visible in the flatness of each curve at its peak. Consider the consequences of an increase in {math}`{m}`: because the curve is flat where the dot sits, the consumer who spends the extra resources reaches almost exactly the same height as the consumer who saves all of them, so the rise in attainable utility is about the same whether the increment is consumed or not. The term involving {math}`\partial \cFunc_{\tNow}/\partial {m}_{\tNow}` can therefore be dropped.
+Each curve in the figure plots {math}`\underline{\vFunc}({m},{c})` against {math}`{c}` for a fixed value of {math}`{m}`, with the dot marking the {math}`{c}` that maximizes it; higher curves correspond to higher {math}`{m}`, and the locus of dots traces out {math}`\vFunc({m})`. The figure makes the Envelope theorem visible in the flatness of each curve at its peak. Consider the consequences of an increase in {math}`{m}`: because the curve is flat where the dot sits, the consumer who spends the extra resources reaches almost exactly the same height as the consumer who saves all of them, so the rise in attainable utility is about the same whether the increment is consumed or not. The term involving {math}`\partial \cFunc_{\tNow}/\partial {m}_{\tNow}` can therefore be dropped. The figure is drawn by this chapter's [figure notebook](../notebooks/Envelope.md), where the parameters can be changed and the figure redrawn.
