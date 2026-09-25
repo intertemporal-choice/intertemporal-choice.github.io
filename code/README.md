@@ -44,11 +44,13 @@ to the `LaTeX/<stem>.tex` inside their source zip.
 Builds `exports/intertemporal-choice.pdf`. Use it instead of a bare `myst build --pdf`.
 
 MyST exports every link to another page as a site-relative `\href{/content/...}`, which
-goes nowhere in a PDF, and drops links to Math Facts entries altogether. The script
-builds from a staged copy in `_build/pdf-src`, points those links at the published site
-(`https://intertemporal-choice.github.io/...`, with the fact's anchor), and fails if any
-link names a page the book does not have. The Markdown keeps its `#label` links, so the
-website's cross-references stay internal and follow pages when they move.
+goes nowhere in a PDF, and drops links to Math Facts entries altogether. A link with text
+to a section heading becomes `Section~\ref{...}`, losing the text; for an unnumbered
+subsection, such as an appendix inside a chapter, the number is its parent's. The
+script builds from a staged copy in `_build/pdf-src`, points all of these links at the
+published site (`https://intertemporal-choice.github.io/...`, with the anchor), and fails
+if any link names a page the book does not have. The Markdown keeps its `#label` links,
+so the website's cross-references stay internal and follow pages when they move.
 
 Links into Supplemental Notes, which the PDF omits, work the same way. They resolve
 once the site carrying those pages has been deployed.
