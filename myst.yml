@@ -172,6 +172,8 @@ project:
           level: 1
         - file: content/consumption/RiskAndPSPremia.md
           level: 1
+        - file: content/consumption/TractableBufferStock.md
+          level: 1
         - file: content/consumption/BufferStockAgeProfiles.md
           level: 1
         - file: content/consumption/Laibson.md
