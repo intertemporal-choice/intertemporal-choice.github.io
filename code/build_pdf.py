@@ -3,14 +3,17 @@
 `myst build --pdf` exports every link to another page as a site-relative
 `\\href{/content/...}`, which goes nowhere in a PDF, and drops links to Math Facts
 entries (`[LogELogNormTimes](#fact:logelognormtimes)`) altogether, leaving bare text.
-MyST never emits a LaTeX \\ref to another chapter, so a link to the published site is
-the best the PDF can carry. Writing those URLs into the Markdown would fix the PDF but
+A link with text to a section heading (`[the appendix on X](#sec:x)`) comes out as
+`Section~\\ref{sec:x}`, which drops the text and, for a section too deep to be numbered,
+names its numbered parent instead. A page link cannot become a LaTeX \\ref at all, so a
+link to the published site is the best the PDF can carry. Writing those URLs into the Markdown would fix the PDF but
 turn every cross-reference on the website into an unchecked external link that breaks
 whenever a page moves, so the Markdown is left alone and the fix happens here:
 
   1. stage a copy of the project in _build/pdf-src
-  2. in the staged Markdown only, rewrite each `](#fact:...)` link to the fact's anchor
-     on the site, so the export keeps it as a link
+  2. in the staged Markdown only, rewrite each `](#fact:...)` link, and each link with
+     text to a section heading, to that anchor on the site, so the export keeps the link
+     and its text
   3. run `myst build --pdf --execute` in the staged copy through code/build_site.py, reusing
      the execution cache the HTML build filled, so every figure is its notebook's output,
      and check that every figure in the generated LaTeX includes an image that exists
@@ -74,6 +77,9 @@ FACT_DEF = re.compile(r"^\((fact:[^)\s]+)\)=", re.MULTILINE)
 # into the page title, which has no anchor on the site.
 TITLE_LABEL = re.compile(r"\A\s*\((fact:[^)\s]+)\)=\s*\n#\s")
 FACT_LINK = re.compile(r"\]\(#(fact:[^)\s]+)\)")
+SECTION_DEF = re.compile(r"^\(((?:sub)*sec:[^)\s]+)\)=\s*\n#", re.MULTILINE)
+TITLE_SECTION = re.compile(r"\A\s*\(((?:sub)*sec:[^)\s]+)\)=\s*\n#\s")
+SECTION_LINK = re.compile(r"\[([^\]]+)\]\(#((?:sub)*sec:[^)\s]+)\)")
 REL_HREF = re.compile(r"\\href\{/")
 SITE_HREF = re.compile(r"\\href\{" + re.escape(SITE) + r"(/[^}#\\]*)")
 
@@ -136,6 +142,38 @@ def rewrite_fact_links(text: str, targets: dict[str, str]) -> tuple[str, int]:
     return FACT_LINK.subn(sub, text)
 
 
+def section_label_targets(text: str, url: str) -> dict[str, str]:
+    """The `(sec:x)=` labels on one page's headings, each mapped to its anchor on the site.
+
+    A label on the page's title is left out: MyST exports a link to it as a link to the
+    page, which step 4 makes absolute.
+    """
+    title = TITLE_SECTION.match(text)
+    return {
+        label: f"{url}#{html_id(label)}"
+        for label in SECTION_DEF.findall(text)
+        if not (title and label == title.group(1))
+    }
+
+
+def rewrite_section_links(text: str, targets: dict[str, str]) -> tuple[str, int]:
+    """Point `[text](#sec:x)` links to a heading below a page title at the site.
+
+    A link without text is left alone: MyST fills in the section's title, and
+    `Section~\\ref` is then the right rendering.
+    """
+    count = 0
+
+    def sub(m):
+        nonlocal count
+        if m.group(2) not in targets:
+            return m.group(0)
+        count += 1
+        return f"[{m.group(1)}]({targets[m.group(2)]})"
+
+    return SECTION_LINK.sub(sub, text), count
+
+
 def absolutize(tex: str) -> tuple[str, int]:
     """Prefix site-relative \\href targets with the site's URL."""
     return REL_HREF.subn(lambda _: "\\href{" + SITE + "/", tex)
@@ -171,15 +209,21 @@ def stage(root: Path) -> None:
 
 
 def rewrite_staged_facts() -> None:
-    """Step 2: point every fact link in the staged Markdown at the site."""
+    """Step 2: point every fact link, and every link with text to a section, at the site."""
     targets = fact_targets(STAGE)
-    n_facts = 0
+    sections = {}
+    for md in sorted((STAGE / "content").rglob("*.md")):
+        sections |= section_label_targets(md.read_text(), SITE + page_url(md, STAGE))
+    n_facts = n_sections = 0
     for md in (STAGE / "content").rglob("*.md"):
         text, n = rewrite_fact_links(md.read_text(), targets)
-        if n:
+        text, m = rewrite_section_links(text, sections)
+        if n or m:
             md.write_text(text)
             n_facts += n
+            n_sections += m
     log.info("fact links pointed at the site: %d", n_facts)
+    log.info("section links pointed at the site: %d", n_sections)
 
 
 def absolutize_tex() -> list[str]:
@@ -299,6 +343,32 @@ def fact_failures() -> list[str]:
     ]
 
 
+def section_failures() -> list[str]:
+    """Failures of the section-link rewrite."""
+    page = "(sec:page)=\n# Title\n\n(sec:here)=\n## Here\n\n(eq:x)=\n"
+    targets = section_label_targets(page, "U")
+    links = (
+        "See [the part here](#sec:here), [the title](#sec:page), [](#sec:here)"
+        " and [elsewhere](#sec:elsewhere)."
+    )
+    text, n = rewrite_section_links(links, targets)
+    return [
+        msg
+        for bad, msg in [
+            (targets != {"sec:here": "U#sec-here"}, f"section labels mapped to {targets}"),
+            (n != 1, f"rewrote {n} section links, not 1"),
+            ("[the part here](U#sec-here)" not in text, "section link not pointed at its anchor"),
+            ("[the title](#sec:page)" not in text, "link to a page's title label was rewritten"),
+            (
+                "[](#sec:here)" not in text,
+                "a link without text was rewritten; MyST fills in its title",
+            ),
+            ("[elsewhere](#sec:elsewhere)" not in text, "link to an unknown label was rewritten"),
+        ]
+        if bad
+    ]
+
+
 def href_failures() -> list[str]:
     """Failures of the LaTeX \\href rewrite and the page check."""
     tex, n = absolutize(
@@ -370,7 +440,13 @@ def graphics_failures() -> list[str]:
 
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
-    failures = fact_failures() + href_failures() + url_failures() + graphics_failures()
+    failures = (
+        fact_failures()
+        + section_failures()
+        + href_failures()
+        + url_failures()
+        + graphics_failures()
+    )
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")
