@@ -32,11 +32,18 @@ so only the template preamble could load them. Left undefined, LaTeX drops the w
 and prints the bare symbol, which would make Carroll's bliss point \cancel{\cRat}
 identical to ordinary consumption and \kPriceAfterITC identical to the ordinary price.
 KaTeX supports both natively, so the website is unaffected and these fallbacks stay out
-of its way. Replace them with the real packages if the template is ever vendored. -->
+of its way. Replace them with the real packages if the template is ever vendored.
+
+The contents list and the PDF's bookmarks show the parts and their notes by name only, not
+each note's own subsections. The template's \tableofcontents runs before this block, so
+tocdepth cannot simply be set here; \addtocontents writes the setting into the .toc file
+itself, ahead of the first note's entry, which is where the contents list reads it. -->
 
 
 ```{raw:latex}
 \counterwithin{equation}{section}
 \providecommand{\cancel}[1]{{\not{#1}}}
 \providecommand{\mathscr}[1]{\mathcal{#1}}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+\hypersetup{bookmarksdepth=1}
 ```
