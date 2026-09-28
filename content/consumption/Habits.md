@@ -321,3 +321,10 @@ Substituting {eq}`eq:cgrowapprox` into {eq}`eq:zfoc` gives
 ```
 
 Thus, this formulation of habit formation implies that the growth rate of consumption is serially correlated.
+
+The Jupyter notebook
+[Habits.ipynb](https://github.com/intertemporal-choice/intertemporal-choice.github.io/blob/main/Jupyter/Habits.ipynb)
+solves this model and checks the approximation above against the exact solution. It
+also uses the [HARK](https://docs.econ-ark.org/) toolkit to show how habits shape the
+consumption function and the response of consumption to an income shock when income
+is risky.
