@@ -6,13 +6,19 @@ on:
   push:
     # Runs on pushes targeting the default branch
     branches: [main]
-  # Pull requests run the build and its checks; only a push to main deploys.
+  # Pull requests run the build and its checks. A push to main deploys, as does a run
+  # started by hand from main (the Actions tab, or `gh workflow run`).
   pull_request:
+  workflow_dispatch:
 env:
-  # `BASE_URL` determines, relative to the root of the domain, the URL that your site is served from.
-  # E.g., if your site lives at `https://mydomain.org/myproject`, set `BASE_URL=/myproject`.
-  # If, instead, your site lives at the root of the domain, at `https://mydomain.org`, set `BASE_URL=''`.
-  BASE_URL: ''
+  # `BASE_URL` is the folder of the domain the site is served from, and it follows from
+  # the repository's name. The public repository, intertemporal-choice.github.io, serves
+  # the root of the domain: https://intertemporal-choice.github.io. Any other repository
+  # in the organisation is served from a folder named after it, so the private source
+  # repository, intertemporal-choice.github.io-source, publishes its preview of the next
+  # release at https://intertemporal-choice.github.io/intertemporal-choice.github.io-source/.
+  # The same file therefore serves both repositories unchanged; code/publish.py copies it.
+  BASE_URL: ${{ github.event.repository.name != 'intertemporal-choice.github.io' && format('/{0}', github.event.repository.name) || '' }}
 
 # Read-only by default: the build job runs pull-request code. Only deploy writes to Pages.
 permissions:
@@ -27,29 +33,44 @@ jobs:
           node-version: 22.x
       - name: Install MyST
         run: npm install -g mystmd
-      - name: Build HTML Assets
-        run: myst build --html --strict
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      # A preview build (BASE_URL names a folder) gets a banner on every page, through the
+      # theme; the published book (BASE_URL empty) is built exactly as committed. See
+      # code/mark_preview.py.
+      - name: Configure a preview build
+        run: |
+          python code/mark_preview.py --self-test
+          python code/mark_preview.py
+      - name: Build HTML Assets
+        run: myst build --html --strict
       # Old URLs of moved pages forward to their new ones; see code/redirects.txt.
       - name: Write redirects for moved pages
         run: |
           python code/write_redirects.py --self-test
           python code/write_redirects.py
+      # The published book's robots.txt tells search engines to skip the preview folder.
+      - name: Keep search engines off the preview
+        run: |
+          python code/write_robots.py --self-test
+          python code/write_robots.py
       # Gates the deploy on the OUTPUT, not the build's exit code: myst build exits 0
       # on a site whose every stylesheet 404s. See code/verify_build.py.
       - name: Verify the built site is servable
         run: |
           python code/verify_build.py --self-test
           python code/verify_build.py
+      # The script that copies the source repository into the public one; see code/publish.py.
+      - name: Self-test the publish script
+        run: python code/publish.py --self-test
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './_build/html'
 
   deploy:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
     needs: build
     permissions:
       pages: write

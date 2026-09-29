@@ -335,3 +335,4 @@ site:
       Built with [MyST Markdown](https://mystmd.org) •
       Part of the [Econ-ARK](https://econ-ark.org) ecosystem
     # primary_sidebar_footer: sidebar-footer.md
+    # navbar_end: filled in by code/mark_preview.py for a preview build; see code/README.md
