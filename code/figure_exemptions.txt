@@ -41,9 +41,6 @@ pending  /content/figures/EntrepreneurPF/klossIRF.png                           
 pending  /content/figures/EntrepreneurPF/lPhaseDiag.png                          port to a notebook beside the chapter
 pending  /content/figures/EntrepreneurPF/mlossIRF.png                            port to a notebook beside the chapter
 
-# Envelope
-pending  /content/figures/Envelope/Envelope.png                                  port to a notebook beside the chapter
-
 # Equiprobable
 pending  /content/figures/Equiprobable/CDFPlot.png                               decision pending: may move to a HARK companion notebook instead
 
