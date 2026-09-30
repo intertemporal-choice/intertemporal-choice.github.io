@@ -62,6 +62,7 @@ SKIP = {
     "sources",
     "node_modules",
     ".DS_Store",
+    ".ipynb_checkpoints",  # Jupyter autosaves beside the figure notebooks
 }
 
 FACT_DEF = re.compile(r"^\((fact:[^)\s]+)\)=", re.MULTILINE)
@@ -177,7 +178,13 @@ def rewrite_staged_facts() -> None:
 
 def absolutize_tex() -> list[str]:
     """Step 4: make every page link absolute and check that each names a real page."""
-    pages = {page_url(md, STAGE) for md in (STAGE / "content").rglob("*.md")}
+    # The notebooks beside the chapters are pages of the site too, and chapters link to them.
+    pages = {
+        page_url(page, STAGE)
+        for pattern in ("*.md", "*.ipynb")
+        for page in (STAGE / "content").rglob(pattern)
+        if ".ipynb_checkpoints" not in page.parts
+    }
     failures, n_pages = [], 0
     for tex_file in (STAGE / TEX_DIR).glob("*.tex"):
         tex, n = absolutize(tex_file.read_text())
@@ -302,6 +309,7 @@ def url_failures() -> list[str]:
                 "/content/consumption/periodlcmodel",
             ),
             ("content/growth/index.md", "/content/growth"),
+            ("content/consumption/Envelope/Envelope.ipynb", "/content/consumption/envelope/envelope"),
         ]
         if page_url(Path("r") / md, Path("r")) != want
     ]
