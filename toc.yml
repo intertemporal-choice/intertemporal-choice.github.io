@@ -26,6 +26,11 @@ project:
         - file: content/consumption/Habits.md
         - file: content/consumption/Durables.md
         - file: content/consumption/RiskAndPSPremia.md
+        # Ported from the public repo llorracc/TractableBufferStock (the econ2 zip is a
+        # private version); its figures are drawn by the notebook beside it.
+        - file: content/consumption/TractableBufferStock/index.md
+          children:
+            - file: content/consumption/TractableBufferStock/TractableBufferStock.ipynb
         - file: content/consumption/BufferStockAgeProfiles.md
         - file: content/consumption/Laibson.md
     - file: content/asset_pricing/index.md
