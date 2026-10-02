@@ -1,0 +1,6 @@
+# dev/ holds development tooling that is not part of the published book. `git archive`
+# leaves export-ignore paths out, and code/publish.py publishes by `git archive`, so
+# nothing under dev/ ever reaches the public repository. The first line covers the
+# directory entry itself, the second everything inside it.
+dev export-ignore
+dev/** export-ignore

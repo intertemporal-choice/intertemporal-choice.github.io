@@ -6,6 +6,10 @@ code/redirects.txt this writes `_build/html<old>/index.html`, a page that sends 
 browser to `<new>` at once, carrying over any #anchor (so a link to a Math Facts entry
 still reaches the entry), with a meta refresh and a plain link as fallbacks.
 
+The target is prefixed with `BASE_URL`, the folder the site is served from: empty for the
+published book, `/intertemporal-choice.github.io-source` for the preview that the private
+source repository builds. A preview's forwarding pages therefore stay on the preview.
+
 It refuses rather than guesses:
 
   1. the new path must be a page in the build, so a typo or a second move of the same
@@ -16,12 +20,13 @@ It refuses rather than guesses:
 `--self-test` runs both checks against input they should reject, and fails if either
 passes it.
 
-Usage: uv run python code/write_redirects.py [--self-test]   (after `myst build --html`)
+Usage: BASE_URL=... python code/write_redirects.py [--self-test]   (after `myst build --html`)
 """
 
 import argparse
 import html
 import logging
+import os
 import sys
 import tempfile
 from pathlib import Path
@@ -82,12 +87,14 @@ def check(build: Path, pairs: list[tuple[str, str]]) -> list[str]:
     return failures
 
 
-def write(build: Path, pairs: list[tuple[str, str]]) -> None:
+def write(build: Path, pairs: list[tuple[str, str]], base: str = "") -> None:
+    """Write the forwarding pages; `base` is the folder the site is served from."""
     for old, new in pairs:
         target = build / old.lstrip("/") / "index.html"
         target.parent.mkdir(parents=True, exist_ok=True)
-        new_js = '"' + new.replace("\\", "\\\\").replace('"', '\\"') + '"'
-        target.write_text(PAGE.format(new=html.escape(new), new_js=new_js))
+        url = base + new
+        new_js = '"' + url.replace("\\", "\\\\").replace('"', '\\"') + '"'
+        target.write_text(PAGE.format(new=html.escape(url), new_js=new_js))
 
 
 def self_test() -> bool:
@@ -112,6 +119,15 @@ def self_test() -> bool:
         ):
             log.error("SELF-TEST FAIL: a duplicated old path was accepted")
             ok = False
+        write(build, [("/content/old", "/content/a")], base="/x")
+        page = (build / "content/old/index.html").read_text()
+        if 'url=/x/content/a"' not in page or 'replace("/x/content/a"' not in page:
+            log.error("SELF-TEST FAIL: BASE_URL was not prefixed onto the forwarding target")
+            ok = False
+        write(build, [("/content/old", "/content/a")])
+        if 'url=/content/a"' not in (build / "content/old/index.html").read_text():
+            log.error("SELF-TEST FAIL: a root-served forwarding target was altered")
+            ok = False
     try:
         parse("content/old /content/new")
         log.error("SELF-TEST FAIL: a path without a leading slash was accepted")
@@ -135,11 +151,12 @@ if __name__ == "__main__":
     if args.self_test:
         sys.exit(0 if self_test() else 1)
 
+    base = os.environ.get("BASE_URL", "").rstrip("/")
     pairs = parse(REDIRECTS.read_text())
     problems = check(BUILD, pairs)
     for p in problems:
         log.error("FAIL: %s", p)
     if problems:
         sys.exit(1)
-    write(BUILD, pairs)
-    log.info("wrote %d redirect pages", len(pairs))
+    write(BUILD, pairs, base)
+    log.info("wrote %d redirect pages, forwarding under %s", len(pairs), base or "/")
