@@ -875,6 +875,7 @@ dependencies = [
     { name = "ipywidgets" },
     { name = "jupyterlab" },
     { name = "jupytext" },
+    { name = "matplotlib" },
     { name = "mystmd" },
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
@@ -888,6 +889,7 @@ requires-dist = [
     { name = "ipywidgets", specifier = ">=8.1.8" },
     { name = "jupyterlab", specifier = ">=4.5.2" },
     { name = "jupytext", specifier = ">=1.18.1" },
+    { name = "matplotlib", specifier = ">=3.9" },
     { name = "mystmd", specifier = ">=1.10.1" },
     { name = "numpy", specifier = ">=2.3.5" },
     { name = "scipy", specifier = ">=1.17.0" },
@@ -1974,16 +1976,16 @@ resolution-markers = [
     "python_full_version < '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 dependencies = [
-    { name = "annotated-types", marker = "python_full_version < '3.12'" },
-    { name = "cloudpickle", marker = "python_full_version < '3.12'" },
-    { name = "joblib", marker = "python_full_version < '3.12'" },
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
-    { name = "pandas", marker = "python_full_version < '3.12'" },
-    { name = "plotly", marker = "python_full_version < '3.12'" },
-    { name = "pybaum", marker = "python_full_version < '3.12'" },
-    { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
-    { name = "sqlalchemy", marker = "python_full_version < '3.12'" },
-    { name = "typing-extensions", marker = "python_full_version < '3.12'" },
+    { name = "annotated-types" },
+    { name = "cloudpickle" },
+    { name = "joblib" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" } },
+    { name = "pandas" },
+    { name = "plotly" },
+    { name = "pybaum" },
+    { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" } },
+    { name = "sqlalchemy" },
+    { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e6/8b/c73021109ac254465c973453f926e8204fefdccdfc8c094a9d642ad9423e/optimagic-0.5.3.tar.gz", hash = "sha256:1489f51843efb43897c6a281f4ccc2e816d0c00ee6288a58f1039348bf30d07d", size = 404890, upload-time = "2026-02-20T15:51:38.43Z" }
 wheels = [
@@ -2006,16 +2008,16 @@ resolution-markers = [
     "python_full_version == '3.12.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 dependencies = [
-    { name = "annotated-types", marker = "python_full_version >= '3.12'" },
-    { name = "cloudpickle", marker = "python_full_version >= '3.12'" },
-    { name = "joblib", marker = "python_full_version >= '3.12'" },
-    { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "pandas", marker = "python_full_version >= '3.12'" },
-    { name = "plotly", marker = "python_full_version >= '3.12'" },
-    { name = "pybaum", marker = "python_full_version >= '3.12'" },
-    { name = "scipy", version = "1.18.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "sqlalchemy", marker = "python_full_version >= '3.12'" },
-    { name = "typing-extensions", marker = "python_full_version >= '3.12'" },
+    { name = "annotated-types" },
+    { name = "cloudpickle" },
+    { name = "joblib" },
+    { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" } },
+    { name = "pandas" },
+    { name = "plotly" },
+    { name = "pybaum" },
+    { name = "scipy", version = "1.18.1", source = { registry = "https://pypi.org/simple" } },
+    { name = "sqlalchemy" },
+    { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/f9/bf/4e743abaa65147bc3d6d7e93638096a8efed94f9053cdf6039ea57409ac2/optimagic-0.5.4.tar.gz", hash = "sha256:bf3fd655a60fef0f40c18f81870f30fc1db7ed783a620dcad0bb9526ff6985e7", size = 412248, upload-time = "2026-07-28T10:32:09.948Z" }
 wheels = [
@@ -2132,7 +2134,7 @@ name = "pexpect"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "ptyprocess", marker = "sys_platform != 'emscripten' and sys_platform != 'win32'" },
+    { name = "ptyprocess" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/42/92/cc564bf6381ff43ce1f4d06852fc19a2f11d180f23dc32d9588bee2f149d/pexpect-4.9.0.tar.gz", hash = "sha256:ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f", size = 166450, upload-time = "2023-11-25T09:07:26.339Z" }
 wheels = [
@@ -2722,7 +2724,7 @@ resolution-markers = [
     "python_full_version < '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 dependencies = [
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" } },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7a/97/5a3609c4f8d58b039179648e62dd220f89864f56f7357f5d4f45c29eb2cc/scipy-1.17.1.tar.gz", hash = "sha256:95d8e012d8cb8816c226aef832200b1d45109ed4464303e997c5b13122b297c0", size = 30573822, upload-time = "2026-02-23T00:26:24.851Z" }
 wheels = [
@@ -2804,7 +2806,7 @@ resolution-markers = [
     "python_full_version == '3.12.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 dependencies = [
-    { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" } },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7e/74/66de6258867beb2ef08f35f9f2ac017a52cacd5081714d239ff1a442d458/scipy-1.18.1.tar.gz", hash = "sha256:52c4b7422442aba924d03ad4019852b08a92e64ea187b933135687bfe2747307", size = 30781235, upload-time = "2026-08-21T23:28:50.599Z" }
 wheels = [

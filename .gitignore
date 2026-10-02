@@ -338,6 +338,9 @@ TSWLatexianTemp*
 # Agent working directory; .claude/memory symlinks to a machine-local store
 .claude/
 
+# Jupyter autosaves
+.ipynb_checkpoints/
+
 # macOS directory metadata
 .DS_Store
 
