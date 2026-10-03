@@ -21,8 +21,14 @@
 /content/appendix/equiprobable                  /content/supplemental/equiprobable
 /content/appendix/equiprobable-returns          /content/supplemental/equiprobable-returns
 
-# 2026-09-24: the Appendix part renamed Numerical and moved to content/numerical
-/content/appendix                               /content/numerical
-/content/appendix/aggregation                   /content/numerical/aggregation
-/content/appendix/hamiltonianvsdiscrete         /content/numerical/hamiltonianvsdiscrete
-/content/appendix/mathfactslist                 /content/numerical/mathfactslist
+# 2026-09-24: the Appendix part renamed Numerical and moved to content/numerical;
+# 2026-09-25: renamed Mathematical Appendices and moved to content/appendices/mathematical.
+# Both earlier addresses forward straight to the current one.
+/content/appendix                               /content/appendices/mathematical
+/content/appendix/aggregation                   /content/appendices/mathematical/aggregation
+/content/appendix/hamiltonianvsdiscrete         /content/appendices/mathematical/hamiltonianvsdiscrete
+/content/appendix/mathfactslist                 /content/appendices/mathematical/mathfactslist
+/content/numerical                              /content/appendices/mathematical
+/content/numerical/aggregation                  /content/appendices/mathematical/aggregation
+/content/numerical/hamiltonianvsdiscrete        /content/appendices/mathematical/hamiltonianvsdiscrete
+/content/numerical/mathfactslist                /content/appendices/mathematical/mathfactslist

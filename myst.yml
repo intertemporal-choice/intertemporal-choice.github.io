@@ -228,13 +228,13 @@ project:
           level: 1
         - file: content/dsge/RBC-Prescott.md
           level: 1
-        - file: content/numerical/index.md
+        - file: content/appendices/mathematical/index.md
           level: 0
-        - file: content/numerical/Aggregation.md
+        - file: content/appendices/mathematical/Aggregation.md
           level: 1
-        - file: content/numerical/HamiltonianVSDiscrete.md
+        - file: content/appendices/mathematical/HamiltonianVSDiscrete.md
           level: 1
-        - file: content/numerical/MathFactsList.md
+        - file: content/appendices/mathematical/MathFactsList.md
           level: 1
 
   # No `jupyter` block. The book carries no executable pages; the Fisher notebook lives
