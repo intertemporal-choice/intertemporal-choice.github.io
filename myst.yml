@@ -164,7 +164,7 @@ project:
           level: 1
         - file: content/consumption/ConsumptionFunction.md
           level: 1
-        - file: content/consumption/StickyExpectationsC.md
+        - file: content/consumption/StickyExpectationsC/index.md
           level: 1
         - file: content/consumption/Habits.md
           level: 1
