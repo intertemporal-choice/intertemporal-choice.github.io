@@ -656,3 +656,20 @@ project:
     '\hLucas': 'h'
     '\sigAll': '\Sigma'
     '\scale': 'x'
+    # TractableBufferStock (Resources/LaTeXInputs/TractableBufferStock.sty in the public
+    # repo llorracc/TractableBufferStock). Its conflicting redefinitions (\MPCU as plain
+    # \MPC, \tSS and \hideSup as nothing) were applied to the chapter's text instead, so
+    # the econtex definitions above stay as they are.
+    '\dcEqZero': '\Delta\cRatE=0'
+    '\dmEqZero': '\Delta\mRatE=0'
+    '\GICPGro': '\text{GIC}_{\PGro}'
+    '\GICWGro': '\text{GIC}_{\WGro}'
+    '\FHWC': '\text{FHWC}'
+    '\FHWCPGro': '\text{FHWC}_{\PGro}'
+    '\FHWCWGro': '\text{FHWC}_{\WGro}'
+    '\DiscountMaxRIC': '\bar{\Discount}_{\text{RIC}}'
+    '\DiscountMaxGICTBS': '\bar{\Discount}_{\text{TBS}}'
+    '\DiscountMaxGICPGro': '\bar{\Discount}_{\text{GIC}_{\PGro}}'
+    '\DiscountMaxGICWGro': '\bar{\Discount}_{\text{GIC}_{\WGro}}'
+    '\DiscountMaxGICWhenFHWCTBSHolds': '\bar{\Discount}_{\text{FHW}}'
+    '\psavFunc': '\cancel{\cFunc}'
