@@ -170,7 +170,7 @@ project:
           level: 1
         - file: content/consumption/Durables.md
           level: 1
-        - file: content/consumption/RiskAndPSPremia.md
+        - file: content/consumption/UncertaintyRiskAversionAndPrudence/index.md
           level: 1
         - file: content/consumption/BufferStockAgeProfiles.md
           level: 1
