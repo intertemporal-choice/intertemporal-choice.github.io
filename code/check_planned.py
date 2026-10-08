@@ -349,8 +349,8 @@ def main() -> None:
             sys.exit(2)
     results = [(p, check(p, args.year)) for p in paths]
     if args.json:
-        print(json.dumps([{k: (shown(v) if k == "file" else v) for k, v in i.items()}
-                          for _, items in results for i in items], indent=1))
+        print(json.dumps([dict(question=p.name, **{k: (shown(v) if k == "file" else v) for k, v in i.items()})
+                          for p, items in results for i in items], indent=1))
     else:
         for p, items in results:
             report(p, items, args.year, quiet=args.quiet or args.all, github=args.github)
