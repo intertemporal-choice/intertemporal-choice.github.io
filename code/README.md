@@ -111,3 +111,15 @@ drew in this build beyond the tolerance.
 `--self-test` runs each check against input it should reject, and fails if any check
 passes it. The deploy workflow runs the self-test first, so a check that has quietly
 stopped discriminating is caught rather than trusted.
+
+## `check_planned.py`
+
+Lists planned changes, meaning deferred rulings to apply to some material once a trigger fires,
+and says which are due. Triggers are a year, a pull request merging, or a page going live. The
+book's markers live in `dev/planned.md`, not in `content/`, because MyST publishes comments in a
+page's JSON and HTML. The workflow runs `--self-test` and then a report-only check, so a due
+marker shows up as a warning on the run without blocking the deploy.
+
+This is the only copy. The questions repository's posting tools fetch it from here by a pinned
+commit and run it with `--root` set to their own folder, so it uses only the standard library and
+`gh`. Its docstring defines the marker syntax, the triggers and the exit codes.

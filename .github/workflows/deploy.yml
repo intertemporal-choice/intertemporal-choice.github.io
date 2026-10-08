@@ -41,7 +41,18 @@ jobs:
           uv run python code/write_redirects.py --self-test
           uv run python code/verify_build.py --self-test
           uv run python code/build_pdf.py --self-test
+          uv run python code/check_planned.py --self-test
           uv run python -m intertemporal_choice --self-test
+      # Deferred rulings in dev/planned.md (see code/check_planned.py): what is due, or cannot
+      # be checked, is reported as a warning on the run and never blocks the deploy. Only a
+      # usage error (a missing file) fails the step.
+      - name: Planned changes (report only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          status=0
+          uv run python code/check_planned.py --root . dev/planned.md --github || status=$?
+          case "$status" in 0|4|5) ;; *) exit "$status" ;; esac
       # The notebooks are committed with their outputs but without the metadata Jupyter
       # rewrites on every save; see code/notebooks.py.
       - name: Notebooks are committed stripped
