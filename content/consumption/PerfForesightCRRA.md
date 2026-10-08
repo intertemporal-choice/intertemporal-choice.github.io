@@ -136,6 +136,18 @@ We can solve the model by combining {eq}`eq:cfin` and {eq}`eq:PFCRRA-yfin` using
 
 where {math}`\MPC_{t}` is the marginal propensity to consume (MPC) out of **o**verall (human plus nonhuman) wealth {math}`\oLev_{t}`.
 
+Human wealth as defined in [the PDV of labor income](#eq:PFCRRA-yfin) includes the current period's income: its sum starts at {math}`n=0`. Human wealth from the next period on, called end-of-period human wealth {math}`\hEnd_{t}` and measured as a ratio to {math}`\pLevBF_{\tNow}`, leaves that income out:
+
+```{math}
+:label: eq:PFCRRA-hEnd
+
+\hEnd_{t} \equiv \hRat_{t}-1 = \sum_{n=1}^{\TEnd-\tNow} ({\WGro}/\Rfree)^{n} = ({\WGro}/\Rfree)\left(\frac{1-({\WGro}/\Rfree)^{\TEnd-\tNow}}{1-({\WGro}/\Rfree)}\right),
+```
+
+which approaches {math}`({\WGro}/\Rfree)/(1-{\WGro}/\Rfree)` as {math}`\TEnd \rightarrow \infty` when the [finite human wealth condition](#eq:FHWCPF) below holds.[^pfcrra-edge-cases]
+
+[^pfcrra-edge-cases]: The closed forms divide by zero in two cases, and the sums they come from give the answer. If the return patience factor {math}`\PatR=1`, [the inverse of the MPC as a sum](#eq:MPCrecursiveSum) gives {math}`\MPC_{t}=1/(\TEnd-\tNow+1)`. If {math}`\WGro=\Rfree`, every term of the human wealth sum is 1, so {math}`\hRat_{t}=\TEnd-\tNow+1` and {math}`\hEnd_{t}=\TEnd-\tNow`.
+
 In order to apply [InfSum](#fact:infsum) to move to the infinite-horizon case ({math}`\TEnd=\infty`), we need to impose the condition
 
 ```{math}
@@ -460,6 +472,7 @@ Now suppose the interest rate changes to {math}`\rfree=0.03`, while all other pa
 
 The point of this example is that for plausible parameter values, the human wealth effect is enormously stronger than the income and substitution effects, so that we should see large drops in consumption when interest rates rise and conversely strong gains when interest rates fall. This is a summary of the main point of the famous paper by {cite:t}`summersCapTax`; Summers derives formulas for an economy with overlapping generations of finite-lifetime consumers, but those complications do not change the basic message.
 
+(subsec:SavingRateResponse)=
 ### How Does the Saving Rate Respond to Interest Rates?
 
 The level of saving can be defined as total income minus total consumption:
