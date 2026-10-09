@@ -26,3 +26,6 @@
 /content/appendix/aggregation                   /content/numerical/aggregation
 /content/appendix/hamiltonianvsdiscrete         /content/numerical/hamiltonianvsdiscrete
 /content/appendix/mathfactslist                 /content/numerical/mathfactslist
+
+# 2026-10-05: Risk Premia and Precautionary Premia became Uncertainty, Risk Aversion, and Prudence
+/content/consumption/riskandpspremia             /content/consumption/uncertaintyriskaversionandprudence

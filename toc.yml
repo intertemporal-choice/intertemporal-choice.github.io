@@ -23,7 +23,9 @@ project:
         - file: content/consumption/StickyExpectationsC.md
         - file: content/consumption/Habits.md
         - file: content/consumption/Durables.md
-        - file: content/consumption/RiskAndPSPremia.md
+        - file: content/consumption/UncertaintyRiskAversionAndPrudence/index.md
+          children:
+            - file: content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb
         - file: content/consumption/BufferStockAgeProfiles.md
         - file: content/consumption/Laibson.md
     - file: content/asset_pricing/index.md

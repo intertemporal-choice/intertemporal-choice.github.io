@@ -82,10 +82,6 @@ pending  /content/figures/qRamsey/kDropCostAdj0VsBase.png                       
 pending  /content/figures/RamseyCassKoopmans/RamseySSPlot.png                    port to a notebook beside the chapter
 pending  /content/figures/RamseyCassKoopmans/RamseySaddlePlot.png                port to a notebook beside the chapter
 
-# RiskAndPSPremia
-pending  /content/figures/RiskAndPSPremia/RiskAndPSPremiaPrec.png                port to a notebook beside the chapter
-pending  /content/figures/RiskAndPSPremia/RiskAndPSPremiaRisk.png                port to a notebook beside the chapter
-
 # SocSecAndKAccum
 pending  /content/figures/SocSecAndKAccum/SocSecAndKAccum.png                    port to a notebook beside the chapter
 
