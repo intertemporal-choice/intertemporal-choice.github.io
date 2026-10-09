@@ -16,7 +16,9 @@ project:
         - file: content/consumption/OLGModel.md
         - file: content/consumption/GenAcctsAndGov.md
         - file: content/consumption/SocSecAndKAccum.md
-        - file: content/consumption/Envelope.md
+        - file: content/consumption/Envelope/index.md
+          children:
+            - file: content/consumption/Envelope/Envelope.ipynb
         - file: content/consumption/PerfForesightCRRA.md
         - file: content/consumption/RandomWalk.md
         - file: content/consumption/ConsumptionFunction.md
