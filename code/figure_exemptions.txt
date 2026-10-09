@@ -89,8 +89,3 @@ pending  /content/figures/RiskAndPSPremia/RiskAndPSPremiaRisk.png               
 # SocSecAndKAccum
 pending  /content/figures/SocSecAndKAccum/SocSecAndKAccum.png                    port to a notebook beside the chapter
 
-# StickyExpectationsC
-pending  /content/figures/StickyExpectationsC/StickyExpectationsCb.png           port to a notebook beside the chapter
-pending  /content/figures/StickyExpectationsC/StickyExpectationsCc.png           port to a notebook beside the chapter
-pending  /content/figures/StickyExpectationsC/bPlot.png                          port to a notebook beside the chapter
-pending  /content/figures/StickyExpectationsC/cPlot.png                          port to a notebook beside the chapter

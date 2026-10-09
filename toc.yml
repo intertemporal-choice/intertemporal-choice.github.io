@@ -20,7 +20,9 @@ project:
         - file: content/consumption/PerfForesightCRRA.md
         - file: content/consumption/RandomWalk.md
         - file: content/consumption/ConsumptionFunction.md
-        - file: content/consumption/StickyExpectationsC.md
+        - file: content/consumption/StickyExpectationsC/index.md
+          children:
+            - file: content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb
         - file: content/consumption/Habits.md
         - file: content/consumption/Durables.md
         - file: content/consumption/RiskAndPSPremia.md
