@@ -102,8 +102,10 @@ name (the signature of a project-site `BASE_URL` on a root-served site), and tha
 expected number of pages were emitted.
 
 It also enforces the figures-from-notebooks rule on the built pages: every figure is one
-image, either `figures/<name>.png` beside a chapter that has its notebook or a static
-image listed in `figure_exemptions.txt`; every exemption is in use and every file under
+image, either `figures/<name>.png` beside a chapter that has its notebook or an image
+listed in `figure_exemptions.txt`: a static image (`exception`, `pending`), or a `remote`
+figure drawn and checked by a REMARK, given as a raw GitHub URL pinned to a full commit SHA
+and naming that repository; every exemption is in use and every file under
 `content/figures/` is listed; every notebook sits beside its chapter, is listed under it
 in `toc.yml`, and carries outputs; and no committed figure differs from what its notebook
 drew in this build beyond the tolerance.
