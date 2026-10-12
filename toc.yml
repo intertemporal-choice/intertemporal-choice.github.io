@@ -25,6 +25,9 @@ project:
         - file: content/consumption/Durables.md
         - file: content/consumption/RiskAndPSPremia.md
         - file: content/consumption/BufferStockAgeProfiles.md
+        - file: content/consumption/Aiyagari/index.md
+          children:
+            - file: content/consumption/Aiyagari/Aiyagari.ipynb
         - file: content/consumption/Laibson.md
     - file: content/asset_pricing/index.md
       children:
