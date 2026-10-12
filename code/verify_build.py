@@ -26,7 +26,9 @@ code/build_site.py). MyST does not: a figure whose file is stale builds and depl
      be obtained; `pending`, not yet ported) and a reason, is used by a current page, and
      every file under content/figures/ is listed
   6. every notebook in the build sits beside its chapter, is listed in toc.yml as a child of
-     that chapter, and carries outputs
+     that chapter, and carries outputs; and both the chapter and the notebook's own page link
+     to open the notebook in Colab and in Binder (Chris, 2026-10-12), so a reader can run it
+     without installing anything
   7. the figures are current. A notebook the build re-ran (its code or the environment
      changed) redrew its figures over the committed files, so a file that now differs from
      the committed one beyond a small tolerance means the notebook was changed without its
@@ -57,6 +59,7 @@ log = logging.getLogger(__name__)
 
 BUILD = Path("_build/html")
 REPO_SLUG = "intertemporal-choice.github.io"
+GITHUB_REPO = f"intertemporal-choice/{REPO_SLUG}"
 MIN_BYTES = 2000
 MIN_PAGES = 40
 EXEMPTIONS = Path("code/figure_exemptions.txt")
@@ -245,8 +248,21 @@ def toc_parents(toc: str) -> dict[str, str | None]:
     return parents
 
 
+def launch_links(rel: str) -> dict[str, str]:
+    """The links that open the notebook at `rel` (relative to the repository) in Colab and Binder."""
+    return {
+        "Colab": f"https://colab.research.google.com/github/{GITHUB_REPO}/blob/main/{rel}",
+        "Binder": f"https://mybinder.org/v2/gh/{GITHUB_REPO}/main?labpath={rel}",
+    }
+
+
+def link_urls(mdast) -> set[str]:
+    return {n.get("url") for n in descendants(mdast) if n.get("type") == "link"}
+
+
 def notebook_problems(pages: dict[str, dict], toc: str) -> list[str]:
     parents = toc_parents(toc)
+    by_location = {record.get("location"): (slug, record) for slug, record in pages.items()}
     listed = [f for f in parents if f.endswith(".ipynb")]
     problems, built = [], 0
     for slug, record in pages.items():
@@ -266,6 +282,12 @@ def notebook_problems(pages: dict[str, dict], toc: str) -> list[str]:
             problems.append(f"{slug}: {rel} is not listed in toc.yml as a child of {chapter}")
         if not any(is_output(n) for n in descendants(record.get("mdast"))):
             problems.append(f"{slug}: notebook carries no cell output: committed without outputs?")
+        chapter_slug, chapter_record = by_location.get("/" + chapter, (chapter, {}))
+        for where, mdast in ((slug, record.get("mdast")), (chapter_slug, chapter_record.get("mdast"))):
+            urls = link_urls(mdast)
+            for service, url in launch_links(rel).items():
+                if url not in urls:
+                    problems.append(f"{where}: no link to open {rel} in {service} ({url})")
     if built != len(listed):
         problems.append(
             f"{len(listed)} notebooks are listed in toc.yml but {built} were built as notebooks"
@@ -456,11 +478,14 @@ def self_test_figures() -> list[str]:
         def write_config(slugs):
             (build / "config.json").write_text(json.dumps({"projects": [{"index": "index", "pages": [{"slug": s} for s in slugs]}]}))
 
+        launch = {"type": "paragraph", "children": [{"type": "link", "url": u} for u in launch_links(nb_loc[1:]).values()]}
+        colab_only = {"type": "paragraph", "children": [{"type": "link", "url": launch_links(nb_loc[1:])["Colab"]}]}
+
         def reset():
             page("index", "Article", "/README.md", {"type": "root", "children": []})
             page("content.a", "Article", plain, _fig(_img(static)))
-            page("content.part.a", "Article", at_a, _fig(_img("figures/a.png")))
-            page("content.part.a.a", "Notebook", nb_loc, _out(*png))
+            page("content.part.a", "Article", at_a, {"type": "root", "children": [_fig(_img("figures/a.png")), launch]})
+            page("content.part.a.a", "Notebook", nb_loc, {"type": "root", "children": [_out(*png), launch]})
             page("content.old", "Notebook", "/content/old.ipynb", {"children": []})  # stale, not current
             write_config(["content.a", "content.part.a", "content.part.a.a"])
 
@@ -472,6 +497,9 @@ def self_test_figures() -> list[str]:
             "a notebook not beside a chapter": lambda: (page("content.b", "Notebook", "/content/b.ipynb", _out(*png)), write_config(["content.a", "content.part.a", "content.part.a.a", "content.b"])),
             "a listed notebook that was not built as one": lambda: page("content.part.a.a", "Article", nb_loc, _out(*png)),
             "a notebook not listed under its chapter": lambda: (repo / "toc.yml").write_text(toc.replace("      children:\n        - file: content/part/A/A.ipynb\n", "    - file: content/part/A/A.ipynb\n")),
+            "a chapter with no launch links for its notebook": lambda: page("content.part.a", "Article", at_a, _fig(_img("figures/a.png"))),
+            "a notebook page with no launch links": lambda: page("content.part.a.a", "Notebook", nb_loc, _out(*png)),
+            "a chapter that links Colab but not Binder": lambda: page("content.part.a", "Article", at_a, {"type": "root", "children": [_fig(_img("figures/a.png")), colab_only]}),
         }
         for name, spoil in cases.items():
             reset()

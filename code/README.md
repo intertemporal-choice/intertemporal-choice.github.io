@@ -105,7 +105,8 @@ It also enforces the figures-from-notebooks rule on the built pages: every figur
 image, either `figures/<name>.png` beside a chapter that has its notebook or a static
 image listed in `figure_exemptions.txt`; every exemption is in use and every file under
 `content/figures/` is listed; every notebook sits beside its chapter, is listed under it
-in `toc.yml`, and carries outputs; and no committed figure differs from what its notebook
+in `toc.yml`, and carries outputs, and both the chapter and the notebook's page link to
+open it in Colab and in Binder; and no committed figure differs from what its notebook
 drew in this build beyond the tolerance.
 
 `--self-test` runs each check against input it should reject, and fails if any check
