@@ -1,0 +1,96 @@
+# Static figures the build still allows. Every other figure a chapter shows is a file in the
+# figures/ folder beside the chapter, drawn by the notebook in that folder
+# (content/<part>/<Chapter>/<Chapter>.ipynb), and code/verify_build.py fails the build on any
+# static figure not listed here, on any entry no page uses, and on any file under
+# content/figures/ missing from this list.
+#
+#   kind   exception: data that cannot be obtained; stays a cited static image
+#          pending:   not yet ported; the line is deleted by the PR that ports it
+#   path   exactly as the chapter's figure directive writes it
+#   reason required
+#
+# Kept in per-handout blocks, alphabetical, so the porting PRs rebase cleanly.
+
+
+# 2PeriodLCModel
+pending  /content/figures/2PeriodLCModel/FisherFigure.png                        port to a notebook beside the chapter
+
+# BlanchardFiniteHorizon
+pending  /content/figures/BlanchardFiniteHorizon/BlanchardCDynamics.png          port to a notebook beside the chapter
+pending  /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase1.png  port to a notebook beside the chapter
+pending  /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase2.png  port to a notebook beside the chapter
+pending  /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase3.png  port to a notebook beside the chapter
+
+# BrockMirman
+pending  /content/figures/BrockMirman/yPlotBrockMirman.png                       port to a notebook beside the chapter
+pending  /content/figures/BrockMirman/zWhiteNoise.png                            port to a notebook beside the chapter
+
+# BufferStockAgeProfiles
+pending  /content/figures/BufferStockAgeProfiles/AgeProfilesData.png             exception planned: Carroll (1997 QJE) Figure IV, 1960-61 CEX microdata not obtainable
+pending  /content/figures/BufferStockAgeProfiles/AgeProfilesTheory.png           port to a notebook beside the chapter
+
+# C-With-Optimal-Portfolio
+pending  /content/figures/C-With-Optimal-Portfolio/MPCApproxVsExactVsSigma.png   port to a notebook beside the chapter
+
+# CRRA-RateRisk
+pending  /content/figures/CRRA-RateRisk/MPCvsCRRA.png                            port to a notebook beside the chapter
+pending  /content/figures/CRRA-RateRisk/MPCvsSigma.png                           port to a notebook beside the chapter
+
+# EntrepreneurPF
+pending  /content/figures/EntrepreneurPF/klossIRF.png                            port to a notebook beside the chapter
+pending  /content/figures/EntrepreneurPF/lPhaseDiag.png                          port to a notebook beside the chapter
+pending  /content/figures/EntrepreneurPF/mlossIRF.png                            port to a notebook beside the chapter
+
+# Envelope
+pending  /content/figures/Envelope/Envelope.png                                  port to a notebook beside the chapter
+
+# Equiprobable
+pending  /content/figures/Equiprobable/CDFPlot.png                               decision pending: may move to a HARK companion notebook instead
+
+# Equiprobable-Returns
+pending  /content/figures/Equiprobable-Returns/ShareVsCovByMethod.png            decision pending: may move to a HARK companion notebook instead
+
+# Imperfections
+pending  /content/figures/Imperfections/FinancialBonds.png                       exception planned: Raskin (2013) Figure 2, proprietary Merrill Lynch data
+pending  /content/figures/Imperfections/NonfinancialBonds.png                    exception planned: Raskin (2013) Figure 1, proprietary Merrill Lynch data
+
+# InvestmentNotes
+pending  /content/figures/InvestmentNotes/InvestmentDrivesCycle.png              port to a notebook beside the chapter
+
+# OLGModel
+pending  /content/figures/OLGModel/OLGModelDynamics.png                          port to a notebook beside the chapter
+pending  /content/figures/OLGModel/fnkBoth.png                                   port to a notebook beside the chapter
+
+# Portfolio-CRRA
+pending  /content/figures/Portfolio-CRRA/ShareApproxErr.png                      port to a notebook beside the chapter
+pending  /content/figures/Portfolio-CRRA/ShareVsCRRA.png                         port to a notebook beside the chapter
+
+# qModel
+pending  /content/figures/qModel/CorporateTaxReduction.png                       port to a notebook beside the chapter
+pending  /content/figures/qModel/ITCIncrease.png                                 port to a notebook beside the chapter
+pending  /content/figures/qModel/ProductivityIncrease.png                        port to a notebook beside the chapter
+pending  /content/figures/qModel/lPhaseDiag.png                                  port to a notebook beside the chapter
+pending  /content/figures/qModel/qPhaseDiag.png                                  port to a notebook beside the chapter
+
+# qRamsey
+pending  /content/figures/qRamsey/PatRiseCostAdj0VsBase.png                      port to a notebook beside the chapter
+pending  /content/figures/qRamsey/PolFuncAdjCost0VsBase.png                      port to a notebook beside the chapter
+pending  /content/figures/qRamsey/PolFuncRRALoVsHi.png                           port to a notebook beside the chapter
+pending  /content/figures/qRamsey/kDropCostAdj0VsBase.png                        port to a notebook beside the chapter
+
+# RamseyCassKoopmans
+pending  /content/figures/RamseyCassKoopmans/RamseySSPlot.png                    port to a notebook beside the chapter
+pending  /content/figures/RamseyCassKoopmans/RamseySaddlePlot.png                port to a notebook beside the chapter
+
+# RiskAndPSPremia
+pending  /content/figures/RiskAndPSPremia/RiskAndPSPremiaPrec.png                port to a notebook beside the chapter
+pending  /content/figures/RiskAndPSPremia/RiskAndPSPremiaRisk.png                port to a notebook beside the chapter
+
+# SocSecAndKAccum
+pending  /content/figures/SocSecAndKAccum/SocSecAndKAccum.png                    port to a notebook beside the chapter
+
+# StickyExpectationsC
+pending  /content/figures/StickyExpectationsC/StickyExpectationsCb.png           port to a notebook beside the chapter
+pending  /content/figures/StickyExpectationsC/StickyExpectationsCc.png           port to a notebook beside the chapter
+pending  /content/figures/StickyExpectationsC/bPlot.png                          port to a notebook beside the chapter
+pending  /content/figures/StickyExpectationsC/cPlot.png                          port to a notebook beside the chapter
