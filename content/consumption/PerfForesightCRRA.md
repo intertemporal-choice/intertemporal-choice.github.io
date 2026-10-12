@@ -419,7 +419,7 @@ For simplicity, assume that {math}`\bRat_{\tNow} = 0`. Then the original version
 \end{aligned}
 ```
 
-We are interested only in calibrations of the model in which the consumer is "growth impatient" so that {math}`\wGro > \CRRA^{-1}(\rfree-\DiscRate)` so if we define the rate of growth impatience as
+We are interested only in calibrations of the model in which the consumer is "growth impatient" so that {math}`\wGro > \CRRA^{-1}(\rfree-\DiscRate)` so if we define the growth patience rate as
 
 ```{math}
 :label: eq:patwGro
