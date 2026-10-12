@@ -276,3 +276,7 @@ Aiyagari's conclusion, that uninsured idiosyncratic risk changes aggregate savin
 The model describes a stationary equilibrium only: it has no aggregate shocks, and as stated it cannot describe the transition between steady states after a change in policy. {cite:t}`ksHetero` added aggregate productivity shocks, which require households to forecast prices that depend on the whole distribution of wealth, an object of infinite dimension. They found that forecasting next period's aggregate capital from its current mean alone was almost perfectly accurate ("approximate aggregation"), and that aggregate dynamics were close to those of a representative-agent economy, for the same reason as Aiyagari's result: almost every household is wealthy enough to behave like the representative household.
 
 More recent methods linearize the economy's response to aggregate shocks around its steady state ({cite:t}`auclertSSJ`), making it practical to put realistic heterogeneity into heterogeneous-agent New Keynesian models ({cite:t}`kaplanMollViolante`). Being built around a given steady state, the approximation is least reliable for a policy change, such as a lasting change in unemployment insurance, that moves the steady state itself.
+
+## Replication
+
+Econ-ARK's replication of {cite:t}`aiyagari:ge` is the [Aiyagari1994QJE REMARK](https://econ-ark.github.io/Aiyagari1994QJE/); its [econ-ark.org page](https://econ-ark.org/materials/aiyagari1994qje/) launches its notebooks in the browser.
