@@ -202,7 +202,7 @@ The steps repeat until the interest rate settles down:
 3. Find the stationary distribution and its mean {math}`\Ex\aRat(\rfree)`. Aiyagari simulated one household for 10,000 periods; tracking the mass of households on a fine grid of assets, splitting the mass that lands between two gridpoints in proportion to distance ({cite:t}`youngNonStochastic`), avoids simulation noise.
 4. If {math}`\Ex\aRat(\rfree)` exceeds {math}`\KLev(\rfree)`, lower the guess; if it falls short, raise it; then solve the household's problem again.
 
-The [notebook](Aiyagari.ipynb) carries out these steps and draws the figures. Its interest rates match Aiyagari's to within a quarter of a percentage point, and its household solution matches Econ-ARK's `MarkovConsumerType`; the Econ-ARK replication [`Aiyagari1994QJE`](https://github.com/econ-ark/Aiyagari1994QJE) reproduces the paper by simulation.
+The [notebook](Aiyagari.ipynb) carries out these steps and draws the figures; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything. Its interest rates match Aiyagari's to within a quarter of a percentage point, and its household solution matches Econ-ARK's `MarkovConsumerType`; the Econ-ARK replication [`Aiyagari1994QJE`](https://github.com/econ-ark/Aiyagari1994QJE) reproduces the paper by simulation.
 
 ## Calibration and Results
 

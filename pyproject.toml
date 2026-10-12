@@ -21,6 +21,10 @@ dependencies = [
     "numpy>=2.3.5",
     "pyyaml>=6.0.3",
     "scipy>=1.17.0",
+    # econ-ark 0.17.2 imports sympy without declaring it, so a fresh install of the book's
+    # package (Colab, Binder, a downloaded notebook) failed at `import HARK...`. Drop this once
+    # an econ-ark release declares it.
+    "sympy>=1.14.0",
 ]
 
 # The figure notebooks import shared code from src/intertemporal_choice/, which `uv sync`
