@@ -25,9 +25,10 @@ code/build_site.py). MyST does not: a figure whose file is stale builds and depl
   5. the exemptions list stays honest: each entry has a kind (`exception`, data that cannot
      be obtained; `pending`, not yet ported; `remote`, drawn by a REMARK whose CI regenerates
      and checks it) and a reason, is used by a current page, and every file under
-     content/figures/ is listed. A `remote` entry is a raw.githubusercontent.com URL pinned
-     to a full commit SHA, never a branch or a tag, and its reason names the repository
-     (owner/repo) that draws it; any other image from the web is rejected
+     content/figures/ is listed. A `remote` entry is a raw.githubusercontent.com/econ-ark/
+     URL pinned to a full commit SHA, never a branch or a tag, and its reason names the
+     repository (econ-ark/<repo>) that draws it; any other image from the web is rejected.
+     REMARKs only: DemARKs do not check their figures, so a chapter redraws them itself
   6. every notebook in the build sits beside its chapter, is listed in toc.yml as a child of
      that chapter, and carries outputs
   7. the figures are current. A notebook the build re-ran (its code or the environment
@@ -65,8 +66,10 @@ MIN_PAGES = 40
 EXEMPTIONS = Path("code/figure_exemptions.txt")
 FIGURES = Path("content/figures")
 KINDS = {"exception", "pending", "remote"}
-# A remote figure is pinned to a commit: raw.githubusercontent.com/<owner>/<repo>/<40-hex SHA>/<path>.
-PINNED_REMOTE = re.compile(r"^https://raw\.githubusercontent\.com/([^/]+)/([^/]+)/[0-9a-f]{40}/\S+\.(?:png|svg)$")
+# A remote figure comes from an Econ-ARK REMARK, pinned to a commit:
+# raw.githubusercontent.com/econ-ark/<repo>/<40-hex SHA>/<path>. DemARKs do not qualify (Chris, 2026-10-12):
+# their CI does not check their figures, so a chapter draws a DemARK figure in its own notebook.
+PINNED_REMOTE = re.compile(r"^https://raw\.githubusercontent\.com/(econ-ark)/([^/]+)/[0-9a-f]{40}/\S+\.(?:png|svg)$")
 # RMS difference over 0-255 pixel values below which a redrawn figure counts as the same.
 TOLERANCE = 3.0
 
@@ -140,8 +143,8 @@ def parse_exemptions(text: str) -> tuple[dict[str, tuple[str, str]], list[str]]:
             m = PINNED_REMOTE.match(path)
             if not m:
                 problems.append(
-                    f"{EXEMPTIONS} line {n}: {path} is not a raw.githubusercontent.com URL pinned to a full"
-                    " commit SHA (a branch or a tag can move)"
+                    f"{EXEMPTIONS} line {n}: {path} is not a raw.githubusercontent.com/econ-ark/ URL pinned"
+                    " to a full commit SHA (a branch or a tag can move)"
                 )
             elif f"{m.group(1)}/{m.group(2)}" not in reason:
                 problems.append(f"{EXEMPTIONS} line {n}: the reason must name {m.group(1)}/{m.group(2)}, the repository that draws it")
@@ -468,6 +471,7 @@ def self_test_figures() -> list[str]:
             "a remote figure on a tag": "remote https://raw.githubusercontent.com/econ-ark/REMARK/v1.1.0/figures/r.png econ-ark/REMARK\n",
             "a remote figure on a short SHA": "remote https://raw.githubusercontent.com/econ-ark/REMARK/0123456/figures/r.png econ-ark/REMARK\n",
             "a remote figure from another host": f"remote https://example.org/econ-ark/REMARK/{sha}/r.png econ-ark/REMARK\n",
+            "a remote figure outside econ-ark": f"remote https://raw.githubusercontent.com/someone/REMARK/{sha}/r.png someone/REMARK\n",
             "a remote figure whose reason names no repository": f"remote {remote} drawn elsewhere\n",
             "a URL under a non-remote kind": f"exception {remote} econ-ark/REMARK\n",
             "a remote kind on a local path": f"remote {static} econ-ark/REMARK\n",
