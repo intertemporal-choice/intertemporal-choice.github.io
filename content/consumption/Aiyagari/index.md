@@ -191,11 +191,11 @@ Aiyagari's algorithm repeats three steps until the interest rate settles down:
 2. Solve the household's problem at those prices, and simulate one household for many periods (Aiyagari used 10,000) to find mean assets {math}`\Ex\aRat(\rfree)`.
 3. If {math}`\Ex\aRat(\rfree)` exceeds {math}`\KLev(\rfree)`, lower the guess; if it falls short, raise it.
 
-The [notebook](Aiyagari.ipynb) computes the equilibrium and draws the figures; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything.
+The [notebook](Aiyagari.ipynb) carries out these steps with the code of the Aiyagari1994QJE REMARK, which builds the households with HARK and, like Aiyagari, simulates them; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything.
 
 ## Results
 
-A period is a year; Aiyagari set {math}`\DiscFac = 0.96`, {math}`\kapShare = 0.36` and {math}`\depr = 0.08` ({cite:t}`prescottTheoryAhead`), so that with complete markets {math}`\timeRate = 4.17` percent and the saving rate is 23.67 percent. He varied {math}`\sigma` (0.2, 0.4), {math}`\tau` (0 to 0.9) and {math}`\CRRA` (1, 3, 5), with no borrowing. In the baseline ({math}`\sigma = 0.2`, {math}`\tau = 0.6`, {math}`\CRRA = 3`), uninsured risk lowers the interest rate to 3.88 percent, raises capital by 3.8 percent and the saving rate to 24.25 percent. Aiyagari concluded that for moderate risk aversion, variability and persistence the saving rate rises by at most about three percentage points; only when income is both volatile and persistent is the effect large ({math}`\sigma = 0.4`, {math}`\tau = 0.9`, {math}`\CRRA = 5`: a negative interest rate and a saving rate of 37.6 percent).
+A period is a year; Aiyagari set {math}`\DiscFac = 0.96`, {math}`\kapShare = 0.36` and {math}`\depr = 0.08` ({cite:t}`prescottTheoryAhead`), so that with complete markets {math}`\timeRate = 4.17` percent and the saving rate is 23.67 percent. He varied {math}`\sigma` (0.2, 0.4), {math}`\tau` (0 to 0.9) and {math}`\CRRA` (1, 3, 5), with no borrowing. In the baseline ({math}`\sigma = 0.2`, {math}`\tau = 0.6`, {math}`\CRRA = 3`), uninsured risk lowers the interest rate to 3.86 percent (Aiyagari found 3.88), raises capital by 4.0 percent and the saving rate to 24.28 percent. Aiyagari concluded that for moderate risk aversion, variability and persistence the saving rate rises by at most about three percentage points; only when income is both volatile and persistent is the effect large ({math}`\sigma = 0.4`, {math}`\tau = 0.9`, {math}`\CRRA = 5`: a negative interest rate and a saving rate of 37.6 percent).
 
 ## What the Calibration Leaves Out
 
@@ -211,16 +211,16 @@ With an endowment bounded away from zero, the [natural borrowing limit](#eq:Aiya
 
 ### The Distribution of Wealth
 
-The model's wealth distribution is far more equal than the data's. In the baseline the wealth Gini is 0.39 and the richest one percent hold 4 percent of wealth, against about 0.8 and 30 percent in U.S. data ({cite:t}`ksHetero`), as [the Lorenz curve figure](#fig:WealthLorenz) shows. {cite:t}`stachurskiTodaImpossibility` show that this is no accident of calibration: when infinitely lived households save only in a risk-free asset and share a discount factor, the upper tail of wealth can be no thicker than that of income.
+The model's wealth distribution is far more equal than the data's, across the whole range of [the Lorenz curve figure](#fig:WealthLorenz). In the 2004 Survey of Consumer Finances the poorest 40 percent of households hold about 1 percent of net worth, and the poorest fifth slightly less than nothing; in the model the poorest 40 percent hold 15 percent. At the top, the richest 1 percent hold about 32 percent of U.S. net worth but 4 percent in the model, and the Gini coefficients are 0.80 and 0.38. {cite:t}`stachurskiTodaImpossibility` show that this is no accident of calibration: when infinitely lived households save only in a risk-free asset and share a discount factor, the upper tail of wealth can be no thicker than that of income.
 
 :::{figure} figures/WealthLorenz.png
 :name: fig:WealthLorenz
 :align: center
 
-Lorenz curves for wealth: in the baseline Aiyagari economy, and the shares held by the richest 1, 5, 10, 20 and 30 percent of U.S. households as reported by {cite:t}`ksHetero`.
+Lorenz curves for wealth: in the baseline Aiyagari economy, and for U.S. net worth in the 2004 Survey of Consumer Finances, the data used by {cite:t}`cstwMPC`.
 :::
 
-Identical, infinitely lived households all have time to accumulate a large buffer, and that matters for spending. Only 0.3 percent of households are at the borrowing limit, and the average annual marginal propensity to consume is 0.055, not far above the [perfect foresight](#eq:PFCRRA-cOfw) value of 0.038 at the same interest rate. Empirical estimates are several times larger; {cite:t}`cstwMPC` show that matching the observed wealth distribution, with its many households holding little, brings the model close to them.
+Identical, infinitely lived households all have time to accumulate a large buffer, and that matters for spending. Only about a quarter of one percent of households are at the borrowing limit, and the average annual marginal propensity to consume is 0.054, not far above the [perfect foresight](#eq:PFCRRA-cOfw) value of 0.038 at the same interest rate. Empirical estimates are several times larger; {cite:t}`cstwMPC` show that matching the observed wealth distribution, with its many households holding little, brings the model close to them.
 
 ## Why the Answer Came Out as It Did
 

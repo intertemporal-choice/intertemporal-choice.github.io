@@ -25,6 +25,10 @@ dependencies = [
     # package (Colab, Binder, a downloaded notebook) failed at `import HARK...`. Drop this once
     # an econ-ark release declares it.
     "sympy>=1.14.0",
+    # The Aiyagari chapter's notebook computes its figures and numbers with the code of Econ-ARK's
+    # Aiyagari1994QJE REMARK, pinned to the commit of its v1.1.0 tag. A direct-URL dependency keeps
+    # this package off PyPI; if it ever goes there, the REMARK's package goes first.
+    "aiyagari1994qje @ git+https://github.com/econ-ark/Aiyagari1994QJE@66ae8be37402a223ca789363191cca243b8f7324",
 ]
 
 # The figure notebooks import shared code from src/intertemporal_choice/, which `uv sync`

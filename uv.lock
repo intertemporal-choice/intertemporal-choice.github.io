@@ -17,6 +17,20 @@ resolution-markers = [
 ]
 
 [[package]]
+name = "aiyagari1994qje"
+version = "1.1.0"
+source = { git = "https://github.com/econ-ark/Aiyagari1994QJE?rev=66ae8be37402a223ca789363191cca243b8f7324#66ae8be37402a223ca789363191cca243b8f7324" }
+dependencies = [
+    { name = "econ-ark" },
+    { name = "matplotlib" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "scipy", version = "1.18.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "sympy" },
+]
+
+[[package]]
 name = "annotated-types"
 version = "0.8.0"
 source = { registry = "https://pypi.org/simple" }
@@ -885,6 +899,7 @@ name = "intertemporal-choice"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "aiyagari1994qje" },
     { name = "econ-ark" },
     { name = "ipykernel" },
     { name = "ipywidgets" },
@@ -908,6 +923,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "aiyagari1994qje", git = "https://github.com/econ-ark/Aiyagari1994QJE?rev=66ae8be37402a223ca789363191cca243b8f7324" },
     { name = "econ-ark", specifier = ">=0.17.0" },
     { name = "ipykernel", specifier = ">=7.3.0" },
     { name = "ipywidgets", specifier = ">=8.1.8" },
