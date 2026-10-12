@@ -20,11 +20,15 @@ content/<part>/<Chapter>/<Chapter>.ipynb, into the chapter's figures/ folder (se
 code/build_site.py). MyST does not: a figure whose file is stale builds and deploys. So:
 
   4. every figure is exactly one image: `figures/<name>.png` beside a chapter that has its
-     notebook, or a static image listed in code/figure_exemptions.txt; no notebook output
-     is embedded, and no image appears outside a figure unless it is exempt
+     notebook, or an image listed in code/figure_exemptions.txt; no notebook output is
+     embedded, and no image appears outside a figure unless it is exempt
   5. the exemptions list stays honest: each entry has a kind (`exception`, data that cannot
-     be obtained; `pending`, not yet ported) and a reason, is used by a current page, and
-     every file under content/figures/ is listed
+     be obtained; `pending`, not yet ported; `remote`, drawn by a REMARK whose CI regenerates
+     and checks it) and a reason, is used by a current page, and every file under
+     content/figures/ is listed. A `remote` entry is a raw.githubusercontent.com/econ-ark/
+     URL pinned to a full commit SHA, never a branch or a tag, and its reason names the
+     repository (econ-ark/<repo>) that draws it; any other image from the web is rejected.
+     REMARKs only: DemARKs do not check their figures, so a chapter redraws them itself
   6. every notebook in the build sits beside its chapter, is listed in toc.yml as a child of
      that chapter, and carries outputs; and both the chapter and the notebook's own page link
      to open the notebook in Colab and in Binder (Chris, 2026-10-12), so a reader can run it
@@ -64,7 +68,11 @@ MIN_BYTES = 2000
 MIN_PAGES = 40
 EXEMPTIONS = Path("code/figure_exemptions.txt")
 FIGURES = Path("content/figures")
-KINDS = {"exception", "pending"}
+KINDS = {"exception", "pending", "remote"}
+# A remote figure comes from an Econ-ARK REMARK, pinned to a commit:
+# raw.githubusercontent.com/econ-ark/<repo>/<40-hex SHA>/<path>. DemARKs do not qualify (Chris, 2026-10-12):
+# their CI does not check their figures, so a chapter draws a DemARK figure in its own notebook.
+PINNED_REMOTE = re.compile(r"^https://raw\.githubusercontent\.com/(econ-ark)/([^/]+)/[0-9a-f]{40}/\S+\.(?:png|svg)$")
 # RMS difference over 0-255 pixel values below which a redrawn figure counts as the same.
 TOLERANCE = 3.0
 
@@ -131,6 +139,18 @@ def parse_exemptions(text: str) -> tuple[dict[str, tuple[str, str]], list[str]]:
         kind, path, reason = parts
         if kind not in KINDS:
             problems.append(f"{EXEMPTIONS} line {n}: kind {kind!r} is not one of {sorted(KINDS)}")
+        remote = path.startswith(("http://", "https://"))
+        if remote != (kind == "remote"):
+            problems.append(f"{EXEMPTIONS} line {n}: only a `remote` entry may be a URL, and a `remote` entry must be one")
+        elif remote:
+            m = PINNED_REMOTE.match(path)
+            if not m:
+                problems.append(
+                    f"{EXEMPTIONS} line {n}: {path} is not a raw.githubusercontent.com/econ-ark/ URL pinned"
+                    " to a full commit SHA (a branch or a tag can move)"
+                )
+            elif f"{m.group(1)}/{m.group(2)}" not in reason:
+                problems.append(f"{EXEMPTIONS} line {n}: the reason must name {m.group(1)}/{m.group(2)}, the repository that draws it")
         if path in entries:
             problems.append(f"{EXEMPTIONS} line {n}: {path} is listed twice")
         entries[path] = (kind, reason.strip())
@@ -172,7 +192,14 @@ def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, re
 
     def image_problem(src: str | None, what: str) -> None:
         src = src or ""
-        if src.startswith(f"/{FIGURES}/"):
+        if src.startswith(("http://", "https://")):
+            used.add(src)
+            if exempt.get(src, ("",))[0] != "remote":
+                problems.append(
+                    f"{slug}: {what} is the remote image {src}; list it in {EXEMPTIONS} as a `remote`"
+                    " figure pinned to a commit, or draw it in the chapter's notebook"
+                )
+        elif src.startswith(f"/{FIGURES}/"):
             used.add(src)
             if src not in exempt:
                 problems.append(
@@ -188,7 +215,7 @@ def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, re
         else:
             problems.append(
                 f"{slug}: {what} uses {src!r}, which is neither figures/<name>.png beside the"
-                " chapter nor an exempt static image"
+                " chapter nor an exempt image"
             )
 
     def one_figure(fig: dict) -> None:
@@ -408,7 +435,12 @@ def _out(*mimes):
 def self_test_figures() -> list[str]:
     failures = []
     png, static = ("image/png", "text/plain"), "/content/figures/A/a.png"
-    exempt = {static: ("pending", "port to a notebook beside the chapter")}
+    sha = "0123456789abcdef0123456789abcdef01234567"
+    remote = f"https://raw.githubusercontent.com/econ-ark/REMARK/{sha}/figures/r.png"
+    exempt = {
+        static: ("pending", "port to a notebook beside the chapter"),
+        remote: ("remote", "drawn and checked by econ-ark/REMARK's CI"),
+    }
     with tempfile.TemporaryDirectory() as tmp:
         repo = Path(tmp) / "repo"
         chapter = repo / "content/part/A"
@@ -432,6 +464,7 @@ def self_test_figures() -> list[str]:
         good = {
             "a notebook-drawn figure beside its chapter": (at_a, _fig(_img("figures/a.png"))),
             "an exempt static image": (plain, _fig(_img(static))),
+            "an exempt remote image pinned to a commit": (at_a, _fig(_img(remote))),
         }
         bad = {
             "an embedded notebook output": (at_a, _fig(_out(*png))),
@@ -443,6 +476,7 @@ def self_test_figures() -> list[str]:
             "a figures/ file on a page that is not a chapter": (plain, _fig(_img("figures/x.png"))),
             "an image from somewhere else": (at_a, _fig(_img("../pictures/a.png"))),
             "an unlisted image outside a figure": (plain, {"type": "root", "children": [_img("/x.png")]}),
+            "an unlisted remote image": (at_a, _fig(_img(remote.replace("/r.png", "/s.png")))),
         }
         for name, (location, node) in good.items():
             if figure_problems("p", location, node, exempt, set(), repo):
@@ -455,11 +489,21 @@ def self_test_figures() -> list[str]:
             "a missing reason": "pending /content/figures/A/a.png\n",
             "an unknown kind": "maybe /content/figures/A/a.png some reason\n",
             "a duplicate": f"pending {static} r\npending {static} r\n",
+            "a remote figure on a branch": "remote https://raw.githubusercontent.com/econ-ark/REMARK/main/figures/r.png econ-ark/REMARK\n",
+            "a remote figure on a tag": "remote https://raw.githubusercontent.com/econ-ark/REMARK/v1.1.0/figures/r.png econ-ark/REMARK\n",
+            "a remote figure on a short SHA": "remote https://raw.githubusercontent.com/econ-ark/REMARK/0123456/figures/r.png econ-ark/REMARK\n",
+            "a remote figure from another host": f"remote https://example.org/econ-ark/REMARK/{sha}/r.png econ-ark/REMARK\n",
+            "a remote figure outside econ-ark": f"remote https://raw.githubusercontent.com/someone/REMARK/{sha}/r.png someone/REMARK\n",
+            "a remote figure whose reason names no repository": f"remote {remote} drawn elsewhere\n",
+            "a URL under a non-remote kind": f"exception {remote} econ-ark/REMARK\n",
+            "a remote kind on a local path": f"remote {static} econ-ark/REMARK\n",
         }.items():
             if not parse_exemptions(text)[1]:
                 failures.append(f"exemptions parser accepted {name}")
         if parse_exemptions(f"# comment\n\npending {static} port it # soon\n")[1]:
             failures.append("exemptions parser rejected a comment, a blank line or a # in a reason")
+        if parse_exemptions(f"remote {remote} drawn and checked by econ-ark/REMARK's CI\n")[1]:
+            failures.append("exemptions parser rejected a remote figure pinned to a commit")
         if not exemption_problems(exempt, set(), []):
             failures.append("an exemption no page uses was accepted")
         if not exemption_problems({}, set(), [static]):

@@ -1,11 +1,18 @@
-# Static figures the build still allows. Every other figure a chapter shows is a file in the
-# figures/ folder beside the chapter, drawn by the notebook in that folder
-# (content/<part>/<Chapter>/<Chapter>.ipynb), and code/verify_build.py fails the build on any
-# static figure not listed here, on any entry no page uses, and on any file under
-# content/figures/ missing from this list.
+# Figures the build allows that the chapter's own notebook does not draw. Every other
+# figure a chapter shows is a file in the figures/ folder beside the chapter, drawn by the
+# notebook in that folder (content/<part>/<Chapter>/<Chapter>.ipynb), and
+# code/verify_build.py fails the build on any figure not listed here, on any entry no page
+# uses, and on any file under content/figures/ missing from this list.
 #
 #   kind   exception: data that cannot be obtained; stays a cited static image
 #          pending:   not yet ported; the line is deleted by the PR that ports it
+#          remote:    drawn by an Econ-ARK REMARK whose CI regenerates and checks it (Chris,
+#                     2026-10-12; not DemARKs, whose CI does not check figures: a chapter draws a
+#                     DemARK figure in its own notebook); the path is a
+#                     raw.githubusercontent.com/econ-ark/ URL pinned to a full commit SHA,
+#                     never a branch or a tag, and the reason names the repository (owner/repo).
+#                     The chapter keeps a small notebook that checks its quoted numbers against
+#                     the REMARK's results at the same commit
 #   path   exactly as the chapter's figure directive writes it
 #   reason required
 #
