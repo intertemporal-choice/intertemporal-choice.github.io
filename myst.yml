@@ -156,7 +156,7 @@ project:
           level: 1
         - file: content/consumption/SocSecAndKAccum.md
           level: 1
-        - file: content/consumption/Envelope.md
+        - file: content/consumption/Envelope/index.md
           level: 1
         - file: content/consumption/PerfForesightCRRA.md
           level: 1
