@@ -63,7 +63,7 @@ Dynamic stochastic general equilibrium frameworks:
 - The Brock-Mirman stochastic growth model
 - Real business cycle theory
 
-### Numerical
+### Mathematical Appendices
 
 Derivations and methods useful for macroeconomics:
 
