@@ -37,7 +37,7 @@ it leaves nothing to commit.
 
 Runs `myst build --execute` (default `--html --strict`) against a Jupyter server it starts
 itself, because MyST's own launcher times out on this book. It sets `IC_EXEC_ENV`, a hash of
-`uv.lock`, `src/` and `data/`, which each notebook declares in `execute: depends_on_env`, so
+`uv.lock`, `src/`, `data/` and each chapter's own `data/` folder, which each notebook declares in `execute: depends_on_env`, so
 MyST's execution cache in `_build/execute` is invalidated when the code or data a notebook
 uses changes, not only when its cells do. A preflight lint refuses a notebook that is not
 `content/<part>/<Chapter>/<Chapter>.ipynb` beside its chapter, lacks the python3 kernel or
