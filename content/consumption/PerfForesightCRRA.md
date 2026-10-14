@@ -1,9 +1,11 @@
 (sec:PerfForesightCRRA)=
 # Consumption Under Perfect Foresight and CRRA Utility
 
-Two companion notebooks in the Econ-ARK DemARK collection work this model numerically:
-[Perfect Foresight CRRA Model - Approximation](https://econ-ark.org/materials/perfforesightcrra-approximation)
-and [Perfect Foresight CRRA Model - Saving Rate](https://econ-ark.org/materials/perfforesightcrra-savingrate).
+Two companion notebooks in the Econ-ARK DemARK collection work this model numerically.
+[How Close Is HARK's Infinite-Horizon Solution?](https://econ-ark.github.io/DemARK/perfforesightcrra-convergence/)
+measures how a numerical solution, found by iterating backward from the last period of life, approaches the exact formulas derived here.
+[Perfect Foresight CRRA Model - Saving Rate](https://econ-ark.github.io/DemARK/perfforesightcrra-savingrate/)
+uses HARK to compute the consumer's saving rate.
 
 ## The Problem
 
@@ -252,6 +254,8 @@ Substituting this into {eq}`eq:PFCRRA-cOfw` gives
 
 \cLevBF_{\tNow} \approx \left(\rfree-\CRRA^{-1}(\rfree-\timeRate)\right)\oLev_{\tNow}.
 ```
+
+The consumption function {eq}`eq:PFCRRA-cOfw` is exact; {eq}`eq:PFCRRA-capprox` treats {math}`\rfree`, {math}`\timeRate` and the return patience rate {math}`\patr` as small. Its error is a different thing from the error of a numerical solution, which approaches the exact formula, not the approximation.
 
 From this we can see again that whether the consumer is return patient, return poised, or return impatient depends on the relationship between {math}`\rfree` and {math}`\timeRate`. Note also that if {math}`\CRRA = \infty` then the consumer is infinitely averse to changing the level of consumption, and so once again the consumer spends exactly the sustainable amount. (This consumer is "absolutely poised" but "return impatient").
 
