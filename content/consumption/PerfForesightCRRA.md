@@ -609,7 +609,7 @@ v_{t} = \uFunc(c_{t})\overbrace{(1+\PatR+\PatR^{2}+...+\PatR^{T-t})}^{\equiv \cP
 
 where {math}`\cPDVFunc_{t}` is the discounted value of future consumption growth (that is, the discounted value of the ratio of future consumption to today's consumption).
 
-{cite:t}`BufferStockTheory` shows ([in an appendix](http://www.econ2.jhu.edu/people/ccarroll/papers/BufferStockTheory/#MPCnvrsIsCPDV)) that {math}`\cPDVFunc_{t} = \MPC_{t}^{-1}`, which means that we can write value as
+{cite:t}`BufferStockTheory` shows ([in an appendix](https://econ-ark.github.io/BufferStockTheory/BufferStockTheory.pdf#nameddest=MPCnvrs)) that {math}`\cPDVFunc_{t} = \MPC_{t}^{-1}`, which means that we can write value as
 
 ```{math}
 \begin{aligned}

@@ -10,12 +10,14 @@ Furthermore, a version of a variable without a subscript should be interpreted a
 ## Utility Functions
 
 (fact:crralim)=
+::::{div}
 :::{note} Fact: CRRALim
 
 $$
 \lim_{\CRRA \rightarrow 1} \left(\frac{\cLev^{1-\CRRA}-1}{1-\CRRA}\right) = \log \cLev
 $$
 :::
+::::
 
 This follows from L'Hopital's rule[^jqenGvrOCB] because for any {math}`\CRRA \neq 1` the derivative exists,
 
@@ -34,14 +36,17 @@ Thus, we can conclude that as {math}`\CRRA \rightarrow 1`, the behavior of the c
 [^BCWfEsTpT1]: Recall that *behavior* is not affected by adding a constant to the utility function ...
 
 (fact:finsum)=
+::::{div}
 :::{tip} Fact: FinSum
 
 $$
 \sum_{i=0}^{T} \gamma^{i} = \left(\frac{1-\gamma^{T+1}}{1-\gamma}\right)
 $$
 :::
+::::
 
 (fact:infsum)=
+::::{div}
 :::{note} Fact: InfSum
 
 If $0 < \gamma < 1$, then
@@ -50,16 +55,20 @@ $$
 \sum_{i=0}^{\infty} \gamma^{i} = \left(\frac{1}{1-\gamma}\right)
 $$
 :::
+::::
 
 (fact:finsummult)=
+::::{div}
 :::{tip} Fact: FinSumMult
 
 $$
 \sum_{i=0}^{T} i \gamma^{i} = \left(\frac{\gamma + \gamma^{T+1}(T(\gamma-1)-1)}{(1-\gamma)^{2}}\right)
 $$
 :::
+::::
 
 (fact:infsummult)=
+::::{div}
 :::{note} Fact: InfSumMult
 
 If $0 < \gamma < 1$, then
@@ -68,6 +77,7 @@ $$
 \sum_{i=0}^{\infty} i \gamma^{i} = \left(\frac{\gamma}{(1-\gamma)^{2}}\right)
 $$
 :::
+::::
 
 ## 'Small' Number Approximations
 
@@ -84,6 +94,7 @@ The words 'corresponds to' are not meant to imply that these objects are mathema
 Many of the following facts can be interpreted as manifestations of the limiting relationships between continuous and discrete time approaches to economic problems. (The continuous time formulations often yield simpler expressions, while the discrete formulations are useful for computational solutions; one of the purposes of the approximations is to show how the discrete-time solution becomes close to the corresponding continuous-time problem as the time interval shrinks).
 
 (fact:taylorone)=
+::::{div}
 :::{hint} Fact: TaylorOne
 
 For $\epsilon$ near zero ('small'), a first order Taylor expansion of $(1+\epsilon)^{\zeta}$ around 1 yields
@@ -92,8 +103,10 @@ $$
 (1+\epsilon)^{\zeta} \approx 1+ \epsilon\zeta
 $$
 :::
+::::
 
 (fact:taylortwo)=
+::::{div}
 :::{tip} Fact: TaylorTwo
 
 For $\epsilon$ near zero ('small'), a second order Taylor expansion of $(1+\epsilon)^{\zeta}$ around 1 yields
@@ -105,8 +118,10 @@ $$
 \end{aligned}\end{gathered}
 $$
 :::
+::::
 
 (fact:logeps)=
+::::{div}
 :::{hint} Fact: LogEps
 
 For $\epsilon$ near zero ('small')
@@ -115,8 +130,10 @@ $$
 \log (1+\epsilon) \approx \epsilon
 $$
 :::
+::::
 
 (fact:expeps)=
+::::{div}
 :::{tip} Fact: ExpEps
 
 For $\epsilon$ near zero ('small')
@@ -125,8 +142,10 @@ $$
 (1+\epsilon) \approx e^{\epsilon}
 $$
 :::
+::::
 
 (fact:overplus)=
+::::{div}
 :::{hint} Fact: OverPlus
 
 For $\epsilon$ near zero ('small')
@@ -135,8 +154,10 @@ $$
 1/(1+\epsilon) \approx 1-\epsilon
 $$
 :::
+::::
 
 (fact:multplus)=
+::::{div}
 :::{tip} Fact: MultPlus
 
 For $\epsilon$ and $\zeta$ near zero ('small')
@@ -145,8 +166,10 @@ $$
 (1+\epsilon)(1+\zeta) \approx 1+\epsilon+\zeta
 $$
 :::
+::::
 
 (fact:expplus)=
+::::{div}
 :::{hint} Fact: ExpPlus
 
 For real numbers $\epsilon$ and $\zeta$
@@ -155,16 +178,20 @@ $$
 \exp(\zeta)\exp(\epsilon) = \exp(\zeta+\epsilon)
 $$
 :::
+::::
 
 (fact:smallsmallzero)=
+::::{div}
 :::{tip} Fact: SmallSmallZero
 
 If $\epsilon$ is small and $\zeta$ is small then $\epsilon\zeta$ can be approximated by zero.
 :::
+::::
 
 ## Statistics/Probability Facts
 
 (fact:sumnormsisnorm)=
+::::{div}
 :::{important} Fact: SumNormsIsNorm
 
 If $\rport_{t+1} \sim \mathcal{N}(\rport,\sigma^{2}_{\rport})$ and $\risky_{t+1} \sim \mathcal{N}(\risky,\sigma^{2}_{\risky})$ and $\rport_{t+1}$ and $\risky_{t+1}$ are [independent](http://en.wikipedia.org/wiki/Independence_(probability_theory)) (written $\rport_{t+1} \perp \risky_{t+1}$), then
@@ -173,8 +200,10 @@ $$
 \rport_{t+1}+\risky_{t+1} = \mathcal{N}(\rport+\risky,\sigma^{2}_{\rport}+\sigma^{2}_{\risky})
 $$
 :::
+::::
 
 (fact:elognorm)=
+::::{div}
 :::{seealso} Fact: ELogNorm
 
 If from the viewpoint of period $t$ the stochastic variable $\Risky_{t+1}$ is lognormally distributed with mean ${\risky}$ and variance $\sigma_{\risky}^{2}$, $\risky_{t+1} \sim \mathcal{N}({\risky},\sigma_{\risky}^{2})$, then
@@ -183,8 +212,10 @@ $$
 \Ex_{t}[e^{\risky_{t+1}}] = e^{{\risky}+\sigma_{\risky}^{2}/2}
 $$
 :::
+::::
 
 (fact:elognormmeanone)=
+::::{div}
 :::{important} Fact: ELogNormMeanOne
 
 If from the viewpoint of period $t$ the stochastic variable $\Risky_{t+1}$ is lognormally distributed with mean $-\sigma^{2}/2$ and variance $\sigma_{\risky}^{2}$, $\log \Risky_{t+1} \sim \mathcal{N}(-\sigma^{2}/2,\sigma^{2})$, then
@@ -193,8 +224,10 @@ $$
 \Ex_{t}[e^{\risky_{t+1}}] = e^{-\sigma_{\risky}^{2}/2+\sigma_{\risky}^{2}/2}=e^{0}=1
 $$
 :::
+::::
 
 (fact:logelognorm)=
+::::{div}
 :::{seealso} Fact: LogELogNorm
 
 If $\Risky_{t+1}$ is lognormally distributed as in [ELogNorm](#fact:elognorm), then
@@ -208,8 +241,10 @@ $$
 
 This follows from taking the log of both sides of the equation in [ELogNorm](#fact:elognorm).
 :::
+::::
 
 (fact:normtimes)=
+::::{div}
 :::{important} Fact: NormTimes
 
 If $\risky_{t+1} \sim \mathcal{N}({\risky},\sigma_{\risky}^{2})$, then
@@ -218,8 +253,10 @@ $$
 \gamma \risky_{t+1} \sim \mathcal{N}(\gamma \risky,\gamma^{2} \sigma_{\risky}^{2})
 $$
 :::
+::::
 
 (fact:meanone)=
+::::{div}
 :::{seealso} Fact: MeanOne
 
 If $\log \Risky_{t+1} \sim \mathcal{N}(-\sigma_{\risky}^{2}/2,\sigma_{\risky}^{2})$, then
@@ -232,10 +269,12 @@ $$
 
 for any value of $\sigma_{\risky}^{2} \geq 0.$
 :::
+::::
 
 This follows from substituting $-\sigma_{\risky}^{2}/2$ for $\risky$ in [ELogNorm](#fact:elognorm).
 
 (fact:logmeanmps)=
+::::{div}
 :::{important} Fact: LogMeanMPS
 
 If $\log \Risky_{t+1} \sim \mathcal{N}({\risky}-\sigma_{\risky}^{2}/2,\sigma_{\risky}^{2})$, then
@@ -248,10 +287,12 @@ $$
 
 for any value of $\sigma_{\risky}^{2} \geq 0.$
 :::
+::::
 
 This follows from substituting $\risky - \sigma_{\risky}^{2}/2$ for $\risky$ in [ELogNorm](#fact:elognorm) and taking the log.
 
 (fact:elognormtimes)=
+::::{div}
 :::{seealso} Fact: ELogNormTimes
 
 If $\log \hat{\Risky}_{t+1} = \gamma \log \Risky_{t+1}$ where $\log \Risky_{t+1} \sim \mathcal{N}(\risky,\sigma_{\risky}^{2})$, then
@@ -260,8 +301,10 @@ $$
 \Ex_{t}[\hat{\Risky}_{t+1}] = e^{\gamma \risky+\gamma^{2}\sigma_{\risky}^{2}/2}
 $$
 :::
+::::
 
 (fact:logelognormtimes)=
+::::{div}
 :::{important} Fact: LogELogNormTimes
 
 If $\log \hat{\Risky}_{t+1} = \gamma \log \Risky_{t+1}$ where $\log \Risky_{t+1} \sim \mathcal{N}(\risky,\sigma_{\risky}^{2})$, then
@@ -272,8 +315,10 @@ $$
 
 This follows from taking the log of [ELogNormTimes](#fact:elognormtimes).
 :::
+::::
 
 (fact:friedmanpihregression)=
+::::{div}
 :::{important} Fact: FriedmanPIHRegression
 
 Suppose that each household's measured income is the sum of permanent and transitory income, $y=y^{P}+y^{T}$, where transitory income has mean zero and is uncorrelated with permanent income, and that consumption is proportional to permanent income, $c=k\,y^{P}$ (and Friedman assumed $k=1$). Then a regression of consumption on measured income across households, ${c=\alpha_{0}+\alpha_{1}y}$, has the coefficients
@@ -287,6 +332,7 @@ $$
 
 The measured marginal propensity to consume, $\alpha_{1}$, is the propensity to consume out of permanent income, $k$, times the share of the variance of income that is permanent. It is below $k$, and the intercept is positive.
 :::
+::::
 
 You should remember from your econometrics courses that the [least-squares slope](https://en.wikipedia.org/wiki/Simple_linear_regression#Formulation_and_computation) is the covariance of $c$ and $y$ divided by the variance of $y$. Substituting $c=k\,y^{P}$ and $y=y^{P}+y^{T}$, and using $\operatorname{cov}(y^{P},y^{T})=0$,
 
@@ -302,6 +348,7 @@ Their ratio is $\alpha_{1}$. The fitted line passes through the means, $\Ex[c]=\
 The intuition: households with high measured income are, on average, partly households with high permanent income and partly households that drew a positive transitory shock. Only the permanent part raises consumption, so consumption rises with measured income by $k$ times the fraction of the differences in income that are permanent. If consumption also has a transitory part uncorrelated with income, the slope is unchanged ([AttenuationByNoise](#fact:attenuationbynoise)).
 
 (fact:attenuationbynoise)=
+::::{div}
 :::{seealso} Fact: AttenuationByNoise
 
 If a variable is measured with noise, $y=p+\xi$, and another variable depends on it as $z=k\,p+u$, where $p$, $\xi$ and $u$ are uncorrelated, then the coefficient of a regression of $z$ on $y$ is
@@ -312,10 +359,12 @@ $$
 
 $k$ times the share of the variance of $y$ that comes from $p$. The noise biases the coefficient toward zero.
 :::
+::::
 
 Since $p$, $\xi$ and $u$ are uncorrelated, $\operatorname{cov}(z,y)=\operatorname{cov}(k\,p+u,\,p+\xi)=k\operatorname{var}(p)$ and $\operatorname{var}(y)=\operatorname{var}(p)+\operatorname{var}(\xi)$. It generalizes [FriedmanPIHRegression](#fact:friedmanpihregression): $z$ need only depend on $p$, and may carry noise $u$ of its own.
 
 (fact:varianceofincomedifferences)=
+::::{div}
 :::{important} Fact: VarianceOfIncomeDifferences
 
 If log income is the sum of a permanent component that follows a random walk and a transitory shock, $y_{t}=p_{t}+\xi_{t}$ with $p_{t}=p_{t-1}+\psi_{t}$, where the shocks are independent with variances $\sigma_{\psi}^{2}$ and $\sigma_{\xi}^{2}$, then the variance of the change in income over $d\geq1$ periods is
@@ -340,6 +389,7 @@ $$
 
 which rises toward one as the difference lengthens.
 :::
+::::
 
 Over $d$ periods the permanent component accumulates $d$ permanent shocks, while the transitory shocks of the first and last periods both appear:
 
@@ -356,6 +406,7 @@ In the regression, $c_{t+d}-c_{t}=(p_{t+d}-p_{t})+(u_{t+d}-u_{t})$ and $y_{t+d}-
 Measured transitory income is not white noise: {cite:t}`abowdCard` find that annual changes in earnings are correlated with the changes one and two years away, and not beyond. If $\xi_{t}$ is correlated with its own values up to $q$ periods apart, then for $d>q$, $\operatorname{var}(\xi_{t+d}-\xi_{t})=2\operatorname{var}(\xi)$, and the formulas hold with $\operatorname{var}(\xi)$ in place of $\sigma_{\xi}^{2}$: only the intercept changes. {cite:t}`carroll:brookings` used only differences of three years or more for this reason.
 
 (fact:randomwalkspread)=
+::::{div}
 :::{seealso} Fact: RandomWalkSpread
 
 If $x_{s}$ follows a random walk over $n$ consecutive periods, with independent shocks of variance $\sigma^{2}$, then the expected sum of its squared deviations from its own mean $\bar{x}$ over those periods is
@@ -366,6 +417,7 @@ $$
 
 Its average squared deviation from its own mean, about $\sigma^{2}n/6$, grows in proportion to the length of the history, while that of $n$ independent draws with variance $\sigma^{2}$ stays about $\sigma^{2}$.
 :::
+::::
 
 The sum of squared deviations from the mean equals the sum of all the squared pairwise differences, divided by $2n$:
 
@@ -386,6 +438,7 @@ $$
 $$
 
 (fact:ar1randomwalkplusnoise)=
+::::{div}
 :::{important} Fact: AR1RandomWalkPlusNoise
 
 Let $y_{t}=p_{t}+\xi_{t}$ for $t=0,1,\ldots,T$, where $p_{t}=p_{t-1}+\psi_{t}$ is a random walk and $\xi_{t}$ is white noise, with independent shocks of variances $\sigma_{\psi}^{2}$ and $\sigma_{\xi}^{2}$. In a regression of $y_{t}$ on a constant and $y_{t-1}$ over this one history, the coefficient on $y_{t-1}$ is about
@@ -396,6 +449,7 @@ $$
 
 below one for any finite history and approaching one as the history lengthens. The formula sets aside a second bias, from estimating the history's own mean, which pulls the coefficient down further and is not small in histories of the length real panels have {cite:p}`nickellBiases`.
 :::
+::::
 
 This year's income is $y_{t}=p_{t-1}+(\psi_{t}+\xi_{t})$: last year's permanent income with the coefficient one, plus shocks uncorrelated with last year's income $y_{t-1}=p_{t-1}+\xi_{t-1}$. So [AttenuationByNoise](#fact:attenuationbynoise) applies with $k=1$, with the variation within the history in place of the variances: about $\sigma_{\psi}^{2}T/6$ for the random walk ([RandomWalkSpread](#fact:randomwalkspread)) and $\sigma_{\xi}^{2}$ for the white noise. The coefficient is
 
@@ -406,6 +460,7 @@ $$
 The random walk's variation within the history grows with the history's length and the white noise's does not, so the transitory part's weight, $6\sigma_{\xi}^{2}/(T\sigma_{\psi}^{2}+6\sigma_{\xi}^{2})$, falls as the history lengthens.
 
 (fact:ar1persistentplusnoise)=
+::::{div}
 :::{seealso} Fact: AR1PersistentPlusNoise
 
 If instead $p_{t}=\tau\,p_{t-1}+\psi_{t}$ with $0<\tau<1$, starting from its long-run distribution, the coefficient on $y_{t-1}$ in a long history approaches
@@ -418,12 +473,14 @@ where $\operatorname{var}(p)=\sigma_{\psi}^{2}/(1-\tau^{2})$ is the long-run var
 
 Unlike the random walk's, this bias does not fade as the history lengthens. As $\tau\to1$ the coefficient approaches one, because $\operatorname{var}(p)$ grows without bound.
 :::
+::::
 
 Now $y_{t}=\tau\,p_{t-1}+(\psi_{t}+\xi_{t})$ and $y_{t-1}=p_{t-1}+\xi_{t-1}$, so [AttenuationByNoise](#fact:attenuationbynoise) applies with $k=\tau$. Since $\psi_{t}$ is independent of $p_{t-1}$, $\operatorname{var}(p)=\tau^{2}\operatorname{var}(p)+\sigma_{\psi}^{2}$, which gives ${\operatorname{var}(p)=\sigma_{\psi}^{2}/(1-\tau^{2})}$. In a long history the sample variances and covariances approach these population values. Substituting it and multiplying numerator and denominator by $1-\tau^{2}$ gives the result.
 
 ## Other Facts
 
 (fact:eulerstheorem)=
+::::{div}
 :::{tip} Fact: EulersTheorem
 
 If $Y=\FFunc(K,L)$ is a constant returns to scale production function, then
@@ -436,3 +493,4 @@ $$
 
 and if this production function characterizes output in a perfectly competitive economy then $\FFunc_{K}$ is the interest factor and $\FFunc_{L}$ is the wage rate.
 :::
+::::

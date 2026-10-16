@@ -74,7 +74,7 @@ One of the foundations of the {math}`\q` model as developed by Abel and Hayashi 
 
 The key reason that the assumption of perfect capital markets is so useful is that it implies that it is not necessary to keep track of the firm's cash management or financial activities.
 
-Useful though it may be, the assumption of perfect capital markets is clearly very far from reality. A vast literature has explored what happens when a wide variety of imperfections are introduced. The handout [DynanImperfCapMkts.pdf](http://www.econ2.jhu.edu/people/ccarroll/Choice/LectureNotes/investment/DynanImperfCapMkts.pdf) summarizes one particular model of capital market imperfections that produces implications that are similar to those that emerge from many other models.
+Useful though it may be, the assumption of perfect capital markets is clearly very far from reality. A vast literature has explored what happens when a wide variety of imperfections are introduced. The chapter [Investment and Capital Market Imperfections](#sec:DynanImperfCapMkts) summarizes one particular model of capital market imperfections that produces implications that are similar to those that emerge from many other models.
 
 The implication of capital market imperfections that has been most vigorously explored is that the amount of investment may be affected by a firm's financial position. The crux of that literature is summarized in the [investment and cash flow](#sec:iAndCashFlow) section.
 
