@@ -316,8 +316,8 @@ site:
     # analytics_google: G-XXXXXXXXXX
     # analytics_plausible: your-domain.com
 
-    # Custom CSS (uncomment to add custom styles)
-    # style: css/custom.css
+    # Custom CSS
+    style: css/custom.css
 
   # Top-level navigation links in header
   # See https://mystmd.org/guide/website-navigation

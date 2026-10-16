@@ -1,0 +1,11 @@
+/* Math Facts: each fact box is wrapped in a div that carries its #fact-… anchor, because the theme
+   does not put a label on a rendered admonition. The wrapper takes over the box's vertical margins,
+   so the spacing is the same as an unwrapped box. */
+div[id^="fact-"] {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+div[id^="fact-"] > aside.myst-admonition {
+  margin-top: 0;
+  margin-bottom: 0;
+}
