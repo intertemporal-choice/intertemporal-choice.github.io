@@ -39,6 +39,14 @@ code/build_site.py). MyST does not: a figure whose file is stale builds and depl
      figures being re-run and committed; a figure drawn but never committed fails too. The
      tolerance allows the pixel or two of antialiasing that differs between machines.
 
+It also checks that links to labeled targets land (Chris, 2026-10-16):
+
+  8. every target MyST lists in myst.xref.json (each labeled equation, heading, figure, table,
+     proof and fact, and each heading's implicit anchor) carries its id in the served page.
+     MyST records a target's id in the page data whether or not the theme renders it, and a
+     browser can only land on an id in the HTML. Until 2026-10-16 the Math Facts boxes rendered
+     with no id, so every #fact- link opened the page at its top while the build passed
+
 `--self-test` runs every check against synthetic bad input and fails if any check passes
 it, so a check that has silently stopped discriminating is caught rather than trusted.
 
@@ -400,6 +408,33 @@ def figure_freshness(repo: Path) -> list[str]:
     return problems
 
 
+# ---------------------------------------------------------------- anchors
+
+
+def anchor_problems(build: Path) -> list[str]:
+    """Targets in myst.xref.json whose id is missing from the served page."""
+    xref = build / "myst.xref.json"
+    if not xref.exists():
+        return [f"{xref} does not exist"]
+    pages: dict[Path, str | None] = {}
+    problems = []
+    for ref in json.loads(xref.read_text())["references"]:
+        if ref.get("kind") == "page":
+            continue
+        anchor = ref.get("html_id") or ref["identifier"]
+        page = build / ref["url"].lstrip("/") / "index.html"
+        if page not in pages:
+            pages[page] = page.read_text(errors="ignore") if page.exists() else None
+        if pages[page] is None:
+            problems.append(f"{ref['url']}#{anchor}: the page was not built")
+        elif f'id="{anchor}"' not in pages[page]:
+            problems.append(
+                f"{ref['url']}#{anchor}: the {ref['kind']} has no id in the served page, so a link to it"
+                " opens the page at its top (a Math Fact must sit inside its ::::{div})"
+            )
+    return problems
+
+
 # ---------------------------------------------------------------- self-tests
 
 
@@ -610,9 +645,39 @@ def self_test_freshness() -> list[str]:
     return failures
 
 
+def self_test_anchors() -> list[str]:
+    failures = []
+    with tempfile.TemporaryDirectory() as tmp:
+        build = Path(tmp)
+        if not anchor_problems(build):
+            failures.append("a build with no myst.xref.json was accepted")
+        page = build / "content" / "facts"
+        page.mkdir(parents=True)
+        (page / "index.html").write_text('<h2 id="intro">Intro</h2><div id="fact-a"><aside>A</aside></div><aside>B</aside>')
+        refs = [
+            {"kind": "page", "url": "/content/facts"},
+            {"kind": "heading", "identifier": "intro", "url": "/content/facts", "implicit": True},
+            {"kind": "div", "identifier": "fact:a", "html_id": "fact-a", "url": "/content/facts"},
+        ]
+        (build / "myst.xref.json").write_text(json.dumps({"references": refs}))
+        if anchor_problems(build):
+            failures.append("targets whose ids are in the page were rejected")
+        refs.append({"kind": "admonition", "identifier": "fact:b", "html_id": "fact-b", "url": "/content/facts"})
+        refs.append({"kind": "equation", "identifier": "eq:c", "html_id": "eq-c", "url": "/content/gone"})
+        (build / "myst.xref.json").write_text(json.dumps({"references": refs}))
+        found = anchor_problems(build)
+        if not any("#fact-b:" in p for p in found):
+            failures.append("a target with no id in its page was accepted")
+        if not any("#eq-c:" in p for p in found):
+            failures.append("a target on a page that was not built was accepted")
+        if len(found) != 2:
+            failures.append(f"anchor check reported {len(found)} problems, expected 2: {found}")
+    return failures
+
+
 def self_test() -> bool:
     """Every check must reject input it is supposed to reject."""
-    failures = self_test_site() + self_test_figures() + self_test_freshness()
+    failures = self_test_site() + self_test_figures() + self_test_freshness() + self_test_anchors()
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")
@@ -630,12 +695,12 @@ if __name__ == "__main__":
     repo = Path(".")
     problems = check(BUILD, REPO_SLUG)
     if not problems:
-        problems = check_figures(BUILD, repo) + figure_freshness(repo)
+        problems = check_figures(BUILD, repo) + figure_freshness(repo) + anchor_problems(BUILD)
     for p in problems:
         log.error("FAIL: %s", p)
     if problems:
         sys.exit(1)
     log.info(
         "built site looks servable: index.html ok, asset paths root-relative,"
-        " every figure drawn by its notebook or exempt, and current"
+        " every figure drawn by its notebook or exempt, and current; every labeled target has its id"
     )
