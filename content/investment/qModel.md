@@ -3,7 +3,7 @@
 
 This section presents a discrete-time version of the Abel-Hayashi marginal {math}`\q` model of investment ({cite:p}`abel:q`; {cite:p}`hayashi:q`).
 
-A corresponding [Jupyter Notebook](https://github.com/econ-ark/DARKolo/blob/master/chimeras/qModel/qModel-Template-Section-Figures.ipynb) implements numerical solutions to the model using [HARK](https://github.com/econ-ark/HARK) and [dolo](https://dolo.readthedocs.io/en/doc/).
+A corresponding [Jupyter Notebook](https://github.com/econ-ark/DARKolo/blob/master/chimeras/qModel/qModel-Template-Handout-Figures.ipynb) implements numerical solutions to the model using [HARK](https://github.com/econ-ark/HARK) and [dolo](https://dolo.readthedocs.io/en/doc/).
 
 (Definitions)=
 ## Definitions
@@ -481,4 +481,4 @@ The steady-state effects on {math}`\vk` are of course determined by the same con
 
 ## More Figures
 
-Figures for a variety of other experiments, including changes in the interest rate, can be constructed using the [notebook](https://github.com/econ-ark/DARKolo/blob/master/chimeras/qModel/qModel-Template-Section-Figures.ipynb).
+Figures for a variety of other experiments, including changes in the interest rate, can be constructed using the [notebook](https://github.com/econ-ark/DARKolo/blob/master/chimeras/qModel/qModel-Template-Handout-Figures.ipynb).
