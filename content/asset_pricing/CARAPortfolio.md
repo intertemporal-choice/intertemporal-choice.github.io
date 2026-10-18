@@ -6,7 +6,7 @@ utility
 {math}`\uFunc(\cRat) = -\CARA^{-1} e^{-\alpha \cRat_{}}`, with assets
 {math}`\aLev_{T-1}` who is deciding how much to invest in a risky security that
 will earn a normally distributed stochastic return {math}`\Risky_{T} \sim
-\mathcal{N}(\Risky,\sigma)` versus a safe asset that will earn return
+\mathcal{N}(\Risky,\sigma^{2})` versus a safe asset that will earn return
 {math}`\Rfree < \Risky` (the risky asset gets a bold font because you must be a bold person to invest in a risky asset!).[^fn1][^fn2]
 
 [^fn1]: The seminal paper examining this problem (in continuous time) was by {cite:t}`merton:restat`; that paper also examines the case with CRRA utility and lognormal returns.
@@ -23,7 +23,7 @@ of resources. If the consumer invests an absolute amount of money \${math}`\Stoc
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\EPrem_{T}` is the "excess return" realized in period {math}`T`. Note that {math}`\EPrem_{T}` could be negative: if the risky asset performs badly enough, shareholders lose not just the excess return they hoped to earn, but part of what they would have earned from the safe asset. Given {math}`\Stocks` and defining the expected risk premium as the expected value of the expected return {math}`\EPrem = \Ex_{T-1}[\Risky_{T}-\Rfree]`, the expectation as of time {math}`T-1` is:
+where {math}`\EPrem_{T}` is the "excess return" realized in period {math}`T`. Note that {math}`\EPrem_{T}` could be negative: if the risky asset performs badly enough, shareholders lose not just the excess return they hoped to earn, but part of what they would have earned from the safe asset. Given {math}`\Stocks`, and defining the expected risk premium {math}`\EPrem \equiv \Ex_{T-1}[\EPrem_{T}] = \Risky-\Rfree` as the expected value of the excess return, expected utility as of time {math}`T-1` is:
 
 ```{math}
 :label: eq:last
