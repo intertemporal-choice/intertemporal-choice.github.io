@@ -23,7 +23,7 @@ of resources. If the consumer invests an absolute amount of money \${math}`\Stoc
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\EPrem_{T}` is the "excess return" realized in period {math}`T`. Note that {math}`\EPrem_{T}` could be negative: if the risky asset performs badly enough, shareholders lose not just the excess return they hoped to earn, but part of what they would have earned from the safe asset. Given {math}`\Stocks`, and defining the expected risk premium {math}`\EPrem \equiv \Ex_{T-1}[\EPrem_{T}] = \Risky-\Rfree` as the expected value of the excess return, expected utility is{math}`\EPrem = \Ex_{T-1}[\Risky_{T}-\Rfree]`, the expectation as of time {math}`T-1` is:
+where {math}`\EPrem_{T}` is the "excess return" realized in period {math}`T`. Note that {math}`\EPrem_{T}` could be negative: if the risky asset performs badly enough, shareholders lose not just the excess return they hoped to earn, but part of what they would have earned from the safe asset. Given {math}`\Stocks`, and defining the expected risk premium {math}`\EPrem \equiv \Ex_{T-1}[\EPrem_{T}] = \Risky-\Rfree` as the expected value of the excess return, expected utility as of time {math}`T-1` is:
 
 ```{math}
 :label: eq:last

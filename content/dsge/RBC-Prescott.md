@@ -141,11 +141,11 @@ of a trend in {math}`\leisure`) or on micro data (like intertemporal elasticitie
 estimated using household data). So how is {math}`\zeta` calibrated?
 
 If wages are defined as per unit of labor, then if on average consumption
-roughly equals labor income {math}`\cons = (1-\leisure)\wage` we have
+roughly equals labor income {math}`\cons = (1-\leisure)\Wage` we have
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \left(\frac{\wage  \leisure}{\wage (1-\leisure)}\right) & =  \left(\frac{\zeta}{1-\zeta}\right)  \\
+        \left(\frac{\Wage  \leisure}{\Wage (1-\leisure)}\right) & =  \left(\frac{\zeta}{1-\zeta}\right)  \\
         \left(\frac{1-\leisure}{\leisure }\right) & =  \left(\frac{1-\zeta}{\zeta}\right)
 \\      1/\leisure - 1 & =  1/\zeta - 1
 \\  \leisure & =  \zeta     .
