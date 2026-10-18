@@ -314,7 +314,7 @@ Combining this with {eq}`eq:wlcttp1` gives
 \begin{gathered}\begin{aligned}
         \Wage_{t}\leisure_{t} & =  \Wage_{t+1}\leisure_{t+1}/\Rfree_{t+1}\Discount  \\
         \leisure_{t+1}/\leisure_{t} & =  \left(\frac{\Rfree_{t+1}\Discount}{\Wage_{t+1}/\Wage_{t}}\right)  \\
-        \hat{\leisure }_{t+1} & \approx  -\hat{\wage }_{t+1}+(\rfree_{t+1}-\DiscRate)
+        \hat{\leisure }_{t+1} & \approx  -\hat{\Wage }_{t+1}+(\rfree_{t+1}-\DiscRate)
 \end{aligned}\end{gathered}
 ```
 
