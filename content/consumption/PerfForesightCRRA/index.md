@@ -476,6 +476,15 @@ Now suppose the interest rate changes to {math}`\rfree=0.03`, while all other pa
 
 The point of this example is that for plausible parameter values, the human wealth effect is enormously stronger than the income and substitution effects, so that we should see large drops in consumption when interest rates rise and conversely strong gains when interest rates fall. This is a summary of the main point of the famous paper by {cite:t}`summersCapTax`; Summers derives formulas for an economy with overlapping generations of finite-lifetime consumers, but those complications do not change the basic message.
 
+Nor is a change of a percentage point in the long-term real interest rate unusual. [The long-term real interest rate figure](#fig:LongTermRealRate) shows two measures of it. One is the Federal Reserve Bank of Cleveland's estimate of the real rate expected over the next ten years, from a model fitted to Treasury yields, inflation, inflation swaps and surveys of expected inflation {cite:p}`haubrichInflationSwaps`. The other is the yield on ten-year inflation-indexed Treasury bonds (TIPS). The expected rate averaged 5.3 percent a year in the 1980s and 0.6 percent in the 2010s, and reached a low of −0.4 percent in August 2020. The TIPS yield rose by 3.5 percentage points in two years, from −1.07 percent in August 2021 to 2.41 percent in October 2023. Since 1982 the expected rate has moved by a percentage point or more within a year in 13 percent of months, and within two years in 24 percent. The chapter's [notebook](PerfForesightCRRA.ipynb) computes these numbers from FRED's data; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) to run it without installing anything.
+
+:::{figure} figures/LongTermRealRate.png
+:name: fig:LongTermRealRate
+:align: center
+
+Two measures of the U.S. long-term real interest rate, monthly, in percent a year: the Federal Reserve Bank of Cleveland's estimate of the real rate expected over the next ten years (FRED series REAINTRATREARAT10Y, from 1982), and the yield on ten-year inflation-indexed Treasury bonds (FRED series FII10, from 2003). Downloaded from FRED on 2026-10-20.
+:::
+
 (subsec:SavingRateResponse)=
 ### How Does the Saving Rate Respond to Interest Rates?
 

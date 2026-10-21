@@ -158,7 +158,7 @@ project:
           level: 1
         - file: content/consumption/Envelope/index.md
           level: 1
-        - file: content/consumption/PerfForesightCRRA.md
+        - file: content/consumption/PerfForesightCRRA/index.md
           level: 1
         - file: content/consumption/RandomWalk.md
           level: 1
