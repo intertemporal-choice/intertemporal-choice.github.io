@@ -216,8 +216,9 @@ saving is the source of all growth). The {math}`\bar{\hLucas}` externality is li
 increase in the interest rate, and thus its effect will be determined
 by the balance between the income and substitution effects. We know
 that for {math}`\CRRA=1` the income and substitution effects exactly offset
-each other, leaving consumption unchanged in response to an
-increase in the interest rate, which is why {eq}`eq:indgrow`
+each other, leaving the marginal propensity to consume out of
+wealth unchanged in response to an increase in the interest
+rate, which is why {eq}`eq:indgrow`
 collapses to {eq}`eq:Lucas-ssg` for {math}`\CRRA=1`. If consumers are very
 willing to cut current consumption in exchange for higher future
 consumption (that is, if the intertemporal elasticity of substitution

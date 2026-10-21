@@ -255,6 +255,16 @@ Substituting this into {eq}`eq:PFCRRA-cOfw` gives
 \cLevBF_{\tNow} \approx \left(\rfree-\CRRA^{-1}(\rfree-\timeRate)\right)\oLev_{\tNow}.
 ```
 
+Since {math}`\patr \equiv \log \PatR`, the approximation just made is a formula for the return patience rate,
+
+```{math}
+:label: eq:patrApprox
+
+\patr \approx \CRRA^{-1}(\rfree-\timeRate)-\rfree,
+```
+
+and the marginal propensity to consume in {eq}`eq:PFCRRA-capprox` is {math}`\MPC \approx -\patr`: the RIC, {math}`\patr<0`, is what makes it positive.
+
 The consumption function {eq}`eq:PFCRRA-cOfw` is exact; {eq}`eq:PFCRRA-capprox` treats {math}`\rfree`, {math}`\timeRate` and the return patience rate {math}`\patr` as small. Its error is a different thing from the error of a numerical solution, which approaches the exact formula, not the approximation.
 
 From this we can see again that whether the consumer is return patient, return poised, or return impatient depends on the relationship between {math}`\rfree` and {math}`\timeRate`. Note also that if {math}`\CRRA = \infty` then the consumer is infinitely averse to changing the level of consumption, and so once again the consumer spends exactly the sustainable amount. (This consumer is "absolutely poised" but "return impatient").
@@ -290,7 +300,7 @@ With constant {math}`\pLevBF` we can rewrite {eq}`eq:PFCRRA-capprox` as
 \cLevBF_{\tNow} \approx \left(\rfree-\CRRA^{-1}(\rfree-\timeRate)\right)\left(\bLevBF_{\tNow}+ \pLevBF\left(\frac{\Rfree}{\rfree}\right)\right).
 ```
 
-{math}`\rfree` appears three times in this equation. In order, the three appearances are the income effect, the substitution effect and the human wealth effect, as the [two-period model](#sec:2PeriodLCModel) defines them. The first two are inside the marginal propensity to consume out of total wealth, so they are the effects of {math}`\rfree` on consumption for a given total wealth {math}`\bLevBF_{\tNow}+\hLevBF_{\tNow}`. An increase in the first {math}`\rfree` raises the payout rate on total wealth (set {math}`\pLevBF = 0` and use {eq}`eq:PIHMPC` for {math}`\PIHMPC`, with {math}`\rfree/\Rfree \approx \rfree` for small {math}`\rfree`): this is the income effect. The second is the substitution effect, as its dependence on the intertemporal elasticity of substitution {math}`\CRRA^{-1}` shows. The third, in {math}`\pLevBF(\Rfree/\rfree)`, is the human wealth effect: the effect of {math}`\rfree` on human wealth itself, which comes from the budget constraint and involves no preference parameter. Bank balances {math}`\bLevBF_{\tNow}` are in none of the three; they are part of the total wealth that the marginal propensity to consume applies to. Because consumption depends on {math}`\bLevBF_{\tNow}` and {math}`\hLevBF_{\tNow}` only through their sum, this formula, like the two-period model, assumes that the consumer can borrow against future income at no penalty. [How Large is the Human Wealth Effect?](#subsec:HWEffect) measures what the human wealth effect does to consumption under that assumption.
+{math}`\rfree` appears in three expressions of this equation. In order, the three are the income effect, the substitution effect and the human wealth effect, as the [two-period model](#sec:2PeriodLCModel) defines them. The first two are inside the marginal propensity to consume out of total wealth, so they are the effects of {math}`\rfree` on consumption for a given total wealth {math}`\bLevBF_{\tNow}+\hLevBF_{\tNow}`. An increase in the first {math}`\rfree` raises the payout rate on total wealth (set {math}`\pLevBF = 0` and use {eq}`eq:PIHMPC` for {math}`\PIHMPC`, with {math}`\rfree/\Rfree \approx \rfree` for small {math}`\rfree`): this is the income effect. The second is the substitution effect, as its dependence on the intertemporal elasticity of substitution {math}`\CRRA^{-1}` shows. The third, in {math}`\pLevBF(\Rfree/\rfree)`, is the human wealth effect: the effect of {math}`\rfree` on human wealth itself, which comes from the budget constraint and involves no preference parameter. Bank balances {math}`\bLevBF_{\tNow}` are in none of the three; they are part of the total wealth that the marginal propensity to consume applies to. Because consumption depends on {math}`\bLevBF_{\tNow}` and {math}`\hLevBF_{\tNow}` only through their sum, this formula, like the two-period model, assumes that the consumer can borrow against future income at no penalty. [How Large is the Human Wealth Effect?](#subsec:HWEffect) measures what the human wealth effect does to consumption under that assumption.
 
 ## Normalizing By {math}`\pLevBF`
 
@@ -413,7 +423,7 @@ where {math}`\PatWGro` is the "growth patience factor." We call {eq}`eq:PatWGroC
 
 [^gic-pf]: Or, GIC-PF if we want to highlight that this is the condition for the perfect foresight model.
 
-Thus, whether the consumer is patient or impatient in the sense of building up or drawing down a wealth-to-income *ratio* depends on whether the growth rate of labor income is less than, equal to, or greater than the growth rate of consumption. Analogously to our earlier usages, a consumer for whom {math}`\PatWGro=1` (equivalently, {math}`\patwGro= 0`) would be "growth poised."
+Thus, whether the consumer is patient or impatient in the sense of building up or drawing down a wealth-to-income *ratio* depends on whether the growth rate of labor income is less than, equal to, or greater than the growth rate of consumption. Analogously to our earlier usages, a consumer for whom {math}`\PatWGro=1` (equivalently, {math}`\patpGro= 0`) would be "growth poised."
 
 To get the intuition for this, consider the case of a consumer with no nonhuman wealth, {math}`\bRat_{\tNow}=0`. This consumer's absolute level of consumption will grow at {math}`(\Rfree\Discount)^{1/\CRRA}` and absolute level of income grows at {math}`{\WGro}`, but the PDV of future consumption and future income must be equal. If income is growing faster than consumption but has the same PDV, consumption must be *starting out* at a level *higher* than income, which is the sense in which this consumer is impatient (spending more than his income). "Growth impatience" is therefore the condition that causes consumers with no assets to want to borrow.
 
@@ -431,16 +441,16 @@ For simplicity, assume that {math}`\bRat_{\tNow} = 0`. Then the original version
 
 \begin{aligned}
         \cLevBF_{\tNow} & \approx  \left(\rfree - \CRRA^{-1}(\rfree-\timeRate)\right)\left(\frac{\pLevBF_{\tNow}}{1-{\WGro}/\Rfree}\right)  \\
-         & \approx  \left(\rfree - \CRRA^{-1}(\rfree-\timeRate)\right)\left(\frac{\pLevBF_{\tNow}}{\rfree-\wGro}\right).
+         & \approx  \left(\rfree - \CRRA^{-1}(\rfree-\timeRate)\right)\left(\frac{\pLevBF_{\tNow}}{\rfree-\pGro}\right).
 \end{aligned}
 ```
 
-We are interested only in calibrations of the model in which the consumer is "growth impatient" so that {math}`\wGro > \CRRA^{-1}(\rfree-\DiscRate)` so if we define the growth patience rate as
+We are interested only in calibrations of the model in which the consumer is "growth impatient" so that {math}`\pGro > \CRRA^{-1}(\rfree-\DiscRate)` so if we define the growth patience rate as
 
 ```{math}
 :label: eq:patwGro
 
-\patwGro \equiv \CRRA^{-1}(\rfree-\DiscRate)-\wGro
+\patpGro \equiv \CRRA^{-1}(\rfree-\DiscRate)-\pGro
 ```
 
 we can write this as
@@ -449,14 +459,14 @@ we can write this as
 :label: eq:CvsP
 
 \begin{aligned}
-        \cLevBF_{\tNow} & \approx  \pLevBF_{\tNow} \left(\frac{\rfree - (\wGro+\patwGro)}{\rfree-\wGro}\right)
-\\ & =  \pLevBF_{\tNow} \left(1 - \patwGro/(\rfree - \wGro)\right).
+        \cLevBF_{\tNow} & \approx  \pLevBF_{\tNow} \left(\frac{\rfree - (\pGro+\patpGro)}{\rfree-\pGro}\right)
+\\ & =  \pLevBF_{\tNow} \left(1 - \patpGro/(\rfree - \pGro)\right).
 \end{aligned}
 ```
 
-Remembering that imposition of the growth impatience condition is equivalent to assuming {math}`\patwGro < 0`, while the FHWC requires {math}`\rfree > \wGro`, it is clear that the expression {math}`-\patwGro/(\rfree-\wGro)` will be positive: The consumer will spend more than his permanent labor income.
+Remembering that imposition of the growth impatience condition is equivalent to assuming {math}`\patpGro < 0`, while the FHWC requires {math}`\rfree > \pGro`, it is clear that the expression {math}`-\patpGro/(\rfree-\pGro)` will be positive: The consumer will spend more than his permanent labor income.
 
-Now suppose we choose plausible values for {math}`(\rfree, \timeRate, \wGro, \CRRA) = (0.04,0.04,0.02,2)`. Then {eq}`eq:PFCRRA-cofw2` becomes:
+Now suppose we choose plausible values for {math}`(\rfree, \timeRate, \pGro, \CRRA) = (0.04,0.04,0.02,2)`. Then {eq}`eq:PFCRRA-cofw2` becomes:
 
 ```{math}
 \begin{aligned}
@@ -474,6 +484,16 @@ Now suppose the interest rate changes to {math}`\rfree=0.03`, while all other pa
 \end{aligned}
 ```
 
+In terms of the three effects of {math}`\rfree` in {eq}`eq:PFCRRA-capprox`, with {math}`\bRat_{\tNow}=0` consumption is {math}`\MPC\hRat` times permanent income, where {math}`\MPC = \rfree-\CRRA^{-1}(\rfree-\DiscRate)` and {math}`\hRat \approx 1/(\rfree-\pGro)`, so {math}`\log \cRat_{\tNow} = \log \MPC + \log \hRat` and the three effects add:
+
+```{math}
+:label: eq:dlogcdr
+
+\frac{d \log \cRat_{\tNow}}{d \rfree} \approx \underbrace{\frac{1}{\MPC}}_{\text{income}} - \underbrace{\frac{\CRRA^{-1}}{\MPC}}_{\text{substitution}} + \underbrace{\frac{1}{\pGro-\rfree}}_{\text{human wealth}}.
+```
+
+The income and substitution terms are positive because the RIC makes {math}`\MPC>0`; the human wealth term is negative because the FHWC requires {math}`\rfree>\pGro`. At the calibration above the three terms are 25, −12.5 and −50. In the example, the fall in {math}`\rfree` lowers the marginal propensity to consume from 0.04 to 0.035 (the income effect lowers it by 0.01, the substitution effect raises it by 0.005), while human wealth doubles, from 50 to 100 times permanent income: −0.13 against +0.69 in logs. The human wealth effect exceeds the income effect whenever the consumer is growth impatient, because the two net to {math}`\patpGro/(\MPC(\rfree-\pGro))`, here −25.
+
 The point of this example is that for plausible parameter values, the human wealth effect is enormously stronger than the income and substitution effects, so that we should see large drops in consumption when interest rates rise and conversely strong gains when interest rates fall. This is a summary of the main point of the famous paper by {cite:t}`summersCapTax`; Summers derives formulas for an economy with overlapping generations of finite-lifetime consumers, but those complications do not change the basic message.
 
 Nor is a change of a percentage point in the long-term real interest rate unusual. [The long-term real interest rate figure](#fig:LongTermRealRate) shows two measures of it. One is the Federal Reserve Bank of Cleveland's estimate of the real rate expected over the next ten years, from a model fitted to Treasury yields, inflation, inflation swaps and surveys of expected inflation {cite:p}`haubrichInflationSwaps`. The other is the yield on ten-year inflation-indexed Treasury bonds (TIPS). The expected rate averaged 5.3 percent a year in the 1980s and 0.6 percent in the 2010s, and reached a low of −0.4 percent in August 2020. The TIPS yield rose by 3.5 percentage points in two years, from −1.07 percent in August 2021 to 2.41 percent in October 2023. Since 1982 the expected rate has moved by a percentage point or more within a year in 13 percent of months, and within two years in 24 percent. The [notebook](PerfForesightCRRA.ipynb) computes these numbers from FRED's data; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) to run it without installing anything.
@@ -482,7 +502,7 @@ Nor is a change of a percentage point in the long-term real interest rate unusua
 :name: fig:LongTermRealRate
 :align: center
 
-Two measures of the U.S. long-term real interest rate, monthly, in percent a year: the Federal Reserve Bank of Cleveland's estimate of the real rate expected over the next ten years (FRED series REAINTRATREARAT10Y, from 1982), and the yield on ten-year inflation-indexed Treasury bonds (FRED series FII10, from 2003). Downloaded from FRED on 2026-10-20.
+Two measures of the U.S. long-term real interest rate, monthly, in percent a year: the Federal Reserve Bank of Cleveland's estimate of the real rate expected over the next ten years (FRED series REAINTRATREARAT10Y, from 1982), and the yield on ten-year inflation-indexed Treasury bonds (FRED series FII10, from 2003). Downloaded from FRED on 2026-10-20. Drawn by the chapter's [notebook](PerfForesightCRRA.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) to run it without installing anything.
 :::
 
 (subsec:SavingRateResponse)=
@@ -499,24 +519,24 @@ but substituting from {eq}`eq:CvsP` and {eq}`eq:PFCRRA-capprox`,
 ```{math}
 :label: eq:cFromHandB
 
-\cLevBF_{t} \approx \pLevBF_{\tNow} \left(1 - \patwGro/(\rfree - \wGro)\right)+(\rfree-\CRRA^{-1}(\rfree-\DiscRate))\bLevBF_{\tNow}
+\cLevBF_{t} \approx \pLevBF_{\tNow} \left(1 - \patpGro/(\rfree - \pGro)\right)-\patr\bLevBF_{\tNow}
 ```
 
 this can be rewritten as
 
 ```{math}
 \begin{aligned}
- \sLevBF_{\tNow} & \approx  \rfree \aLevBF_{\tNow-1} + \pLevBF_{\tNow}- \pLevBF_{\tNow} \left(1 - \patwGro/(\rfree - \wGro)\right) - (\rfree-\CRRA^{-1}(\rfree-\DiscRate))\Rfree \aLevBF_{\tNow-1}
-\\ & =  \rfree \aLevBF_{\tNow-1} + \pLevBF_{\tNow} \patwGro/(\rfree - \wGro)- (\rfree-\CRRA^{-1}(\rfree-\DiscRate))\Rfree\aLevBF_{\tNow-1}
-\\ \sRat_{\tNow} & \approx  \rfree \aRat_{\tNow-1} + \patwGro/(\rfree - \wGro)- (\rfree-\CRRA^{-1}(\rfree-\DiscRate))\Rfree \aRat_{\tNow-1}
-\\ & \approx  \patwGro/(\rfree - \wGro)+ \CRRA^{-1}(\rfree-\DiscRate)\aRat_{\tNow-1}
+ \sLevBF_{\tNow} & \approx  \rfree \aLevBF_{\tNow-1} + \pLevBF_{\tNow}- \pLevBF_{\tNow} \left(1 - \patpGro/(\rfree - \pGro)\right) + \patr\Rfree \aLevBF_{\tNow-1}
+\\ & =  \rfree \aLevBF_{\tNow-1} + \pLevBF_{\tNow} \patpGro/(\rfree - \pGro) + \patr\Rfree\aLevBF_{\tNow-1}
+\\ \sRat_{\tNow} & \approx  \rfree \aRat_{\tNow-1} + \patpGro/(\rfree - \pGro) + \patr\Rfree \aRat_{\tNow-1}
+\\ & \approx  \patpGro/(\rfree - \pGro)+ \CRRA^{-1}(\rfree-\DiscRate)\aRat_{\tNow-1}
 \end{aligned}
 ```
 
-(where the last approximations come from the assumptions that {math}`1/G \approx 1`) and that {math}`\rfree \times (\rfree-\CRRA^{-1}(\rfree-\DiscRate))` is "small." The saving *rate* (for which we use the letter {math}`\srate` to distinguish it from {math}`\sRat` above) is the ratio of saving to *total* income (not just labor income):
+(where the last approximations come from the assumptions that {math}`1/G \approx 1` and that {math}`\rfree\patr`, the product of two small rates, is zero, so that {math}`\rfree+\patr\Rfree \approx \rfree+\patr = \CRRA^{-1}(\rfree-\DiscRate)` by {eq}`eq:patrApprox`). The saving *rate* (for which we use the letter {math}`\srate` to distinguish it from {math}`\sRat` above) is the ratio of saving to *total* income (not just labor income):
 
 ```{math}
-\varsigma_{\tNow} = \left(\frac{\patwGro/(\rfree - \wGro)+ \CRRA^{-1}(\rfree-\DiscRate)\aRat_{\tNow-1}}{1+ \rfree \aRat_{\tNow-1}}\right).
+\varsigma_{\tNow} = \left(\frac{\patpGro/(\rfree - \pGro)+ \CRRA^{-1}(\rfree-\DiscRate)\aRat_{\tNow-1}}{1+ \rfree \aRat_{\tNow-1}}\right).
 ```
 
 The first thing to notice about this expression is that as {math}`\aRat_{\tNow-1}` approaches infinity, the saving rate asymptotes to
@@ -529,13 +549,13 @@ and whether the saving rate is positive or negative depends on whether the consu
 
 [^partial-eq]: In this partial equilibrium framework, we are assuming that the consumer's wealth can go to infinity without any effect on the aggregate interest rate.
 
-Finally, if we rewrite this as
+If we rewrite this as
 
 ```{math}
 \varsigma \approx \CRRA^{-1} (1 - \timeRate \rfree^{-1})
 ```
 
-then it is apparent that the response of the saving rate to the interest rate is
+then it is apparent that the response of the asymptotic saving rate to the interest rate is
 
 ```{math}
 :label: eq:dsdr
@@ -544,6 +564,22 @@ then it is apparent that the response of the saving rate to the interest rate is
 ```
 
 If we consider almost any plausible configuration of parameter values, say {math}`\rfree = \timeRate=0.05` and {math}`\CRRA = 2`, this translates to a very large response of the saving rate with respect to {math}`\rfree` (in the case of the parameter values mentioned above, {math}`(1/2)(20)=10`).
+
+In terms of the three effects of {math}`\rfree` in {eq}`eq:PFCRRA-capprox`, this response is entirely a substitution effect. A consumer whose wealth is enormous relative to income has negligible human wealth, so the human wealth effect is negligible too. The income effect raises the marginal propensity to consume by the rise in {math}`\rfree`, and so raises consumption by the rise in {math}`\rfree` times wealth, but capital income rises by exactly as much, so the income effect leaves saving unchanged. What remains is the substitution effect: consumption grows faster by {math}`\CRRA^{-1}` times the rise in {math}`\rfree`, and a consumer who lives on capital income can make consumption grow faster only by making wealth grow faster, so saving rises by {math}`\CRRA^{-1}` times the rise in {math}`\rfree` times wealth. The saving *rate* responds so strongly because it divides that change by income, which is only {math}`\rfree` times wealth. Writing {eq}`eq:dsdr` as {math}`\CRRA^{-1}\rfree^{-1} - \varsigma\rfree^{-1}` shows this: the first term is the substitution effect, and the second, zero for an absolutely poised consumer, is only the effect of higher income on the rate's denominator.
+
+A consumer with no wealth responds even more strongly, and for a different reason. With {math}`\aRat_{\tNow-1}=0`, the saving rate is {math}`\patpGro/(\rfree-\pGro) = 1-\MPC\hRat`, with {math}`\hRat \approx 1/(\rfree-\pGro)`, and its response to the interest rate is
+
+```{math}
+:label: eq:dsdrNoWealth
+
+\left(\frac{d \varsigma}{d \rfree}\right)_{\aRat_{\tNow-1}=0} = -\underbrace{\hRat}_{\text{income}}+\underbrace{\CRRA^{-1}\hRat}_{\text{substitution}}+\underbrace{\MPC\hRat^{2}}_{\text{human wealth}} = \frac{(1-\CRRA^{-1})\pGro+\CRRA^{-1}\timeRate}{(\rfree-\pGro)^{2}}.
+```
+
+All three effects are at work, each measured in its own terms and then turned into saving. The income effect raises the marginal propensity to consume one for one with {math}`\rfree`, which raises consumption, and so lowers saving, by {math}`\hRat` per unit of {math}`\rfree`; with no wealth, there is no capital income to offset it. The substitution effect lowers the marginal propensity to consume by {math}`\CRRA^{-1}` per unit of {math}`\rfree`, which raises saving by {math}`\CRRA^{-1}\hRat`. The human wealth effect lowers human wealth by {math}`\hRat/(\rfree-\pGro) = \hRat^{2}`, which at the marginal propensity to consume {math}`\MPC` raises saving by {math}`\MPC\hRat^{2}`.
+
+With the calibration of [How Large is the Human Wealth Effect?](#subsec:HWEffect), {math}`(\rfree, \timeRate, \pGro, \CRRA) = (0.04,0.04,0.02,2)`, human wealth is 50 times income and {math}`\MPC=0.04`, so the three terms are −50, 25 and 100, and the response is 75, six times the 12.5 that {eq}`eq:dsdr` gives at the same parameter values. When {math}`\rfree` falls to 0.03, the saving rate falls from −1 to −2.5, the mirror image of that section's rise in consumption from 2 to 3.5 times income.
+
+The human wealth effect is the largest of the three here, and it exceeds the income effect whenever the consumer is growth impatient: {math}`\MPC\hRat^{2}>\hRat` exactly when {math}`\MPC\hRat>1`, that is, when a consumer with no wealth spends more than income, which is {math}`\patpGro<0`. It is also the effect that mechanisms later in the course, liquidity constraints and precautionary saving, drastically attenuate for some households while leaving a meaningful income effect in place. Their human wealth falls by just as much when {math}`\rfree` rises, but because they will not borrow against future income, the fall does much less to their consumption and their saving.
 
 ## Appendix
 

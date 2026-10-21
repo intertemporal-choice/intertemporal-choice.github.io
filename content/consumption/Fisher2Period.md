@@ -298,14 +298,17 @@ The optimal choice again moves from point {math}`A` to point {math}`C`. However,
 
 Notice that once we have computed the human wealth effect, if we treat point {math}`D` as the starting point of our analysis, the remaining analysis is identical to that for the upper figure: We can increase the interest factor from {math}`\underline{\Rfree}` to {math}`\bar{\Rfree}`, which causes the equilibrium point to change from point {math}`D` to point {math}`C`, a movement that can be decomposed into an income effect {math}`DB` (analogous to the income effect {math}`AB` in the original analysis) and a substitution effect {math}`BC`.
 
+(box:TextbookDefinitions)=
+::::{div}
 :::{important} How these definitions differ from the textbook's
 Micro textbooks traditionally define the income effect of a change in the interest factor in a way that incorporates both what I call the income effect and what I call the human wealth effect. I depart from that definition because it hard-wires an assumption of perfect capital markets: it treats a change in the value of future income as equivalent to a change in current resources, which is true only if people can borrow against their future income at no penalty. My definitions separate two different things a change in the interest factor does:
 
 - the *human wealth effect* is its effect on human wealth itself, calculated from the budget constraint;
-- the *income and substitution effects* are its effects on consumption for any given total wealth, bank balances plus human wealth: the income earned on savings changes, and so does the reward for deferring consumption.
+- the *income and substitution effects* are its effects on consumption for any given total wealth, bank balances plus human wealth: the rate at which total wealth pays out changes, and so does the reward for deferring consumption.
 
 In this model capital markets are perfect, so consumption depends on bank balances and human wealth only through their sum, and a change in human wealth affects consumption exactly as an equal change in bank balances would. The distinction is preparation for mechanisms later in the course, liquidity constraints and precautionary saving, that drastically attenuate the human wealth effect for some households while leaving a meaningful income effect in place. For those households human wealth changes by just as much, but the change does much less to their consumption. {cite:t}`summersCapTax` vigorously made the point that in standard life cycle models the human wealth effect dwarfs the income and substitution effects, because for most people most lifetime income is in the future.
 :::
+::::
 
 <!-- FisherFigure.png stacks FisherFigureY1 above FisherFigureY2, reproducing the single
 two-panel exhibit in Carroll's LaTeX. Carrying the second panel as a separate image

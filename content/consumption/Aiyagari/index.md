@@ -61,7 +61,7 @@ The solution is a consumption function for each level of the endowment, {math}`\
 :name: fig:ConsFuncByIncomeState
 :align: center
 
-The consumption function {math}`\cFunc(\mRat,\labor)` for each of the seven levels of the idiosyncratic labor productivity component, from lowest (dark) to highest (light), at the equilibrium interest rate for Aiyagari's baseline: {math}`\CRRA = 3`, {math}`\tau = 0.6`, {math}`\sigma = 0.2`, {math}`\DiscFac = 0.96`, and no borrowing.
+The consumption function {math}`\cFunc(\mRat,\labor)` for each of the seven levels of the idiosyncratic labor productivity component, from lowest (dark) to highest (light), at the equilibrium interest rate for Aiyagari's baseline: {math}`\CRRA = 3`, {math}`\tau = 0.6`, {math}`\sigma = 0.2`, {math}`\DiscFac = 0.96`, and no borrowing. Drawn by the chapter's [notebook](Aiyagari.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything.
 :::
 
 ### How Much May a Household Borrow?
@@ -159,7 +159,7 @@ In [the capital supply and demand figure](#fig:CapitalSupplyDemand), supply rise
 :name: fig:CapitalSupplyDemand
 :align: center
 
-Steady-state supply and demand for capital, with the wage moving with the interest rate. With complete markets the supply of capital is horizontal at the time preference rate {math}`\timeRate`, and the capital stock is {math}`\KLev^{\timeRate}`; with uninsured idiosyncratic risk it is {math}`\KLev^{*}`. Baseline parameters as in [the consumption functions figure](#fig:ConsFuncByIncomeState).
+Steady-state supply and demand for capital, with the wage moving with the interest rate. With complete markets the supply of capital is horizontal at the time preference rate {math}`\timeRate`, and the capital stock is {math}`\KLev^{\timeRate}`; with uninsured idiosyncratic risk it is {math}`\KLev^{*}`. Baseline parameters as in [the consumption functions figure](#fig:ConsFuncByIncomeState). Drawn by the chapter's [notebook](Aiyagari.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything.
 :::
 
 Nothing guarantees that supply slopes up everywhere, so the equilibrium need not be unique ({cite:t}`acikgozExistence`); {cite:t}`lightUniqueness` and {cite:t}`achdouHACT` prove uniqueness only under conditions that include relative risk aversion no greater than one.
@@ -217,7 +217,7 @@ The model's wealth distribution is far more equal than the data's, across the wh
 :name: fig:WealthLorenz
 :align: center
 
-Lorenz curves for wealth: in the baseline Aiyagari economy, and for U.S. net worth in the 2004 Survey of Consumer Finances, the data used by {cite:t}`cstwMPC`.
+Lorenz curves for wealth: in the baseline Aiyagari economy, and for U.S. net worth in the 2004 Survey of Consumer Finances, the data used by {cite:t}`cstwMPC`. Drawn by the chapter's [notebook](Aiyagari.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything.
 :::
 
 Identical, infinitely lived households all have time to accumulate a large buffer, and that matters for spending. Only about a quarter of one percent of households are at the borrowing limit, and the average annual marginal propensity to consume is 0.054, not far above the [perfect foresight](#eq:PFCRRA-cOfw) value of 0.038 at the same interest rate. Empirical estimates are several times larger; {cite:t}`cstwMPC` show that matching the observed wealth distribution, with its many households holding little, brings the model close to them.
