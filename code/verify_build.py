@@ -32,7 +32,8 @@ code/build_site.py). MyST does not: a figure whose file is stale builds and depl
   6. every notebook in the build sits beside its chapter, is listed in toc.yml as a child of
      that chapter, and carries outputs; and both the chapter and the notebook's own page link
      to open the notebook in Colab and in Binder (Chris, 2026-10-12), so a reader can run it
-     without installing anything
+     without installing anything; and so does the caption of every figure the notebook draws
+     (Chris, 2026-10-21: "the caption of each figure or table should have a link to the notebook")
   7. the figures are current. A notebook the build re-ran (its code or the environment
      changed) redrew its figures over the committed files, so a file that now differs from
      the committed one beyond a small tolerance means the notebook was changed without its
@@ -237,7 +238,16 @@ def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, re
             return
         if images[0].get("placeholder"):
             problems.append(f"{slug}: {name} falls back to a placeholder image")
-        image_problem(images[0].get("urlSource") or images[0].get("url"), name)
+        src = images[0].get("urlSource") or images[0].get("url") or ""
+        image_problem(src, name)
+        chapter = CHAPTER_LOCATION.match(location)
+        if FIGURE_FILE.match(src) and chapter and notebook_beside(repo, location):
+            # A figure drawn by the chapter's notebook links to it in its caption.
+            rel = f"{Path(location.lstrip('/')).parent}/{chapter.group(1)}.ipynb"
+            urls = link_urls(fig)
+            for service, url in launch_links(rel).items():
+                if url not in urls:
+                    problems.append(f"{slug}: {name}'s caption has no link to open {rel} in {service} ({url})")
 
     def visit(node) -> None:
         if isinstance(node, list):
@@ -495,9 +505,11 @@ def self_test_figures() -> list[str]:
         )
         (repo / "toc.yml").write_text(toc)
         at_a, at_b, plain = "/content/part/A/index.md", "/content/part/B/index.md", "/content/a.md"
+        caption = {"type": "caption", "children": [{"type": "link", "url": u} for u in launch_links("content/part/A/A.ipynb").values()]}
+        colab_caption = {"type": "caption", "children": [{"type": "link", "url": launch_links("content/part/A/A.ipynb")["Colab"]}]}
 
         good = {
-            "a notebook-drawn figure beside its chapter": (at_a, _fig(_img("figures/a.png"))),
+            "a notebook-drawn figure beside its chapter": (at_a, _fig(_img("figures/a.png"), caption)),
             "an exempt static image": (plain, _fig(_img(static))),
             "an exempt remote image pinned to a commit": (at_a, _fig(_img(remote))),
         }
@@ -506,7 +518,9 @@ def self_test_figures() -> list[str]:
             "a figure with two images": (at_a, _fig(_img("figures/a.png"), _img("figures/b.png"))),
             "an unlisted static image": (plain, _fig(_img("/content/figures/B/b.png"))),
             "an empty figure": (at_a, _fig({"type": "_lift"})),
-            "a placeholder": (at_a, _fig(_img("figures/a.png", placeholder=True))),
+            "a placeholder": (at_a, _fig(_img("figures/a.png", placeholder=True), caption)),
+            "a notebook-drawn figure whose caption has no launch links": (at_a, _fig(_img("figures/a.png"))),
+            "a notebook-drawn figure whose caption links Colab but not Binder": (at_a, _fig(_img("figures/a.png"), colab_caption)),
             "a figures/ file on a chapter with no notebook": (at_b, _fig(_img("figures/x.png"))),
             "a figures/ file on a page that is not a chapter": (plain, _fig(_img("figures/x.png"))),
             "an image from somewhere else": (at_a, _fig(_img("../pictures/a.png"))),
@@ -563,7 +577,7 @@ def self_test_figures() -> list[str]:
         def reset():
             page("index", "Article", "/README.md", {"type": "root", "children": []})
             page("content.a", "Article", plain, _fig(_img(static)))
-            page("content.part.a", "Article", at_a, {"type": "root", "children": [_fig(_img("figures/a.png")), launch]})
+            page("content.part.a", "Article", at_a, {"type": "root", "children": [_fig(_img("figures/a.png"), caption), launch]})
             page("content.part.a.a", "Notebook", nb_loc, {"type": "root", "children": [_out(*png), launch]})
             page("content.old", "Notebook", "/content/old.ipynb", {"children": []})  # stale, not current
             write_config(["content.a", "content.part.a", "content.part.a.a"])
