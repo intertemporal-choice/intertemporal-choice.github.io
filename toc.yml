@@ -19,7 +19,9 @@ project:
         - file: content/consumption/Envelope/index.md
           children:
             - file: content/consumption/Envelope/Envelope.ipynb
-        - file: content/consumption/PerfForesightCRRA.md
+        - file: content/consumption/PerfForesightCRRA/index.md
+          children:
+            - file: content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb
         - file: content/consumption/RandomWalk.md
         - file: content/consumption/ConsumptionFunction.md
         - file: content/consumption/StickyExpectationsC.md
