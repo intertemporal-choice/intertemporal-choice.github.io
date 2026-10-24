@@ -182,7 +182,7 @@ project:
           level: 0
         - file: content/asset_pricing/CARAPortfolio.md
           level: 1
-        - file: content/asset_pricing/Portfolio-CRRA.md
+        - file: content/asset_pricing/Portfolio-CRRA/index.md
           level: 1
         - file: content/asset_pricing/LucasAssetPrice.md
           level: 1

@@ -131,11 +131,11 @@ Equation {eq}`eq:PortCRRA-riskyshareMS` says[^fn-cv-difference] that the consume
 
 If there is no excess return, nothing will be put in the risky asset. Similarly, if risk aversion or the variance of the risk is infinity, again nothing will be put in the risky asset.[^fn-approx-quality]
 
-[^fn-approx-quality]: [](#fig:Port:b) shows the quality of the approximation.
+[^fn-approx-quality]: [](#fig:ShareApproxErr) shows the quality of the approximation.
 
 This formula hints at the existence of an "equity premium puzzle" ({cite:t}`mehraPrescottPuzzle`). Interpreting the risky asset as the aggregate stock market, the annual standard deviation of the log of U.S. stock returns has historically been about {math}`\sigma_{\risky}=0.2` yielding {math}`\Evarr = 0.04`. The equity premium over historical periods has been something like {math}`\EpremLog = 0.08` (eight percent). With risk aversion of {math}`\CRRA=2` this formula implies that the share of risky assets in your portfolio should be {math}`0.08/0.08` or 100 percent! The fact that most people hold far less than 100 percent of their wealth in stocks, and that many hold none, is the "stockholding puzzle," the microeconomic manifestation of the equity premium puzzle ({cite:t}`haliassos&bertaut:fewholdstocks`).
 
-To avoid the problems caused by a prediction of a risky portfolio share greater than one, we can calibrate the model with more modest expectations for the equity premium. Some researchers have argued that when evidence for other countries and longer time periods is taken into account, a plausible average value of the premium might be as low as three percent. [](#fig:Port:a) shows the relationship between the portfolio share and relative risk aversion for a calibration that assumes a modest premium of 3 percent and a large standard deviation of {math}`\sigma=0.2`. Even when risks are this high and the premium is this low, if relative risk aversion is close to logarithmic ({math}`\CRRA = 1`) the investor wants to put well over half of the portfolio in the risky asset. Only for values of risk aversion greater than 2 does the predicted portfolio share reach plausible small values.
+To avoid the problems caused by a prediction of a risky portfolio share greater than one, we can calibrate the model with more modest expectations for the equity premium. Some researchers have argued that when evidence for other countries and longer time periods is taken into account, a plausible average value of the premium might be as low as three percent. [](#fig:ShareVsCRRA) shows the relationship between the portfolio share and relative risk aversion for a calibration that assumes a modest premium of 3 percent and a large standard deviation of {math}`\sigma=0.2`. Even when risks are this high and the premium is this low, if relative risk aversion is close to logarithmic ({math}`\CRRA = 1`) the investor wants to put well over half of the portfolio in the risky asset. Only for values of risk aversion greater than 2 does the predicted portfolio share reach plausible small values.
 
 But remember that these calculations are all assuming that the consumer's *entire* consumption spending is financed by asset income. If the consumer has other income (for example, labor or transfer income) that is not perfectly correlated with returns on the risky asset, they should be willing to take more risk. Since, for most consumers, most of their future consumption will be financed from labor or transfer income, it is not surprising to learn that models calibrated to actual data on capital and noncapital income dynamics imply that people should be investing most of their non-human wealth in the risky asset (with reasonable values of {math}`\CRRA`).
 
@@ -173,20 +173,22 @@ Finally, we can ask what effect an exogenous increase in the risk of the risky a
 
 which is actually *smaller* when {math}`\sigma^{2}_{\risky}` is larger. Upon reflection, maybe this makes sense. Imagine that the consumer had adjusted their portfolio share in the risky asset downward just enough to restore the portfolio's riskiness to its original level before the increase in risk. The consumer would now be bearing the same degree of risk but for a lower (mean) rate of return (because of their reduction in exposure to the risky asset). It makes intuitive sense that the consumer will not be satisfied with this "same riskiness, lower return" outcome and therefore that the undesirableness of the risky asset must have increased enough to make them want to hold even less than the amount that would return their portfolio's riskiness to its original value.
 
-:::{figure} /content/figures/Portfolio-CRRA/ShareVsCRRA.png
-:name: fig:Port:a
+:::{figure} figures/ShareVsCRRA.png
+:name: fig:ShareVsCRRA
 :align: center
 
 The Approximate Risky Portfolio Share {math}`\riskyshare` Declines as Relative Risk Aversion {math}`\CRRA` Increases
+
+Note: The approximation {math}`\riskyshare = \EpremLog/(\CRRA\Evarr)` with a premium of {math}`\EpremLog = 0.03` and {math}`\sigma_{\risky} = 0.2`, drawn by the [notebook](Portfolio-CRRA.ipynb).
 :::
 
-:::{figure} /content/figures/Portfolio-CRRA/ShareApproxErr.png
-:name: fig:Port:b
+:::{figure} figures/ShareApproxErr.png
+:name: fig:ShareApproxErr
 :align: center
 
 The Approximation Error for the Portfolio Share in Risky Assets {math}`\riskyshare` Is Small
 
-Note: The approximation error is computed by solving for the exactly optimal portfolio share numerically. See the `doAll.nb` Mathematica notebook for details.
+Note: The exactly optimal share minus the approximation, for the same parameters. The [notebook](Portfolio-CRRA.ipynb) finds the exact share numerically; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb) to run it without installing anything.
 :::
 
 
