@@ -20,7 +20,7 @@ Because this expression must hold at all {math}`t`, we can check it empirically 
 
 The equity premium puzzle is essentially that {math}`\cov(\Delta \log c,\Risky)` is very small (about 0.004) but {math}`\Ex [\Risky]-\Rfree` is about 0.08 (stocks have earned real returns of about 8 percent more than riskless assets over the historical period), which means that the only way equation {eq}`eq:EPP-eqprem` can hold is if {math}`\CRRA` is implausibly large (these values imply {math}`\CRRA=20`; keeping the denominator of {eq}`eq:EPP-eqprem`, with consumption growth of 1.5 percent, lowers that only to about 15).
 
-How do we know what plausible values of {math}`\CRRA` are? Consider the following. You must choose between a gamble in which you consume \$50,000 for the rest of your life with probability 0.5 and \$100,000 with probability 0.5, or consuming some amount {math}`X` with certainty. The coefficient of relative risk aversion determines the {math}`X` which would make you indifferent between consuming X or being exposed to the gamble. For example, if {math}`\CRRA = 0`, then you have no risk aversion at all and you will be indifferent between \$75,000 with certainty and the 50/50 gamble with expected value of \$75,000. Here are the values of X associated with different values of {math}`\CRRA` (table taken from {cite:t}`mankiw&zeldes:stockholders`).
+How do we know what plausible values of {math}`\CRRA` are? Consider the following. You must choose between a gamble in which you consume \$50,000 for the rest of your life with probability 0.5 and \$100,000 with probability 0.5, or consuming some amount {math}`X` with certainty. The coefficient of relative risk aversion determines the {math}`X` which would make you indifferent between consuming X and being exposed to the gamble. For example, if {math}`\CRRA = 0`, then you have no risk aversion at all and you will be indifferent between \$75,000 with certainty and the 50/50 gamble with expected value of \$75,000. Here are the values of X associated with different values of {math}`\CRRA` (table taken from {cite:t}`mankiw&zeldes:stockholders`).
 
 :::{list-table} Certainty equivalent {math}`X` for different coefficients of relative risk aversion
 :header-rows: 1
@@ -43,6 +43,8 @@ How do we know what plausible values of {math}`\CRRA` are? Consider the followin
 * - {math}`\infty`
   - 50,000
 :::
+
+{math}`\CRRA = 20` means preferring \$51,858 for sure to a fifty-fifty chance at \$50,000 or \$100,000, far more risk aversion than people show.
 
 ## The Riskfree Rate Puzzle
 
@@ -71,4 +73,4 @@ Using the same approximations ([ExpEps](#fact:expeps) and [TaylorOne](#fact:tayl
 
 The "riskfree rate puzzle" is that average consumption growth per capita has been about 1.5 percent (in the US in the postwar period) while real riskfree interest rates have been at most 1 percent. Even if we assume a time preference rate of {math}`\timeRate=0` (no impatience at all, i.e. {math}`\Discount=1`), the only way this equation can hold is if {math}`\CRRA` is a very small number: with a riskless rate of at most 1 percent and growth of 1.5 percent, {math}`\CRRA \leq 2/3`. Of course, this is precisely the opposite of the conclusion of the equity premium puzzle, which implies the {math}`\CRRA` must be very large.
 
-The riskfree rate puzzle might in principle be explicable by overlapping generations, though in practice it is hard to make that work well. A precautionary saving motive also cuts against the puzzle, by adding a variance term to consumption growth.
+The riskfree rate puzzle might in principle be explicable by [overlapping generations](#sec:OLGModel), whose riskless rate is not pinned down by a representative consumer's Euler equation and can even fall below the growth rate, though in practice it is hard to make that work well. A precautionary saving motive also cuts against the puzzle, by adding a variance term to consumption growth.

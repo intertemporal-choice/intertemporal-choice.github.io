@@ -13,9 +13,7 @@
 \cRat_{t}\Pop_{t} = \dvdnd_{t}\Kap_{t}
 ```
 
-where {math}`\cRat_{t}` is consumption of fruit per person, {math}`\Pop_{t}` is the population, {math}`\Kap_{t}` measures the stock of trees, and {math}`\dvdnd_{t}` is the exogenous output of fruit that drops from each tree. A crucial assumption is that the stock of trees is exogenous: you cannot consume a little less fruit and have more trees next period.
-
-(In a given year, each tree produces exactly the same amount of fruit as every other tree, but {math}`\dvdnd_{t}` varies from year to year depending on the weather.) An economy like this, in which output arrives without any deliberate actions on the part of residents, is called an "endowment" economy (or, sometimes, an "exchange" economy).[^production-economy]
+where {math}`\cRat_{t}` is consumption of fruit per person, {math}`\Pop_{t}` is the population, {math}`\Kap_{t}` measures the stock of trees, and {math}`\dvdnd_{t}` is the exogenous output of fruit that drops from each tree. A crucial assumption is that the stock of trees is exogenous: you cannot consume a little less fruit and have more trees next period. In a given year, each tree produces exactly the same amount of fruit as every other tree, but {math}`\dvdnd_{t}` varies from year to year depending on the weather. An economy like this, in which output arrives without any deliberate actions on the part of residents, is called an "endowment" economy (or, sometimes, an "exchange" economy).[^production-economy]
 
 [^production-economy]: The alternative is a "production" economy, in which factors of production (labor, capital, maybe land, maybe knowledge) combine somehow to generate the output.
 
@@ -79,7 +77,7 @@ Substituting this and moving the resulting negative term to the left-hand side,
 ```{math}
 :label: eq:FOCwithRisky
 
-\uFunc^{\prime}(c_{t}^{i}) = \DiscFac \Ex_{t}^{i}\left[\vFunc^{\prime}({m}_{t+1}^{i})\left(\underbrace{\frac{{\Price}_{t+1}+\dvdnd_{t+1}}{\Price_{t}}}_{\equiv \Risky_{t+1}}\right)\right] = \DiscFac \Ex_{t}^{i}\left[\Risky_{t+1} \vFunc^{\prime}({m}_{t+1}^{i})\right]
+\uFunc^{\prime}(c_{t}^{i}) = \DiscFac \Ex_{t}^{i}\left[\vFunc^{\prime}({m}_{t+1}^{i})\left(\frac{{\Price}_{t+1}+\dvdnd_{t+1}}{\Price_{t}}\right)\right] = \DiscFac \Ex_{t}^{i}\left[\Risky_{t+1} \vFunc^{\prime}({m}_{t+1}^{i})\right]
 ```
 
 where {math}`\Risky_{t+1}` is the return factor: the resources in period {math}`t+1` that are the reward for investing one unit of consumption in trees at the end of {math}`t`.
@@ -150,7 +148,7 @@ so we can use repeated substitution, e.g. of {eq}`eq:Ptp1` into {eq}`eq:Pt`, and
 \Price_{t} = \Ex_{t}\left[\SDF_{t,t+1}\dvdnd_{t+1}\right]+\Ex_{t}[\SDF_{t,t+1}\Ex_{t+1}[\SDF_{t+1,t+2}\dvdnd_{t+2}]]+ \ldots.
 ```
 
-The "law of iterated expectations" says that {math}`\Ex_{t}[\Ex_{t+1}[{\Price}_{t+2}]] = \Ex_{t}[{\Price}_{t+2}]`; given this, and noting that {math}`\SDF_{t,t+2} = \SDF_{t,t+1}\SDF_{t+1,t+2}`, {eq}`eq:PtsubPtp1` becomes:
+The "law of iterated expectations," together with {math}`\SDF_{t,t+2} = \SDF_{t,t+1}\SDF_{t+1,t+2}`, gives {math}`\Ex_{t}[\SDF_{t,t+1}\Ex_{t+1}[\SDF_{t+1,t+2}\dvdnd_{t+2}]] = \Ex_{t}[\SDF_{t,t+2}\dvdnd_{t+2}]`, and likewise for later terms, so, assuming no [bubble](#sec:Bubbles), {eq}`eq:PtsubPtp1` becomes:
 
 ```{math}
 :label: eq:PtAsPDV
@@ -200,7 +198,7 @@ It may surprise you that the equilibrium price of trees today does not depend on
 
 The above derivation says that intuition is wrong: Today's price depends only on today's output.
 
-Nevertheless, the logic (higher future output is a reason for higher current prices) is not wrong; but it is (exactly) counterbalanced by another, and subtler, fact: Since future consumption will equal future fruit output, higher expected fruit output means lower marginal utility of consumption in that future period of (more) abundant fruit (basically, people are starving today, which reduces the attractiveness of cutting their consumption to buy trees that will produce more in a period when they expect *not* to be starving). These two forces are the manifestation of the (pure) income effect and substitution effect in this model (there is no human wealth, and therefore no human wealth effect). In the special case of logarithmic utility considered here, income and substitution effects are of the same size and opposite sign so the two forces exactly offset.
+Nevertheless, the logic (higher future output is a reason for higher current prices) is not wrong; but it is (exactly) counterbalanced by another, and subtler, fact: Since future consumption will equal future fruit output, higher expected fruit output means lower marginal utility of consumption in that future period of (more) abundant fruit (basically, people are starving today, which reduces the attractiveness of cutting their consumption to buy trees that will produce more in a period when they expect *not* to be starving). The first force is the substitution effect: a higher return to buying trees makes saving more attractive. The second is the (pure) income effect: future abundance makes saving less urgent. (There is no human wealth in this model, and therefore no human wealth effect.) In the special case of logarithmic utility considered here, income and substitution effects are of the same size and opposite sign so the two forces exactly offset.
 
 ## The Interest Rate and the Rate of Return in a Lucas Model
 
@@ -238,7 +236,7 @@ One of the subtler entries in {cite:t}`aristotleFallacies`'s catalog of common h
 
 The Lucas model provides a counterexample. From the standpoint of any individual (atomistic) agent, it is quite true that a decision to save one more unit will yield greater future resources, in the amount {math}`\Risky_{t+1}`. But from the standpoint of the society as a whole, if everyone decided to do the same thing (save one more unit), there would be no effect on aggregate resources in period {math}`t+1`. Put another way, for any individual agent, it appears that the "marginal product of capital" is {math}`\Risky_{t+1}`, but for the society as a whole the marginal product of capital is zero.
 
-The proposition that the return for society as a whole must be the same as the return that is available to individuals is an error because it implicitly assumes that there are no general equilibrium effects of a generalized desire to save more (or, more broadly, that there is no interaction between the decisions one person makes and the outcomes for another person). The Lucas model provides a counterexample in which, if everyone's preferences change (e.g., {math}`\timeRate` goes down for everyone), the price of the future asset is affected, indeed, it is affected in a way that is sufficient to exactly counteract the increased desire for ownership of future dividends (since there is a fixed supply of assets to be owned, the demand must be reconciled with that preexisting supply).
+The proposition that the return for society as a whole must be the same as the return that is available to individuals is an error because it implicitly assumes that there are no general equilibrium effects of a generalized desire to save more (or, more broadly, that there is no interaction between the decisions one person makes and the outcomes for another person). In the Lucas model, if everyone's preferences change (e.g., {math}`\timeRate` goes down for everyone), the price of trees rises just enough to offset the increased desire for ownership of future dividends (since there is a fixed supply of assets to be owned, the demand must be reconciled with that preexisting supply).
 
 Aristotle was a smart guy!
 

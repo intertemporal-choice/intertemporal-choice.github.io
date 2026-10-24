@@ -75,15 +75,15 @@ Using this approximation, the expectation as of date {math}`t` of utility at dat
 
 \begin{split}
   \Ex_{t}[\uFunc(c_{t+1})] & \approx  (1-\CRRA)^{-1}\Ex_{t}\left[\left(a_{t}e^{\rfree}e^{\riskyshare \EpremLog_{t+1}+\riskyshare(1-\riskyshare)\sigma^{2}_{\risky}/2 }\right)^{1-\CRRA}\right]
-\\                      & \approx  (1-\CRRA)^{-1}\Ex_{t}\left[(a_{t}\Rfree)^{1-\CRRA}\left( e^{\riskyshare \EpremLog_{t+1}+\riskyshare(1-\riskyshare)\sigma^{2}_{\risky}/2 }\right)^{1-\CRRA}\right]
-\\                      & \approx  (1-\CRRA)^{-1}(a_{t}\Rfree)^{1-\CRRA}\Ex_{t}\left[e^{(\riskyshare \EpremLog_{t+1}+\riskyshare(1-\riskyshare)\sigma^{2}_{\risky}/2)  (1-\CRRA)}\right]
-\\                      & \approx  \underbrace{(1-\CRRA)^{-1}(a_{t}\Rfree)^{1-\CRRA}}_{\text{constant $< 0$}}\underbrace{e^{ (1-\CRRA)\riskyshare(1-\riskyshare)\sigma^{2}_{\risky}/2}\Ex_{t}\left[e^{\riskyshare \EpremLog_{t+1}  (1-\CRRA)}\right]}_{\text{excess return utility factor}}
+\\                      & =  (1-\CRRA)^{-1}\Ex_{t}\left[(a_{t}\Rfree)^{1-\CRRA}\left( e^{\riskyshare \EpremLog_{t+1}+\riskyshare(1-\riskyshare)\sigma^{2}_{\risky}/2 }\right)^{1-\CRRA}\right]
+\\                      & =  (1-\CRRA)^{-1}(a_{t}\Rfree)^{1-\CRRA}\Ex_{t}\left[e^{(\riskyshare \EpremLog_{t+1}+\riskyshare(1-\riskyshare)\sigma^{2}_{\risky}/2)  (1-\CRRA)}\right]
+\\                      & =  \underbrace{(1-\CRRA)^{-1}(a_{t}\Rfree)^{1-\CRRA}}_{\text{constant $< 0$}}\underbrace{e^{ (1-\CRRA)\riskyshare(1-\riskyshare)\sigma^{2}_{\risky}/2}\Ex_{t}\left[e^{\riskyshare \EpremLog_{t+1}  (1-\CRRA)}\right]}_{\text{excess return utility factor}}
 \end{split}
 ```
 
 where the first term is a negative constant under the usual assumption that relative risk aversion {math}`\CRRA>1`.
 
-For the special (but reasonable) case of a lognormally distributed return, we can make substantial further progress, by obtaining an analytical approximation to the numerical optimum. In this case {math}`\riskyshare (1-\CRRA) \EpremLog_{t+1} \sim \mathcal{N}(\riskyshare (1-\CRRA)(\EpremLog - \Evarr/2),(\riskyshare(1-\CRRA))^{2}\Evarr)` (using [NormTimes](#fact:normtimes)). With a couple of extra lines of derivation we can show that the log of the expectation in {eq}`eq:PortCRRA-exputil` is
+Because the return is lognormal, we can make substantial further progress, by obtaining an analytical approximation to the numerical optimum. In this case {math}`\riskyshare (1-\CRRA) \EpremLog_{t+1} \sim \mathcal{N}(\riskyshare (1-\CRRA)(\EpremLog - \Evarr/2),(\riskyshare(1-\CRRA))^{2}\Evarr)` (using [NormTimes](#fact:normtimes)). With a couple of extra lines of derivation we can show that the log of the expectation in {eq}`eq:PortCRRA-exputil` is
 
 ```{math}
 :label: eq:PortCRRA-Ex
@@ -135,11 +135,11 @@ If there is no excess return, nothing will be put in the risky asset. Similarly,
 
 This formula hints at the existence of an "equity premium puzzle" ({cite:t}`mehraPrescottPuzzle`). Interpreting the risky asset as the aggregate stock market, the annual standard deviation of the log of U.S. stock returns has historically been about {math}`\sigma_{\risky}=0.2` yielding {math}`\Evarr = 0.04`. The equity premium over historical periods has been something like {math}`\EpremLog = 0.08` (eight percent). With risk aversion of {math}`\CRRA=2` this formula implies that the share of risky assets in your portfolio should be {math}`0.08/0.08` or 100 percent! The fact that most people hold far less than 100 percent of their wealth in stocks, and that many hold none, is the "stockholding puzzle," the microeconomic manifestation of the equity premium puzzle ({cite:t}`haliassos&bertaut:fewholdstocks`).
 
-To avoid the problems caused by a prediction of a risky portfolio share greater than one, we can calibrate the model with more modest expectations for the equity premium. Some researchers have argued that when evidence for other countries and longer time periods is taken into account, a plausible average value of the premium might be as low as three percent. [](#fig:ShareVsCRRA) shows the relationship between the portfolio share and relative risk aversion for a calibration that assumes a modest premium of 3 percent and a large standard deviation of {math}`\sigma=0.2`. Even when risks are this high and the premium is this low, if relative risk aversion is close to logarithmic ({math}`\CRRA = 1`) the investor wants to put well over half of the portfolio in the risky asset. Only for values of risk aversion greater than 2 does the predicted portfolio share reach plausible small values.
+To avoid the problems caused by a prediction of a risky portfolio share greater than one, we can calibrate the model with more modest expectations for the equity premium. Taking evidence from other countries and longer periods into account, {cite:t}`dimson&marsh&staunton:smallerpuzzle` estimate that investors can expect a premium of about 3 to 3½ percent on a geometric basis, or 4½ to 5 percent on the arithmetic basis that matches {math}`\EpremLog`. [](#fig:ShareVsCRRA) shows the relationship between the portfolio share and relative risk aversion for a deliberately modest premium of 3 percent and a large standard deviation of {math}`\sigma=0.2`. Even when risks are this high and the premium is this low, if relative risk aversion is close to logarithmic ({math}`\CRRA = 1`) the investor wants to put well over half of the portfolio in the risky asset. Only for values of risk aversion greater than 2 does the predicted portfolio share reach plausible small values.
 
-But remember that these calculations are all assuming that the consumer's *entire* consumption spending is financed by asset income. If the consumer has other income (for example, labor or transfer income) that is not perfectly correlated with returns on the risky asset, they should be willing to take more risk. Since, for most consumers, most of their future consumption will be financed from labor or transfer income, it is not surprising to learn that models calibrated to actual data on capital and noncapital income dynamics imply that people should be investing most of their non-human wealth in the risky asset (with reasonable values of {math}`\CRRA`).
+But remember that these calculations are all assuming that the consumer's *entire* consumption spending is financed by asset income. If the consumer has other income (for example, labor or transfer income) whose covariance with the risky return is small, they should be willing to take more risk. Since, for most consumers, most of their future consumption will be financed from labor or transfer income, it is not surprising to learn that models calibrated to actual data on capital and noncapital income dynamics imply that people should be investing most of their non-human wealth in the risky asset, with reasonable values of {math}`\CRRA` {cite:p}`cocco&gomes&maenhout:lifecycle`.
 
-A final interesting question is what the expected rate of return on the consumer's portfolio will be once the portfolio share in risky assets has been chosen optimally. Note first that {eq}`eq:PortCRRA-rportDist` implies that
+Another question is what the expected rate of return on the consumer's portfolio will be once the portfolio share in risky assets has been chosen optimally. Note first that {eq}`eq:PortCRRA-rportDist` implies that
 
 ```{math}
 :label: eq:eport
@@ -160,7 +160,7 @@ while the variance of the log of the excess return factor for the portfolio is {
 \end{aligned}\end{gathered}
 ```
 
-which is an interesting formula for the excess return of the optimally chosen portfolio because the object {math}`\EpremLog/\sigma_{\risky}` (the excess return divided by the standard deviation) is a well-known tool in finance for evaluating the tradeoff between risk and return (the "Sharpe ratio"). Equation {eq}`eq:rportPremOpt` says that the consumer will choose a portfolio that earns an excess return that is directly related to the (square of the) Sharpe ratio and inversely related to the risk aversion coefficient. Higher reward (per unit of risk) convinces the consumer to take the risk necessary to earn higher returns; but higher risk aversion convinces the investor to sacrifice (risky) return for safety.
+which is an interesting formula for the excess return of the optimally chosen portfolio because the object {math}`\EpremLog/\sigma_{\risky}` (the excess return divided by the standard deviation) is a well-known tool in finance for evaluating the tradeoff between risk and return (the "Sharpe ratio"). Equation {eq}`eq:rportPremOpt` says that the consumer will choose a portfolio that earns an excess return proportional to the square of the Sharpe ratio and inversely proportional to the risk aversion coefficient. Higher reward (per unit of risk) convinces the consumer to take the risk necessary to earn higher returns; but higher risk aversion convinces the investor to sacrifice (risky) return for safety.
 
 Finally, we can ask what effect an exogenous increase in the risk of the risky asset has on the endogenous riskiness of the portfolio once the consumer has chosen optimally. The answer is surprising: The variance of the optimally-chosen portfolio is
 
@@ -171,7 +171,7 @@ Finally, we can ask what effect an exogenous increase in the risk of the risky a
 \end{aligned}\end{gathered}
 ```
 
-which is actually *smaller* when {math}`\sigma^{2}_{\risky}` is larger. Upon reflection, maybe this makes sense. Imagine that the consumer had adjusted their portfolio share in the risky asset downward just enough to restore the portfolio's riskiness to its original level before the increase in risk. The consumer would now be bearing the same degree of risk but for a lower (mean) rate of return (because of their reduction in exposure to the risky asset). It makes intuitive sense that the consumer will not be satisfied with this "same riskiness, lower return" outcome and therefore that the undesirableness of the risky asset must have increased enough to make them want to hold even less than the amount that would return their portfolio's riskiness to its original value.
+which is actually *smaller* when {math}`\sigma^{2}_{\risky}` is larger. The reason: a riskier asset pays less per unit of variance. Cutting the share only enough to restore the portfolio's variance would leave the same risk at a lower expected return, so the investor cuts it further.
 
 :::{figure} figures/ShareVsCRRA.png
 :name: fig:ShareVsCRRA
