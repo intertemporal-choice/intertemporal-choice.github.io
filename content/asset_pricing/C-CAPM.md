@@ -81,7 +81,19 @@ Now assume CRRA utility, {math}`\uFunc(c) \equiv c^{1-\CRRA}/(1-\CRRA)` and divi
 \end{aligned}\end{gathered}
 ```
 
-We can now follow the same steps as in [The Equity Premium Puzzle and the Riskfree Rate](#sec:EquityPremiumPuzzle) to obtain the relation that *for every asset {math}`i`*
+If consumption growth is small, {math}`c_{t+1}/c_{t} \approx 1+ \Delta \log c_{t+1}` ([ExpEps](#fact:expeps)), and if {math}`z` is small, {math}`(1+z)^{\lambda} \approx 1 + \lambda z` ([TaylorOne](#fact:taylorone)). With these, {eq}`eq:CCAPM-gameulernew` can be approximated by
+
+```{math}
+\Ex_{t}[(1-\CRRA \Delta \log {c}_{t+1})(\Risky_{t+1,i}-\Rfree)] \approx 0
+```
+
+and by the definition of covariance, {math}`\Ex [xy] = \Ex [x]\Ex [y] + \cov(x,y)`,
+
+```{math}
+(1-\CRRA \Ex_{t}[\Delta \log {c}_{t+1}])(\Ex_{t}[\Risky_{t+1,i}]-\Rfree)-\CRRA \cov_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i}) \approx 0,
+```
+
+so that *for every asset {math}`i`*
 
 ```{math}
 :label: eq:CCAPM-eqprem
@@ -91,6 +103,8 @@ We can now follow the same steps as in [The Equity Premium Puzzle and the Riskfr
 \\                             & \approx  \CRRA \cov_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i})
 \end{aligned}\end{gathered}
 ```
+
+where the last approximation holds when {math}`\CRRA\Ex_{t}[\Delta \log {c}_{t+1}]` is small.
 
 What does this imply about asset pricing?
 
