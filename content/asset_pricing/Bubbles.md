@@ -68,7 +68,7 @@ We usually assume the "no-bubbles" condition that says that {math}`\lim_{T \righ
 \Price_{t}^{*} = \Ex_{t}\left[\sum_{s=t+1}^{\infty} \Risky^{t-s}\dvdnd_{s}\right]
 ```
 
-This result is very similar to what emerges from the [Lucas Asset Pricing model](#sec:LucasAssetPrice), though there the stochastic discount factor plays the role that {math}`\Risky` plays here.
+This result is very similar to what emerges from the [Lucas Asset Pricing model](#sec:LucasAssetPrice), though there the stochastic discount factor plays the role that {math}`\Risky^{-1}` plays here.
 
 Suppose now that dividends are expected to grow by a constant factor {math}`\PGro` henceforth. In that case we have
 
@@ -81,13 +81,13 @@ Suppose now that dividends are expected to grow by a constant factor {math}`\PGr
 \end{aligned}
 ```
 
-where the final approximation uses log rates: {math}`\risky \equiv \log \Risky` and {math}`\pGro \equiv \log \PGro`. This is known as the "Gordon formula." The tricky thing in applying the formula is to know what to assume for {math}`\Risky` and {math}`\PGro`. The interest rate {math}`\Risky` should be the interest rate "appropriate" for discounting risky quantities. The usual assumption is that {math}`\Risky = \Rfree+\EPrem` where {math}`\Rfree` is the rate of return on perfectly safe (riskfree) assets and {math}`\EPrem` is the rate-of-return premium that people demand as compensation for the risk inherent in future dividends.
+where the final approximation uses log rates: {math}`\risky \equiv \log \Risky` and {math}`\pGro \equiv \log \PGro`. This is known as the "Gordon formula." The tricky thing in applying the formula is to know what to assume for {math}`\Risky` and {math}`\PGro`. The return factor {math}`\Risky` should be the one "appropriate" for discounting risky quantities. The usual assumption is that {math}`\risky = \rfree+\EpremLog`, where {math}`\rfree` is the log of the return factor on perfectly safe (riskfree) assets and {math}`\EpremLog` is the premium that people demand as compensation for the risk inherent in future dividends.
 
-## The Random Walk of Asset Pricing
+## Prices as Martingales
 
 ### The Law of Iterated Expectations
 
-Suppose that a security price at time {math}`t`, {math}`\Price_{t}`, can be written as the rational expectation of some "fundamental value" {math}`V^{*}` conditional on information available at time {math}`t` (the usual example of the "fundamental value" in question is the present discounted value of dividends). Then we have
+Suppose that a security price at time {math}`t`, {math}`\Price_{t}`, can be written as the rational expectation of some "fundamental value" {math}`V^{*}` conditional on information available at time {math}`t` (the classic example, from {cite:t}`samuelson:proof`, is a futures contract, whose fundamental value is the spot price on its delivery date). Then we have
 
 ```{math}
 \Price_{t} = \Ex_{t}[V^{*}].
@@ -111,6 +111,8 @@ Then the expectation of the change in the price over the next period is
 
 because any information known at time {math}`t` must be known at time {math}`t+1` and so the only thing that should cause a *change* in prices should be the arrival of new information that was not known at time {math}`t`.
 
+A stock's price is not such a martingale: by {eq}`eq:pteq`, its expected price rises each period by the return it must pay, net of the dividend, {math}`\Ex_{t}[\Price_{t+1}] = \Risky \Price_{t} - \Ex_{t}[\dvdnd_{t+1}]`. What follows a martingale for a stock is its price plus the dividends it has paid, all discounted back to a fixed date.
+
 ## Deterministic Bubbles
 
 Note, however, that we simply *assumed* the no-bubbles condition; we did not justify it with economic logic. Consider the following candidate process for {math}`\Price_{t}`:
@@ -124,7 +126,7 @@ B_{t+1} &= \Rfree B_{t}.
 \end{aligned}
 ```
 
-That is, price is equal to the fundamental price plus a "bubble" term {math}`B_{t}` which grows nonstochastically at rate {math}`\Rfree` from period to period. (Here we will assume that the risk premium {math}`\EPrem` is zero, which would be true in equilibrium for risk-neutral consumers). The question at hand is whether this equation satisfies the first order condition {eq}`eq:pteq`. We can show that it does by starting with the formula for {math}`\Price_{t+1}` and working backwards:
+That is, price is equal to the fundamental price plus a "bubble" term {math}`B_{t}` which grows nonstochastically by the factor {math}`\Rfree` from period to period. (Here we will assume that there is no risk premium, {math}`\EpremLog = 0`, which would be true in equilibrium for risk-neutral consumers.) The question at hand is whether this equation satisfies the first order condition {eq}`eq:pteq`. We can show that it does by starting with the formula for {math}`\Price_{t+1}` and working backwards:
 
 ```{math}
 \begin{aligned}
@@ -144,19 +146,19 @@ In words, this says that the first order condition has an infinite number of sol
 
 ## Stochastically Bursting Bubbles
 
-{cite:t}`blanchard:burstingbubbles` considers another possible candidate process for {math}`P`:
+{cite:t}`blanchard:burstingbubbles` considers another possible candidate process for {math}`\Price_{t}`:
 
 ```{math}
 :label: eq:pburst
 
-\Price_{t} = \Price_{t}^{*}+q_{t}
+\Price_{t} = \Price_{t}^{*}+B_{t}
 ```
 
 ```{math}
-q_{t+1} =
+B_{t+1} =
 \begin{cases}
-(\Rfree/\alpha)q_{t} & \text{with probability $\alpha$} \\
-0 & \text{with probability $1-\alpha$}
+(\Rfree/\LivPrb)B_{t} & \text{with probability } \LivPrb \\
+0 & \text{with probability } \DiePrb = 1-\LivPrb
 \end{cases}
 ```
 
@@ -164,33 +166,33 @@ Roll equation {eq}`eq:pburst` forward one period, and take its expectation as of
 
 ```{math}
 \begin{aligned}
-\Price_{t+1} &= \Price_{t+1}^{*}+q_{t+1} \\
-\Ex_{t}[\Price_{t+1}] &= \Ex_{t}[\Price_{t+1}^{*}]+ q_{t}(\Rfree/\alpha) \alpha + (0)(1-\alpha) \\
-\Ex_{t}[\Price_{t+1}] &= \Ex_{t}\left[\sum_{s=t+2}^{\infty}\Rfree^{t+1-s}\dvdnd_{s}\right]+ q_{t} \Rfree \\
-\Ex_{t}[\Price_{t+1}]/\Rfree &= \Ex_{t}\left[\sum_{s=t+2}^{\infty}\Rfree^{t-s}\dvdnd_{s}\right]+ q_{t} \\
-\Ex_{t}[\Price_{t+1}+\dvdnd_{t+1}]/\Rfree &= \Ex_{t}[\dvdnd_{t+1}/\Rfree] + \Ex_{t}\left[\sum_{s=t+2}^{\infty}\Rfree^{t-s}\dvdnd_{s}\right]+ q_{t} \\
-\Price_{t} &= \Ex_{t}\left[\sum_{s=t+1}^{\infty}\Rfree^{t-s}\dvdnd_{s}\right]+ q_{t}
+\Price_{t+1} &= \Price_{t+1}^{*}+B_{t+1} \\
+\Ex_{t}[\Price_{t+1}] &= \Ex_{t}[\Price_{t+1}^{*}]+ B_{t}(\Rfree/\LivPrb) \LivPrb + (0)\DiePrb \\
+\Ex_{t}[\Price_{t+1}] &= \Ex_{t}\left[\sum_{s=t+2}^{\infty}\Rfree^{t+1-s}\dvdnd_{s}\right]+ B_{t} \Rfree \\
+\Ex_{t}[\Price_{t+1}]/\Rfree &= \Ex_{t}\left[\sum_{s=t+2}^{\infty}\Rfree^{t-s}\dvdnd_{s}\right]+ B_{t} \\
+\Ex_{t}[\Price_{t+1}+\dvdnd_{t+1}]/\Rfree &= \Ex_{t}[\dvdnd_{t+1}/\Rfree] + \Ex_{t}\left[\sum_{s=t+2}^{\infty}\Rfree^{t-s}\dvdnd_{s}\right]+ B_{t} \\
+\Price_{t} &= \Ex_{t}\left[\sum_{s=t+1}^{\infty}\Rfree^{t-s}\dvdnd_{s}\right]+ B_{t}
 \end{aligned}
 ```
 
-Thus, the model allows stochastic bubbles which, during the period of their inflation, rise at a rate that is enough faster than the gross interest rate to exactly compensate shareholders (in expected value terms) for their expected capital loss when the bubble collapses.
+Thus, the model allows stochastic bubbles which, while they last, grow by the factor {math}`\Rfree/\LivPrb`, enough faster than {math}`\Rfree` to exactly compensate shareholders (in expected value terms) for their expected capital loss when the bubble collapses.
 
-Note that the probability that the bubble has burst by time {math}`t+s` is the probability that it bursts in {math}`t+1` plus the probability that it bursts in {math}`t+2` given that it did not burst in {math}`t+1`, and so on:
+Note that the probability that the bubble has burst by time {math}`t+s` is the probability that it bursts in {math}`t+1` plus the probability that it survives {math}`t+1` and bursts in {math}`t+2`, and so on:
 
 ```{math}
 :label: eq:pnotburst
 
-\text{Prob(burst by t+s)} = (1-\alpha)(1+\alpha+\alpha^{2}+\ldots+\alpha^{s-1}).
+\text{Prob(burst by } t+s) = \DiePrb(1+\LivPrb+\LivPrb^{2}+\ldots+\LivPrb^{s-1}).
 ```
 
-Summing the geometric series collapses the right-hand side of {eq}`eq:pnotburst` to {math}`1-\alpha^{s}`. Since {math}`\alpha<1`, letting {math}`s \rightarrow \infty` drives {math}`\alpha^{s}` to zero, so the probability that the bubble has burst by time {math}`t+s` approaches one: a stochastic bubble bursts eventually with probability one.
+Summing the geometric series collapses the right-hand side of {eq}`eq:pnotburst` to {math}`1-\LivPrb^{s}`. Since {math}`\LivPrb<1`, letting {math}`s \rightarrow \infty` drives {math}`\LivPrb^{s}` to zero, so the probability that the bubble has burst by time {math}`t+s` approaches one: a stochastic bubble bursts eventually with probability one.
 
 (WhyBubblesCannotExist)=
 ## Arguments for Why Bubbles Cannot Exist
 
 Note that the bubble term in equation {eq}`eq:pbubble` rises without bound. It turns out that this fact rules out negative bubbles. To see why, note that if {math}`B_{t}` is negative and if the fundamental price {math}`\Price_{t}^{*}` is bounded, then eventually {math}`B_{t}` grows large enough so that the predicted price of a share is negative. But if share prices were negative, people could make themselves better off by simply throwing away their stock certificates. Thus, the restriction that prices must be positive rules out negative bubbles.
 
-Bubbles can also be ruled out if there is a maximum possible price that the asset can have. Consider, for example, the question of whether there can be a bubble on the price of diamonds. Suppose that there is a fixed supply of natural diamonds in existence, but suppose that new artificial diamonds can be made at some price {math}`\bar{\Price}>4\Price_{t}`, that is diamonds can be made at a cost 4 times higher than the current market price. But if there is a bubble, then it will imply that eventually the market price would exceed {math}`\bar{\Price}`. At that point, nobody will be willing to pay {math}`\Price_{t}>\bar{\Price}` for natural diamonds, so the bubble's price cannot keep rising beyond {math}`\bar{\Price}`. Thus, rational bubbles are ruled out for assets which are reproducible.
+Bubbles can also be ruled out if there is a maximum possible price that the asset can have. Consider, for example, the question of whether there can be a bubble on the price of diamonds. Suppose that there is a fixed supply of natural diamonds in existence, but that artificial diamonds can be made at a cost {math}`\bar{\Price}` above the current market price. A bubble would eventually carry the market price past {math}`\bar{\Price}`, but nobody will pay more than {math}`\bar{\Price}` for a natural diamond when an artificial one costs {math}`\bar{\Price}`, so the price cannot rise beyond {math}`\bar{\Price}`. In the period before the bubble would pass {math}`\bar{\Price}`, then, the price cannot rise by the factor the bubble needs to earn the required return, so nobody holds the bubble then; and by the same logic nobody holds it in the period before that, or in any earlier period, today included. Thus, rational bubbles are ruled out for assets which are reproducible.
 
 We assumed, in deriving these results, that the investor's utility function was linear. It is more difficult to justify rational bubbles in an economy with risk averse investors.
 

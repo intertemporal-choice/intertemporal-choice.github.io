@@ -1,12 +1,12 @@
 (sec:CARAPortfolio)=
-# Portfolio Choice With CARA Utility
+# Portfolio Choice with CARA Utility
 
 Consider a consumer with Constant Absolute Risk Aversion
 utility
 {math}`\uFunc(\cRat) = -\CARA^{-1} e^{-\alpha \cRat_{}}`, with assets
 {math}`\aLev_{T-1}` who is deciding how much to invest in a risky security that
-will earn a normally distributed stochastic return {math}`\Risky_{T} \sim
-\mathcal{N}(\Risky,\sigma^{2})` versus a safe asset that will earn return
+will earn a normally distributed stochastic return factor {math}`\Risky_{T} \sim
+\mathcal{N}(\Risky,\sigma^{2})` versus a safe asset that will earn return factor
 {math}`\Rfree < \Risky` (the risky asset gets a bold font because you must be a bold person to invest in a risky asset!).[^fn1][^fn2]
 
 [^fn1]: The seminal paper examining this problem (in continuous time) was by {cite:t}`merton:restat`; that paper also examines the case with CRRA utility and lognormal returns.
@@ -19,41 +19,41 @@ of resources. If the consumer invests an absolute amount of money \${math}`\Stoc
 ```{math}
 \begin{gathered}\begin{aligned}
         \cRat_{T} & =  \Stocks \Risky_{T}+( \aLev_{T-1}-\Stocks)\Rfree  \\
-         & =   \aLev_{T-1}\Rfree + \underbrace{(\Risky_{T}-\Rfree)}_{\equiv \EPrem_{T}}\Stocks
+         & =   \aLev_{T-1}\Rfree + (\Risky_{T}-\Rfree)\Stocks
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\EPrem_{T}` is the "excess return" realized in period {math}`T`. Note that {math}`\EPrem_{T}` could be negative: if the risky asset performs badly enough, shareholders lose not just the excess return they hoped to earn, but part of what they would have earned from the safe asset. Given {math}`\Stocks`, and defining the expected risk premium {math}`\EPrem \equiv \Ex_{T-1}[\EPrem_{T}] = \Risky-\Rfree` as the expected value of the excess return, expected utility as of time {math}`T-1` is:
+where {math}`\Risky_{T}-\Rfree` is the "excess return" realized in period {math}`T`. Note that it could be negative: if the risky asset performs badly enough, shareholders lose not just the excess return they hoped to earn, but part of what they would have earned from the safe asset. Given {math}`\Stocks`, and with expected excess return {math}`\Ex_{T-1}[\Risky_{T}-\Rfree] = \Risky-\Rfree`, expected utility as of time {math}`T-1` is:
 
 ```{math}
-:label: eq:last
+:label: eq:CARA-exputil
 
 \begin{gathered}\begin{aligned}
         \Ex_{T-1}[\uFunc(\cRat_{T})] & =  \Ex_{T-1}[-\CARA^{-1}e^{-\alpha( \aLev_{T-1}\Rfree+(\Risky_{T}-\Rfree)\Stocks)}]
 \\ & =  -\CARA^{-1}e^{-\alpha( \aLev_{T-1}\Rfree)} \Ex_{T-1}[e^{-\alpha(\Risky_{T}-\Rfree)\Stocks}]
-\\ & =  -\CARA^{-1}e^{-\alpha( \aLev_{T-1}\Rfree)} e^{-\alpha\Stocks\EPrem+(\alpha\Stocks)^{2}\sigma^{2}/2}
+\\ & =  -\CARA^{-1}e^{-\alpha( \aLev_{T-1}\Rfree)} e^{-\alpha\Stocks(\Risky-\Rfree)+(\alpha\Stocks)^{2}\sigma^{2}/2}
 \\ & =  -\CARA^{-1} e^{-\alpha( \aLev_{T-1}\Rfree)}
-e^{-\alpha(\Stocks\EPrem-\alpha\Stocks^{2}\sigma^{2}/2)}
+e^{-\alpha(\Stocks(\Risky-\Rfree)-\alpha\Stocks^{2}\sigma^{2}/2)}
 \end{aligned}\end{gathered}
 ```
 
-and the third line follows from the second because if {math}`z \sim \mathcal{N}(\EPrem_{z},\sigma_{z}^{2})`
-then {math}`\Ex[e^{z}] = e^{\EPrem_{z}+\sigma_{z}^{2}/2}.` (See [ELogNorm](#fact:elognorm)).
+and the third line follows from the second because if {math}`z \sim \mathcal{N}(\mu_{z},\sigma_{z}^{2})`
+then {math}`\Ex[e^{z}] = e^{\mu_{z}+\sigma_{z}^{2}/2}.` (See [ELogNorm](#fact:elognorm)).
 
-Because {eq}`eq:last` is negative, the optimal {math}`\Stocks` will be the
+Because {eq}`eq:CARA-exputil` is negative, the optimal {math}`\Stocks` will be the
 one that yields the largest negative exponent on {math}`e`, which occurs at the value of {math}`S`
 given by
 
 ```{math}
-\max_{\Stocks} \left\{ \Stocks \EPrem - \frac{\alpha \Stocks^{2} \sigma^{2}}{2} \right\}
+\max_{\Stocks} \left\{ \Stocks (\Risky-\Rfree) - \frac{\alpha \Stocks^{2} \sigma^{2}}{2} \right\}
 ```
 
 with FOC
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \EPrem & =  \alpha \Stocks \sigma^{2}  \\
-        \Stocks & =  \frac{\EPrem}{\alpha \sigma^{2}}.
+        \Risky-\Rfree & =  \alpha \Stocks \sigma^{2}  \\
+        \Stocks & =  \frac{\Risky-\Rfree}{\alpha \sigma^{2}}.
 \end{aligned}\end{gathered}
 ```
 

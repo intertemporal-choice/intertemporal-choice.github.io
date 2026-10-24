@@ -12,13 +12,13 @@ Consider a representative agent solving the joint consumption and portfolio allo
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\Rfree` denotes the return on a perfectly riskless asset and {math}`\Risky_{t+1,i}` denotes the return on asset {math}`i` between periods {math}`t` and {math}`t+1`, {math}`\omega_{t,i}` is the share of end-of-period savings invested in asset {math}`i`, and {math}`\Rport_{t+1}` is the portfolio-weighted rate of return, and {math}`y_{t+1}` is noncapital income in period {math}`t+1`.
+where {math}`\Rfree` denotes the return factor on a perfectly riskless asset and {math}`\Risky_{t+1,i}` denotes the return factor on asset {math}`i` between periods {math}`t` and {math}`t+1`, {math}`\omega_{t,i}` is the share of end-of-period savings invested in asset {math}`i`, and {math}`\Rport_{t+1}` is the portfolio-weighted return factor, and {math}`y_{t+1}` is noncapital income in period {math}`t+1`.
 
 As usual, the objective can be rewritten in recursive form:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \vFunc(\mRat_{t}) & =  \max_{\{c_{t},\omega_{1,t},\omega_{2,t},\ldots\}} \uFunc(c_{t}) +\Discount \Ex_{t}\left[\vFunc(\Rport_{t+1}(\mRat_{t}-c_{t})+{y}_{t+1})\right]
+        \vFunc(\mRat_{t}) & =  \max_{\{c_{t},\omega_{t,1},\omega_{t,2},\ldots\}} \uFunc(c_{t}) +\Discount \Ex_{t}\left[\vFunc(\Rport_{t+1}(\mRat_{t}-c_{t})+{y}_{t+1})\right]
 \end{aligned}\end{gathered}
 ```
 
@@ -42,7 +42,7 @@ and the FOC with respect to {math}`\omega_{t,i}` is
 \end{aligned}\end{gathered}
 ```
 
-But the usual logic of the Envelope theorem tells us that
+But the usual logic of the [Envelope theorem](#sec:Envelope) tells us that
 
 ```{math}
 :label: eq:CCAPM-envelope
@@ -81,17 +81,17 @@ Now assume CRRA utility, {math}`\uFunc(c) \equiv c^{1-\CRRA}/(1-\CRRA)` and divi
 \end{aligned}\end{gathered}
 ```
 
-We can now follow the same steps as in the [Equity Premium Puzzle](#sec:EquityPremiumPuzzle) section to obtain the relation that *for every asset {math}`i`*
+We can now follow the same steps as in [The Equity Premium Puzzle and the Riskfree Rate](#sec:EquityPremiumPuzzle) to obtain the relation that *for every asset {math}`i`*
 
 ```{math}
 :label: eq:CCAPM-eqprem
 
 \begin{gathered}\begin{aligned}
-        \Ex_{t}[\Risky_{t+1,i}]-\Rfree & \approx  \frac{\CRRA \text{cov}_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i})}{1-\CRRA \Ex_{t}[ \Delta \log {c}_{t+1}]}
-\\                             & \approx  \CRRA \text{cov}_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i})
+        \Ex_{t}[\Risky_{t+1,i}]-\Rfree & \approx  \frac{\CRRA \cov_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i})}{1-\CRRA \Ex_{t}[ \Delta \log {c}_{t+1}]}
+\\                             & \approx  \CRRA \cov_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i})
 \end{aligned}\end{gathered}
 ```
 
 What does this imply about asset pricing?
 
-Consider an asset for which the return covaries positively with consumption, {math}`\mbox{cov}(\Risky_{t+1,i},\Delta \log c_{t+1}) > 0`. For such an asset, the *marginal utility* will negatively covary with the return. Thus the expected return must be higher for an asset that "does well" when consumption is high. But for a given average stream of dividends or payouts, if the average return is high, the average price must be low. Thus this indicates that prices should be low for assets whose payoffs are procyclical, and high for assets whose payoffs are countercyclical.
+Consider an asset for which the return covaries positively with consumption, {math}`\cov(\Risky_{t+1,i},\Delta \log c_{t+1}) > 0`. For such an asset, the *marginal utility* will negatively covary with the return. Thus the expected return must be higher for an asset that "does well" when consumption is high. But for a given average stream of dividends or payouts, if the average return is high, the average price must be low. Thus this indicates that prices should be low for assets whose payoffs are procyclical, and high for assets whose payoffs are countercyclical.
