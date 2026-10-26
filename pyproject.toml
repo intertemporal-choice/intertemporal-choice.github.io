@@ -9,18 +9,20 @@ authors = [
     {name = "Christopher D. Carroll", email = "ccarroll@jhu.edu"},
     {name = "Alan E. Lujan Solis"},
 ]
+# What a figure notebook needs to run, and nothing else: a notebook opened in Colab or Binder
+# installs this package with pip (see the first cell of any notebook). The minimums are ones
+# Colab already meets (numpy 2.1, scipy 1.16, matplotlib 3.10, ipywidgets 7.7 in October 2026),
+# so that pip adds what is missing without upgrading what Colab has loaded. Upgrading numpy
+# under a running Colab kernel broke every notebook there until the runtime was restarted
+# (`ImportError: cannot import name '_slice' from 'numpy._core.umath'`), and upgrading ipykernel
+# and ipywidgets breaks Colab's own kernel and widgets. The book's own environment is the `book`
+# group below, with the versions uv.lock pins.
 dependencies = [
     "econ-ark>=0.17.0",
-    "ipykernel>=7.3.0",
-    "ipywidgets>=8.1.8",
-    "jupyter-server>=2.21.0",
-    "jupyterlab>=4.5.2",
-    "jupytext>=1.18.1",
-    "matplotlib>=3.11.1",
-    "mystmd>=1.10.1",
-    "numpy>=2.3.5",
-    "pyyaml>=6.0.3",
-    "scipy>=1.17.0",
+    "ipywidgets>=7.6",
+    "matplotlib>=3.8",
+    "numpy>=2.0",
+    "scipy>=1.11",
     # econ-ark 0.17.2 imports sympy without declaring it, so a fresh install of the book's
     # package (Colab, Binder, a downloaded notebook) failed at `import HARK...`. Drop this once
     # an econ-ark release declares it.
@@ -42,3 +44,19 @@ build-backend = "uv_build"
 dev = [
     "nbstripout>=0.9.1",
 ]
+# The tools that build the book, and the minimums its own environment keeps.
+book = [
+    "ipykernel>=7.3.0",
+    "ipywidgets>=8.1.8",
+    "jupyter-server>=2.21.0",
+    "jupyterlab>=4.5.2",
+    "jupytext>=1.18.1",
+    "matplotlib>=3.11.1",
+    "mystmd>=1.10.1",
+    "numpy>=2.3.5",
+    "pyyaml>=6.0.3",
+    "scipy>=1.17.0",
+]
+
+[tool.uv]
+default-groups = ["dev", "book"]
