@@ -3,10 +3,10 @@
 
 {cite:t}`merton:restat` and {cite:t}`samuelson:portfolio` study optimal portfolio allocation for a consumer with Constant Relative Risk Aversion utility {math}`\uFunc(\cRat) = (1-\CRRA)^{-1}\cRat^{1-\CRRA}` who can choose among many risky investment options.
 
-Using their framework, here we study a consumer who has wealth {math}`\aRat_{t}` at the end of period {math}`t`, and is deciding how much to invest in two risky assets with lognormally distributed return factors {math}`\Risky_{t+1}=(\Risky_{1,t+1}, \Risky_{2,t+1})'`. As in [Portfolio Choice with CRRA Utility](#sec:Portfolio-CRRA), {math}`\risky_{i} \equiv \log \Ex_{t}[\Risky_{i,t+1}]` is the log of asset {math}`i`'s expected return factor, so the log returns are distributed {math}`\log \Risky_{t+1} = \risky_{t+1}=(\risky_{1,t+1}, \risky_{2,t+1})' \sim \left ( \mathcal{N}(\risky_1-\sigma^{2}_{1}/2,\sigma^{2}_{1}), \mathcal{N}(\risky_2-\sigma^{2}_{2}/2,\sigma^{2}_{2}) \right)'`, with covariance matrix
+Using their framework, here we study a consumer who has wealth {math}`\aRat_{t}` at the end of period {math}`t`, and is deciding how much to invest in two risky assets with lognormally distributed return factors {math}`\Risky_{t+1}=(\Risky_{1,t+1}, \Risky_{2,t+1})'`. As in [Portfolio Choice with CRRA Utility](#sec:Portfolio-CRRA), {math}`\risky_{i} \equiv \log \Ex_{t}[\Risky_{i,t+1}]` is the log of asset {math}`i`'s expected return factor, so the log returns are jointly normally distributed, {math}`\log \Risky_{t+1} = \risky_{t+1}=(\risky_{1,t+1}, \risky_{2,t+1})' \sim \mathcal{N}(\mu,\Sigma)`, with means {math}`\mu=(\risky_1-\sigma^{2}_{1}/2, \risky_2-\sigma^{2}_{2}/2)'` and covariance matrix
 
 ```{math}
-\left(\begin{array}{cc}\sigma_1^2 & \sigma_{12} \\ \sigma_{12}& \sigma_2^2\end{array}\right).
+\Sigma=\left(\begin{array}{cc}\sigma_1^2 & \sigma_{12} \\ \sigma_{12}& \sigma_2^2\end{array}\right).
 ```
 
 If the period-{math}`t` consumer invests proportion {math}`\riskyshare_i` of {math}`\aRat_{t}` in risky asset {math}`i`, {math}`i=1,2` (so that {math}`\riskyshare_{1}=(1-\riskyshare_{2})` and vice-versa), spending all available resources in the last period of life[^samuelson] {math}`t+1` will yield:
@@ -53,7 +53,7 @@ Our foregoing assumptions imply that
    \sim \mathcal{N}( (1-\CRRA)(\riskyshare_1(\risky_1-\sigma_1^2/2)+\riskyshare_2 (\risky_2-\sigma_2^2/2)),      (1-\CRRA)^2 (   \riskyshare_1^2\sigma_1^2+\riskyshare_2^2\sigma_2^2+2\riskyshare_1\riskyshare_2\sigma_{12}))
 ```
 
-(using [NormTimes](#fact:normtimes) and [SumNormsIsNorm](#fact:sumnormsisnorm)). With a couple of extra lines of derivation we can show that the log of the expectation in {eq}`eq:PortMulti-exputil` is
+(using [NormTimes](#fact:normtimes) and [SumJointNormsIsNorm](#fact:sumjointnormsisnorm)). With a couple of extra lines of derivation we can show that the log of the expectation in {eq}`eq:PortMulti-exputil` is
 
 ```{math}
 :label: eq:PortMulti-Ex
