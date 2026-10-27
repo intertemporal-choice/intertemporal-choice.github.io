@@ -80,10 +80,13 @@ def build(output: Path) -> None:
         contents = Path(tmp) / "contents"
         contents.mkdir()
         stage(contents)
+        # Build in the temporary folder, so the build's own cache (.jupyterlite.doit.db) stays out
+        # of the repository.
+        shutil.copy2(CONFIG / "jupyter-lite.json", tmp)
         subprocess.run(
             ["jupyter", "lite", "build", "--contents", str(contents), "--output-dir", str(output.resolve()),
              "--no-sourcemaps"],
-            cwd=CONFIG, check=True,
+            cwd=tmp, check=True,
         )
     log.info("JupyterLite site with %d notebooks in %s", len(NOTEBOOKS), output)
 
