@@ -38,7 +38,7 @@ def sliders(share_approx, share_exact, rho=np.linspace(1.0, 5.0, 81)):
         exact = np.array([share_exact(x, phi, sigma) for x in rho])
         fig, (left, right) = plt.subplots(1, 2, figsize=(10.0, 4.0))
         left.plot(rho, approx, color="C0", label="approximation")
-        left.plot(rho, exact, color="C1", linestyle="--", label="exact, at most one")
+        left.plot(rho, exact, color="C1", linestyle="--", label="exact")
         left.axhline(1, color="0.6", linewidth=0.6)
         left.set_ylim(0, max(1.1, min(float(approx.max()) * 1.05, 3.0)))
         left.set_xlim(rho[0], rho[-1])
