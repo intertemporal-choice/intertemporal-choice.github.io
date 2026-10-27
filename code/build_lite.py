@@ -22,9 +22,11 @@ it, sees the economics straight away:
     JupyterLite does not have; otherwise it asks the reader to choose a kernel before anything runs.
 
 Each version of what is published keeps the readers' copies in a store of its own (see
-storage_name), so an update reaches a reader who has run a notebook before.
+storage_name), so an update reaches a reader who has run a notebook before. And every page asks the
+server, each time it starts, whether the site's settings and files have changed (see REVALIDATE),
+so an update reaches a reader as soon as it is published, not up to ten minutes later.
 
-`--self-test` checks those changes against a synthetic notebook, and the store's name.
+`--self-test` checks those changes against a synthetic notebook, the store's name and the pages.
 
 Usage: python code/build_lite.py OUTPUT_DIR   (CI: _build/html/lite, after the MyST build)
        python code/build_lite.py --self-test
@@ -56,6 +58,19 @@ BROWSER_KERNEL = {"name": "python", "display_name": "Python (Pyodide)", "languag
 RUN_FIRST = "**First, choose Run \u2192 Run All Cells in the menu above.** The sliders appear below the figures."
 FRONTMATTER = re.compile(r"\A\s*---\n(.*?)\n---\s*\Z", re.S)
 TITLE = re.compile(r'^title:\s*"?(.*?)"?\s*$', re.M)
+# GitHub Pages tells browsers to keep every file for ten minutes (max-age=600), and JupyterLite reads
+# its settings and the notebooks with fetch(), which takes the browser's copy while it is fresh, even
+# on a hard reload. So for ten minutes after a deploy a reader could get the old settings and the old
+# notebook (2026-10-27, 08:31-08:41, in Chris's Chrome). This script, first in each page's head, makes
+# the page's fetches ask the server each time; an unchanged file costs a "304 Not Modified".
+REVALIDATE_MARK = "<!-- build_lite: revalidate -->"
+REVALIDATE = REVALIDATE_MARK + """
+    <script>
+      (() => {
+        const fetch = window.fetch.bind(window);
+        window.fetch = (input, init = {}) => fetch(input, init.cache ? init : { ...init, cache: "no-cache" });
+      })();
+    </script>"""
 
 
 def text(cell: dict) -> str:
@@ -117,7 +132,22 @@ def build(output: Path) -> None:
              "--no-sourcemaps"],
             cwd=tmp, check=True,
         )
-    log.info("JupyterLite site with %d notebooks in %s", len(NOTEBOOKS), output)
+    pages = revalidate(output)
+    if REVALIDATE_MARK not in (output / "notebooks" / "index.html").read_text():
+        raise SystemExit("build_lite: the notebook page does not ask the server for fresh files")
+    log.info("JupyterLite site with %d notebooks in %s; %d pages ask for fresh files", len(NOTEBOOKS), output, pages)
+
+
+def revalidate(output: Path) -> int:
+    """Put REVALIDATE first in the head of every page of the built site; returns how many pages."""
+    pages = 0
+    for page in sorted(output.rglob("index.html")):
+        text = page.read_text()
+        if REVALIDATE_MARK in text or "<head>" not in text:
+            continue
+        page.write_text(text.replace("<head>", "<head>\n    " + REVALIDATE, 1))
+        pages += 1
+    return pages
 
 
 def self_test() -> bool:
@@ -157,6 +187,21 @@ def self_test() -> bool:
         failures.append("the store's name differs for the same files")
     if changed == first:
         failures.append("the store's name did not change when the package did")
+    with tempfile.TemporaryDirectory() as tmp:
+        site = Path(tmp)
+        (site / "notebooks").mkdir()
+        page = "<html>\n<head>\n    <title>t</title>\n    <script>start()</script>\n</head>\n</html>\n"
+        (site / "notebooks" / "index.html").write_text(page)
+        (site / "fragment").mkdir()
+        (site / "fragment" / "index.html").write_text("<p>no head</p>\n")
+        first, again = revalidate(site), revalidate(site)
+        patched = (site / "notebooks" / "index.html").read_text()
+        if (first, again) != (1, 0) or patched.count(REVALIDATE_MARK) != 1:
+            failures.append(f"revalidate patched {first} pages, then {again}; the page has the script {patched.count(REVALIDATE_MARK)} times")
+        if patched.index(REVALIDATE_MARK) > patched.index("start()"):
+            failures.append("revalidate's script does not come before the page's own")
+        if (site / "fragment" / "index.html").read_text() != "<p>no head</p>\n":
+            failures.append("revalidate changed a page without a head")
     missing = [rel for rel in NOTEBOOKS if not (ROOT / rel).is_file()]
     if missing:
         failures.append(f"listed notebooks that do not exist: {missing}")
