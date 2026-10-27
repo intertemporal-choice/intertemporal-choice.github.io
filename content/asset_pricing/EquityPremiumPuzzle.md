@@ -12,7 +12,7 @@ m_{t+1} & = (m_{t}-c_{t})\Rport_{t+1} + y_{t+1} \\
 \end{aligned}
 ```
 
-where {math}`\Rfree` denotes the return on a perfectly riskless asset and {math}`\Risky_{t+1}` denotes the return on equities (the risky asset) held between periods {math}`t` and {math}`t+1`, {math}`\riskyshare_{t}` is the share of end-of-period savings invested in the risky asset, {math}`\Rport_{t+1}` is the portfolio-weighted rate of return, and {math}`y_{t+1}` is noncapital income in period {math}`t+1`.
+where {math}`\Rfree` denotes the return factor on a perfectly riskless asset and {math}`\Risky_{t+1}` denotes the return factor on equities (the risky asset) held between periods {math}`t` and {math}`t+1`, {math}`\riskyshare_{t}` is the share of end-of-period savings invested in the risky asset, {math}`\Rport_{t+1}` is the portfolio-weighted return factor, and {math}`y_{t+1}` is noncapital income in period {math}`t+1`.
 
 As usual, the objective can be rewritten in recursive form:
 
@@ -66,26 +66,16 @@ Now assume CRRA utility, {math}`\uFunc(c) = c^{1-\CRRA}/(1-\CRRA)` and divide bo
 \Ex_{t}[(c_{t+1}/c_{t})^{-\CRRA}(\Risky_{t+1}-\Rfree)] = 0
 ```
 
-Now recall the following two facts:
-
-> **Fact 1:** If {math}`\Delta c_{t+1}/c_{t}` is small, {math}`c_{t+1}/c_{t} \approx 1+ \Delta \log c_{t+1}`.
->
-> **Fact 2:** If {math}`z` is small, {math}`(1+z)^{\lambda} \approx 1 + \lambda z`.
-
-Using these two facts, equation {eq}`eq:EPP-gameulernew` can be approximated by
+If consumption growth is small, {math}`c_{t+1}/c_{t} \approx 1+ \Delta \log c_{t+1}` ([ExpEps](#fact:expeps)), and if {math}`z` is small, {math}`(1+z)^{\lambda} \approx 1 + \lambda z` ([TaylorOne](#fact:taylorone)). With these, equation {eq}`eq:EPP-gameulernew` can be approximated by
 
 ```{math}
 \Ex_{t}[(1-\CRRA \Delta \log {c}_{t+1})(\Risky_{t+1}-\Rfree)] \approx 0
 ```
 
-Using one more fact,
-
-> **Fact 3:** {math}`\Ex [xy] = \Ex [x]\Ex [y] + \text{cov}(x,y)`
-
-we get
+and by the definition of covariance, {math}`\Ex [xy] = \Ex [x]\Ex [y] + \cov(x,y)`, we get
 
 ```{math}
-(1-\CRRA \Ex_{t}[\Delta \log {c}_{t+1}])(\Rfree - \Ex_{t}[\Risky_{t+1}])+\text{cov}_{t}(-\CRRA \Delta \log {c}_{t+1},-\Risky_{t+1}) \approx 0
+(1-\CRRA \Ex_{t}[\Delta \log {c}_{t+1}])(\Rfree - \Ex_{t}[\Risky_{t+1}])+\cov_{t}(-\CRRA \Delta \log {c}_{t+1},-\Risky_{t+1}) \approx 0
 ```
 
 or
@@ -94,18 +84,18 @@ or
 :label: eq:EPP-eqprem
 
 \begin{aligned}
-\Ex_{t}[\Risky_{t+1}]-\Rfree & \approx \frac{\CRRA \text{cov}_{t}(\Delta \log {c}_{t+1},\Risky_{t+1})}{1-\CRRA \Ex_{t}[ \Delta \log {c}_{t+1}]} \\
-& \approx \CRRA \text{cov}_{t}(\Delta \log {c}_{t+1},\Risky_{t+1})
+\Ex_{t}[\Risky_{t+1}]-\Rfree & \approx \frac{\CRRA \cov_{t}(\Delta \log {c}_{t+1},\Risky_{t+1})}{1-\CRRA \Ex_{t}[ \Delta \log {c}_{t+1}]} \\
+& \approx \CRRA \cov_{t}(\Delta \log {c}_{t+1},\Risky_{t+1})
 \end{aligned}
 ```
 
-where the last approximation holds because {math}`\Ex_{t}[\Delta \log {c}_{t+1}]` is small.
+where the last approximation holds when {math}`\CRRA\Ex_{t}[\Delta \log {c}_{t+1}]` is small.
 
 ## The Equity Premium Puzzle
 
-Because this expression must hold at all {math}`t`, we can check it empirically by calculating empirical estimates of the two components and assuming that the sample averages correspond to the representative agent's expectations. That is, if we have data for periods {math}`1 \ldots n`, we assume that the unconditional expectations correspond to the sample means, {math}`\Ex [\Risky] = (1/n) \sum_{s=1}^{n} \Risky_{s}`; {math}`\Ex [\Delta \log c] = (1/n) \sum_{s=1}^{n} \Delta \log c_{s}`; and {math}`\text{cov}(\Delta \log c,\Risky) = (1/n) \sum_{s=1}^{n} (\Delta \log c_{s} - \Ex [\Delta \log c])(\Risky_{s}-\Ex [\Risky])`.
+Because this expression must hold at all {math}`t`, we can check it empirically by calculating empirical estimates of the two components and assuming that the sample averages correspond to the representative agent's expectations. That is, if we have data for periods {math}`1 \ldots n`, we assume that the unconditional expectations correspond to the sample means, {math}`\Ex [\Risky] = (1/n) \sum_{s=1}^{n} \Risky_{s}`; {math}`\Ex [\Delta \log c] = (1/n) \sum_{s=1}^{n} \Delta \log c_{s}`; and {math}`\cov(\Delta \log c,\Risky) = (1/n) \sum_{s=1}^{n} (\Delta \log c_{s} - \Ex [\Delta \log c])(\Risky_{s}-\Ex [\Risky])`.
 
-The equity premium puzzle is essentially that {math}`\text{cov}(\Delta \log c,\Risky)` is very small (about 0.004) but {math}`\Ex [\Risky]-\Rfree` is about 0.08 (stocks have earned real returns of about 8 percent more than riskless assets over the historical period), which means that the only way equation {eq}`eq:EPP-eqprem` can hold is if {math}`\CRRA` is implausibly large (these values imply a value of {math}`\CRRA=20`).
+The equity premium puzzle is essentially that {math}`\cov(\Delta \log c,\Risky)` is very small (about 0.004) but {math}`\Ex [\Risky]-\Rfree` is about 0.08 (stocks have earned real returns of about 8 percent more than riskless assets over the historical period), which means that the only way equation {eq}`eq:EPP-eqprem` can hold is if {math}`\CRRA` is implausibly large (these values imply {math}`\CRRA=20`; keeping the denominator of {eq}`eq:EPP-eqprem`, with consumption growth of 1.5 percent, lowers that only to about 15).
 
 How do we know what plausible values of {math}`\CRRA` are? Consider the following. You must choose between a gamble in which you consume \$50,000 for the rest of your life with probability 0.5 and \$100,000 with probability 0.5, or consuming some amount {math}`X` with certainty. The coefficient of relative risk aversion determines the {math}`X` which would make you indifferent between consuming X or being exposed to the gamble. For example, if {math}`\CRRA = 0`, then you have no risk aversion at all and you will be indifferent between \$75,000 with certainty and the 50/50 gamble with expected value of \$75,000. Here are the values of X associated with different values of {math}`\CRRA` (table taken from {cite:t}`mankiw&zeldes:stockholders`).
 
@@ -156,6 +146,6 @@ Using the same "facts" and approximations as above, we get the standard approxim
 \Delta \log c_{t+1} \approx (1/\CRRA) (\rfree - \timeRate)
 ```
 
-The "riskfree rate puzzle" is that average consumption growth per capita has been about 1.5 percent (in the US in the postwar period) while real riskfree interest rates have been at most 1 percent. Even if we assume a time preference rate of {math}`\timeRate=0` (no impatience at all, e.g. {math}`\Discount=1`), the only way this equation can hold is if {math}`\CRRA` is a very small number (maybe even less than one). Of course, this is precisely the opposite of the conclusion of the equity premium puzzle, which implies the {math}`\CRRA` must be very large.
+The "riskfree rate puzzle" is that average consumption growth per capita has been about 1.5 percent (in the US in the postwar period) while real riskfree interest rates have been at most 1 percent. Even if we assume a time preference rate of {math}`\timeRate=0` (no impatience at all, i.e. {math}`\Discount=1`), the only way this equation can hold is if {math}`\CRRA` is a very small number: with a riskless rate of at most 1 percent and growth of 1.5 percent, {math}`\CRRA \leq 2/3`. Of course, this is precisely the opposite of the conclusion of the equity premium puzzle, which implies the {math}`\CRRA` must be very large.
 
 The riskfree rate puzzle might in principle be explicable by overlapping generations, though in practice it is hard to make that work well. A precautionary saving motive also cuts against the puzzle, by adding a variance term to consumption growth.

@@ -3,7 +3,7 @@
 
 {cite:t}`merton:restat` and {cite:t}`samuelson:portfolio` study optimal portfolio allocation for a consumer with Constant Relative Risk Aversion utility {math}`\uFunc(\cRat) = (1-\CRRA)^{-1}\cRat^{1-\CRRA}` who can choose among many risky investment options.
 
-Using their framework, here we study a consumer who has wealth {math}`\aRat_{t}` at the end of period {math}`t`, and is deciding how much to invest in two risky assets with lognormally distributed return factors {math}`\Risky_{t+1}=(\Risky_{1,t+1}, \Risky_{2,t+1})'`, {math}`\log \Risky_{t+1} = \risky_{t+1}=(\risky_{1,t+1}, \risky_{2,t+1})' \sim \left ( \mathcal{N}(\risky_1,\sigma^{2}_{1}), \mathcal{N}(\risky_2,\sigma^{2}_{2}) \right)'`, with covariance matrix
+Using their framework, here we study a consumer who has wealth {math}`\aRat_{t}` at the end of period {math}`t`, and is deciding how much to invest in two risky assets with lognormally distributed return factors {math}`\Risky_{t+1}=(\Risky_{1,t+1}, \Risky_{2,t+1})'`. As in [Portfolio Choice with CRRA Utility](#sec:Portfolio-CRRA), {math}`\risky_{i} \equiv \log \Ex_{t}[\Risky_{i,t+1}]` is the log of asset {math}`i`'s expected return factor, so the log returns are distributed {math}`\log \Risky_{t+1} = \risky_{t+1}=(\risky_{1,t+1}, \risky_{2,t+1})' \sim \left ( \mathcal{N}(\risky_1-\sigma^{2}_{1}/2,\sigma^{2}_{1}), \mathcal{N}(\risky_2-\sigma^{2}_{2}/2,\sigma^{2}_{2}) \right)'`, with covariance matrix
 
 ```{math}
 \left(\begin{array}{cc}\sigma_1^2 & \sigma_{12} \\ \sigma_{12}& \sigma_2^2\end{array}\right).
@@ -21,7 +21,7 @@ If the period-{math}`t` consumer invests proportion {math}`\riskyshare_i` of {ma
 
 where {math}`\Rport_{t+1}` is the portfolio-weighted return factor.
 
-{cite:t}`cvAppendix` point out that a good approximation to the portfolio rate of return is obtained by
+{cite:t}`cvAppendix` point out that a good approximation to the log of the portfolio's return factor is obtained by
 
 ```{math}
 \rport_{t+1} = \risky_{1,t+1}+\riskyshare_{2} (\risky_{2,t+1}-\risky_{1,t+1})+ \riskyshare_2 (1-\riskyshare_2) \eta/2
@@ -50,21 +50,21 @@ Our foregoing assumptions imply that
 
 ```{math}
 (1-\CRRA) (\riskyshare_1 \risky_{1,t+1}+\riskyshare_2 \risky_{2,t+1})
-   \sim \mathcal{N}( (1-\CRRA)(\riskyshare_1\risky_1+\riskyshare_2 \risky_2),      (1-\CRRA)^2 (   \riskyshare_1^2\sigma_1^2+\riskyshare_2^2\sigma_2^2+2\riskyshare_1\riskyshare_2\sigma_{12}))
+   \sim \mathcal{N}( (1-\CRRA)(\riskyshare_1(\risky_1-\sigma_1^2/2)+\riskyshare_2 (\risky_2-\sigma_2^2/2)),      (1-\CRRA)^2 (   \riskyshare_1^2\sigma_1^2+\riskyshare_2^2\sigma_2^2+2\riskyshare_1\riskyshare_2\sigma_{12}))
 ```
 
-(using [LogELogNormTimes](#fact:logelognormtimes)). With a couple of extra lines of derivation we can show that the log of the expectation in {eq}`eq:PortMulti-exputil` is
+(using [NormTimes](#fact:normtimes) and [SumNormsIsNorm](#fact:sumnormsisnorm)). With a couple of extra lines of derivation we can show that the log of the expectation in {eq}`eq:PortMulti-exputil` is
 
 ```{math}
 :label: eq:PortMulti-Ex
 
-  \log \Ex_{t}\left[e^{(\risky_{1,t+1}+\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1}))  (1-\CRRA)}\right]  =  {(1-\CRRA)(\riskyshare_1 \risky_1+\riskyshare_2 \risky_2) + (1-\CRRA)^2 (\riskyshare_1^2\sigma_1^2+\riskyshare_2^2\sigma_2^2+2\riskyshare_1\riskyshare_2\sigma_{12})/2}
+  \log \Ex_{t}\left[e^{(\risky_{1,t+1}+\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1}))  (1-\CRRA)}\right]  =  {(1-\CRRA)(\riskyshare_1 (\risky_1-\sigma_1^2/2)+\riskyshare_2 (\risky_2-\sigma_2^2/2)) + (1-\CRRA)^2 (\riskyshare_1^2\sigma_1^2+\riskyshare_2^2\sigma_2^2+2\riskyshare_1\riskyshare_2\sigma_{12})/2}
 ```
 
 Substituting from {eq}`eq:PortMulti-Ex` for the log of the expectation in {eq}`eq:PortMulti-exputil`, the log of the "excess return utility factor" in {eq}`eq:PortMulti-exputil` is
 
 ```{math}
-  (1-\CRRA)\riskyshare_2(1-\riskyshare_2)\eta/2+(1-\CRRA) (\risky_1+\riskyshare_2(\risky_2-\risky_1))+(\CRRA-1)^2 (\sigma_1^2+\riskyshare_2^2 \eta+2\riskyshare_2(\sigma_{12}-\sigma_1^2))/2
+  (1-\CRRA)\riskyshare_2(1-\riskyshare_2)\eta/2+(1-\CRRA) (\risky_1-\sigma_1^2/2+\riskyshare_2(\risky_2-\risky_1+(\sigma_1^2-\sigma_2^2)/2))+(\CRRA-1)^2 (\sigma_1^2+\riskyshare_2^2 \eta+2\riskyshare_2(\sigma_{12}-\sigma_1^2))/2
 .
 ```
 
@@ -74,29 +74,25 @@ The {math}`\riskyshare` that minimizes this log will also minimize the level; th
 :label: eq:PortMulti-riskyshareMS
 
 \begin{aligned}
-         (1-2\riskyshare_2)\eta/2+ \risky_2-\risky_1+(1-\CRRA) (\riskyshare_2 \eta+(\sigma_{12}-\sigma_1^2)) & =  0 \\
-         \quad(\risky_2-\risky_1+\frac{\eta}{2})+(1-\CRRA) (\sigma_{12}-\sigma_1^2) & = \CRRA \eta \riskyshare_2.
+         (1-2\riskyshare_2)\eta/2+ \risky_2-\risky_1+(\sigma_1^2-\sigma_2^2)/2+(1-\CRRA) (\riskyshare_2 \eta+(\sigma_{12}-\sigma_1^2)) & =  0 \\
+         \risky_2-\risky_1+\CRRA(\sigma_1^2-\sigma_{12}) & = \CRRA \eta \riskyshare_2,
 \end{aligned}
 ```
 
-So
+since {math}`\eta/2+(\sigma_1^2-\sigma_2^2)/2 = \sigma_1^2-\sigma_{12}`. So
 
 ```{math}
-\riskyshare_2  =  \left(\frac{\risky_2-\risky_1+\eta/2+(1-\CRRA)(\sigma_{12}-\sigma_1^2)}{\CRRA\eta}\right)
+\riskyshare_2  =  \frac{\risky_2-\risky_1}{\CRRA\eta}+\frac{\sigma_1^2-\sigma_{12}}{\eta}.
 ```
 
-and note that if the first asset is riskfree so that {math}`\sigma_{1}=\sigma_{12}=0` then this reduces to
+The second term is asset 2's share in the portfolio of the two assets with the smallest variance; the first adds a speculative demand that rises with asset 2's expected return over asset 1's and falls with risk aversion and with the variance {math}`\eta` of the difference between their log returns.
+
+If the first asset is riskfree, so that {math}`\sigma_{1}=\sigma_{12}=0` and {math}`\eta=\sigma^{2}_{2}`, this reduces to
 
 ```{math}
 :label: eq:riskyshare2
 
-\riskyshare_2  =  \left(\frac{\risky_2-\risky_1+\sigma^{2}_{2}/2}{\CRRA\sigma^{2}_{2}}\right)
+\riskyshare_2  =  \left(\frac{\risky_2-\risky_1}{\CRRA\sigma^{2}_{2}}\right) = \left(\frac{\EpremLog}{\CRRA\sigma^{2}_{2}}\right),
 ```
 
-but the log of the expected return premium (in levels) on the risky over the safe asset in this case is {math}`\EpremLog \equiv \log(\Risky_{2}/\Risky_{1}) = \risky_{2}-\risky_{1}+\sigma^{2}_{2}/2` (recalling that we have assumed {math}`\sigma_{12}=\sigma^{2}_{1}=0`), so {eq}`eq:riskyshare2` becomes
-
-```{math}
-\riskyshare_2  =  \left(\frac{\EpremLog}{\CRRA\sigma^{2}_{2}}\right)
-```
-
-which corresponds to the solution obtained for the case of a single risky asset in the [CRRA portfolio choice](#sec:Portfolio-CRRA) section.
+where {math}`\EpremLog \equiv \log \EPrem = \risky_{2}-\risky_{1}` is the log of the expected excess return factor {math}`\EPrem \equiv \Risky_{2}/\Risky_{1}`. This is the solution for a single risky asset in [Portfolio Choice with CRRA Utility](#sec:Portfolio-CRRA).
