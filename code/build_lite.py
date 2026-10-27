@@ -4,8 +4,8 @@ JupyterLite runs Python in the browser (Pyodide), so a reader opens a notebook a
 with nothing installed and no server, e.g.
 https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Fisher2Period.ipynb
 
-Only notebooks whose packages Pyodide has can go here: numpy, matplotlib and ipywidgets are
-enough for those in NOTEBOOKS. HARK cannot run in a browser (it needs numba), so a notebook that
+Only notebooks whose packages Pyodide has can go here: numpy, scipy, matplotlib and ipywidgets
+are enough for those in NOTEBOOKS. HARK cannot run in a browser (it needs numba), so a notebook that
 uses it stays with Colab and Binder.
 
 Each notebook is published as the book has it, except that the reader, who is already running
@@ -13,10 +13,13 @@ it, sees the economics straight away:
 
   - the frontmatter cell, which MyST reads and Jupyter would show as a stray heading, becomes
     the title, followed by one line telling the reader to run all the cells;
-  - the cell with the links that open the notebook elsewhere is dropped;
+  - the cell with the links that open the notebook elsewhere is dropped, and so are cells tagged
+    `remove-cell`, such as the checks of a chapter's numbers, which the book's build runs;
   - the bootstrap cell, whose `%pip install` from GitHub Pyodide cannot do, is dropped. The book's
     package, which is pure Python, is copied beside the notebooks, and the site's configuration
-    (jupyter-lite.json) loads ipywidgets, which Pyodide lacks, when the page starts.
+    (jupyter-lite.json) loads ipywidgets, which Pyodide lacks, when the page starts;
+  - the kernelspec names JupyterLite's own kernel, `python`, instead of the book's `python3`, which
+    JupyterLite does not have; otherwise it asks the reader to choose a kernel before anything runs.
 
 `--self-test` checks those changes against a synthetic notebook.
 
@@ -42,7 +45,9 @@ CONFIG = ROOT / "code" / "jupyterlite"  # jupyter-lite.json: the site's name and
 PACKAGE = ROOT / "src" / "intertemporal_choice"
 NOTEBOOKS = [
     "content/consumption/Fisher2Period/Fisher2Period.ipynb",
+    "content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb",
 ]
+BROWSER_KERNEL = {"name": "python", "display_name": "Python (Pyodide)", "language": "python"}
 RUN_FIRST = "**First, choose Run \u2192 Run All Cells in the menu above.** The sliders appear at the end."
 FRONTMATTER = re.compile(r"\A\s*---\n(.*?)\n---\s*\Z", re.S)
 TITLE = re.compile(r'^title:\s*"?(.*?)"?\s*$', re.M)
@@ -62,11 +67,13 @@ def for_the_browser(nb: dict) -> dict:
     name = title.group(1).removeprefix("Figures: ") if title else ""
     links = lambda c: c.get("cell_type") == "markdown" and "colab.research.google.com" in text(c) and "mybinder.org" in text(c)
     bootstrap = lambda c: c.get("cell_type") == "code" and "import intertemporal_choice" in text(c) and "%pip install" in text(c)
-    kept = [c for c in cells[1:] if not links(c) and not bootstrap(c)]
+    removed = lambda c: "remove-cell" in (c.get("metadata") or {}).get("tags", [])  # checks the build runs
+    kept = [c for c in cells[1:] if not links(c) and not bootstrap(c) and not removed(c)]
     nb["cells"] = [
         {"cell_type": "markdown", "id": cells[0].get("id", "title"), "metadata": {}, "source": f"# {name}"},
         {"cell_type": "markdown", "id": "run-first", "metadata": {}, "source": RUN_FIRST},
     ] + kept
+    nb.setdefault("metadata", {})["kernelspec"] = dict(BROWSER_KERNEL)
     return nb
 
 
@@ -103,6 +110,8 @@ def self_test() -> bool:
         {"cell_type": "code", "id": "b", "metadata": {}, "outputs": [], "execution_count": None,
          "source": "try:\n    import intertemporal_choice\nexcept ImportError:\n    %pip install -q git+https://example"},
         {"cell_type": "code", "id": "c", "metadata": {}, "source": "x = 1", "outputs": [], "execution_count": None},
+        {"cell_type": "code", "id": "k", "metadata": {"tags": ["remove-cell"]}, "source": "assert True",
+         "outputs": [], "execution_count": None},
     ]}
     out = for_the_browser(json.loads(json.dumps(nb)))
     failures = []
@@ -111,6 +120,8 @@ def self_test() -> bool:
         failures.append(f"the notebook should open with its title and RUN_FIRST, not {sources[:2]!r}")
     if out["cells"][2:] != [nb["cells"][2], nb["cells"][4]]:
         failures.append("the links and bootstrap cells were not the only ones dropped")
+    if out.get("metadata", {}).get("kernelspec") != BROWSER_KERNEL:
+        failures.append("the browser's copy does not name JupyterLite's kernel")
     plain = {"cells": [{"cell_type": "markdown", "id": "a", "metadata": {}, "source": "# Already a title"}]}
     if for_the_browser(json.loads(json.dumps(plain))) != plain:
         failures.append("a notebook without frontmatter changed")
