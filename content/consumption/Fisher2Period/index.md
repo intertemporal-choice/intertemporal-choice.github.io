@@ -315,7 +315,7 @@ the inner float, so references print "Figure ??". -->
 :::{figure} figures/FisherFigure.png
 :name: fig:Fisher
 
-Fisher Figure Analysis
+The effects on {math}`\cNbr_{1}` of a rise in the interest factor from 1 to 2, at {math}`\DiscFac=0.96` and {math}`\CRRA=2`, with all income in the first period (top) and all in the second (bottom)
 :::
 
 {numref}`fig:Fisher` is drawn by this chapter's [figure notebook](Fisher2Period.ipynb), which also redraws it with sliders; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Fisher2Period.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Fisher2Period/Fisher2Period.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Fisher2Period/Fisher2Period.ipynb). Varying the interest factors, the two incomes and the preferences rotates the budget constraints and moves the optimal points, tracing the income, substitution, and human wealth effects decomposed above.
