@@ -24,18 +24,18 @@ import numpy as np
 
 from intertemporal_choice import slider_check
 
-YEARS = 30  # a generation
+YEARS = 36  # a generation: 2 x 36 = 72, so by the rule of 72 two percent a year doubles over one
 BEFORE = {"alpha": 1 / 3, "beta_year": 0.96, "growth_year": 0.01}  # the chapter's calibration
 READOUT = dict(facecolor="white", edgecolor="none", alpha=0.85)  # a readout stays legible over a line
 
 # The sliders, by panel: name -> (first value, lowest, highest, step, label, readout format). The
 # first values are the chapter's calibration, except the transition's, which raise patience. The
 # ranges are narrow enough that, on axes holding every combination, each first picture's steady
-# state is about 60 percent of the way across its frame (a 30-year generation compounds every
+# state is 55 to 65 percent of the way across its frame (a 36-year generation compounds every
 # annual parameter; Chris, 2026-10-27: the ranges were "too wide, with the result that the figures
 # often occupy too little of the available space"). The output panel keeps wide ranges, so that
-# the economy can become dynamically inefficient; its first picture's steady state, a twenty-fifth
-# of the golden rule's capital, then sits near the left edge.
+# the economy can become dynamically inefficient; its first picture's steady state, about a
+# twenty-fifth of the golden rule's capital, then sits near the left edge.
 DYNAMICS = {
     "alpha": (1 / 3, 0.31, 0.36, 0.01, "capital share α", ".2f"),
     "beta_year": (0.96, 0.957, 0.963, 0.001, "β per year", ".3f"),

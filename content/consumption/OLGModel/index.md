@@ -9,7 +9,7 @@ This chapter and its [notebook](OLGModel.ipynb) present a canonical overlapping 
 
 The economy has the following features:
 
-1. Two generations are alive at any point in time, the young (age 1) and old (age 2). A period is a generation, about 30 years, so annual rates compound: a discount factor of 0.96 a year is {math}`0.96^{30} \approx 0.29` a period.
+1. Two generations are alive at any point in time, the young (age 1) and old (age 2). A period is a generation, taken to be 36 years, so annual rates compound. Since {math}`2 \times 36 = 72`, the [rule of 72](#fact:ruleof72) does the compounding in your head: a rate of {math}`x` percent a year multiplies a quantity by about {math}`2^{x/2}` over a generation. Population growth of 1 percent a year makes each generation about {math}`\sqrt{2} \approx 1.41` times as large as the last (exactly {math}`1.01^{36} \approx 1.43`), and a discount factor of 0.96 a year, discounting at about 4 percent a year, is about {math}`2^{-2} = 1/4` a period (exactly {math}`0.96^{36} \approx 0.23`).
 
 2. The size of the *young* generation in period {math}`t` is given by {math}`\PopLev_{t}=\PopLev_{0}\PopGro^{t}` (note that {math}`\PopLev` denotes only the young population, not the entire population, and this formula assumes constant population growth since time 0).
 
@@ -104,7 +104,7 @@ Dynamics of the model can be analyzed using a simple figure relating the capital
 :::{figure} figures/OLGModelDynamics.png
 :name: fig:OLGModelDynamics
 
-Convergence of OLG Economy to Steady State, with a capital share of a third, a discount factor of 0.96 a year and population growth of 1 percent a year, a generation being 30 years. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=OLGModel.ipynb), which runs in your browser.
+Convergence of OLG Economy to Steady State, with a capital share of a third, a discount factor of 0.96 a year and population growth of 1 percent a year, a generation being 36 years. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=OLGModel.ipynb), which runs in your browser.
 :::
 
 The experiment traced out in the figure is as follows. We start the economy in period {math}`t=0` with capital per capita of {math}`\kLev_{0}`, which, from {eq}`eq:ktp1`, implies a certain value {math}`\kLev_{1}` for capital in period {math}`t+1=1`. Now think about period 1 becoming {math}`t` and period 2 becoming {math}`t+1`. To find the level of capital the model implies for period {math}`t+1=2`, we find the point on the 45 degree line that corresponds to {math}`\kLev_{1}`, then go vertically up from there to the curve, which gives {math}`\kLev_{t+1}=\kLev_{2}`. When the same set of gyrations is repeated the result is that the level of capital converges to the steady-state level {math}`\bar{\kLev}`.
@@ -231,7 +231,7 @@ Since {math}`\rfree = \fFunc^{\prime}(\bar{\kLev})`, the economy is dynamically 
 \bar{\rfree} = \frac{\kapShare\PopGro(1+\Discount)}{(1-\kapShare)\Discount}.
 ```
 
-With the calibration of {numref}`fig:OLGModelDynamics`, it is 4.7 percent a year, against population growth of 1 percent: the economy is dynamically efficient by a wide margin, with capital only 4 percent of the golden rule's. Inefficiency takes very patient households, a low capital share and fast population growth together, and {cite:t}`amszDynamicEfficiency` find that actual economies are dynamically efficient. Dynamic inefficiency is the condition under which pay-as-you-go [Social Security](#sec:SocSecAndKAccum) can make every generation better off, and under which [bubbles](#sec:Bubbles) can last.
+With the calibration of {numref}`fig:OLGModelDynamics`, it is 4.5 percent a year, against population growth of 1 percent. Over a generation, by the rule of 72, that is an interest factor of about {math}`2^{4.5/2} \approx 4.8` (exactly 4.83), against a population growth factor of about 1.41: the economy is dynamically efficient by a wide margin, with capital only 4 percent of the golden rule's. Inefficiency takes very patient households, a low capital share and fast population growth together, and {cite:t}`amszDynamicEfficiency` find that actual economies are dynamically efficient. Dynamic inefficiency is the condition under which pay-as-you-go [Social Security](#sec:SocSecAndKAccum) can make every generation better off, and under which [bubbles](#sec:Bubbles) can last.
 
 Note further that there is actually a {math}`\bar{\kLev}` so large that consumption would have to be zero:
 
