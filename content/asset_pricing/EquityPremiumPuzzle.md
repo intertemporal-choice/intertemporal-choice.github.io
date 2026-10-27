@@ -33,7 +33,7 @@ How do we know what plausible values of {math}`\CRRA` are? Consider the followin
 * - 3
   - 63,246
 * - 5
-  - 58,565
+  - 58,566
 * - 10
   - 53,991
 * - 20
@@ -44,7 +44,7 @@ How do we know what plausible values of {math}`\CRRA` are? Consider the followin
   - 50,000
 :::
 
-{math}`\CRRA = 20` means preferring \$51,858 for sure to a fifty-fifty chance at \$50,000 or \$100,000, far more risk aversion than people show.
+{math}`\CRRA = 20` means being indifferent between \$51,858 for sure and a fifty-fifty chance at \$50,000 or \$100,000, far more risk aversion than people show.
 
 ## The Riskfree Rate Puzzle
 
@@ -68,7 +68,7 @@ and note that from {eq}`eq:CCAPM-gameuler` we know that {math}`\Ex_{t}[\Discount
 Using the same approximations ([ExpEps](#fact:expeps) and [TaylorOne](#fact:taylorone)), we get the standard approximation to the Euler equation,
 
 ```{math}
-\Delta \log c_{t+1} \approx (1/\CRRA) (\rfree - \timeRate)
+\Ex_{t}[\Delta \log c_{t+1}] \approx (1/\CRRA) (\rfree - \timeRate)
 ```
 
 The "riskfree rate puzzle" is that average consumption growth per capita has been about 1.5 percent (in the US in the postwar period) while real riskfree interest rates have been at most 1 percent. Even if we assume a time preference rate of {math}`\timeRate=0` (no impatience at all, i.e. {math}`\Discount=1`), the only way this equation can hold is if {math}`\CRRA` is a very small number: with a riskless rate of at most 1 percent and growth of 1.5 percent, {math}`\CRRA \leq 2/3`. Of course, this is precisely the opposite of the conclusion of the equity premium puzzle, which implies the {math}`\CRRA` must be very large.
