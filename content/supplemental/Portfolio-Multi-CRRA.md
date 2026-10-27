@@ -1,7 +1,7 @@
 (sec:Portfolio-Multi-CRRA)=
 # CRRA Portfolio Choice with Two Risky Assets
 
-{cite:t}`merton:restat` and {cite:t}`samuelson:portfolio` study optimal portfolio allocation for a consumer with Constant Relative Risk Aversion utility {math}`\uFunc(\cRat) = (1-\CRRA)^{-1}\cRat^{1-\CRRA}` who can choose among many risky investment options.
+{cite:t}`merton:restat` and {cite:t}`samuelson:portfolio` study optimal portfolio allocation for a consumer with Constant Relative Risk Aversion utility {math}`\uFunc(\cRat) = (1-\CRRA)^{-1}\cRat^{1-\CRRA}` who can choose between a safe and a risky investment option; Merton also derives the optimality conditions for a choice among many risky investment options.
 
 Using their framework, here we study a consumer who has wealth {math}`\aRat_{t}` at the end of period {math}`t`, and is deciding how much to invest in two risky assets with lognormally distributed return factors {math}`\Risky_{t+1}=(\Risky_{1,t+1}, \Risky_{2,t+1})'`. As in [Portfolio Choice with CRRA Utility](#sec:Portfolio-CRRA), {math}`\risky_{i} \equiv \log \Ex_{t}[\Risky_{i,t+1}]` is the log of asset {math}`i`'s expected return factor, so the log returns are jointly normally distributed, {math}`\log \Risky_{t+1} = \risky_{t+1}=(\risky_{1,t+1}, \risky_{2,t+1})' \sim \mathcal{N}(\mu,\Sigma)`, with means {math}`\mu=(\risky_1-\sigma^{2}_{1}/2, \risky_2-\sigma^{2}_{2}/2)'` and covariance matrix
 

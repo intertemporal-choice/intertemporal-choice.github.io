@@ -5,13 +5,17 @@
 
 [^fn-utility]: {math}`\uFunc(\cRat) = (1-\CRRA)^{-1}\cRat^{1-\CRRA}`.
 
-[^fn-multi-asset]: Both papers present the solution in the case with multiple risky assets; for the two-asset case, see [two risky assets](#sec:Portfolio-Multi-CRRA).
+[^fn-multi-asset]: Both papers present the solution in the case with a single risky asset. {cite:t}`merton:restat` also derives the optimality conditions for many risky assets, a case Merton solved explicitly in a 1971 paper in the *Journal of Economic Theory*. For two risky assets, see [CRRA Portfolio Choice with Two Risky Assets](#sec:Portfolio-Multi-CRRA).
 
 ```{math}
+:label: eq:PortCRRA-lognormalReturn
+
 \risky_{t+1} = \risky+\ShkMeanOneLog_{t+1}, \qquad \ShkMeanOneLog_{t+1} \sim \mathcal{N}(-\sigma^{2}_{\risky}/2,\sigma^{2}_{\risky}).
 ```
 
-The shock is mean-one in levels, {math}`\Ex_{t}[e^{\ShkMeanOneLog_{t+1}}]=1` (see [ELogNormMeanOne](#fact:elognormmeanone)), so {math}`\risky` is the log of the expected return factor, {math}`\Ex_{t}[\Risky_{t+1}]=e^{\risky}=\Risky` (upper-case variables like {math}`\Risky` without a subscript are time-invariant means), while the mean of the log return is {math}`\Ex_{t}[\risky_{t+1}]=\risky-\sigma^{2}_{\risky}/2`.
+The shock is mean-one in levels, {math}`\Ex_{t}[e^{\ShkMeanOneLog_{t+1}}]=1` (see [ELogNormMeanOne](#fact:elognormmeanone)), so {math}`\risky` is the log of the expected return factor, {math}`\Ex_{t}[\Risky_{t+1}]=e^{\risky}=\Risky` (upper-case variables like {math}`\Risky` without a subscript are time-invariant means), while the mean of the log return is {math}`\Ex_{t}[\risky_{t+1}]=\risky-\sigma^{2}_{\risky}/2`.[^fn-return-convention]
+
+[^fn-return-convention]: In this chapter, we use the word "return" always to mean the logarithm of the corresponding "factor"; and when not explicitly specified, we always take the expectation before taking the log; if we wanted to refer to {math}`\Ex_{t}[\risky_{t+1}]` we would call it the expected log return (to distinguish it from the expected return, {math}`\log \Ex_{t}[e^{\risky_{t+1}}]`).
 
 The alternative to the risky asset is a riskfree asset that earns return factor {math}`\Rfree=e^{\rfree}`. Importantly, the consumer is assumed to have no labor income and to face no risk except from the investment in the risky asset.[^fn-retired-investor][^fn-riskless-income]
 
@@ -64,7 +68,7 @@ whose mean is {math}`\EpremLog-\sigma^{2}_{\risky}/2`, where {math}`\EpremLog \e
 :label: eq:rportCV
 
 \begin{gathered}\begin{aligned}
-  \rport_{t+1} & =  \rfree+ \riskyshare \EpremLog_{t+1}+\riskyshare \sigma^{2}_{\risky}/2 - \riskyshare^{2}\sigma^{2}_{\risky}/2
+  \rport_{t+1} & \approx  \rfree+ \riskyshare \EpremLog_{t+1}+\riskyshare \sigma^{2}_{\risky}/2 - \riskyshare^{2}\sigma^{2}_{\risky}/2
 \end{aligned}\end{gathered}
 ```
 
@@ -109,7 +113,6 @@ and the {math}`\riskyshare` that minimizes the log will also minimize the level;
 \end{aligned}\end{gathered}
 ```
 
-(riskyshareMS)=
 with FOC
 
 ```{math}
@@ -123,7 +126,7 @@ with FOC
 
 Equation {eq}`eq:PortCRRA-riskyshareMS` says[^fn-cv-difference] that the consumer allocates a higher proportion of their net worth to the high-risk, high-return asset when
 
-[^fn-cv-difference]: This expression differs slightly from that derived by {cite:t}`cvAppendix`, because we adjust the mean logarithmic return of the risky investment for its variance in order to keep the mean return factor constant for different values of the variance (cf. {eq}`eq:eprem`), which makes comparisons of alternative levels of risk more transparent.
+[^fn-cv-difference]: This expression differs slightly from that derived by {cite:t}`cvAppendix`, because we adjust the mean logarithmic return of the risky investment for its variance in order to keep the mean return factor constant for different values of the variance (cf. {eq}`eq:PortCRRA-lognormalReturn`), which makes comparisons of alternative levels of risk more transparent.
 
 1. the amount {math}`\EpremLog` by which the risky asset's return exceeds the riskless return is greater
 2. the consumer is less risk averse ({math}`\CRRA` is lower)
@@ -179,7 +182,7 @@ which is actually *smaller* when {math}`\sigma^{2}_{\risky}` is larger. The reas
 
 The Approximate Risky Portfolio Share {math}`\riskyshare` Declines as Relative Risk Aversion {math}`\CRRA` Increases
 
-Note: The approximation {math}`\riskyshare = \EpremLog/(\CRRA\Evarr)` with a premium of {math}`\EpremLog = 0.03` and {math}`\sigma_{\risky} = 0.2`, drawn by the [notebook](Portfolio-CRRA.ipynb).
+Note: The approximation {math}`\riskyshare = \EpremLog/(\CRRA\Evarr)` with a premium of {math}`\EpremLog = 0.03` and {math}`\sigma_{\risky} = 0.2`, drawn by the [notebook](Portfolio-CRRA.ipynb); run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Portfolio-CRRA.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb).
 :::
 
 :::{figure} figures/ShareApproxErr.png
@@ -228,6 +231,4 @@ which means that exponentiating then taking the expectation then taking the loga
 \end{aligned}\end{gathered}
 ```
 
-or, in words: The expected excess portfolio return is equal to the proportion invested in the risky asset times the expected excess return of the risky asset.[^fn-return-convention]
-
-[^fn-return-convention]: We use the word "return" always to mean the logarithm of the corresponding "factor"; and when not explicitly specified, we always take the expectation before taking the log; if we wanted to refer to {math}`\Ex_{t}[\rport_{t+1}]` we would call it the expected log portfolio return (to distinguish it from the expected portfolio return, {math}`\log \Ex_{t}[e^{\rport_{t+1}}]`).
+or, in words: The expected excess portfolio return is equal to the proportion invested in the risky asset times the expected excess return of the risky asset.
