@@ -66,10 +66,18 @@ def _corners(table):
     return [dict(zip(names, values)) for values in itertools.product(*(table[name][1:3] for name in names))]
 
 
-def _controls(widgets, table):
+def _look(widgets, labels):
+    """One label width for all of a panel's sliders, set by its longest label, and a track about 20 em
+    long beside it. A slider is 300 px wide in all unless told otherwise, so a long label left its
+    track a few pixels, or none."""
+    label = 0.55 * max(len(text) for text in labels) + 1  # em: a character is about half an em wide
+    return {"style": {"description_width": f"{label:.1f}em"}, "layout": widgets.Layout(width=f"{label + 25:.1f}em")}
+
+
+def _controls(widgets, table, look=None):
+    look = look or _look(widgets, [row[4] for row in table.values()])
     return {name: widgets.FloatSlider(value=value, min=low, max=high, step=step, description=label,
-                                      continuous_update=False, readout_format=fmt,
-                                      style={"description_width": "initial"})
+                                      continuous_update=False, readout_format=fmt, **look)
             for name, (value, low, high, step, label, fmt) in table.items()}
 
 
@@ -175,11 +183,12 @@ def sliders_dynamics(k_next, k_bar, table=DYNAMICS):
                 f"of the log gap to $\\bar{{k}}$", transform=ax.transAxes, va="top", fontsize=9, bbox=READOUT)
         plt.show()
 
-    controls = _controls(widgets, table)
+    start = "capital to start with, k₀"
+    look = _look(widgets, [row[4] for row in table.values()] + [start])
+    controls = _controls(widgets, table, look)
     # rounded down: a tick beyond the axis would make matplotlib widen it
     controls["k0"] = widgets.FloatSlider(value=round(kbar_first / 4, 3), min=0.002, max=np.floor(kmax * 1000) / 1000, step=0.001,
-                                         description="capital to start with, k₀", continuous_update=False,
-                                         readout_format=".3f", style={"description_width": "initial"})
+                                         description=start, continuous_update=False, readout_format=".3f", **look)
     widgets.interact(explore, **controls)
 
 
