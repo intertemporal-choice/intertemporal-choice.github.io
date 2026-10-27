@@ -59,10 +59,11 @@ serves at `/lite/`: a reader opens one and runs it with nothing installed, at
 `https://intertemporal-choice.github.io/lite/notebooks/index.html?path=<Chapter>.ipynb`. Only
 notebooks whose packages Pyodide has belong in its `NOTEBOOKS` list (numpy, matplotlib and
 ipywidgets are enough for those there); HARK cannot run in a browser. The browser's copy of a
-notebook differs from the book's in three ways: its frontmatter cell becomes its title, the
-book's pure-Python package is copied beside it, and its bootstrap cell installs ipywidgets
-from PyPI instead of the book's package from GitHub. The workflow step that runs it pins the
-JupyterLite tools; `code/jupyterlite/jupyter-lite.json` names the site.
+notebook opens on the economics: its frontmatter cell becomes its title, followed by one line
+telling the reader to run all the cells, and the launch-link and bootstrap cells are dropped.
+The book's pure-Python package is copied beside it, and `code/jupyterlite/jupyter-lite.json`,
+which names the site, has it load ipywidgets, which Pyodide lacks, when the page starts. The
+workflow step that runs it pins the JupyterLite tools.
 
 ## `mirror_check.py`
 

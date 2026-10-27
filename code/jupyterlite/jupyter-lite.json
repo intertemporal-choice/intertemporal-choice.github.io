@@ -1,6 +1,15 @@
 {
   "jupyter-lite-schema-version": 0,
   "jupyter-config-data": {
-    "appName": "Intertemporal Choice"
+    "appName": "Intertemporal Choice",
+    "litePluginSettings": {
+      "@jupyterlite/pyodide-kernel-extension:kernel": {
+        "loadPyodideOptions": {
+          "packages": [
+            "https://files.pythonhosted.org/packages/c3/55/298e9b3b864a198234997e87a1471c1b17d7f3546ace6d18fb5cf1ce24b2/ipywidgets-8.1.9-py3-none-any.whl"
+          ]
+        }
+      }
+    }
   }
 }
