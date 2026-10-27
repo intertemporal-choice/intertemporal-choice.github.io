@@ -17,6 +17,13 @@ env:
 # Read-only by default: the build job runs pull-request code. Only deploy writes to Pages.
 permissions:
   contents: read
+# Pushes to main run one at a time, and a newer push replaces one still waiting, so the last site deployed is
+# always main's newest commit. (With only the deploy job queued, builds ran side by side, and an older commit
+# whose build was slower deployed last, over the newer site.) Each pull-request run is its own group, so those
+# still run side by side.
+concurrency:
+  group: ${{ github.event_name == 'push' && 'pushes-to-main' || github.run_id }}
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
