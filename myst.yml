@@ -150,7 +150,7 @@ project:
           level: 1
         - file: content/consumption/ConsAndLaborSupply.md
           level: 1
-        - file: content/consumption/OLGModel.md
+        - file: content/consumption/OLGModel/index.md
           level: 1
         - file: content/consumption/GenAcctsAndGov.md
           level: 1

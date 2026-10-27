@@ -69,3 +69,5 @@ Thus the capital accumulation curve is shifted down (the figure simplifies by as
 
 Convergence of OLG Economy After Intro of Social Security
 :::
+
+The [Diamond OLG chapter's notebook](OLGModel/OLGModel.ipynb) traces the introduction of Social Security with sliders for the size of the contributions, the capital share and patience; run it in your browser, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=OLGModel.ipynb).

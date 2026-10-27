@@ -1,7 +1,7 @@
 (sec:OLGModel)=
 # The Diamond OLG Model
 
-This section and the associated Jupyter notebook, [DiamondOLG](https://econ-ark.org/materials/diamondolg?launch), present a canonical overlapping generations (OLG) model, like the one originally proposed by {cite:t}`diamond:olg`, building on {cite:t}`samuelsonOLG`.[^olg-references]
+This section and its [notebook](OLGModel.ipynb) present a canonical overlapping generations (OLG) model, like the one originally proposed by {cite:t}`diamond:olg`, building on {cite:t}`samuelsonOLG`.[^olg-references]
 
 [^olg-references]: For a remarkably clear statement of the questions addressed by OLG models, see {cite:t}`jeffersonOLG`. For a review of the influence of {cite:t}`samuelsonOLG`'s model, see {cite:t}`weilSamuelson`.
 
@@ -101,10 +101,10 @@ Then the steady-state will be the point where {math}`\kLev_{t+1}=\kLev_{t}=\bar{
 
 Dynamics of the model can be analyzed using a simple figure relating the capital stock per capita in period {math}`t+1` to that in period {math}`t`. The solid locus is a graph of equation {eq}`eq:ktp1`. We depict the 45 degree line because it indicates the set of "steady-state" points where {math}`\kLev_{t+1}=\kLev_{t}` and thus any intersection of the 45 degree line with the {math}`\kLev_{t+1}(\kLev_{t})` function indicates a steady-state of the model.
 
-:::{figure} /content/figures/OLGModel/OLGModelDynamics.png
+:::{figure} figures/OLGModelDynamics.png
 :name: fig:OLGModelDynamics
 
-Convergence of OLG Economy to Steady State
+Convergence of OLG Economy to Steady State, with a capital share of a third, a discount factor of 0.96 a year and population growth of 1 percent a year, a generation being 30 years
 :::
 
 The experiment traced out in the figure is as follows. We start the economy in period {math}`t=0` with capital per capita of {math}`\kLev_{0}`, which, from {eq}`eq:ktp1`, implies a certain value {math}`\kLev_{1}` for capital in period {math}`t+1=1`. Now think about period 1 becoming {math}`t` and period 2 becoming {math}`t+1`. To find the correct level of capital implied by the model in period {math}`t+2` we need to find the point on the 45 degree line that corresponds to {math}`\kLev_{1}`, then go vertically up from there to find {math}`\kLev_{t+1}=\kLev_{2}`. When the same set of gyrations is repeated the result is that the level of capital converges to the steady-state level {math}`\bar{\kLev}`.
@@ -233,8 +233,10 @@ Note further that there is actually a {math}`\bar{\kLev}` so large that consumpt
 
 These points are illustrated graphically in the remaining figure.
 
-:::{figure} /content/figures/OLGModel/fnkBoth.png
+:::{figure} figures/fnkBoth.png
 :name: fig:fnkBoth
 
 Gross and Net Per Capita Output as a Function of {math}`\kLev`
 :::
+
+Both figures are drawn by this chapter's [figure notebook](OLGModel.ipynb), which also redraws them with sliders for the capital share, patience and population growth, and adds the introduction of a pay-as-you-go [Social Security](#sec:SocSecAndKAccum) system; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=OLGModel.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/OLGModel/OLGModel.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/OLGModel/OLGModel.ipynb).
