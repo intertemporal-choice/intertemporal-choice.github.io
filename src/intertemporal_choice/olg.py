@@ -102,11 +102,19 @@ def _controls(widgets, table, look=None):
             for name, (value, low, high, step, label, fmt) in table.items()}
 
 
+def _status(widgets):
+    """The line for the "drawing" note. Its height is fixed, so the note coming and going does not
+    move the picture below it: empty, the line had no height, and each redraw pushed the picture
+    down a line for a tenth of a second (Chris, 2026-10-27: "it briefly redraws the figure in a
+    different position then jumps it to the final position")."""
+    return widgets.HTML(layout=widgets.Layout(height="1.5em"))
+
+
 def _panel(widgets, explore, controls):
     """Show the sliders, the note that appears while a picture takes long to draw, and the picture."""
     from IPython.display import display
 
-    status = widgets.HTML()
+    status = _status(widgets)
 
     def draw(**values):
         status.value = BUSY
@@ -486,6 +494,10 @@ def self_test() -> list[str]:
         points = (k_bar(c["alpha"], beta, Xi), k_golden(c["alpha"], Xi - 1), k_planner(c["alpha"], Xi, c["beth_year"] ** YEARS))
         if min(points) < left or max(points) > right:
             failures.append(f"olg: the output panel's axes miss {c}")
+    import ipywidgets as widgets
+
+    if not _status(widgets).layout.height:
+        failures.append("olg: the drawing note's line has no fixed height, so the picture would jump")
     failures += slider_check.check("olg dynamics", sliders_dynamics, k_next, k_bar)
     failures += slider_check.check("olg output", sliders_output, k_bar, k_golden, k_planner, interest_factor)
     failures += slider_check.check("olg transition", sliders_transition, k_next, k_bar, wage, interest_factor)
