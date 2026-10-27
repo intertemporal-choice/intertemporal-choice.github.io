@@ -21,13 +21,17 @@ it, sees the economics straight away:
   - the kernelspec names JupyterLite's own kernel, `python`, instead of the book's `python3`, which
     JupyterLite does not have; otherwise it asks the reader to choose a kernel before anything runs.
 
-`--self-test` checks those changes against a synthetic notebook.
+Each version of what is published keeps the readers' copies in a store of its own (see
+storage_name), so an update reaches a reader who has run a notebook before.
+
+`--self-test` checks those changes against a synthetic notebook, and the store's name.
 
 Usage: python code/build_lite.py OUTPUT_DIR   (CI: _build/html/lite, after the MyST build)
        python code/build_lite.py --self-test
 """
 
 import argparse
+import hashlib
 import json
 import logging
 import re
@@ -85,14 +89,29 @@ def stage(folder: Path) -> None:
     shutil.copytree(PACKAGE, folder / PACKAGE.name, ignore=shutil.ignore_patterns("__pycache__"))
 
 
+def storage_name(folder: Path) -> str:
+    """The name of the browser's store for the readers' copies of the notebooks, which changes with
+    what is published. JupyterLite saves a notebook a reader has run in the browser, and from then
+    on opens that copy instead of the site's. So a reader who had run one kept it after an update,
+    beside the new package: on 2026-10-27 the OLG notebook of the evening before failed with a
+    TypeError against the new olg.py. Under a new name each version opens as published, and a
+    reader's changes last as long as the version they were made in."""
+    digest = hashlib.sha256()
+    for path in sorted(p for p in folder.rglob("*") if p.is_file()):
+        digest.update(path.relative_to(folder).as_posix().encode() + b"\0" + path.read_bytes() + b"\0")
+    return f"JupyterLite Storage - Intertemporal Choice {digest.hexdigest()[:12]}"
+
+
 def build(output: Path) -> None:
     with tempfile.TemporaryDirectory() as tmp:
         contents = Path(tmp) / "contents"
         contents.mkdir()
         stage(contents)
+        config = json.loads((CONFIG / "jupyter-lite.json").read_text())
+        config["jupyter-config-data"]["contentsStorageName"] = storage_name(contents)
         # Build in the temporary folder, so the build's own cache (.jupyterlite.doit.db) stays out
         # of the repository.
-        shutil.copy2(CONFIG / "jupyter-lite.json", tmp)
+        (Path(tmp) / "jupyter-lite.json").write_text(json.dumps(config, indent=2) + "\n")
         subprocess.run(
             ["jupyter", "lite", "build", "--contents", str(contents), "--output-dir", str(output.resolve()),
              "--no-sourcemaps"],
@@ -126,6 +145,18 @@ def self_test() -> bool:
     plain = {"cells": [{"cell_type": "markdown", "id": "a", "metadata": {}, "source": "# Already a title"}]}
     if for_the_browser(json.loads(json.dumps(plain))) != plain:
         failures.append("a notebook without frontmatter changed")
+    with tempfile.TemporaryDirectory() as tmp:
+        folder = Path(tmp)
+        (folder / "a.ipynb").write_text("{}")
+        (folder / "pkg").mkdir()
+        (folder / "pkg" / "m.py").write_text("x = 1\n")
+        first, again = storage_name(folder), storage_name(folder)
+        (folder / "pkg" / "m.py").write_text("x = 2\n")
+        changed = storage_name(folder)
+    if first != again:
+        failures.append("the store's name differs for the same files")
+    if changed == first:
+        failures.append("the store's name did not change when the package did")
     missing = [rel for rel in NOTEBOOKS if not (ROOT / rel).is_file()]
     if missing:
         failures.append(f"listed notebooks that do not exist: {missing}")
