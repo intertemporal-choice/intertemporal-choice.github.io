@@ -34,7 +34,8 @@ READOUT = dict(facecolor="white", edgecolor="none", alpha=0.85)  # a readout sta
 # state is about 60 percent of the way across its frame (a 30-year generation compounds every
 # annual parameter; Chris, 2026-10-27: the ranges were "too wide, with the result that the figures
 # often occupy too little of the available space"). The output panel keeps wide ranges, so that
-# the economy can become dynamically inefficient, and draws capital on a log scale instead.
+# the economy can become dynamically inefficient; its first picture's steady state, a twenty-fifth
+# of the golden rule's capital, then sits near the left edge.
 DYNAMICS = {
     "alpha": (1 / 3, 0.31, 0.36, 0.01, "capital share α", ".2f"),
     "beta_year": (0.96, 0.957, 0.963, 0.001, "β per year", ".3f"),
@@ -167,32 +168,24 @@ def draw_dynamics(ax, k_next, k0, kbar, steps=8, kmax=None):
 
 def draw_output(top, bottom, alpha, xi, kgold, kbar=None, limits=None, kplanner=None):
     """The chapter's second figure: gross output f(k) and xi k (top), and their difference,
-    steady-state consumption per worker, which is highest at the golden rule (bottom). Without
-    `limits` the panels run, on a linear scale, to where consumption would be zero. `limits`, from
-    the sliders, is (the smallest and the largest k, the top panel's top, the bottom panel's top),
-    and k is then on a log scale, which gives the economy's steady state, the planner's and the
-    golden rule room: at the chapter's calibration the economy has a twenty-fifth of the golden
-    rule's capital, and on a linear scale it sat against the left edge (Chris, 2026-10-27)."""
+    steady-state consumption per worker, which is highest at the golden rule (bottom). `limits`,
+    from the sliders, is (the largest k, the top panel's top, the bottom panel's top); without it
+    the panels run to where consumption would be zero. Capital is on a level scale: a log scale
+    gave the economy's steady state more room, but Chris ruled it out (2026-10-27: "it was a
+    mistake to change k to a log scale")."""
     kzero = xi ** (1 / (alpha - 1))  # where f(k) = xi k and consumption would be zero
-    if limits is None:
-        left, right = 0.0, 1.05 * kzero
-        k = np.linspace(left, right, 500)
-        across = lambda share: share * kzero  # a point some share of the way across
-    else:
-        left, right = limits[0], limits[1]
-        k = np.geomspace(left, right, 500)
-        across = lambda share: left * (right / left) ** share
+    right = 1.05 * kzero if limits is None else limits[0]
+    k = np.linspace(0, right, 500)
     f = k**alpha
     top.plot(k, f, color="black", lw=1.8)
     top.plot(k, xi * k, color="C0", lw=1.0, linestyle="--")
     if limits is None:
-        x = across(0.6)
-        top.annotate(r"$\mathrm{f}(k)$", (x, x**alpha), xytext=(0, 8), textcoords="offset points")
-        top.annotate(r"$\xi k$", (x, xi * x), xytext=(8, -14), textcoords="offset points")
+        top.annotate(r"$\mathrm{f}(k)$", (0.6 * kzero, (0.6 * kzero) ** alpha), xytext=(0, 8), textcoords="offset points")
+        top.annotate(r"$\xi k$", (0.6 * kzero, xi * 0.6 * kzero), xytext=(8, -14), textcoords="offset points")
     else:  # inside the fixed frame
-        x, y = across(0.85), min(across(0.97), 0.6 * limits[2] / xi)  # xi k rises late on a log scale
-        top.annotate(r"$\mathrm{f}(k)$", (x, x**alpha), xytext=(-12, 8), textcoords="offset points")
-        top.annotate(r"$\xi k$", (y, xi * y), xytext=(-24, 0), textcoords="offset points")
+        x = min(0.6 * right, 0.5 * limits[1] / xi)
+        top.annotate(r"$\mathrm{f}(k)$", (0.75 * right, (0.75 * right) ** alpha), xytext=(0, 8), textcoords="offset points")
+        top.annotate(r"$\xi k$", (x, xi * x), xytext=(8, -14), textcoords="offset points")
     bottom.plot(k, f - xi * k, color="black", lw=1.8)
     bottom.axvline(kgold, color="0.45", lw=0.8, linestyle=":", label=r"$k^{**}$, the golden rule")
     ticks, names = [kgold], [r"$k^{**}$"]
@@ -202,23 +195,18 @@ def draw_output(top, bottom, alpha, xi, kgold, kbar=None, limits=None, kplanner=
     if kplanner is not None:
         bottom.axvline(kplanner, color="C2", lw=0.8, linestyle="-.", label=r"$k^{*}$, the planner's")
         ticks, names = ticks + [kplanner], names + [r"$k^{*}$"]
-    x = across(0.75) if limits is None else across(0.08)
-    bottom.annotate(r"$\mathrm{f}(k)-\xi k$", (x, x**alpha - xi * x), xytext=(6, 6) if limits is None else (0, 14),
-                    textcoords="offset points")
-    for ax, height in ((top, None if limits is None else limits[2]), (bottom, None if limits is None else limits[3])):
-        if limits is not None:
-            ax.set_xscale("log")
-        ax.set_xlim(left, right)
+    x = 0.75 * min(kzero, right)
+    bottom.annotate(r"$\mathrm{f}(k)-\xi k$", (x, x**alpha - xi * x), xytext=(6, 6), textcoords="offset points")
+    for ax, height in ((top, None if limits is None else limits[1]), (bottom, None if limits is None else limits[2])):
+        ax.set_xlim(0, right)
         ax.set_ylim(0, height)
         ax.set_yticks([])
-        ax.set_xlabel(r"$k$" if limits is None else r"$k$, on a log scale", loc="right")
+        ax.set_xlabel(r"$k$", loc="right")
     top.set_xticks([])
     if limits is None:  # the chapter's figure
         bottom.set_xticks(ticks, names)
     else:  # the three can sit close together, so a legend names them
-        for ax in (top, bottom):
-            ax.set_xticks([])
-            ax.set_xticks([], minor=True)
+        bottom.set_xticks([])
         bottom.legend(loc="lower right", fontsize=8)
 
 
@@ -256,23 +244,20 @@ def sliders_dynamics(k_next, k_bar, table=DYNAMICS):
 
 
 def output_limits(k_bar, k_golden, k_planner, table=OUTPUT):
-    """The output panel's (smallest k, largest k, top panel's top, bottom panel's top): on its log
-    scale, from a third below the smallest to half again beyond the largest of the three steady
-    states any combination reaches, and the highest output and consumption in between."""
-    small, large = np.inf, 0.0
+    """The output panel's (largest k, top panel's top, bottom panel's top): MARGIN beyond the
+    largest of the three steady states any combination reaches, and the highest output and
+    consumption there."""
+    right, top, bottom = 0.0, 0.0, 0.0
     for c in _corners(table):
         beta, Xi = _per_generation(c["beta_year"], c["growth_year"])
-        points = (k_bar(c["alpha"], beta, Xi), k_golden(c["alpha"], Xi - 1),
-                  k_planner(c["alpha"], Xi, c["beth_year"] ** YEARS))
-        small, large = min(small, *points), max(large, *points)
-    left, right = small / 1.5, 1.5 * large
-    k = np.geomspace(left, right, 400)
-    top, bottom = 0.0, 0.0
+        right = max(right, MARGIN * max(k_bar(c["alpha"], beta, Xi), k_golden(c["alpha"], Xi - 1),
+                                        k_planner(c["alpha"], Xi, c["beth_year"] ** YEARS)))
+    k = np.linspace(0, right, 400)
     for c in _corners(table):
         xi = _per_generation(c["beta_year"], c["growth_year"])[1] - 1
         top = max(top, 1.05 * float(np.max(k ** c["alpha"])))
         bottom = max(bottom, 1.05 * float(np.max(k ** c["alpha"] - xi * k)))
-    return left, right, top, bottom
+    return right, top, bottom
 
 
 def sliders_output(k_bar, k_golden, k_planner, interest_factor, table=OUTPUT):
@@ -484,7 +469,7 @@ def self_test() -> list[str]:
     rng = np.random.default_rng(0)
     sample = lambda table: {name: rng.uniform(low, high) for name, (_, low, high, *_) in table.items()}
     kmax = dynamics_limits(k_bar)
-    left, right, _, _ = output_limits(k_bar, k_golden, k_planner)
+    right, _, _ = output_limits(k_bar, k_golden, k_planner)
     for _ in range(200):
         c = sample(DYNAMICS)
         if k_bar(c["alpha"], *_per_generation(c["beta_year"], c["growth_year"])) > kmax:
@@ -492,7 +477,7 @@ def self_test() -> list[str]:
         c = sample(OUTPUT)
         beta, Xi = _per_generation(c["beta_year"], c["growth_year"])
         points = (k_bar(c["alpha"], beta, Xi), k_golden(c["alpha"], Xi - 1), k_planner(c["alpha"], Xi, c["beth_year"] ** YEARS))
-        if min(points) < left or max(points) > right:
+        if max(points) > right:
             failures.append(f"olg: the output panel's axes miss {c}")
     import ipywidgets as widgets
 
