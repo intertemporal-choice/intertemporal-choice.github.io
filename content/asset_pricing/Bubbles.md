@@ -180,7 +180,7 @@ Thus, the model allows stochastic bubbles which, while they last, grow by the fa
 The probability that the bubble has burst by time {math}`t+s` adds the probability that it bursts in {math}`t+1`, the probability that it survives {math}`t+1` and bursts in {math}`t+2`, and so on:
 
 ```{math}
-:label: eq:pnotburst
+:label: eq:probburst
 
 \text{Prob(burst by } t+s) = \DiePrb(1+\LivPrb+\LivPrb^{2}+\ldots+\LivPrb^{s-1}).
 ```
