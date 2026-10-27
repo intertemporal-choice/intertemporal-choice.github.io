@@ -13,17 +13,26 @@ import numpy as np
 
 
 def capture(sliders, *args):
-    """Run `sliders(*args)` with ipywidgets.interact replaced, and return the redraw function and
-    the sliders it was given, so a test can draw any combination of values without a browser."""
+    """Run `sliders(*args)` with ipywidgets.interact and interactive_output, and IPython's display,
+    replaced, and return the redraw function and the sliders it was given, so a test can draw any
+    combination of values without a browser."""
+    import IPython.display
     import ipywidgets as widgets
 
     captured = {}
-    interact = widgets.interact
+
+    def output(f, controls):
+        captured.update(redraw=f, controls=controls)
+        return widgets.Output()
+
+    saved = widgets.interact, widgets.interactive_output, IPython.display.display
     widgets.interact = lambda f, **controls: captured.update(redraw=f, controls=controls)
+    widgets.interactive_output = output
+    IPython.display.display = lambda *objects, **kwargs: None
     try:
         sliders(*args)
     finally:
-        widgets.interact = interact
+        widgets.interact, widgets.interactive_output, IPython.display.display = saved
     return captured["redraw"], captured["controls"]
 
 
