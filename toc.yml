@@ -15,7 +15,9 @@ project:
           children:
             - file: content/consumption/Fisher2Period/Fisher2Period.ipynb
         - file: content/consumption/ConsAndLaborSupply.md
-        - file: content/consumption/OLGModel.md
+        - file: content/consumption/OLGModel/index.md
+          children:
+            - file: content/consumption/OLGModel/OLGModel.ipynb
         - file: content/consumption/GenAcctsAndGov.md
         - file: content/consumption/SocSecAndKAccum.md
         - file: content/consumption/Envelope/index.md

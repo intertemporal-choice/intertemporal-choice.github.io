@@ -11,9 +11,9 @@ import matplotlib
 
 matplotlib.use("Agg")  # no display in CI
 
-from intertemporal_choice import fisher, portfolio, style  # noqa: E402
+from intertemporal_choice import fisher, olg, portfolio, style  # noqa: E402
 
-MODULES = [style, fisher, portfolio]
+MODULES = [style, fisher, portfolio, olg]
 
 logging.basicConfig(level=logging.INFO, format="%(message)s", force=True)
 log = logging.getLogger(__name__)
