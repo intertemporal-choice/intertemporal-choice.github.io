@@ -182,13 +182,13 @@ project:
           level: 0
         - file: content/asset_pricing/CARAPortfolio.md
           level: 1
-        - file: content/asset_pricing/Portfolio-CRRA.md
+        - file: content/asset_pricing/Portfolio-CRRA/index.md
           level: 1
         - file: content/asset_pricing/LucasAssetPrice.md
           level: 1
-        - file: content/asset_pricing/EquityPremiumPuzzle.md
-          level: 1
         - file: content/asset_pricing/C-CAPM.md
+          level: 1
+        - file: content/asset_pricing/EquityPremiumPuzzle.md
           level: 1
         - file: content/asset_pricing/Bubbles.md
           level: 1

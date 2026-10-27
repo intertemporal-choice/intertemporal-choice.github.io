@@ -61,10 +61,6 @@ pending  /content/figures/InvestmentNotes/InvestmentDrivesCycle.png             
 pending  /content/figures/OLGModel/OLGModelDynamics.png                          port to a notebook beside the chapter
 pending  /content/figures/OLGModel/fnkBoth.png                                   port to a notebook beside the chapter
 
-# Portfolio-CRRA
-pending  /content/figures/Portfolio-CRRA/ShareApproxErr.png                      port to a notebook beside the chapter
-pending  /content/figures/Portfolio-CRRA/ShareVsCRRA.png                         port to a notebook beside the chapter
-
 # qModel
 pending  /content/figures/qModel/CorporateTaxReduction.png                       port to a notebook beside the chapter
 pending  /content/figures/qModel/ITCIncrease.png                                 port to a notebook beside the chapter

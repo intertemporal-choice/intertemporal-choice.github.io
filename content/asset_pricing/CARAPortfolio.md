@@ -11,7 +11,7 @@ will earn a normally distributed stochastic return factor {math}`\Risky_{T} \sim
 
 [^fn1]: The seminal paper examining this problem (in continuous time) was by {cite:t}`merton:restat`; that paper also examines the case with CRRA utility and lognormal returns.
 
-[^fn2]: The assumption that returns are normally distributed is highly implausible. This means that with some positive probability, {math}`\Risky_{T} < 0`. So, owning a \$1 of the risky asset in period {math}`T-1` could result in *negative* wealth in period {math}`T`. You can lose *more than everything*, which is a violation of the legal principle of limited liability. (For a detailed history of limited liability, see {cite:t}`micklethwaitWooldridgeCompany`.) Lognormally distributed returns are therefore much more plausible.
+[^fn2]: The assumption that returns are normally distributed is highly implausible. This means that with some positive probability, {math}`\Risky_{T} < 0`. So, owning \$1 of the risky asset in period {math}`T-1` could result in *negative* wealth in period {math}`T`. You can lose *more than everything*, which is a violation of the legal principle of limited liability. (For a detailed history of limited liability, see {cite:t}`micklethwaitWooldridgeCompany`.) Lognormally distributed returns are therefore much more plausible.
 
 Consumption in the last period of life will be the entire amount
 of resources. If the consumer invests an absolute amount of money \${math}`\Stocks` in the risky asset, then
@@ -40,9 +40,9 @@ e^{-\alpha(\Stocks(\Risky-\Rfree)-\alpha\Stocks^{2}\sigma^{2}/2)}
 and the third line follows from the second because if {math}`z \sim \mathcal{N}(\mu_{z},\sigma_{z}^{2})`
 then {math}`\Ex[e^{z}] = e^{\mu_{z}+\sigma_{z}^{2}/2}.` (See [ELogNorm](#fact:elognorm)).
 
-Because {eq}`eq:CARA-exputil` is negative, the optimal {math}`\Stocks` will be the
-one that yields the largest negative exponent on {math}`e`, which occurs at the value of {math}`S`
-given by
+Expected utility {eq}`eq:CARA-exputil` is a negative constant times
+{math}`e^{-\alpha(\Stocks(\Risky-\Rfree)-\alpha\Stocks^{2}\sigma^{2}/2)}`, so maximizing it means
+maximizing the term in parentheses:
 
 ```{math}
 \max_{\Stocks} \left\{ \Stocks (\Risky-\Rfree) - \frac{\alpha \Stocks^{2} \sigma^{2}}{2} \right\}
@@ -63,7 +63,7 @@ risky asset, while the greater is the expected excess return, the more
 the consumer wants to invest. Note, however, that the model
 implausibly says that the dollar amount invested in the risky asset
 does not depend on the total dollar amount of resources {math}`\aLev_{T-1}`.
-So, Warren Buffett and Homer Simpson should have the exact same dollar
+So, Warren Buffett and Homer Simpson should have the same dollar
 holdings of the risky asset! If Buffett is richer than Simpson, Buffett's
-excess wealth is held in the safe form. Not very plausible. (That is why
+extra wealth is held in the safe form. Not very plausible. (That is why
 models with CARA utility are increasingly unfashionable in the economics and finance literatures).

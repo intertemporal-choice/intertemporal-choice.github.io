@@ -142,7 +142,7 @@ That is, price is equal to the fundamental price plus a "bubble" term {math}`B_{
 
 where the underbraced equality follows from {eq}`eq:pteq`.
 
-In words, this says that the first order condition has an infinite number of solutions of the form {math}`\Price_{t}= \Price_{t}^{*}+B_{t}`. Thus, nothing about the logic of the problem thus far rules out a *rational deterministic bubble*, which is a bubble whose size grows at the rate of interest forever. Thus, in principle any level of the stock price is possible at period {math}`t`; all that the theory implies is that *if a bubble exists*, its value must rise by a factor {math}`\Rfree` in every period.
+In words, the first order condition has infinitely many solutions of the form {math}`\Price_{t}= \Price_{t}^{*}+B_{t}`. Nothing in the logic of the problem so far rules out a *rational deterministic bubble*, one whose size grows at the rate of interest forever. In principle, then, any level of the stock price is possible at period {math}`t`; all the theory implies is that *if a bubble exists*, its value must rise by the factor {math}`\Rfree` every period.
 
 ## Stochastically Bursting Bubbles
 
@@ -177,7 +177,7 @@ Roll equation {eq}`eq:pburst` forward one period, and take its expectation as of
 
 Thus, the model allows stochastic bubbles which, while they last, grow by the factor {math}`\Rfree/\LivPrb`, enough faster than {math}`\Rfree` to exactly compensate shareholders (in expected value terms) for their expected capital loss when the bubble collapses.
 
-Note that the probability that the bubble has burst by time {math}`t+s` is the probability that it bursts in {math}`t+1` plus the probability that it survives {math}`t+1` and bursts in {math}`t+2`, and so on:
+The probability that the bubble has burst by time {math}`t+s` adds the probability that it bursts in {math}`t+1`, the probability that it survives {math}`t+1` and bursts in {math}`t+2`, and so on:
 
 ```{math}
 :label: eq:pnotburst
@@ -185,15 +185,15 @@ Note that the probability that the bubble has burst by time {math}`t+s` is the p
 \text{Prob(burst by } t+s) = \DiePrb(1+\LivPrb+\LivPrb^{2}+\ldots+\LivPrb^{s-1}).
 ```
 
-Summing the geometric series collapses the right-hand side of {eq}`eq:pnotburst` to {math}`1-\LivPrb^{s}`. Since {math}`\LivPrb<1`, letting {math}`s \rightarrow \infty` drives {math}`\LivPrb^{s}` to zero, so the probability that the bubble has burst by time {math}`t+s` approaches one: a stochastic bubble bursts eventually with probability one.
+The sum is {math}`1-\LivPrb^{s}`, which goes to one as {math}`s` grows: a stochastic bubble bursts eventually with probability one.
 
 (WhyBubblesCannotExist)=
 ## Arguments for Why Bubbles Cannot Exist
 
-Note that the bubble term in equation {eq}`eq:pbubble` rises without bound. It turns out that this fact rules out negative bubbles. To see why, note that if {math}`B_{t}` is negative and if the fundamental price {math}`\Price_{t}^{*}` is bounded, then eventually {math}`B_{t}` grows large enough so that the predicted price of a share is negative. But if share prices were negative, people could make themselves better off by simply throwing away their stock certificates. Thus, the restriction that prices must be positive rules out negative bubbles.
+Note that the bubble term in equation {eq}`eq:pbubble` rises without bound. It turns out that this fact rules out negative bubbles. To see why, note that if {math}`B_{t}` is negative and if the fundamental price {math}`\Price_{t}^{*}` is bounded, then eventually {math}`|B_{t}|` grows large enough so that the predicted price of a share is negative. But if share prices were negative, people could make themselves better off by simply throwing away their stock certificates. Thus, the restriction that prices must be positive rules out negative bubbles.
 
 Bubbles can also be ruled out if there is a maximum possible price that the asset can have. Consider, for example, the question of whether there can be a bubble on the price of diamonds. Suppose that there is a fixed supply of natural diamonds in existence, but that artificial diamonds can be made at a cost {math}`\bar{\Price}` above the current market price. A bubble would eventually carry the market price past {math}`\bar{\Price}`, but nobody will pay more than {math}`\bar{\Price}` for a natural diamond when an artificial one costs {math}`\bar{\Price}`, so the price cannot rise beyond {math}`\bar{\Price}`. In the period before the bubble would pass {math}`\bar{\Price}`, then, the price cannot rise by the factor the bubble needs to earn the required return, so nobody holds the bubble then; and by the same logic nobody holds it in the period before that, or in any earlier period, today included. Thus, rational bubbles are ruled out for assets which are reproducible.
 
-We assumed, in deriving these results, that the investor's utility function was linear. It is more difficult to justify rational bubbles in an economy with risk averse investors.
+We assumed, in deriving these results, that the investor's utility function was linear.
 
-There are also some general equilibrium arguments against bubbles, which basically boil down to the observation that if the value of the bubble is growing forever, its size will eventually exceed the size of the entire capital stock, and in that case productive capital will have been driven to zero because everybody owns the bubble instead of capital, which cannot make sense.
+There are also some general equilibrium arguments against bubbles, which basically boil down to the observation that if the value of the bubble is growing forever, its size will eventually exceed the size of the entire capital stock, and in that case productive capital will have been driven to zero because everybody owns the bubble instead of capital, which cannot make sense. The argument needs the interest rate to exceed the economy's growth rate: a bubble grows at the rate of interest {math}`\rfree`, so it outgrows the economy only if {math}`\rfree` exceeds the growth rate {math}`\pGro`. In a dynamically inefficient economy, where {math}`\rfree < \pGro`, as can happen in [Diamond's overlapping generations model](#sec:OLGModel), a bubble can survive in general equilibrium {cite:p}`tirole:bubbles`.

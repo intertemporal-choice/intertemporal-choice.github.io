@@ -8,10 +8,11 @@ It begins with the portfolio problem taken in isolation. Under CARA utility the 
 is a dollar amount held in the risky asset, independent of wealth; under CRRA utility the
 Merton-Samuelson result instead makes the risky *share* independent of wealth. The logic
 then reverses. Lucas takes consumption as exogenous and solves for the price that makes
-households willing to hold the market, which delivers the consumption CAPM and, applied
-to data, the equity premium puzzle, since no plausible degree of risk aversion explains
-the historical excess return on equity (matching it takes a coefficient of relative risk
-aversion around 20, while the riskless rate over the same period wants one below one).
+households willing to hold the market. With many assets, the same reasoning gives the
+consumption CAPM; applied to data, it gives the equity premium puzzle. No plausible degree
+of risk aversion explains the historical excess return on equity: matching it takes a
+coefficient of relative risk aversion of 15 to 20, while the riskless rate over the same
+period wants one of at most 2/3.
 
 The part closes by asking what prices are consistent with the absence of arbitrage
 even when they diverge from fundamentals.

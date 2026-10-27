@@ -81,7 +81,19 @@ Now assume CRRA utility, {math}`\uFunc(c) \equiv c^{1-\CRRA}/(1-\CRRA)` and divi
 \end{aligned}\end{gathered}
 ```
 
-We can now follow the same steps as in [The Equity Premium Puzzle and the Riskfree Rate](#sec:EquityPremiumPuzzle) to obtain the relation that *for every asset {math}`i`*
+If consumption growth is small, {math}`c_{t+1}/c_{t} \approx 1+ \Delta \log c_{t+1}` ([ExpEps](#fact:expeps)), and if {math}`z` is small, {math}`(1+z)^{\lambda} \approx 1 + \lambda z` ([TaylorOne](#fact:taylorone)). With these, {eq}`eq:CCAPM-gameulernew` can be approximated by
+
+```{math}
+\Ex_{t}[(1-\CRRA \Delta \log {c}_{t+1})(\Risky_{t+1,i}-\Rfree)] \approx 0
+```
+
+and by the definition of covariance, {math}`\Ex [xy] = \Ex [x]\Ex [y] + \cov(x,y)`,
+
+```{math}
+(1-\CRRA \Ex_{t}[\Delta \log {c}_{t+1}])(\Ex_{t}[\Risky_{t+1,i}]-\Rfree)-\CRRA \cov_{t}(\Delta \log {c}_{t+1},\Risky_{t+1,i}) \approx 0,
+```
+
+so that *for every asset {math}`i`*
 
 ```{math}
 :label: eq:CCAPM-eqprem
@@ -92,6 +104,10 @@ We can now follow the same steps as in [The Equity Premium Puzzle and the Riskfr
 \end{aligned}\end{gathered}
 ```
 
+where the last approximation holds when {math}`\CRRA\Ex_{t}[\Delta \log {c}_{t+1}]` is small.
+
 What does this imply about asset pricing?
 
 Consider an asset for which the return covaries positively with consumption, {math}`\cov(\Risky_{t+1,i},\Delta \log c_{t+1}) > 0`. For such an asset, the *marginal utility* will negatively covary with the return. Thus the expected return must be higher for an asset that "does well" when consumption is high. But for a given average stream of dividends or payouts, if the average return is high, the average price must be low. Thus this indicates that prices should be low for assets whose payoffs are procyclical, and high for assets whose payoffs are countercyclical.
+
+Risk aversion moves prices in two ways, and {eq}`eq:CCAPM-eqprem` shows only one. Through the covariance it governs *relative* prices: a higher {math}`\CRRA` raises every asset's premium in proportion to its covariance with consumption, so assets that covary more lose value relative to those that covary less. The *level* of all prices also depends on the riskless rate, which {eq}`eq:CCAPM-eqprem` takes as given. A higher {math}`\CRRA` moves that rate in two directions: precaution lowers it, which raises prices, as in the economies without growth of [The Lucas Asset Pricing Model](#sec:LucasAssetPrice); and when consumption is expected to grow, a lower willingness to substitute over time raises it, which lowers prices. For consumption-like growth and risk the second effect dominates (see [When Dividends Follow a Random Walk](#When-Dividends-Follow-a-Random-Walk)).

@@ -38,10 +38,12 @@ project:
     - file: content/asset_pricing/index.md
       children:
         - file: content/asset_pricing/CARAPortfolio.md
-        - file: content/asset_pricing/Portfolio-CRRA.md
+        - file: content/asset_pricing/Portfolio-CRRA/index.md
+          children:
+            - file: content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb
         - file: content/asset_pricing/LucasAssetPrice.md
-        - file: content/asset_pricing/EquityPremiumPuzzle.md
         - file: content/asset_pricing/C-CAPM.md
+        - file: content/asset_pricing/EquityPremiumPuzzle.md
         - file: content/asset_pricing/Bubbles.md
     - file: content/investment/index.md
       children:
