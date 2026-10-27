@@ -188,7 +188,7 @@ Note: The approximation {math}`\riskyshare = \EpremLog/(\CRRA\Evarr)` with a pre
 
 The Approximation Error for the Portfolio Share in Risky Assets {math}`\riskyshare` Is Small
 
-Note: The exactly optimal share minus the approximation, for the same parameters. The [notebook](Portfolio-CRRA.ipynb) finds the exact share numerically; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb) to run it without installing anything.
+Note: The exactly optimal share minus the approximation, for the same parameters. The [notebook](Portfolio-CRRA.ipynb) finds the exact share numerically, and its sliders vary the premium and the volatility; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Portfolio-CRRA.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb).
 :::
 
 
