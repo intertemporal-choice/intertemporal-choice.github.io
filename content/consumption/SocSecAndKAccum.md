@@ -55,12 +55,12 @@ Now consider the implications in a {cite:t}`diamond:olg` OLG model where saving 
 \begin{aligned}
 K_{t+1} & = \aRat_{1,t} \\
 & = \Wage_{1,t}\left(\frac{\Discount}{1+\Discount}\right)-\taxNetTrans_{1,t}\left(\frac{1+\Rfree_{t+1}\Discount}{\Rfree_{t+1}(1+\Discount)}\right) \\
-& = (1-\varepsilon)K^{\varepsilon}_{t} \left(\frac{\Discount}{1+\Discount}\right)-\taxNetTrans_{1,t}\left(\frac{1+\Rfree_{t+1}\Discount}{\Rfree_{t+1}(1+\Discount)}\right) \\
-& = \mathcal{Q} K^{\varepsilon}_{t} -\taxNetTrans_{1,t}\left(\frac{1+\Rfree_{t+1}\Discount}{\Rfree_{t+1}(1+\Discount)}\right)
+& = (1-\kapShare)K^{\kapShare}_{t} \left(\frac{\Discount}{1+\Discount}\right)-\taxNetTrans_{1,t}\left(\frac{1+\Rfree_{t+1}\Discount}{\Rfree_{t+1}(1+\Discount)}\right) \\
+& = \mathcal{Q} K^{\kapShare}_{t} -\taxNetTrans_{1,t}\left(\frac{1+\Rfree_{t+1}\Discount}{\Rfree_{t+1}(1+\Discount)}\right)
 \end{aligned}
 ```
 
-where {math}`\mathcal{Q}=(1-\varepsilon)\Discount/(1+\Discount)` as before in the [Diamond OLG model](#sec:OLGModel) section.
+where {math}`\mathcal{Q}=(1-\kapShare)\Discount/(1+\Discount)` as before in the [Diamond OLG model](#sec:OLGModel) section.
 
 Thus the capital accumulation curve is shifted down (the figure simplifies by assuming a constant downward shift, though strictly speaking {math}`\Rfree_{t+1}` depends on {math}`k_{t+1}`). The dynamics of the introduction of Social Security are captured in the figure, under the assumption that the economy was at its steady-state equilibrium level {math}`\bar{k}` before the Social Security system was introduced. The effect of introduction is an immediate increase in consumption, as the old generation spends everything it gets and the young generation doesn't need to do as much retirement saving as before. Over time the economy will converge to its new, lower level of capital {math}`\bar{\bar{k}}`.
 
@@ -70,4 +70,4 @@ Thus the capital accumulation curve is shifted down (the figure simplifies by as
 Convergence of OLG Economy After Intro of Social Security
 :::
 
-The [Diamond OLG chapter's notebook](OLGModel/OLGModel.ipynb) traces the introduction of Social Security with sliders for the size of the contributions, the capital share and patience; run it in your browser, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=OLGModel.ipynb).
+The [Diamond OLG chapter's notebook](OLGModel/OLGModel.ipynb) traces the introduction of Social Security with sliders for the size of the contributions, the capital share and patience. It also draws the exact curve, with {math}`\Rfree_{t+1}` moving with capital: the simplification overstates the fall in capital, 33 percent instead of 30 with contributions of a tenth of the wage, and with contributions of a fifth it finds no steady state where the exact model has one. Run it in your browser, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=OLGModel.ipynb).
