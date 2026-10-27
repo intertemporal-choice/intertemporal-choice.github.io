@@ -5,10 +5,25 @@ approximate risky share and the exactly optimal one, computed by its own `share_
 `share_exact`, which it passes here. This module only draws, as `fisher` does for the Fisher
 two-period chapter.
 
+The sliders redraw both panels on fixed axes, the largest any combination of their values needs
+(Chris, 2026-10-26: "fix the axes ... so that rescaling does not hide meaningful changes").
+
 `python -m intertemporal_choice --self-test` runs `self_test`.
 """
 
 import numpy as np
+
+from intertemporal_choice import slider_check
+
+# The sliders: name -> (first value, lowest, highest, step, label). The first values draw the
+# chapter's figures. The ranges keep the approximate share at most 2, at the highest premium, the
+# lowest volatility and log utility, so on axes holding every combination the first picture still
+# fills a third of the share panel.
+SLIDERS = {
+    "phi": (0.03, 0.0, 0.08, 0.005, "premium φ"),
+    "sigma": (0.20, 0.20, 0.40, 0.01, "σ"),
+}
+RHO = np.linspace(1.0, 5.0, 81)  # the sliders' degrees of relative risk aversion
 
 
 def draw_share(ax, rho, share):
@@ -28,10 +43,28 @@ def draw_error(ax, rho, error):
     ax.set_ylabel("exact minus approximate share", loc="top")
 
 
-def sliders(share_approx, share_exact, rho=np.linspace(1.0, 5.0, 81)):
-    """Sliders for the premium and the volatility, each redrawing the two shares and their difference."""
+def axis_limits(share_approx, share_exact, rho=RHO, sliders=SLIDERS):
+    """The share panel's top, and the error panel's bottom and top, for every combination of the
+    sliders' values. The approximation is largest at the highest premium, the lowest volatility and
+    the lowest rho; the error is computed on a grid, with a twentieth of its range to spare (the
+    notebook checks a finer grid)."""
+    phi = np.linspace(*sliders["phi"][1:3], 5)
+    sigma = np.linspace(*sliders["sigma"][1:3], 5)
+    grid = rho[:: max(1, len(rho) // 8)]
+    top = 1.05 * max(1.0, float(share_approx(rho[0], phi[-1], sigma[0])))
+    errors = [share_exact(r, p, s) - share_approx(r, p, s) for p in phi for s in sigma for r in grid]
+    low, high = min(errors), max(errors)
+    spare = 0.05 * (high - low)
+    return top, (low - spare, high + spare)
+
+
+def sliders(share_approx, share_exact, rho=RHO):
+    """Sliders for the premium and the volatility, each redrawing the two shares and their difference
+    on the same axes."""
     import ipywidgets as widgets  # only the sliders need it
     import matplotlib.pyplot as plt
+
+    top, (low, high) = axis_limits(share_approx, share_exact, rho)
 
     def explore(phi, sigma):
         approx = share_approx(rho, phi, sigma)
@@ -40,7 +73,7 @@ def sliders(share_approx, share_exact, rho=np.linspace(1.0, 5.0, 81)):
         left.plot(rho, approx, color="C0", label="approximation")
         left.plot(rho, exact, color="C1", linestyle="--", label="exact")
         left.axhline(1, color="0.6", linewidth=0.6)
-        left.set_ylim(0, max(1.1, min(float(approx.max()) * 1.05, 3.0)))
+        left.set_ylim(0, top)
         left.set_xlim(rho[0], rho[-1])
         left.set_xlabel(r"$\rho$", loc="right")
         left.set_ylabel(r"$\varsigma$", loc="top", rotation=0)
@@ -50,18 +83,14 @@ def sliders(share_approx, share_exact, rho=np.linspace(1.0, 5.0, 81)):
                   f"{share_exact(2.0, phi, sigma):.3f} exact",
                   transform=left.transAxes, ha="right", va="top", fontsize=9)
         draw_error(right, rho, exact - approx)
+        right.set_ylim(low, high)
         fig.tight_layout()
         plt.show()
 
-    def slider(value, low, high, step, label):
-        return widgets.FloatSlider(value=value, min=low, max=high, step=step, description=label,
-                                   continuous_update=False, readout_format=".3f")
-
-    widgets.interact(
-        explore,
-        phi=slider(0.03, 0.0, 0.10, 0.005, "premium φ"),
-        sigma=slider(0.20, 0.05, 0.40, 0.01, "σ"),
-    )
+    widgets.interact(explore, **{
+        name: widgets.FloatSlider(value=value, min=lowest, max=highest, step=step, description=label,
+                                  continuous_update=False, readout_format=".3f")
+        for name, (value, lowest, highest, step, label) in SLIDERS.items()})
 
 
 def self_test() -> list[str]:
@@ -78,4 +107,7 @@ def self_test() -> list[str]:
         except Exception as e:  # noqa: BLE001
             failures.append(f"portfolio: {draw.__name__} failed: {e!r}")
         plt.close(fig)
+    approx = lambda rho, phi, sigma: phi / (rho * sigma**2)
+    exact = lambda rho, phi, sigma: min(1.0, 0.99 * approx(rho, phi, sigma))  # never above one, like the real one
+    failures += slider_check.check("portfolio", sliders, approx, exact)
     return failures
