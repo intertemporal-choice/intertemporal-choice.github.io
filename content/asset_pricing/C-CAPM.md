@@ -8,17 +8,17 @@ Consider a representative agent solving the joint consumption and portfolio allo
         \vFunc(\mRat_{t}) & =  \max \uFunc(c_{t}) + \Ex_{t}\left[\sum_{n=1}^{\infty} \Discount^{n} \uFunc(c_{t+n}) \right]
 \\  & \text{s.t.}
 \\      \mRat_{t+1} & =  (\mRat_{t}-c_{t})\Rport_{t+1} + y_{t+1}
-\\      \Rport_{t+1} & =  \sum_{i=1}^{m}\omega_{t,i}\Risky_{t+1,i}+\left(1-\sum_{i=1}^{m} \omega_{t,i}\right)\Rfree
+\\      \Rport_{t+1} & =  \sum_{i=1}^{m}\riskyshare_{t,i}\Risky_{t+1,i}+\left(1-\sum_{i=1}^{m} \riskyshare_{t,i}\right)\Rfree
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\Rfree` denotes the return factor on a perfectly riskless asset and {math}`\Risky_{t+1,i}` denotes the return factor on asset {math}`i` between periods {math}`t` and {math}`t+1`, {math}`\omega_{t,i}` is the share of end-of-period savings invested in asset {math}`i`, and {math}`\Rport_{t+1}` is the portfolio-weighted return factor, and {math}`y_{t+1}` is noncapital income in period {math}`t+1`.
+where {math}`\Rfree` denotes the return factor on a perfectly riskless asset and {math}`\Risky_{t+1,i}` denotes the return factor on asset {math}`i` between periods {math}`t` and {math}`t+1`, {math}`\riskyshare_{t,i}` is the share of end-of-period savings invested in asset {math}`i`, and {math}`\Rport_{t+1}` is the portfolio-weighted return factor, and {math}`y_{t+1}` is noncapital income in period {math}`t+1`.
 
 As usual, the objective can be rewritten in recursive form:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \vFunc(\mRat_{t}) & =  \max_{\{c_{t},\omega_{t,1},\omega_{t,2},\ldots\}} \uFunc(c_{t}) +\Discount \Ex_{t}\left[\vFunc(\Rport_{t+1}(\mRat_{t}-c_{t})+{y}_{t+1})\right]
+        \vFunc(\mRat_{t}) & =  \max_{\{c_{t},\riskyshare_{t,1},\riskyshare_{t,2},\ldots\}} \uFunc(c_{t}) +\Discount \Ex_{t}\left[\vFunc(\Rport_{t+1}(\mRat_{t}-c_{t})+{y}_{t+1})\right]
 \end{aligned}\end{gathered}
 ```
 
@@ -28,14 +28,14 @@ The first order condition with respect to {math}`c_{t}` is
 :label: eq:CCAPM-cfoc
 
 \begin{gathered}\begin{aligned}
-        \uFunc^{\prime}(c_{t}) & =  \Discount \Ex_{t}[\Rport_{t+1}\vFunc^{\prime}(\mRat_{t+1})].
+        \uFunc^{\prime}(c_{t}) & =  \Discount \Ex_{t}[\Rport_{t+1}\vFunc^{\prime}(\mRat_{t+1})]
 \end{aligned}\end{gathered}
 ```
 
-and the FOC with respect to {math}`\omega_{t,i}` is
+and the FOC with respect to {math}`\riskyshare_{t,i}` is
 
 ```{math}
-:label: eq:CCAPM-gamfoc
+:label: eq:CCAPM-sharefoc
 
 \begin{gathered}\begin{aligned}
         \Ex_{t}[(\Risky_{t+1,i}-\Rfree)\vFunc^{\prime}(\mRat_{t+1})] & =  0
@@ -52,7 +52,7 @@ But the usual logic of the [Envelope theorem](#sec:Envelope) tells us that
 \end{aligned}\end{gathered}
 ```
 
-so, substituting {eq}`eq:CCAPM-envelope` into {eq}`eq:CCAPM-cfoc` and {eq}`eq:CCAPM-gamfoc` we have
+so, substituting {eq}`eq:CCAPM-envelope` into {eq}`eq:CCAPM-cfoc` and {eq}`eq:CCAPM-sharefoc` we have
 
 ```{math}
 :label: eq:CCAPM-ceuler
@@ -63,7 +63,7 @@ so, substituting {eq}`eq:CCAPM-envelope` into {eq}`eq:CCAPM-cfoc` and {eq}`eq:CC
 ```
 
 ```{math}
-:label: eq:CCAPM-gameuler
+:label: eq:CCAPM-shareeuler
 
 \begin{gathered}\begin{aligned}
         \Ex_{t}[(\Risky_{t+1,i}-\Rfree)\uFunc^{\prime}({c}_{t+1})] & =  0
@@ -71,17 +71,17 @@ so, substituting {eq}`eq:CCAPM-envelope` into {eq}`eq:CCAPM-cfoc` and {eq}`eq:CC
 \end{aligned}\end{gathered}
 ```
 
-Now assume CRRA utility, {math}`\uFunc(c) \equiv c^{1-\CRRA}/(1-\CRRA)` and divide both sides of {eq}`eq:CCAPM-gameuler` by {math}`c_{t}^{-\CRRA}` to get
+Now assume CRRA utility, {math}`\uFunc(c) \equiv c^{1-\CRRA}/(1-\CRRA)` and divide both sides of {eq}`eq:CCAPM-shareeuler` by {math}`c_{t}^{-\CRRA}` to get
 
 ```{math}
-:label: eq:CCAPM-gameulernew
+:label: eq:CCAPM-shareeulercrra
 
 \begin{gathered}\begin{aligned}
         \Ex_{t}[(c_{t+1}/c_{t})^{-\CRRA}(\Risky_{t+1,i}-\Rfree)] & =  0
 \end{aligned}\end{gathered}
 ```
 
-If consumption growth is small, {math}`c_{t+1}/c_{t} \approx 1+ \Delta \log c_{t+1}` ([ExpEps](#fact:expeps)), and if {math}`z` is small, {math}`(1+z)^{\lambda} \approx 1 + \lambda z` ([TaylorOne](#fact:taylorone)). With these, {eq}`eq:CCAPM-gameulernew` can be approximated by
+If consumption growth is small, {math}`c_{t+1}/c_{t} \approx 1+ \Delta \log c_{t+1}` ([ExpEps](#fact:expeps)), and if {math}`z` is small, {math}`(1+z)^{\lambda} \approx 1 + \lambda z` ([TaylorOne](#fact:taylorone)). With these, {eq}`eq:CCAPM-shareeulercrra` can be approximated by
 
 ```{math}
 \Ex_{t}[(1-\CRRA \Delta \log {c}_{t+1})(\Risky_{t+1,i}-\Rfree)] \approx 0

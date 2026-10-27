@@ -11,7 +11,7 @@ Using their framework, here we study a consumer who has wealth {math}`\aRat_{t}`
 
 If the period-{math}`t` consumer invests proportion {math}`\riskyshare_i` of {math}`\aRat_{t}` in risky asset {math}`i`, {math}`i=1,2` (so that {math}`\riskyshare_{1}=(1-\riskyshare_{2})` and vice-versa), spending all available resources in the last period of life[^samuelson] {math}`t+1` will yield:
 
-[^samuelson]: The portfolio allocation solution obtained below induces back to earlier periods of life, as {cite:t}`samuelsonFallacy` and {cite:t}`samuelsonJudgment` famously emphasized.
+[^samuelson]: The portfolio allocation solution obtained below carries back, by induction, to earlier periods of life, as {cite:t}`samuelsonFallacy` and {cite:t}`samuelsonJudgment` famously emphasized.
 
 ```{math}
 :label: eq:PortMulti-RportDef
@@ -40,7 +40,7 @@ Using this approximation, the expectation as of date {math}`t` of utility at dat
 
 \begin{aligned}
   \Ex_{t}[\uFunc(\cRat_{t+1})] & \approx  (1-\CRRA)^{-1}\Ex_{t}\left[\left(\aRat_{t}e^{\risky_{1,t+1}}e^{\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1})+\riskyshare_2(1-\riskyshare_2)\eta /2}\right)^{1-\CRRA}\right]
-\\                      & \approx  \underbrace{ (1-\CRRA)^{-1}\aRat_{t}^{1-\CRRA}}_{\text{constant $< 0$}}\underbrace{e^{ (1-\CRRA)\riskyshare_2(1-\riskyshare_2)\eta/2}\Ex_{t}\left[e^{(\risky_{1,t+1}+\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1}))  (1-\CRRA)}\right]}_{\text{excess return utility factor}}
+\\                      & \approx  \underbrace{ (1-\CRRA)^{-1}\aRat_{t}^{1-\CRRA}}_{\text{constant $< 0$}}\underbrace{e^{ (1-\CRRA)\riskyshare_2(1-\riskyshare_2)\eta/2}\Ex_{t}\left[e^{(\risky_{1,t+1}+\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1}))  (1-\CRRA)}\right]}_{\text{portfolio return utility factor}}
   \end{aligned}
 ```
 
@@ -61,7 +61,7 @@ Our foregoing assumptions imply that
   \log \Ex_{t}\left[e^{(\risky_{1,t+1}+\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1}))  (1-\CRRA)}\right]  =  {(1-\CRRA)(\riskyshare_1 (\risky_1-\sigma_1^2/2)+\riskyshare_2 (\risky_2-\sigma_2^2/2)) + (1-\CRRA)^2 (\riskyshare_1^2\sigma_1^2+\riskyshare_2^2\sigma_2^2+2\riskyshare_1\riskyshare_2\sigma_{12})/2}
 ```
 
-Substituting from {eq}`eq:PortMulti-Ex` for the log of the expectation in {eq}`eq:PortMulti-exputil`, the log of the "excess return utility factor" in {eq}`eq:PortMulti-exputil` is
+Substituting from {eq}`eq:PortMulti-Ex` for the log of the expectation in {eq}`eq:PortMulti-exputil`, the log of the "portfolio return utility factor" in {eq}`eq:PortMulti-exputil` is
 
 ```{math}
   (1-\CRRA)\riskyshare_2(1-\riskyshare_2)\eta/2+(1-\CRRA) (\risky_1-\sigma_1^2/2+\riskyshare_2(\risky_2-\risky_1+(\sigma_1^2-\sigma_2^2)/2))+(\CRRA-1)^2 (\sigma_1^2+\riskyshare_2^2 \eta+2\riskyshare_2(\sigma_{12}-\sigma_1^2))/2
@@ -87,12 +87,12 @@ since {math}`\eta/2+(\sigma_1^2-\sigma_2^2)/2 = \sigma_1^2-\sigma_{12}`. So
 
 The second term is asset 2's share in the portfolio of the two assets with the smallest variance; the first adds a speculative demand that rises with asset 2's expected return over asset 1's and falls with risk aversion and with the variance {math}`\eta` of the difference between their log returns.
 
-If the first asset is riskfree, so that {math}`\sigma_{1}=\sigma_{12}=0` and {math}`\eta=\sigma^{2}_{2}`, this reduces to
+If the first asset is riskfree, with return factor {math}`\Rfree=e^{\rfree}`, so that {math}`\risky_{1}=\rfree`, {math}`\sigma_{1}=\sigma_{12}=0` and {math}`\eta=\sigma^{2}_{2}`, this reduces to
 
 ```{math}
 :label: eq:riskyshare2
 
-\riskyshare_2  =  \left(\frac{\risky_2-\risky_1}{\CRRA\sigma^{2}_{2}}\right) = \left(\frac{\EpremLog}{\CRRA\sigma^{2}_{2}}\right),
+\riskyshare_2  =  \left(\frac{\risky_2-\rfree}{\CRRA\sigma^{2}_{2}}\right) = \left(\frac{\EpremLog}{\CRRA\sigma^{2}_{2}}\right),
 ```
 
-where {math}`\EpremLog \equiv \log \EPrem = \risky_{2}-\risky_{1}` is the log of the expected excess return factor {math}`\EPrem \equiv \Risky_{2}/\Risky_{1}`. This is the solution for a single risky asset in [Portfolio Choice with CRRA Utility](#sec:Portfolio-CRRA).
+where {math}`\EpremLog \equiv \log \EPrem = \risky_{2}-\rfree` is the log of the expected excess return factor {math}`\EPrem \equiv \Risky_{2}/\Rfree`. This is the solution for a single risky asset in [Portfolio Choice with CRRA Utility](#sec:Portfolio-CRRA).

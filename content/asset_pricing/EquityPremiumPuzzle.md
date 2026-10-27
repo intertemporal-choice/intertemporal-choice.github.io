@@ -51,12 +51,12 @@ How do we know what plausible values of {math}`\CRRA` are? Consider the followin
 Rewrite the consumption Euler equation {eq}`eq:CCAPM-ceuler`, for a single risky asset held in the share {math}`\riskyshare_{t}`, as
 
 ```{math}
-:label: eq:EPP-newgam
+:label: eq:EPP-ceulerport
 
 \uFunc^{\prime}(c_{t}) = \Ex_{t}\left[\Discount (\Rfree + \riskyshare_{t} [\Risky_{t+1} - \Rfree])\uFunc^{\prime}({c}_{t+1})\right]
 ```
 
-and note that from {eq}`eq:CCAPM-gameuler` we know that {math}`\Ex_{t}[\Discount \riskyshare_{t}(\Risky_{t+1}-\Rfree)\uFunc^{\prime}({c}_{t+1})] = 0` so that {eq}`eq:EPP-newgam` reduces to the ordinary Euler equation
+and note that from {eq}`eq:CCAPM-shareeuler` we know that {math}`\Ex_{t}[\Discount \riskyshare_{t}(\Risky_{t+1}-\Rfree)\uFunc^{\prime}({c}_{t+1})] = 0` so that {eq}`eq:EPP-ceulerport` reduces to the ordinary Euler equation
 
 ```{math}
 \begin{aligned}

@@ -11,7 +11,7 @@ will earn a normally distributed stochastic return factor {math}`\Risky_{T} \sim
 
 [^fn-merton-continuous]: The seminal paper examining this problem (in continuous time) was by {cite:t}`merton:restat`; that paper also examines the case with CRRA utility and lognormal returns.
 
-[^fn-normal-returns]: The assumption that returns are normally distributed is highly implausible. This means that with some positive probability, {math}`\Risky_{T} < 0`. So, owning \$1 of the risky asset in period {math}`T-1` could result in *negative* wealth in period {math}`T`. You can lose *more than everything*, which is a violation of the legal principle of limited liability. (For a detailed history of limited liability, see {cite:t}`micklethwaitWooldridgeCompany`.) Lognormally distributed returns are therefore much more plausible.
+[^fn-normal-returns]: The assumption that returns are normally distributed is highly implausible. It implies that with some positive probability, {math}`\Risky_{T} < 0`. So, owning \$1 of the risky asset in period {math}`T-1` could result in *negative* wealth in period {math}`T`. You can lose *more than everything*, which is a violation of the legal principle of limited liability. (For a detailed history of limited liability, see {cite:t}`micklethwaitWooldridgeCompany`.) Lognormally distributed returns are therefore much more plausible.
 
 Consumption in the last period of life will be the entire amount
 of resources. If the consumer invests an absolute amount of money \${math}`\Stocks` in the risky asset, then
