@@ -11,7 +11,9 @@ project:
         # Formerly 2PeriodLCModel.md. MyST drops a leading number from a page's URL
         # (it reads 01-, 2- as ordering prefixes), which served this chapter at
         # .../periodlcmodel. Keep digits out of the front of file names.
-        - file: content/consumption/Fisher2Period.md
+        - file: content/consumption/Fisher2Period/index.md
+          children:
+            - file: content/consumption/Fisher2Period/Fisher2Period.ipynb
         - file: content/consumption/ConsAndLaborSupply.md
         - file: content/consumption/OLGModel.md
         - file: content/consumption/GenAcctsAndGov.md

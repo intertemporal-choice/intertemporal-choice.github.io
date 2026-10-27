@@ -18,10 +18,6 @@
 #
 # Kept in per-handout blocks, alphabetical, so the porting PRs rebase cleanly.
 
-
-# 2PeriodLCModel
-pending  /content/figures/2PeriodLCModel/FisherFigure.png                        port to a notebook beside the chapter
-
 # BlanchardFiniteHorizon
 pending  /content/figures/BlanchardFiniteHorizon/BlanchardCDynamics.png          port to a notebook beside the chapter
 pending  /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase1.png  port to a notebook beside the chapter

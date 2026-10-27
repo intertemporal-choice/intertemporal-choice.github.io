@@ -65,6 +65,13 @@ jobs:
         with:
           path: _build/execute
           key: myst-exec-${{ steps.exec.outputs.env }}-${{ github.sha }}
+      # The figure notebooks that need only what Pyodide has also run in the browser, with
+      # nothing installed: a JupyterLite site served at /lite/ (code/build_lite.py).
+      - name: Build the in-browser notebooks (JupyterLite)
+        run: >-
+          uv run --no-project --with jupyterlite-core==0.8.6 --with jupyterlite-pyodide-kernel==0.8.6
+          --with jupyter-server==2.21.1 --with jupyterlab_widgets==3.0.17
+          python code/build_lite.py _build/html/lite
       # Old URLs of moved pages forward to their new ones; see code/redirects.txt.
       - name: Write redirects for moved pages
         run: uv run python code/write_redirects.py

@@ -307,15 +307,15 @@ Micro textbooks traditionally define the income effect of a change in the intere
 In this model capital markets are perfect, so consumption depends on bank balances and human wealth only through their sum, and a change in human wealth affects consumption exactly as an equal change in bank balances would. The distinction is preparation for mechanisms later in the course, liquidity constraints and precautionary saving, that drastically attenuate the human wealth effect for some households while leaving a meaningful income effect in place. For those households human wealth changes by just as much, but the change does much less to their consumption. {cite:t}`summersCapTax` vigorously made the point that in standard life cycle models the human wealth effect dwarfs the income and substitution effects, because for most people most lifetime income is in the future.
 :::
 
-<!-- FisherFigure.png stacks FisherFigureY1 above FisherFigureY2, reproducing the single
-two-panel exhibit in Carroll's LaTeX. Carrying the second panel as a separate image
-inside this directive instead nests a float within a float, which LaTeX rejects and
-which moves the label onto the inner float, so references print "Figure ??". -->
+<!-- The notebook draws both panels into one image, reproducing the single two-panel exhibit
+in Carroll's LaTeX. Carrying the second panel as a separate image inside this directive
+instead nests a float within a float, which LaTeX rejects and which moves the label onto
+the inner float, so references print "Figure ??". -->
 
-:::{figure} /content/figures/2PeriodLCModel/FisherFigure.png
+:::{figure} figures/FisherFigure.png
 :name: fig:Fisher
 
 Fisher Figure Analysis
 :::
 
-The analysis in {numref}`fig:Fisher` is redrawn with sliders in the [Fisher two-period notebook](https://econ-ark.org/materials/fishertwoperiod) in the Econ-ARK DemARK collection. Varying the interest factor and the two income endowments rotates the budget constraint and moves the optimal point, tracing the income, substitution, and human wealth effects decomposed above.
+{numref}`fig:Fisher` is drawn by this chapter's [figure notebook](Fisher2Period.ipynb), which also redraws it with sliders; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Fisher2Period.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Fisher2Period/Fisher2Period.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Fisher2Period/Fisher2Period.ipynb). Varying the interest factors, the two incomes and the preferences rotates the budget constraints and moves the optimal points, tracing the income, substitution, and human wealth effects decomposed above.

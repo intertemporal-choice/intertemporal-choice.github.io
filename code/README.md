@@ -52,6 +52,18 @@ counts, timings and the Python version dropped. `--install` sets nbstripout up a
 filter in the clone; `--check` fails if a tracked notebook is committed unstripped (the
 workflow runs it); `--strip` strips the tracked notebooks in place.
 
+## `build_lite.py`
+
+Builds the in-browser copies of the figure notebooks, a JupyterLite site that the deploy
+serves at `/lite/`: a reader opens one and runs it with nothing installed, at
+`https://intertemporal-choice.github.io/lite/notebooks/index.html?path=<Chapter>.ipynb`. Only
+notebooks whose packages Pyodide has belong in its `NOTEBOOKS` list (numpy, matplotlib and
+ipywidgets are enough for those there); HARK cannot run in a browser. The browser's copy of a
+notebook differs from the book's in three ways: its frontmatter cell becomes its title, the
+book's pure-Python package is copied beside it, and its bootstrap cell installs ipywidgets
+from PyPI instead of the book's package from GitHub. The workflow step that runs it pins the
+JupyterLite tools; `code/jupyterlite/jupyter-lite.json` names the site.
+
 ## `mirror_check.py`
 
 Reconciles `sources/` against Carroll's lecture-notes page at econ2.jhu.edu.
