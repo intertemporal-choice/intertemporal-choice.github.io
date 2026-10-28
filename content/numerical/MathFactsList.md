@@ -188,6 +188,24 @@ If $\epsilon$ is small and $\zeta$ is small then $\epsilon\zeta$ can be approxim
 :::
 ::::
 
+(fact:ruleof72)=
+::::{div}
+:::{hint} Fact: RuleOf72
+
+A quantity that grows at the rate $\epsilon$ per period doubles in about $72/(100\epsilon)$ periods: at 2 percent a period ($\epsilon = 0.02$), in about 36. The exact doubling time $n$ solves $(1+\epsilon)^{n} = 2$:
+
+$$
+n = \frac{\log 2}{\log(1+\epsilon)} \approx \frac{72}{100\epsilon}
+$$
+
+[LogEps](#fact:logeps) alone gives $\log 2/\epsilon \approx 69.3/(100\epsilon)$. But $\log(1+\epsilon)$ is a little less than $\epsilon$, so the exact time is a little longer, and 72, which has many divisors, is nearly exact at 8 percent (9.01 periods, against 9). At 2 percent the exact time is 35.0 periods.
+
+Put the other way around, over $n$ periods the quantity grows by a factor of about $2^{100\epsilon n/72}$: over 36 years, 2 percent a year doubles it and 4 percent a year quadruples it (exactly, by factors of 2.04 and 4.10).
+
+A quantity that shrinks at the rate $\epsilon$ per period halves in $\log 2/(-\log(1-\epsilon))$ periods, a little less than $69.3/(100\epsilon)$.
+:::
+::::
+
 ## Statistics/Probability Facts
 
 (fact:sumnormsisnorm)=
