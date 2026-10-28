@@ -220,6 +220,18 @@ $$
 :::
 ::::
 
+(fact:sumjointnormsisnorm)=
+::::{div}
+:::{important} Fact: SumJointNormsIsNorm
+
+If $x$ and $y$ are [jointly normal](https://en.wikipedia.org/wiki/Multivariate_normal_distribution), with means $\mu_{x}$ and $\mu_{y}$, variances $\sigma^{2}_{x}$ and $\sigma^{2}_{y}$, and covariance $\sigma_{xy}$, then for any constants $a$ and $b$
+
+$$
+a x+b y \sim \mathcal{N}(a\mu_{x}+b\mu_{y},a^{2}\sigma^{2}_{x}+b^{2}\sigma^{2}_{y}+2ab\sigma_{xy})
+$$
+:::
+::::
+
 (fact:elognorm)=
 ::::{div}
 :::{seealso} Fact: ELogNorm

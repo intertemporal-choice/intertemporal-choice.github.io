@@ -35,7 +35,7 @@ with FOC
 
 \begin{aligned}
 \uFunc^{\prime}(C_{t}) &= \Risky^{-1} \Ex_{t}\left[\left(\frac{\Price_{t+1}+\dvdnd_{t+1}}{\Price_{t}}\right)\VFunc^{\prime}_{t+1}(M_{t+1})\right] \\
-\uFunc^{\prime}(C_{t}) &= \Risky^{-1} \Ex_{t}\left[\left(\frac{\Price_{t+1}+\dvdnd_{t+1}}{\Price_{t}}\right)\uFunc^{\prime}_{t+1}(C_{t+1})\right].
+\uFunc^{\prime}(C_{t}) &= \Risky^{-1} \Ex_{t}\left[\left(\frac{\Price_{t+1}+\dvdnd_{t+1}}{\Price_{t}}\right)\uFunc^{\prime}(C_{t+1})\right].
 \end{aligned}
 ```
 
@@ -70,7 +70,7 @@ We usually assume the "no-bubbles" condition that says that {math}`\lim_{T \righ
 
 This result is very similar to what emerges from the [Lucas Asset Pricing model](#sec:LucasAssetPrice), though there the stochastic discount factor plays the role that {math}`\Risky^{-1}` plays here.
 
-Suppose now that dividends are expected to grow by a constant factor {math}`\PGro` henceforth. In that case we have
+Suppose now that dividends are expected to grow by a constant factor {math}`\PGro` henceforth. In that case, provided {math}`\PGro < \Risky` so that the sum converges, we have
 
 ```{math}
 \begin{aligned}
@@ -180,7 +180,7 @@ Thus, the model allows stochastic bubbles which, while they last, grow by the fa
 The probability that the bubble has burst by time {math}`t+s` adds the probability that it bursts in {math}`t+1`, the probability that it survives {math}`t+1` and bursts in {math}`t+2`, and so on:
 
 ```{math}
-:label: eq:pnotburst
+:label: eq:probburst
 
 \text{Prob(burst by } t+s) = \DiePrb(1+\LivPrb+\LivPrb^{2}+\ldots+\LivPrb^{s-1}).
 ```
@@ -190,10 +190,10 @@ The sum is {math}`1-\LivPrb^{s}`, which goes to one as {math}`s` grows: a stocha
 (WhyBubblesCannotExist)=
 ## Arguments for Why Bubbles Cannot Exist
 
-Note that the bubble term in equation {eq}`eq:pbubble` rises without bound. It turns out that this fact rules out negative bubbles. To see why, note that if {math}`B_{t}` is negative and if the fundamental price {math}`\Price_{t}^{*}` is bounded, then eventually {math}`|B_{t}|` grows large enough so that the predicted price of a share is negative. But if share prices were negative, people could make themselves better off by simply throwing away their stock certificates. Thus, the restriction that prices must be positive rules out negative bubbles.
+Note that the bubble term in equation {eq}`eq:pbubble` grows without bound in absolute value. It turns out that this fact rules out negative bubbles. To see why, note that if {math}`B_{t}` is negative and if the fundamental price {math}`\Price_{t}^{*}` is bounded, then eventually {math}`|B_{t}|` grows large enough so that the predicted price of a share is negative. But if share prices were negative, people could make themselves better off by simply throwing away their stock certificates. Thus, the restriction that prices must be positive rules out negative bubbles.
 
 Bubbles can also be ruled out if there is a maximum possible price that the asset can have. Consider, for example, the question of whether there can be a bubble on the price of diamonds. Suppose that there is a fixed supply of natural diamonds in existence, but that artificial diamonds can be made at a cost {math}`\bar{\Price}` above the current market price. A bubble would eventually carry the market price past {math}`\bar{\Price}`, but nobody will pay more than {math}`\bar{\Price}` for a natural diamond when an artificial one costs {math}`\bar{\Price}`, so the price cannot rise beyond {math}`\bar{\Price}`. In the period before the bubble would pass {math}`\bar{\Price}`, then, the price cannot rise by the factor the bubble needs to earn the required return, so nobody holds the bubble then; and by the same logic nobody holds it in the period before that, or in any earlier period, today included. Thus, rational bubbles are ruled out for assets which are reproducible.
 
 We assumed, in deriving these results, that the investor's utility function was linear.
 
-There are also some general equilibrium arguments against bubbles, which basically boil down to the observation that if the value of the bubble is growing forever, its size will eventually exceed the size of the entire capital stock, and in that case productive capital will have been driven to zero because everybody owns the bubble instead of capital, which cannot make sense. The argument needs the interest rate to exceed the economy's growth rate: a bubble grows at the rate of interest {math}`\rfree`, so it outgrows the economy only if {math}`\rfree` exceeds the growth rate {math}`\pGro`. In a dynamically inefficient economy, where {math}`\rfree < \pGro`, as can happen in [Diamond's overlapping generations model](#sec:OLGModel), a bubble can survive in general equilibrium {cite:p}`tirole:bubbles`.
+There are also some general equilibrium arguments against bubbles, which basically boil down to the observation that if the value of the bubble is growing forever, its size will eventually exceed the size of the entire capital stock, and in that case productive capital will have been driven to zero because everybody owns the bubble instead of capital, which cannot make sense. The argument needs the interest rate to exceed the economy's growth rate: a bubble grows at the rate of interest {math}`\rfree`, so it outgrows the economy only if {math}`\rfree` exceeds the growth rate {math}`\pGro`, which in a steady state is also the growth rate of dividends. In a dynamically inefficient economy, where {math}`\rfree < \pGro`, as can happen in [Diamond's overlapping generations model](#sec:OLGModel), a bubble can survive in general equilibrium {cite:p}`tirole:bubbles`.
