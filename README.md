@@ -89,7 +89,7 @@ Notes that supplement the main chapters, on the website only and not in the PDF:
 
 ## Acknowledgments
 
-Development supported by the [Econ-ARK](https://econ-ark.org/) project with funding from the Alfred P. Sloan Foundation.
+Development supported by the [Econ-ARK](https://econ-ark.org/) project with funding from the Alfred P. Sloan Foundation and T. Rowe Price.
 
 :::{seealso}
 The [HARK](https://docs.econ-ark.org/) toolkit provides computational implementations of many models covered in these notes, including buffer-stock consumption, portfolio choice, and lifecycle models.

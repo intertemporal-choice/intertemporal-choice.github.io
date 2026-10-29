@@ -114,7 +114,7 @@ project:
   funding:
     - statement: >-
         Development of these materials has been supported by the Econ-ARK project,
-        funded by the Alfred P. Sloan Foundation.
+        funded by the Alfred P. Sloan Foundation and T. Rowe Price.
       open_access: These materials are freely available under open access terms.
       awards:
         - id: sloan-econ-ark
@@ -127,6 +127,11 @@ project:
           recipients:
             - ccarroll
             - alujan
+        - id: trowe-econ-ark
+          name: Support for the Econ-ARK project
+          sources:
+            - name: T. Rowe Price
+              url: https://www.troweprice.com
 
   github: https://github.com/intertemporal-choice/intertemporal-choice.github.io
 
