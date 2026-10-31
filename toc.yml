@@ -51,7 +51,9 @@ project:
       children:
         - file: content/investment/InvestmentNotes.md
         - file: content/investment/HallJorgenson.md
-        - file: content/investment/qModel.md
+        - file: content/investment/qModel/index.md
+          children:
+            - file: content/investment/qModel/qModel.ipynb
         # Converted from the DynanImperfCapMkts handout, which the local sources/
         # mirror never pulled; the mechanism chapter for the one that follows. It also
         # holds the bond-premium evidence that was the Imperfections page until 2026-10-31.

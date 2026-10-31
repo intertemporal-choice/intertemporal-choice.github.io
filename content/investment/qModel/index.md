@@ -3,7 +3,7 @@
 
 This section presents a discrete-time version of the Abel-Hayashi marginal {math}`\q` model of investment ({cite:p}`abel:q`; {cite:p}`hayashi:q`).
 
-A corresponding [Jupyter Notebook](https://github.com/econ-ark/DARKolo/blob/master/chimeras/qModel/qModel-Template-Handout-Figures.ipynb) implements numerical solutions to the model using [HARK](https://github.com/econ-ark/HARK) and [dolo](https://dolo.readthedocs.io/en/doc/).
+The chapter's [notebook](qModel.ipynb) solves the model exactly, without the approximations used below, draws the chapter's figures, and redraws them with sliders; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/investment/qModel/qModel.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/investment/qModel/qModel.ipynb).
 
 (Definitions)=
 ## Definitions
@@ -51,9 +51,7 @@ The {math}`\q` model assumes that firms maximize the net profits payable to shar
 \end{aligned}
 ```
 
-Next period's capital is what remains of this period's capital after depreciation, plus current investment:[^timing-alternative]
-
-[^timing-alternative]: The [software archive](https://github.com/econ-ark/DARKolo/blob/master/chimeras/qModel) that produces the figures for this section makes a slightly different assumption about the timing of depreciation: {math}`k_{t+1} = (i_{t}+k_{t})\daleth.` The timing choice makes no qualitative and very little quantitative difference, but the alternative specification is slightly better for computational reasons.
+Next period's capital is what remains of this period's capital after depreciation, plus current investment:
 
 ```{math}
 \begin{aligned}
@@ -381,16 +379,16 @@ For appropriate choices of parameter values the problem satisfies the usual cond
 The {math}`\vk` diagram is virtually indistinguishable from the {math}`\q` diagram; the only difference is that the {math}`\Delta k_{t+1}` locus is located at the point {math}`\vk = \kPriceAfterITC` (i.e. the marginal value of investment is equal to the price of a unit of investment). The distinction between the diagrams reflects the fact that an increase in the investment tax credit will result in a rise in the steady-state value of {math}`k` which implies a fall in the pretax marginal product of capital.
 
 
-:::{figure} /content/figures/qModel/lPhaseDiag.png
+:::{figure} figures/lPhaseDiag.png
 :name: fig:qMod-lPhaseDiag
 
-Phase diagram for {math}`\vk`
+Phase diagram for {math}`\vk`, with an investment tax credit of 10 percent, so that the line where capital is constant is at {math}`\vk = \kPriceAfterITC = 0.9`. The locus where {math}`\vk` is constant sets aside the effect of capital on the costs of adjustment, as the text does near the steady state; the saddle path is exact. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
 :::
 
-:::{figure} /content/figures/qModel/qPhaseDiag.png
+:::{figure} figures/qPhaseDiag.png
 :name: fig:qMod-qPhaseDiag
 
-Phase diagram for {math}`\q`
+Phase diagram for {math}`\q`, with the same investment tax credit: the line where capital is constant is at {math}`\q = 1`. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
 :::
 
 (Dynamics)=
@@ -414,10 +412,10 @@ So we can tell the story as follows. Suppose that leading up to period {math}`t`
 
 The phase diagrams with the saddle paths before and after the productivity increase together with the impulse response functions are plotted in {numref}`fig:ProductivityIncrease`.
 
-:::{figure} /content/figures/qModel/ProductivityIncrease.png
+:::{figure} figures/ProductivityIncrease.png
 :name: fig:ProductivityIncrease
 
-Increase in productivity. Phase diagrams with saddle paths (dashed black and continuous red lines respectively pre and post the productivity increase) and impulse response functions.
+Increase in productivity of 10 percent, unexpected and at once. Top left, the phase diagram with the saddle paths before (gray, dashed) and after (red) the increase, and the path the economy takes, a dot a period; then, by period, the net investment rate, {math}`\vk` and {math}`\q`, and capital relative to its old steady state. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
 :::
 
 (Permanent-Tax-Cut)=
@@ -444,16 +442,16 @@ The phase diagrams with the saddle paths before and after the corporate tax redu
 
 In sum: In terms of effects on capital, the outcome from a corporate tax cut and an ITC tax cut are similar, but the analytics of {math}`\vk` are different, because the former raises the after-tax return that capital earns, {math}`\TaxFree\fFunc^{k}`, while the latter lowers the after-tax price of acquiring it, {math}`\kPriceAfterITC`.
 
-:::{figure} /content/figures/qModel/CorporateTaxReduction.png
+:::{figure} figures/CorporateTaxReduction.png
 :name: fig:CorporateTaxReduction
 
-Corporate tax reduction. Phase diagrams with saddle paths (dashed black and continuous red lines respectively pre and post the corporate tax reduction) and impulse response functions.
+Corporate tax reduction from 30 to 20 percent, unexpected and at once, drawn as in {numref}`fig:ProductivityIncrease`. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
 :::
 
-:::{figure} /content/figures/qModel/ITCIncrease.png
+:::{figure} figures/ITCIncrease.png
 :name: fig:ITCIncrease
 
-ITC increase. Phase diagrams with saddle paths (dashed black and continuous red lines respectively pre and post the ITC increase) and impulse response functions.
+An investment tax credit of 10 percent, unexpected and at once, drawn as in {numref}`fig:ProductivityIncrease`. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
 :::
 
 (Future-Shock-To-Productivity)=
@@ -473,11 +471,17 @@ To determine the short run dynamics, notice several things. First, there can be 
 
 But because the equilibrium capital stock is larger, we know that {math}`{j}^{k}_{\geq t+n}<0` and will stay negative thereafter (asymptoting to zero from below). This reflects the fact that if you know you will need higher capital in the future, the most efficient way to minimize the cost of obtaining that capital is to gradually start building some of it even before you need it, rather than trying to do it all at once. Note further that before period {math}`t+n` the model behaves according to the equations of motion defined by the problem under the {math}`{<}` parameter values,[^jk-path-note] while at {math}`t+n` and after it behaves according to the new {math}`\geq` equations of motion.
 
-[^jk-path-note]: Strictly speaking, this is not true, because {math}`j_{t}^{k}` will now differ from the value associated with the initial problem. For purposes of analyzing problems of this kind (announced future changes in parameters) we will neglect the effects of the path of {math}`j_{t}^{k}` on the equations of motion. Except under extreme circumstances, this should not change the qualitative results of the analysis, and doing anything else would require a very intricate analysis. This treatment is admittedly a bit inconsistent, since in the case under consideration it is precisely the change in {math}`j_{t}^{k}` that motivates the firm to start adjusting its capital stock before the productivity change comes into effect; effectively, we are taking into account the effect of {math}`j_{t}^{k}` on the level of {math}`\vk` before period {math}`t+n` while neglecting its effects on {math}`\vk`'s dynamics during this interval. C'est la vie.
+[^jk-path-note]: Strictly speaking, the path of {math}`j_{t}^{k}` changes the equations of motion before {math}`t+n` too. The phase diagrams set that effect aside; the chapter's notebook solves the model exactly, and its paths ({numref}`fig:FutureProductivityIncrease` and {numref}`fig:FutureITCIncrease`) have the shapes described here.
 
 Putting all this together, the story is as follows. Upon announcement of the productivity increase, {math}`\vk` jumps to the level such that, evolving exactly according to its {math}`{<}` equations of motion, it will arrive in period {math}`t+n` at a point exactly on the saddle path of the model corresponding to the {math}`{\geq}` equations of motion. Thereafter it will evolve toward the steady state, which will be at a higher level of capital than before, {math}`\check{k}_{\geq} > \check{k}_{<}`, because the greater productivity justifies a higher equilibrium capital stock.
 
 Thus, {math}`\vk` jumps up at time {math}`t`, evolves to the northeast until time {math}`t+n`, and thereafter asymptotes downward toward the same equilibrium value it had originally before the productivity change. Since {math}`\TaxComb` has not changed, the dynamics of {math}`\q` and {math}`\iota` are the same as those of {math}`\vk`.
+
+:::{figure} figures/FutureProductivityIncrease.png
+:name: fig:FutureProductivityIncrease
+
+Increase in productivity of 10 percent, announced at 0 to take effect at 5, drawn as in {numref}`fig:ProductivityIncrease`. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
+:::
 
 (Future-Increase-In-ITC)=
 ### A Future Increase in the ITC
@@ -490,7 +494,15 @@ The dynamics of {math}`\vk` show this. As in the case of a [future increase in p
 
 Investment follows {math}`\q_{t+1} = \vk_{t+1}/\kPriceAfterITC_{t+1}`, since {math}`1+\iota_{t}\omega = \q_{t+1}`: the price that matters for investment at {math}`t` is {math}`\kPriceAfterITC_{t+1}`, at which it is paid for. Until {math}`t+n-1` that price has not changed, so {math}`\q` is below one and the firm invests less than it needs to replace depreciation, {math}`\iota < 0`; and {math}`\iota` keeps falling, along with {math}`\vk`, as the date of the credit approaches. At {math}`t+n-1`, the first period whose investment is paid for at the new, lower price {math}`\kPriceAfterITC_{t+n}`, {math}`\q_{t+n}` jumps up, and so does investment, to a level above the one it had before the announcement.
 
+{numref}`fig:FutureITCIncrease` shows the path for a credit of 10 percent announced five periods ahead.
+
 So the path of {math}`\iota` is: At {math}`t`, a discrete drop below zero; between {math}`t` and {math}`t+n-2`, a falling path, as the firm postpones investment; at {math}`t+n-1`, an upward jump; and after that, a path that asymptotes downward toward the steady state level of investment, at a capital stock larger than before. This postponement is the central result of {cite:t}`abelTempTax`, and it is why an anticipated or temporary tax incentive changes the timing of investment so strongly {cite:p}`auerbachHinesITC,hsITC`.
+
+:::{figure} figures/FutureITCIncrease.png
+:name: fig:FutureITCIncrease
+
+An investment tax credit of 10 percent, announced at 0 to take effect at 5, drawn as in {numref}`fig:ProductivityIncrease`: investment falls below replacement while the firm waits for the cheaper capital, and jumps at 4, the first period whose investment is paid for at the new price. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
+:::
 
 A future cut in the corporate tax rate is different. It raises the after-tax return to capital without changing its price, so it works like a future increase in productivity: {math}`\vk`, {math}`\q` and {math}`\iota` all jump up at {math}`t` and rise until {math}`t+n`.
 
@@ -506,6 +518,6 @@ Hayashi's result made the model testable: regress investment on average {math}`Q
 
 Quadratic costs of adjustment make net investment move smoothly, in proportion to {math}`\q-1`. Plants do not behave that way: they invest in bursts, with long periods of little investment in between {cite:p}`domsDunneLumpy`. When investment cannot be reversed, or reversing it is costly, there is a range of {math}`\q` around one in which the firm does nothing, and it buys capital only when {math}`\q` rises above an upper threshold and sells only when {math}`\q` falls below a lower one; {cite:t}`abel&eberly:unified` give a unified model, and {cite:t}`dixitPindyck` and {cite:t}`adepOptions` connect it to the value of the option to wait. Fixed costs of adjustment make investment lumpy {cite:p}`caballeroEngelSs,cooperHaltiwangerAdjCosts`. Whether the lumpiness matters for aggregate investment is debated: {cite:t}`khanThomasNonconvex` find that in general equilibrium the movements of prices smooth it away, and {cite:t}`winberryLumpy` finds that it does not, with consequences for policies that aim to stimulate investment. Models used for monetary policy often instead put the cost on the *change* in investment, which produces the gradual, hump-shaped responses of investment seen in the data {cite:p}`ceeNominal`.
 
-## More Figures
+## With Sliders
 
-Figures for a variety of other experiments, including changes in the interest rate, can be constructed using the [notebook](https://github.com/econ-ark/DARKolo/blob/master/chimeras/qModel/qModel-Template-Handout-Figures.ipynb).
+The chapter's [notebook](qModel.ipynb) redraws the phase diagram as the cost of adjustment, the interest rate and the depreciation rate change, and each experiment with sliders for its size, the number of periods between its announcement and its effect, and the cost of adjustment; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/investment/qModel/qModel.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/investment/qModel/qModel.ipynb).

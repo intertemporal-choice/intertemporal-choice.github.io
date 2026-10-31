@@ -203,7 +203,7 @@ project:
           level: 1
         - file: content/investment/HallJorgenson.md
           level: 1
-        - file: content/investment/qModel.md
+        - file: content/investment/qModel/index.md
           level: 1
         - file: content/investment/DynanImperfCapMkts.md
           level: 1
