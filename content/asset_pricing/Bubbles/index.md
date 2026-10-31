@@ -1,6 +1,8 @@
 (sec:Bubbles)=
 # Canonical Asset Pricing and Rational Bubbles
 
+The chapter's [notebook](Bubbles.ipynb) simulates bubbles that burst and draws a bubble in an overlapping generations economy, with sliders; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Bubbles.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/asset_pricing/Bubbles/Bubbles.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/asset_pricing/Bubbles/Bubbles.ipynb).
+
 ## Prices as the PDV of Dividends
 
 Denoting dividends as {math}`\dvdnd_{t}` for a stock with a market price of {math}`\Price_{t}` per share, consider an investor who owns {math}`K_{t}` shares at the beginning of period {math}`t` yielding total wealth {math}`M_{t}=\Price_{t}K_{t}+\dvdnd_{t}K_{t}`. Assuming the investor has no other source of income (no labor income, for instance) the investor's budget constraint will be
@@ -245,6 +247,20 @@ The sum is {math}`1-\LivPrb^{s}`, which goes to one as {math}`s` grows: a stocha
 
 periods, a little less than {math}`69.3/(100\DiePrb)`, which is the halving form of the [rule of 72](#fact:ruleof72). With a 5 percent chance of bursting each period, a bubble's chance of surviving halves every 13.5 periods, while its expected lifetime is 20 periods: the mean exceeds the half-life because a few bubbles last a very long time.
 
+{numref}`fig:BubblePaths` follows a dozen such bubbles with an interest factor of 1.04, and {numref}`fig:BubbleLifetimes` shows the lifetimes of twenty thousand.
+
+:::{figure} figures/BubblePaths.png
+:name: fig:BubblePaths
+
+A dozen bubbles that burst with probability 0.05 each period, with an interest factor of 1.04, on a log scale. While a bubble lasts it grows by {math}`\Rfree/\LivPrb`, so the dozen share one line; an x marks the last period a bubble was alive (with a count when several burst together). Their expected value, dashed, grows by {math}`\Rfree`. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Bubbles.ipynb), which runs in your browser.
+:::
+
+:::{figure} figures/BubbleLifetimes.png
+:name: fig:BubbleLifetimes
+
+The lifetimes of twenty thousand bubbles that burst with probability 0.05 each period, against the geometric distribution, with the half-life of survival, 13.5 periods, and the expected lifetime, 20 periods. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Bubbles.ipynb), which runs in your browser.
+:::
+
 Both kinds of bubble are special cases of a general solution: adding to {math}`\Price_{t}^{*}` any process {math}`B_{t}` with {math}`\Ex_{t}[B_{t+1}] = \Rfree B_{t}` satisfies the first order condition {eq}`eq:pteq` {cite:p}`floodGarberBubbles,blanchardWatsonBubbles`. Other members of the family have been built to resemble the data. The "intrinsic" bubbles of {cite:t}`frootObstfeldIntrinsic` depend on dividends themselves, so that prices overreact to news about dividends. The bubbles of {cite:t}`evansPitfalls` collapse periodically to a small positive value and then grow again, and standard tests for bubbles miss them. {cite:t}`westSpecTest` tests for a bubble by comparing two estimates of the present-value relation that should agree if there is none, and {cite:t}`phillipsShiYuBubbles` date periods of explosive growth in the S&P 500.
 
 (WhyBubblesCannotExist)=
@@ -274,7 +290,13 @@ These results were derived for risk-neutral investors, but none depends on it. W
 
 and the arguments against negative bubbles, against bubbles that start, and against bubbles on assets that can be reproduced are unchanged.
 
-There are also some general equilibrium arguments against bubbles, which basically boil down to the observation that if the value of the bubble is growing forever, its size will eventually exceed the size of the entire capital stock, and in that case productive capital will have been driven to zero because everybody owns the bubble instead of capital, which cannot make sense. The argument needs the interest rate to exceed the economy's growth rate: a bubble grows at the rate of interest {math}`\rfree`, so it outgrows the economy only if {math}`\rfree` exceeds the growth rate {math}`\pGro`, which in a steady state is also the growth rate of dividends. In a dynamically inefficient economy, where {math}`\rfree < \pGro`, as can happen in [Diamond's overlapping generations model](#sec:OLGModel), a bubble can survive in general equilibrium {cite:p}`tirole:bubbles`. The idea goes back to {cite:t}`samuelsonOLG`, whose money is a bubble: an asset that pays no dividend and has value only because each generation expects the next to accept it. {cite:t}`weilConfidence` shows that such a bubble can burst at random, as Blanchard's does. But {cite:t}`amszDynamicEfficiency` find that actual economies are dynamically efficient, which seems to close this route to a rational bubble.
+There are also some general equilibrium arguments against bubbles, which basically boil down to the observation that if the value of the bubble is growing forever, its size will eventually exceed the size of the entire capital stock, and in that case productive capital will have been driven to zero because everybody owns the bubble instead of capital, which cannot make sense. The argument needs the interest rate to exceed the economy's growth rate: a bubble grows at the rate of interest {math}`\rfree`, so it outgrows the economy only if {math}`\rfree` exceeds the growth rate {math}`\pGro`, which in a steady state is also the growth rate of dividends. In a dynamically inefficient economy, where {math}`\rfree < \pGro`, as can happen in [Diamond's overlapping generations model](#sec:OLGModel), a bubble can survive in general equilibrium {cite:p}`tirole:bubbles`. {numref}`fig:TiroleBubble` draws such a bubble in the OLG chapter's economy. The idea goes back to {cite:t}`samuelsonOLG`, whose money is a bubble: an asset that pays no dividend and has value only because each generation expects the next to accept it. {cite:t}`weilConfidence` shows that such a bubble can burst at random, as Blanchard's does. But {cite:t}`amszDynamicEfficiency` find that actual economies are dynamically efficient, which seems to close this route to a rational bubble.
+
+:::{figure} figures/TiroleBubble.png
+:name: fig:TiroleBubble
+
+A bubble in the [Diamond OLG model](#sec:OLGModel), with very patient consumers ({math}`\DiscFac` of 0.999 a year), a capital share of 0.2 and population growth of 4 percent a year, a period being 36 years. With no bubble, capital converges to {math}`\bar{k}`, where the interest rate, 3.2 percent a year, is below the growth rate of the population: the economy is dynamically inefficient. A bubble that lasts must grow as fast as the population, so in its steady state the interest factor equals the population's growth factor and capital is at the golden rule, {math}`k^{**}`; the bubble takes the savings that would have been capital beyond it, a third of the young's savings. At the OLG chapter's own calibration, the economy is dynamically efficient and no bubble can last. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Bubbles.ipynb), which runs in your browser.
+:::
 
 More recent work finds room for bubbles even in dynamically efficient economies, through frictions in financial markets: bubbles that relax firms' borrowing constraints, and so can crowd investment in rather than out {cite:p}`martinVenturaBubbles`; bubbles that supply the liquidity firms need {cite:p}`farhiTiroleBubbly`; and a rational bubble that grows faster when the central bank raises interest rates to lean against it {cite:p}`galiBubbles`.
 

@@ -46,7 +46,9 @@ project:
         - file: content/asset_pricing/LucasAssetPrice.md
         - file: content/asset_pricing/C-CAPM.md
         - file: content/asset_pricing/EquityPremiumPuzzle.md
-        - file: content/asset_pricing/Bubbles.md
+        - file: content/asset_pricing/Bubbles/index.md
+          children:
+            - file: content/asset_pricing/Bubbles/Bubbles.ipynb
     - file: content/investment/index.md
       children:
         - file: content/investment/InvestmentNotes.md
