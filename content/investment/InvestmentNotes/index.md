@@ -1,11 +1,13 @@
 (sec:InvestmentNotes)=
 # Investment Notes
 
+The chapter's [notebook](InvestmentNotes.ipynb) draws its figures from the national accounts and solves Samuelson's multiplier-accelerator model, with sliders; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/investment/InvestmentNotes/InvestmentNotes.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/investment/InvestmentNotes/InvestmentNotes.ipynb).
+
 ## Broad Comments
 
 ### Why Study Investment?
 
-1. Although investment is much smaller as a fraction of GDP than consumption, investment is much more *variable* than consumption. So *fluctuations* in investment spending account for a large proportion of business-cycle frequency fluctuations in GDP: over the business cycle, investment is several times as volatile as output {cite:p}`stockWatsonHandbook`. {numref}`fig:InvestmentDrivesCycle` shows one way of measuring this.
+1. Although investment is much smaller as a fraction of GDP than consumption, investment is much more *variable* than consumption. So *fluctuations* in investment spending account for a large proportion of business-cycle frequency fluctuations in GDP: over the business cycle, investment is several times as volatile as output {cite:p}`stockWatsonHandbook`. {numref}`fig:InvestmentVolatility` shows one way of measuring this: since 1948, real investment's growth over four quarters has varied four times as much as real GDP's, and, measured by the covariance of its growth with GDP's, investment accounts for about half of the variance of GDP's growth.
 
 2. In the long run, the average magnitude of investment spending determines the size of the capital stock. If we think accounting for capital is an important component of explaining macroeconomic outcomes, then we need an understanding of investment.
 
@@ -39,7 +41,13 @@ where {math}`c` is the marginal propensity to consume and {math}`v` is the accel
 Y_{t} = G + c(1+v)Y_{t-1} - c v Y_{t-2},
 ```
 
-whose steady state is the Keynesian multiplier's {math}`G/(1-c)`. The model was famous for its dynamics, which depend only on {math}`c` and {math}`v`. Output cycles when the roots of {math}`x^{2}-c(1+v)x+cv=0` are complex, which happens when {math}`c(1+v)^{2} < 4v`, and it converges when {math}`cv < 1`. So output can converge smoothly, converge in damped cycles, cycle with growing amplitude, or explode. In the cyclical case, the amplitude of the cycles changes each period by the factor {math}`\sqrt{cv}`, the modulus of the roots.
+whose steady state is the Keynesian multiplier's {math}`G/(1-c)`. The model was famous for its dynamics, which depend only on {math}`c` and {math}`v`. Output cycles when the roots of {math}`x^{2}-c(1+v)x+cv=0` are complex, which happens when {math}`c(1+v)^{2} < 4v`, and it converges when {math}`cv < 1`. So output can converge smoothly, converge in damped cycles, cycle with growing amplitude, or explode ({numref}`fig:MultiplierAccelerator`). In the cyclical case, the amplitude of the cycles changes each period by the factor {math}`\sqrt{cv}`, the modulus of the roots.
+
+:::{figure} figures/MultiplierAccelerator.png
+:name: fig:MultiplierAccelerator
+
+The multiplier-accelerator's four regimes. Left, the map: below the solid curve output cycles, and below the dashed one it converges. Right, output after government spending rises by 10 percent for good at {math}`t = 0`, relative to the change's long-run effect (0 is the old steady state, 1 the new), at the four numbered points. Drawn by the chapter's notebook, which you can open in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/investment/InvestmentNotes/InvestmentNotes.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/investment/InvestmentNotes/InvestmentNotes.ipynb).
+:::
 
 From today's perspective, the distinctive feature of Samuelson's model of investment is its emphasis on the proposition that levels of investment were determined by impulses from outside the market for investment. Empirical work in this tradition boiled the investment component down to a reduced form like
 
@@ -98,8 +106,8 @@ Useful though it may be, the assumption of perfect capital markets is clearly ve
 
 The implication of capital market imperfections that has been most vigorously explored is that the amount of investment may be affected by a firm's financial position. The crux of that literature is summarized in the [investment and cash flow](#sec:iAndCashFlow) section.
 
-:::{figure} /content/figures/InvestmentNotes/InvestmentDrivesCycle.png
-:name: fig:InvestmentDrivesCycle
+:::{figure} figures/InvestmentVolatility.png
+:name: fig:InvestmentVolatility
 
-Investment Drives the Cycle. Source: Torsten Sløk, Deutsche Bank, October 2011.
+Investment drives the cycle: the growth over four quarters of real gross private domestic investment, real GDP and real personal consumption expenditures, in percent, 1948 to 2026, with the NBER's recessions shaded. The standard deviations of the three growth rates are 11.5, 2.6 and 2.3 percentage points. Data from the Bureau of Economic Analysis, via FRED (series GPDIC1, GDPC1, PCECC96 and USRECQ), downloaded on 2026-10-31. Drawn by the chapter's notebook, which you can open in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/investment/InvestmentNotes/InvestmentNotes.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/investment/InvestmentNotes/InvestmentNotes.ipynb).
 :::

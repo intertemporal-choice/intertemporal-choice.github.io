@@ -199,7 +199,7 @@ project:
           level: 1
         - file: content/investment/index.md
           level: 0
-        - file: content/investment/InvestmentNotes.md
+        - file: content/investment/InvestmentNotes/index.md
           level: 1
         - file: content/investment/HallJorgenson.md
           level: 1
