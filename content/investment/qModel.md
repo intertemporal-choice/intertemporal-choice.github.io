@@ -10,13 +10,13 @@ A corresponding [Jupyter Notebook](https://github.com/econ-ark/DARKolo/blob/mast
 
 To simplify some algebra, we assume that a unit of investment purchased in period {math}`t` does not become productive until {math}`t+1`; the cost at {math}`t` reflects the present discounted value of the period-{math}`t+1` price of capital.[^timing-simplification]
 
-[^timing-simplification]: This assumption simplifies many of the expressions that arise in the discrete-time framework; in continuous time the model presentation is simpler, but is hard to map the continuous-time theory into a transparent computational solution like the one that accompanies these notes.
+[^timing-simplification]: This assumption simplifies many of the expressions that arise in the discrete-time framework; in continuous time the model presentation is simpler, but it is hard to map the continuous-time theory into a transparent computational solution like the one that accompanies these notes.
 
 Adjustment costs are priced the same way.[^itc-resale] We repeatedly make approximations motivated by results from the continuous-time model; the key approximation will be the usual calculus result that if {math}`\epsilon` and {math}`\gamma` are "small" then {math}`\epsilon\gamma` can be approximated by zero. (We will call this fact [SmallSmallZero](#fact:smallsmallzero) in the MathFactsList.)[^tax-depreciation]
 
-[^itc-resale]: To avoid arbitrage opportunities, assume that if you claimed an investment tax credit on a unit of investment in period {math}`t`, then if you resell the portion that remains after depreciation in a future period, you must repay the ITC corresponding to the remaining capital. Actual tax treatment of depreciation is too complicated be worth incorporating into the model; these assumptions capture the core of it.
+[^itc-resale]: To avoid arbitrage opportunities, assume that if you claimed an investment tax credit on a unit of investment in period {math}`t`, then if you resell the portion that remains after depreciation in a future period, you must repay the ITC corresponding to the remaining capital. Actual tax treatment of depreciation is too complicated to be worth incorporating into the model; these assumptions capture the core of it.
 
-[^tax-depreciation]: We neglect tax depreciation because, as shown in the [Hall-Jorgenson](#sec:HallJorgenson) section, it matters only insofar as it affects the cost of capital; since the investment tax credit has a more transparent and direct effect on the cost of capital, including tax depreciation would add complication without adding any fundamental insights to the analysis. In the perfect foresight framework analyzed here, any attempt to analyze the effects of changes in tax depreciation should be translatable into an equivalent modification to the ITC. See {cite:t}`hsITC` for elaboration.
+[^tax-depreciation]: We neglect tax depreciation because, as shown in the [Hall-Jorgenson](#HallJorgensonTaxes) section, it matters only through the after-tax price of capital: deductions worth {math}`z` per dollar of investment work exactly like an investment tax credit at the rate {math}`{\TaxCorp} z`, for a given tax rate. So the ITC here can be read as including them, and including tax depreciation separately would add complication without adding any fundamental insights to the analysis. See {cite:t}`hsITC` for elaboration.
 
 | Symbol | | Definition |
 | --- | --- | --- |
@@ -61,9 +61,9 @@ k_{t+1} & = k_{t}\daleth+i_{t}.
 \end{aligned}
 ```
 
-If capital markets are efficient, {math}`\vFirm_{t}(\kap_{t})` will also be the stock market value ("**e**quity" is the mnemonic) of the profit-maximizing firm because it is precisely the amount that a rational investor will be willing to pay if they care only about discounted after-tax income derived from owning (a share of) the firm.
+If capital markets are efficient, {math}`\vFirm_{t}(k_{t})` will also be the stock market value ("**e**quity" is the mnemonic) of the profit-maximizing firm because it is precisely the amount that a rational investor will be willing to pay if they care only about discounted after-tax income derived from owning (a share of) the firm.
 
-We can simplify by thinking about the firm's shareholders as the suppliers of physical capital, not just financial capital. In this interpretation, {math}`\kap` represents not just the value of the physical machinery owned by the firm, but also the number of shares of stock outstanding in the firm. We can think of the firm in this way if we suppose that every time the firm purchases new physical capital, it does so by issuing new shares at a price equal to the marginal valuation of the firm's capital stock, purchasing the unit of capital at the price given by the after-tax cost of that capital (and after paying any associated adjustment costs).[^itc-share-price]
+We can simplify by thinking about the firm's shareholders as the suppliers of physical capital, not just financial capital. In this interpretation, {math}`k` represents not just the value of the physical machinery owned by the firm, but also the number of shares of stock outstanding in the firm. We can think of the firm in this way if we suppose that every time the firm purchases new physical capital, it does so by issuing new shares at a price equal to the marginal valuation of the firm's capital stock, purchasing the unit of capital at the price given by the after-tax cost of that capital (and after paying any associated adjustment costs).[^itc-share-price]
 
 [^itc-share-price]: This leads to some subtlety in thinking about what happens to the firm's share price when an ITC is introduced; we discuss this briefly below.
 
@@ -88,7 +88,7 @@ which is equivalent to
 \end{aligned}
 ```
 
-and defining {math}`j_{t}^{i}=\adj^{i}(i_{t},k_{t})` as the derivative of adjustment costs with respect to the level of investment,[^adj-function-structure] the first order condition for optimization with respect to {math}`\kap_{t+1}` (or, equivalently, {math}`i_{t}`) is
+and defining {math}`j_{t}^{i}=\adj^{i}(i_{t},k_{t})` as the derivative of adjustment costs with respect to the level of investment,[^adj-function-structure] the first order condition for optimization with respect to {math}`k_{t+1}` (or, equivalently, {math}`i_{t}`) is
 
 [^adj-function-structure]: We implicitly assume in the following derivations that the structure of the {math}`\adj` function is appropriate to our needs; later we will define a specific {math}`\adj` that will always work, but here we want to leave the structure of the function general.
 
@@ -282,6 +282,19 @@ and notice that this implies
 - The investment ratio {math}`\iota_{t}` is monotonically increasing in {math}`\q_{t+1}` ({math}`\pmb{\iota}^{\prime}(\q_{t+1})>0`)
 - The strength with which {math}`\iota_{t}` is related to {math}`\q_{t+1}` depends on the magnitude of adjustment costs ({math}`d |\pmb{\iota}_{t}| / d \omega < 0`)
 
+(MarginalAndAverageQ)=
+### Marginal and Average {math}`\q`
+
+Marginal {math}`\q` is the value of one more unit of capital relative to its price, which nobody observes directly. What can be observed, when the firm's shares trade, is the ratio of the firm's market value to the replacement cost of its capital, Tobin's average {math}`Q`. {cite:t}`hayashi:q` showed when the two are the same. Suppose the firm's after-tax revenue is proportional to its capital, as it is when the firm takes prices as given and produces with constant returns to scale in capital and the inputs it adjusts freely, such as labor; and suppose the cost of adjustment {math}`\adj(i,k)` is homogeneous of degree one in investment and capital. Then the value of the firm is proportional to its capital, by the same logic as [Euler's theorem](#fact:eulerstheorem): {math}`\vFirm_{t}(k_{t}) = \vk_{t} k_{t}`, and
+
+```{math}
+:label: eq:hayashi
+
+\q_{t} = \frac{\vk_{t}}{\kPriceAfterITC_{t}} = \frac{\vFirm_{t}(k_{t})}{\kPriceAfterITC_{t} k_{t}} = Q_{t}.
+```
+
+Marginal {math}`\q` then equals average {math}`Q`, which can be measured from the stock market. The adjustment cost function used below, {math}`\adj = (k/2)\omega(i/k-\depr)^{2}`, is homogeneous of degree one, so the condition comes down to revenue. With the production function of the figures, {math}`\fFunc(k) = k^{\alpha}` with {math}`\alpha < 1`, it fails: decreasing returns give the firm rents, which add to its market value without adding to the value of a marginal unit of capital, so average {math}`Q` exceeds marginal {math}`\q`.
+
 (Phase-Diagrams)=
 ## Phase Diagrams
 
@@ -429,7 +442,7 @@ There is, however, one interesting distinction between a decrease in {math}`\Tax
 
 The phase diagrams with the saddle paths before and after the corporate tax reduction and the ITC increase, together with the impulse response functions, are plotted respectively in {numref}`fig:CorporateTaxReduction` and {numref}`fig:ITCIncrease`. Note that the {math}`\vk` saddle path actually jumps *downward* after the ITC increase. This is not an error; rather, recall that {math}`\vk` reflects marginal value of a unit of capital inside the firm, and recall that the *price* of purchasing that capital has gone down. Remembering that we are assuming that capital can move in and out of the firm, this has the surprising consequence that, for the original owners of the firm, the ITC is *bad* news because it means that the capital they own has a lower value (its value is ultimately tied to the price of capital, which has gone down). For a potential new shareholder, the investment tax credit means that you can obtain ownership of a share of the firm's capital by buying the capital at the ITC-discounted price, paying the adjustment costs, then giving the capital to the firm. Thus, the ITC has the effect of increasing the absolute value of a dollar of money relative to the value of a unit of capital inside the firm. So in this special case, you should think of the ITC as something that provides a discount to purchasing shares or capital {math}`\vk`. While the new saddle path for {math}`\vk` is lower than the old one, that does not reflect the adjustment for the fact that the new capital is being purchased at a cheaper price. The dynamics of {math}`\q`, in this case, are more intuitive than those of {math}`\vk`: {math}`\q` unambiguously increases, reflecting the fact that the value of capital to the firm exceeds its new (cheaper) cost.
 
-In sum: In terms of effects on capital, the outcome from a corporate tax cut and an ITC tax cut are similar, but the analytics of {math}`\vk` are different, because the former affects the after-tax interest rate while the latter affects the after-tax cost of capital.
+In sum: In terms of effects on capital, the outcome from a corporate tax cut and an ITC tax cut are similar, but the analytics of {math}`\vk` are different, because the former raises the after-tax return that capital earns, {math}`\TaxFree\fFunc^{k}`, while the latter lowers the after-tax price of acquiring it, {math}`\kPriceAfterITC`.
 
 :::{figure} /content/figures/qModel/CorporateTaxReduction.png
 :name: fig:CorporateTaxReduction
@@ -471,13 +484,27 @@ Thus, {math}`\vk` jumps up at time {math}`t`, evolves to the northeast until tim
 
 Consider now the consequences if a surprise increase in the investment tax credit is passed at date {math}`t` that will become effective at date {math}`t+n>t`.
 
-Inspection of {eq}`eq:qdyn` might suggest that the effects of a future tax cut would be identical to the effects of a future increase in {math}`\fFunc^{k}`, since the terms enter multiplicatively via {math}`\TaxCombInv \fFunc^{k}`. And indeed, with respect to the dynamics of {math}`\vk` the two experiments are basically the same. And of course the steady-state value of {math}`\q` is always equal to one.
+Inspection of {eq}`eq:qdyn` might suggest that the effects of a future tax cut would be identical to the effects of a future increase in {math}`\fFunc^{k}`, since the terms enter multiplicatively via {math}`\TaxCombInv \fFunc^{k}`. They are not, because an investment tax credit changes the price of capital, not just its after-tax return. Capital bought once the credit is in effect will be cheaper, so the firm has a reason to wait.
 
-During the transition, however, {math}`\q` has interesting dynamics. From periods {math}`t` to {math}`t+n-1`, the ITC does not change, leaving {math}`\TaxCombInv` and the after-tax marginal product of capital unchanged, and so the dynamics of {math}`\q` are basically the same as those of {math}`\vk.` But between {math}`t+n-1` and {math}`t+n`, {math}`\vk` cannot jump but {math}`\TaxCombInv` does jump, which implies that {math}`\q` must jump (so there is a predictable change in {math}`\q`).
+The dynamics of {math}`\vk` show this. As in the case of a [future increase in productivity](#Future-Shock-To-Productivity), {math}`\vk` must jump at {math}`t` to the level from which, evolving according to the old equations of motion, it arrives at {math}`t+n` on the saddle path of the new ones. But the new saddle path for {math}`\vk` is *lower* than the old one: as with an immediate increase in the ITC ({numref}`fig:ITCIncrease`), the marginal value of capital is tied to its price, which the credit will reduce, and in the new steady state {math}`\vk = \kPriceAfterITC` is lower by the amount of the credit. So {math}`\vk` jumps *down* at {math}`t`, where a productivity increase makes it jump up, and it keeps falling toward its new, lower steady state.
 
-Dynamics of investment are determined by dynamics of {math}`\q`, so the path of {math}`\iota` is: At {math}`t`, a discrete jump up; between {math}`t` and {math}`t+n-1`, a gently rising path; between {math}`t+n-1` and {math}`t+n`, an upward jump; and after {math}`t+n`, a path that asymptotes downward toward the steady state level of investment.
+Investment follows {math}`\q_{t+1} = \vk_{t+1}/\kPriceAfterITC_{t+1}`, since {math}`1+\iota_{t}\omega = \q_{t+1}`: the price that matters for investment at {math}`t` is {math}`\kPriceAfterITC_{t+1}`, at which it is paid for. Until {math}`t+n-1` that price has not changed, so {math}`\q` is below one and the firm invests less than it needs to replace depreciation, {math}`\iota < 0`; and {math}`\iota` keeps falling, along with {math}`\vk`, as the date of the credit approaches. At {math}`t+n-1`, the first period whose investment is paid for at the new, lower price {math}`\kPriceAfterITC_{t+n}`, {math}`\q_{t+n}` jumps up, and so does investment, to a level above the one it had before the announcement.
+
+So the path of {math}`\iota` is: At {math}`t`, a discrete drop below zero; between {math}`t` and {math}`t+n-2`, a falling path, as the firm postpones investment; at {math}`t+n-1`, an upward jump; and after that, a path that asymptotes downward toward the steady state level of investment, at a capital stock larger than before. This postponement is the central result of {cite:t}`abelTempTax`, and it is why an anticipated or temporary tax incentive changes the timing of investment so strongly {cite:p}`auerbachHinesITC,hsITC`.
+
+A future cut in the corporate tax rate is different. It raises the after-tax return to capital without changing its price, so it works like a future increase in productivity: {math}`\vk`, {math}`\q` and {math}`\iota` all jump up at {math}`t` and rise until {math}`t+n`.
 
 The steady-state effects on {math}`\vk` are of course determined by the same considerations as apply to the unanticipated tax cut, so they depend on whether the tax change is a drop in {math}`\TaxCorp` or an increase in {math}`\itc`.
+
+(qEvidence)=
+## What the Data Say About {math}`\q`
+
+Hayashi's result made the model testable: regress investment on average {math}`Q` measured from the stock market. The early verdict was poor. {cite:t}`summersQTax` found that investment responds to {math}`Q` so weakly that the implied costs of adjustment are implausibly large, and that much of the movement in investment goes unexplained; {cite:t}`blanchardRheeSummers` found that measures of fundamentals, such as profits, predict investment better than market valuations do. Later work has offered several answers. {math}`Q` is measured with a great deal of error, and correcting for it raises its explanatory power considerably {cite:p}`ericksonWhitedQ`. A "fundamental" {math}`\q`, built from forecasts of profits instead of stock prices, does better {cite:p}`gilchristHimmelbergCashFlow`, as does one built from the prices of corporate bonds {cite:p}`philipponBondQ`. Counting intangible capital as capital improves the fit {cite:p}`petersTaylorIntangible`, and {cite:t}`andreiMannMoyenQ` find that {math}`Q` has come to explain investment much better in recent decades, as the variation in {math}`Q` itself has grown.
+
+(qBeyondConvex)=
+## Beyond Convex Costs of Adjustment
+
+Quadratic costs of adjustment make net investment move smoothly, in proportion to {math}`\q-1`. Plants do not behave that way: they invest in bursts, with long periods of little investment in between {cite:p}`domsDunneLumpy`. When investment cannot be reversed, or reversing it is costly, there is a range of {math}`\q` around one in which the firm does nothing, and it buys capital only when {math}`\q` rises above an upper threshold and sells only when {math}`\q` falls below a lower one; {cite:t}`abel&eberly:unified` give a unified model, and {cite:t}`dixitPindyck` and {cite:t}`adepOptions` connect it to the value of the option to wait. Fixed costs of adjustment make investment lumpy {cite:p}`caballeroEngelSs,cooperHaltiwangerAdjCosts`. Whether the lumpiness matters for aggregate investment is debated: {cite:t}`khanThomasNonconvex` find that in general equilibrium the movements of prices smooth it away, and {cite:t}`winberryLumpy` finds that it does not, with consequences for policies that aim to stimulate investment. Models used for monetary policy often instead put the cost on the *change* in investment, which produces the gradual, hump-shaped responses of investment seen in the data {cite:p}`ceeNominal`.
 
 ## More Figures
 
