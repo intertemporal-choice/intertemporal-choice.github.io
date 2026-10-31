@@ -61,7 +61,9 @@ project:
         # Converted from the DynanImperfCapMkts handout, which the local sources/
         # mirror never pulled; the mechanism chapter for the one that follows. It also
         # holds the bond-premium evidence that was the Imperfections page until 2026-10-31.
-        - file: content/investment/DynanImperfCapMkts.md
+        - file: content/investment/DynanImperfCapMkts/index.md
+          children:
+            - file: content/investment/DynanImperfCapMkts/DynanImperfCapMkts.ipynb
         - file: content/investment/iAndCashFlow.md
     - file: content/growth/index.md
       children:
