@@ -477,11 +477,7 @@ Putting all this together, the story is as follows. Upon announcement of the pro
 
 Thus, {math}`\vk` jumps up at time {math}`t`, evolves to the northeast until time {math}`t+n`, and thereafter asymptotes downward toward the same equilibrium value it had originally before the productivity change. Since {math}`\TaxComb` has not changed, the dynamics of {math}`\q` and {math}`\iota` are the same as those of {math}`\vk`.
 
-:::{figure} figures/FutureProductivityIncrease.png
-:name: fig:FutureProductivityIncrease
-
-Increase in productivity of 10 percent, announced at 0 to take effect at 5, drawn as in {numref}`fig:ProductivityIncrease`. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
-:::
+The [exact solution](#AnnouncedChanges) shows how large these movements are, and in which periods they happen.
 
 (Future-Increase-In-ITC)=
 ### A Future Increase in the ITC
@@ -494,9 +490,40 @@ The dynamics of {math}`\vk` show this. As in the case of a [future increase in p
 
 Investment follows {math}`\q_{t+1} = \vk_{t+1}/\kPriceAfterITC_{t+1}`, since {math}`1+\iota_{t}\omega = \q_{t+1}`: the price that matters for investment at {math}`t` is {math}`\kPriceAfterITC_{t+1}`, at which it is paid for. Until {math}`t+n-1` that price has not changed, so {math}`\q` is below one and the firm invests less than it needs to replace depreciation, {math}`\iota < 0`; and {math}`\iota` keeps falling, along with {math}`\vk`, as the date of the credit approaches. At {math}`t+n-1`, the first period whose investment is paid for at the new, lower price {math}`\kPriceAfterITC_{t+n}`, {math}`\q_{t+n}` jumps up, and so does investment, to a level above the one it had before the announcement.
 
-{numref}`fig:FutureITCIncrease` shows the path for a credit of 10 percent announced five periods ahead.
-
 So the path of {math}`\iota` is: At {math}`t`, a discrete drop below zero; between {math}`t` and {math}`t+n-2`, a falling path, as the firm postpones investment; at {math}`t+n-1`, an upward jump; and after that, a path that asymptotes downward toward the steady state level of investment, at a capital stock larger than before. This postponement is the central result of {cite:t}`abelTempTax`, and it is why an anticipated or temporary tax incentive changes the timing of investment so strongly {cite:p}`auerbachHinesITC,hsITC`.
+
+A future cut in the corporate tax rate is different. It raises the after-tax return to capital without changing its price, so it works like a future increase in productivity: {math}`\vk`, {math}`\q` and {math}`\iota` all jump up at {math}`t`, and {math}`\iota` rises until {math}`t+n-1`, {math}`\vk` and {math}`\q` until {math}`t+n`.
+
+The steady-state effects on {math}`\vk` are of course determined by the same considerations as apply to the unanticipated tax cut, so they depend on whether the tax change is a drop in {math}`\TaxCorp` or an increase in {math}`\itc`.
+
+(AnnouncedChanges)=
+### Announced Changes, Solved Exactly
+
+The arguments above say which way things move. The chapter's notebook solves the model exactly, so it can also say by how much, and in which period. Here are its results for three changes announced, unexpectedly, at date 0 and taking effect at date 5. In the first, productivity rises by 10 percent. In the second, the corporate tax rate falls from 30 to 20 percent. In the third, an investment tax credit of 10 percent lowers the price of capital paid for from date 5 on, which is the price of the investment made from date 4 on. The calibration is the notebook's: a capital share of 0.3, an interest rate of 4 percent, depreciation of 10 percent and an adjustment cost {math}`\omega = 2`, a period being a year.
+
+The table gives the net investment rate, in percent, period by period. {numref}`fig:FutureProductivityIncrease`, {numref}`fig:FutureCorporateTaxReduction` and {numref}`fig:FutureITCIncrease` show the paths of all the variables.
+
+| announced at 0, in effect from 5 | {math}`\iota_{0}` | {math}`\iota_{1}` | {math}`\iota_{2}` | {math}`\iota_{3}` | {math}`\iota_{4}` | {math}`\iota_{5}` | {math}`\iota_{6}` |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| productivity up 10 percent | 0.99 | 1.07 | 1.20 | 1.40 | 1.66 | 1.35 | 1.10 |
+| corporate tax from 30 to 20 percent | 1.41 | 1.52 | 1.71 | 1.98 | 2.34 | 1.90 | 1.54 |
+| investment tax credit of 10 percent | −0.72 | −0.79 | −0.90 | −1.06 | 3.52 | 2.84 | 2.30 |
+
+**A rise in productivity, or a cut in the corporate tax.** Both raise the after-tax return to capital from date 5 on without changing what capital costs, so the value of installed capital rises as soon as the change is announced. {math}`\vk` jumps up at date 0, by 1.9 percent with the rise in productivity and by 2.7 percent with the tax cut. Since the price of capital has not changed, {math}`\q` jumps with it. Investment rises above replacement at once, and keeps rising until date 4. The investment made at date 4 becomes capital at date 5, the first to earn the higher return, so it is the largest. The firm still starts at date 0, because convex costs of adjustment make several moderate steps cheaper than one large one. {math}`\vk` and {math}`\q` keep rising as the higher returns draw nearer, peak at date 5, and then fall back toward the price of capital as the new capital accumulates and its marginal product declines. Capital converges to a steady state 14.6 percent above the old one with the rise in productivity, and 21.0 percent above it with the tax cut.
+
+:::{figure} figures/FutureProductivityIncrease.png
+:name: fig:FutureProductivityIncrease
+
+Increase in productivity of 10 percent, announced at 0 to take effect at 5, drawn as in {numref}`fig:ProductivityIncrease`. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
+:::
+
+:::{figure} figures/FutureCorporateTaxReduction.png
+:name: fig:FutureCorporateTaxReduction
+
+Corporate tax reduction from 30 to 20 percent, announced at 0 to take effect at 5, drawn as in {numref}`fig:ProductivityIncrease`. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
+:::
+
+**An investment tax credit.** The credit changes what capital costs, not what it earns. Capital paid for at date 5 or later costs 10 percent less than capital paid for earlier, so the firm waits. Investment falls below replacement at the announcement and keeps falling, to −1.06 percent at date 3, and capital shrinks, to 96.6 percent of its old steady state by date 4. At date 4, the first period whose investment is paid for at the new price, investment jumps to 3.52 percent. That is more than the 2.83 percent with which an immediate credit starts, because there is now more capital to rebuild. {math}`\vk` falls at the announcement, by 1.4 percent, and keeps falling: the value of installed capital is tied to the price of new capital, which will be 10 percent lower. {math}`\q`, the marginal value divided by the price of capital, stays below one until the price falls at date 5, when it jumps to 1.07; then it declines to one. Capital ends 16.2 percent above its old steady state.
 
 :::{figure} figures/FutureITCIncrease.png
 :name: fig:FutureITCIncrease
@@ -504,9 +531,9 @@ So the path of {math}`\iota` is: At {math}`t`, a discrete drop below zero; betwe
 An investment tax credit of 10 percent, announced at 0 to take effect at 5, drawn as in {numref}`fig:ProductivityIncrease`: investment falls below replacement while the firm waits for the cheaper capital, and jumps at 4, the first period whose investment is paid for at the new price. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
 :::
 
-A future cut in the corporate tax rate is different. It raises the after-tax return to capital without changing its price, so it works like a future increase in productivity: {math}`\vk`, {math}`\q` and {math}`\iota` all jump up at {math}`t` and rise until {math}`t+n`.
+**How much notice the firm gets.** The shorter the notice, the sharper the postponement. Suppose the credit applies to investment from date 1, one period after the announcement. Then investment falls 1.51 percent below replacement at date 0 and jumps to 3.13 percent at date 1. If it applies only from date 9, investment falls by only 0.22 percent at first, but stays below replacement for nine periods, and capital runs down to 96.0 percent of its old steady state before the credit arrives. The notebook's sliders vary the notice, the size of the credit and the cost of adjustment.
 
-The steady-state effects on {math}`\vk` are of course determined by the same considerations as apply to the unanticipated tax cut, so they depend on whether the tax change is a drop in {math}`\TaxCorp` or an increase in {math}`\itc`.
+The same logic is why lawmakers often make an investment incentive apply from a date before it becomes law, which removes the reason to wait. The Tax Cuts and Jobs Act (Public Law 115-97) became law in December 2017. Its 100 percent bonus depreciation applied to property acquired after 27 September 2017, the day the framework for the act was published, and that framework had already proposed expensing for investment made after that date.
 
 (qEvidence)=
 ## What the Data Say About {math}`\q`
