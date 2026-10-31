@@ -1,6 +1,8 @@
 (sec:DynanImperfCapMkts)=
 # Investment and Capital Market Imperfections
 
+The chapter's [notebook](DynanImperfCapMkts.ipynb) draws its figure of credit spreads from Moody's bond yields; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/investment/DynanImperfCapMkts/DynanImperfCapMkts.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/investment/DynanImperfCapMkts/DynanImperfCapMkts.ipynb).
+
 Every model of investment we have seen so far assumes that capital markets are
 perfect. A project is valued at its expected payoff and its risk, it is undertaken
 whenever that value exceeds the cost of acquiring and installing the capital, and the
@@ -192,6 +194,17 @@ cost of investment and helped drive it down {cite:p}`bernankeDepression`.
 The model's central prediction is that external finance carries a premium, which rises
 with the borrower's risk and falls with its net worth, and so should widen in a recession,
 when net worth falls. The yields on corporate bonds show both.
+{numref}`fig:CreditSpread` shows a century of one measure, the spread between the yields on
+Moody's Baa-rated and Aaa-rated corporate bonds. Since 1919 it has averaged 1.7 percentage points
+in recessions and 1.0 in expansions, and it reached 5.6 points in May 1932, 3.4 in December 2008
+and 1.7 in April 2020.
+
+:::{figure} figures/CreditSpread.png
+:name: fig:CreditSpread
+
+The spread between the yields on Moody's seasoned Baa-rated and Aaa-rated corporate bonds, in percentage points, monthly from 1919, with the NBER's recessions shaded. Data from FRED (series BAA, AAA and USREC), downloaded on 2026-10-31. Drawn by the chapter's notebook, which you can open in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/investment/DynanImperfCapMkts/DynanImperfCapMkts.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/investment/DynanImperfCapMkts/DynanImperfCapMkts.ipynb).
+:::
+
 {numref}`fig:NonfinancialBonds` and {numref}`fig:FinancialBonds`, from the third chapter
 of Matthew Raskin's 2013 Johns Hopkins dissertation, plot the yields on five-year bonds of
 nonfinancial and of financial firms, by credit rating, against the five-year Treasury

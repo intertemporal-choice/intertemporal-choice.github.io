@@ -195,17 +195,17 @@ project:
           level: 1
         - file: content/asset_pricing/EquityPremiumPuzzle.md
           level: 1
-        - file: content/asset_pricing/Bubbles.md
+        - file: content/asset_pricing/Bubbles/index.md
           level: 1
         - file: content/investment/index.md
           level: 0
-        - file: content/investment/InvestmentNotes.md
+        - file: content/investment/InvestmentNotes/index.md
           level: 1
         - file: content/investment/HallJorgenson.md
           level: 1
-        - file: content/investment/qModel.md
+        - file: content/investment/qModel/index.md
           level: 1
-        - file: content/investment/DynanImperfCapMkts.md
+        - file: content/investment/DynanImperfCapMkts/index.md
           level: 1
         - file: content/investment/iAndCashFlow.md
           level: 1

@@ -53,6 +53,8 @@ NOTEBOOKS = [
     "content/consumption/Fisher2Period/Fisher2Period.ipynb",
     "content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb",
     "content/consumption/OLGModel/OLGModel.ipynb",
+    "content/asset_pricing/Bubbles/Bubbles.ipynb",
+    "content/investment/qModel/qModel.ipynb",
 ]
 BROWSER_KERNEL = {"name": "python", "display_name": "Python (Pyodide)", "language": "python"}
 RUN_FIRST = "**First, choose Run \u2192 Run All Cells in the menu above.** The sliders appear below the figures."

@@ -54,16 +54,6 @@ pending  /content/figures/Equiprobable-Returns/ShareVsCovByMethod.png           
 pending  /content/figures/Imperfections/FinancialBonds.png                       exception planned: Raskin (2013) Figure 2, proprietary Merrill Lynch data
 pending  /content/figures/Imperfections/NonfinancialBonds.png                    exception planned: Raskin (2013) Figure 1, proprietary Merrill Lynch data
 
-# InvestmentNotes
-pending  /content/figures/InvestmentNotes/InvestmentDrivesCycle.png              port to a notebook beside the chapter
-
-# qModel
-pending  /content/figures/qModel/CorporateTaxReduction.png                       port to a notebook beside the chapter
-pending  /content/figures/qModel/ITCIncrease.png                                 port to a notebook beside the chapter
-pending  /content/figures/qModel/ProductivityIncrease.png                        port to a notebook beside the chapter
-pending  /content/figures/qModel/lPhaseDiag.png                                  port to a notebook beside the chapter
-pending  /content/figures/qModel/qPhaseDiag.png                                  port to a notebook beside the chapter
-
 # qRamsey
 pending  /content/figures/qRamsey/PatRiseCostAdj0VsBase.png                      port to a notebook beside the chapter
 pending  /content/figures/qRamsey/PolFuncAdjCost0VsBase.png                      port to a notebook beside the chapter
