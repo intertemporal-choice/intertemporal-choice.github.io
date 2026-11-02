@@ -104,10 +104,10 @@ a Gordon formula in which the asset's own expected return replaces {math}`\Rfree
 ```{math}
 :label: eq:campbellShiller
 
-\log (\Price_{t}/\dvdnd_{t}) \approx \frac{\kappa}{1-\varrho} + \Ex_{t}\left[\sum_{j=0}^{\infty} \varrho^{j}\left(\Delta \log \dvdnd_{t+1+j} - \risky_{t+1+j}\right)\right]
+\log (\Price_{t}/\dvdnd_{t}) \approx \frac{\kappa}{1-\mathcal{M}} + \Ex_{t}\left[\sum_{j=0}^{\infty} \mathcal{M}^{j}\left(\Delta \log \dvdnd_{t+1+j} - \risky_{t+1+j}\right)\right]
 ```
 
-where {math}`\varrho` is the average of {math}`\Price/(\Price+\dvdnd)`, a number just below one, and {math}`\kappa` is a constant from the linearization. A price that is high relative to dividends must be followed, on average, either by high growth of dividends or by low returns.
+where {math}`\kappa` is a constant from the linearization and {math}`\mathcal{M}`, the average of {math}`\Price/(\Price+\dvdnd)`, is a number just below one ({math}`\PGro/\Rfree` under the Gordon formula {eq}`eq:gordon`). Its powers discount future dividend growth and returns, as the stochastic discount factor {math}`\SDF_{t,s}` discounts future dividends. A price that is high relative to dividends must be followed, on average, either by high growth of dividends or by low returns.
 
 ## Prices as Martingales
 
