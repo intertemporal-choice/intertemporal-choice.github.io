@@ -132,6 +132,8 @@ which is called the "stochastic discount factor" because (a) it is stochastic (t
 \Price_{t} = \Ex_{t}\left[\SDF_{t,t+1}\left({\Price}_{t+1}+\dvdnd_{t+1}\right)\right].
 ```
 
+The letter is the Old English eth, {math}`\SDF`, the sibling of the thorn {math}`\Pat` that marks the [absolute patience factor](#eq:AIC); like {math}`\Pat` it names a factor, and its log, the stochastic discount rate, is the small eth {math}`\sdf`.
+
 A corresponding equation will hold in period {math}`t+1` (and in period {math}`t+2` and beyond):
 
 ```{math}
