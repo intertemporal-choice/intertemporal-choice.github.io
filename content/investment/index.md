@@ -12,9 +12,10 @@ the implied investment rate is unbounded.
 Convex costs of adjustment cure the indeterminacy: a firm that pays more per unit the faster
 it invests spreads its investment out
 {cite:p}`eisnerStrotz,lucasAdjustmentCosts,gouldAdjustmentCosts,treadwayInvestment`.
-{cite:t}`yoshikawaQ`, {cite:t}`abel:q` and {cite:t}`hayashi:q` showed that the shadow value of
-installed capital, {math}`q`, then becomes the state variable governing investment, and Hayashi
-showed when it equals the ratio of a firm's market value to the replacement cost of its capital,
+{cite:t}`yoshikawaQ`, {cite:t}`abel:q` and {cite:t}`hayashi:q` showed that investment then depends
+on the shadow value of installed capital, {math}`q`, which is neither a state variable nor a control
+variable but an indicator: it captures the marginal value of capital inside the firm. Hayashi showed
+when it equals the ratio of a firm's market value to the replacement cost of its capital,
 which {cite:t}`brainardTobinPitfalls` and {cite:t}`tobinsQ` had proposed as the determinant of
 investment. The chapter closes with imperfect capital markets, which break the separation between a
 firm's investment decision and its financial position, and so explain why cash flow

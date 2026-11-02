@@ -13,7 +13,7 @@ The chapter's [notebook](InvestmentNotes.ipynb) draws its figures from the natio
 
 ### History of Thought
 
-- {cite:t}`keynesGeneralTheory`, in the chapter on "The State of Long-Term Expectation": {math}`I` determined by "animal spirits" which fluctuated strongly. The same chapter anticipates {math}`\q`: "there is no sense in building up a new enterprise at a cost greater than that at which a similar existing enterprise can be purchased."
+- {cite:t}`keynesGeneralTheory`, in the chapter on "The State of Long-Term Expectation": {math}`I` determined by "animal spirits" which fluctuated strongly.
 - The acceleration principle of {cite:t}`clarkAccelerator`, and the Keynesian "Multiplier/Accelerator" model of investment of {cite:t}`samuelsonI`, Hansen and Harrod
 - The neoclassical model with no costs of adjustment: {cite:t}`jorgensonCapitalTheory` and {cite:t}`hall&jorgenson:i`
 - The {math}`q` of {cite:t}`brainardTobinPitfalls` and {cite:t}`tobinsQ`
