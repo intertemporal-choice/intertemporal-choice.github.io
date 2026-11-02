@@ -100,11 +100,12 @@ and defining {math}`j_{t}^{i}=\adj^{i}(i_{t},k_{t})` as the derivative of adjust
 
 Thus: The PDV of the marginal cost (after tax, including adjustment costs) of an additional unit of investment should match the discounted expected marginal value of the resulting extra capital. (Recall that investment performed today {math}`i_{t}` is paid for tomorrow at price {math}`\kPriceAfterITC_{t+1}` so today's cost is {math}`\kPriceAfterITC_{t+1}\Discount`.)
 
-Recalling that {math}`\pi_{t} = \TaxFree\fFunc(k_{t})`, the [Envelope theorem](#sec:Envelope) for this problem can be used on either {eq}`eq:nudef` or {eq}`eq:nuequiv`:
+Recalling that {math}`\pi_{t} = \TaxFree\fFunc(k_{t})`, the [Envelope theorem](#sec:Envelope) applied to {eq}`eq:nuequiv` gives
 
 ```{math}
+:label: eq:qMod-envelope
+
 \begin{aligned}
-\vFirm_{t}^{k}(k_{t}) & = \TaxFree\fFunc^{k}(k_{t})-j_{t}^{k}\kPriceAfterITC_{t+1}\Discount +\daleth \Discount \Ex_{t}[\vFirm_{t+1}^{k}(k_{t+1})] \\
 \vFirm_{t}^{k}(k_{t}) & = \TaxFree\fFunc^{k}(k_{t}) + ((1 + j_{t}^{i})\daleth-j_{t}^{k})\kPriceAfterITC_{t+1}\Discount
 \end{aligned}
 ```
@@ -115,8 +116,7 @@ and equivalently for period {math}`t+1` so that {eq}`eq:qMod-iFOC` can be rewrit
 :label: eq:qMod-iEuler
 
 \begin{aligned}
-(1+j_{t}^{i})\kPriceAfterITC_{t+1} & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) +( \daleth + \daleth j_{t+1}^{i}-j_{t+1}^{k})\kPriceAfterITC_{t+2}\Discount] \\
-& = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) +( \daleth + j_{t+1}^{i}-\depr j_{t+1}^{i} -j_{t+1}^{k})\kPriceAfterITC_{t+2}\Discount].
+(1+j_{t}^{i})\kPriceAfterITC_{t+1} & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) +( \daleth + j_{t+1}^{i}-\depr j_{t+1}^{i} -j_{t+1}^{k})\kPriceAfterITC_{t+2}\Discount].
 \end{aligned}
 ```
 
@@ -205,7 +205,7 @@ This says that the cost of buying one unit of capital, {math}`\kPriceAfterITC`, 
 \end{aligned}
 ```
 
-Now define {math}`\vk_{t} \equiv \vFirm_{t}^{k}` as the marginal value to the firm of ownership of one more unit of capital at the beginning of period {math}`t`; using this definition, the envelope condition can be written
+Now define {math}`\vk_{t} \equiv \vFirm_{t}^{k}` as the marginal value to the firm of ownership of one more unit of capital at the beginning of period {math}`t`; using this definition and the first order condition {eq}`eq:qMod-iFOC`, the envelope condition {eq}`eq:qMod-envelope` can be written
 
 ```{math}
 :label: eq:lambdadyn
