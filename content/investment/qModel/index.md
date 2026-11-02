@@ -43,7 +43,7 @@ The price of one unit of investment is {math}`\kPrice_{t}`, so {math}`\kPriceAft
 (The-Problem)=
 ## The Problem
 
-The {math}`\q` model assumes that firms maximize the net profits payable to shareholders, definable as the present discounted value of after-tax revenues after subtracting off costs of investment:
+Firms maximize the net profits payable to shareholders, definable as the present discounted value of after-tax revenues after subtracting off costs of investment:
 
 ```{math}
 \begin{aligned}
