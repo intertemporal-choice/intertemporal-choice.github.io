@@ -43,7 +43,7 @@ The price of one unit of investment is {math}`\kPrice_{t}`, so {math}`\kPriceAft
 (The-Problem)=
 ## The Problem
 
-The {math}`\q` model assumes that firms maximize the net profits payable to shareholders, definable as the present discounted value of after-tax revenues after subtracting off costs of investment:
+Firms maximize the net profits payable to shareholders, definable as the present discounted value of after-tax revenues after subtracting off costs of investment:
 
 ```{math}
 \begin{aligned}
@@ -82,7 +82,7 @@ which is equivalent to
 :label: eq:nuequiv
 
 \begin{aligned}
-\vFirm_{t}(k_{t}) & = \max_{k_{t+1}} \left\{ \rev_{t}-(\overbrace{k_{t+1}-k_{t}\daleth}^{=i_{t}}+\adj(k_{t+1}-k_{t}\daleth,k_{t}))\kPriceAfterITC_{t+1}\Discount+\Discount \Ex_{t}[\vFirm_{t+1}(k_{t+1})]\right\}
+\vFirm_{t}(k_{t}) & = \max_{k_{t+1}} \left\{ \rev_{t}-(\overbrace{k_{t+1}-k_{t}\daleth}^{=i_{t}}+\overbrace{\adj(k_{t+1}-k_{t}\daleth,k_{t})}^{\text{costs of adjustment}})\kPriceAfterITC_{t+1}\Discount+\Discount \Ex_{t}[\vFirm_{t+1}(k_{t+1})]\right\}
 \end{aligned}
 ```
 
