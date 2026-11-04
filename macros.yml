@@ -379,6 +379,7 @@ project:
     # already defined". Nothing in the book uses it. Restore under another name if a
     # handout ever needs it.
     '\divGro': '\mathsf{g}'
+    '\csDiscFac': '\rho'  # Campbell and Shiller's linearization factor, the average P/(P+d); not the CRRA, not a correlation
     '\dvdnd': 'd'
     '\eFunc': '\mathrm{e}'
     '\edvdnd': '\grave{\dvdnd}'
