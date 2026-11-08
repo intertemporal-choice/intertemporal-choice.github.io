@@ -48,11 +48,16 @@ jobs:
           uv run python code/write_redirects.py --self-test
           uv run python code/verify_build.py --self-test
           uv run python code/build_pdf.py --self-test
+          uv run python code/derive_bib.py --self-test
           uv run python -m intertemporal_choice --self-test
       # The notebooks are committed with their outputs but without the metadata Jupyter
       # rewrites on every save; see code/notebooks.py.
       - name: Notebooks are committed stripped
         run: uv run python code/notebooks.py --check
+      # The bibliography is derived from economics.bib in llorracc/texmf-local and never edited
+      # here: a correction goes into economics.bib. See code/derive_bib.py.
+      - name: Bibliography matches its source
+        run: uv run python code/derive_bib.py --check
       # MyST caches executed notebooks in _build/execute, so a notebook whose code has not
       # changed is not re-run. The key covers the cell code and IC_EXEC_ENV, a hash of
       # uv.lock, src/ and data/ (see code/build_site.py); the cache key here carries the
