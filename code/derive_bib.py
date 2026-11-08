@@ -59,16 +59,28 @@ def cited_keys(root: Path) -> set[str]:
 
 
 def entries(text: str) -> dict[str, str]:
-    """Each entry's key and its text exactly as written, braces matched; @string, @preamble and @comment skipped."""
+    """Each entry's key and its text exactly as written, braces matched.
+
+    Skipped: @string, @preamble, anything inside an @comment, and an entry whose @ sits on a line
+    after a %, which is commented out. If a key occurs twice, the first wins.
+    """
     found: dict[str, str] = {}
+    skip_until = 0
     for match in ENTRY_START.finditer(text):
-        if match.group(1).lower() in ("comment", "string", "preamble"):
+        if match.start() < skip_until:
+            continue
+        line_start = text.rfind("\n", 0, match.start()) + 1
+        if "%" in text[line_start:match.start()]:
             continue
         depth, end = 1, match.end()
         while end < len(text) and depth:
             depth += {"{": 1, "}": -1}.get(text[end], 0)
             end += 1
-        found.setdefault(match.group(2), text[match.start():end])
+        kind = match.group(1).lower()
+        if kind == "comment":
+            skip_until = end
+        elif kind not in ("string", "preamble"):
+            found.setdefault(match.group(2), text[match.start():end])
     return found
 
 
@@ -132,7 +144,9 @@ def self_test() -> int:
         "@article{beta,\n  author = {B},\n  title = {{Nested} braces},\n  crossref = {parent}\n}\n\n"
         "@book{parent,\n  title = {P},\n  year = 2000\n}\n\n"
         "@article{Alpha,\n  title = \"Quoted\",\n  year = 1999\n}\n\n"
-        "@article{unused,\n  title = {U}\n}\n"
+        "@article{unused,\n  title = {U}\n}\n\n"
+        "% @article{Alpha, title = {Commented out}}\n"
+        "@comment{ @article{beta, title = {Inside a comment}} }\n"
     )
     sha = "0" * 40
     failures = []
