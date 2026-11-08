@@ -207,7 +207,7 @@ Now define {math}`\nabla _{t+1} \equiv \left(\frac{{\cRat}^{e}_{t+1}-\cU_{t+1}}{
 \prudEx = \left(\frac{\CRRA-1}{2}\right).
 ```
 
-The [appendix on approximate consumption growth](#sec:TBS-CGroApprox) shows that, with some approximations, we can rewrite {eq}`eq:TBS-ctp1Oct` as
+The [appendix on approximate consumption growth](#sec:TBS-CGroApprox) shows that, with some approximations, we can rewrite {eq}`eq:TBS-BeforePFStep` as
 
 ```{math}
 :label: eq:TBS-cedelapprox
@@ -304,12 +304,12 @@ When it is useful to distinguish the version of the GIC that applies in the mode
 
 ```{math}
 \begin{aligned}
-   \Discount < \DiscountMaxGICPGro & =  \Rfree^{\CRRA-1}\PGro^{\CRRA}
-\\ \Discount < \DiscountMaxGICWGro & =  \Rfree^{\CRRA-1}\WGro^{\CRRA}
+   \Discount < \DiscountMaxGICPGro & =  \left(\frac{\PGro^{\CRRA}}{\Rfree}\right)
+\\ \Discount < \DiscountMaxGICWGro & =  \left(\frac{\WGro^{\CRRA}}{\Rfree}\right)
 \end{aligned}
 ```
 
-Using {math}`\pGro \equiv \log \PGro`, we similarly define the corresponding "growth impatience rate":
+Using {math}`\pGro \equiv \log \PGro`, we similarly define the corresponding "growth patience rate":
 
 ```{math}
 \patpGro \equiv \log \PatPGro \approx \CRRA^{-1}(\rfree-\timeRate) - \pGro
@@ -420,11 +420,11 @@ It turns out that in the buffer stock model, we can relax the requirement that h
 
 We pointed out above that {eq}`eq:TBS-GICExistsSoln`, which is necessary for the existence of a steady-state level of consumption, implies that the {math}`\GICPGro` holds in the case being considered here, the limit as {math}`\urate \downarrow 0`. The interesting question is therefore what happens when the {math}`\FHWCWGro` does not hold (that is {math}`\WGro > \Rfree`).
 
-Given that the {math}`\GICWGro` holds, if the {math}`\FHWCWGro` does not hold the RIC may or may not hold: {math}`\WGro > \Rfree` implies that {math}`\Pat/\Rfree > \Pat/\WGro` but {math}`1 > \Pat/\WGro` could be consistent with {math}`\Pat/\Rfree` being greater or less than one. But recall that our assumption is that the unemployed consumer is assumed to behave according to the perfect foresight model with human wealth equal to zero. We must therefore impose the RIC in order to obtain a nondegenerate solution. We therefore impose the RIC.
+Given that the {math}`\GICWGro` holds, if the {math}`\FHWCWGro` does not hold the RIC may or may not hold: {math}`\WGro > \Rfree` implies that {math}`\Pat/\Rfree > \Pat/\WGro` but {math}`1 > \Pat/\WGro` could be consistent with {math}`\Pat/\Rfree` being greater or less than one. But recall that our assumption is that the unemployed consumer is assumed to behave according to the perfect foresight model with human wealth equal to zero. We must therefore impose the RIC in order to obtain a nondegenerate solution.
 
 For any finite horizon, human wealth is finite, and there is a positive probability that income will be zero over the remainder of the horizon. This puts a strict bound on the extent to which consumers are willing to rely for current consumption upon future income that is unbounded in expectation (as the horizon extends) but potentially bounded in practice. In effect, the precautionary motive introduces a self-imposed borrowing constraint that prevents the (arbitrarily large) amount of future income from being something the consumer is willing to borrow against.
 
-The consequence is that the limiting model (as {math}`\urate \downarrow 0`) exhibits a solution with a unique finite target {math}`\mRatE` so long as {eq}`eq:TBS-GICExistsSoln` holds, *even if human wealth is infinite*; in this case the {math}`\dmEqZero` locus is downward sloping (because {math}`1-\Rnorm^{-1}<1`; see {eq}`eq:TBS-mDelEqZero`) while the {math}`\dcEqZero` locus is upward sloping (as guaranteed by {eq}`eq:TBS-GICExistsSoln`). Thus, a target {math}`\mRatE` will exist.
+The consequence is that the limiting model (as {math}`\urate \downarrow 0`) exhibits a solution with a unique finite target {math}`\mRatE` so long as {eq}`eq:TBS-GICExistsSoln` holds, *even if human wealth is infinite*; in this case the {math}`\dmEqZero` locus is downward sloping (because {math}`\Rfree < \PGro` means {math}`\Rnorm < 1`, so its slope {math}`1-\Rnorm^{-1}` in {eq}`eq:TBS-mDelEqZero` is negative) while the {math}`\dcEqZero` locus is upward sloping (as guaranteed by {eq}`eq:TBS-GICExistsSoln`). Thus, a target {math}`\mRatE` will exist.
 
 #### The Phase Diagram
 
@@ -440,7 +440,7 @@ The {math}`\Delta \mRatE = 0` locus, given in {eq}`eq:TBS-mDelEqZero`, indicates
 
 [^tbs-some-authors-refer]: Some authors refer to {math}`\Delta \mRatE = 0` as giving the level of "permanent income," but this definition differs from {cite:t}`friedmanATheory`'s and is problematic because it could be confused with "permanent labor income" {math}`\Wage_{t} \labor_{t}`.
 
-The intuition for the {math}`\Delta {\cRat}^{e}=0` locus (which comes from {eq}`eq:TBS-cDelEqZero`) is a bit subtler, because it reflects preferences: it comes from the Euler equation, not from the budget constraint, which gives the {math}`\Delta \mRatE = 0` locus. Take a point on the {math}`\Delta {\cRat}^{e}=0` locus, and consider how things would change if {math}`\mE` were a bit higher at the same {math}`\cE`. Recall that the growth rate of consumption consistent with the Euler equation {eq}`eq:TBS-ctp1Oct` depends on the amount by which consumption will fall if the bad state is realized, {math}`\nabla_{t+1} = \cE_{t+1}/\cU_{t+1}`. But {math}`\cU_{t+1} = \MPC \Rfree (\mE_{t} - \cE_{t})` so at the same {math}`\cE_{t}` but a greater {math}`\mE_{t}`, {math}`\cU_{t+1}` will be larger. If {math}`\cE_{t+1}` were to remain unchanged, then with the larger {math}`\cU_{t+1}` the ratio {math}`\nabla_{t+1} = \cE_{t+1}/\cU_{t+1}-1` would be smaller.
+The intuition for the {math}`\Delta {\cRat}^{e}=0` locus (which comes from {eq}`eq:TBS-cDelEqZero`) is a bit subtler, because it reflects preferences: it comes from the Euler equation, not from the budget constraint, which gives the {math}`\Delta \mRatE = 0` locus. Take a point on the {math}`\Delta {\cRat}^{e}=0` locus, and consider how things would change if {math}`\mE` were a bit higher at the same {math}`\cE`. Recall that the growth rate of consumption consistent with the Euler equation {eq}`eq:TBS-ctp1Oct` depends on the amount by which consumption will fall if the bad state is realized, {math}`\nabla_{t+1} = \cE_{t+1}/\cU_{t+1}-1`. But {math}`\cU_{t+1} = \MPC \Rnorm (\mE_{t} - \cE_{t})` so at the same {math}`\cE_{t}` but a greater {math}`\mE_{t}`, {math}`\cU_{t+1}` will be larger. If {math}`\cE_{t+1}` were to remain unchanged, then with the larger {math}`\cU_{t+1}` the ratio {math}`\nabla_{t+1} = \cE_{t+1}/\cU_{t+1}-1` would be smaller.
 
 The consequences of this are easiest to see in the logarithmic case whose consumption growth equation is derived in {eq}`eq:TBS-cedelapproxLog`, which tells us that {math}`{\cRat}^{e}_{t+1} \approx {\cRat}^{e}_{t}\left(1+ \urate \nabla _{t+1}\right) {\PatPGro}`, which directly implies that the lower {math}`\nabla_{t+1}` will yield a lower {math}`\cE_{t+1}`. That is, for any point to the right of the {math}`\Delta \cE_{t+1}=0` locus, the growth rate of consumption will be lower than at the corresponding point on the locus. Since on the locus, growth was zero, this means that to the right of the locus, {math}`\cE` is declining (hence the down arrow in the phase diagram). Reciprocally, for any point to the left of {math}`\Delta \cE_{t+1}=0`, the Euler equation implies that consumption will rise.
 
@@ -484,7 +484,7 @@ This point is clearest as {math}`\mRat` approaches zero. Note that the consumpti
 \pGro > \CRRA^{-1}(\rfree-\timeRate) ,
 ```
 
-a condition that can be visually verified for our benchmark calibration in {numref}`fig:TBS-GrowthA`. Now multiply both sides of {eq}`eq:TBS-ctp1Oct` by {math}`\PGro`, obtaining
+a condition that can be visually verified for our benchmark calibration in {numref}`fig:TBS-GrowthA`. Now multiply both sides of {eq}`eq:TBS-BeforePFStep` by {math}`\PGro`, obtaining
 
 ```{math}
 :label: eq:TBS-cLevGro
@@ -507,7 +507,7 @@ Thus consumption growth is equal to what it would be in the absence of uncertain
 Income and Consumption Growth
 :::
 
-Next, note that the point where the consumption growth locus meets the income growth line is labelled {math}`\mTarg`. This is because the place where consumption growth is equal to income growth is at the target value of {math}`\mRatE`.
+Next, note that the point where the consumption growth locus meets the income growth line is labeled {math}`\mTarg`. This is because the place where consumption growth is equal to income growth is at the target value of {math}`\mRatE`.
 
 #### Summing Up the Intuition
 
@@ -521,7 +521,7 @@ Now consider the results of increasing the interest rate to {math}`\grave{\rfree
 Effect of An Increase In {math}`\rfree`
 :::
 
-The next exercise, shown in {numref}`fig:TBS-cGroIncreaseMhoPlot`, is an increase in the risk of unemployment {math}`\urate`. The principal effect we are interested in is the upward shift in the expected consumption growth locus to {math}`\Delta \grave{\cLev}_{t+1}`. If the household starts at the original target level of resources {math}`\grave{m}`, the size of the upward shift at that point is captured by the arrow originating at {math}`\{\check{m},\pGro\}`.
+The next exercise, shown in {numref}`fig:TBS-cGroIncreaseMhoPlot`, is an increase in the risk of unemployment {math}`\urate`. The principal effect we are interested in is the upward shift in the expected consumption growth locus to {math}`\Delta \grave{\cLev}_{t+1}`. If the household starts at the original target level of resources {math}`\mTarg`, the size of the upward shift at that point is captured by the arrow originating at {math}`\{\check{m},\pGro\}`.
 
 In the absence of other consequences of the rise in {math}`\urate`, the effect on the target level of {math}`\mRat` would be unambiguously positive. However, recall our adjustment to the growth rate conditional upon employment, {eq}`eq:TBS-meanPreserve`; this induces the shift in the income growth locus to {math}`\grave{\pGro}` which has an offsetting effect on the target {math}`\mRat` ratio. Under our benchmark parameter values, the target value of {math}`\mRat` is higher than before the increase in risk even after accounting for the effect of higher {math}`\pGro`, but in principle it is possible for the {math}`\pGro` effect to dominate the direct effect. Note, however, that even if the target value of {math}`\mRat` is lower, it is possible that the *saving rate* will be higher; this is possible because the faster rate of {math}`\pGro` makes a given saving rate translate into a lower ratio of wealth to income. In any case, the most useful calibrations of the model are those for which an increase in uncertainty results in either an increase in the saving rate or an increase in the target ratio of resources to permanent income. This is partly because our intent is to use the model to illustrate the general features of precautionary behavior, including the qualitative effects of an increase in the magnitude of transitory shocks, which unambiguously increase both target {math}`\mRat` and saving rates.
 
@@ -588,7 +588,7 @@ We now consider a final experiment: A decrease in the time preference rate. To r
 
 {numref}`fig:TBS-DecreaseTheta` depicts the effect on the employed consumer's spending by showing each successive point in time as a dot. Starting at time 0 from the steady-state level of consumption, the decrease in the future discounting rate (an increase in patience) causes an instantaneous drop in the level of consumption. Starting from this diminished base, consumption growth is subsequently faster than before the drop in {math}`\timeRate`.[^tbs-could-also-analyze]
 
-[^tbs-could-also-analyze]: We could also analyze the effects on growth, but the results would be essentially the same as in preceding figure analyzing the effect of an increase the interest rate.
+[^tbs-could-also-analyze]: We could also analyze the effects on growth, but the results would be essentially the same as in {numref}`fig:TBS-GrowthB`, which analyzes the effect of an increase in the interest rate.
 
 :::{figure} figures/DecreaseTheta.png
 :name: fig:TBS-DecreaseTheta
@@ -726,7 +726,7 @@ However, if we started out in steady-state, the *ratio* problem of every member 
 
 [^tbs-economy-experienced-multiple]: If the economy has experienced multiple shocks, it will be necessary to retain a complete history of the shocks in order to compute the properly population-weighted dynamics. This is not too hard to do, if we start with the assumption that the economy started at its balanced growth equilibrium before the shocks began to arrive.
 
-{numref}`fig:TBS-SOEStakescPathAfterThetaDropPlot` illustrates the dynamics in this economy using an experiment identical to one explored above for the individual's problem: In period 0 there is a one-off decline in the future discounting rate (assuming the economy was in steady state before period 0). In the previous model, each individual consumer's consumption function shifted down, and consumption experienced a discrete jump downward, because the agent became more impatient. Here, there is a modest further effect: With more-patient consumers, the tax rate that the government sets to finance a transfer of {math}`\bTarg` to the newborns must be larger (so that the ratio of initial assets to after-tax income is smaller). Qualitatively, the dynamics are indistinguishable from the individual consumer's dynamics obtainable without working through the extra complication involved in accounting for the "stakes."
+{numref}`fig:TBS-SOEStakescPathAfterThetaDropPlot` illustrates the dynamics in this economy using an experiment identical to one explored above for the individual's problem: In period 0 there is a one-off decline in the future discounting rate (assuming the economy was in steady state before period 0). In the previous model, each individual consumer's consumption function shifted down, and consumption experienced a discrete jump downward, because the agent became more patient. Here, there is a modest further effect: With more-patient consumers, the tax rate that the government sets to finance a transfer of {math}`\bTarg` to the newborns must be larger (so that the ratio of initial assets to after-tax income is smaller). Qualitatively, the dynamics are indistinguishable from the individual consumer's dynamics obtainable without working through the extra complication involved in accounting for the "stakes."
 
 :::{figure} figures/SOEStakescPathAfterThetaDropPlot.png
 :name: fig:TBS-SOEStakescPathAfterThetaDropPlot
@@ -774,7 +774,7 @@ Path of Aggregate {math}`c` in Stakeless PE/SOE Economy From Date 0
 (sec:TBS-CGroApprox)=
 ### Approximate Formula for Consumption Growth
 
-Using from [Math Facts](#fact:mathfactslist) the second-order and then the first-order Taylor approximations [TaylorTwo](#fact:taylortwo) {math}`(1+\epsilon)^{\zeta} \approx 1 + \zeta \epsilon + (1/2)\zeta(\zeta-1) \epsilon^{2}` and then [TaylorOne](#fact:taylorone) {math}`(1+\epsilon)^{\zeta} \approx 1 + \zeta \epsilon`, the expression in braces in {eq}`eq:TBS-ctp1Oct` can be rewritten
+Using from [Math Facts](#fact:mathfactslist) the second-order and then the first-order Taylor approximations [TaylorTwo](#fact:taylortwo) {math}`(1+\epsilon)^{\zeta} \approx 1 + \zeta \epsilon + (1/2)\zeta(\zeta-1) \epsilon^{2}` and then [TaylorOne](#fact:taylorone) {math}`(1+\epsilon)^{\zeta} \approx 1 + \zeta \epsilon`, the expression in braces in {eq}`eq:TBS-BeforePFStep` can be rewritten
 
 ```{math}
 \begin{aligned}
@@ -963,7 +963,7 @@ But if the consumer is growth-patient ({math}`\PatPGro > 1`) then {math}`\varpi 
 \left(\frac{(\Rfree \Discount (1-\urate))^{1/\CRRA}}{\WGro/(1-\urate)}\right) = \left(\frac{(\Rfree \Discount (1-\urate))^{1/\CRRA}}{\PGro}\right) < 1 .
 ```
 
-Expanding on a discussion in the main text, the numerator in the leftmost expression reflects the sense in which the unemployment risk acts in a manner similar to the effect of an extra degree of discounting (reflecting the fact that the relevant condition applies only so long as the consumer remains in employment, a condition whose probability is {math}`(1-\urate)`), while the denominator reflects the mechanical effect in which the relevant measure of growth is boosted by the adjustment that preserves human wealth. Writing the perfect foresight version of the growth patience factor as {math}`\Pat_{\WGro}` (which is just the limit as {math}`\urate \downarrow 0`), we can see that the expression on the LHS is just {math}`\Pat_{\WGro}(1-\urate)^{1+1/\CRRA}` which is smaller than {math}`\Pat_{\WGro}` because {math}`\urate>0` and {math}`1+\CRRA^{-1} > 0`. So, the GIC-TBS holds whenever the plain-vanilla {math}`\GICPGro` holds, but not vice-versa; there are parametric configurations in which a perfect-foresight consumer with income growth rate {math}`\WGro` would not satisfy the relevant {math}`\GICWGro` (so, their wealth-to-income ratio would go to infinity), but the same consumer faced the same human wealth but with an unemployment risk {math}`\urate` would have a finite target wealth-to-income ratio.
+Expanding on a discussion in the main text, the numerator in the leftmost expression reflects the sense in which the unemployment risk acts in a manner similar to the effect of an extra degree of discounting (reflecting the fact that the relevant condition applies only so long as the consumer remains in employment, a condition whose probability is {math}`(1-\urate)`), while the denominator reflects the mechanical effect in which the relevant measure of growth is boosted by the adjustment that preserves human wealth. Writing the perfect foresight version of the growth patience factor as {math}`\Pat_{\WGro}` (which is just the limit as {math}`\urate \downarrow 0`), we can see that the expression on the LHS is just {math}`\Pat_{\WGro}(1-\urate)^{1+1/\CRRA}` which is smaller than {math}`\Pat_{\WGro}` because {math}`\urate>0` and {math}`1+\CRRA^{-1} > 0`. So, the GIC-TBS holds whenever the plain-vanilla {math}`\GICWGro` holds, but not vice-versa; there are parametric configurations in which a perfect-foresight consumer with income growth rate {math}`\WGro` would not satisfy the relevant {math}`\GICWGro` (so, their wealth-to-income ratio would go to infinity), but the same consumer faced the same human wealth but with an unemployment risk {math}`\urate` would have a finite target wealth-to-income ratio.
 
 The easiest way to understand all of this is graphically. A *Mathematica* notebook in the handout's repository, [`When-FHWC-Holds.nb`](https://github.com/llorracc/TractableBufferStock/blob/main/Code/Mathematica/Examples/ManipulateParameters/When-FHWC-Holds.nb) ({cite:t}`When-FHWC-Holds`), shows how this works for alternative values of {math}`\Discount`.
 
@@ -1058,9 +1058,9 @@ But
 \end{aligned}
 ```
 
-which is guaranteed to be positive by the {math}`\GICPGro`, but which can take any value in the interval {math}`(0,\infty)`. Note, however, that the approximations above are valid only if {math}`\aleph` is "small" which requires that the degree of growth impatience be small relative to the size of the unemployment risk. Thus, the formulae derived above (and used below) are reliable only in rather special circumstances, in particular when the consumer is only very slightly growth-impatient.[^tbs-other-approximations-better] Under these circumstances, this approximation can be substituted into {eq}`eq:TBS-zetaExp` to obtain
+which is guaranteed to be positive by the {math}`\GICPGro`, but which can take any value in the interval {math}`(0,\infty)`. Note, however, that the approximations above are valid only if {math}`\aleph` is "small" which requires that the degree of growth impatience be small relative to the size of the unemployment risk. Thus, the formulas derived above (and used below) are reliable only in rather special circumstances, in particular when the consumer is only very slightly growth-impatient.[^tbs-other-approximations-better] Under these circumstances, this approximation can be substituted into {eq}`eq:TBS-zetaExp` to obtain
 
-[^tbs-other-approximations-better]: Other approximations are better for consumers who are highly impatient, relative to their unemployment risk; in this case a better approximation to {eq}`eq:TBS-zetaExp` is obtained by rewriting it as {math}`\zeta\PGro = \Rfree \MPC \aleph^{1/\CRRA} \left(\aleph^{-1}1+1\right)^{1/\CRRA}` and approximating using {math}`(1+\aleph^{-1})^{1/\CRRA} \approx 1 + \CRRA^{-1}\aleph^{-1}+\CRRA^{-1}(\CRRA^{-1}-1)\aleph^{-2}/2`.
+[^tbs-other-approximations-better]: Other approximations are better for consumers who are highly impatient, relative to their unemployment risk; in this case a better approximation to {eq}`eq:TBS-zetaExp` is obtained by rewriting it as {math}`\zeta\PGro = \Rfree \MPC \aleph^{1/\CRRA} \left(1+\aleph^{-1}\right)^{1/\CRRA}` and approximating using {math}`(1+\aleph^{-1})^{1/\CRRA} \approx 1 + \CRRA^{-1}\aleph^{-1}+\CRRA^{-1}(\CRRA^{-1}-1)\aleph^{-2}/2`.
 
 ```{math}
 :label: eq:TBS-zetaGammaApprox
@@ -1179,7 +1179,7 @@ where the additional term involving {math}`\prudEx` in this equation captures th
 
 #### The Consumption Function
 
-To solve the model by the method of *reverse shooting*,[^tbs-presentation-shooting-methods] we need {math}`{\cRat}^{e}_{t}` as a function of {math}`{\cRat}^{e}_{t+1}`. Starting with {eq}`eq:TBS-ctp1Oct`:
+To solve the model by the method of *reverse shooting*,[^tbs-presentation-shooting-methods] we need {math}`{\cRat}^{e}_{t}` as a function of {math}`{\cRat}^{e}_{t+1}`. Starting with {eq}`eq:TBS-BeforePFStep`:
 
 [^tbs-presentation-shooting-methods]: See {cite:t}`judd:book` for a presentation of shooting methods of solution for numerical difference and differential equations.
 
@@ -1311,7 +1311,7 @@ Reverse shooting requires us to solve separately for an approximation to the con
 \end{aligned}
 ```
 
-and then iterate the reverse-shooting equations until we reach some period {math}`n` in which {math}`\mRatE_{\Alt{t}-n}` escapes some pre-specified interval {math}`[\underline{\mRat}^{e},\bar{\mRat}^{e}]` (where the natural value for {math}`\underline{\mRat}^{e}` is 1 because this is the {math}`\mRat` that would be owned by a consumer who had saved nothing in the prior period and therefore is below any feasible value of {math}`\mRat` that could be realized by an optimizing consumer). This generates a sequence of points all of which are on the consumption function. A parallel procedure (substituting {math}`-` for {math}`+` in {eq}`eq:TBS-revshootmstart` and where appropriate in the corresponding equation for {math}`\cRat` generates the sequence of points for the approximation below the steady state. Taken together with the already-derived characterization of the function at the target level of wealth, these points constitute the basis for a piecewise second-order interpolating approximation to the consumption function on the interval {math}`[\underline{\mRat}^{e},\bar{\mRat}^{e}]`.
+and then iterate the reverse-shooting equations until we reach some period {math}`n` in which {math}`\mRatE_{\Alt{t}-n}` escapes some pre-specified interval {math}`[\underline{\mRat}^{e},\bar{\mRat}^{e}]` (where the natural value for {math}`\underline{\mRat}^{e}` is 1 because this is the {math}`\mRat` that would be owned by a consumer who had saved nothing in the prior period and therefore is below any feasible value of {math}`\mRat` that could be realized by an optimizing consumer). This generates a sequence of points all of which are on the consumption function. A parallel procedure (substituting {math}`-` for {math}`+` in {eq}`eq:TBS-revshootmstart` and where appropriate in the corresponding equation for {math}`\cRat`) generates the sequence of points for the approximation below the steady state. Taken together with the already-derived characterization of the function at the target level of wealth, these points constitute the basis for a piecewise second-order interpolating approximation to the consumption function on the interval {math}`[\underline{\mRat}^{e},\bar{\mRat}^{e}]`.
 
 #### The Value Function
 
@@ -1397,13 +1397,13 @@ The object {eq}`eq:TBS-cFuncMat` is not an arbitrary example; it reflects a set 
 
 which creates a function {math}`\texttt{cE}` that is a {math}`\mathbf{C}^4` interpolating polynomial connecting these points.
 
-The reverse shooting algorithm terminates at some finite maximum point {math}`\bar\mRat`, but for completeness it is useful to have an approximation to the consumption function that is reasonably well behaved for any {math}`\mTarg` no matter how large.[^tbs-extrapolation-approximating-interpolation]
+The reverse shooting algorithm terminates at some finite maximum point {math}`\bar\mRat`, but for completeness it is useful to have an approximation to the consumption function that is reasonably well behaved for any {math}`\mRat` no matter how large.[^tbs-extrapolation-approximating-interpolation]
 
-[^tbs-extrapolation-approximating-interpolation]: An extrapolation of the approximating interpolation will not perform well; a polynomial approximation will inevitably "blow up" if evaluated at large enough {math}`\mTarg`.
+[^tbs-extrapolation-approximating-interpolation]: An extrapolation of the approximating interpolation will not perform well; a polynomial approximation will inevitably "blow up" if evaluated at large enough {math}`\mRat`.
 
 Since we know that the consumption function in the presence of uncertainty asymptotes to the perfect foresight function, we adopt the following approach. Defining the level of precautionary saving as[^tbs-mnemonic-amount-consumption]
 
-[^tbs-mnemonic-amount-consumption]: Mnemonic: This is the amount of consumption that is cancelled as a result of uncertainty.
+[^tbs-mnemonic-amount-consumption]: Mnemonic: This is the amount of consumption that is canceled as a result of uncertainty.
 
 ```{math}
 :label: eq:TBS-pSavFunc
@@ -1447,7 +1447,7 @@ The text asserts that if {math}`\PGro < \Rfree` the consumption function for a f
 \lim_{\mRat \uparrow \infty} \bar{\cFunc}_{t}(\mRat) - \cFunc_{t}(\mRat) = 0 .
 ```
 
-This proposition can be proven by careful analysis of the consumption Euler equation, noting that as {math}`\mRat` approaches infinity the proportion of consumption will be financed out of (uncertain) labor income approaches zero, and that the magnitude of the precautionary effect is proportional to the square of the proportion of such consumption financed out of uncertain labor income.
+This proposition can be proven by careful analysis of the consumption Euler equation, noting that as {math}`\mRat` approaches infinity the proportion of consumption that will be financed out of (uncertain) labor income approaches zero, and that the magnitude of the precautionary effect is proportional to the square of the proportion of such consumption financed out of uncertain labor income.
 
 A footnote also claims that for employed consumers, {math}`\cFunc(\mRat)` approaches a different, but still well-defined, limit even if {math}`\PGro \geq \Rfree`, so long as the impatience condition holds.
 
@@ -1499,7 +1499,7 @@ and
 \left(\frac{\blacktriangle_{t+1}}{\blacktriangle_{t}}\right) = \MPS^{e}\Rnorm
 ```
 
-while using {eq}`eq:TBS-ctp1Oct` yields
+while using {eq}`eq:TBS-BeforePFStep` yields
 
 ```{math}
 :label: eq:TBS-dc
