@@ -31,6 +31,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import build_lite  # beside this file: the in-browser notebooks the site publishes
+
 logging.basicConfig(level=logging.INFO, format="%(message)s", force=True)
 log = logging.getLogger(__name__)
 
@@ -137,6 +139,11 @@ def absolutize(tex: str) -> tuple[str, int]:
     return REL_HREF.subn(lambda _: "\\href{" + SITE + "/", tex)
 
 
+def lite_pages() -> set[str]:
+    """The in-browser notebooks chapters link to: pages of the site, though not of the MyST project."""
+    return {f"/lite/notebooks/index.html?path={Path(rel).name}" for rel in build_lite.NOTEBOOKS}
+
+
 def unknown_pages(tex: str, pages: set[str]) -> list[str]:
     """Absolute site links whose path is not a page of the book."""
     return sorted(
@@ -153,8 +160,17 @@ def run(cmd, cwd: Path, output: Path) -> int:
         ).returncode
 
 
+def clear(folder: Path) -> None:
+    """Delete a stage. The copy keeps @resources/'s read-only modes, so its folders must be made writable first."""
+    if folder.exists():
+        for path in [folder, *folder.rglob("*")]:
+            if path.is_dir() and not path.is_symlink():
+                path.chmod(path.stat().st_mode | 0o200)
+    shutil.rmtree(folder, ignore_errors=True)
+
+
 def stage(root: Path) -> None:
-    shutil.rmtree(STAGE, ignore_errors=True)
+    clear(STAGE)
     shutil.copytree(
         root, STAGE, ignore=lambda _, names: [n for n in names if n in SKIP]
     )
@@ -184,7 +200,7 @@ def absolutize_tex() -> list[str]:
         for pattern in ("*.md", "*.ipynb")
         for page in (STAGE / "content").rglob(pattern)
         if ".ipynb_checkpoints" not in page.parts
-    }
+    } | lite_pages()
     failures, n_pages = [], 0
     for tex_file in (STAGE / TEX_DIR).glob("*.tex"):
         tex, n = absolutize(tex_file.read_text())
@@ -293,6 +309,14 @@ def href_failures() -> list[str]:
                 ),
                 "an escaped anchor was read as part of the page path",
             ),
+            (
+                unknown_pages(rf"\href{{{SITE}/lite/notebooks/index.html?path=Bubbles.ipynb}}{{x}}", lite_pages()),
+                "a link to an in-browser notebook was reported unknown",
+            ),
+            (
+                not unknown_pages(rf"\href{{{SITE}/lite/notebooks/index.html?path=Gone.ipynb}}{{x}}", lite_pages()),
+                "a link to an in-browser notebook the site does not build was not reported",
+            ),
         ]
         if bad
     ]
@@ -315,9 +339,24 @@ def url_failures() -> list[str]:
     ]
 
 
+def clear_failures() -> list[str]:
+    """A stage holding a read-only folder, as @resources/ is, must still be deleted."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        stage_dir = Path(tmp) / "stage"
+        locked = stage_dir / "locked"
+        locked.mkdir(parents=True)
+        (locked / "file").write_text("x")
+        (locked / "file").chmod(0o444)
+        locked.chmod(0o555)
+        clear(stage_dir)
+        return ["clear left a stage with a read-only folder in place"] if stage_dir.exists() else []
+
+
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
-    failures = fact_failures() + href_failures() + url_failures()
+    failures = fact_failures() + href_failures() + url_failures() + clear_failures()
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")
