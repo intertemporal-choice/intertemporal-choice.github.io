@@ -5,7 +5,7 @@
 # content as a MyST project.math map, meant to be listed in the book's myst.yml `extends:` AFTER the
 # registry's econark-math.yml. Every entry is a debt: an override to substitute away, an object to give a
 # registry row, or a name to retire. The comment on each entry says which, and how much it is used.
-# Built 2026-11-04T19:40:34-05:00 from the registry at 6ab13aee27 (v9.0.0) and the book at 2805ff5d2a.
+# Built 2026-11-08T21:27:05-05:00 from the registry at 6ab13aee27 (v9.0.0) and the book at 2805ff5d2a.
 version: 1
 project:
   math:
@@ -84,12 +84,12 @@ project:
     '\fLev': 'f'  # registry: \boldsymbol{\mathit{f}} via \fLvl; uses book 0 questions 0
     '\GLev': 'G'  # registry: \boldsymbol{\mathit{G}} via \GLvl; uses book 0 questions 0
     '\HLevBF': '\mathbf{H}'  # registry: \boldsymbol{\mathit{H}} via \HLvl; uses book 0 questions 0
-    '\iLev': 'i'  # registry: \boldsymbol{\mathit{i}} via \iLvl; uses book 0 questions 0
     '\ILev': 'I'  # registry: \boldsymbol{\mathit{I}} via \ILvl; uses book 0 questions 0
+    '\iLev': 'i'  # registry: \boldsymbol{\mathit{i}} via \iLvl; uses book 0 questions 0
     '\InvEpShkInv': '\underline{\psi}'  # registry: {\PowMean_{-1}[\permShk]} via \InvEPermShkInv [inv-e-perm-shk-inv]; uses book 0 questions 0
     '\JLev': 'J'  # registry: \boldsymbol{\mathit{J}} via \JLvl; uses book 0 questions 0
-    '\kLevBF': '\mathbf{k}'  # registry: \boldsymbol{\mathit{k}} via \kLvl; uses book 0 questions 0
     '\KLevBF': '\mathbf{K}'  # registry: \boldsymbol{\mathit{K}} via \KLvl; uses book 0 questions 0
+    '\kLevBF': '\mathbf{k}'  # registry: \boldsymbol{\mathit{k}} via \kLvl; uses book 0 questions 0
     '\LivFac': '\Alive'  # registry: \Alive via \LivPrb [survival-prob]; uses book 0 questions 0
     '\lLev': '\ell'  # registry: \boldsymbol{\mathit{l}} via \lLvl; uses book 0 questions 0
     '\LLevBF': '\mathbf{L}'  # registry: \boldsymbol{\mathit{L}} via \LLvl; uses book 0 questions 0
@@ -100,8 +100,8 @@ project:
     '\MinMinMPC': '\underline{\kappa}'  # registry: \Min{\Min{\MPC}} via \MPCminmin; uses book 0 questions 0
     '\MinMPC': '\uline{\kappa}'  # registry: \Min{\MPC} via \MPCmin [mpc-min]; uses book 0 questions 0
     '\MLevBF': '\mathbf{M}'  # registry: \boldsymbol{\mathit{M}} via \MLvl; uses book 0 questions 0
-    '\nLev': 'n'  # registry: \boldsymbol{\mathit{n}} via \nLvl; uses book 0 questions 0
     '\NLev': 'N'  # registry: \boldsymbol{\mathit{N}} via \NLvl; uses book 0 questions 0
+    '\nLev': 'n'  # registry: \boldsymbol{\mathit{n}} via \nLvl; uses book 0 questions 0
     '\OLev': 'O'  # registry: \boldsymbol{\mathit{O}} via \OLvl; uses book 0 questions 0
     '\OLevBF': '\mathbf{O}'  # registry: \boldsymbol{\mathit{O}} via \OLvl; uses book 0 questions 0
     '\oLevBF': '\mathbf{o}'  # registry: \boldsymbol{\mathit{o}} via \oLvl; uses book 0 questions 0
@@ -127,17 +127,17 @@ project:
     '\vLevBF': '\mathbf{v}'  # registry: \boldsymbol{\mathit{v}} via \vLvl; uses book 0 questions 0
     '\WLev': 'W'  # registry: \boldsymbol{\mathit{W}} via \WLvl; uses book 0 questions 0
     '\wLev': '\pmb{w}'  # registry: \boldsymbol{\mathit{w}} via \wLvl; uses book 0 questions 0
-    '\xLev': 'x'  # registry: \boldsymbol{\mathit{x}} via \xLvl; uses book 0 questions 0
     '\XLev': 'X'  # registry: \boldsymbol{\mathit{X}} via \XLvl; uses book 0 questions 0
-    '\yLevBF': '\mathbf{y}'  # registry: \boldsymbol{\mathit{y}} via \yLvl; uses book 0 questions 0
+    '\xLev': 'x'  # registry: \boldsymbol{\mathit{x}} via \xLvl; uses book 0 questions 0
     '\YLevBF': '\mathbf{Y}'  # registry: \boldsymbol{\mathit{Y}} via \YLvl; uses book 0 questions 0
-    '\zLev': 'z'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
+    '\yLevBF': '\mathbf{y}'  # registry: \boldsymbol{\mathit{y}} via \yLvl; uses book 0 questions 0
     '\ZLev': 'Z'  # registry: \boldsymbol{\mathit{Z}} via \ZLvl; uses book 0 questions 0
-    '\zLevBF': '\mathbf{z}'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
+    '\zLev': 'z'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
     '\ZLevBF': '\mathbf{Z}'  # registry: \boldsymbol{\mathit{Z}} via \ZLvl; uses book 0 questions 0
+    '\zLevBF': '\mathbf{z}'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
     # --- local-upstream (34): objects the registry lacks: candidates for registry rows
-    '\Price': '\mathsf{P}'  # uses book 190 questions 207
-    '\dvdnd': 'd'  # uses book 151 questions 214
+    '\Price': '\mathsf{P}'  # uses book 190 questions 206
+    '\dvdnd': 'd'  # uses book 151 questions 213
     '\q': '\koppa'  # uses book 100 questions 156
     '\riskyAlt': '\acute{\mathbf{r}}'  # uses book 82 questions 0
     '\ptyLev': 'a'  # uses book 26 questions 50
@@ -237,7 +237,7 @@ project:
     '\TaxFree': '\cancel{\Tax}'  # uses book 30 questions 24
     '\PostITC': '\cancel{\zeta}'  # uses book 10 questions 0
     # --- local-unclassified (0): objects the registry lacks: not yet classified
-    # --- aliases (93): course names for registry objects, same rendering: pure renames to retire
+    # --- aliases (90): course names for registry objects, same rendering: pure renames to retire
     '\ARat': '\ANrm'  # alias of the registry's macro
     '\aRat': '\aNrm'  # alias of the registry's macro
     '\BRat': '\BNrm'  # alias of the registry's macro
@@ -245,47 +245,44 @@ project:
     '\cons': '\cNrm'  # alias of the registry's macro
     '\CRat': '\CNrm'  # alias of the registry's macro
     '\cRat': '\cNrm'  # alias of the registry's macro
-    '\depr': '\deprRte'  # alias of the registry's macro
     '\Depr': '\DeprFac'  # alias of the registry's macro
+    '\depr': '\deprRte'  # alias of the registry's macro
     '\Discount': '\DiscFac'  # alias of the registry's macro
     '\DiscRate': '\discRte'  # alias of the registry's macro
     '\dRat': '\dNrm'  # alias of the registry's macro
     '\hMin': '\hNrmPes'  # alias of the registry's macro
-    '\hRat': '\hNrm'  # alias of the registry's macro
     '\HRat': '\HNrm'  # alias of the registry's macro
+    '\hRat': '\hNrm'  # alias of the registry's macro
     '\inc': '\yNrm'  # alias of the registry's macro
     '\IRat': '\INrm'  # alias of the registry's macro
     '\iRat': '\iNrm'  # alias of the registry's macro
-    '\kRat': '\kNrm'  # alias of the registry's macro
     '\KRat': '\KNrm'  # alias of the registry's macro
+    '\kRat': '\kNrm'  # alias of the registry's macro
     '\LRat': '\LNrm'  # alias of the registry's macro
     '\m': '\mNrm'  # alias of the registry's macro
     '\MRat': '\MNrm'  # alias of the registry's macro
     '\mRat': '\mNrm'  # alias of the registry's macro
-    '\nRat': '\nNrm'  # alias of the registry's macro
     '\NRat': '\NNrm'  # alias of the registry's macro
-    '\oRat': '\oNrm'  # alias of the registry's macro
+    '\nRat': '\nNrm'  # alias of the registry's macro
     '\ORat': '\ONrm'  # alias of the registry's macro
+    '\oRat': '\oNrm'  # alias of the registry's macro
     '\Pat': '\APFac'  # alias of the registry's macro
     '\PatR': '\RPFac'  # alias of the registry's macro
-    '\pDies': '\diePrb'  # alias of the registry's macro
     '\PDies': '\DiePrb'  # alias of the registry's macro
+    '\pDies': '\diePrb'  # alias of the registry's macro
     '\PopFac': '\PopGroFac'  # alias of the registry's macro
     '\PopGro': '\PopGroFac'  # alias of the registry's macro
     '\pRat': '\pNrm'  # alias of the registry's macro
-    '\prodFunc': '\fFunc'  # alias of the registry's macro
     '\ProdFunc': '\FFunc'  # alias of the registry's macro
-    '\pshk': '\permShkInd'  # alias of the registry's macro
+    '\prodFunc': '\fFunc'  # alias of the registry's macro
     '\PShk': '\PermShkAgg'  # alias of the registry's macro
     '\pShk': '\permShkInd'  # alias of the registry's macro
+    '\pshk': '\permShkInd'  # alias of the registry's macro
     '\pShkMin': '\permShkIndMin'  # alias of the registry's macro
     '\R': '\Rfree'  # alias of the registry's macro
-    '\sRat': '\sNrm'  # alias of the registry's macro
     '\SRat': '\SNrm'  # alias of the registry's macro
+    '\sRat': '\sNrm'  # alias of the registry's macro
     '\timeRate': '\discRte'  # alias of the registry's macro
-    '\tShk': '\tranShkInd'  # alias of the registry's macro
-    '\tshk': '\tranShkInd'  # alias of the registry's macro
-    '\tShkAll': '\tranShkAll'  # alias of the registry's macro
     '\TShkEmp': '\TranShkEmp'  # alias of the registry's macro
     '\tShkEmp': '\tranShkEmp'  # alias of the registry's macro
     '\tShkEmpMin': '\tranShkEmpMin'  # alias of the registry's macro
@@ -294,68 +291,65 @@ project:
     '\Value': '\VFunc'  # alias of the registry's macro
     '\VRat': '\VNrm'  # alias of the registry's macro
     '\vRat': '\vNrm'  # alias of the registry's macro
-    '\wAll': '\oNrm'  # alias of the registry's macro
     '\WAll': '\ONrm'  # alias of the registry's macro
+    '\wAll': '\oNrm'  # alias of the registry's macro
     '\WAllRat': '\ONrm'  # alias of the registry's macro
     '\wAllRat': '\oNrm'  # alias of the registry's macro
-    '\wBeg': '\kNrm'  # alias of the registry's macro
     '\WBeg': '\KNrm'  # alias of the registry's macro
+    '\wBeg': '\kNrm'  # alias of the registry's macro
     '\Wealth': '\ONrm'  # alias of the registry's macro
     '\wealth': '\oNrm'  # alias of the registry's macro
-    '\wEnd': '\aNrm'  # alias of the registry's macro
-    '\Wend': '\ANrm'  # alias of the registry's macro
-    '\wend': '\aNrm'  # alias of the registry's macro
     '\WEnd': '\ANrm'  # alias of the registry's macro
-    '\wEndRat': '\aNrm'  # alias of the registry's macro
+    '\Wend': '\ANrm'  # alias of the registry's macro
+    '\wEnd': '\aNrm'  # alias of the registry's macro
+    '\wend': '\aNrm'  # alias of the registry's macro
     '\WEndRat': '\ANrm'  # alias of the registry's macro
+    '\wEndRat': '\aNrm'  # alias of the registry's macro
     '\WGro': '\WGroFac'  # alias of the registry's macro
-    '\whum': '\hNrm'  # alias of the registry's macro
     '\Whum': '\HNrm'  # alias of the registry's macro
     '\wHum': '\hNrm'  # alias of the registry's macro
-    '\wMid': '\bNrm'  # alias of the registry's macro
+    '\whum': '\hNrm'  # alias of the registry's macro
     '\WMid': '\BNrm'  # alias of the registry's macro
     '\Wmid': '\BNrm'  # alias of the registry's macro
+    '\wMid': '\bNrm'  # alias of the registry's macro
     '\wmid': '\bNrm'  # alias of the registry's macro
     '\WMkt': '\MNrm'  # alias of the registry's macro
-    '\wmkt': '\mNrm'  # alias of the registry's macro
     '\wMkt': '\mNrm'  # alias of the registry's macro
+    '\wmkt': '\mNrm'  # alias of the registry's macro
     '\WPre': '\KNrm'  # alias of the registry's macro
     '\wPre': '\kNrm'  # alias of the registry's macro
-    '\wRat': '\oNrm'  # alias of the registry's macro
     '\WRat': '\ONrm'  # alias of the registry's macro
-    '\wtot': '\oNrm'  # alias of the registry's macro
+    '\wRat': '\oNrm'  # alias of the registry's macro
     '\Wtot': '\ONrm'  # alias of the registry's macro
+    '\wtot': '\oNrm'  # alias of the registry's macro
     '\XRat': '\XNrm'  # alias of the registry's macro
     '\xRat': '\xNrm'  # alias of the registry's macro
-    '\yRat': '\yNrm'  # alias of the registry's macro
     '\YRat': '\YNrm'  # alias of the registry's macro
+    '\yRat': '\yNrm'  # alias of the registry's macro
     '\ZRat': '\ZNrm'  # alias of the registry's macro
     '\zRat': '\zNrm'  # alias of the registry's macro
+    # --- exact (22): the registry's glyph written differently (extra braces, an accent's argument, a helper), or an alias whose target the block overrides; KaTeX's output would change, so the course's is kept
+    '\Ex': '\mathbb{E}'  # registry: {\mathbb{E}}; uses book 322 questions 421
+    '\riskyshare': '\varsigma'  # registry: {\varsigma}; uses book 146 questions 130
+    '\Wage': '\mathsf{W}'  # registry: {\mathsf{W}}; uses book 151 questions 82
+    '\Steady': '\bar'  # registry: \bar{#1}; uses book 0 questions 150
+    '\urate': '\mho'  # registry: {\mho}; uses book 0 questions 127
+    '\Rnorm': '\mathcal{R}'  # registry: {\mathcal{R}}; uses book 3 questions 42
+    '\PDV': '\mathbb{P}'  # registry: {\mathbb{P}}; uses book 27 questions 10
+    '\SDF': '\textbf{Ð}'  # registry: \textbf{\text{Ð}}; uses book 31 questions 0
+    '\wage': '\mathsf{w}'  # registry: {\mathsf{w}}; uses book 0 questions 27
+    '\erate': '\cancel{\mho}'  # registry: {\cancel{\mho}}; uses book 0 questions 16
+    '\aMin': '\underline{\aRat}'  # registry: {\Min{\aNrm}}; uses book 5 questions 0
+    '\CEndFunc': '\mathfrak{C}'  # registry: {\mathfrak{C}}; uses book 0 questions 0
+    '\cEndFunc': '\mathfrak{c}'  # registry: {\mathfrak{c}}; uses book 0 questions 0
+    '\Chi': '\mathrm{X}'  # registry: {\mathrm{X}}; uses book 0 questions 0
+    '\EEndMap': '\mathsf{E}'  # registry: {\mathsf{E}}; uses book 0 questions 0
+    '\FDist': '\mathcal{F}'  # registry: {\mathcal{F}}; uses book 0 questions 0
+    '\Mean': '\mathbb{M}'  # registry: {\mathbb{M}}; uses book 0 questions 0
+    '\rnorm': '\mathit{r}'  # registry: {\mathit{r}}; uses book 0 questions 0
+    '\tShk': '\xi'  # alias of \tranShkInd, which this block redefines; uses book 0 questions 0
+    '\tshk': '\xi'  # alias of \tranShkInd, which this block redefines; uses book 0 questions 0
+    '\tShkAll': '\xi'  # alias of \tranShkAll, which this block redefines; uses book 0 questions 0
+    '\VInv': '\Lambda'  # registry: {\Lambda}; uses book 0 questions 0
     # --- dependencies (1): course macros the entries above expand into, defined in neither the registry nor above
     '\koppa': 'q'  # dependency of another block entry
-    # --- exact renderings (added in the book, not by the generator): the registry's definition is the same glyph
-    # written differently (extra braces, or through a helper), which changes KaTeX's output, so the course's is kept
-    '\CEndFunc': '\mathfrak{C}'
-    '\Chi': '\mathrm{X}'
-    '\DiscAltuAdj': '\underline{\underline{\beth}}'
-    '\EEndMap': '\mathsf{E}'
-    '\Ex': '\mathbb{E}'
-    '\FDist': '\mathcal{F}'
-    '\Mean': '\mathbb{M}'
-    '\PDV': '\mathbb{P}'
-    '\PermShk': '\Psi'
-    '\RSave': '\underline{\Rfree}'
-    '\Rnorm': '\mathcal{R}'
-    '\SDF': '\textbf{Ð}'
-    '\Steady': '\bar'
-    '\VInv': '\Lambda'
-    '\Wage': '\mathsf{W}'
-    '\aMin': '\underline{\aRat}'
-    '\cEndFunc': '\mathfrak{c}'
-    '\erate': '\cancel{\mho}'
-    '\permShk': '\psi'
-    '\riskyshare': '\varsigma'
-    '\rnorm': '\mathit{r}'
-    '\rsave': '\underline{\rfree}'
-    '\urate': '\mho'
-    '\wage': '\mathsf{w}'
