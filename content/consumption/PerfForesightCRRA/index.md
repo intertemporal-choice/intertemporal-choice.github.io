@@ -200,7 +200,7 @@ where {math}`\oLev_{\tNow}` is the consumer's "**o**verall" or "total wealth," t
 
 Now consider the question "What is the level of {math}`\cLevBF_{\tNow}` that will leave total wealth intact, allowing the same value of consumption in period {math}`t+1` and forever after (that is, allowing {math}`\cLevBF_{\tNow+n}=\cLevBF_{\tNow}~\forall~n>0`)?"
 
-The intuitive answer is that the wealth-preserving level of spending is exactly equal to the (properly conceived) interest earnings on one's total wealth. We call this the "sustainable" level of consumption. The literature of the 1970s and 80s interpreted that quantity as "permanent income," but we reserve that term here for {math}`\pLevBF` itself. Wealth in this framework behaves exactly like an asset that yields a dividend {math}`\pLevBF`.
+The intuitive answer is that the wealth-preserving level of spending is exactly equal to the (properly conceived) interest earnings on one's total wealth. We call this the "sustainable" level of consumption. The literature of the 1970s and 80s interpreted that quantity as "permanent income," but we reserve that term here for {math}`\pLevBF` itself. Wealth in this framework behaves exactly like an asset that pays {math}`\pLevBF` each period.
 
 Because human wealth is exactly like any other kind of wealth in this perfect foresight framework, it is possible to work directly with the level of total wealth {math}`\oLev` to find the sustainable level of spending. Suppose we assume the consumer will spend fraction {math}`\PIHMPC` of total wealth in each period; the {math}`\PIHMPC` that leaves wealth intact will be given by {math}`\PIHMPC` in
 
@@ -513,7 +513,7 @@ this can be rewritten as
 \end{aligned}
 ```
 
-(where the last approximations come from the assumptions that {math}`1/G \approx 1`) and that {math}`\rfree \times (\rfree-\CRRA^{-1}(\rfree-\DiscRate))` is "small." The saving *rate* (for which we use the letter {math}`\srate` to distinguish it from {math}`\sRat` above) is the ratio of saving to *total* income (not just labor income):
+(where the last approximations come from the assumptions that {math}`1/\WGro \approx 1` and that {math}`\rfree \times (\rfree-\CRRA^{-1}(\rfree-\DiscRate))` is "small"). The saving *rate* (for which we use the letter {math}`\srate` to distinguish it from {math}`\sRat` above) is the ratio of saving to *total* income (not just labor income):
 
 ```{math}
 \varsigma_{\tNow} = \left(\frac{\patwGro/(\rfree - \wGro)+ \CRRA^{-1}(\rfree-\DiscRate)\aRat_{\tNow-1}}{1+ \rfree \aRat_{\tNow-1}}\right).
