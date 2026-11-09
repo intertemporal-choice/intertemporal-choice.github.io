@@ -382,13 +382,13 @@ The {math}`\vk` diagram is virtually indistinguishable from the {math}`\q` diagr
 :::{figure} figures/lPhaseDiag.png
 :name: fig:qMod-lPhaseDiag
 
-Phase diagram for {math}`\vk`, with an investment tax credit of 10 percent, so that the line where capital is constant is at {math}`\vk = \kPriceAfterITC = 0.9`. The locus where {math}`\vk` is constant sets aside the effect of capital on the costs of adjustment, as the text does near the steady state; the saddle path is exact. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
+Phase diagram for {math}`\vk`, with an investment tax credit of 10 percent, so that the line where capital is constant is at {math}`\vk = \kPriceAfterITC = 0.9`. The locus where {math}`\vk` is constant sets aside the effect of capital on the costs of adjustment, as the text does near the steady state; the saddle path is exact. Above the diagram are the two equations of motion that define it, {eq}`eq:qMod-kdyn` with {math}`\pmb{\iota}(\q) = (\q-1)/\omega` and {math}`\q = \vk/\kPriceAfterITC`, and {eq}`eq:Edl`, with a constant price of capital. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
 :::
 
 :::{figure} figures/qPhaseDiag.png
 :name: fig:qMod-qPhaseDiag
 
-Phase diagram for {math}`\q`, with the same investment tax credit: the line where capital is constant is at {math}`\q = 1`. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
+Phase diagram for {math}`\q`, with the same investment tax credit: the line where capital is constant is at {math}`\q = 1`. Above the diagram are the two equations of motion that define it, {eq}`eq:qMod-kdyn` with {math}`\pmb{\iota}(\q) = (\q-1)/\omega`, and {eq}`eq:dq`, with a constant price of capital. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=qModel.ipynb), which runs in your browser.
 :::
 
 (Dynamics)=

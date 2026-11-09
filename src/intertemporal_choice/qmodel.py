@@ -155,11 +155,23 @@ def _motion(ax, model, values, omega, unit, kbar, frame):
                 ax.annotate("", xy=(x + ddx, y + ddy), xytext=(x, y), arrowprops=dict(arrowstyle="->", lw=0.8, color="0.35"))
 
 
+EQUATIONS = {  # the chapter's two equations of motion, written over the phase diagram they define
+    "q": (r"$\Delta k_{t+1} = k_{t}\,(q_{t+1}-1)/\omega$",
+          r"$\mathbb{E}_{t}[\Delta q_{t+1}] \approx (\mathsf{r}+\delta)\,q_{t}"
+          r" - [(1-\tau)\,\mathrm{f}^{k}(k_{t})/\mathscr{P} - j^{k}_{t}\beta]$"),
+    "lambda": (r"$\Delta k_{t+1} = k_{t}\,(\lambda_{t+1}/\mathscr{P}-1)/\omega$",
+               r"$\mathbb{E}_{t}[\Delta \lambda_{t+1}] \approx (\mathsf{r}+\delta)\,\lambda_{t}"
+               r" - [(1-\tau)\,\mathrm{f}^{k}(k_{t}) - j^{k}_{t}\mathscr{P}\beta]$"),
+}
+
+
 def draw_phase(ax, model, values, omega, scale="lambda", frame=None):
     """The phase diagram in (k, lambda), or with scale="q" in (k, q): the locus where the marginal
     value of capital is constant, the line where capital is (lambda at the price of capital, q at
-    one), the saddle path and arrows of motion. k is relative to the steady state; `frame`, from the
-    sliders, fixes the axes."""
+    one), the saddle path and arrows of motion, with the two equations of motion written above it
+    (Chris, in class 2026-11-09: "the diagram should be modified to have the two dynamic equations
+    right there on itself"). k is relative to the steady state; `frame`, from the sliders, fixes the
+    axes."""
     kbar, lam_bar = model.steady_state(values["tax_free"], values["P"], values["A"])
     unit = values["P"] if scale == "q" else 1.0
     ks, ls = saddle_path(model, values, omega)
@@ -182,6 +194,8 @@ def draw_phase(ax, model, values, omega, scale="lambda", frame=None):
     x = k_lo + 0.8 * (k_hi - k_lo)  # lower right, where the saddle path is above the locus
     ax.annotate("saddle path", (x, float(np.interp(x * kbar, ks, ls)) / unit), xytext=(0, 8),
                 textcoords="offset points", fontsize=9, color=NEW)
+    ax.text(1.0, 1.03, "\n".join(EQUATIONS["q" if scale == "q" else "lambda"]), transform=ax.transAxes,
+            ha="right", va="bottom", fontsize=9.5, linespacing=1.6)
     ax.set_xlim(k_lo, k_hi)
     ax.set_ylim(y_lo, y_hi)
     ax.set_xlabel(r"$k/\bar{k}$", loc="right")
