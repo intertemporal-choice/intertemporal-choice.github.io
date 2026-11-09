@@ -33,6 +33,18 @@ Once per clone, run `uv run python code/notebooks.py --install`: it sets up the 
 that strips the metadata Jupyter rewrites on every save, so opening a notebook and saving
 it leaves nothing to commit.
 
+## `derive_bib.py`: the bibliography comes from economics.bib
+
+`content/minimal_bibliography.bib` is derived, never edited. The source of every reference is
+`bibtex/bib/economics.bib` in [llorracc/texmf-local](https://github.com/llorracc/texmf-local), and a correction
+goes there (Chris Carroll, 2026-11-08). The script copies, verbatim, the entries the chapters and notebooks cite in
+`{cite:t}` and `{cite:p}` roles, with any entry they name in a `crossref` field, and names the source's commit on
+the file's first line. Cite the source's key for a work, never a new one.
+
+- `uv run python code/derive_bib.py` derives from texmf-local's `main` and rewrites the file.
+- `--check`, run by the workflow, derives again from the commit the file names and fails if anything differs or a
+  cited key is missing from the source. After a correction in texmf-local, run the script and commit the result.
+
 ## `build_site.py`
 
 Runs `myst build --execute` (default `--html --strict`) against a Jupyter server it starts

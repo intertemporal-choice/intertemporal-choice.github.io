@@ -7,18 +7,18 @@ The chapter's [notebook](InvestmentNotes.ipynb) draws its figures from the natio
 
 ### Why Study Investment?
 
-1. Although investment is much smaller as a fraction of GDP than consumption, investment is much more *variable* than consumption. So *fluctuations* in investment spending account for a large proportion of business-cycle frequency fluctuations in GDP: over the business cycle, investment is several times as volatile as output {cite:p}`stockWatsonHandbook`. {numref}`fig:InvestmentVolatility` shows one way of measuring this: since 1948, real investment's growth over four quarters has varied four times as much as real GDP's, and, measured by the covariance of its growth with GDP's, investment accounts for about half of the variance of GDP's growth.
+1. Although investment is much smaller as a fraction of GDP than consumption, investment is much more *variable* than consumption. So *fluctuations* in investment spending account for a large proportion of business-cycle frequency fluctuations in GDP: over the business cycle, investment is several times as volatile as output {cite:p}`stock&watson:handbook`. {numref}`fig:InvestmentVolatility` shows one way of measuring this: since 1948, real investment's growth over four quarters has varied four times as much as real GDP's, and, measured by the covariance of its growth with GDP's, investment accounts for about half of the variance of GDP's growth.
 
 2. In the long run, the average magnitude of investment spending determines the size of the capital stock. If we think accounting for capital is an important component of explaining macroeconomic outcomes, then we need an understanding of investment.
 
 ### History of Thought
 
-- {cite:t}`keynesGeneralTheory`, in the chapter on "The State of Long-Term Expectation": {math}`I` determined by "animal spirits" which fluctuated strongly.
+- {cite:t}`keynes:generaltheory`, in the chapter on "The State of Long-Term Expectation": {math}`I` determined by "animal spirits" which fluctuated strongly.
 - The acceleration principle of {cite:t}`clarkAccelerator`, and the Keynesian "Multiplier/Accelerator" model of investment of {cite:t}`samuelsonI`, Hansen and Harrod
 - The neoclassical model with no costs of adjustment: {cite:t}`jorgensonCapitalTheory` and {cite:t}`hall&jorgenson:i`
 - The {math}`q` of {cite:t}`brainardTobinPitfalls` and {cite:t}`tobinsQ`
 - Convex costs of adjustment {cite:p}`eisnerStrotz,lucasAdjustmentCosts,gouldAdjustmentCosts,treadwayInvestment`, and the {cite:t}`abel:q`-{cite:t}`hayashi:q` "marginal {math}`\q`" model
-- Irreversibility and nonconvex costs of adjustment {cite:p}`abel&eberly:unified,dixitPindyck,caballeroEngelSs,cooperHaltiwangerAdjCosts`
+- Irreversibility and nonconvex costs of adjustment {cite:p}`abel&eberly:unified,dixit&pindyck:option,caballero&engel:dynamics,cooperHaltiwangerAdjCosts`
 - Capital market imperfections {cite:p}`fhp,bernankeGertlerAgency,kiyotakiMooreCredit`
 
 ## The Samuelson Multiplier-Accelerator Model
@@ -59,7 +59,7 @@ I_{t} = \alpha Y_{t} + \gamma \rfree_{t}, \qquad \gamma < 0,
 
 in which the desired level of investment depends in a simple linear way on the autonomous evolution of other variables: Output {math}`Y` and interest rates {math}`\rfree`. These variables were in turn affected by {math}`I`, and the model was capable of producing rich dynamics as a result.
 
-In purely statistical terms, an equation like {eq}`eq:InvNotes-reducedForm` performs remarkably well in "explaining" investment spending. But this is not very satisfactory because income, investment, and interest rates are presumably all determined by deeper underlying features of the environment, and so it is highly problematic to interpret this equation as instructive about the fundamental determinants of investment. In particular, there is no reason to expect its coefficients to stay the same when policy changes the environment that produced them {cite:p}`lucasCritique`.
+In purely statistical terms, an equation like {eq}`eq:InvNotes-reducedForm` performs remarkably well in "explaining" investment spending. But this is not very satisfactory because income, investment, and interest rates are presumably all determined by deeper underlying features of the environment, and so it is highly problematic to interpret this equation as instructive about the fundamental determinants of investment. In particular, there is no reason to expect its coefficients to stay the same when policy changes the environment that produced them {cite:p}`lucas:critique`.
 
 ## Hall and Jorgenson
 

@@ -433,7 +433,7 @@ With $0<\tau<1$, $p$ has the same variance in every period, and since $\psi_{t}$
 
 In the regression, $c_{t+d}-c_{t}=(p_{t+d}-p_{t})+(u_{t+d}-u_{t})$ and $y_{t+d}-y_{t}=(p_{t+d}-p_{t})+(\xi_{t+d}-\xi_{t})$. So [AttenuationByNoise](#fact:attenuationbynoise) applies with $k=1$, a common part of variance $d\,\sigma_{\psi}^{2}$ and noise of variance $2\,\sigma_{\xi}^{2}$. The longer the difference, the larger the permanent part's share of the change in income: that is why Friedman's model predicts a larger coefficient in long differences than in short ones.
 
-Measured transitory income is not white noise: {cite:t}`abowdCard` find that annual changes in earnings are correlated with the changes one and two years away, and not beyond. If $\xi_{t}$ is correlated with its own values up to $q$ periods apart, then for $d>q$, $\operatorname{var}(\xi_{t+d}-\xi_{t})=2\operatorname{var}(\xi)$, and the formulas hold with $\operatorname{var}(\xi)$ in place of $\sigma_{\xi}^{2}$: only the intercept changes. {cite:t}`carroll:brookings` used only differences of three years or more for this reason.
+Measured transitory income is not white noise: {cite:t}`acCovariance` find that annual changes in earnings are correlated with the changes one and two years away, and not beyond. If $\xi_{t}$ is correlated with its own values up to $q$ periods apart, then for $d>q$, $\operatorname{var}(\xi_{t+d}-\xi_{t})=2\operatorname{var}(\xi)$, and the formulas hold with $\operatorname{var}(\xi)$ in place of $\sigma_{\xi}^{2}$: only the intercept changes. {cite:t}`carroll:brookings` used only differences of three years or more for this reason.
 
 (fact:randomwalkspread)=
 ::::{div}
