@@ -31,6 +31,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import build_lite  # beside this file: the in-browser notebooks the site publishes
+
 logging.basicConfig(level=logging.INFO, format="%(message)s", force=True)
 log = logging.getLogger(__name__)
 
@@ -137,6 +139,11 @@ def absolutize(tex: str) -> tuple[str, int]:
     return REL_HREF.subn(lambda _: "\\href{" + SITE + "/", tex)
 
 
+def lite_pages() -> set[str]:
+    """The in-browser notebooks chapters link to: pages of the site, though not of the MyST project."""
+    return {f"/lite/notebooks/index.html?path={Path(rel).name}" for rel in build_lite.NOTEBOOKS}
+
+
 def unknown_pages(tex: str, pages: set[str]) -> list[str]:
     """Absolute site links whose path is not a page of the book."""
     return sorted(
@@ -184,7 +191,7 @@ def absolutize_tex() -> list[str]:
         for pattern in ("*.md", "*.ipynb")
         for page in (STAGE / "content").rglob(pattern)
         if ".ipynb_checkpoints" not in page.parts
-    }
+    } | lite_pages()
     failures, n_pages = [], 0
     for tex_file in (STAGE / TEX_DIR).glob("*.tex"):
         tex, n = absolutize(tex_file.read_text())
@@ -292,6 +299,14 @@ def href_failures() -> list[str]:
                     rf"\href{{{SITE}/content/consumption/envelope\#fact-x}}{{x}}", pages
                 ),
                 "an escaped anchor was read as part of the page path",
+            ),
+            (
+                unknown_pages(rf"\href{{{SITE}/lite/notebooks/index.html?path=Bubbles.ipynb}}{{x}}", lite_pages()),
+                "a link to an in-browser notebook was reported unknown",
+            ),
+            (
+                not unknown_pages(rf"\href{{{SITE}/lite/notebooks/index.html?path=Gone.ipynb}}{{x}}", lite_pages()),
+                "a link to an in-browser notebook the site does not build was not reported",
             ),
         ]
         if bad
