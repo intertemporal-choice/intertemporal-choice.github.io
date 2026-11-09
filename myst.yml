@@ -4,7 +4,8 @@ version: 1
 # Import external configuration files
 # See https://mystmd.org/guide/configuration#compose-and-extend-configuration-yml-files
 extends:
-  - macros.yml # LaTeX math macros (extracted from econtexShortcuts.sty)
+  - "@resources/notation/econark-math.yml" # the shared notation (econ-ark-tools, vendored in @resources/)
+  - notation/course-local-math.yml # the course's own macros and overrides; listed second, so on a name both define it wins
   - toc.yml # Table of contents
 
 project:
