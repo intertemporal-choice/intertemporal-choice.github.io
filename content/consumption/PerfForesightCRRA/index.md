@@ -1,3 +1,9 @@
+---
+math:
+  # local until econ-ark-tools' notation registry has the row and the book's vendored copy is updated
+  '\hNrmEnd': '\mathfrak{h}'
+---
+
 (sec:PerfForesightCRRA)=
 # Consumption Under Perfect Foresight and CRRA Utility
 
@@ -55,7 +61,7 @@ The first order condition for this maximization is
 \uFunc^{\prime}(\cLevBF_{\tNow}) = \Discount \left(\Rfree \vFunc_{\tNow+1}^{\mLevBF}(\mLevBF_{\tNow+1},\pLevBF_{\tNow+1})-\overbrace{\frac{d\pLevBF_{\tNow+1}}{d \cLevBF_{\tNow}}}^{=0}\vFunc_{\tNow+1}^{\pLevBF}(\mLevBF_{\tNow+1},\pLevBF_{\tNow+1})\right),
 ```
 
-and the Envelope theorem tells us that
+and the [Envelope theorem](#sec:Envelope) tells us that
 
 ```{math}
 :label: eq:vpeqrbv
@@ -138,17 +144,17 @@ We can solve the model by combining {eq}`eq:cfin` and {eq}`eq:PFCRRA-yfin` using
 
 where {math}`\MPC_{t}` is the marginal propensity to consume (MPC) out of **o**verall (human plus nonhuman) wealth {math}`\oLev_{t}`.
 
-Human wealth as defined in [the PDV of labor income](#eq:PFCRRA-yfin) includes the current period's income: its sum starts at {math}`n=0`. Human wealth from the next period on, called end-of-period human wealth {math}`\hEnd_{t}` and measured as a ratio to {math}`\pLevBF_{\tNow}`, leaves that income out:
+Human wealth as defined in [the PDV of labor income](#eq:PFCRRA-yfin) includes the current period's income: its sum starts at {math}`n=0`. Human wealth from the next period on, called end-of-period human wealth {math}`\hNrmEnd_{t}` and measured as a ratio to {math}`\pLevBF_{\tNow}`, leaves that income out:
 
 ```{math}
 :label: eq:PFCRRA-hEnd
 
-\hEnd_{t} \equiv \hRat_{t}-1 = \sum_{n=1}^{\TEnd-\tNow} ({\WGro}/\Rfree)^{n} = ({\WGro}/\Rfree)\left(\frac{1-({\WGro}/\Rfree)^{\TEnd-\tNow}}{1-({\WGro}/\Rfree)}\right),
+\hNrmEnd_{t} \equiv \hRat_{t}-1 = \sum_{n=1}^{\TEnd-\tNow} ({\WGro}/\Rfree)^{n} = ({\WGro}/\Rfree)\left(\frac{1-({\WGro}/\Rfree)^{\TEnd-\tNow}}{1-({\WGro}/\Rfree)}\right),
 ```
 
 which approaches {math}`({\WGro}/\Rfree)/(1-{\WGro}/\Rfree)` as {math}`\TEnd \rightarrow \infty` when the [finite human wealth condition](#eq:FHWCPF) below holds.[^pfcrra-edge-cases]
 
-[^pfcrra-edge-cases]: The closed forms divide by zero in two cases, and the sums they come from give the answer. If the return patience factor {math}`\PatR=1`, [the inverse of the MPC as a sum](#eq:MPCrecursiveSum) gives {math}`\MPC_{t}=1/(\TEnd-\tNow+1)`. If {math}`\WGro=\Rfree`, every term of the human wealth sum is 1, so {math}`\hRat_{t}=\TEnd-\tNow+1` and {math}`\hEnd_{t}=\TEnd-\tNow`.
+[^pfcrra-edge-cases]: The closed forms divide by zero in two cases, and the sums they come from give the answer. If the return patience factor {math}`\PatR=1`, [the inverse of the MPC as a sum](#eq:MPCrecursiveSum) gives {math}`\MPC_{t}=1/(\TEnd-\tNow+1)`. If {math}`\WGro=\Rfree`, every term of the human wealth sum is 1, so {math}`\hRat_{t}=\TEnd-\tNow+1` and {math}`\hNrmEnd_{t}=\TEnd-\tNow`.
 
 In order to apply [InfSum](#fact:infsum) to move to the infinite-horizon case ({math}`\TEnd=\infty`), we need to impose the condition
 
@@ -200,7 +206,7 @@ where {math}`\oLev_{\tNow}` is the consumer's "**o**verall" or "total wealth," t
 
 Now consider the question "What is the level of {math}`\cLevBF_{\tNow}` that will leave total wealth intact, allowing the same value of consumption in period {math}`t+1` and forever after (that is, allowing {math}`\cLevBF_{\tNow+n}=\cLevBF_{\tNow}~\forall~n>0`)?"
 
-The intuitive answer is that the wealth-preserving level of spending is exactly equal to the (properly conceived) interest earnings on one's total wealth. We call this the "sustainable" level of consumption. The literature of the 1970s and 80s interpreted that quantity as "permanent income," but we reserve that term here for {math}`\pLevBF` itself. Wealth in this framework behaves exactly like an asset that yields a dividend {math}`\pLevBF`.
+The intuitive answer is that the wealth-preserving level of spending is exactly equal to the (properly conceived) interest earnings on one's total wealth. We call this the "sustainable" level of consumption. The literature of the 1970s and 80s interpreted that quantity as "permanent income," but we reserve that term here for {math}`\pLevBF` itself. Wealth in this framework behaves exactly like an asset that pays {math}`\pLevBF` each period.
 
 Because human wealth is exactly like any other kind of wealth in this perfect foresight framework, it is possible to work directly with the level of total wealth {math}`\oLev` to find the sustainable level of spending. Suppose we assume the consumer will spend fraction {math}`\PIHMPC` of total wealth in each period; the {math}`\PIHMPC` that leaves wealth intact will be given by {math}`\PIHMPC` in
 
@@ -241,7 +247,7 @@ Equation {eq}`eq:PFCRRA-cOfw` can be simplified into something a bit easier to h
 ```{math}
 \begin{aligned}
       \log (\Rfree\Discount)^{1/\CRRA}/\Rfree & =  (1/\CRRA) (\log \Rfree + \log [1/(1+\timeRate) ]) - \log \Rfree  \\
-     & =  (1/\CRRA) (\log(1+r) + \log 1 - \log (1+\timeRate) ) - \log \Rfree  \\
+     & =  (1/\CRRA) (\log(1+\rfree) + \log 1 - \log (1+\timeRate) ) - \log \Rfree  \\
          & \approx  \CRRA^{-1}(\rfree -\timeRate)  - \rfree
 \\      (\Rfree\Discount)^{1/\CRRA}/\Rfree & \approx  1+(\CRRA^{-1}(\rfree-\timeRate)-\rfree).
 \end{aligned}
@@ -513,7 +519,7 @@ this can be rewritten as
 \end{aligned}
 ```
 
-(where the last approximations come from the assumptions that {math}`1/G \approx 1`) and that {math}`\rfree \times (\rfree-\CRRA^{-1}(\rfree-\DiscRate))` is "small." The saving *rate* (for which we use the letter {math}`\srate` to distinguish it from {math}`\sRat` above) is the ratio of saving to *total* income (not just labor income):
+(where the last approximations come from the assumptions that {math}`1/\WGro \approx 1` and that {math}`\rfree \times (\rfree-\CRRA^{-1}(\rfree-\DiscRate))` is "small"). The saving *rate* (for which we use the letter {math}`\srate` to distinguish it from {math}`\sRat` above) is the ratio of saving to *total* income (not just labor income):
 
 ```{math}
 \varsigma_{\tNow} = \left(\frac{\patwGro/(\rfree - \wGro)+ \CRRA^{-1}(\rfree-\DiscRate)\aRat_{\tNow-1}}{1+ \rfree \aRat_{\tNow-1}}\right).
@@ -589,7 +595,7 @@ we can rewrite the value function as
 
 ```{math}
 \begin{aligned}
-  v_{\tNow} & =  \uFunc(c_{t}) + \DiscFac \uFunc(c_{t}\Pat) + \DiscFac^{2} \uFunc(c_{t} \Pat^{2}) + ...
+  \vFunc_{\tNow} & =  \uFunc(c_{t}) + \DiscFac \uFunc(c_{t}\Pat) + \DiscFac^{2} \uFunc(c_{t} \Pat^{2}) + ...
   \\ & =  (1-\CRRA)^{-1}\left(c_{t}^{1-\CRRA} + \DiscFac (c_{t}\Pat)^{1-\CRRA} + \DiscFac^{2} (c_{t} \Pat^{2})^{1-\CRRA} + ...\right)
   \\ & =  (1-\CRRA)^{-1}\left(c_{t}^{1-\CRRA}\left(1+\DiscFac \Pat^{1-\CRRA} + (\DiscFac \Pat^{1-\CRRA})^{2} + ... \right) \right)
 \\ & =  \uFunc(c_{t})\left(1+\DiscFac \Pat^{1-\CRRA} + (\DiscFac \Pat^{1-\CRRA})^{2} + ... \right)
@@ -613,7 +619,7 @@ but since {math}`\DiscFac \Pat^{1-\CRRA} = \PatR`,[^patr-derivation] this reduce
 ```{math}
 :label: eq:vFuncAnalytical
 
-v_{t} = \uFunc(c_{t})\overbrace{(1+\PatR+\PatR^{2}+...+\PatR^{T-t})}^{\equiv \cPDVFunc_{t}}
+\vFunc_{t} = \uFunc(c_{t})\overbrace{(1+\PatR+\PatR^{2}+...+\PatR^{T-t})}^{\equiv \cPDVFunc_{t}}
 ```
 
 where {math}`\cPDVFunc_{t}` is the discounted value of future consumption growth (that is, the discounted value of the ratio of future consumption to today's consumption).
@@ -622,7 +628,7 @@ where {math}`\cPDVFunc_{t}` is the discounted value of future consumption growth
 
 ```{math}
 \begin{aligned}
-  v_{t} & =  \uFunc(c_{t})\MPC^{-1}_{t}
+  \vFunc_{t} & =  \uFunc(c_{t})\MPC^{-1}_{t}
   \\ & =  \left(\frac{(\oRat_{t}\MPC_{t})^{1-\CRRA}}{1-\CRRA}\right)\MPC_{t}^{-1}
 \\ & =  \uFunc(\oRat_{t})\MPC_{t}^{-\CRRA}
 \end{aligned}
@@ -657,7 +663,7 @@ which implies that if the MPC in the last period {math}`T` is {math}`\MPC_{T}=1`
 But the series on the RHS in {eq}`eq:vFuncAnalytical` and {eq}`eq:MPCrecursiveSum` are identical! So {math}`\MPC^{-1}_{t} = \cPDVFunc_{t}`, and we can equivalently write
 
 ```{math}
-v_{t} = \uFunc(c_{t})\MPC^{-1}_{t}.
+\vFunc_{t} = \uFunc(c_{t})\MPC^{-1}_{t}.
 ```
 
 Now note that if we define a utility-inverse of the value function as {math}`\vInv \equiv \left((1-\CRRA) \vFunc\right)^{1/(1-\CRRA)}`, then consumption exceeds its minimum possible value at {math}`\underline{\mRat}` (where consumption exceeds {math}`\cFunc(\underline{\mRat})=0`) by {math}`c_{t}=\MPC_{t}(\mRat-\underline{m})`:
