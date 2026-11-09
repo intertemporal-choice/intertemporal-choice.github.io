@@ -153,8 +153,17 @@ def run(cmd, cwd: Path, output: Path) -> int:
         ).returncode
 
 
+def clear(folder: Path) -> None:
+    """Delete a stage. The copy keeps @resources/'s read-only modes, so its folders must be made writable first."""
+    if folder.exists():
+        for path in [folder, *folder.rglob("*")]:
+            if path.is_dir() and not path.is_symlink():
+                path.chmod(path.stat().st_mode | 0o200)
+    shutil.rmtree(folder, ignore_errors=True)
+
+
 def stage(root: Path) -> None:
-    shutil.rmtree(STAGE, ignore_errors=True)
+    clear(STAGE)
     shutil.copytree(
         root, STAGE, ignore=lambda _, names: [n for n in names if n in SKIP]
     )
@@ -315,9 +324,24 @@ def url_failures() -> list[str]:
     ]
 
 
+def clear_failures() -> list[str]:
+    """A stage holding a read-only folder, as @resources/ is, must still be deleted."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        stage_dir = Path(tmp) / "stage"
+        locked = stage_dir / "locked"
+        locked.mkdir(parents=True)
+        (locked / "file").write_text("x")
+        (locked / "file").chmod(0o444)
+        locked.chmod(0o555)
+        clear(stage_dir)
+        return ["clear left a stage with a read-only folder in place"] if stage_dir.exists() else []
+
+
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
-    failures = fact_failures() + href_failures() + url_failures()
+    failures = fact_failures() + href_failures() + url_failures() + clear_failures()
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")
