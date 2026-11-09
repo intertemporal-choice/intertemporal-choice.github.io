@@ -246,7 +246,8 @@ def draw_experiment(axes, model, before, after, lead, omega, frames=None):
         left, right = 0.8, max(1.3, 1.12 * k_new)
         near = path["lambda"][(path["k"] >= left) & (path["k"] <= right)]
         lam_new = model.steady_state(after["tax_free"], after["P"], after["A"])[1]
-        frames = [((left, right), _pad(min(np.min(near), lam_new, 1.0), max(np.max(near), lam_new, 1.0), 0.6))]
+        lam_old = path["lambda"][0]  # the old steady state: the price of capital, which need not be one
+        frames = [((left, right), _pad(min(np.min(near), lam_new, lam_old), max(np.max(near), lam_new, lam_old), 0.6))]
         phase.set_xlim(*frames[0][0])
         phase.set_ylim(*frames[0][1])
     else:
