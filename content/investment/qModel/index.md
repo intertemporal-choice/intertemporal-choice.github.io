@@ -31,7 +31,7 @@ Adjustment costs are priced the same way.[^itc-resale] We repeatedly make approx
 | {math}`\itc` | - | Investment tax credit (ITC) |
 | {math}`\PostITC` | - | {math}`=1-\itc` = Cost of investment after ITC |
 
-The price of one unit of investment is {math}`\kPrice_{t}`, so {math}`\kPriceAfterITC_{t}=\PostITC \kPrice_{t}` is the effective after-tax price of one unit of investment. (In the special case of a constant price {math}`\kPrice_{t}=1`, this collapses to {math}`\PostITC`.)
+The price of one unit of investment is {math}`\kPrice_{t}`: what the firm pays for a new unit of capital (a machine, say), a price it takes as given. It is not the firm's share price, which is the value of a unit of capital once it is inside the firm, {math}`\vk` below. The effective after-tax price of one unit of investment is then {math}`\kPriceAfterITC_{t}=\PostITC \kPrice_{t}`. (In the special case of a constant price {math}`\kPrice_{t}=1`, this collapses to {math}`\PostITC`.)
 
 | Symbol | | Definition |
 | --- | --- | --- |
