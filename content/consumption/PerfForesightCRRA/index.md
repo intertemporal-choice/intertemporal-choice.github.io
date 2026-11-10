@@ -1,9 +1,3 @@
----
-math:
-  # local until econ-ark-tools' notation registry has the row and the book's vendored copy is updated
-  '\hNrmEnd': '\mathfrak{h}'
----
-
 (sec:PerfForesightCRRA)=
 # Consumption Under Perfect Foresight and CRRA Utility
 
