@@ -291,7 +291,11 @@ project:
     RCK: Ramsey-Cass-Koopmans
 
 site:
-  template: book-theme
+  # The theme is pinned to a release. Named only as `book-theme`, it is fetched from the main branch of
+  # myst-templates/book-theme on every build, so a new release there reaches the next build unannounced:
+  # v2.0.0 (2026-11-10) needs a newer mystmd than uv.lock's and broke every build. Move this pin and the
+  # mystmd in uv.lock together, and check the site, when upgrading.
+  template: https://github.com/jupyter-book/myst-theme/releases/download/myst-to-react%401.4.1/book-theme.zip
   title: Intertemporal Choice
 
   # Site options for book-theme
