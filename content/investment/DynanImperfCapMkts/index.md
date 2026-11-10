@@ -107,7 +107,7 @@ costs it expects to bear,
 and the entrepreneur keeps whatever output remains. Her income is therefore maximized by
 the contract that minimizes expected verification costs. As long as verification is
 deterministic and the investor can commit to carrying it out, that contract is debt; random
-audits can do better (Border and Sobel 1987; Mookherjee and Png 1989). The
+audits can do better {cite:p}`borderSobelAuditing,mookherjeePngAuditing`. The
 investor receives a fixed payment {math}`D` whenever output is high enough to cover it,
 verifying nothing; when output falls short, the investor verifies and takes everything
 there is. Verifying always would be wasteful, and a payment that varied with output
