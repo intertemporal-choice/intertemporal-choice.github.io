@@ -33,7 +33,7 @@ but since by assumption {math}`\Discount = \Rfree^{-1}` this expression reduces 
 
 The point can be extended to show that the firm can raise an arbitrary amount of money in one period, paying it back in another, or vice versa, without having any effect on its value or its optimal investment plans.
 
-This is an example of the result on dividend policy of Miller and Modigliani (1961), a companion to the famous theorem by {cite:t}`mmTheorem`, who showed that under perfect capital markets the value of the firm is identical whether its investment is financed by equity, debt, or any combination of the two.
+This is an example of the result on dividend policy of {cite:t}`millerModiglianiDividend`, a companion to the famous theorem by {cite:t}`mmTheorem`, who showed that under perfect capital markets the value of the firm is identical whether its investment is financed by equity, debt, or any combination of the two.
 
 It is precisely to get around this result that models of imperfect capital markets were invented, since from the beginning many economists did not believe that the result is a plausible description of reality (including, I believe, Modigliani and Miller; see {cite:t}`millerMM30` for Miller's own look back). Indeed, the existence (and high salaries) of chief financial officers constitutes a proof that the proposition is not true: if it were true, CFOs would have no effect on the value of the firm, and could all be fired (thus saving the firm their salaries!). What remains true, however, is that models of investment that relax the assumption of perfect capital markets are much more difficult to work with (and harder to extract implications from) than models that assume capital markets are perfect.
 
