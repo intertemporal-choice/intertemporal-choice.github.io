@@ -3,6 +3,31 @@
 Versioning: SemVer on `notation.yml`'s `meta.version`. MAJOR = change to an
 existing rendering or meaning; MINOR = additions; PATCH = gloss/typo fixes.
 
+## v9.2.0 — 2026-11-09
+
+**A new row: end-of-period human wealth `\hNrmEnd` = 𝔥**, with 𝔥_t = h_t − 1: human wealth from next period on,
+current period's income excluded. The owner, in this session at 10:09:17 EST: "add the \hEnd row and merge it", then
+at 10:16:29 EST: "rename it to \hNrmEnd and merge". The macro is also in `econark-shortcuts.sty`, beside `\cEndFunc`
+= 𝔠. SolvingMicroDSOPs and TractableBufferStock define the old name `\hEnd` = 𝔥 locally, with this meaning; the old
+name is not in the shared files. The row records his earlier words, and his answer on the 2026-07-14 ban on a "local
+future-only h", as relayed by the cc_PerfForesightCRRA session. MINOR: an addition, and no existing rendering changes.
+
+## v9.1.0 — 2026-11-05
+
+**A convention: π is inflation** (`terminology.yml`). The owner, in this session at 18:15:19 EST: "It's always bet
+to keep \pi as inflation; if you can't figure out why HAFiscal moved inflation off \pi, move HAFiscal back to
+inflation as \pi." HAFiscal's HANK appendix had written inflation ϖ since 2026-10-22, to keep it apart from the
+paper's transition probabilities π_eu, π_ue and Markov matrix Π. At 19:28:30 EST he chose to return inflation to π
+and give those objects new letters ("1. inflation goes back"). HAFiscal's session proposes the letters. MINOR: no
+rendering in the shared files changes.
+
+Corrections in the matching block:
+- **The `\matchElas` row's ϖ check** said ϖ was used nowhere, but it had not looked at the papers. HAFiscal wrote
+  inflation ϖ in the same appendix, which the convention above resolves. BST declares a local `\lomdkPrbmm` = ϖ
+  in its Harmenberg appendix, a different document.
+- **The formulas** for matches, `\vacFillPrb` and `\jobFindPrb`, and the `\jobFindPrb` notes in the registry and
+  the shortcuts, still wrote the elasticity as z. They now write ϖ.
+
 ## v9.0.0 — 2026-11-04
 
 **The Intertemporal Choice course's notation, reconciled with the registry.** The owner ruled on the course's

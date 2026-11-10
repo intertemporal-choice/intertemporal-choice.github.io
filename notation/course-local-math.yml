@@ -5,7 +5,8 @@
 # content as a MyST project.math map, meant to be listed in the book's myst.yml `extends:` AFTER the
 # registry's econark-math.yml. Every entry is a debt: an override to substitute away, an object to give a
 # registry row, or a name to retire. The comment on each entry says which, and how much it is used.
-# Built 2026-11-08T21:27:05-05:00 from the registry at 6ab13aee27 (v9.0.0) and the book at 2805ff5d2a.
+# Built 2026-11-09T11:15:50-05:00 from the registry at 02df18ac5e (v9.2.0), the course's definitions in
+# notation/course-macros.yml (641 macros) and the book at 249a3ed439.
 version: 1
 project:
   math:
@@ -135,7 +136,7 @@ project:
     '\zLev': 'z'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
     '\ZLevBF': '\mathbf{Z}'  # registry: \boldsymbol{\mathit{Z}} via \ZLvl; uses book 0 questions 0
     '\zLevBF': '\mathbf{z}'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
-    # --- local-upstream (34): objects the registry lacks: candidates for registry rows
+    # --- local-upstream (33): objects the registry lacks: candidates for registry rows
     '\Price': '\mathsf{P}'  # uses book 190 questions 206
     '\dvdnd': 'd'  # uses book 151 questions 213
     '\q': '\koppa'  # uses book 100 questions 156
@@ -162,7 +163,6 @@ project:
     '\adjPar': '\omega'  # uses book 9 questions 0
     '\argmax': '\operatorname*{arg\,max}'  # uses book 3 questions 3
     '\Dvdnd': '\mathbf{D}'  # uses book 0 questions 6
-    '\hEnd': '\mathfrak{h}'  # uses book 3 questions 3
     '\kPrice': '\mathsf{P}'  # uses book 6 questions 0
     '\TaxCombInv': '\mathcal{T}^{-1}'  # uses book 6 questions 0
     '\rev': '\pi'  # uses book 5 questions 0
