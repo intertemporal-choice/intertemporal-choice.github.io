@@ -29,7 +29,7 @@ import numpy as np
 from intertemporal_choice import slider_check
 
 READOUT = dict(facecolor="white", edgecolor="none", alpha=0.85)  # a readout stays legible over a line
-SHOWN = 30  # periods after the announcement in the pictures by period
+SHOWN = 30  # periods after the announcement in the pictures by period, and at least 20 after the change
 BEFORE = 3  # and before it
 PERIODS = 100  # periods solved: the economy is back in a steady state long before the last
 OLD, NEW, PATH = "0.55", "C3", "C0"  # colors: the economy before the change, after it, and its path
@@ -42,17 +42,17 @@ PHASE = {
 }
 PRODUCTIVITY = {
     "size": (1.10, 1.02, 1.20, 0.01, "productivity, new over old", ".2f"),
-    "lead": (5, 0, 10, 1, "periods until it takes effect, n", ""),
+    "lead": (5, 0, 30, 1, "periods until it takes effect, n", ""),
     "omega": (2.0, 0.5, 6.0, 0.25, "adjustment cost ω", ".2f"),
 }
 CORPORATE_TAX = {
     "size": (0.20, 0.10, 0.28, 0.01, "new corporate tax rate (old 0.30)", ".2f"),
-    "lead": (5, 0, 10, 1, "periods until it takes effect, n", ""),
+    "lead": (5, 0, 30, 1, "periods until it takes effect, n", ""),
     "omega": (2.0, 0.5, 6.0, 0.25, "adjustment cost ω", ".2f"),
 }
 ITC = {
     "size": (0.10, 0.02, 0.20, 0.01, "new investment tax credit (old 0)", ".2f"),
-    "lead": (5, 0, 10, 1, "periods until it takes effect, n", ""),
+    "lead": (5, 0, 30, 1, "periods until it takes effect, n", ""),
     "omega": (2.0, 0.5, 6.0, 0.25, "adjustment cost ω", ".2f"),
 }
 
@@ -213,20 +213,28 @@ def draw_experiment(axes, model, before, after, lead, omega, frames=None):
     k0 = path["k0"]
     k_new = model.steady_state(after["tax_free"], after["P"], after["A"])[0] / k0
     k = np.linspace(0.5, 1.8, 400) * k0
+    horizon = frames[4] if frames is not None and len(frames) > 4 else _horizon(path["lead"])
     for v, old in ((before, True), (after, False)):
         lam_bar = model.steady_state(v["tax_free"], v["P"], v["A"])[1]
         color = "0.75" if old else "black"
-        phase.plot(k / k0, model.stationary(k, v["tax_free"], v["P"], v["A"], omega), color=color, lw=1.0)
-        phase.axhline(lam_bar, color=color, lw=0.9, linestyle="--")
+        phase.plot(k / k0, model.stationary(k, v["tax_free"], v["P"], v["A"], omega), color=color, lw=1.0,
+                   label="the same two lines, before" if old else r"$\Delta\lambda = 0$")
+        phase.axhline(lam_bar, color=color, lw=0.9, linestyle="--", label=None if old else r"$\Delta k = 0$")
         ks, ls = saddle_path(model, v, omega)
-        phase.plot(ks / k0, ls, color=OLD if old else NEW, lw=1.6, linestyle="--" if old else "-")
-    shown = (path["t"] >= 0) & (path["t"] <= SHOWN)
+        phase.plot(ks / k0, ls, color=OLD if old else NEW, lw=1.6, linestyle="--" if old else "-",
+                   label="saddle path, before" if old else "saddle path")
+    shown = (path["t"] >= 0) & (path["t"] <= horizon)
     phase.plot(path["k"][shown], path["lambda"][shown], ".", color=PATH, ms=4)
     phase.plot([1], [path["lambda"][0]], "o", color="black", ms=4)
     phase.annotate("before", (1, path["lambda"][0]), xytext=(4, 4), textcoords="offset points", fontsize=8)
     phase.set_xlabel(r"$k/\bar{k}$", loc="right")
     phase.set_ylabel(r"$\lambda$", loc="top", rotation=0)
-    window = path["t"] <= SHOWN
+    handles = dict(zip(*reversed(phase.get_legend_handles_labels())))  # label -> line, in a reading order:
+    order = [r"$\Delta\lambda = 0$", r"$\Delta k = 0$", "saddle path", "saddle path, before",
+             "the same two lines, before"]  # a student asked which line was which in class, 2026-11-09
+    phase.legend([handles[name] for name in order], order, loc="best", fontsize=6.5, handlelength=2.2,
+                 labelspacing=0.3, borderpad=0.3, frameon=True, facecolor="white", edgecolor="none", framealpha=0.85)
+    window = path["t"] <= horizon
     t = path["t"][window]
     inv.axhline(0, color=OLD, lw=0.8)
     inv.plot(t, path["iota"][window], ".-", color=PATH, lw=1.2, ms=4)
@@ -241,7 +249,7 @@ def draw_experiment(axes, model, before, after, lead, omega, frames=None):
         if path["lead"] > 0:
             ax.axvline(path["lead"], color=OLD, lw=0.6, linestyle=":")
         ax.set_xlabel(r"$t$", loc="right")
-        ax.set_xlim(-BEFORE, SHOWN)
+        ax.set_xlim(-BEFORE, horizon)
     if frames is None:  # around the old and new steady states and the path between them
         left, right = 0.8, max(1.3, 1.12 * k_new)
         near = path["lambda"][(path["k"] >= left) & (path["k"] <= right)]
@@ -258,6 +266,11 @@ def draw_experiment(axes, model, before, after, lead, omega, frames=None):
     return path
 
 
+def _horizon(lead):
+    """The last period in the pictures: SHOWN, or 20 periods after a change announced further ahead."""
+    return max(SHOWN, int(lead) + 20)
+
+
 def _corners(table):
     names = list(table)
     return [dict(zip(names, values)) for values in itertools.product(*(table[name][1:3] for name in names))]
@@ -270,19 +283,21 @@ def _pad(low, high, share=0.08):
 
 def experiment_frames(model, before, change, table):
     """Frames that hold every combination of the ends of a panel's sliders: for the phase diagram,
-    (capital, lambda); for the three pictures by period, (lowest, highest)."""
+    (capital, lambda); for the three pictures by period, (lowest, highest); and the last period in
+    those pictures, the one for the longest notice the slider gives."""
     k_hi, lams, lows, highs = 1.0, [], [np.inf] * 3, [-np.inf] * 3
+    horizon = _horizon(table["lead"][2])
     for corner in _corners(table):
         after = change(before, corner["size"])
         path = solve(model, before, after, corner["lead"], corner["omega"])
-        window = path["t"] <= SHOWN
+        window = path["t"] <= horizon
         for i, series in enumerate((path["iota"][window], np.concatenate([path["lambda"][window], path["q"][window]]),
                                     path["k"][window])):
             lows[i], highs[i] = min(lows[i], float(np.min(series))), max(highs[i], float(np.max(series)))
         k_hi = max(k_hi, float(np.max(path["k"])))
         lams += [float(np.min(path["lambda"])), float(np.max(path["lambda"]))]
     phase = ((0.8, max(1.3, 1.08 * k_hi)), _pad(min(lams), max(lams), 0.4))
-    return [phase] + [_pad(lo, hi) for lo, hi in zip(lows, highs)]
+    return [phase] + [_pad(lo, hi) for lo, hi in zip(lows, highs)] + [horizon]
 
 
 def phase_frame(model_with, values, table=PHASE):
