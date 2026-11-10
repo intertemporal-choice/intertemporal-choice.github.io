@@ -232,8 +232,9 @@ def draw_experiment(axes, model, before, after, lead, omega, frames=None):
     handles = dict(zip(*reversed(phase.get_legend_handles_labels())))  # label -> line, in a reading order:
     order = [r"$\Delta\lambda = 0$", r"$\Delta k = 0$", "saddle path", "saddle path, before",
              "the same two lines, before"]  # a student asked which line was which in class, 2026-11-09
-    phase.legend([handles[name] for name in order], order, loc="best", fontsize=6.5, handlelength=2.2,
-                 labelspacing=0.3, borderpad=0.3, frameon=True, facecolor="white", edgecolor="none", framealpha=0.85)
+    phase.legend([handles[name] for name in order], order, loc="lower left", bbox_to_anchor=(0, 1.03, 1, 0),
+                 mode="expand", ncol=2, borderaxespad=0, fontsize=6.5, handlelength=2.2, labelspacing=0.3,
+                 columnspacing=1.0)  # above the panel, where no line can run under it; after on the left, before on the right
     window = path["t"] <= horizon
     t = path["t"][window]
     inv.axhline(0, color=OLD, lw=0.8)
