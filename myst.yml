@@ -5,7 +5,7 @@ version: 1
 # See https://mystmd.org/guide/configuration#compose-and-extend-configuration-yml-files
 extends:
   - "@resources/notation/econark-math.yml" # the shared notation (econ-ark-tools, vendored in @resources/)
-  - macros.yml # the book's own macros; listed second, so on a name both define the book's rendering still wins
+  - notation/course-local-math.yml # the course's own macros and overrides; listed second, so on a name both define it wins
   - toc.yml # Table of contents
 
 project:
@@ -115,7 +115,7 @@ project:
   funding:
     - statement: >-
         Development of these materials has been supported by the Econ-ARK project,
-        funded by the Alfred P. Sloan Foundation.
+        funded by the Alfred P. Sloan Foundation and T. Rowe Price.
       open_access: These materials are freely available under open access terms.
       awards:
         - id: sloan-econ-ark
@@ -128,6 +128,11 @@ project:
           recipients:
             - ccarroll
             - alujan
+        - id: trowe-econ-ark
+          name: Support for the Econ-ARK project
+          sources:
+            - name: T. Rowe Price
+              url: https://www.troweprice.com
 
   github: https://github.com/intertemporal-choice/intertemporal-choice.github.io
 
@@ -147,11 +152,11 @@ project:
       articles:
         - file: content/consumption/index.md
           level: 0
-        - file: content/consumption/Fisher2Period.md
+        - file: content/consumption/Fisher2Period/index.md
           level: 1
         - file: content/consumption/ConsAndLaborSupply.md
           level: 1
-        - file: content/consumption/OLGModel.md
+        - file: content/consumption/OLGModel/index.md
           level: 1
         - file: content/consumption/GenAcctsAndGov.md
           level: 1
@@ -159,7 +164,7 @@ project:
           level: 1
         - file: content/consumption/Envelope/index.md
           level: 1
-        - file: content/consumption/PerfForesightCRRA.md
+        - file: content/consumption/PerfForesightCRRA/index.md
           level: 1
         - file: content/consumption/RandomWalk.md
           level: 1
@@ -177,33 +182,33 @@ project:
           level: 1
         - file: content/consumption/BufferStockAgeProfiles.md
           level: 1
+        - file: content/consumption/Aiyagari/index.md
+          level: 1
         - file: content/consumption/Laibson.md
           level: 1
         - file: content/asset_pricing/index.md
           level: 0
         - file: content/asset_pricing/CARAPortfolio.md
           level: 1
-        - file: content/asset_pricing/Portfolio-CRRA.md
+        - file: content/asset_pricing/Portfolio-CRRA/index.md
           level: 1
         - file: content/asset_pricing/LucasAssetPrice.md
           level: 1
-        - file: content/asset_pricing/EquityPremiumPuzzle.md
-          level: 1
         - file: content/asset_pricing/C-CAPM.md
           level: 1
-        - file: content/asset_pricing/Bubbles.md
+        - file: content/asset_pricing/EquityPremiumPuzzle.md
+          level: 1
+        - file: content/asset_pricing/Bubbles/index.md
           level: 1
         - file: content/investment/index.md
           level: 0
-        - file: content/investment/InvestmentNotes.md
+        - file: content/investment/InvestmentNotes/index.md
           level: 1
         - file: content/investment/HallJorgenson.md
           level: 1
-        - file: content/investment/qModel.md
+        - file: content/investment/qModel/index.md
           level: 1
-        - file: content/investment/DynanImperfCapMkts.md
-          level: 1
-        - file: content/investment/Imperfections.md
+        - file: content/investment/DynanImperfCapMkts/index.md
           level: 1
         - file: content/investment/iAndCashFlow.md
           level: 1
@@ -240,8 +245,9 @@ project:
         - file: content/numerical/MathFactsList.md
           level: 1
 
-  # No `jupyter` block. The book carries no executable pages; the Fisher notebook lives
-  # in Econ-ARK's DemARK and the two-period chapter links out to it.
+  # No `jupyter` block. The book carries no executable pages: a reader runs a chapter's
+  # notebook in Colab or Binder, or, for the notebooks that need only what Pyodide has, in the
+  # browser with JupyterLite, which the deploy builds into /lite/ (code/build_lite.py).
 
   # Exclude patterns (TOC-listed files are still built even if matched)
   # sources/ contains LaTeX originals, exports/ is build output
@@ -287,7 +293,11 @@ project:
     RCK: Ramsey-Cass-Koopmans
 
 site:
-  template: book-theme
+  # The theme is pinned to a release. Named only as `book-theme`, it is fetched from the main branch of
+  # myst-templates/book-theme on every build, so a new release there reaches the next build unannounced:
+  # v2.0.0 (2026-11-10) needs a newer mystmd than uv.lock's and broke every build. Move this pin and the
+  # mystmd in uv.lock together, and check the site, when upgrading.
+  template: https://github.com/jupyter-book/myst-theme/releases/download/myst-to-react%401.4.1/book-theme.zip
   title: Intertemporal Choice
 
   # Site options for book-theme
@@ -317,8 +327,8 @@ site:
     # analytics_google: G-XXXXXXXXXX
     # analytics_plausible: your-domain.com
 
-    # Custom CSS (uncomment to add custom styles)
-    # style: css/custom.css
+    # Custom CSS
+    style: css/custom.css
 
   # Top-level navigation links in header
   # See https://mystmd.org/guide/website-navigation

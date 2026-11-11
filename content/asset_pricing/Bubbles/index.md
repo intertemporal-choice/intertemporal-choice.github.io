@@ -1,0 +1,295 @@
+(sec:Bubbles)=
+# Canonical Asset Pricing and Rational Bubbles
+
+The chapter's [notebook](Bubbles.ipynb) simulates bubbles that burst and draws a bubble in an overlapping generations economy, with sliders; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Bubbles.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/asset_pricing/Bubbles/Bubbles.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/asset_pricing/Bubbles/Bubbles.ipynb).
+
+## Prices as the PDV of Dividends
+
+Denoting dividends as {math}`\dvdnd_{t}` for a stock with a market price of {math}`\Price_{t}` per share, consider an investor who owns {math}`K_{t}` shares at the beginning of period {math}`t` yielding total wealth {math}`M_{t}=\Price_{t}K_{t}+\dvdnd_{t}K_{t}`. Assuming the investor has no other source of income (no labor income, for instance) the investor's budget constraint will be
+
+```{math}
+\begin{aligned}
+M_{t}&=\underbrace{\dvdnd_{t}K_{t}+\Price_{t}K_{t}}_{\text{Total resources}} \\
+    &= \underbrace{K_{t+1}\Price_{t}+C_{t}}_{\text{Uses of resources}}
+\end{aligned}
+```
+
+which can be rearranged to indicate how many shares the investor will own next period, as a function of this period's wealth and consumption:
+
+```{math}
+\begin{aligned}
+K_{t+1} &= \frac{M_{t}-C_{t}}{\Price_{t}} \\
+M_{t+1} &= K_{t+1}(\Price_{t+1}+\dvdnd_{t+1}) \\
+        &= (\Price_{t+1}+\dvdnd_{t+1})\left(\frac{M_{t}-C_{t}}{\Price_{t}}\right).
+\end{aligned}
+```
+
+If this investor's only goal is to maximize the present discounted utility of consumption, discounting future utility by the factor {math}`\DiscFac`, then we have
+
+```{math}
+\VFunc_{t}(M_{t}) = \max_{\{C_{t}\}} \uFunc(C_{t})+\DiscFac \Ex_{t}\left[\VFunc_{t+1}\left((\Price_{t+1}+\dvdnd_{t+1})\left(\frac{M_{t}-C_{t}}{\Price_{t}}\right)\right)\right]
+```
+
+with FOC
+
+```{math}
+:label: eq:ceuler
+
+\begin{aligned}
+\uFunc^{\prime}(C_{t}) &= \DiscFac \Ex_{t}\left[\left(\frac{\Price_{t+1}+\dvdnd_{t+1}}{\Price_{t}}\right)\VFunc^{\prime}_{t+1}(M_{t+1})\right] \\
+\uFunc^{\prime}(C_{t}) &= \DiscFac \Ex_{t}\left[\left(\frac{\Price_{t+1}+\dvdnd_{t+1}}{\Price_{t}}\right)\uFunc^{\prime}(C_{t+1})\right].
+\end{aligned}
+```
+
+The second line applies the envelope theorem, {math}`\VFunc^{\prime}_{t+1}(M_{t+1}) = \uFunc^{\prime}(C_{t+1})`, as in the [Lucas model](#sec:LucasAssetPrice). Defining the stochastic discount factor {math}`\SDF_{t,t+1} \equiv \DiscFac \uFunc^{\prime}(C_{t+1})/\uFunc^{\prime}(C_{t})`, the second line says {math}`\Price_{t} = \Ex_{t}[\SDF_{t,t+1}(\Price_{t+1}+\dvdnd_{t+1})]`, which is the pricing equation {eq}`eq:Pt` of the [Lucas model](#sec:LucasAssetPrice). Substituting forward as in that model, with {math}`\SDF_{t,s} \equiv \DiscFac^{s-t}\uFunc^{\prime}(C_{s})/\uFunc^{\prime}(C_{t})`, gives
+
+```{math}
+:label: eq:pdvWithSDF
+
+\Price_{t} = \Ex_{t}\left[\sum_{s=t+1}^{T} \SDF_{t,s}\dvdnd_{s}\right] + \Ex_{t}\left[\SDF_{t,T}\Price_{T}\right].
+```
+
+Nothing so far assumes anything about the investor's attitude toward risk.
+
+Now suppose that the investor is risk neutral ({math}`\uFunc(C) = C`), so that {math}`\uFunc^{\prime}(C_{t+1})=\uFunc^{\prime}(C_{t})=1` and {math}`\SDF_{t,s} = \DiscFac^{s-t}`. A perfectly safe asset with return factor {math}`\Rfree` must satisfy the same first order condition, {math}`1 = \DiscFac \Rfree`, so {math}`\Rfree = 1/\DiscFac`, and {eq}`eq:ceuler` becomes
+
+```{math}
+:label: eq:pteq
+
+\begin{aligned}
+\Rfree &= \Ex_{t}\left[\frac{\Price_{t+1}+\dvdnd_{t+1}}{\Price_{t}}\right] \\
+\Price_{t} &= \Ex_{t}\left[\frac{\Price_{t+1}+\dvdnd_{t+1}}{\Rfree} \right].
+\end{aligned}
+```
+
+A risk-neutral investor holds the stock only if it is expected to earn the riskless return. In {eq}`eq:pdvWithSDF`, the discount factor becomes {math}`\Rfree^{t-s}`:
+
+```{math}
+\Price_{t} = \Ex_{t}\left[\sum_{s=t+1}^{T} \Rfree^{t-s}\dvdnd_{s}\right] + \Rfree^{-(T-t)}\Ex_{t}[\Price_{T}].
+```
+
+We usually assume the "no-bubbles" condition that says that {math}`\lim_{T \rightarrow \infty} \Rfree^{-(T-t)}\Ex_{t}[\Price_{T}] = 0` (with risk aversion, {math}`\lim_{T \rightarrow \infty} \Ex_{t}[\SDF_{t,T}\Price_{T}] = 0`). In this case it is clear that the equilibrium price must equal the present discounted value of dividends:
+
+```{math}
+:label: eq:pstar
+
+\Price_{t}^{*} = \Ex_{t}\left[\sum_{s=t+1}^{\infty} \Rfree^{t-s}\dvdnd_{s}\right].
+```
+
+Suppose now that dividends are expected to grow by a constant factor {math}`\PGro` henceforth, {math}`\Ex_{t}[\dvdnd_{s}] = \PGro^{s-t}\dvdnd_{t}`. In that case, provided {math}`\PGro < \Rfree` so that the sum converges, we have
+
+```{math}
+:label: eq:gordon
+
+\begin{aligned}
+\Price_{t}^{*} &= \sum_{s=t+1}^{\infty} (\PGro/\Rfree)^{s-t}\dvdnd_{t} \\
+&= \dvdnd_{t} \left(\frac{\PGro/\Rfree}{1-\PGro/\Rfree}\right) \\
+&= \frac{\Ex_{t}[\dvdnd_{t+1}]}{\Rfree-\PGro} \\
+&\approx \frac{\dvdnd_{t}}{\rfree-\pGro}.
+\end{aligned}
+```
+
+The third line is exact: the price is next period's expected dividend divided by the difference between the interest factor and the growth factor of dividends, which is also the difference between the net interest rate and the net growth rate. The final approximation uses log rates, {math}`\rfree \equiv \log \Rfree` and {math}`\pGro \equiv \log \PGro`. This is known as the "Gordon formula," after {cite:t}`gordonDividends` and {cite:t}`gordonShapiro`; the idea of valuing a stock as the present value of its dividends is older {cite:p}`williamsInvestmentValue`.
+
+The convergence condition {math}`\PGro < \Rfree` is the dividend analog of the [Finite Human Wealth Condition](#eq:FHWCPF) of the consumption chapters: a stream that grows by the factor {math}`\PGro` and is discounted by the factor {math}`\Rfree` has a finite present value only if {math}`\PGro/\Rfree < 1`, whether the stream is a consumer's labor income or a stock's dividends. When the condition fails, the dividends have no finite present value and there is no fundamental price, just as [human wealth is infinite](#sec:PFwhenFHWfails) for a consumer whose income grows faster than the interest rate.
+
+The tricky thing in applying the formula is to know what to assume for the discount rate and for {math}`\PGro`. It is common to discount at a rate {math}`\risky = \rfree+\EpremLog`, where {math}`\EpremLog` is a premium that compensates for the risk in future dividends. But that is inconsistent with the derivation, which assumed a risk-neutral investor: such an investor demands no premium, and discounts at {math}`\rfree`. A premium can enter consistently only in a model in which risk is priced. In the [Lucas model with random-walk dividends](#When-Dividends-Follow-a-Random-Walk), for example, the price-dividend ratio is a constant, so the realized return factor {math}`\Risky_{t+1} = (\Price_{t+1}+\dvdnd_{t+1})/\Price_{t}` is the dividend growth factor {math}`\dvdnd_{t+1}/\dvdnd_{t}` times a constant. Taking expectations and solving for the price-dividend ratio gives, exactly,
+
+```{math}
+\Price_{t} = \frac{\Ex_{t}[\dvdnd_{t+1}]}{\Ex_{t}[\Risky_{t+1}]-\PGro},
+```
+
+a Gordon formula in which the asset's own expected return replaces {math}`\Rfree`. The premium {math}`\Ex_{t}[\Risky_{t+1}]-\Rfree` is whatever the model's stochastic discount factor makes it, not a number chosen separately. That is where the [equity premium puzzle](#sec:EquityPremiumPuzzle) bites: the consumption-based model makes the premium the coefficient of relative risk aversion times a covariance so small that the historical premium of several percent requires implausibly high risk aversion. The premium practitioners add to the Gordon formula is a number the model cannot supply.
+
+The Lucas model's [log utility price](#eq:pWithLogU), {math}`\Price_{t} = \dvdnd_{t}/\timeRate`, is this Gordon formula in disguise. With log utility the price-dividend ratio is {math}`\DiscFac/(1-\DiscFac)`, so the tree's expected return factor is {math}`\Ex_{t}[\Risky_{t+1}] = \Ex_{t}[\dvdnd_{t+1}/\dvdnd_{t}]/\DiscFac = \PGro(1+\timeRate)`; then {math}`\Ex_{t}[\Risky_{t+1}]-\PGro = \PGro\timeRate`, and the Gordon price {math}`\Ex_{t}[\dvdnd_{t+1}]/(\PGro\timeRate)` is exactly {math}`\dvdnd_{t}/\timeRate`. In log rates, {math}`\risky - \pGro \approx \timeRate`, which is the consumption Euler equation for log utility, whose coefficient of relative risk aversion is one, dividends being consumption in Lucas's economy. The Gordon formula is not an artifact of risk neutrality: it is the exact price of a risk-averse economy, discounted at the asset's own expected return.
+
+{cite:t}`campbellShillerDP` derive the general version, which allows expected returns and expected dividend growth to change over time. Linearizing the definition of the log return {math}`\risky_{t+1} \equiv \log \Risky_{t+1}` around the average price-dividend ratio gives, approximately,
+
+```{math}
+:label: eq:campbellShiller
+
+\log (\Price_{t}/\dvdnd_{t}) \approx \frac{\kappa}{1-\csDiscFac} + \Ex_{t}\left[\sum_{j=0}^{\infty} \csDiscFac^{j}\left(\Delta \log \dvdnd_{t+1+j} - \risky_{t+1+j}\right)\right]
+```
+
+where {math}`\kappa` is a constant from the linearization and {math}`\csDiscFac`, the average of {math}`\Price/(\Price+\dvdnd)`, is a number just below one ({math}`\PGro/\Rfree` under the Gordon formula {eq}`eq:gordon`): a price-dividend ratio of 25, for example, gives {math}`\csDiscFac = 25/26 \approx 0.96`. The letter is Campbell and Shiller's own, and here it does not mean what it usually means. It is not a coefficient of relative risk aversion, and it is not a serial correlation coefficient, though both are often written {math}`\rho` (or {math}`\varrho`). It is a fixed number, set by the average price-dividend ratio. Its powers discount future dividend growth and returns, as the stochastic discount factor {math}`\SDF_{t,s}` discounts future dividends. A price that is high relative to dividends must be followed, on average, either by high growth of dividends or by low returns.
+
+## Prices as Martingales
+
+### The Law of Iterated Expectations
+
+Suppose that a security price at time {math}`t`, {math}`\Price_{t}`, can be written as the rational expectation of some "fundamental value" {math}`V^{*}` conditional on information available at time {math}`t` (the classic example, from {cite:t}`samuelson:proof`, is a futures contract, whose fundamental value is the spot price on its delivery date). Then we have
+
+```{math}
+\Price_{t} = \Ex_{t}[V^{*}].
+```
+
+The same formula holds in period {math}`t+1`:
+
+```{math}
+\Price_{t+1} = \Ex_{t+1}[V^{*}].
+```
+
+Then the expectation of the change in the price over the next period is
+
+```{math}
+\begin{aligned}
+\Ex_{t}[\Price_{t+1}-\Price_{t}] &= \Ex_{t}\left[\Ex_{t+1}[V^{*}]-\Ex_{t}[V^{*}]\right] \\
+&= \Ex_{t}[V^{*}]-\Ex_{t}[V^{*}] \\
+&= 0
+\end{aligned}
+```
+
+because any information known at time {math}`t` must be known at time {math}`t+1` and so the only thing that should cause a *change* in prices should be the arrival of new information that was not known at time {math}`t`.
+
+This is the argument of the [random walk chapter](#sec:RandomWalk). There, with quadratic utility and {math}`\Rfree\DiscFac = 1`, the Euler equation makes consumption a rational forecast of itself, {math}`\Ex_{t}[\cRat_{t+1}] = \cRat_{t}`, so the change in consumption is the arrival of news about lifetime resources. {cite:t}`hallRandomWalk`'s consumption and {cite:t}`samuelson:proof`'s futures price are martingales for the same reason: each is a forecast, and a forecast changes only with news.
+
+A stock's price is not such a martingale: by {eq}`eq:pteq`, its expected price rises each period by the return it must pay, net of the dividend, {math}`\Ex_{t}[\Price_{t+1}] = \Rfree \Price_{t} - \Ex_{t}[\dvdnd_{t+1}]`. What follows a martingale for a stock is its price plus the dividends it has paid, all discounted back to a fixed date.
+
+Even that requires risk neutrality. With risk-averse investors, the martingale is the price plus past dividends, each weighted by the stochastic discount factor back to a fixed date {math}`0`: by the pricing equation,
+
+```{math}
+\Ex_{t}\left[\SDF_{0,t+1}\Price_{t+1} + \sum_{s=1}^{t+1}\SDF_{0,s}\dvdnd_{s}\right] = \SDF_{0,t}\Price_{t} + \sum_{s=1}^{t}\SDF_{0,s}\dvdnd_{s}.
+```
+
+Prices and dividends discounted at the riskless rate are a martingale only under "risk-neutral" probabilities, the true probabilities reweighted by the stochastic discount factor {cite:p}`harrisonKrepsMartingales`; under the true probabilities they need not be {cite:p}`leroyMartingale,lucas:assetpricing`. That is why a test of whether markets are efficient, in the sense of {cite:t}`famaEfficient`, is always also a test of a model of expected returns.
+
+(PricesMoveTooMuch)=
+## Do Prices Move Too Much?
+
+Define the *ex post rational* price as the present value of the dividends that were actually paid:
+
+```{math}
+\tilde{\Price}_{t} \equiv \sum_{s=t+1}^{\infty} \Rfree^{t-s}\dvdnd_{s}.
+```
+
+By {eq}`eq:pstar`, {math}`\Price_{t}^{*} = \Ex_{t}[\tilde{\Price}_{t}]`, so {math}`\tilde{\Price}_{t} = \Price_{t}^{*} + \epsilon_{t}`, where {math}`\epsilon_{t}` is the error made at {math}`t` in forecasting {math}`\tilde{\Price}_{t}`. A rational forecast error cannot be predicted from anything known at {math}`t`, so its covariance with {math}`\Price_{t}^{*}` is zero, and
+
+```{math}
+:label: eq:varianceBound
+
+\text{var}(\tilde{\Price}_{t}) = \text{var}(\Price_{t}^{*}) + \text{var}(\epsilon_{t}) \geq \text{var}(\Price_{t}^{*}).
+```
+
+A forecast cannot vary more than the thing it forecasts. {cite:t}`shillerExcessVol` and {cite:t}`leroyPorterBounds` found that U.S. stock prices vary far more than this allows. The ex post rational price, computed from a century of dividends, is a smooth trend, while actual prices swing widely around it; in Shiller's tests, the measures of price volatility exceeded their bounds by factors of five to thirteen. The bound assumes that dividends do not themselves respond to prices; {cite:t}`marshMertonBounds` showed that when managers smooth dividends, so that dividends depend on past prices, the inequality can reverse, and later tests allow for it.
+
+There are two ways to read the violation. One is that prices contain something other than the expected present value of dividends: a bubble, the subject of the rest of this chapter. The other is that the discount rate is not constant. Prices then move with expected returns even when expected dividends do not, and {eq}`eq:varianceBound`, which assumed a constant {math}`\Rfree`, does not apply. The Campbell-Shiller approximation {eq}`eq:campbellShiller` makes the second reading testable: if dividend growth is hard to forecast, the price-dividend ratio must forecast returns. {cite:t}`cochraneDiscountRates` summarizes the evidence that it does, and that nearly all of the variation in the price-dividend ratio corresponds to variation in expected returns. Read this way, excess volatility and the [equity premium puzzle](#sec:EquityPremiumPuzzle) are one problem seen from two sides: the premium is both larger than the consumption-based model delivers and variable over time, and a discount-rate account of prices must explain its level and its movements together. {cite:t}`carrollIrrational` applies the same logic to the decline of 2008: by Graham's ratio of price to a long average of past earnings, which Campbell and Shiller had used to forecast the returns of the following decade, prices had fallen to the middle of historical experience, so the decline was the purging of the 1990s' exuberance rather than a panic.
+
+## Rational Bubbles
+
+The no-bubbles condition, however, was simply *assumed*; we did not justify it with economic logic. It is the twin of a condition the consumption chapters did justify. The [intertemporal budget constraint](#eq:PFCRRA-ibc) rests on the requirement that the discounted value of the consumer's debt go to zero as the horizon recedes, a limit the growth model imposes through its [transversality condition](#eq:tvc); the no-bubbles condition asks the same of the discounted value of an asset. A bubble in a price is the mirror image of a Ponzi scheme in debt: a debt that is never repaid, only rolled over, grows at the rate of interest forever, and the lender's claim is worth something only if another lender will take it over, exactly as a bubble pays its holder only if another buyer will. The arguments against bubbles below are, read in the mirror, the arguments that rule out Ponzi schemes. Consider the following candidate process for {math}`\Price_{t}`:
+
+```{math}
+:label: eq:pbubble
+
+\begin{aligned}
+\Price_{t} &= \Price_{t}^{*}+B_{t} \\
+\Ex_{t}[B_{t+1}] &= \Rfree B_{t}.
+\end{aligned}
+```
+
+That is, the price is the fundamental price plus a "bubble" term {math}`B_{t}` that is expected to grow by the factor {math}`\Rfree` from period to period. The question at hand is whether this process satisfies the first order condition {eq}`eq:pteq`. We can show that it does by starting with the formula for {math}`\Price_{t+1}` and working backwards:
+
+```{math}
+\begin{aligned}
+\Price_{t+1} &= \Price_{t+1}^{*}+B_{t+1} \\
+\Ex_{t}[\Price_{t+1}] &= \Ex_{t}[\Price_{t+1}^{*}]+ \Rfree B_{t} \\
+\Ex_{t}[\Price_{t+1}] &= \Ex_{t}\left[\sum_{s=t+2}^{\infty}\Rfree^{t+1-s}\dvdnd_{s}\right]+ \Rfree B_{t} \\
+\Ex_{t}[\Price_{t+1}]/\Rfree &= \Ex_{t}\left[\sum_{s=t+2}^{\infty}\Rfree^{t-s}\dvdnd_{s}\right]+ B_{t} \\
+\underbrace{\Ex_{t}[\Price_{t+1}+\dvdnd_{t+1}]/\Rfree}_{= \Price_{t}} &= \Ex_{t}[\dvdnd_{t+1}/\Rfree] + \Ex_{t}\left[\sum_{s=t+2}^{\infty}\Rfree^{t-s}\dvdnd_{s}\right]+ B_{t} \\
+\Price_{t} &= \Ex_{t}\left[\sum_{s=t+1}^{\infty}\Rfree^{t-s}\dvdnd_{s}\right]+ B_{t} \\
+\Price_{t} &= \Price_{t}^{*}+ B_{t}
+\end{aligned}
+```
+
+where the underbraced equality follows from {eq}`eq:pteq`, and the second line uses only {math}`\Ex_{t}[B_{t+1}] = \Rfree B_{t}`.
+
+In words, the first order condition has infinitely many solutions of the form {math}`\Price_{t}= \Price_{t}^{*}+B_{t}` {cite:p}`floodGarberBubbles,blanchardWatsonBubbles`. Nothing in the logic of the problem so far rules out a *rational bubble*. In principle, then, any level of the stock price is possible at period {math}`t`; all the theory implies is that *if a bubble exists*, its value must be expected to rise by the factor {math}`\Rfree` every period. Two members of the family show the range of what that allows.
+
+A *deterministic bubble* grows by exactly {math}`\Rfree` every period, {math}`B_{t+1} = \Rfree B_{t}`: its size grows at the rate of interest forever.
+
+The *stochastically bursting bubble* of {cite:t}`blanchard:burstingbubbles` survives each period with probability {math}`\LivPrb` and otherwise collapses to zero:
+
+```{math}
+:label: eq:pburst
+
+B_{t+1} =
+\begin{cases}
+(\Rfree/\LivPrb)B_{t} & \text{with probability } \LivPrb \\
+0 & \text{with probability } \DiePrb = 1-\LivPrb,
+\end{cases}
+```
+
+so that {math}`\Ex_{t}[B_{t+1}] = (\Rfree/\LivPrb)B_{t}\LivPrb + 0 \cdot \DiePrb = \Rfree B_{t}`. While it lasts, the bubble grows by the factor {math}`\Rfree/\LivPrb`, enough faster than {math}`\Rfree` to exactly compensate shareholders (in expected value terms) for their expected capital loss when the bubble collapses.
+
+The probability that the bubble has burst by time {math}`t+s` adds the probability that it bursts in {math}`t+1`, the probability that it survives {math}`t+1` and bursts in {math}`t+2`, and so on:
+
+```{math}
+:label: eq:probburst
+
+\text{Prob(burst by } t+s) = \DiePrb(1+\LivPrb+\LivPrb^{2}+\ldots+\LivPrb^{s-1}).
+```
+
+The sum is {math}`1-\LivPrb^{s}`, which goes to one as {math}`s` grows: a stochastic bubble bursts eventually with probability one. Its lifetime is random, with a geometric distribution: the probability that it is still alive after {math}`s` periods is {math}`\LivPrb^{s}`, and the expected number of periods until it bursts is {math}`1/\DiePrb`. The probability of survival falls by half every
+
+```{math}
+\frac{\log 2}{-\log \LivPrb}
+```
+
+periods, a little less than {math}`69.3/(100\DiePrb)`, which is the halving form of the [rule of 72](#fact:ruleof72). With a 5 percent chance of bursting each period, a bubble's chance of surviving halves every 13.5 periods, while its expected lifetime is 20 periods: the mean exceeds the half-life because a few bubbles last a very long time.
+
+{numref}`fig:BubblePaths` follows a dozen such bubbles with an interest factor of 1.04, and {numref}`fig:BubbleLifetimes` shows the lifetimes of twenty thousand.
+
+:::{figure} figures/BubblePaths.png
+:name: fig:BubblePaths
+
+A dozen bubbles that burst with probability 0.05 each period, with an interest factor of 1.04, on a log scale. While a bubble lasts it grows by {math}`\Rfree/\LivPrb`, so the dozen share one line; an x marks the last period a bubble was alive (with a count when several burst together). Their expected value, dashed, grows by {math}`\Rfree`. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Bubbles.ipynb), which runs in your browser.
+:::
+
+:::{figure} figures/BubbleLifetimes.png
+:name: fig:BubbleLifetimes
+
+The lifetimes of twenty thousand bubbles that burst with probability 0.05 each period, against the geometric distribution, with the half-life of survival, 13.5 periods, and the expected lifetime, 20 periods. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Bubbles.ipynb), which runs in your browser.
+:::
+
+Other members of the family {eq}`eq:pbubble` have been built to resemble the data. The "intrinsic" bubbles of {cite:t}`frootObstfeldIntrinsic` depend on dividends themselves, so that prices overreact to news about dividends. The bubbles of {cite:t}`evansPitfalls` collapse periodically to a small positive value and then grow again, and standard tests for bubbles miss them. {cite:t}`westSpecTest` tests for a bubble by comparing two estimates of the present-value relation that should agree if there is none, and {cite:t}`phillipsShiYuBubbles` date periods of explosive growth in the S&P 500.
+
+(WhyBubblesCannotExist)=
+## Arguments for Why Bubbles Cannot Exist
+
+Note that the bubble term in equation {eq}`eq:pbubble` is expected to grow without bound in absolute value. It turns out that this fact rules out negative bubbles. To see why, note that if {math}`B_{t}` is negative and if the fundamental price {math}`\Price_{t}^{*}` is bounded, then eventually {math}`|\Ex_{t}[B_{t+s}]|` grows large enough so that the expected price of a share is negative, which cannot be unless the price itself is negative in some state. But if share prices were negative, people could make themselves better off by simply throwing away their stock certificates. Thus, the restriction that prices must be positive rules out negative bubbles.
+
+{cite:t}`dibaGrossmanTheory` turn this into a more striking result. If negative bubbles are impossible, then {math}`B_{t} \geq 0` always. Suppose that the bubble is zero at some date. Its expected value next period is then zero too, and a quantity that cannot be negative and is expected to be zero must be zero with probability one:
+
+```{math}
+:label: eq:dibaGrossman
+
+B_{t} = 0 \Rightarrow \Ex_{t}[B_{t+1}] = \Rfree B_{t} = 0 \Rightarrow B_{t+1} = 0,
+```
+
+and the same holds in every later period. So a bubble cannot start: if one exists now, it has existed since the asset was first traded. Nor can a bubble that has burst restart. (The bubbles of {cite:t}`evansPitfalls` escape this by never collapsing all the way to zero.)
+
+Bubbles can also be ruled out if there is a maximum possible price that the asset can have. Consider, for example, the question of whether there can be a bubble on the price of diamonds. Suppose that there is a fixed supply of natural diamonds in existence, but that artificial diamonds can be made at a cost {math}`\bar{\Price}` above the current market price. A bubble would eventually carry the market price past {math}`\bar{\Price}`, but nobody will pay more than {math}`\bar{\Price}` for a natural diamond when an artificial one costs {math}`\bar{\Price}`, so the price cannot rise beyond {math}`\bar{\Price}`. In the period before the bubble would pass {math}`\bar{\Price}`, then, the price cannot rise by the factor the bubble needs to earn the required return, so nobody holds the bubble then; and by the same logic nobody holds it in the period before that, or in any earlier period, today included. Thus, rational bubbles are ruled out for assets which are reproducible.
+
+Two formal results make these arguments general. With finitely many traders, all rational and all sharing the same prior beliefs, there can be no bubble and no purely speculative trade {cite:p}`tiroleSpeculation`; that is the backward induction of the diamonds example in general form, and it rules out a Ponzi scheme in the same way, since with finitely many traders someone would have to be the last lender. With infinitely lived traders, {cite:t}`santosWoodfordBubbles` show that bubbles are impossible in a wide class of economies, in particular whenever the present value of the economy's aggregate endowment is finite, the infinite-horizon counterpart of an interest rate above the growth rate.
+
+These results were derived for risk-neutral investors, but none depends on it. With risk-averse investors every argument goes through with the stochastic discount factor {math}`\SDF_{t,t+1}` in place of {math}`1/\Rfree`. A bubble is then any {math}`B_{t}` with
+
+```{math}
+\Ex_{t}[\SDF_{t,t+1}B_{t+1}] = B_{t},
+```
+
+and the arguments against negative bubbles, against bubbles that start, and against bubbles on assets that can be reproduced are unchanged.
+
+There are also some general equilibrium arguments against bubbles, which basically boil down to the observation that if the value of the bubble is growing forever, its size will eventually exceed the size of the entire capital stock, and in that case productive capital will have been driven to zero because everybody owns the bubble instead of capital, which cannot make sense. The argument needs the interest rate to exceed the economy's growth rate: a bubble grows at the rate of interest {math}`\rfree`, so it outgrows the economy only if {math}`\rfree` exceeds the growth rate {math}`\pGro`, which in a steady state is also the growth rate of dividends. That requirement is the [Finite Human Wealth Condition](#eq:FHWCPF) once more, now for the economy as a whole, and a rational bubble lives exactly where it fails: the present value of the economy's endowment is then infinite, which is the case {cite:t}`santosWoodfordBubbles` leave open. In a dynamically inefficient economy, where {math}`\rfree < \pGro`, as can happen in [Diamond's overlapping generations model](#sec:OLGModel), a bubble can survive in general equilibrium {cite:p}`tirole:bubbles`. {numref}`fig:TiroleBubble` draws such a bubble in the OLG chapter's economy. The idea goes back to {cite:t}`samuelsonOLG`, whose money is a bubble: an asset that pays no dividend and has value only because each generation expects the next to accept it. {cite:t}`weilConfidence` shows that such a bubble can burst at random, as Blanchard's does. But {cite:t}`amszDynamicEfficiency` find that actual economies are dynamically efficient, which seems to close this route to a rational bubble.
+
+:::{figure} figures/TiroleBubble.png
+:name: fig:TiroleBubble
+
+A bubble in the [Diamond OLG model](#sec:OLGModel), with very patient consumers ({math}`\DiscFac` of 0.999 a year), a capital share of 0.2 and population growth of 4 percent a year, a period being 36 years, so that the population quadruples each period, by the [rule of 72](#fact:ruleof72). With no bubble, capital converges to {math}`\bar{k}`, where the interest rate, 3.2 percent a year, is below the growth rate of the population: the economy is dynamically inefficient. A bubble that lasts must grow as fast as the population, so in its steady state the interest factor equals the population's growth factor and capital is at the golden rule, {math}`k^{**}`; the bubble takes the savings that would have been capital beyond it, a third of the young's savings. At the OLG chapter's own calibration, the economy is dynamically efficient and no bubble can last. Drawn by the chapter's [notebook](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=Bubbles.ipynb), which runs in your browser.
+:::
+
+## Further Reading
+
+More recent work finds room for bubbles even in dynamically efficient economies, through frictions in financial markets: bubbles that relax firms' borrowing constraints, and so can crowd investment in rather than out {cite:p}`martinVenturaBubbles`; bubbles that supply the liquidity firms need {cite:p}`farhiTiroleBubbly`; and a rational bubble that grows faster when the central bank raises interest rates to lean against it {cite:p}`galiBubbles`.
+
+A separate literature explains episodes that look like bubbles without any rational bubble. When investors disagree, an asset's price includes the value of the option to resell it to someone more optimistic, so it can exceed every investor's own valuation {cite:p}`HarrisonKreps1978,ScheinkmanXiong2003`. Noise traders can make an asset risky to arbitrageurs, who therefore do not trade its mispricing away {cite:p}`delongNoiseTrader`, and arbitrageurs who cannot coordinate a sale may ride a bubble rather than attack it {cite:p}`abreuBrunnermeierBubbles`. {cite:t}`brunnermeierOehmkeBubbles` survey the field. {cite:t}`garberBubbles` reexamines the most famous early bubbles and finds fundamentals behind most of them, while {cite:t}`shillerIEed2` makes the case that modern markets have them.

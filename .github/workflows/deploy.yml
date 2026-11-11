@@ -17,6 +17,13 @@ env:
 # Read-only by default: the build job runs pull-request code. Only deploy writes to Pages.
 permissions:
   contents: read
+# Pushes to main run one at a time, and a newer push replaces one still waiting, so the last site deployed is
+# always main's newest commit. (With only the deploy job queued, builds ran side by side, and an older commit
+# whose build was slower deployed last, over the newer site.) Each pull-request run is its own group, so those
+# still run side by side.
+concurrency:
+  group: ${{ github.event_name == 'push' && 'pushes-to-main' || github.run_id }}
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,11 +48,16 @@ jobs:
           uv run python code/write_redirects.py --self-test
           uv run python code/verify_build.py --self-test
           uv run python code/build_pdf.py --self-test
+          uv run python code/derive_bib.py --self-test
           uv run python -m intertemporal_choice --self-test
       # The notebooks are committed with their outputs but without the metadata Jupyter
       # rewrites on every save; see code/notebooks.py.
       - name: Notebooks are committed stripped
         run: uv run python code/notebooks.py --check
+      # The bibliography is derived from economics.bib in llorracc/texmf-local and never edited
+      # here: a correction goes into economics.bib. See code/derive_bib.py.
+      - name: Bibliography matches its source
+        run: uv run python code/derive_bib.py --check
       # MyST caches executed notebooks in _build/execute, so a notebook whose code has not
       # changed is not re-run. The key covers the cell code and IC_EXEC_ENV, a hash of
       # uv.lock, src/ and data/ (see code/build_site.py); the cache key here carries the
@@ -65,6 +77,13 @@ jobs:
         with:
           path: _build/execute
           key: myst-exec-${{ steps.exec.outputs.env }}-${{ github.sha }}
+      # The figure notebooks that need only what Pyodide has also run in the browser, with
+      # nothing installed: a JupyterLite site served at /lite/ (code/build_lite.py).
+      - name: Build the in-browser notebooks (JupyterLite)
+        run: >-
+          uv run --no-project --with jupyterlite-core==0.8.6 --with jupyterlite-pyodide-kernel==0.8.6
+          --with jupyter-server==2.21.1 --with jupyterlab_widgets==3.0.17
+          python code/build_lite.py _build/html/lite
       # Old URLs of moved pages forward to their new ones; see code/redirects.txt.
       - name: Write redirects for moved pages
         run: uv run python code/write_redirects.py

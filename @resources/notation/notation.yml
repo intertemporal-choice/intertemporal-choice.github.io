@@ -20,8 +20,11 @@
 #     ruling:  {date, source, rationale}
 
 meta:
-  version: 9.0.0        # SemVer: MAJOR = change to an existing rendering/meaning;
-  updated: 2026-11-04   #         MINOR = additions; PATCH = gloss/typo fixes
+  version: 9.2.0        # SemVer: MAJOR = change to an existing rendering/meaning;
+  updated: 2026-11-09   #         MINOR = additions; PATCH = gloss/typo fixes
+                        # 9.2.0: new row: end-of-period human wealth \hNrmEnd = 𝔥 (owner, 2026-11-09)
+                        # 9.1.0: convention: π is inflation (owner, 2026-11-05); the matching block's
+                        #        formulas and notes written with ϖ, and its ϖ check corrected
                         # 9.0.0: the owner's rulings of 2026-11-02/03 in the Intertemporal Choice course's
                         #        session: permanent-income growth 𝖦/𝗀, productivity growth 𝒢/g, ϑ, υ, ϖ,
                         #        n; new rows Ð/ð, G, steady state, golden rule, z, χ, sav (adopted 2026-11-04)
@@ -61,6 +64,14 @@ symbols:
       source: "BST feedback N1"
       rationale: "one h, BST's; the shadow h_BST and local future-only h are banned"
 
+  human-wealth-end-of-period:
+    gloss: "end-of-period human wealth, as a ratio to permanent income: human wealth from next period on, current period's income EXCLUDED"
+    define: "𝔥_t = h_t − 1"
+    latex: {macro: '\hNrmEnd', expansion: '\mathfrak{h}'}
+    unicode: '𝔥'
+    conflicts_checked: "Proposed as \\hEnd and renamed before release (the ruling below). Checked 2026-11-09: \\hNrmEnd is absent from this registry, econark-shortcuts.sty and every repo on jhu-dell. Checked 2026-11-08 at 6ab13aee: \\hEnd and 𝔥 were absent from this registry and econark-shortcuts.sty, and are not written in BST, HAFiscal, NARK, method-of-moderation or HARK outside vendored copies. SolvingMicroDSOPs (@local/local-macros.sty) and TractableBufferStock (econtexShortcuts.sty, handoutShortcuts.sty) define the old name \\hEnd = 𝔥 locally, with this meaning; TractableBufferStock's two files also define \\hours = 𝔥, which its .tex files do not use. The book chapter and the handout could not be seen from this machine; the cc_PerfForesightCRRA session reports their use of the old name, and that they are being renamed. No python name: 𝔥 equals HARK's hNrm numerically (the hark-python dialect on the human-wealth row), and hNrm is that row's name. The human-wealth row's 2026-07-14 ruling bans a 'local future-only h'; the owner on that ban, as relayed by the cc_PerfForesightCRRA session, typed there 2026-11-09 10:09:26 EST: 'yes, the ban is only about overloading h'. 𝔥 is a distinct symbol. Fraktur already marks end-of-period objects (\\cEndFunc = 𝔠, \\CEndFunc = ℭ)."
+    ruling: {date: 2026-11-09, source: "owner, in the econ-ark-tools session, 2026-11-09 10:09:17 EST: 'add the \\hEnd row and merge it'; then 10:16:29 EST: 'rename it to \\hNrmEnd and merge'. As relayed by the cc_PerfForesightCRRA session: typed there 2026-11-08 22:51:34 EST, 'I guess \\hEnd (as \\mathfrak{h}) should be incorporated in the SST/union-catalog of macros.  make it so'; 2026-11-09 10:04:25 EST, 'add the \\hEnd row to the registry, and once it is there you can remove it from the chapter and the handout'; 10:13:05 EST, 'let's rename \\hEnd to \\hNrmEnd in both the chapter and the handout, and ask the jd_econ-ark-tools session to revise the PR to add \\hNrmEnd to the registry'; and in cc_intertemporal-choice.github.io, 2026-11-08 21:19:22 EST, '2. keep gothic h'", rationale: "human wealth with and without current income need distinct symbols"}
+
   vacancy-cost:
     gloss: "vacancy posting cost — the flow cost of keeping a vacancy open, in a search-and-matching block"
     latex: {macro: '\vacCost', expansion: '\mathrm{cst}'}
@@ -70,7 +81,7 @@ symbols:
 
   matching-efficiency:
     gloss: "matching-function efficiency — the scale parameter of the Cobb-Douglas matching function"
-    define: "matches = eff * searchers^z * vacancies^(1-z)"
+    define: "matches = eff * searchers^ϖ * vacancies^(1−ϖ)"
     latex: {macro: '\matchEff', expansion: '\mathrm{eff}'}
     unicode: 'eff'
     conflicts_checked: "Written chi in HAFiscal's published appendix. chi is unclaimed upstream, so this moves by CONVENTION (words for the SAM block) rather than to resolve a collision -- kept with its siblings so the block reads as one family."
@@ -82,12 +93,12 @@ symbols:
     latex: {macro: '\matchElas', expansion: '\varpi'}
     aliases: ["was z (2026-08-30 to v9.0.0), which passes to leisure; until 2026-10-22 the sce-wg-1-dev schemas also wrote z for the employment state, which is now j (see employment-state)"]
     unicode: 'ϖ'
-    conflicts_checked: "MAJOR (v9.0.0). ϖ is used nowhere in the registry, the shortcuts, the course's book and questions, or HARK's symbol tables (checked 2026-11-02). The 2026-08-30 search rejected \\mathrm{els}, ϰ, υ and ι and did not consider ϖ; it chose z, which needs a single glyph because it is an EXPONENT. Reading hazard: ϖ resembles ω, the registry's \\weight, and HAFiscal uses both (its HANK appendix writes \\matchElas)."
+    conflicts_checked: "MAJOR (v9.0.0). ϖ is used nowhere in the registry, the shortcuts, the course's book and questions, or HARK's symbol tables (checked 2026-11-02). That check left out the papers (corrected 2026-11-05, v9.1.0): HAFiscal's HANK appendix, the block this row serves, had written inflation ϖ since its notation pass of 2026-10-22, and the owner returned inflation to π (see terminology.yml's inflation convention), so ϖ is unique there once that paper follows; BST declares a local \\lomdkPrbmm = ϖ in its Harmenberg appendix, a different document. The 2026-08-30 search rejected \\mathrm{els}, ϰ, υ and ι and did not consider ϖ; it chose z, which needs a single glyph because it is an EXPONENT. Reading hazard: ϖ resembles ω, the registry's \\weight, and HAFiscal uses both (its HANK appendix writes \\matchElas)."
     ruling: {date: 2026-11-03, source: "owner, in the cc:course-choice session, 08:08:44 EST: 'z for leisure; elasticity takes ϖ'; adopted in the econ-ark-tools session, 2026-11-04 19:20:49 EST: 'adopt them'", rationale: "leisure keeps z, as NARK and the course write it, and both symbols become unique; supersedes 'use z' (2026-08-30)"}
 
   vacancy-fill-probability:
     gloss: "probability that a vacancy is filled in a period"
-    define: "fill = eff * tgt^(-z)"
+    define: "fill = eff * tgt^(−ϖ)"
     latex: {macro: '\vacFillPrb', expansion: '\mathrm{fill}'}
     unicode: 'fill'
     conflicts_checked: "Written phi in HAFiscal's published appendix, where phi is ALSO subscripted for the wage rule, the Taylor rule and two fiscal rules -- five distinct meanings on one letter, the heaviest overload in that document. phi is additionally NARK's \\prstShkInd and \\eprem. This retires the bare use; the four subscripted ones are a separate question."
@@ -95,11 +106,11 @@ symbols:
 
   job-find-probability:
     gloss: "probability that a searcher finds a job in a period"
-    define: "find = eff * tgt^(1-z)"
+    define: "find = eff * tgt^(1−ϖ)"
     latex: {macro: '\jobFindPrb', expansion: '\mathrm{find}'}
     unicode: 'find'
     python: 'job_find'
-    conflicts_checked: "Written eta in HAFiscal's published appendix; the registry claims eta subscripted as \\etaL / \\etaR. Named apart from vacancy-fill-probability deliberately: the two differ only as tgt^{1-z} against tgt^{-z}, so a reader had to hold which of eta and phi was which."
+    conflicts_checked: "Written eta in HAFiscal's published appendix; the registry then claimed eta subscripted as \\etaL / \\etaR (power-law rows, removed in v5.0.0). Named apart from vacancy-fill-probability deliberately: the two differ only as tgt^{1−ϖ} against tgt^{−ϖ}, so a reader had to hold which of eta and phi was which."
     ruling: {date: 2026-08-30, source: "owner ruling: words for the SAM block"}
 
   labor-market-tightness:

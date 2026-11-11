@@ -81,6 +81,7 @@ Notes that supplement the main chapters, on the website only and not in the PDF:
 - An entrepreneur's problem under perfect foresight
 - The q-Ramsey model, and gross saving and growth in the RCK model
 - Equiprobable approximations to lognormal distributions
+- Chapter appendices: derivations of results a chapter states without proof
 
 ## License
 
@@ -89,7 +90,7 @@ Notes that supplement the main chapters, on the website only and not in the PDF:
 
 ## Acknowledgments
 
-Development supported by the [Econ-ARK](https://econ-ark.org/) project with funding from the Alfred P. Sloan Foundation.
+Development supported by the [Econ-ARK](https://econ-ark.org/) project with funding from the Alfred P. Sloan Foundation and T. Rowe Price.
 
 :::{seealso}
 The [HARK](https://docs.econ-ark.org/) toolkit provides computational implementations of many models covered in these notes, including buffer-stock consumption, portfolio choice, and lifecycle models.
