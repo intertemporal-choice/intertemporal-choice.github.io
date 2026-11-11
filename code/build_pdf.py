@@ -10,7 +10,9 @@ whenever a page moves, so the Markdown is left alone and the fix happens here:
 
   1. stage a copy of the project in _build/pdf-src
   2. in the staged Markdown only, rewrite each `](#fact:...)` link to the fact's anchor
-     on the site, so the export keeps it as a link
+     on the site, so the export keeps it as a link; likewise each link to a label on a
+     page the PDF leaves out (the Supplemental Notes, chapter appendices among them),
+     which MyST would otherwise export as a \\ref to a label the PDF lacks, printed "??"
   3. run `myst build --pdf` in the staged copy
   4. rewrite every `\\href{/` in the generated LaTeX to an absolute URL on the site, and
      check that each one names a page the book actually has
@@ -72,6 +74,11 @@ FACT_DEF = re.compile(r"^\((fact:[^)\s]+)\)=", re.MULTILINE)
 # into the page title, which has no anchor on the site.
 TITLE_LABEL = re.compile(r"\A\s*\((fact:[^)\s]+)\)=\s*\n#\s")
 FACT_LINK = re.compile(r"\]\(#(fact:[^)\s]+)\)")
+# Any label: a `(label)=` target, or a directive's `:label:` or `:name:` option.
+LABEL_DEF = re.compile(r"^[ \t]*(?:\(([^)\s]+)\)=|:(?:label|name):[ \t]*(\S+))", re.MULTILINE)
+PAGE_TITLE_LABEL = re.compile(r"\A\s*\(([^)\s]+)\)=\s*\n#\s")
+LINK = re.compile(r"\]\(#([^)\s]+)\)")
+ROLE = re.compile(r"\{(?:eq|ref|numref)\}`(?:[^`<]*<)?([^`<>]+)>?`")
 REL_HREF = re.compile(r"\\href\{/")
 SITE_HREF = re.compile(r"\\href\{" + re.escape(SITE) + r"(/[^}#\\]*)")
 
@@ -132,6 +139,62 @@ def rewrite_fact_links(text: str, targets: dict[str, str]) -> tuple[str, int]:
         return f"]({targets[m.group(1)]})"
 
     return FACT_LINK.subn(sub, text)
+
+
+def pdf_articles(config: str) -> set[str]:
+    """The files the tex+pdf export in myst.yml's text puts in the PDF."""
+    import yaml
+
+    exports = yaml.safe_load(config)["project"]["exports"]
+    return {a["file"] for e in exports if "pdf" in e.get("format", "") for a in e.get("articles", [])}
+
+
+def all_label_targets(text: str, url: str) -> dict[str, str]:
+    """Every label in one page's text, each mapped to its URL on the site."""
+    title = PAGE_TITLE_LABEL.match(text)
+    labels = [a or b for a, b in LABEL_DEF.findall(text)]
+    return {label: url if title and label == title.group(1) else f"{url}#{html_id(label)}" for label in labels}
+
+
+def web_only_targets(root: Path) -> dict[str, str]:
+    """Every label on a page the PDF leaves out, mapped to its absolute URL on the site."""
+    in_pdf = pdf_articles((root / "myst.yml").read_text())
+    targets = {}
+    for md in sorted((root / "content").rglob("*.md")):
+        if md.relative_to(root).as_posix() not in in_pdf:
+            targets |= all_label_targets(md.read_text(), SITE + page_url(md, root))
+    return targets
+
+
+def rewrite_web_only_links(text: str, targets: dict[str, str]) -> tuple[str, int]:
+    """Point `](#label)` links to a label on a page the PDF leaves out at the site.
+
+    A role ({eq}, {ref}, {numref}) to such a label has no text of its own to keep as a
+    link, so it is an error: write it as a link with words instead.
+    """
+    roles = sorted({m.group(1) for m in ROLE.finditer(text) if m.group(1) in targets})
+    if roles:
+        raise ValueError(f"role to a label the PDF leaves out (make it a link with words): {', '.join(roles)}")
+    rewritten = [m for m in LINK.finditer(text) if m.group(1) in targets]
+    return LINK.sub(lambda m: f"]({targets[m.group(1)]})" if m.group(1) in targets else m.group(0), text), len(rewritten)
+
+
+def rewrite_staged_web_only() -> None:
+    """Step 2, continued: in the pages the PDF has, point links to labels on pages it leaves out at the site."""
+    targets = web_only_targets(STAGE)
+    n_links = 0
+    for rel in sorted(pdf_articles((STAGE / "myst.yml").read_text())):
+        md = STAGE / rel
+        if md.suffix != ".md":
+            continue
+        try:
+            text, n = rewrite_web_only_links(md.read_text(), targets)
+        except ValueError as e:
+            raise ValueError(f"{rel}: {e}") from None
+        if n:
+            md.write_text(text)
+            n_links += n
+    log.info("links to pages left out of the PDF pointed at the site: %d", n_links)
 
 
 def absolutize(tex: str) -> tuple[str, int]:
@@ -238,6 +301,7 @@ def compile_and_copy(root: Path) -> list[str]:
 def build(root: Path) -> list[str]:
     stage(root)
     rewrite_staged_facts()
+    rewrite_staged_web_only()
     if run(["myst", "build", "--pdf"], STAGE, root / MYST_LOG):
         return [f"myst build --pdf failed; see {MYST_LOG}"]
     return absolutize_tex() or compile_and_copy(root)
@@ -277,6 +341,38 @@ def fact_failures() -> list[str]:
                 html_id("fact:logelognormtimes") != "fact-logelognormtimes",
                 "html_id no longer matches MyST's anchors",
             ),
+        ]
+        if bad
+    ]
+
+
+def web_only_failures() -> list[str]:
+    """Failures of the rewrite of links to labels on pages the PDF leaves out."""
+    page = ("(sec:page)=\n# Title\n\n(sec:x)=\n## X\n\n```{math}\n:label: eq:y\n```\n\n"
+            ":::{figure} f.png\n:name: fig:z\n:::\n\n[^n]:\n\n    ```{math}\n    :label: eq:inFootnote\n    ```\n")
+    found = all_label_targets(page, "U")
+    targets = {"sec:x": "U#sec-x"}
+    text, n = rewrite_web_only_links("see [infinite](#sec:x) and [here](#sec:inpdf)", targets)
+    config = "project:\n  exports:\n    - format: tex+pdf\n      articles:\n        - file: content/a.md\n"
+    try:
+        rewrite_web_only_links("by {eq}`eq:y` and {ref}`words <sec:x>`", {"eq:y": "U#eq-y"})
+        role_refused = False
+    except ValueError:
+        role_refused = True
+    return [
+        msg
+        for bad, msg in [
+            (
+                found != {"sec:page": "U", "sec:x": "U#sec-x", "eq:y": "U#eq-y", "fig:z": "U#fig-z",
+                          "eq:inFootnote": "U#eq-infootnote"},
+                f"labels of a page mapped to {found}",
+            ),
+            (
+                n != 1 or "](U#sec-x)" not in text or "](#sec:inpdf)" not in text,
+                "a link to a page left out of the PDF was missed, or a link inside the PDF was touched",
+            ),
+            (not role_refused, "a role to a label the PDF leaves out was accepted"),
+            (pdf_articles(config) != {"content/a.md"}, "the PDF's articles were misread from myst.yml"),
         ]
         if bad
     ]
@@ -356,7 +452,7 @@ def clear_failures() -> list[str]:
 
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
-    failures = fact_failures() + href_failures() + url_failures() + clear_failures()
+    failures = fact_failures() + web_only_failures() + href_failures() + url_failures() + clear_failures()
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")

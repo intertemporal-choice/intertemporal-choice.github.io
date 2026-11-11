@@ -81,6 +81,7 @@ Notes that supplement the main chapters, on the website only and not in the PDF:
 - An entrepreneur's problem under perfect foresight
 - The q-Ramsey model, and gross saving and growth in the RCK model
 - Equiprobable approximations to lognormal distributions
+- Chapter appendices: derivations of results a chapter states without proof
 
 ## License
 
