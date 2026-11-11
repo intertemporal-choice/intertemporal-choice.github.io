@@ -44,7 +44,7 @@ math:
 (sec:TractableBufferStock)=
 # A Tractable Model of Buffer Stock Saving
 
-A companion notebook in the Econ-ARK DemARK collection, [Tractable Buffer Stock (interactive)](https://econ-ark.org/materials/tractablebufferstock-interactive), lets you vary the model's parameters and watch the consumption function and target wealth respond. HARK solves the model as its [`TractableConsumerType`](https://github.com/econ-ark/HARK/blob/main/examples/TractableBufferStockModel/TractableConsumerType.ipynb), and this chapter's figures are drawn with that class by its [figure notebook](TractableBufferStock.ipynb).
+A companion notebook in the Econ-ARK DemARK collection, [Tractable Buffer Stock (interactive)](https://econ-ark.org/materials/tractablebufferstock-interactive), lets you vary the model's parameters and watch the consumption function and target wealth respond. HARK solves the model as its [`TractableConsumerType`](https://github.com/econ-ark/HARK/blob/main/examples/TractableBufferStockModel/TractableConsumerType.ipynb), and this chapter's figures are drawn with that class by its [figure notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 
 ## Introduction
 
