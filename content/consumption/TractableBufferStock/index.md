@@ -287,7 +287,7 @@ The {math}`\dcEqZero` locus can be characterized by substituting {math}`{\cNrm}^
          1 & = \left\{1+\urate\left[\left(\frac{{\cNrm}^{e}_{t+1}}{\cNrm_{t+1}^{u}}\right)^{\CRRA}-1\right]\right\} \GPFachFix^{\CRRA}
 \\ \GPFachFix^{-\CRRA} & =  (1-\urate)+\urate\left(\frac{{\cNrm}^{e}}{\cNrm_{t+1}^{u} }\right)^{\CRRA}
 \\ \underbrace{\left(\frac{\GPFachFix^{-\CRRA}-1+\urate}{\urate}\right)^{1/\CRRA}}_{\equiv \straight} & =   \left(\frac{{\cNrm}^{e}}{\cNrmU_{t+1}}\right)
-  \\ \underbrace{\left(\overbrace{\urate^{-1}(\GPFachFix^{-\CRRA}-1)}^{\equiv \varpi}+1\right)^{1/\CRRA}}_{\straight=(1+\varpi)^{1/\CRRA}} & =   \left(\frac{{\cNrm}^{e}}{\cNrmU_{t+1}}\right)
+  \\ \underbrace{\left(1+\urate^{-1}(\GPFachFix^{-\CRRA}-1)\right)^{1/\CRRA}}_{=\straight} & =   \left(\frac{{\cNrm}^{e}}{\cNrmU_{t+1}}\right)
 \end{aligned}
 ```
 
@@ -893,12 +893,12 @@ Multiplying both sides of {eq}`eq:TBS-cDelEq0SlopeCondAlt` by {math}`\RNrmByG^{-
 
 #### A Target Always Exists When Human Wealth Is Infinite
 
-Since {math}`0 < \urate < 1` and {math}`\MPC>0` (as guaranteed by the RIC), {eq}`eq:TBS-alphaReq` is satisfied whenever the {math}`\FHWChFix` fails ({math}`\alpha \leq 1`) and {math}`\straight > 0`. We now show that under these conditions, {math}`(1+\varpi)^{1/\CRRA}=\straight>0`.
+Since {math}`0 < \urate < 1` and {math}`\MPC>0` (as guaranteed by the RIC), {eq}`eq:TBS-alphaReq` is satisfied whenever the {math}`\FHWChFix` fails ({math}`\alpha \leq 1`) and {math}`\straight > 0`. We now show that under these conditions, {math}`\straight>0`.
 
 {math}`\straight` from {eq}`eq:TBS-straightDef` is:
 
 ```{math}
-\straight = \left(1+\overbrace{\urate^{-1}(\GPFachFix^{-\CRRA}-1)}^{\equiv \varpi}\right)^{1/\CRRA}
+\straight = \left(1+\urate^{-1}(\GPFachFix^{-\CRRA}-1)\right)^{1/\CRRA}
 ```
 
 but note that
@@ -907,7 +907,7 @@ but note that
 \GPFachFix = \RPFac \overbrace{(\Rfree/\WGroFachFix)}^{=\RNrmByG}
 ```
 
-and in the case where {math}`\alpha=1`, {math}`\RNrmByG` must also be 1, implying that {math}`\GPFachFix = \RPFac < 1` (the RIC) so that {math}`\GPFachFix^{-\CRRA} > 1` and so {math}`\varpi > 0` and hence {math}`\straight > 1 > 0`. The other interesting case is when {math}`\alpha=0` so that {math}`\WGroFac=\Rfree` and {math}`\RNrmByG=\Rfree/\WGroFachFix=\Rfree(1-\urate)/\WGroFac=(1-\urate)<1`. In this case {math}`\GPFachFix < \RPFac` and so {math}`\GPFachFix^{-\CRRA} > \RPFac^{-\CRRA} > 1` and so {math}`\varpi` is even more positive so that {math}`\straight` is even more strongly {math}`>0`. Similar logic holds for any {math}`\alpha \leq 1`.
+and in the case where {math}`\alpha=1`, {math}`\RNrmByG` must also be 1, implying that {math}`\GPFachFix = \RPFac < 1` (the RIC) so that {math}`\GPFachFix^{-\CRRA} > 1` and hence {math}`\straight > 1 > 0`. The other interesting case is when {math}`\alpha=0` so that {math}`\WGroFac=\Rfree` and {math}`\RNrmByG=\Rfree/\WGroFachFix=\Rfree(1-\urate)/\WGroFac=(1-\urate)<1`. In this case {math}`\GPFachFix < \RPFac` and so {math}`\GPFachFix^{-\CRRA} > \RPFac^{-\CRRA} > 1` and so {math}`\straight` is even further above 1, so that it is even more strongly {math}`>0`. Similar logic holds for any {math}`\alpha \leq 1`.
 
 Thus, we can conclude that, when human wealth is infinite (that is, if {math}`\alpha \leq 1`), a target {math}`\TargetNrm{\mNrm}^{e}` will exist.
 
@@ -919,10 +919,10 @@ In the case where human wealth is finite ({math}`\alpha > 1`), we need the RHS o
 :label: eq:TBS-GPFacRawReqForTarget
 
 \begin{aligned}
-    \MPC (1+\varpi)^{1/\CRRA} & >  (\alpha-1)\urate/(1-\urate)
-\\   (1+\varpi)^{1/\CRRA} & >  \left(\frac{(\alpha-1)\urate}{\MPC (1-\urate)}\right)
-\\   (1+\varpi) & >  \left(\frac{(\alpha-1)\urate}{\MPC (1-\urate)}\right)^{\CRRA}
-\\  (\GPFachFix^{-\CRRA}-1)\urate^{-1} = \varpi & >  \left(\frac{(\alpha-1)\urate}{\MPC (1-\urate)}\right)^{\CRRA}-1
+    \MPC \straight & >  (\alpha-1)\urate/(1-\urate)
+\\   \straight & >  \left(\frac{(\alpha-1)\urate}{\MPC (1-\urate)}\right)
+\\   \straight^{\CRRA} & >  \left(\frac{(\alpha-1)\urate}{\MPC (1-\urate)}\right)^{\CRRA}
+\\  (\GPFachFix^{-\CRRA}-1)\urate^{-1} = \straight^{\CRRA}-1 & >  \left(\frac{(\alpha-1)\urate}{\MPC (1-\urate)}\right)^{\CRRA}-1
 \\  (\GPFachFix^{-\CRRA}-1) & >  \urate \left[\left(\frac{(\alpha-1)\urate}{\MPC (1-\urate)}\right)^{\CRRA}-1\right]
 \\  \GPFachFix^{-\CRRA} & >  1  + \urate \left[\left(\frac{(\alpha-1)\urate}{\MPC (1-\urate)}\right)^{\CRRA}-1\right]
 \\  \GPFachFix & <  \left\{1  + \urate \underbrace{\left[\left(\frac{(\alpha-1)\urate}{\MPC (1-\urate)}\right)^{\CRRA}-1\right]}_{\equiv \chi} \right\}^{-1/\CRRA}
@@ -968,7 +968,7 @@ This can be understood as follows. Rewrite the requirement for existence of a ta
 ```{math}
 :label: eq:TBS-cDelEq0SlopeCondAltAlt
 
-\MPC (1+\varpi)^{1/\CRRA}+1 > \RNrmByG ,
+\MPC \straight+1 > \RNrmByG ,
 ```
 
 or taking logs we have approximately
@@ -976,14 +976,14 @@ or taking logs we have approximately
 ```{math}
 :label: eq:TBS-cDelEq0SlopeCondLog
 
-\MPC (1+\varpi)^{1/\CRRA} > \rfree-\WGroRtehFix .
+\MPC \straight > \rfree-\WGroRtehFix .
 ```
 
-The LHS captures the slope of the {math}`\dcEqZero` locus, which is {math}`\MPC` modified by {math}`\varpi` whose difference from {math}`\varpi=0` captures the degree of growth (im)patience.[^tbs-captures-does-mean] The RHS captures the slope of the {math}`\dmEqZero` locus. Recall that the inequality captures the fact that a target {math}`\mTrgNrm^{e}` exists if these two loci intercept, which happens if the slope of {math}`\dcEqZero` exceeds that of {math}`\dmEqZero`.
+The LHS captures the slope of the {math}`\dcEqZero` locus, which is {math}`\MPC` modified by {math}`\straight`, whose difference from 1 captures the degree of growth (im)patience.[^tbs-captures-does-mean] The RHS captures the slope of the {math}`\dmEqZero` locus. Recall that the inequality captures the fact that a target {math}`\mTrgNrm^{e}` exists if these two loci intercept, which happens if the slope of {math}`\dcEqZero` exceeds that of {math}`\dmEqZero`.
 
 [^tbs-captures-does-mean]: "Captures" does not mean "is equal to." Equation {eq}`eq:TBS-cDelEq0SlopeCondAlt` provides the actual formula for the slope.
 
-If the consumer is "growth patience poised" (that is, {math}`\GPFachFix = 1`), then {math}`\varpi = 0` and the slope of the {math}`\dcEqZero` locus is identical to the {math}`\MPC` that characterizes the perfect foresight consumption function. In this case {eq}`eq:TBS-cDelEq0SlopeCondLog` becomes
+If the consumer is "growth patience poised" (that is, {math}`\GPFachFix = 1`), then {math}`\straight = 1` and the slope of the {math}`\dcEqZero` locus is identical to the {math}`\MPC` that characterizes the perfect foresight consumption function. In this case {eq}`eq:TBS-cDelEq0SlopeCondLog` becomes
 
 ```{math}
 :label: eq:TBS-patpGroLT0
@@ -996,9 +996,9 @@ If the consumer is "growth patience poised" (that is, {math}`\GPFachFix = 1`), t
 
 which is the (log version of) the {math}`\GIChFix`. The condition cannot hold both as an equality {math}`\GPFachFix=1` (our starting assumption) and an inequality {math}`\GPFachFix < 1` (the conclusion of {eq}`eq:TBS-patpGroLT0`). This contradiction constitutes a proof that exactly at {math}`\GPFachFix=1` a target does not exist.
 
-As noted above, if the consumer is growth-impatient ({math}`\GPFachFix < 1`) then {math}`\varpi > 0` and the slope of {math}`\dcEqZero` is monotonically increased as the degree of growth-impatience increases (so that target {math}`\TargetNrm{\mNrm}^{e}` is diminished).
+As noted above, if the consumer is growth-impatient ({math}`\GPFachFix < 1`) then {math}`\straight > 1` and the slope of {math}`\dcEqZero` is monotonically increased as the degree of growth-impatience increases (so that target {math}`\TargetNrm{\mNrm}^{e}` is diminished).
 
-But if the consumer is growth-patient ({math}`\GPFachFix > 1`) then {math}`\varpi < 0` and the slope of {math}`\dcEqZero` is diminished (which reflects the fact that the greater the degree of patience, the lower will consumption be for any given {math}`\mNrmE`).[^tbs-note-fails-slope] The lower bound is defined by the point at which the degree of growth patience becomes so strong that the slope of {math}`\dcEqZero` reaches zero (when {math}`\straight=0`; equivalently, {math}`\varpi` reaches -1). This restricts the permissible degree of growth patience, because {math}`\straight > 0` requires (rewrite {eq}`eq:TBS-GICExistsSoln`):
+But if the consumer is growth-patient ({math}`\GPFachFix > 1`) then {math}`\straight < 1` and the slope of {math}`\dcEqZero` is diminished (which reflects the fact that the greater the degree of patience, the lower will consumption be for any given {math}`\mNrmE`).[^tbs-note-fails-slope] The lower bound is defined by the point at which the degree of growth patience becomes so strong that the slope of {math}`\dcEqZero` reaches zero (when {math}`\straight=0`). This restricts the permissible degree of growth patience, because {math}`\straight > 0` requires (rewrite {eq}`eq:TBS-GICExistsSoln`):
 
 [^tbs-note-fails-slope]: Note that if the {math}`\GIChFix` fails so that {math}`\straight < 1`, the slope of the {math}`\dcEqZero` locus is shallower than the slope of the perfect foresight consumption function. The fact that these two loci never intersect reflects the fact that the consumer will behave in such a way as to accumulate {math}`\mNrmE` forever.
 
