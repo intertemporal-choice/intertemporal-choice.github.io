@@ -98,3 +98,6 @@ project:
         - file: content/supplemental/GrowthAndGrossSaving.md
         - file: content/supplemental/Equiprobable.md
         - file: content/supplemental/Equiprobable-Returns.md
+        - file: content/supplemental/appendices/index.md
+          children:
+            - file: content/supplemental/appendices/PerfForesightCRRA.md
