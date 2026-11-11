@@ -38,10 +38,11 @@ SECTIONS = {
     "DSGEModels": "dsge",
     "MathFacts": "appendix",
 }
-# Handouts that are on the site but deliberately outside the book. Each needs a
-# reason, so that "not mirrored" never quietly becomes "forgotten".
+# Handouts that are on the site but deliberately not mirrored: outside the book, or
+# ported from somewhere other than the econ2 zip. Each needs a reason, so that "not
+# mirrored" never quietly becomes "forgotten".
 EXCLUDED = {
-    "TractableBufferStock": "Carroll and Toche paper, not a handout",
+    "TractableBufferStock": "ported from the public repo llorracc/TractableBufferStock; the econ2 zip is a private version",
     "PalgravePrecautionary": "Palgrave entry under /papers/, not a handout",
     "AggImplications": "IMF minicourse, syllabus and slides only",
     "AggImplicationsSyllabus": "minicourse syllabus",

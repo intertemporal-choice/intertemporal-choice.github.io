@@ -14,8 +14,8 @@ by local builds.
     code only, so a notebook that has not changed is not re-run. A change to the shared
     package, the data snapshots or the locked environment would reuse stale outputs, though:
     every notebook declares `execute: {depends_on_env: [IC_EXEC_ENV]}`, and this script sets
-    IC_EXEC_ENV to a hash of uv.lock, src/**/*.py and data/**, which puts all three into the
-    cache key.
+    IC_EXEC_ENV to a hash of uv.lock, src/**/*.py, data/** and every chapter's own data/
+    folder (content/<part>/<Chapter>/data/**), which puts them all into the cache key.
   - A preflight lint refuses to build when a notebook breaks the conventions the checks rely
     on: it must sit beside its chapter as content/<part>/<Chapter>/<Chapter>.ipynb, declare the
     python3 kernel, declare depends_on_env in the frontmatter of its first cell, begin with the
@@ -56,7 +56,9 @@ DEFAULT_ARGS = ["--html", "--strict"]
 STARTUP_SECONDS = 60
 ENV_VAR = "IC_EXEC_ENV"
 # What the notebooks' outputs depend on besides their own cells.
-HASHED = [("uv.lock", "*"), ("src", "**/*.py"), ("data", "**/*")]
+# A chapter keeps the data its notebook reads in its own folder (everything to do with a chapter
+# lives there), so those files count too.
+HASHED = [("uv.lock", "*"), ("src", "**/*.py"), ("data", "**/*"), ("content", "*/*/data/**/*")]
 
 # The first code cell of every notebook, verbatim: a downloaded copy installs what it needs.
 BOOTSTRAP = """\
@@ -275,7 +277,8 @@ def self_test() -> bool:
         (chapter / "Test.ipynb").write_text(json.dumps(good_notebook()))
         if env_hash(root) != base:
             failures.append("env hash changed on a __pycache__ file or a notebook")
-        for path, text in [("uv.lock", "lock 2"), ("src/pkg/mod.py", "x = 2"), ("data/a.csv", "1")]:
+        for path, text in [("uv.lock", "lock 2"), ("src/pkg/mod.py", "x = 2"), ("data/a.csv", "1"),
+                           ("content/part/Test/data/b.csv", "1"), ("content/part/Test/data/b.csv", "2")]:
             (root / path).parent.mkdir(parents=True, exist_ok=True)
             (root / path).write_text(text)
             if env_hash(root) == base:

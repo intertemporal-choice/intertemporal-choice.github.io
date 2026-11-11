@@ -141,11 +141,11 @@ of a trend in {math}`\leisure`) or on micro data (like intertemporal elasticitie
 estimated using household data). So how is {math}`\zeta` calibrated?
 
 If wages are defined as per unit of labor, then if on average consumption
-roughly equals labor income {math}`\cons = (1-\leisure)\wage` we have
+roughly equals labor income {math}`\cons = (1-\leisure)\Wage` we have
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \left(\frac{\wage  \leisure}{\wage (1-\leisure)}\right) & =  \left(\frac{\zeta}{1-\zeta}\right)  \\
+        \left(\frac{\Wage  \leisure}{\Wage (1-\leisure)}\right) & =  \left(\frac{\zeta}{1-\zeta}\right)  \\
         \left(\frac{1-\leisure}{\leisure }\right) & =  \left(\frac{1-\zeta}{\zeta}\right)
 \\      1/\leisure - 1 & =  1/\zeta - 1
 \\  \leisure & =  \zeta     .
@@ -314,7 +314,7 @@ Combining this with {eq}`eq:wlcttp1` gives
 \begin{gathered}\begin{aligned}
         \Wage_{t}\leisure_{t} & =  \Wage_{t+1}\leisure_{t+1}/\Rfree_{t+1}\Discount  \\
         \leisure_{t+1}/\leisure_{t} & =  \left(\frac{\Rfree_{t+1}\Discount}{\Wage_{t+1}/\Wage_{t}}\right)  \\
-        \hat{\leisure }_{t+1} & \approx  -\hat{\wage }_{t+1}+(\rfree_{t+1}-\DiscRate)
+        \hat{\leisure }_{t+1} & \approx  -\hat{\Wage }_{t+1}+(\rfree_{t+1}-\DiscRate)
 \end{aligned}\end{gathered}
 ```
 
