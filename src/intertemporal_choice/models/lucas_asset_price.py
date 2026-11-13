@@ -1,4 +1,7 @@
-"""The Lucas Asset Pricing Model: the model of the chapter's notebook, for other notebooks to import.
+"""The Lucas Asset Pricing Model: the model of the chapter's notebook, for other notebooks to import:
+
+    from intertemporal_choice import models
+    model = models.lucas_asset_price
 
 Written by code/export_models.py from the cells tagged `export` in
 content/asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb.

@@ -55,13 +55,15 @@ def draw_against_rho(ax, rho, lines, ylabel=r"$\mathsf{P}/d$", log=False):
     ax.legend(frameon=False)
 
 
-def draw_small_tree(ax, risk, lines, xlabel):
+def draw_small_tree(ax, risk, lines, xlabel, from_zero=True):
     """The small tree's price-dividend ratio as one kind of its risk grows. `risk` is the standard
-    deviation of that risk; `lines` maps a label to the ratios at each value of it."""
+    deviation of that risk; `lines` maps a label to the ratios at each value of it. The axis starts
+    at zero unless `from_zero` is False, for a figure whose point is the gap between the lines."""
     for label, values in lines.items():
         ax.plot(risk, values, label=label)
     ax.set_xlim(risk[0], risk[-1])
-    ax.set_ylim(0, 1.1 * max(max(v) for v in lines.values()))  # from zero: a few percent looks like a few percent
+    if from_zero:  # a few percent looks like a few percent
+        ax.set_ylim(0, 1.1 * max(max(v) for v in lines.values()))
     ax.set_xlabel(xlabel, loc="right")
     ax.set_ylabel(r"$\mathsf{P}/d$", loc="top", rotation=0)
     ax.legend(frameon=False)
@@ -92,5 +94,10 @@ def self_test() -> list[str]:
     draw_small_tree(ax, np.linspace(0, 0.1, 3), {"own": [1, 1, 1], "systematic": [1, 0.9, 0.8]}, "risk")
     if len(ax.get_lines()) != 2 or ax.get_ylim()[0] != 0:
         failures.append("lucas: draw_small_tree does not draw one line per kind of risk, from zero")
+    plt.close(fig)
+    fig, ax = plt.subplots()
+    draw_small_tree(ax, np.linspace(0, 0.1, 3), {"own": [12, 12, 12], "systematic": [12, 11.8, 11.6]}, "risk", from_zero=False)
+    if ax.get_ylim()[0] <= 0:
+        failures.append("lucas: draw_small_tree starts at zero when told not to")
     plt.close(fig)
     return failures
