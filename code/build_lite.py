@@ -58,7 +58,8 @@ NOTEBOOKS = [
     "content/investment/qModel/qModel.ipynb",
 ]
 BROWSER_KERNEL = {"name": "python", "display_name": "Python (Pyodide)", "language": "python"}
-RUN_FIRST = "**First, choose Run \u2192 Run All Cells in the menu above.** The sliders appear below the figures."
+RUN_FIRST = "**First, choose Run \u2192 Run All Cells in the menu above.**"
+SLIDERS = " The sliders appear below the figures."  # for a notebook with sliders (skip-execution cells)
 FRONTMATTER = re.compile(r"\A\s*---\n(.*?)\n---\s*\Z", re.S)
 TITLE = re.compile(r'^title:\s*"?(.*?)"?\s*$', re.M)
 # GitHub Pages tells browsers to keep every file for ten minutes (max-age=600), and JupyterLite reads
@@ -92,9 +93,10 @@ def for_the_browser(nb: dict) -> dict:
     bootstrap = lambda c: c.get("cell_type") == "code" and "import intertemporal_choice" in text(c) and "%pip install" in text(c)
     removed = lambda c: "remove-cell" in (c.get("metadata") or {}).get("tags", [])  # checks the build runs
     kept = [c for c in cells[1:] if not links(c) and not bootstrap(c) and not removed(c)]
+    sliders = any("skip-execution" in (c.get("metadata") or {}).get("tags", []) for c in kept)
     nb["cells"] = [
         {"cell_type": "markdown", "id": cells[0].get("id", "title"), "metadata": {}, "source": f"# {name}"},
-        {"cell_type": "markdown", "id": "run-first", "metadata": {}, "source": RUN_FIRST},
+        {"cell_type": "markdown", "id": "run-first", "metadata": {}, "source": RUN_FIRST + (SLIDERS if sliders else "")},
     ] + kept
     nb.setdefault("metadata", {})["kernelspec"] = dict(BROWSER_KERNEL)
     return nb
@@ -165,14 +167,20 @@ def self_test() -> bool:
         {"cell_type": "code", "id": "c", "metadata": {}, "source": "x = 1", "outputs": [], "execution_count": None},
         {"cell_type": "code", "id": "k", "metadata": {"tags": ["remove-cell"]}, "source": "assert True",
          "outputs": [], "execution_count": None},
+        {"cell_type": "code", "id": "s", "metadata": {"tags": ["skip-execution"]}, "source": "slider()",
+         "outputs": [], "execution_count": None},
     ]}
     out = for_the_browser(json.loads(json.dumps(nb)))
     failures = []
     sources = [c["source"] for c in out["cells"]]
-    if sources[:2] != ["# The Fisher Two-Period Problem", RUN_FIRST]:
-        failures.append(f"the notebook should open with its title and RUN_FIRST, not {sources[:2]!r}")
-    if out["cells"][2:] != [nb["cells"][2], nb["cells"][4]]:
+    if sources[:2] != ["# The Fisher Two-Period Problem", RUN_FIRST + SLIDERS]:
+        failures.append(f"the notebook should open with its title and RUN_FIRST with the sliders, not {sources[:2]!r}")
+    if out["cells"][2:] != [nb["cells"][2], nb["cells"][4], nb["cells"][6]]:
         failures.append("the links and bootstrap cells were not the only ones dropped")
+    no_sliders = json.loads(json.dumps(nb))
+    no_sliders["cells"] = no_sliders["cells"][:-1]
+    if for_the_browser(no_sliders)["cells"][1]["source"] != RUN_FIRST:
+        failures.append("a notebook without sliders is told that the sliders appear below the figures")
     if out.get("metadata", {}).get("kernelspec") != BROWSER_KERNEL:
         failures.append("the browser's copy does not name JupyterLite's kernel")
     plain = {"cells": [{"cell_type": "markdown", "id": "a", "metadata": {}, "source": "# Already a title"}]}

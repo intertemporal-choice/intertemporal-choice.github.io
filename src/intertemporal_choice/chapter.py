@@ -8,11 +8,15 @@ computes with the chapter's own code rather than a copy of it:
 `load` runs the notebook's code cells, in order, in a new module, and returns the module. It skips the
 cells a reader is not shown or that need IPython: the checks of the chapter's numbers (tagged
 `remove-cell`), the sliders (`skip-execution`), and the cell that installs the package (any cell with
-a `%` or `!` line). The figures the notebook draws are closed, and what it prints is discarded.
+a `%` or `!` line). The figures the notebook draws are closed, and what it prints is discarded. An
+error names the notebook and the cell (counting every cell from zero, as nbformat does) and shows
+the cell's lines.
 
-It reads the notebook from the book's clone when the package runs from one; from the folder the
-notebook is run in, where the book's in-browser site keeps its notebooks; and otherwise from the
-book's GitHub repository at `ref` (main by default), so a key computes with the chapter's current code.
+Which copy it reads:
+- with no `ref`, the nearest: the book's clone when the package runs from one (its working tree,
+  whatever branch is checked out); else the folder the notebook is run in, where the book's
+  in-browser site keeps its notebooks; else the book's GitHub repository at main;
+- with a `ref` (a branch, tag or commit), that version, always from the book's GitHub repository.
 
 `python -m intertemporal_choice --self-test` runs `self_test`.
 """
@@ -20,6 +24,7 @@ book's GitHub repository at `ref` (main by default), so a key computes with the 
 import contextlib
 import io
 import json
+import linecache
 import sys
 import types
 from pathlib import Path
@@ -29,12 +34,8 @@ ROOT = Path(__file__).resolve().parents[2]  # the book's clone, when the package
 SKIP_TAGS = {"remove-cell", "skip-execution"}
 
 
-def _read(path, ref):
-    """The notebook's text: from the clone, from the current folder, or from GitHub."""
-    for candidate in (ROOT / "content" / path, Path(path), Path.cwd() / Path(path).name):
-        if candidate.is_file():
-            return candidate.read_text(encoding="utf-8")
-    url = f"https://raw.githubusercontent.com/{REPO}/{ref}/content/{path}"
+def _fetch(url):
+    """The text at `url`."""
     if "pyodide" in sys.modules:  # in a browser, where Python's own network calls do not work
         from pyodide.http import open_url
 
@@ -45,9 +46,19 @@ def _read(path, ref):
         return response.read().decode("utf-8")
 
 
+def _read(path, ref):
+    """The notebook's text: the nearest copy with no `ref`, or that version from GitHub."""
+    if ref is None:
+        for candidate in (ROOT / "content" / path, Path(path), Path.cwd() / Path(path).name):
+            if candidate.is_file():
+                return candidate.read_text(encoding="utf-8")
+        ref = "main"
+    return _fetch(f"https://raw.githubusercontent.com/{REPO}/{ref}/content/{path}")
+
+
 def code_cells(notebook):
-    """The sources of the code cells `load` runs, in order."""
-    for cell in notebook["cells"]:
+    """The code cells `load` runs, in order, as (the cell's position in the notebook, its source)."""
+    for index, cell in enumerate(notebook["cells"]):
         if cell["cell_type"] != "code":
             continue
         if SKIP_TAGS & set(cell.get("metadata", {}).get("tags", [])):
@@ -55,10 +66,10 @@ def code_cells(notebook):
         source = "".join(cell["source"])
         if any(line.lstrip().startswith(("%", "!")) for line in source.splitlines()):
             continue
-        yield source
+        yield index, source
 
 
-def load(path, ref="main"):
+def load(path, ref=None):
     """Run the chapter notebook at `content/<path>` and return its definitions as a module."""
     import matplotlib.pyplot as plt
 
@@ -67,8 +78,11 @@ def load(path, ref="main"):
     already_open = set(plt.get_fignums())
     try:
         with contextlib.redirect_stdout(io.StringIO()):  # what the chapter's notebook prints stays there
-            for number, source in enumerate(code_cells(notebook)):
-                exec(compile(source, f"{path}, code cell {number}", "exec"), module.__dict__)
+            for index, source in code_cells(notebook):
+                name = f"<{path}, cell {index}>"
+                lines = source.splitlines(keepends=True)
+                linecache.cache[name] = (len(source), None, lines, name)  # so tracebacks show the lines
+                exec(compile(source, name, "exec"), module.__dict__)
     finally:
         for figure in set(plt.get_fignums()) - already_open:
             plt.close(figure)
@@ -77,6 +91,7 @@ def load(path, ref="main"):
 
 def self_test() -> list[str]:
     import tempfile
+    import traceback
 
     import matplotlib.pyplot as plt
 
@@ -90,6 +105,7 @@ def self_test() -> list[str]:
             cell("import matplotlib.pyplot as plt\n\nfig, ax = plt.subplots()\nax.plot([0, 1])\n"),
             cell("raise AssertionError('a check ran')\n", ["remove-cell"]),
             cell("raise AssertionError('a slider ran')\n", ["skip-execution"]),
+            cell("def broken():\n    return 1 / 0\n"),
         ]
     }
     with tempfile.TemporaryDirectory() as folder:
@@ -105,4 +121,20 @@ def self_test() -> list[str]:
                 failures.append("chapter: load does not return the notebook's definitions as a module")
             if len(plt.get_fignums()) != before:
                 failures.append("chapter: load leaves the notebook's figures open")
+            try:
+                module.broken()
+            except ZeroDivisionError as error:
+                frame = traceback.extract_tb(error.__traceback__)[-1]
+                if not frame.filename.endswith(", cell 6>") or frame.line != "return 1 / 0":
+                    failures.append(f"chapter: an error does not name its cell and line: {frame.filename} {frame.line!r}")
+
+    global _fetch
+    fetch, asked = _fetch, []
+    _fetch = lambda url: asked.append(url) or "{}"
+    try:
+        _read("asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb", "some-branch")
+    finally:
+        _fetch = fetch
+    if asked != [f"https://raw.githubusercontent.com/{REPO}/some-branch/content/asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb"]:
+        failures.append(f"chapter: load with a ref does not read that version from GitHub: {asked}")
     return failures

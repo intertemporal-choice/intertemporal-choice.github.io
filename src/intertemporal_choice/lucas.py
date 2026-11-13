@@ -61,6 +61,7 @@ def draw_small_tree(ax, risk, lines, xlabel):
     for label, values in lines.items():
         ax.plot(risk, values, label=label)
     ax.set_xlim(risk[0], risk[-1])
+    ax.set_ylim(0, 1.1 * max(max(v) for v in lines.values()))  # from zero: a few percent looks like a few percent
     ax.set_xlabel(xlabel, loc="right")
     ax.set_ylabel(r"$\mathsf{P}/d$", loc="top", rotation=0)
     ax.legend(frameon=False)
@@ -89,7 +90,7 @@ def self_test() -> list[str]:
 
     fig, ax = plt.subplots()
     draw_small_tree(ax, np.linspace(0, 0.1, 3), {"own": [1, 1, 1], "systematic": [1, 0.9, 0.8]}, "risk")
-    if len(ax.get_lines()) != 2:
-        failures.append("lucas: draw_small_tree does not draw one line per kind of risk")
+    if len(ax.get_lines()) != 2 or ax.get_ylim()[0] != 0:
+        failures.append("lucas: draw_small_tree does not draw one line per kind of risk, from zero")
     plt.close(fig)
     return failures
