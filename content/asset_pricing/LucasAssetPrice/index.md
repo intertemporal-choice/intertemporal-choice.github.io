@@ -1,6 +1,8 @@
 (sec:LucasAssetPrice)=
 # The Lucas Asset Pricing Model
 
+The chapter's [notebook](LucasAssetPrice.ipynb) solves the model for every case below, numerically and with the exact series, and prices a small tree whose dividends move only partly with the economy's; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=LucasAssetPrice.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb).
+
 ## Introduction/Setup
 
 {cite:t}`lucas:assetpricing` considers an economy populated by infinitely many[^aggregation-note] identical individual consumers, in which the only assets are a set of identical infinitely-lived trees. Aggregate output is the fruit that falls from the trees, and cannot be stored (it would rot!); because {math}`\uFunc^{\prime}(\cRat)>0~\forall~\cRat`, the fruit is all eaten:
@@ -244,7 +246,7 @@ Aristotle was a smart guy!
 
 ## Analytical and Numerical Solutions
 
-The model has analytical solutions (such as {math}`\Price_{t} = \dvdnd_{t}/\timeRate`) or approximate analytical solutions only in very special circumstances; [Analytical Solutions in CRRA Utility Case](#Appendix-Analytical-Solutions-in-CRRA-Utility-Case) derives them. When dividends follow an AR(1) process there is no closed form, though [When Dividends Follow an AR(1) Process](#When-Dividends-Follow-an-AR-1-Process) gives an exact series. The accompanying [DemARK notebook](https://mybinder.org/v2/gh/econ-ark/DemARK/HEAD?filepath=notebooks/Lucas-Asset-Pricing-Model.ipynb) shows how to solve that case numerically, and also shows how the numerical solution compares with the approximate analytical solution in the CRRA utility case.
+The model has analytical solutions (such as {math}`\Price_{t} = \dvdnd_{t}/\timeRate`) or approximate analytical solutions only in very special circumstances; [Analytical Solutions in CRRA Utility Case](#Appendix-Analytical-Solutions-in-CRRA-Utility-Case) derives them. When dividends follow an AR(1) process there is no closed form, though [When Dividends Follow an AR(1) Process](#When-Dividends-Follow-an-AR-1-Process) gives an exact series. The chapter's [notebook](LucasAssetPrice.ipynb) solves that case numerically, by iterating {eq}`eq:pofdCRRA` to its fixed point, and checks the solution against the series and against the closed forms of the polar cases.
 
 (Appendix-Analytical-Solutions-in-CRRA-Utility-Case)=
 ## Appendix: Analytical Solutions in CRRA Utility Case
