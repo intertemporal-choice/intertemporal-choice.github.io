@@ -1,0 +1,14 @@
+"""The chapters' models, written from their notebooks by code/export_models.py. Do not edit.
+
+`models.<name>` imports a model when it is first used, so each costs only the notebooks that use it.
+"""
+
+import importlib
+
+__all__ = ["lucas"]
+
+
+def __getattr__(name):
+    if name in __all__:
+        return importlib.import_module(f".{name}", __name__)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
