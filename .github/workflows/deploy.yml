@@ -49,11 +49,16 @@ jobs:
           uv run python code/verify_build.py --self-test
           uv run python code/build_pdf.py --self-test
           uv run python code/derive_bib.py --self-test
+          uv run python code/export_models.py --self-test
           uv run python -m intertemporal_choice --self-test
       # The notebooks are committed with their outputs but without the metadata Jupyter
       # rewrites on every save; see code/notebooks.py.
       - name: Notebooks are committed stripped
         run: uv run python code/notebooks.py --check
+      # A chapter's model, the cells of its notebook tagged `export`, is a module of the package,
+      # written from the notebook and never edited by hand; see code/export_models.py.
+      - name: Models match their notebooks
+        run: uv run python code/export_models.py --check
       # The bibliography is derived from economics.bib in llorracc/texmf-local and never edited
       # here: a correction goes into economics.bib. See code/derive_bib.py.
       - name: Bibliography matches its source
