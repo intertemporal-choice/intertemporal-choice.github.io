@@ -118,12 +118,12 @@ Using {eq}`eq:cRat` and the other results above, we can rewrite the social plann
 \end{aligned}\end{gathered}
 ```
 
-Thus, defining {math}`\nu = \timeRate  - (1-\CRRA) \ptyGro`, which we assume is positive so that the objective is finite, and normalizing the initial
+Thus, assuming {math}`\timeRate > (1-\CRRA) \ptyGro`, so that the objective is finite, and normalizing the initial
 level of productivity to {math}`\PtyLab _{0}=1`, the complete optimization problem
 can be formulated as
 
 ```{math}
-\max \int_{0}^{\infty} \util(c) e^{-\nu  t}\,dt
+\max \int_{0}^{\infty} \util(c) e^{-(\timeRate - (1-\CRRA)\ptyGro) t}\,dt
 ```
 
 subject to
@@ -155,32 +155,26 @@ The second discounted Hamiltonian optimization condition requires:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{\lambda} & =  \nu\lambda - \partial \Ham/\partial \kap  \\
-                & =  \nu\lambda - \lambda (\prodFunc^{\prime}(\kap) - (\popGro+\ptyGro+\depr))  \\
-  \dot{\lambda}/{\lambda} & =  (\nu+(\popGro+\ptyGro+\depr)-\prodFunc^{\prime}(\kap))
-  \\  \left(\frac{-\CRRA c^{-\CRRA-1}\dot{\cons}}{\cons^{-\CRRA}}\right) & =  (\nu+(\popGro+\ptyGro+\depr)-\prodFunc^{\prime}(\kap))
-  \\  \CRRA \dot{\cons}/\cons & =  (\prodFunc^{\prime}(\kap)-\nu-(\popGro+\ptyGro+\depr))
-  \\  \dot{\cons}/\cons  & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\ptyGro+\depr)-\nu)
+  \dot{\lambda} & =  (\timeRate-(1-\CRRA)\ptyGro)\lambda - \partial \Ham/\partial \kap  \\
+                & =  (\timeRate-(1-\CRRA)\ptyGro)\lambda - \lambda (\prodFunc^{\prime}(\kap) - (\popGro+\ptyGro+\depr))  \\
+  \dot{\lambda}/{\lambda} & =  \timeRate+\popGro+\depr+\CRRA \ptyGro-\prodFunc^{\prime}(\kap) .
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\rfree \equiv \prodFunc^{\prime}(\kap) - \depr` is the interest rate, so {math}`\prodFunc^{\prime}(\kap)-(\popGro+\ptyGro+\depr) = \rfree - \popGro - \ptyGro` is the interest rate net of depreciation and dilution.
+Since {eq}`eq:RCK-H1A` gives {math}`\dot{\lambda}/\lambda = -\CRRA\dot{\cons}/\cons`, this is
+
+```{math}
+:label: eq:cdotOc
+
+\dot{\cons}/\cons = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate - \CRRA \ptyGro),
+```
+
+or, with {math}`\rfree \equiv \prodFunc^{\prime}(\kap) - \depr` the interest rate, {math}`\dot{\cons}/\cons = \CRRA^{-1}(\rfree - \timeRate - \popGro) - \ptyGro`.
 
 This Euler equation is called the "Keynes-Ramsey rule," because it was originally derived by
 Ramsey with an explanation attributed to Keynes.
 It is just like [the Euler equation in the perfect foresight CRRA model](#eq:PFCRRA-cgrow), except that now the relevant interest rate can vary over
 time as {math}`\prodFunc^{\prime}(\kap)` varies.
-
-Substituting in the modified time preference rate gives
-
-```{math}
-:label: eq:cdotOc
-
-\begin{gathered}\begin{aligned}
-  \dot{\cons}/\cons  & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr+\ptyGro)-\timeRate  +(1- \CRRA) \ptyGro)
-  \\   & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate  - \CRRA \ptyGro). 
-\end{aligned}\end{gathered}
-```
 
 Since per capita consumption is {math}`\Cons/\Labor = \cons \PtyLab`, it grows at {math}`\dot{\cons}/\cons + \ptyGro = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth ({eq}`eq:cdotOc` with {math}`\ptyGro=0`). Productivity growth matters only through {math}`\kap`.
 
@@ -204,7 +198,7 @@ and capital all grow at rate {math}`\ptyGro`.[^x66RuMjc3A]
 \end{aligned}\end{gathered}
 ```
 
-This is the "modified golden rule" of {cite:t}`blanchard&fischer:text`, chapter 2. Comparing it with the [golden rule](#eq:RCK-goldenRule), {math}`\prodFunc^{\prime}(\check{\kap}) = \prodFunc^{\prime}(\GoldRule{\kap}) + \nu`, so {math}`\check{\kap} < \GoldRule{\kap}` exactly when {math}`\nu > 0`: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
+This is the "modified golden rule" of {cite:t}`blanchard&fischer:text`, chapter 2. Comparing it with the [golden rule](#eq:RCK-goldenRule), {math}`\prodFunc^{\prime}(\check{\kap}) - \prodFunc^{\prime}(\GoldRule{\kap}) = \timeRate - (1-\CRRA)\ptyGro`, so {math}`\check{\kap} < \GoldRule{\kap}` exactly when {math}`\timeRate > (1-\CRRA)\ptyGro`: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
 
 Thus, the steady-state {math}`\kap` will be higher if capital
 is more productive ({math}`\kapShare` is higher), and will be lower if
@@ -236,14 +230,12 @@ and we have already solved for the (constant) {math}`\check{\kap}` that characte
 the {math}`\dot{\cons}/\cons=0` locus. These can be combined to generate the borders between
 the phases in the phase diagram, as illustrated in {numref}`fig:RamseySSPlot`.
 
-:::{margin}
-The programs that generated these figures are not quite consistent with the equations above: they assume {math}`\util(\cons \Labor)/\Labor`, whereas here we assume {math}`\util(\cons)`.
-:::
-
-:::{figure} /content/figures/RamseyCassKoopmans/RamseySSPlot.png
+:::{figure} figures/RamseySSPlot.png
 :name: fig:RamseySSPlot
 
 {math}`\dot{\cons}/\cons =0` and {math}`\dot{\kap}=0` Loci
+
+Note: With {math}`\CRRA=2`, {math}`\kapShare=0.3`, {math}`\timeRate=0.02`, {math}`\popGro=0.01` and {math}`\depr=0.08`, and productivity growth {math}`\ptyGro` of 0.03 (low) or 0.06 (high); the dotted line marks the golden rule when {math}`\ptyGro` is low. Drawn by the [notebook](RamseyCassKoopmans.ipynb); run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).
 :::
 
 ## Transition
@@ -272,10 +264,12 @@ however, is clearly on a trajectory toward zero then negative
 both {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot` as well as the TVC
 {eq}`eq:tvc`.
 
-:::{figure} /content/figures/RamseyCassKoopmans/RamseySaddlePlot.png
+:::{figure} figures/RamseySaddlePlot.png
 :name: fig:RamseySaddlePlot
 
 Transition to the Steady State
+
+Note: The same economy, with {math}`\ptyGro=0.03`. From {math}`\kap=0.5`, consumption 10 percent above the saddle path runs the capital stock down to zero, and consumption 10 percent below it accumulates capital past the golden rule, marked by the dotted line. Drawn by the [notebook](RamseyCassKoopmans.ipynb); run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).
 :::
 
 How much of observed growth can the transition explain? Little, {cite:t}`king&rebelo:trans` argue: with plausible parameters, an economy far enough below its steady state for the transition to account for much of its growth would have implausibly high interest rates early on.
@@ -324,4 +318,4 @@ which is a differential equation with, in general, no analytical solution. Many 
 
 There is one problem, however, which is that at the steady-state values of {math}`\cons` and {math}`\kap` both numerator and denominator of this equation are zero. The alternative is to solve the differential equation twice: Once for a domain extending from {math}`\kap=0` to {math}`\check{\kap}-\epsilon`, yielding {math}`\cFunc_{-}(\kap)`, and once for a domain from {math}`\check{\kap}+\epsilon` to some large value of {math}`\kap`, yielding {math}`\cFunc_{+}(\kap)`. The true consumption policy function can then be approximated by interpolating between the upper endpoint of {math}`\cFunc_{-}(\kap)` and the lower endpoint of {math}`\cFunc_{+}(\kap)`.
 
-{cite:t}`judd:book` covers numerical methods for saddle paths more generally. The [RamseyCassKoopmans notebook](https://github.com/llorracc/Jupyter/blob/master/notebooks/RamseyCassKoopmans.ipynb) implements this method; in a clone of its repo, `ipython RamseyCassKoopmans.py` runs the corresponding Python program.
+{cite:t}`judd:book` covers numerical methods for saddle paths more generally. The [notebook](RamseyCassKoopmans.ipynb) solves the model this way and draws both figures; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).

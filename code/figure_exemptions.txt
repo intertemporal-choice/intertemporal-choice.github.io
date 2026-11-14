@@ -60,10 +60,6 @@ pending  /content/figures/qRamsey/PolFuncAdjCost0VsBase.png                     
 pending  /content/figures/qRamsey/PolFuncRRALoVsHi.png                           port to a notebook beside the chapter
 pending  /content/figures/qRamsey/kDropCostAdj0VsBase.png                        port to a notebook beside the chapter
 
-# RamseyCassKoopmans
-pending  /content/figures/RamseyCassKoopmans/RamseySSPlot.png                    port to a notebook beside the chapter
-pending  /content/figures/RamseyCassKoopmans/RamseySaddlePlot.png                port to a notebook beside the chapter
-
 # RiskAndPSPremia
 pending  /content/figures/RiskAndPSPremia/RiskAndPSPremiaPrec.png                port to a notebook beside the chapter
 pending  /content/figures/RiskAndPSPremia/RiskAndPSPremiaRisk.png                port to a notebook beside the chapter
