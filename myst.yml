@@ -190,7 +190,7 @@ project:
           level: 1
         - file: content/asset_pricing/Portfolio-CRRA/index.md
           level: 1
-        - file: content/asset_pricing/LucasAssetPrice.md
+        - file: content/asset_pricing/LucasAssetPrice/index.md
           level: 1
         - file: content/asset_pricing/C-CAPM.md
           level: 1
