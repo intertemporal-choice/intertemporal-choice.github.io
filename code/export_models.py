@@ -20,7 +20,9 @@ printing, nothing that takes long. Importing a model must be cheap and must not 
 refuses any other statement, and any name the module uses but never defines (one defined only in
 a cell that isn't exported, which would fail only when called). Its check imports each module in
 a fresh, isolated Python and fails if that loads matplotlib's pyplot or takes more than
-IMPORT_BUDGET seconds.
+IMPORT_BUDGET seconds. It times the second of two imports: the first in a new environment also pays
+one-time costs that say nothing about the model, compiling bytecode and, on macOS, checking each
+native library the first time it loads (7.7 s for numpy and scipy in a new worktree, 2026-11-14).
 
 `models/__init__.py` is generated too. It imports a model only when it is first used, so a model
 that needs a heavy package (HARK, say) costs nothing to a notebook that uses another.
@@ -147,19 +149,23 @@ def wanted(root: Path = ROOT) -> dict[Path, str]:
     return files
 
 
-def imports_lightly(name: str) -> str | None:
+def imports_lightly(name: str, package: str = "intertemporal_choice", path: tuple[str, ...] = (),
+                    budget: float = IMPORT_BUDGET) -> str | None:
     """None if the model imports in a fresh, isolated Python (-I, so nothing in the current folder
-    can shadow a module) quickly and without loading pyplot; otherwise what went wrong."""
+    can shadow a module) quickly and without loading pyplot; otherwise what went wrong. Only the
+    second of two imports counts: the first pays the environment's one-time costs. (`package`,
+    `path` and `budget` let the self-test try a package of its own.)"""
     probe = (
-        "import sys, time\n"
+        f"import sys, time\nsys.path[:0] = {list(path)!r}\n"
         "start = time.perf_counter()\n"
-        "from intertemporal_choice import models\n"
+        f"from {package} import models\n"
         f"models.{name}\n"
         "took = time.perf_counter() - start\n"
         "assert 'matplotlib.pyplot' not in sys.modules, 'it loads matplotlib.pyplot'\n"
-        f"assert took < {IMPORT_BUDGET}, f'it takes {{took:.1f}} s, over the budget of {IMPORT_BUDGET} s'\n"
+        f"assert took < {budget}, f'it takes {{took:.1f}} s, over the budget of {budget} s'\n"
     )
-    done = subprocess.run([sys.executable, "-I", "-c", probe], capture_output=True, text=True, cwd=ROOT)
+    for _ in range(2):  # the first run's result is discarded
+        done = subprocess.run([sys.executable, "-I", "-c", probe], capture_output=True, text=True, cwd=ROOT)
     return None if done.returncode == 0 else (done.stderr.strip().splitlines() or ["failed"])[-1]
 
 
@@ -243,6 +249,14 @@ def self_test() -> bool:
         done = subprocess.run([sys.executable, "-c", probe], capture_output=True, text=True, cwd=folder)
         if done.returncode != 0:
             failures.append(f"models/__init__.py should import a model when it is first used: {done.stderr.strip()}")
+        model = package / "models" / "lucas_asset_price.py"
+        model.write_text("import pathlib, time\nmark = pathlib.Path(__file__).with_suffix('.ran')\n"
+                         "if not mark.exists():\n    mark.touch()\n    time.sleep(0.6)\n")
+        if problem := imports_lightly("lucas_asset_price", "pkg", (folder,), budget=0.5):
+            failures.append(f"a model slow only on its first import in a new environment was refused: {problem}")
+        model.write_text("import time\ntime.sleep(0.6)\n")
+        if imports_lightly("lucas_asset_price", "pkg", (folder,), budget=0.5) is None:
+            failures.append("a model that computes for 0.6 s whenever it is imported passed a budget of 0.5 s")
     for failure in failures:
         log.error(f"export_models self-test: {failure}")
     if not failures:
