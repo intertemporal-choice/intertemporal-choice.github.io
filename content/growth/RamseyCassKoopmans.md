@@ -267,8 +267,8 @@ satisfy the equation. And a capital stock that is too large has an interest rate
 {numref}`fig:RamseySaddlePlot` shows three paths for {math}`\cons` and {math}`\kap`
 that satisfy {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot`. The topmost path,
 however, is clearly on a trajectory toward zero then negative
-{math}`\kap`, while the bottommost path is heading toward an infinite
-{math}`\kap`. Only the middle path, labeled the "saddle path," satisfies
+{math}`\kap`, while the bottommost path accumulates capital past the golden rule, toward the point where the
+{math}`\dot{\kap}=0` locus meets the {math}`\kap` axis, while consumption falls toward zero. Only the middle path, labeled the "saddle path," satisfies
 both {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot` as well as the TVC
 {eq}`eq:tvc`.
 
