@@ -292,14 +292,12 @@ and we have already solved for the (constant) {math}`\check{\kap}` that characte
 the {math}`\dot{\cons}/\cons=0` locus. These can be combined to generate the borders between
 the phases in the phase diagram, as illustrated in {numref}`fig:RamseySSPlot`.
 
-:::{margin}
-The programs that generated these figures are not quite consistent with the equations above: they assume {math}`\util(\cons \Labor)/\Labor`, whereas here we assume {math}`\util(\cons)`.
-:::
-
-:::{figure} /content/figures/RamseyCassKoopmans/RamseySSPlot.png
+:::{figure} figures/RamseySSPlot.png
 :name: fig:RamseySSPlot
 
 {math}`\dot{\cons}/\cons =0` and {math}`\dot{\kap}=0` Loci
+
+Note: With {math}`\CRRA=2`, {math}`\kapShare=0.3`, {math}`\timeRate=0.02`, {math}`\popGro=0.01` and {math}`\depr=0.08`, and productivity growth {math}`\ptyGro` of 0.03 (low) or 0.06 (high); the dotted line marks the golden rule when {math}`\ptyGro` is low. Drawn by the [notebook](RamseyCassKoopmans.ipynb); run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).
 :::
 
 ## Transition
@@ -338,16 +336,13 @@ however, is clearly on a trajectory toward zero then negative
 both {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot` as well as the TVC
 {eq}`eq:tvc`.
 
-:::{figure} /content/figures/RamseyCassKoopmans/RamseySaddlePlot.png
+:::{figure} figures/RamseySaddlePlot.png
 :name: fig:RamseySaddlePlot
 
 Transition to the Steady State
+
+Note: The same economy, with {math}`\ptyGro=0.03`. From {math}`\kap=0.5`, consumption 10 percent above the saddle path runs the capital stock down to zero, and consumption 10 percent below it accumulates capital past the golden rule. Drawn by the [notebook](RamseyCassKoopmans.ipynb); run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).
 :::
-
-## Interactive Notebooks
-
-An explicit numerical solution to the Ramsey problem, with a description of a solution method and its
-mathematical/computational underpinnings, is available [here](https://github.com/llorracc/Jupyter/blob/master/notebooks/RamseyCassKoopmans.ipynb).
 
 ## Appendix: Numerical Solution
 
@@ -393,4 +388,4 @@ which is a differential equation with no analytical solution. Many numerical mat
 
 There is one problem, however, which is that at the steady-state values of {math}`\cons` and {math}`\kap` both numerator and denominator of this equation are zero. The alternative is to solve the differential equation twice: Once for a domain extending from {math}`\kap=0` to {math}`\check{\kap}-\epsilon`, yielding {math}`\cFunc_{-}(\kap)`, and once for a domain from {math}`\check{\kap}+\epsilon` to some large value of {math}`\kap`, yielding {math}`\cFunc_{+}(\kap)`. The true consumption policy function can then be approximated by interpolating between the upper endpoint of {math}`\cFunc_{-}(\kap)` and the lower endpoint of {math}`\cFunc_{+}(\kap)`.
 
-For further details of the numerical solution of this model, see [this Jupyter notebook](https://github.com/llorracc/Jupyter/blob/master/notebooks/RamseyCassKoopmans.ipynb), or clone the repo and, in the cloned directory, run the corresponding python program: `ipython RamseyCassKoopmans.py`.
+The [notebook](RamseyCassKoopmans.ipynb) solves the model this way and draws both figures; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).
