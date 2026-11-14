@@ -36,7 +36,7 @@ produce perpetually more as time goes by with the same amount of
 physical capital.[^QeBMSQU4dN] The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
 
 :::{margin}
-Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`\Kap`. Solow (1960) and Phelps (1962) showed that steady-state growth does not depend on how much of technical progress is embodied in new capital, though convergence is faster the more of it is embodied; so the simpler disembodied form delivers the same steady state.
+Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`\Kap`. Solow (1960) and Phelps (1962) showed that steady-state growth does not depend on how much of technical progress is embodied in new capital, though convergence is faster the more of it is embodied; so the simpler disembodied form delivers the same steady-state growth rate.
 :::
 
 [^QeBMSQU4dN]: This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With a Cobb-Douglas production function the three are the same thing at different rates. With any other production function, a steady state with constant growth rates requires progress to be labor-augmenting (Uzawa 1961; Jones and Scrimgeour 2008 give a short proof).
@@ -57,7 +57,7 @@ Lower case variables are the upper case version divided by efficiency units, so 
 \dot{\kap}/\kap = \dot{\Kap}/\Kap - \dot{\PtyLab}/\PtyLab - \dot{\Labor}/\Labor = \dot{\Kap}/\Kap - (\ptyGro +\popGro),
 ```
 
-so dividing {eq}`eq:Kdotlevel` by {math}`\PtyLab \Labor` gives
+so dividing {eq}`eq:Kdotlevel` by {math}`\PtyLab \Labor` and using it gives
 
 ```{math}
 :label: eq:RCK-kdot
@@ -164,7 +164,7 @@ The second discounted Hamiltonian optimization condition requires:
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\prodFunc^{\prime}(\kap)-(\popGro+\ptyGro+\depr)` is the interest rate net of depreciation and dilution.
+where {math}`\rfree \equiv \prodFunc^{\prime}(\kap) - \depr` is the interest rate, so {math}`\prodFunc^{\prime}(\kap)-(\popGro+\ptyGro+\depr) = \rfree - \popGro - \ptyGro` is the interest rate net of depreciation and dilution.
 
 This Euler equation is called the "Keynes-Ramsey rule," because it was originally derived by
 Ramsey with an explanation attributed to Keynes.
@@ -218,7 +218,7 @@ it does not in general have an analytical solution for the transition to the
 steady-state.[^RCKclosedForm] The usual method for analyzing
 models of this kind is a [phase diagram](https://en.wikipedia.org/wiki/Phase_diagram) in {math}`\cons` and {math}`\kap`.
 
-[^RCKclosedForm]: The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` (Smith 2006). The saddle path is then a ray, {math}`\cons = \mu \kap` with {math}`\mu = (\timeRate + (1-\kapShare)(\popGro+\depr))/\kapShare`, which passes through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - (\mu+\popGro+\ptyGro+\depr)\kap` is a Bernoulli equation, so the transition has a closed form.
+[^RCKclosedForm]: The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` (Smith 2006). The saddle path is then the ray {math}`\cons = \left((\timeRate + (1-\kapShare)(\popGro+\depr))/\kapShare\right)\kap` through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - \left((\timeRate+\popGro+\depr)/\kapShare + \ptyGro\right)\kap` is a Bernoulli equation, so the transition has a closed form.
 
 The first step in constructing the phase diagram is to take the differential
 equations that describe the system and find the points where they are
@@ -254,11 +254,9 @@ The two differential equations and {math}`\kap_{0}` don't pin down {math}`\cons_
 :label: eq:tvc
 
 \begin{gathered}\begin{aligned}
-  \lim_{t \rightarrow \infty} e^{-\int_{0}^{t} (r_{\tau} -\popGro -\ptyGro) d\tau }\kap_{t} & =  0,
+  \lim_{t \rightarrow \infty} e^{-\int_{0}^{t} (\rfree_{\tau} -\popGro -\ptyGro)\,d\tau }\kap_{t} & =  0.
 \end{aligned}\end{gathered}
 ```
-
-where {math}`r \equiv \prodFunc^{\prime}(\kap) - \depr`.
 
 The intuitive purpose of this unintuitive equation is basically to prevent
 the capital stock from becoming negative or infinite as time goes by.
@@ -295,7 +293,7 @@ be beginning their research on growth models.
 
 The most straightforward method of numerical solution for perfect foresight
 models of this kind is called the
-'time elimination' method {cite:p}`Mulligan&sm:transdynam`. It starts from the fact that
+'time elimination' method (Mulligan and Sala-i-Martin 1993). It starts from the fact that
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -322,7 +320,7 @@ so we can obtain
   \end{aligned}\end{gathered}
 ```
 
-which is a differential equation with no analytical solution. Many numerical math packages can solve differential equations numerically, yielding a numerical version of the {math}`\cFunc(\kap)` function.
+which is a differential equation with, in general, no analytical solution. Many numerical math packages can solve differential equations numerically, yielding a numerical version of the {math}`\cFunc(\kap)` function.
 
 There is one problem, however, which is that at the steady-state values of {math}`\cons` and {math}`\kap` both numerator and denominator of this equation are zero. The alternative is to solve the differential equation twice: Once for a domain extending from {math}`\kap=0` to {math}`\check{\kap}-\epsilon`, yielding {math}`\cFunc_{-}(\kap)`, and once for a domain from {math}`\check{\kap}+\epsilon` to some large value of {math}`\kap`, yielding {math}`\cFunc_{+}(\kap)`. The true consumption policy function can then be approximated by interpolating between the upper endpoint of {math}`\cFunc_{-}(\kap)` and the lower endpoint of {math}`\cFunc_{+}(\kap)`.
 
