@@ -27,10 +27,6 @@ class Economy:
     def dilution(self):  # capital per efficiency unit shrinks at this rate when none is added
         return self.xi + self.phi + self.delta
 
-    @property
-    def nu(self):        # the time preference rate that discounts utility per efficiency unit
-        return self.theta - (1 - self.rho) * self.phi
-
 
 def kdot(e, k, c):
     return k**e.alpha - c - e.dilution * k

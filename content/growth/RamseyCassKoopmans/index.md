@@ -118,12 +118,12 @@ Using {eq}`eq:cRat` and the other results above, we can rewrite the social plann
 \end{aligned}\end{gathered}
 ```
 
-Thus, defining {math}`\nu = \timeRate  - (1-\CRRA) \ptyGro`, which we assume is positive so that the objective is finite, and normalizing the initial
+Thus, assuming {math}`\timeRate > (1-\CRRA) \ptyGro`, so that the objective is finite, and normalizing the initial
 level of productivity to {math}`\PtyLab _{0}=1`, the complete optimization problem
 can be formulated as
 
 ```{math}
-\max \int_{0}^{\infty} \util(c) e^{-\nu  t}\,dt
+\max \int_{0}^{\infty} \util(c) e^{-(\timeRate - (1-\CRRA)\ptyGro) t}\,dt
 ```
 
 subject to
@@ -155,32 +155,26 @@ The second discounted Hamiltonian optimization condition requires:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{\lambda} & =  \nu\lambda - \partial \Ham/\partial \kap  \\
-                & =  \nu\lambda - \lambda (\prodFunc^{\prime}(\kap) - (\popGro+\ptyGro+\depr))  \\
-  \dot{\lambda}/{\lambda} & =  (\nu+(\popGro+\ptyGro+\depr)-\prodFunc^{\prime}(\kap))
-  \\  \left(\frac{-\CRRA c^{-\CRRA-1}\dot{\cons}}{\cons^{-\CRRA}}\right) & =  (\nu+(\popGro+\ptyGro+\depr)-\prodFunc^{\prime}(\kap))
-  \\  \CRRA \dot{\cons}/\cons & =  (\prodFunc^{\prime}(\kap)-\nu-(\popGro+\ptyGro+\depr))
-  \\  \dot{\cons}/\cons  & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\ptyGro+\depr)-\nu)
+  \dot{\lambda} & =  (\timeRate-(1-\CRRA)\ptyGro)\lambda - \partial \Ham/\partial \kap  \\
+                & =  (\timeRate-(1-\CRRA)\ptyGro)\lambda - \lambda (\prodFunc^{\prime}(\kap) - (\popGro+\ptyGro+\depr))  \\
+  \dot{\lambda}/{\lambda} & =  \timeRate+\popGro+\depr+\CRRA \ptyGro-\prodFunc^{\prime}(\kap) .
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\rfree \equiv \prodFunc^{\prime}(\kap) - \depr` is the interest rate, so {math}`\prodFunc^{\prime}(\kap)-(\popGro+\ptyGro+\depr) = \rfree - \popGro - \ptyGro` is the interest rate net of depreciation and dilution.
+Since {eq}`eq:RCK-H1A` gives {math}`\dot{\lambda}/\lambda = -\CRRA\dot{\cons}/\cons`, this is
+
+```{math}
+:label: eq:cdotOc
+
+\dot{\cons}/\cons = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate - \CRRA \ptyGro),
+```
+
+or, with {math}`\rfree \equiv \prodFunc^{\prime}(\kap) - \depr` the interest rate, {math}`\dot{\cons}/\cons = \CRRA^{-1}(\rfree - \timeRate - \popGro) - \ptyGro`.
 
 This Euler equation is called the "Keynes-Ramsey rule," because it was originally derived by
 Ramsey with an explanation attributed to Keynes.
 It is just like [the Euler equation in the perfect foresight CRRA model](#eq:PFCRRA-cgrow), except that now the relevant interest rate can vary over
 time as {math}`\prodFunc^{\prime}(\kap)` varies.
-
-Substituting in the modified time preference rate gives
-
-```{math}
-:label: eq:cdotOc
-
-\begin{gathered}\begin{aligned}
-  \dot{\cons}/\cons  & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr+\ptyGro)-\timeRate  +(1- \CRRA) \ptyGro)
-  \\   & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate  - \CRRA \ptyGro). 
-\end{aligned}\end{gathered}
-```
 
 Since per capita consumption is {math}`\Cons/\Labor = \cons \PtyLab`, it grows at {math}`\dot{\cons}/\cons + \ptyGro = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth ({eq}`eq:cdotOc` with {math}`\ptyGro=0`). Productivity growth matters only through {math}`\kap`.
 
@@ -204,7 +198,7 @@ and capital all grow at rate {math}`\ptyGro`.[^x66RuMjc3A]
 \end{aligned}\end{gathered}
 ```
 
-This is the "modified golden rule" of {cite:t}`blanchard&fischer:text`, chapter 2. Comparing it with the [golden rule](#eq:RCK-goldenRule), {math}`\prodFunc^{\prime}(\check{\kap}) = \prodFunc^{\prime}(\GoldRule{\kap}) + \nu`, so {math}`\check{\kap} < \GoldRule{\kap}` exactly when {math}`\nu > 0`: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
+This is the "modified golden rule" of {cite:t}`blanchard&fischer:text`, chapter 2. Comparing it with the [golden rule](#eq:RCK-goldenRule), {math}`\prodFunc^{\prime}(\check{\kap}) - \prodFunc^{\prime}(\GoldRule{\kap}) = \timeRate - (1-\CRRA)\ptyGro`, so {math}`\check{\kap} < \GoldRule{\kap}` exactly when {math}`\timeRate > (1-\CRRA)\ptyGro`: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
 
 Thus, the steady-state {math}`\kap` will be higher if capital
 is more productive ({math}`\kapShare` is higher), and will be lower if
