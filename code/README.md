@@ -120,6 +120,26 @@ once the site carrying those pages has been deployed.
 `--self-test` checks the link rewriting, and the reimplementation of MyST's URL and
 anchor slugs, against cases they must handle.
 
+## `release_package.py`
+
+Publishes the book's package as permanent files on its site (Chris Carroll, 2026-11-13: "a
+package file on the book's site", "not on pypi", "automatic"). Every change to `src/` or
+`pyproject.toml` that reaches main becomes a release: one wheel, versioned by date and a counter
+(`2026.11.14.1`), at
+`https://intertemporal-choice.github.io/packages/intertemporal_choice-<version>-py3-none-any.whl`,
+listed at `/packages/`. A question's notebook installs a release by that address, so a posted
+answer key reruns later with the code it was written against. Always by the address, never by
+name: `intertemporal-choice` is not on PyPI, so `pip install intertemporal-choice` could fetch
+someone else's package.
+
+A published file is never rebuilt, changed or deleted. Since the deploy rebuilds the site whole,
+the files are kept on the `packages` branch, which only this script writes, by adding a wheel and
+its line in `releases.txt`. The build job (`stage`) copies that branch into the site, checks that
+every file the live site serves is still there byte for byte, writes the list page, and on a push
+that changed the package builds the next release. The release job (`publish`), the only job that
+can write, adds it to the branch, and the deploy waits for it. On a pull request, `stage` only
+checks that the release would build.
+
 ## `write_redirects.py`
 
 Writes a forwarding page at each old URL listed in `redirects.txt`, so links to a page

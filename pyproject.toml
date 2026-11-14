@@ -1,5 +1,7 @@
 [project]
 name = "intertemporal-choice"
+# What an install from GitHub reports. A release published on the book's site gets its own version, the
+# date and a counter (2026.11.14.1), from code/release_package.py.
 version = "0.1.0"
 description = "Graduate macroeconomics lecture notes on consumption, saving, growth, and asset pricing"
 readme = "README.md"
