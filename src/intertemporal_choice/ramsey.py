@@ -65,10 +65,16 @@ def _arrow(ax, k, c, color, at=-1):
                 arrowprops={"arrowstyle": "-|>", "color": color, "lw": 1.8, "mutation_scale": 14})
 
 
-def draw_saddle(ax, k, c_kdot0, steady, saddle, paths, c_max=None):
+# The paths off the saddle path: purple and brown, not red and green, which color-blind readers
+# confuse, and neither close to the blue kdot = 0 curve or the orange cdot/c = 0 line.
+PATH_COLORS = ("C4", "C5")
+
+
+def draw_saddle(ax, k, c_kdot0, steady, saddle, paths, golden=None, c_max=None):
     """The phase diagram: the kdot = 0 curve (c_kdot0 at each k), the cdot/c = 0 line at the steady
     state, the saddle path `saddle` = (k, c) with arrows toward the steady state, and `paths`, each
-    a path (k, c) in time order, with an arrow at its end."""
+    a path (k, c) in time order, with an arrow at its end. `golden`, if given, is the golden rule
+    k̿, marked on the axis with a dotted line up to the top of the kdot = 0 curve."""
     k_max = k[-1]
     c_max = c_max or 1.6 * np.max(c_kdot0)
     ax.plot(k, c_kdot0, color="C0")
@@ -87,11 +93,13 @@ def draw_saddle(ax, k, c_kdot0, steady, saddle, paths, c_max=None):
         middle = len(order) // 2
         _arrow(ax, kb[order], cb[order], "black", at=middle)
     ax.plot(*steady, "o", color="black", markersize=5)
-    for index, (k_p, c_p) in enumerate(paths):
-        color = f"C{index + 2}"
+    for (k_p, c_p), color in zip(paths, PATH_COLORS):
         ax.plot(k_p, c_p, color=color, linewidth=1.4)
         _arrow(ax, k_p, c_p, color)
     _tick(ax, steady[0], STEADY)
+    if golden is not None:
+        ax.plot([golden, golden], [0, np.interp(golden, k, c_kdot0)], color="0.4", linestyle=":", linewidth=1.2)
+        _tick(ax, golden, GOLDEN)
     _axes(ax, k_max, c_max)
 
 
@@ -110,9 +118,12 @@ def self_test() -> list[str]:
     fig, ax = plt.subplots()
     k_s = np.linspace(0.05, 5, 40)
     paths = [(np.linspace(0.5, 0.05, 20), np.linspace(0.6, 1.2, 20)), (np.linspace(0.5, 5, 20), np.linspace(0.4, 0.8, 20))]
-    draw_saddle(ax, k, curve(0.03), (2.25, 1.0), (k_s, 0.45 * k_s**0.5), paths)
-    if len(ax.get_lines()) != 6:  # the kdot = 0 curve, the cdot = 0 line, the saddle path, its point, two paths
-        failures.append("ramsey: draw_saddle does not draw the loci, the saddle path and each path")
+    draw_saddle(ax, k, curve(0.03), (2.25, 1.0), (k_s, 0.45 * k_s**0.5), paths, golden=3.7)
+    # the kdot = 0 curve, the cdot = 0 line, the saddle path, its point, two paths, the golden rule
+    if len(ax.get_lines()) != 7:
+        failures.append("ramsey: draw_saddle does not draw the loci, the saddle path, each path and the golden rule")
+    if {line.get_color() for line in ax.get_lines()[4:6]} & {"C2", "C3", "tab:green", "tab:red", "#2ca02c", "#d62728"}:
+        failures.append("ramsey: draw_saddle draws the paths in red and green")
     arrows = [a for a in ax.texts if a.arrow_patch is not None]
     if len(arrows) != 4:
         failures.append("ramsey: draw_saddle does not put an arrow on each branch of the saddle path and each path")
