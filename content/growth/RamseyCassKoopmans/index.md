@@ -176,7 +176,7 @@ Ramsey with an explanation attributed to Keynes.
 It is just like [the Euler equation in the perfect foresight CRRA model](#eq:PFCRRA-cgrow), except that now the relevant interest rate can vary over
 time as {math}`\prodFunc^{\prime}(\kap)` varies.
 
-Since per capita consumption is {math}`\Cons/\Labor = \cons \PtyLab`, it grows at {math}`\dot{\cons}/\cons + \ptyGro = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth ({eq}`eq:cdotOc` with {math}`\ptyGro=0`). Productivity growth matters only through {math}`\kap`.
+Since per capita consumption is {math}`\Cons/\Labor = \cons \PtyLab`, it grows at {math}`\dot{\cons}/\cons + \ptyGro = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth, the [Euler equation](#eq:cdotOc) with {math}`\ptyGro=0`. Productivity growth matters only through {math}`\kap`.
 
 ## The Steady State
 
