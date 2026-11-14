@@ -33,7 +33,7 @@ def _tick(ax, k, label):
 
 def draw_loci(ax, k, loci, golden=None, c_max=None):
     """The kdot = 0 curve and the cdot/c = 0 line of each economy in `loci`, a dict from its label
-    (such as r"$\\phi$ low") to (c on the kdot = 0 curve at each k, its steady state ǩ). The first
+    (such as r"$g$ low") to (c on the kdot = 0 curve at each k, its steady state ǩ). The first
     economy is drawn solid and labeled to the right of its lines, the others dashed and labeled to
     the left, so that no label crosses a line. The first economy's steady state is marked ǩ on the
     axis; `golden`, if given, is its golden rule k̿, marked on the axis with a dotted line up to the
