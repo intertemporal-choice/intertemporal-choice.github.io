@@ -550,9 +550,8 @@ If we consider almost any plausible configuration of parameter values, say {math
 
 The [appendix](#sec:PerfForesightCRRA-Appendix) derives three further results, which are stated here without their derivations.
 
-- *Infinite human wealth.* If the finite human wealth condition fails, consumption out of human wealth grows without bound as the horizon extends, so long as the growth impatience condition holds.
-  In that case the return impatience condition implies the growth impatience condition.
-- *Value in closed form.* Value is current utility times the inverse of the MPC: {math}`\vFunc_{t} = \uFunc(c_{t})\MPC_{t}^{-1} = \uFunc(\oRat_{t})\MPC_{t}^{-\CRRA}`.
-- *The MPC recursion.* The inverse of the MPC satisfies {math}`\MPC_{t}^{-1} = 1+\PatR\MPC_{t+1}^{-1}`.
+- *[The limiting solution if the FHWC fails](#sec:PFwhenFHWfails).* If the finite human wealth condition fails, the limit of the finite-horizon solutions depends on the growth impatience condition. If it holds, as it must when the return impatience condition holds, consumption out of human wealth grows without bound. If the return and growth impatience conditions both fail, consumption goes to zero; on the boundary between the two, {math}`\PatWGro=1`, it converges to permanent income.
+- *[The MPC recursion](#sec:PerfForesightCRRA-MPCRecursion).* The inverse of the MPC satisfies {math}`\MPC_{t}^{-1} = 1+\PatR\MPC_{t+1}^{-1}`.
   Starting from {math}`\MPC_{T}=1`, this makes {math}`\MPC_{t}^{-1}` the sum {math}`1+\PatR+\PatR^{2}+\dots+\PatR^{T-t}`.
+- *[Value in closed form](#sec:PerfForesightCRRA-ValueClosedForm).* Value is current utility times the inverse of the MPC: {math}`\vFunc_{t} = \uFunc(\cLevBF_{t})\MPC_{t}^{-1} = \uFunc(\oLev_{t})\MPC_{t}^{-\CRRA}`.
   One consequence is that the utility-inverse of value is linear in market resources above their minimum, so value is easy to compute.
