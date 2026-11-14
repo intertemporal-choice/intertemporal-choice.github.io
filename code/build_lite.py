@@ -55,6 +55,7 @@ NOTEBOOKS = [
     "content/consumption/OLGModel/OLGModel.ipynb",
     "content/asset_pricing/Bubbles/Bubbles.ipynb",
     "content/asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb",
+    "content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb",
     "content/investment/qModel/qModel.ipynb",
 ]
 BROWSER_KERNEL = {"name": "python", "display_name": "Python (Pyodide)", "language": "python"}

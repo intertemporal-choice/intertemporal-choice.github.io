@@ -69,7 +69,9 @@ project:
         - file: content/investment/iAndCashFlow.md
     - file: content/growth/index.md
       children:
-        - file: content/growth/RamseyCassKoopmans.md
+        - file: content/growth/RamseyCassKoopmans/index.md
+          children:
+            - file: content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb
         - file: content/growth/RCKWithGov.md
         - file: content/growth/DecentralizingRCK.md
         - file: content/growth/Romer86.md

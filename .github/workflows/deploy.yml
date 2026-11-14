@@ -50,6 +50,7 @@ jobs:
           uv run python code/build_pdf.py --self-test
           uv run python code/derive_bib.py --self-test
           uv run python code/export_models.py --self-test
+          uv run python code/check_core.py --self-test
           uv run python -m intertemporal_choice --self-test
       # The notebooks are committed with their outputs but without the metadata Jupyter
       # rewrites on every save; see code/notebooks.py.
@@ -59,6 +60,11 @@ jobs:
       # written from the notebook and never edited by hand; see code/export_models.py.
       - name: Models match their notebooks
         run: uv run python code/export_models.py --check
+      # The package's core is what a notebook installs in Colab, and a page running Python in the
+      # browser with micropip, so it must work without HARK, which the book's environment has: install
+      # the core alone in a fresh environment and import every module and model. See code/check_core.py.
+      - name: The package's core works without HARK
+        run: uv run python code/check_core.py
       # The bibliography is derived from economics.bib in llorracc/texmf-local and never edited
       # here: a correction goes into economics.bib. See code/derive_bib.py.
       - name: Bibliography matches its source
