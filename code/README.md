@@ -16,8 +16,9 @@ content/consumption/Envelope/
 The chapter is `index.md` so that its address stays `/content/consumption/envelope`. The
 notebook is a plain `.ipynb`, committed **with** its outputs, so GitHub, Colab and a
 downloaded copy show the figures. Its first code cell installs the book's own package
-(which brings econ-ark, numpy and matplotlib) if it is missing, so it runs anywhere with
-`pip`; inside the book's environment that cell does nothing. Every figure cell ends with
+(which brings numpy, scipy and matplotlib) if it is missing, so it runs anywhere with
+`pip`; inside the book's environment that cell does nothing. A notebook that imports HARK
+installs the package with its `hark` add-on instead, since HARK is not part of the core. Every figure cell ends with
 `style.save(fig, "<name>")`, from the shared `intertemporal_choice` package in `src/`,
 which writes `figures/<name>.png` deterministically (no version or date metadata, fixed
 size and resolution) and shows the same bytes as the cell's output.
@@ -53,7 +54,8 @@ itself, because MyST's own launcher times out on this book. It sets `IC_EXEC_ENV
 MyST's execution cache in `_build/execute` is invalidated when the code or data a notebook
 uses changes, not only when its cells do. A preflight lint refuses a notebook that is not
 `content/<part>/<Chapter>/<Chapter>.ipynb` beside its chapter, lacks the python3 kernel or
-that declaration, does not begin with the bootstrap cell, or whose saved figures are not
+that declaration, does not begin with the bootstrap cell (`BOOTSTRAP_HARK` when a later cell
+imports HARK or the Aiyagari code, `BOOTSTRAP` otherwise), or whose saved figures are not
 exactly the files in its `figures/` folder. `--print-env-hash` prints the hash CI keys its
 cache on.
 
@@ -76,6 +78,17 @@ telling the reader to run all the cells, and the launch-link and bootstrap cells
 The book's pure-Python package is copied beside it, and `code/jupyterlite/jupyter-lite.json`,
 which names the site, has it load ipywidgets, which Pyodide lacks, when the page starts. The
 workflow step that runs it pins the JupyterLite tools.
+
+## `check_core.py`
+
+The package has a light core (`dependencies` in `pyproject.toml`: numpy, scipy, matplotlib,
+pandas, ipywidgets) and a `hark` add-on (econ-ark, sympy and the Aiyagari code). The core is
+what a notebook installs in Colab or Binder, and what a page running Python in the browser
+installs with micropip, so it must never need HARK, which needs numba, which the browser's
+Python lacks. The book's own environment has the add-on, so nothing else would notice a HARK
+import slipping into the core. This script builds the wheel, installs it core only in a fresh
+environment, fails if that brought in any package an add-on names (or numba), then imports
+every module and model and runs the package's self-test there. The workflow runs it.
 
 ## `mirror_check.py`
 

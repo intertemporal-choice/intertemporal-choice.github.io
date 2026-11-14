@@ -11,27 +11,40 @@ authors = [
     {name = "Christopher D. Carroll", email = "ccarroll@jhu.edu"},
     {name = "Alan E. Lujan Solis"},
 ]
-# What a figure notebook needs to run, and nothing else: a notebook opened in Colab or Binder
-# installs this package with pip (see the first cell of any notebook). The minimums are ones
-# Colab already meets (numpy 2.1, scipy 1.16, matplotlib 3.10, ipywidgets 7.7 in October 2026),
-# so that pip adds what is missing without upgrading what Colab has loaded. Upgrading numpy
-# under a running Colab kernel broke every notebook there until the runtime was restarted
-# (`ImportError: cannot import name '_slice' from 'numpy._core.umath'`), and upgrading ipykernel
-# and ipywidgets breaks Colab's own kernel and widgets. The book's own environment is the `book`
-# group below, with the versions uv.lock pins.
+# The core: what the chapters' notebooks and models need, except HARK's. A notebook opened in Colab or
+# Binder installs it with pip (see the first cell of any notebook), and it is pure Python, so a page
+# running Python in the browser installs it too (micropip, in JupyterLite and the keys' browser pages).
+# Nothing in the core may import HARK, which needs numba, which the browser's Python lacks: CI
+# installs the core alone in a fresh environment and imports every module and model
+# (code/check_core.py). A new heavy need becomes a new add-on below, never a core dependency.
+#
+# The minimums are ones Colab already meets (numpy 2.1, scipy 1.16, matplotlib 3.10, ipywidgets
+# 7.7, pandas 2.2 in October 2026), so that pip adds what is missing without upgrading what Colab
+# has loaded. Upgrading numpy under a running Colab kernel broke every notebook there until the
+# runtime was restarted (`ImportError: cannot import name '_slice' from 'numpy._core.umath'`), and
+# upgrading ipykernel and ipywidgets breaks Colab's own kernel and widgets. The book's own
+# environment is the `book` group below, with the versions uv.lock pins.
 dependencies = [
-    "econ-ark>=0.17.0",
     "ipywidgets>=7.6",
     "matplotlib>=3.8",
     "numpy>=2.0",
+    "pandas>=2.0",
     "scipy>=1.11",
+]
+
+# `pip install "intertemporal-choice[hark] @ <address>"`: the core and HARK, for the chapters and
+# questions that use it (Aiyagari), run in Colab or locally, never in the browser.
+[project.optional-dependencies]
+hark = [
+    "econ-ark>=0.17.0",
     # econ-ark 0.17.2 imports sympy without declaring it, so a fresh install of the book's
     # package (Colab, Binder, a downloaded notebook) failed at `import HARK...`. Drop this once
     # an econ-ark release declares it.
     "sympy>=1.14.0",
     # The Aiyagari chapter's notebook computes its figures and numbers with the code of Econ-ARK's
-    # Aiyagari1994QJE REMARK, pinned to the commit of its v1.1.0 tag. A direct-URL dependency keeps
-    # this package off PyPI; if it ever goes there, the REMARK's package goes first.
+    # Aiyagari1994QJE REMARK, pinned to the commit of its v1.1.0 tag. PyPI refuses a package with
+    # a direct-URL dependency, even in an add-on; this package is published as files on the
+    # book's site instead (Chris Carroll, 2026-11-13: "not on pypi").
     "aiyagari1994qje @ git+https://github.com/econ-ark/Aiyagari1994QJE@66ae8be37402a223ca789363191cca243b8f7324",
 ]
 
@@ -46,8 +59,10 @@ build-backend = "uv_build"
 dev = [
     "nbstripout>=0.9.1",
 ]
-# The tools that build the book, and the minimums its own environment keeps.
+# The tools that build the book, and the minimums its own environment keeps. The book runs every
+# chapter's notebook, Aiyagari's included, so its environment has the HARK add-on.
 book = [
+    "intertemporal-choice[hark]",
     "ipykernel>=7.3.0",
     "ipywidgets>=8.1.8",
     "jupyter-server>=2.21.0",
