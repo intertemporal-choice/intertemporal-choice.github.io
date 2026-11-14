@@ -2,6 +2,81 @@
 
 Run from the repository root with `uv run python code/<script>.py`.
 
+## Figures come from notebooks
+
+Everything to do with a chapter lives in its folder, and can be downloaded as one unit:
+
+```
+content/consumption/Envelope/
+  index.md              the chapter; its figures are relative links, figures/<name>.png
+  Envelope.ipynb        draws the figures; a page of the site, listed under the chapter
+  figures/Envelope.png  committed, and checked against a fresh drawing whenever the notebook runs
+```
+
+The chapter is `index.md` so that its address stays `/content/consumption/envelope`. The
+notebook is a plain `.ipynb`, committed **with** its outputs, so GitHub, Colab and a
+downloaded copy show the figures. Its first code cell installs the book's own package
+(which brings econ-ark, numpy and matplotlib) if it is missing, so it runs anywhere with
+`pip`; inside the book's environment that cell does nothing. Every figure cell ends with
+`style.save(fig, "<name>")`, from the shared `intertemporal_choice` package in `src/`,
+which writes `figures/<name>.png` deterministically (no version or date metadata, fixed
+size and resolution) and shows the same bytes as the cell's output.
+
+The build runs a notebook only when its cell code or the environment changed, and then
+compares what it drew with the committed files: a figure that differs beyond a pixel or
+two of antialiasing fails the build, which is how a notebook edited without its figures
+being re-run and committed is caught. A static image is allowed only while it is listed
+in `figure_exemptions.txt`, as `pending` (not yet ported) or `exception` (data that cannot
+be obtained).
+
+Once per clone, run `uv run python code/notebooks.py --install`: it sets up the git filter
+that strips the metadata Jupyter rewrites on every save, so opening a notebook and saving
+it leaves nothing to commit.
+
+## `derive_bib.py`: the bibliography comes from economics.bib
+
+`content/minimal_bibliography.bib` is derived, never edited. The source of every reference is
+`bibtex/bib/economics.bib` in [llorracc/texmf-local](https://github.com/llorracc/texmf-local), and a correction
+goes there (Chris Carroll, 2026-11-08). The script copies, verbatim, the entries the chapters and notebooks cite in
+`{cite:t}` and `{cite:p}` roles, with any entry they name in a `crossref` field, and names the source's commit on
+the file's first line. Cite the source's key for a work, never a new one.
+
+- `uv run python code/derive_bib.py` derives from texmf-local's `main` and rewrites the file.
+- `--check`, run by the workflow, derives again from the commit the file names and fails if anything differs or a
+  cited key is missing from the source. After a correction in texmf-local, run the script and commit the result.
+
+## `build_site.py`
+
+Runs `myst build --execute` (default `--html --strict`) against a Jupyter server it starts
+itself, because MyST's own launcher times out on this book. It sets `IC_EXEC_ENV`, a hash of
+`uv.lock`, `src/`, `data/` and each chapter's own `data/` folder, which each notebook declares in `execute: depends_on_env`, so
+MyST's execution cache in `_build/execute` is invalidated when the code or data a notebook
+uses changes, not only when its cells do. A preflight lint refuses a notebook that is not
+`content/<part>/<Chapter>/<Chapter>.ipynb` beside its chapter, lacks the python3 kernel or
+that declaration, does not begin with the bootstrap cell, or whose saved figures are not
+exactly the files in its `figures/` folder. `--print-env-hash` prints the hash CI keys its
+cache on.
+
+## `notebooks.py`
+
+The one place that says how notebooks are stripped: outputs and cell ids kept, execution
+counts, timings and the Python version dropped. `--install` sets nbstripout up as a git
+filter in the clone; `--check` fails if a tracked notebook is committed unstripped (the
+workflow runs it); `--strip` strips the tracked notebooks in place.
+
+## `build_lite.py`
+
+Builds the in-browser copies of the figure notebooks, a JupyterLite site that the deploy
+serves at `/lite/`: a reader opens one and runs it with nothing installed, at
+`https://intertemporal-choice.github.io/lite/notebooks/index.html?path=<Chapter>.ipynb`. Only
+notebooks whose packages Pyodide has belong in its `NOTEBOOKS` list (numpy, matplotlib and
+ipywidgets are enough for those there); HARK cannot run in a browser. The browser's copy of a
+notebook opens on the economics: its frontmatter cell becomes its title, followed by one line
+telling the reader to run all the cells, and the launch-link and bootstrap cells are dropped.
+The book's pure-Python package is copied beside it, and `code/jupyterlite/jupyter-lite.json`,
+which names the site, has it load ipywidgets, which Pyodide lacks, when the page starts. The
+workflow step that runs it pins the JupyterLite tools.
+
 ## `mirror_check.py`
 
 Reconciles `sources/` against Carroll's lecture-notes page at econ2.jhu.edu.
@@ -50,6 +125,16 @@ because `myst build` exits 0 on a site whose every stylesheet 404s. It checks th
 `index.html` carries real content, that no asset path is prefixed with the repository
 name (the signature of a project-site `BASE_URL` on a root-served site), and that the
 expected number of pages were emitted.
+
+It also enforces the figures-from-notebooks rule on the built pages: every figure is one
+image, either `figures/<name>.png` beside a chapter that has its notebook or an image
+listed in `figure_exemptions.txt`: a static image (`exception`, `pending`), or a `remote`
+figure drawn and checked by an Econ-ARK REMARK (not a DemARK), given as a raw GitHub URL pinned to a full commit SHA
+and naming that repository; every exemption is in use and every file under
+`content/figures/` is listed; every notebook sits beside its chapter, is listed under it
+in `toc.yml`, and carries outputs, and both the chapter and the notebook's page link to
+open it in Colab and in Binder; and no committed figure differs from what its notebook
+drew in this build beyond the tolerance.
 
 `--self-test` runs each check against input it should reject, and fails if any check
 passes it. The deploy workflow runs the self-test first, so a check that has quietly

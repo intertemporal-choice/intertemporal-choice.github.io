@@ -32,3 +32,6 @@
 /content/numerical/aggregation                  /content/appendices/mathematical/aggregation
 /content/numerical/hamiltonianvsdiscrete        /content/appendices/mathematical/hamiltonianvsdiscrete
 /content/numerical/mathfactslist                /content/appendices/mathematical/mathfactslist
+
+# 2026-10-31: the bond-premium figures merged into the capital-market imperfections chapter
+/content/investment/imperfections               /content/investment/dynanimperfcapmkts

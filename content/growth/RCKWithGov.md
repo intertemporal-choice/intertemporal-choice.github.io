@@ -53,7 +53,7 @@ The second Hamiltonian optimization condition requires:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \dot{\lambda}_{t} & =  \timeRate\lambda_{t} - (\partial \Ham_{t}/\partial a_{t})\lambda_{t}  \\
+        \dot{\lambda}_{t} & =  \timeRate\lambda_{t} - \partial \Ham_{t}/\partial a_{t}  \\
          & =  \timeRate\lambda_{t} - \lambda_{t} r_{t}
 \\      \dot{\lambda}_{t}/{\lambda_{t}} & =  (\timeRate-r_{t})
 \\  \dot{c}_{t}/c_{t}  & =  \rho^{-1}(r_{t}-\timeRate).

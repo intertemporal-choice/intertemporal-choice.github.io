@@ -10,7 +10,9 @@ whenever a page moves, so the Markdown is left alone and the fix happens here:
 
   1. stage a copy of the project in _build/pdf-src
   2. in the staged Markdown only, rewrite each `](#fact:...)` link to the fact's anchor
-     on the site, so the export keeps it as a link
+     on the site, so the export keeps it as a link; likewise each link to a label on a
+     page the PDF leaves out (the Supplemental Notes, chapter appendices among them),
+     which MyST would otherwise export as a \\ref to a label the PDF lacks, printed "??"
   3. run `myst build --pdf` in the staged copy
   4. rewrite every `\\href{/` in the generated LaTeX to an absolute URL on the site, and
      check that each one names a page the book actually has
@@ -30,6 +32,8 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+import build_lite  # beside this file: the in-browser notebooks the site publishes
 
 logging.basicConfig(level=logging.INFO, format="%(message)s", force=True)
 log = logging.getLogger(__name__)
@@ -62,6 +66,7 @@ SKIP = {
     "sources",
     "node_modules",
     ".DS_Store",
+    ".ipynb_checkpoints",  # Jupyter autosaves beside the figure notebooks
 }
 
 FACT_DEF = re.compile(r"^\((fact:[^)\s]+)\)=", re.MULTILINE)
@@ -69,6 +74,11 @@ FACT_DEF = re.compile(r"^\((fact:[^)\s]+)\)=", re.MULTILINE)
 # into the page title, which has no anchor on the site.
 TITLE_LABEL = re.compile(r"\A\s*\((fact:[^)\s]+)\)=\s*\n#\s")
 FACT_LINK = re.compile(r"\]\(#(fact:[^)\s]+)\)")
+# Any label: a `(label)=` target, or a directive's `:label:` or `:name:` option.
+LABEL_DEF = re.compile(r"^[ \t]*(?:\(([^)\s]+)\)=|:(?:label|name):[ \t]*(\S+))", re.MULTILINE)
+PAGE_TITLE_LABEL = re.compile(r"\A\s*\(([^)\s]+)\)=\s*\n#\s")
+LINK = re.compile(r"\]\(#([^)\s]+)\)")
+ROLE = re.compile(r"\{(?:eq|ref|numref)\}`(?:[^`<]*<)?([^`<>]+)>?`")
 REL_HREF = re.compile(r"\\href\{/")
 SITE_HREF = re.compile(r"\\href\{" + re.escape(SITE) + r"(/[^}#\\]*)")
 
@@ -131,9 +141,70 @@ def rewrite_fact_links(text: str, targets: dict[str, str]) -> tuple[str, int]:
     return FACT_LINK.subn(sub, text)
 
 
+def pdf_articles(config: str) -> set[str]:
+    """The files the tex+pdf export in myst.yml's text puts in the PDF."""
+    import yaml
+
+    exports = yaml.safe_load(config)["project"]["exports"]
+    return {a["file"] for e in exports if "pdf" in e.get("format", "") for a in e.get("articles", [])}
+
+
+def all_label_targets(text: str, url: str) -> dict[str, str]:
+    """Every label in one page's text, each mapped to its URL on the site."""
+    title = PAGE_TITLE_LABEL.match(text)
+    labels = [a or b for a, b in LABEL_DEF.findall(text)]
+    return {label: url if title and label == title.group(1) else f"{url}#{html_id(label)}" for label in labels}
+
+
+def web_only_targets(root: Path) -> dict[str, str]:
+    """Every label on a page the PDF leaves out, mapped to its absolute URL on the site."""
+    in_pdf = pdf_articles((root / "myst.yml").read_text())
+    targets = {}
+    for md in sorted((root / "content").rglob("*.md")):
+        if md.relative_to(root).as_posix() not in in_pdf:
+            targets |= all_label_targets(md.read_text(), SITE + page_url(md, root))
+    return targets
+
+
+def rewrite_web_only_links(text: str, targets: dict[str, str]) -> tuple[str, int]:
+    """Point `](#label)` links to a label on a page the PDF leaves out at the site.
+
+    A role ({eq}, {ref}, {numref}) to such a label has no text of its own to keep as a
+    link, so it is an error: write it as a link with words instead.
+    """
+    roles = sorted({m.group(1) for m in ROLE.finditer(text) if m.group(1) in targets})
+    if roles:
+        raise ValueError(f"role to a label the PDF leaves out (make it a link with words): {', '.join(roles)}")
+    rewritten = [m for m in LINK.finditer(text) if m.group(1) in targets]
+    return LINK.sub(lambda m: f"]({targets[m.group(1)]})" if m.group(1) in targets else m.group(0), text), len(rewritten)
+
+
+def rewrite_staged_web_only() -> None:
+    """Step 2, continued: in the pages the PDF has, point links to labels on pages it leaves out at the site."""
+    targets = web_only_targets(STAGE)
+    n_links = 0
+    for rel in sorted(pdf_articles((STAGE / "myst.yml").read_text())):
+        md = STAGE / rel
+        if md.suffix != ".md":
+            continue
+        try:
+            text, n = rewrite_web_only_links(md.read_text(), targets)
+        except ValueError as e:
+            raise ValueError(f"{rel}: {e}") from None
+        if n:
+            md.write_text(text)
+            n_links += n
+    log.info("links to pages left out of the PDF pointed at the site: %d", n_links)
+
+
 def absolutize(tex: str) -> tuple[str, int]:
     """Prefix site-relative \\href targets with the site's URL."""
     return REL_HREF.subn(lambda _: "\\href{" + SITE + "/", tex)
+
+
+def lite_pages() -> set[str]:
+    """The in-browser notebooks chapters link to: pages of the site, though not of the MyST project."""
+    return {f"/lite/notebooks/index.html?path={Path(rel).name}" for rel in build_lite.NOTEBOOKS}
 
 
 def unknown_pages(tex: str, pages: set[str]) -> list[str]:
@@ -152,8 +223,17 @@ def run(cmd, cwd: Path, output: Path) -> int:
         ).returncode
 
 
+def clear(folder: Path) -> None:
+    """Delete a stage. The copy keeps @resources/'s read-only modes, so its folders must be made writable first."""
+    if folder.exists():
+        for path in [folder, *folder.rglob("*")]:
+            if path.is_dir() and not path.is_symlink():
+                path.chmod(path.stat().st_mode | 0o200)
+    shutil.rmtree(folder, ignore_errors=True)
+
+
 def stage(root: Path) -> None:
-    shutil.rmtree(STAGE, ignore_errors=True)
+    clear(STAGE)
     shutil.copytree(
         root, STAGE, ignore=lambda _, names: [n for n in names if n in SKIP]
     )
@@ -177,7 +257,13 @@ def rewrite_staged_facts() -> None:
 
 def absolutize_tex() -> list[str]:
     """Step 4: make every page link absolute and check that each names a real page."""
-    pages = {page_url(md, STAGE) for md in (STAGE / "content").rglob("*.md")}
+    # The notebooks beside the chapters are pages of the site too, and chapters link to them.
+    pages = {
+        page_url(page, STAGE)
+        for pattern in ("*.md", "*.ipynb")
+        for page in (STAGE / "content").rglob(pattern)
+        if ".ipynb_checkpoints" not in page.parts
+    } | lite_pages()
     failures, n_pages = [], 0
     for tex_file in (STAGE / TEX_DIR).glob("*.tex"):
         tex, n = absolutize(tex_file.read_text())
@@ -215,6 +301,7 @@ def compile_and_copy(root: Path) -> list[str]:
 def build(root: Path) -> list[str]:
     stage(root)
     rewrite_staged_facts()
+    rewrite_staged_web_only()
     if run(["myst", "build", "--pdf"], STAGE, root / MYST_LOG):
         return [f"myst build --pdf failed; see {MYST_LOG}"]
     return absolutize_tex() or compile_and_copy(root)
@@ -259,6 +346,38 @@ def fact_failures() -> list[str]:
     ]
 
 
+def web_only_failures() -> list[str]:
+    """Failures of the rewrite of links to labels on pages the PDF leaves out."""
+    page = ("(sec:page)=\n# Title\n\n(sec:x)=\n## X\n\n```{math}\n:label: eq:y\n```\n\n"
+            ":::{figure} f.png\n:name: fig:z\n:::\n\n[^n]:\n\n    ```{math}\n    :label: eq:inFootnote\n    ```\n")
+    found = all_label_targets(page, "U")
+    targets = {"sec:x": "U#sec-x"}
+    text, n = rewrite_web_only_links("see [infinite](#sec:x) and [here](#sec:inpdf)", targets)
+    config = "project:\n  exports:\n    - format: tex+pdf\n      articles:\n        - file: content/a.md\n"
+    try:
+        rewrite_web_only_links("by {eq}`eq:y` and {ref}`words <sec:x>`", {"eq:y": "U#eq-y"})
+        role_refused = False
+    except ValueError:
+        role_refused = True
+    return [
+        msg
+        for bad, msg in [
+            (
+                found != {"sec:page": "U", "sec:x": "U#sec-x", "eq:y": "U#eq-y", "fig:z": "U#fig-z",
+                          "eq:inFootnote": "U#eq-infootnote"},
+                f"labels of a page mapped to {found}",
+            ),
+            (
+                n != 1 or "](U#sec-x)" not in text or "](#sec:inpdf)" not in text,
+                "a link to a page left out of the PDF was missed, or a link inside the PDF was touched",
+            ),
+            (not role_refused, "a role to a label the PDF leaves out was accepted"),
+            (pdf_articles(config) != {"content/a.md"}, "the PDF's articles were misread from myst.yml"),
+        ]
+        if bad
+    ]
+
+
 def href_failures() -> list[str]:
     """Failures of the LaTeX \\href rewrite and the page check."""
     tex, n = absolutize(
@@ -286,6 +405,14 @@ def href_failures() -> list[str]:
                 ),
                 "an escaped anchor was read as part of the page path",
             ),
+            (
+                unknown_pages(rf"\href{{{SITE}/lite/notebooks/index.html?path=Bubbles.ipynb}}{{x}}", lite_pages()),
+                "a link to an in-browser notebook was reported unknown",
+            ),
+            (
+                not unknown_pages(rf"\href{{{SITE}/lite/notebooks/index.html?path=Gone.ipynb}}{{x}}", lite_pages()),
+                "a link to an in-browser notebook the site does not build was not reported",
+            ),
         ]
         if bad
     ]
@@ -302,14 +429,30 @@ def url_failures() -> list[str]:
                 "/content/consumption/periodlcmodel",
             ),
             ("content/growth/index.md", "/content/growth"),
+            ("content/consumption/Envelope/Envelope.ipynb", "/content/consumption/envelope/envelope"),
         ]
         if page_url(Path("r") / md, Path("r")) != want
     ]
 
 
+def clear_failures() -> list[str]:
+    """A stage holding a read-only folder, as @resources/ is, must still be deleted."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        stage_dir = Path(tmp) / "stage"
+        locked = stage_dir / "locked"
+        locked.mkdir(parents=True)
+        (locked / "file").write_text("x")
+        (locked / "file").chmod(0o444)
+        locked.chmod(0o555)
+        clear(stage_dir)
+        return ["clear left a stage with a read-only folder in place"] if stage_dir.exists() else []
+
+
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
-    failures = fact_failures() + href_failures() + url_failures()
+    failures = fact_failures() + web_only_failures() + href_failures() + url_failures() + clear_failures()
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")
