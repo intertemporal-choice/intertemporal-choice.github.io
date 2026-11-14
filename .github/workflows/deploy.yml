@@ -27,6 +27,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # The version of a package release this build staged, for the release job; empty when there is none.
+    outputs:
+      version: ${{ steps.package.outputs.version }}
     # The build executes the figure notebooks that changed; a hung kernel must not hold the runner.
     timeout-minutes: 30
     steps:
@@ -44,6 +47,7 @@ jobs:
       - name: Self-tests
         run: |
           uv run python code/build_site.py --self-test
+          uv run python code/release_package.py --self-test
           uv run python code/notebooks.py --self-test
           uv run python code/write_redirects.py --self-test
           uv run python code/verify_build.py --self-test
@@ -92,6 +96,24 @@ jobs:
       # Old URLs of moved pages forward to their new ones; see code/redirects.txt.
       - name: Write redirects for moved pages
         run: uv run python code/write_redirects.py
+      # The book's package, published as permanent files at /packages/ (Chris Carroll, 2026-11-13: "a
+      # package file on the book's site", "not on pypi", "automatic"). Copy the files the `packages` branch
+      # keeps into the site with their list page, checking that none the live site serves is dropped; on a
+      # push to main that changed the package, build the next release for the release job; on a pull
+      # request, only check that it builds. See code/release_package.py.
+      - id: package
+        name: Stage the package files
+        run: >-
+          uv run python code/release_package.py stage _build/html/packages
+          ${{ github.event_name == 'push' && '--release _release' || '' }}
+      - name: Hand the new release to the release job
+        if: steps.package.outputs.version != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-release
+          path: _release/
+          if-no-files-found: error
+          retention-days: 7
       # Gates the deploy on the OUTPUT, not the build's exit code: myst build exits 0 on a
       # site whose every stylesheet 404s, and on a figure whose file is stale. See
       # code/verify_build.py.
@@ -102,9 +124,31 @@ jobs:
         with:
           path: './_build/html'
 
-  deploy:
-    if: github.event_name == 'push'
+  # The only job that can write to the repository, and it writes only the `packages` branch: it adds the
+  # release the build staged, one wheel and its line in releases.txt, and refuses to replace or delete
+  # a file there. See code/release_package.py.
+  release:
     needs: build
+    if: github.event_name == 'push' && needs.build.outputs.version != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-release
+          path: _release
+      - name: Add the release to the packages branch
+        run: python3 code/release_package.py publish _release
+
+  deploy:
+    # After the release job when there is one, and only if it kept the release: the site never serves a
+    # package file that the `packages` branch does not keep.
+    needs: [build, release]
+    if: >-
+      github.event_name == 'push' && !cancelled() && needs.build.result == 'success'
+      && (needs.release.result == 'success' || needs.release.result == 'skipped')
     permissions:
       pages: write
       id-token: write
