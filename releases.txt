@@ -1,0 +1,3 @@
+# Every release of the book's package, oldest first; written by code/release_package.py, never edited.
+# version	released	commit	sha256	src	pyproject.toml
+2026.11.14.1	2026-11-14T21:31:19Z	cf6b08d06c30bcf204832944af6660560385d10c	4bbe2aecd0dacc10d16ed1800fcd7510f7ae3a56ec7ddb53906c4b0f8c457d1e	2d8871e17ab6e64d73297f31b949a64a2a59b37a	5b0a5c048bfe734b81acc6392e0a767b08263865
