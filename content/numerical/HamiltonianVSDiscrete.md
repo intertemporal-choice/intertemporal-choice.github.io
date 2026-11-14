@@ -8,7 +8,7 @@ The problem is to choose a path of consumption per capita {math}`\cons` from the
 ```{math}
 :label: eq:HVD-maxprob
 
-\max_{\{c\}_{0}^{\infty}} \int_{0}^{\infty} \uFunc(\cons) e^{-\timeRate t}
+\max_{\{c\}_{0}^{\infty}} \int_{0}^{\infty} \uFunc(\cons) e^{-\timeRate t}\,dt
 ```
 
 subject to

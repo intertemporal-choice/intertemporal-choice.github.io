@@ -1,7 +1,7 @@
 (sec:RamseyCassKoopmans)=
 # The Ramsey/Cass-Koopmans (RCK) Model
 
-{cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth for an economy with exogenous 'labor-augmenting' technological progress.
+{cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth for an economy with exogenous 'labor-augmenting' technological progress. This chapter follows the textbook treatment in {cite:t}`blanchard&fischer:text`, chapter 2; {cite:t}`barro&salaimartin:book`, chapter 2, is another.
 
 ## The Budget Constraint
 
@@ -13,11 +13,9 @@ The economy has a perfectly competitive production sector that uses a Cobb-Dougl
 \end{aligned}\end{gathered}
 ```
 
-to produce output using capital and labor.[^DGoP2Gjmvh] Labor hours (the same as population) increases exogenously at a constant rate[^GMWPgcHLoc]
+to produce output using capital and labor.[^DGoP2Gjmvh] Labor hours (the same as population) increase exogenously at a constant rate
 
 [^DGoP2Gjmvh]: All Roman variables are functions of time, but putting time subscripts on everything would clutter the notation, so we do it only where necessary for clarity.
-
-[^GMWPgcHLoc]: The ancient Greek philosophers captured eternal truths; therefore, Greek letters represent constants whose value never changes.
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -26,10 +24,6 @@ to produce output using capital and labor.[^DGoP2Gjmvh] Labor hours (the same as
 ```
 
 and {math}`\PtyLab` is an index of labor productivity that grows at rate
-
-:::{margin}
-Solow and Phelps showed that steady-state growth is independent of the fraction of technical progress that is embodied in new capital, though the speed of convergence is faster the more progress is embodied.
-:::
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -42,10 +36,10 @@ produce perpetually more as time goes by with the same amount of
 physical capital.[^QeBMSQU4dN] The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
 
 :::{margin}
-Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`K`. The disembodied form is used here because it is simpler and, as noted above, delivers the same steady state.
+Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`\Kap`. Solow (1960) and Phelps (1962) showed that steady-state growth does not depend on how much of technical progress is embodied in new capital, though convergence is faster the more of it is embodied; so the simpler disembodied form delivers the same steady state.
 :::
 
-[^QeBMSQU4dN]: This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth; with a Cobb-Douglas production function, it turns out to be essentially the same as 'capital-augmenting' productivity growth, also known as Hicks-neutral, as well as output-neutral ('Solow-neutral') progress.
+[^QeBMSQU4dN]: This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With a Cobb-Douglas production function the three are the same thing at different rates. With any other production function, a steady state with constant growth rates requires progress to be labor-augmenting (Uzawa 1961; Jones and Scrimgeour 2008 give a short proof).
 
 Aggregate capital accumulates according to
 
@@ -53,61 +47,43 @@ Aggregate capital accumulates according to
 :label: eq:Kdotlevel
 
 \begin{gathered}\begin{aligned}
-  \dot{\Kap} & =  \Inc - \Cons - \depr K .
+  \dot{\Kap} & =  \Inc - \Cons - \depr \Kap .
 \end{aligned}\end{gathered}
 ```
 
-Lower case variables are the upper case version divided by efficiency units, i.e.
+Lower case variables are the upper case version divided by efficiency units, so {math}`\inc = \Inc/(\PtyLab \Labor) = (\Kap/\PtyLab \Labor)^{\kapShare} = \kap^{\kapShare}`. Since {math}`\kap = \Kap/(\PtyLab \Labor)`,
 
 ```{math}
-\begin{gathered}\begin{aligned}
-  \inc & =  \Inc/(\PtyLab \Labor)  \\
-       & =  \Kap^{\kapShare}(\PtyLab \Labor)^{1-\kapShare}/(\PtyLab \Labor)  \\
-       & =  (\Kap/\PtyLab \Labor)^{\kapShare}
-  \\   & =  \kap^{\kapShare}    .
-\end{aligned}\end{gathered}
+\dot{\kap}/\kap = \dot{\Kap}/\Kap - \dot{\PtyLab}/\PtyLab - \dot{\Labor}/\Labor = \dot{\Kap}/\Kap - (\ptyGro +\popGro),
 ```
 
-Note that
-
-```{math}
-\begin{gathered}\begin{aligned}
-  \dot{\kap} \equiv       \left(\frac{d\kap}{dt}\right) & =  \left(\frac{\dot{\Kap}\PtyLab \Labor - K(\dot{\PtyLab }L + \PtyLab \dot{\Labor})}{(\PtyLab \Labor)^{2}}\right) 
-  \\   & =  \dot{\Kap}/\PtyLab \Labor - k(\dot{\PtyLab }/{\PtyLab } + \dot{\Labor}/\Labor)
-  \\          & =  \dot{\Kap}/\PtyLab \Labor - (\ptyGro +\popGro)k
-\end{aligned}\end{gathered}
-```
-
-which means that {eq}`eq:Kdotlevel` can be divided by {math}`\PtyLab \Labor` and becomes
+so dividing {eq}`eq:Kdotlevel` by {math}`\PtyLab \Labor` gives
 
 ```{math}
 :label: eq:RCK-kdot
 
-\begin{gathered}\begin{aligned}
-  \dot{\Kap}/\PtyLab \Labor & =  \inc - \cons - \depr \kap  \\
-  \dot{\kap}+(\ptyGro +\popGro)k & =  \prodFunc(\kap) - \cons - \depr \kap  \\
-  \dot{\kap} & =  \prodFunc(\kap) - \cons - (\ptyGro +\popGro+\depr) \kap .
-\end{aligned}\end{gathered}
+\dot{\kap} = \prodFunc(\kap) - \cons - (\ptyGro +\popGro+\depr) \kap .
 ```
 
-A steady-state will be a point where {math}`\dot{\kap} = 0`.
+A steady state is a point where {math}`\dot{\kap} = 0`, so that {math}`\cons = \prodFunc(\kap) - (\ptyGro +\popGro+\depr) \kap`. A first candidate for the best steady state is the one with the highest {math}`\cons`. Setting the derivative with respect to {math}`\kap` to zero gives the "golden rule" of {cite:t}`phelps:golden`, an article well worth reading:
 
-Equation {eq}`eq:RCK-kdot` yields a first candidate for an optimal
-steady-state of the growth model: It seems reasonable to argue that the best
-possible steady-state is the one that maximizes {math}`\cons`. This is the
-"golden rule" optimality condition of
-{cite:t}`phelps:golden`, an article well worth reading; this is
-one of the chief contributions for which Phelps won the Nobel prize.
+```{math}
+:label: eq:RCK-goldenRule
+
+\prodFunc^{\prime}(\GoldRule{\kap}) = \ptyGro +\popGro+\depr .
+```
 
 ## The Social Planner's Problem
 
 Now suppose that there is a social planner whose goal is to maximize the discounted
-sum of CRRA utility from per-capita consumption:
+sum of CRRA utility from per-capita consumption:[^RCKpopWeight]
+
+[^RCKpopWeight]: This objective counts each date's per capita utility once, as {cite:t}`blanchard&fischer:text` do. {cite:t}`romer:text` weights it by the size of the population, which replaces {math}`\timeRate` with {math}`\timeRate-\popGro` below, and takes {math}`\popGro` out of the steady-state condition.
 
 ```{math}
 :label: eq:RCK-maxprob
 
-\max \int_{0}^{\infty} \left(\frac{(\Cons/\Labor)^{1-\CRRA}}{1-\CRRA}\right) e^{-\timeRate  t} .
+\max \int_{0}^{\infty} \left(\frac{(\Cons/\Labor)^{1-\CRRA}}{1-\CRRA}\right) e^{-\timeRate  t}\,dt .
 ```
 
 But {math}`\Cons/\Labor = \PtyLab (\Cons/\PtyLab \Labor)= \PtyLab c`. Recall that for a variable growing at rate {math}`\ptyGro`,
@@ -135,19 +111,19 @@ Using {eq}`eq:cRat` and the other results above, we can rewrite the social plann
 :label: eq:maxprobmod
 
 \begin{gathered}\begin{aligned}
-  \int_{0}^{\infty} \left(\frac{(\PtyLab c)^{1-\CRRA}}{1-\CRRA}\right) e^{-\timeRate  t} & =  
-                                                                                               \PtyLab _{0}^{1-\CRRA}\int_{0}^{\infty} \left(\frac{\cons^{1-\CRRA}}{1-\CRRA}\right) e^{-\timeRate  t}e^{(1-\CRRA)\ptyGro  t} 
-  \\ & =  \PtyLab _{0}^{1-\CRRA}\int_{0}^{\infty} \util(c) e^{\left((1-\CRRA)\ptyGro -\timeRate \right) t}
+  \int_{0}^{\infty} \left(\frac{(\PtyLab c)^{1-\CRRA}}{1-\CRRA}\right) e^{-\timeRate  t}\,dt & =  
+                                                                                               \PtyLab _{0}^{1-\CRRA}\int_{0}^{\infty} \left(\frac{\cons^{1-\CRRA}}{1-\CRRA}\right) e^{-\timeRate  t}e^{(1-\CRRA)\ptyGro  t}\,dt 
+  \\ & =  \PtyLab _{0}^{1-\CRRA}\int_{0}^{\infty} \util(c) e^{\left((1-\CRRA)\ptyGro -\timeRate \right) t}\,dt
            .
 \end{aligned}\end{gathered}
 ```
 
-Thus, defining {math}`\nu = \timeRate  - (1-\CRRA) \ptyGro` and normalizing the initial
+Thus, defining {math}`\nu = \timeRate  - (1-\CRRA) \ptyGro`, which we assume is positive so that the objective is finite, and normalizing the initial
 level of productivity to {math}`\PtyLab _{0}=1`, the complete optimization problem
 can be formulated as
 
 ```{math}
-\max \int_{0}^{\infty} \util(c) e^{-\nu  t}
+\max \int_{0}^{\infty} \util(c) e^{-\nu  t}\,dt
 ```
 
 subject to
@@ -184,20 +160,15 @@ The second discounted Hamiltonian optimization condition requires:
   \dot{\lambda}/{\lambda} & =  (\nu+(\popGro+\ptyGro+\depr)-\prodFunc^{\prime}(\kap))
   \\  \left(\frac{-\CRRA c^{-\CRRA-1}\dot{\cons}}{\cons^{-\CRRA}}\right) & =  (\nu+(\popGro+\ptyGro+\depr)-\prodFunc^{\prime}(\kap))
   \\  \CRRA \dot{\cons}/\cons & =  (\prodFunc^{\prime}(\kap)-\nu-(\popGro+\ptyGro+\depr))
-  \\  \dot{\cons}/\cons  & =  \CRRA^{-1}(\underbrace{\prodFunc^{\prime}(\kap)-(\popGro+\ptyGro+\depr)}_{\mbox{$\equiv \acute{r}$}}-\nu)
+  \\  \dot{\cons}/\cons  & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\ptyGro+\depr)-\nu)
 \end{aligned}\end{gathered}
 ```
 
-where the definition of {math}`\acute{r}` is motivated by thinking of
-{math}`\prodFunc^{\prime}(\kap)-(\popGro+\ptyGro+\depr)` as the interest rate net of depreciation and
-dilution.
+where {math}`\prodFunc^{\prime}(\kap)-(\popGro+\ptyGro+\depr)` is the interest rate net of depreciation and dilution.
 
-This is called the "modified golden rule" (or sometimes the
-"Keynes-Ramsey rule" because it was originally derived by
-Ramsey with an explanation attributed to Keynes).
-
-Thus, we end up with an Euler equation for consumption growth that is
-just like [the Euler equation in the perfect foresight partial equilibrium consumption model](http://www.econ2.jhu.edu/people/ccarroll/public/LectureNotes/Consumption/PerfForesightCRRA/#EulerCGroFac), except that now the relevant interest rate can vary over
+This Euler equation is called the "Keynes-Ramsey rule," because it was originally derived by
+Ramsey with an explanation attributed to Keynes.
+It is just like [the Euler equation in the perfect foresight CRRA model](#eq:PFCRRA-cgrow), except that now the relevant interest rate can vary over
 time as {math}`\prodFunc^{\prime}(\kap)` varies.
 
 Substituting in the modified time preference rate gives
@@ -207,43 +178,11 @@ Substituting in the modified time preference rate gives
 
 \begin{gathered}\begin{aligned}
   \dot{\cons}/\cons  & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr+\ptyGro)-\timeRate  +(1- \CRRA) \ptyGro)
-  \\   & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate  - \CRRA \ptyGro), 
+  \\   & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate  - \CRRA \ptyGro). 
 \end{aligned}\end{gathered}
 ```
 
-and finally note that defining per capita consumption {math}`\chi = \Cons/\Labor`
-so that {math}`\cons = \chi \PtyLab ^{-1}`,
-
-```{math}
-:label: eq:chiDotOchi
-
-\begin{gathered}\begin{aligned}
-  \dot{\cons} & =  \dot{\biggl(\chi \PtyLab ^{-1}\biggr)} =  \dot{\chi}\PtyLab ^{-1}-(\chi \PtyLab ^{-1})\dot{\PtyLab }/\PtyLab 
-  \\ \dot{\cons}/\cons & =  \dot{\biggl(\chi \PtyLab ^{-1}\biggr)}/(\chi \PtyLab^{-1}) =  \dot{\chi}/\chi - \ptyGro 
-\end{aligned}\end{gathered}
-```
-
-and since {eq}`eq:cdotOc` can be written
-
-```{math}
-\begin{gathered}\begin{aligned}
-  \dot{\cons}/\cons  & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate ) - \ptyGro,
-\end{aligned}\end{gathered}
-```
-
-we have
-
-```{math}
-\begin{gathered}\begin{aligned}
-  \dot{\chi}/\chi & =  \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate )
-\end{aligned}\end{gathered}
-```
-
-so the formula for per capita consumption growth (as a function of
-{math}`\kap`) is identical to the model with no growth (equation
-{eq}`eq:cdotOc` with {math}`\ptyGro=0`). Any important differences between
-the no-growth model and the model with growth therefore must come
-through the channel of differences in {math}`\kap`.
+Since per capita consumption is {math}`\Cons/\Labor = \cons \PtyLab`, it grows at {math}`\dot{\cons}/\cons + \ptyGro = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth ({eq}`eq:cdotOc` with {math}`\ptyGro=0`). Productivity growth matters only through {math}`\kap`.
 
 ## The Steady State
 
@@ -256,13 +195,16 @@ and capital all grow at rate {math}`\ptyGro`.[^x66RuMjc3A]
 {math}`\dot{\cons}/\cons = 0` implies that at the steady-state value of {math}`\check{\kap}`,
 
 ```{math}
+:label: eq:RCK-modGoldenRule
+
 \begin{gathered}\begin{aligned}
   \prodFunc^{\prime}(\check{\kap}) & =  \timeRate +\popGro+\depr+\CRRA \ptyGro  \\
   \kapShare \check{\kap}^{\kapShare-1} & =  \timeRate +\popGro+\depr+\CRRA \ptyGro  \\
-  \check{\kap} & =  \left(\frac{\timeRate +\popGro+\depr+\CRRA \ptyGro}{\kapShare}\right)^{\frac{1}{\kapShare-1}}
-  \\      \check{\kap} & =  \left(\frac{\kapShare}{\timeRate +\popGro+\depr+\CRRA \ptyGro}\right)^{\frac{1}{1-\kapShare}}   
+  \check{\kap} & =  \left(\frac{\kapShare}{\timeRate +\popGro+\depr+\CRRA \ptyGro}\right)^{\frac{1}{1-\kapShare}}   
 \end{aligned}\end{gathered}
 ```
+
+This is the "modified golden rule" of {cite:t}`blanchard&fischer:text`, chapter 2. Comparing it with the [golden rule](#eq:RCK-goldenRule), {math}`\prodFunc^{\prime}(\check{\kap}) = \prodFunc^{\prime}(\GoldRule{\kap}) + \nu`, so {math}`\check{\kap} < \GoldRule{\kap}` exactly when {math}`\nu > 0`: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
 
 Thus, the steady-state {math}`\kap` will be higher if capital
 is more productive ({math}`\kapShare` is higher), and will be lower if
@@ -272,9 +214,11 @@ depreciation is greater, or technological progress occurs more rapidly.
 ## A Phase Diagram
 
 While the RCK model has an analytical solution for its steady-state,
-it does not have an analytical solution for the transition to the
-steady-state. The usual method for analyzing
+it does not in general have an analytical solution for the transition to the
+steady-state.[^RCKclosedForm] The usual method for analyzing
 models of this kind is a [phase diagram](https://en.wikipedia.org/wiki/Phase_diagram) in {math}`\cons` and {math}`\kap`.
+
+[^RCKclosedForm]: The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` (Smith 2006). The saddle path is then a ray, {math}`\cons = \mu \kap` with {math}`\mu = (\timeRate + (1-\kapShare)(\popGro+\depr))/\kapShare`, which passes through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - (\mu+\popGro+\ptyGro+\depr)\kap` is a Bernoulli equation, so the transition has a closed form.
 
 The first step in constructing the phase diagram is to take the differential
 equations that describe the system and find the points where they are
@@ -304,37 +248,29 @@ The programs that generated these figures are not quite consistent with the equa
 
 ## Transition
 
-Actually, as stated so far, the solution to the problem is very simple: The
-consumer should spend an infinite amount in every period. This solution is
-not ruled out by anything we have yet assumed (except possibly the fact that
-once {math}`\kap` becomes negative the production function is undefined).
-
-Obviously, this is not the solution we are looking for. What is missing is
-that we have not imposed anything corresponding to the intertemporal
-budget constraint. In this context, the IBC takes the form of a "transversality
-condition,"
+The two differential equations and {math}`\kap_{0}` don't pin down {math}`\cons_{0}`: every starting {math}`\cons_{0}` traces a path. The transversality condition, the counterpart of the intertemporal budget constraint, picks one:
 
 ```{math}
 :label: eq:tvc
 
 \begin{gathered}\begin{aligned}
-  \lim_{t \rightarrow \infty} \lambda_{t} e^{(\ptyGro +\popGro) t - \int_{0}^{t} r_{\tau} d\tau }k_{t} & =  0.
+  \lim_{t \rightarrow \infty} e^{-\int_{0}^{t} (r_{\tau} -\popGro -\ptyGro) d\tau }\kap_{t} & =  0,
 \end{aligned}\end{gathered}
 ```
 
+where {math}`r \equiv \prodFunc^{\prime}(\kap) - \depr`.
+
 The intuitive purpose of this unintuitive equation is basically to prevent
-the capital stock from becoming negative or infinity as time goes by.
+the capital stock from becoming negative or infinite as time goes by.
 
 Obviously a capital stock that was negative for the entire future could not
-satisfy the equation. And a capital stock that is too large will have
-an arbitrarily small interest rate, which will result in the LHS of the
-TVC being a positive number, again failing to satisfy the TVC.
+satisfy the equation. And a capital stock that is too large has an interest rate below {math}`\popGro+\ptyGro`, so the discount term grows without bound, and so does the left side of the transversality condition.
 
 {numref}`fig:RamseySaddlePlot` shows three paths for {math}`\cons` and {math}`\kap`
 that satisfy {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot`. The topmost path,
 however, is clearly on a trajectory toward zero then negative
 {math}`\kap`, while the bottommost path is heading toward an infinite
-{math}`\kap`. Only the middle path, labelled the "saddle path," satisfies
+{math}`\kap`. Only the middle path, labeled the "saddle path," satisfies
 both {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot` as well as the TVC
 {eq}`eq:tvc`.
 
@@ -344,14 +280,11 @@ both {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot` as well as the TVC
 Transition to the Steady State
 :::
 
-## Interactive Notebooks
-
-An explicit numerical solution to the Ramsey problem, with a description of a solution method and its
-mathematical/computational underpinnings, is available [here](https://github.com/llorracc/Jupyter/blob/master/notebooks/RamseyCassKoopmans.ipynb).
+How much of observed growth can the transition explain? Little, {cite:t}`king&rebelo:trans` argue: with plausible parameters, an economy far enough below its steady state for the transition to account for much of its growth would have implausibly high interest rates early on.
 
 ## Appendix: Numerical Solution
 
-The RCK model does not have an analytical solution, which means that
+The RCK model does not in general have an analytical solution, which means that
 numerical methods must be used to find out the model's quantitative
 implications for transition paths.
 
@@ -362,7 +295,7 @@ be beginning their research on growth models.
 
 The most straightforward method of numerical solution for perfect foresight
 models of this kind is called the
-'time elimination' method. It starts from the fact that
+'time elimination' method {cite:p}`Mulligan&sm:transdynam`. It starts from the fact that
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -393,4 +326,4 @@ which is a differential equation with no analytical solution. Many numerical mat
 
 There is one problem, however, which is that at the steady-state values of {math}`\cons` and {math}`\kap` both numerator and denominator of this equation are zero. The alternative is to solve the differential equation twice: Once for a domain extending from {math}`\kap=0` to {math}`\check{\kap}-\epsilon`, yielding {math}`\cFunc_{-}(\kap)`, and once for a domain from {math}`\check{\kap}+\epsilon` to some large value of {math}`\kap`, yielding {math}`\cFunc_{+}(\kap)`. The true consumption policy function can then be approximated by interpolating between the upper endpoint of {math}`\cFunc_{-}(\kap)` and the lower endpoint of {math}`\cFunc_{+}(\kap)`.
 
-For further details of the numerical solution of this model, see [this Jupyter notebook](https://github.com/llorracc/Jupyter/blob/master/notebooks/RamseyCassKoopmans.ipynb), or clone the repo and, in the cloned directory, run the corresponding python program: `ipython RamseyCassKoopmans.py`.
+{cite:t}`judd:book` covers numerical methods for saddle paths more generally. The [RamseyCassKoopmans notebook](https://github.com/llorracc/Jupyter/blob/master/notebooks/RamseyCassKoopmans.ipynb) implements this method; in a clone of its repo, `ipython RamseyCassKoopmans.py` runs the corresponding Python program.
