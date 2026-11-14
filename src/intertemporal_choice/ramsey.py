@@ -93,6 +93,8 @@ def draw_saddle(ax, k, c_kdot0, steady, saddle, paths, golden=None, c_max=None):
         middle = len(order) // 2
         _arrow(ax, kb[order], cb[order], "black", at=middle)
     ax.plot(*steady, "o", color="black", markersize=5)
+    if len(paths) > len(PATH_COLORS):
+        raise ValueError(f"draw_saddle draws at most {len(PATH_COLORS)} paths off the saddle path, not {len(paths)}")
     for (k_p, c_p), color in zip(paths, PATH_COLORS):
         ax.plot(k_p, c_p, color=color, linewidth=1.4)
         _arrow(ax, k_p, c_p, color)
