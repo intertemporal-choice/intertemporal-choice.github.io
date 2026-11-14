@@ -212,7 +212,7 @@ project:
           level: 1
         - file: content/growth/index.md
           level: 0
-        - file: content/growth/RamseyCassKoopmans.md
+        - file: content/growth/RamseyCassKoopmans/index.md
           level: 1
         - file: content/growth/RCKWithGov.md
           level: 1
