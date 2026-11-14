@@ -899,19 +899,25 @@ name = "intertemporal-choice"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "aiyagari1994qje" },
-    { name = "econ-ark" },
     { name = "ipywidgets" },
     { name = "matplotlib" },
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "pandas" },
     { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "scipy", version = "1.18.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+]
+
+[package.optional-dependencies]
+hark = [
+    { name = "aiyagari1994qje" },
+    { name = "econ-ark" },
     { name = "sympy" },
 ]
 
 [package.dev-dependencies]
 book = [
+    { name = "intertemporal-choice", extra = ["hark"] },
     { name = "ipykernel" },
     { name = "ipywidgets" },
     { name = "jupyter-server" },
@@ -931,17 +937,20 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "aiyagari1994qje", git = "https://github.com/econ-ark/Aiyagari1994QJE?rev=66ae8be37402a223ca789363191cca243b8f7324" },
-    { name = "econ-ark", specifier = ">=0.17.0" },
+    { name = "aiyagari1994qje", marker = "extra == 'hark'", git = "https://github.com/econ-ark/Aiyagari1994QJE?rev=66ae8be37402a223ca789363191cca243b8f7324" },
+    { name = "econ-ark", marker = "extra == 'hark'", specifier = ">=0.17.0" },
     { name = "ipywidgets", specifier = ">=7.6" },
     { name = "matplotlib", specifier = ">=3.8" },
     { name = "numpy", specifier = ">=2.0" },
+    { name = "pandas", specifier = ">=2.0" },
     { name = "scipy", specifier = ">=1.11" },
-    { name = "sympy", specifier = ">=1.14.0" },
+    { name = "sympy", marker = "extra == 'hark'", specifier = ">=1.14.0" },
 ]
+provides-extras = ["hark"]
 
 [package.metadata.requires-dev]
 book = [
+    { name = "intertemporal-choice", extras = ["hark"] },
     { name = "ipykernel", specifier = ">=7.3.0" },
     { name = "ipywidgets", specifier = ">=8.1.8" },
     { name = "jupyter-server", specifier = ">=2.21.0" },
