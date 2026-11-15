@@ -10,8 +10,7 @@
 version: 1
 project:
   math:
-    # --- overrides (112): renderings that differ from the registry's; the course's kept until the sources are substituted
-    '\CRRA': '\rho'  # registry: \varrho [crra]; uses book 569 questions 943
+    # --- overrides (111): renderings that differ from the registry's; the course's kept until the sources are substituted
     '\CLev': 'C'  # registry: \boldsymbol{\mathit{C}} via \CLvl; uses book 63 questions 200
     '\Target': '\check'  # registry: \hat via \TargetNrm; uses book 13 questions 146
     '\Labor': 'L'  # registry: \mathrm{L}; uses book 35 questions 104

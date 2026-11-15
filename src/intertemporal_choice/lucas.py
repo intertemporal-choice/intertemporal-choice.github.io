@@ -50,7 +50,7 @@ def draw_against_rho(ax, rho, lines, ylabel=r"$\mathsf{P}/d$", log=False):
         ax.set_yticks(ticks, [f"{v:g}" for v in ticks])  # 25, 50, 100, not 2.5 x 10^1
         ax.yaxis.set_minor_formatter(NullFormatter())
     ax.set_xlim(rho[0], rho[-1])
-    ax.set_xlabel(r"$\rho$", loc="right")
+    ax.set_xlabel(r"$\varrho$", loc="right")
     ax.set_ylabel(ylabel, loc="top", rotation=0)
     ax.legend(frameon=False)
 
