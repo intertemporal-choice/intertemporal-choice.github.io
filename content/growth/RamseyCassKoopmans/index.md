@@ -1,7 +1,7 @@
 (sec:RamseyCassKoopmans)=
 # The Ramsey/Cass-Koopmans (RCK) Model
 
-{cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth for an economy with exogenous 'labor-augmenting' technological progress. This chapter follows the textbook treatment in {cite:t}`blanchard&fischer:text`, chapter 2; {cite:t}`barro&salaimartin:book`, chapter 2, is another.
+{cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth for an economy with exogenous 'labor-augmenting' technological progress. This chapter follows the textbook treatment in {cite:t}`blanchard&fischer:text`, chapter 2; {cite:t}`barro&salaimartin:book`, chapter 2, is another. For the facts the model is meant to explain, and the Solow model it builds on, see the undergraduate textbook of {cite:t}`ashrafWeilGrowth`.
 
 ## The Budget Constraint
 
