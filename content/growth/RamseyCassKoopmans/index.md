@@ -138,11 +138,15 @@ subject to
 
 which has a discounted Hamiltonian representation
 
+:::{margin}
+If the Hamiltonian is new to you, Peter Thompson's [lecture notes on optimal control](https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf) derive the method from the economics of a firm's capital problem, and later work through this model. They call the Hamiltonian used here the current-value Hamiltonian; Wikipedia's worked example of this model, linked from the two optimization conditions, uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero.
+:::
+
 ```{math}
 \Ham(\kap,c,\lambda) = \util(c) + (\kap^{\kapShare} - \cons - (\popGro+\ptyGro+\depr)\kap)\lambda.
 ```
 
-The first [discounted Hamiltonian optimization condition](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)) requires {math}`\partial 
+The first [discounted Hamiltonian optimization condition](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model) requires {math}`\partial 
  \Ham/\partial \cons = 0`:
 
 ```{math}
@@ -155,7 +159,7 @@ The first [discounted Hamiltonian optimization condition](https://en.wikipedia.o
 \end{aligned}\end{gathered}
 ```
 
-The second discounted Hamiltonian optimization condition requires:
+The second [discounted Hamiltonian optimization condition](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model) requires:
 
 ```{math}
 \begin{gathered}\begin{aligned}
