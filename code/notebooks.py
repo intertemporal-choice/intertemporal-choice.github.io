@@ -9,7 +9,9 @@ the outputs do: an inspect-and-save leaves nothing to commit, and nothing to bui
 
 The options live here, in one place, and the three uses share them:
 
-  --install   set the filter up in this clone (once per clone; .gitattributes names it)
+  --install   set the filter up in this clone (once per clone; .gitattributes names it), and
+              the pre-commit hook that regenerates each student notebook from its _SST source
+              (code/notebook_math.py --hook)
   --check     fail if any tracked notebook is committed unstripped (the workflow runs this)
   --strip     strip the tracked notebooks in place (what the filter does, by hand)
 
@@ -35,6 +37,14 @@ ROOT = Path(__file__).resolve().parents[1]
 # version, which language_info records and which differs between environments.
 OPTIONS = ["--keep-output", "--keep-id", "--extra-keys", "metadata.language_info"]
 FILTER = "uv run nbstripout " + " ".join(OPTIONS)
+# The pre-commit hook: each student notebook regenerated from its staged _SST source, and staged.
+# A branch without the script skips it, since one hook serves every worktree of the clone.
+HOOK = """#!/bin/sh
+# Installed by code/notebooks.py --install: regenerate each student notebook from its _SST
+# source, from what is staged, and stage it (code/notebook_math.py --hook).
+[ -f code/notebook_math.py ] || exit 0
+exec uv run --locked python code/notebook_math.py --hook
+"""
 
 
 def tracked_notebooks(root: Path) -> list[str]:
@@ -57,6 +67,24 @@ def install(root: Path) -> None:
     ]:
         subprocess.run(["git", "config", key, value], cwd=root, check=True)
     log.info("nbstripout filter installed in this clone: %s", FILTER)
+    install_hook(root)
+
+
+def install_hook(root: Path) -> bool:
+    """Write the pre-commit hook, unless the clone already has a different one: that is left alone."""
+    where = subprocess.run(["git", "rev-parse", "--git-path", "hooks"], cwd=root, capture_output=True,
+                           text=True, check=True).stdout.strip()
+    hooks = Path(where) if Path(where).is_absolute() else root / where
+    hook = hooks / "pre-commit"
+    if hook.exists() and hook.read_text() != HOOK:
+        log.warning("left %s as it is, since it is not this script's: add `uv run --locked python "
+                    "code/notebook_math.py --hook` to it", hook)
+        return False
+    hooks.mkdir(parents=True, exist_ok=True)
+    hook.write_text(HOOK)
+    hook.chmod(0o755)
+    log.info("pre-commit hook installed: %s", hook)
+    return True
 
 
 def check(root: Path) -> int:
@@ -135,6 +163,15 @@ def self_test() -> bool:
             failures.append("stripping removed the kernelspec")
         if nbstripout(["--verify", str(path)], Path(tmp)) != 0:
             failures.append("--check failed a stripped notebook")
+        repo = Path(tmp) / "repo"
+        repo.mkdir()
+        subprocess.run(["git", "init", "-q"], cwd=repo, check=True)
+        hook = repo / ".git" / "hooks" / "pre-commit"
+        if not install_hook(repo) or hook.read_text() != HOOK or not hook.stat().st_mode & 0o100:
+            failures.append("the pre-commit hook was not installed, or not executable")
+        hook.write_text("#!/bin/sh\necho someone else's\n")
+        if install_hook(repo) or "someone else's" not in hook.read_text():
+            failures.append("a pre-commit hook that is not this script's was overwritten")
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")

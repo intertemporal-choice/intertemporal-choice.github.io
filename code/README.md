@@ -59,6 +59,36 @@ imports HARK or the Aiyagari code, `BOOTSTRAP` otherwise), or whose saved figure
 exactly the files in its `figures/` folder. `--print-env-hash` prints the hash CI keys its
 cache on.
 
+## `notebook_math.py`: a chapter notebook's source, `<Chapter>_SST.ipynb`
+
+The book writes every economic object with its macro (rule D, Chris Carroll 2026-11-15):
+`\CRRA`, `\kap`, `\ptyGro`. The website reads the macros' definitions, from the registry and
+the course block; Colab, Binder, JupyterLite, GitHub and VS Code do not. So a chapter whose
+notebook has been converted keeps two:
+
+```
+content/growth/RamseyCassKoopmans/
+  RamseyCassKoopmans_SST.ipynb   the source (single source of truth): math written with the macros
+  RamseyCassKoopmans.ipynb       generated from it: what the site, Colab, Binder and JupyterLite show
+```
+
+**Edit the `_SST` notebook, never the other.** The generated one has the same cells, ids and
+outputs, with every macro in its Markdown math spelled out in the LaTeX it prints, so it renders
+anywhere. The SST carries one hidden Markdown cell, tagged `notation-definitions`, with a
+`\newcommand` for each macro its Markdown uses, so the SST renders in Jupyter too; the script
+writes it, and the generated notebook leaves it out. Code is not rewritten: a figure label is
+written `notation.tex(r"$\ptyGro$ low")`, which prints the book's current symbol, so a change of
+notation reaches the figures with no edit. The site and JupyterLite never see the SST (`myst.yml`
+excludes it); `export_models.py` reads a model's cells from it.
+
+No spurious changes: the SST is read stripped by the same nbstripout command the filter uses,
+so execution counts, timings and versions never reach the generated notebook, and a file is
+rewritten only when its bytes would change. It stays current three ways: run
+`uv run python code/notebook_math.py` after editing an SST or the notation; the pre-commit hook
+(installed by `notebooks.py --install`) regenerates from what is staged and stages the result,
+and refuses a stale definitions cell or a hand-edited generated notebook; and CI's
+`notebook_math.py --check` fails when any generated file is not what the script writes.
+
 ## `notebooks.py`
 
 The one place that says how notebooks are stripped: outputs and cell ids kept, execution

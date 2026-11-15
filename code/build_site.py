@@ -17,7 +17,8 @@ by local builds.
     IC_EXEC_ENV to a hash of uv.lock, src/**/*.py, data/** and every chapter's own data/
     folder (content/<part>/<Chapter>/data/**), which puts them all into the cache key.
   - A preflight lint refuses to build when a notebook breaks the conventions the checks rely
-    on: it must sit beside its chapter as content/<part>/<Chapter>/<Chapter>.ipynb, declare the
+    on: it must sit beside its chapter as content/<part>/<Chapter>/<Chapter>.ipynb (or be that
+    notebook's source, <Chapter>_SST.ipynb, which code/notebook_math.py turns into it), declare the
     python3 kernel, declare depends_on_env in the frontmatter of its first cell, begin with the
     bootstrap cell (so a downloaded copy runs anywhere; the HARK one if it imports HARK, which is
     not part of the package's core), and the figures it saves must be
@@ -83,6 +84,7 @@ except ImportError:
 USES_HARK = re.compile(r"^[ \t]*(?:from|import)[ \t]+(?:HARK|aiyagari1994qje)\b", re.M)
 
 FRONTMATTER = re.compile(r"\A\s*---\n(.*?)\n---", re.S)
+SST = "_SST"  # <Chapter>_SST.ipynb, the source of <Chapter>.ipynb (code/notebook_math.py)
 SAVE = re.compile(r"\bsave\(\s*[^,()]+,\s*[\"']([^\"']+)[\"']")
 
 
@@ -133,11 +135,15 @@ def lint(root: Path, rel: Path, nb: dict) -> list[str]:
     """Why a notebook would build wrongly, or break the checks the build relies on."""
     problems = []
     folder = rel.parent
-    if rel.stem != folder.name or not (root / folder / "index.md").is_file() or len(folder.parts) != 3:
+    sst = rel.stem.endswith(SST)
+    name = rel.stem[: -len(SST)] if sst else rel.stem
+    if name != folder.name or not (root / folder / "index.md").is_file() or len(folder.parts) != 3:
         problems.append(
             f"{rel}: a notebook lives beside its chapter, as content/<part>/<Chapter>/<Chapter>.ipynb"
-            " next to that chapter's index.md"
+            " next to that chapter's index.md (or is its source, <Chapter>_SST.ipynb)"
         )
+    if sst and not (root / folder / f"{name}.ipynb").is_file():
+        problems.append(f"{rel}: a source notebook needs its student notebook, {name}.ipynb: run code/notebook_math.py")
     if ((nb.get("metadata") or {}).get("kernelspec") or {}).get("name") != "python3":
         problems.append(f"{rel}: the notebook's kernelspec must be python3")
     depends = ((frontmatter(nb).get("execute") or {}).get("depends_on_env")) or []
@@ -336,9 +342,12 @@ def self_test() -> bool:
         for name, where in {
             "a notebook not named after its folder": Path("content/part/Test/Other.ipynb"),
             "a notebook outside a chapter folder": Path("content/part/Test.ipynb"),
+            "a source notebook with no student notebook": Path("content/part/Test/Other_SST.ipynb"),
         }.items():
             if not lint(root, where, good_notebook()):
                 failures.append(f"preflight accepted {name}")
+        if lint(root, Path("content/part/Test/Test_SST.ipynb"), good_notebook()):
+            failures.append("preflight rejected a chapter's source notebook beside its student notebook")
         (chapter / "Test.ipynb").write_text("{not json")
         if not preflight(root):
             failures.append("preflight accepted a file that is not a notebook")

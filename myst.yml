@@ -250,6 +250,7 @@ project:
   # Exclude patterns (TOC-listed files are still built even if matched)
   # sources/ contains LaTeX originals, exports/ is build output
   exclude:
+    - "**/*_SST.ipynb" # a chapter notebook's source; the site shows the student notebook generated from it (code/notebook_math.py)
     - "sources/**"
     - "_build/**"
     - "exports/**"
