@@ -1,9 +1,11 @@
 (sec:Durables)=
 # Durables
 
-A durable good is one that provides utility over multiple periods rather than being consumed immediately. The consumer here derives utility from nondurable consumption {math}`c_{t}` as well as from a stock of durable goods {math}`d_{t}`.[^durables-sources] The consumer's goal is to
+A durable good is one that provides utility over multiple periods rather than being consumed immediately. The consumer here derives utility from nondurable consumption {math}`c_{t}` as well as from a stock of durable goods {math}`d_{t}`. The consumer's goal is to
 
-[^durables-sources]: The basic ideas in this section are derived from {cite:t}`mankiw:durgoods`. See {cite:t}`cdSs` for further discussion of the frictionless model and empirical estimates, as well as a model that incorporates transactions costs.
+:::{margin}
+The basic ideas in this section are derived from {cite:t}`mankiw:durgoods`. See {cite:t}`cdSs` for further discussion of the frictionless model and empirical estimates, as well as a model that incorporates transactions costs.
+:::
 
 ```{math}
 \max \sum_{s=t}^{T} \Discount^{s-t} \uFunc(c_{s},d_{s})
@@ -107,9 +109,11 @@ but the Envelope theorem tells us to ignore all the terms that involve {math}`\p
 \vFunc_{t}^{{m}} = \Rfree \Discount \vFunc_{t+1}^{{m}}
 ```
 
-Applying the same Envelope theorem logic for {math}`d_{t-1}` yields:[^derivative-note]
+Applying the same Envelope theorem logic for {math}`d_{t-1}` yields:
 
-[^derivative-note]: Both here and in {eq}`eq:vmt`, the derivative {math}`\vFunc^{d}_{t}` should be understood as a differentiation with respect to {math}`d_{t-1}`.
+:::{margin}
+Both here and in {eq}`eq:vmt`, the derivative {math}`\vFunc^{d}_{t}` should be understood as a differentiation with respect to {math}`d_{t-1}`.
+:::
 
 ```{math}
 :label: eq:vdvsvx
