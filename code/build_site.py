@@ -66,20 +66,31 @@ HASHED = [("uv.lock", "*"), ("src", "**/*.py"), ("data", "**/*"), ("content", "*
 # code built on it, begins with BOOTSTRAP_HARK, which installs the `hark` add-on too; every other
 # notebook begins with BOOTSTRAP. Which one is read from the notebook's imports (`bootstrap`).
 PACKAGE = "git+https://github.com/intertemporal-choice/intertemporal-choice.github.io"
+# With pip (Colab, Binder, most environments) it installs with %pip; in a Python without pip, as
+# uv makes, it installs with uv; with neither, it says so instead of failing on "No module named pip".
+NO_INSTALLER = "Neither pip nor uv can install the book's package here: choose a kernel whose Python has pip, or the course's own environment."
 BOOTSTRAP = f"""\
 # Run anywhere: install the book's package (it brings numpy, scipy and matplotlib) if it
 # is missing. Inside the book's own environment this does nothing.
 try:
     import intertemporal_choice
 except ImportError:
-    %pip install -q {PACKAGE}"""
+    import importlib.util, sys
+    if importlib.util.find_spec("pip"):
+        %pip install -q {PACKAGE}
+    else:  # a Python without pip, as uv makes: install with uv, or say what to do
+        !uv pip install -q --python {{sys.executable}} {PACKAGE} || echo "{NO_INSTALLER}\""""
 BOOTSTRAP_HARK = f"""\
 # Run anywhere: install the book's package with its HARK add-on if either is missing.
 # Inside the book's own environment this does nothing.
 try:
     import intertemporal_choice, HARK, aiyagari1994qje
 except ImportError:
-    %pip install -q "intertemporal-choice[hark] @ {PACKAGE}\""""
+    import importlib.util, sys
+    if importlib.util.find_spec("pip"):
+        %pip install -q "intertemporal-choice[hark] @ {PACKAGE}"
+    else:  # a Python without pip, as uv makes: install with uv, or say what to do
+        !uv pip install -q --python {{sys.executable}} "intertemporal-choice[hark] @ {PACKAGE}" || echo "{NO_INSTALLER}\""""
 USES_HARK = re.compile(r"^[ \t]*(?:from|import)[ \t]+(?:HARK|aiyagari1994qje)\b", re.M)
 
 FRONTMATTER = re.compile(r"\A\s*---\n(.*?)\n---", re.S)
