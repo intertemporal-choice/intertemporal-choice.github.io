@@ -130,7 +130,7 @@ Suppose our definition of optimality reflects the choices that would be made by 
 [^time-inconsistency]: The old at time {math}`t` are generation {math}`t-1`, so the planner weights their old-age utility by their own {math}`\Discount` and, as an earlier generation, by {math}`\beth^{-1}`. With any other weight the planner at {math}`t` would value the old relative to the young differently than the planner at {math}`t-1` did, and would revise that planner's plan: the problem would be time inconsistent.
 
 ```{math}
-\VLev_{t} = \beth^{-1}\Discount \uFunc(\cLev_{2,t}) + \sum_{n=0}^{\infty} \beth^{n} \vLev_{t+n}
+\VLev_{t} = \beth^{-1}\Discount \uFunc(\cLev_{2,t}) + \sum_{j=0}^{\infty} \beth^{j} \vLev_{t+j}
 ```
 
 subject to the economy's aggregate resource constraint

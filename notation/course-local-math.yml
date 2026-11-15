@@ -10,11 +10,10 @@
 version: 1
 project:
   math:
-    # --- overrides (112): renderings that differ from the registry's; the course's kept until the sources are substituted
+    # --- overrides (110): renderings that differ from the registry's; the course's kept until the sources are substituted
     '\CRRA': '\rho'  # registry: \varrho [crra]; uses book 569 questions 943
     '\CLev': 'C'  # registry: \boldsymbol{\mathit{C}} via \CLvl; uses book 63 questions 200
     '\Target': '\check'  # registry: \hat via \TargetNrm; uses book 13 questions 146
-    '\popGro': '\xi'  # registry: \PopnGroRte via \popGroRte; uses book 64 questions 86
     '\Labor': 'L'  # registry: \mathrm{L}; uses book 35 questions 104
     '\CARA': '\alpha'  # registry: \upsilon [cara]; uses book 35 questions 98
     '\pLevBF': '\mathbf{p}'  # registry: \boldsymbol{\mathit{p}} via \pLvl; uses book 80 questions 32
@@ -103,7 +102,6 @@ project:
     '\oLevBF': '\mathbf{o}'  # registry: \boldsymbol{\mathit{o}} via \oLvl; uses book 0 questions 0
     '\PLevBF': '\mathbf{P}'  # registry: \boldsymbol{\mathit{P}} via \PLvl; uses book 0 questions 0
     '\pNotZero': '\cancel{\wp}'  # registry: (1-\pZero); uses book 0 questions 0
-    '\popRte': '\popGro'  # registry: \PopnGroRte via \popGroRte; uses book 0 questions 0
     '\QLev': 'Q'  # registry: \boldsymbol{\mathit{Q}} via \QLvl; uses book 0 questions 0
     '\RLev': 'R'  # registry: \boldsymbol{\mathit{R}} via \RLvl; uses book 0 questions 0
     '\SLevBF': '\mathbf{S}'  # registry: \boldsymbol{\mathit{S}} via \SLvl; uses book 0 questions 0
@@ -224,7 +222,7 @@ project:
     '\TaxFree': '\cancel{\Tax}'  # uses book 30 questions 24
     '\PostITC': '\cancel{\zeta}'  # uses book 10 questions 0
     # --- local-unclassified (0): objects the registry lacks: not yet classified
-    # --- aliases (101): course names for registry objects, same rendering: pure renames to retire
+    # --- aliases (103): course names for registry objects, same rendering: pure renames to retire
     '\ARat': '\ANrm'  # alias of the registry's macro
     '\aRat': '\aNrm'  # alias of the registry's macro
     '\BRat': '\BNrm'  # alias of the registry's macro
@@ -267,6 +265,8 @@ project:
     '\PGrouAdj': '\PermGroFacuAdj'  # alias of the registry's macro
     '\PopFac': '\PopGroFac'  # alias of the registry's macro
     '\PopGro': '\PopGroFac'  # alias of the registry's macro
+    '\popGro': '\popGroRte'  # alias of the registry's macro
+    '\popRte': '\popGroRte'  # alias of the registry's macro
     '\pRat': '\pNrm'  # alias of the registry's macro
     '\ProdFunc': '\FFunc'  # alias of the registry's macro
     '\prodFunc': '\fFunc'  # alias of the registry's macro
