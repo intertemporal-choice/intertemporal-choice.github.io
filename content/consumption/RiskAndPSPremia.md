@@ -65,9 +65,11 @@ in which the second factor is the coefficient of absolute risk aversion. The ide
 \mu^{*} \approx \left(\frac{\sigma^{2}}{2}\right)\left(\frac{-\uPPP(\bar{\cons})}{\uPP(\bar{\cons})}\right),
 ```
 
-in which the second factor is what Kimball calls the coefficient of absolute prudence. Absolute prudence therefore stands to the precautionary premium exactly as absolute risk aversion stands to the risk premium.[^kimball-relative]
+in which the second factor is what Kimball calls the coefficient of absolute prudence. Absolute prudence therefore stands to the precautionary premium exactly as absolute risk aversion stands to the risk premium.
 
-[^kimball-relative]: Multiplying each coefficient by {math}`\bar{\cons}` yields the relative measures, relative risk aversion {math}`-\bar{\cons}\uPP/\uP` and relative prudence {math}`-\bar{\cons}\uPPP/\uPP`.
+:::{margin}
+Multiplying each coefficient by {math}`\bar{\cons}` yields the relative measures, relative risk aversion {math}`-\bar{\cons}\uPP/\uP` and relative prudence {math}`-\bar{\cons}\uPPP/\uPP`.
+:::
 
 For the CRRA utility function used throughout these notes, absolute risk aversion is {math}`\CRRA/\bar{\cons}` while absolute prudence is {math}`(\CRRA+1)/\bar{\cons}`. Two things follow. First, prudence is implied by risk aversion in this family, so any CRRA consumer who dislikes risk also saves against it. Second, prudence strictly exceeds risk aversion, so {math}`\mu^{*}>\pi^{*}`: the risk moves behavior by more than it moves welfare. That the two coefficients differ by exactly one unit of relative curvature is a special feature of CRRA, not a general result.
 
