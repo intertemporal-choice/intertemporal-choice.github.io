@@ -10,7 +10,7 @@
 version: 1
 project:
   math:
-    # --- overrides (110): renderings that differ from the registry's; the course's kept until the sources are substituted
+    # --- overrides (112): renderings that differ from the registry's; the course's kept until the sources are substituted
     '\CRRA': '\rho'  # registry: \varrho [crra]; uses book 569 questions 943
     '\CLev': 'C'  # registry: \boldsymbol{\mathit{C}} via \CLvl; uses book 63 questions 200
     '\Target': '\check'  # registry: \hat via \TargetNrm; uses book 13 questions 146
@@ -121,6 +121,8 @@ project:
     '\zLev': 'z'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
     '\ZLevBF': '\mathbf{Z}'  # registry: \boldsymbol{\mathit{Z}} via \ZLvl; uses book 0 questions 0
     '\zLevBF': '\mathbf{z}'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
+    '\PtyGroFac': '\mathrm{G}'  # registry: \mathcal{G}; roman, as \WGroFac, on Chris's ruling of 2026-11-15 14:45:52 EST, until a registry release carries it
+    '\PtyGroRte': '\mathrm{g}'  # registry: g; roman, as \WGroRte, on Chris's ruling of 2026-11-15 14:45:52 EST, until a registry release carries it
     # --- local-upstream (33): objects the registry lacks: candidates for registry rows
     '\Price': '\mathsf{P}'  # uses book 190 questions 206
     '\dvdnd': 'd'  # uses book 151 questions 213
