@@ -10,8 +10,7 @@
 version: 1
 project:
   math:
-    # --- overrides (121): renderings that differ from the registry's; the course's kept until the sources are substituted
-    '\CRRA': '\rho'  # registry: \varrho [crra]; uses book 569 questions 943
+    # --- overrides (120): renderings that differ from the registry's; the course's kept until the sources are substituted
     '\ptyGro': '\phi'  # registry: \PtyGroRte via \ptyGroRte; uses book 36 questions 244
     '\CLev': 'C'  # registry: \boldsymbol{\mathit{C}} via \CLvl; uses book 63 questions 200
     '\PGro': '\Gamma'  # registry: \mathsf{G} via \PermGroFac [growth-factor]; uses book 29 questions 196
