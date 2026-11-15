@@ -732,7 +732,7 @@ The foregoing scenario assumed that the "stake" is provided by a mysterious "ben
 The size of the required tax rate is calculated as follows. The total size of the resources transferred to the newborn generation must be
 
 ```{math}
-\check{\bNrm}^{e}_{t,t} = \check{\bNrm} \PopnLvl_{t,t} \check{\Wage}_{t}
+\check{\BLvl}^{e}_{t,t} = \check{\bNrm} \PopnLvl_{t,t} \check{\Wage}_{t}
 ```
 
 where
