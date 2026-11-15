@@ -30,7 +30,7 @@ def draw_share(ax, rho, share):
     """The chapter's first figure: the risky share at each degree of relative risk aversion."""
     ax.plot(rho, share, color="C0")
     ax.set_xlim(rho[0], rho[-1])
-    ax.set_xlabel(r"$\rho$", loc="right")
+    ax.set_xlabel(r"$\varrho$", loc="right")
     ax.set_ylabel(r"$\varsigma$", loc="top", rotation=0)
 
 
@@ -39,7 +39,7 @@ def draw_error(ax, rho, error):
     ax.plot(rho, error, color="C0")
     ax.axhline(0, color="black", linewidth=0.6)
     ax.set_xlim(rho[0], rho[-1])
-    ax.set_xlabel(r"$\rho$", loc="right")
+    ax.set_xlabel(r"$\varrho$", loc="right")
     ax.set_ylabel("exact minus approximate share", loc="top")
 
 
@@ -75,11 +75,11 @@ def sliders(share_approx, share_exact, rho=RHO):
         left.axhline(1, color="0.6", linewidth=0.6)
         left.set_ylim(0, top)
         left.set_xlim(rho[0], rho[-1])
-        left.set_xlabel(r"$\rho$", loc="right")
+        left.set_xlabel(r"$\varrho$", loc="right")
         left.set_ylabel(r"$\varsigma$", loc="top", rotation=0)
         left.legend(loc="upper right", fontsize=9)
         left.text(0.97, 0.70, f"Sharpe ratio $\\varphi/\\sigma$ = {phi / sigma:.2f}\n"
-                  f"at $\\rho$ = 2: {share_approx(2.0, phi, sigma):.3f} approximate, "
+                  f"at $\\varrho$ = 2: {share_approx(2.0, phi, sigma):.3f} approximate, "
                   f"{share_exact(2.0, phi, sigma):.3f} exact",
                   transform=left.transAxes, ha="right", va="top", fontsize=9)
         draw_error(right, rho, exact - approx)

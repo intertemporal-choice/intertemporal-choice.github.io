@@ -35,3 +35,7 @@
 
 # 2026-10-31: the bond-premium figures merged into the capital-market imperfections chapter
 /content/investment/imperfections               /content/investment/dynanimperfcapmkts
+
+# 2026-11-14: the chapter appendices left Supplemental Notes for a part of their own, Chapter Appendices
+/content/supplemental/appendices                /content/appendices/chapters
+/content/supplemental/appendices/perfforesightcrra  /content/appendices/chapters/perfforesightcrra

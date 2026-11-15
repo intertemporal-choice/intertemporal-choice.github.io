@@ -134,9 +134,11 @@ which the envelope theorem says is equivalent to
 \vFunc^{\mRat}_{t} = \Discount  \Rfree \vFunc_{t+1}^{\mRat}.
 ```
 
-There is a potentially confusing thing about doing it this way, however: when you reach an expression like {eq}`eq:partialx` it is tempting to think to yourself as follows: "{math}`c_{t}` is a function of {math}`\mRat_{t}`, and {math}`\habit_{t+1}=c_{t}` is also indirectly a function of {math}`\mRat_{t}`, so the chain rule tells me that when I take the derivative in {eq}`eq:partialx` I need to keep track of these." In fact, you must treat {math}`\partial c_{t}/\partial \mRat_{t}` and {math}`\partial \habit_{t+1}/\partial \mRat_{t}` as zero here. The reason is that this is a *partial* derivative with respect to {math}`\mRat_{t}`. The dependence of {math}`c_{t}` (and indirectly {math}`\habit_{t+1}`) on {math}`\mRat_{t}` has already been taken care of in the two terms in {eq}`eq:vx` that were equal to zero. The confusion here is caused largely by the fact that partial differentiation is an area where standard mathematical notation is basically confusing and poorly chosen.[^partial-diff-notation]
+There is a potentially confusing thing about doing it this way, however: when you reach an expression like {eq}`eq:partialx` it is tempting to think to yourself as follows: "{math}`c_{t}` is a function of {math}`\mRat_{t}`, and {math}`\habit_{t+1}=c_{t}` is also indirectly a function of {math}`\mRat_{t}`, so the chain rule tells me that when I take the derivative in {eq}`eq:partialx` I need to keep track of these." In fact, you must treat {math}`\partial c_{t}/\partial \mRat_{t}` and {math}`\partial \habit_{t+1}/\partial \mRat_{t}` as zero here. The reason is that this is a *partial* derivative with respect to {math}`\mRat_{t}`. The dependence of {math}`c_{t}` (and indirectly {math}`\habit_{t+1}`) on {math}`\mRat_{t}` has already been taken care of in the two terms in {eq}`eq:vx` that were equal to zero. The confusion here is caused largely by the fact that partial differentiation is an area where standard mathematical notation is basically confusing and poorly chosen.
 
-[^partial-diff-notation]: Google the string "partial differentiation confusing OCW" to find a fuller description of the problems of standard notation on partial differentiation.
+:::{margin}
+Google the string "partial differentiation confusing OCW" to find a fuller description of the problems of standard notation on partial differentiation.
+:::
 
 The shortest way to obtain the end result is, as in the single variable problem, to start with Bellman's equation and take the partial derivative with respect to {math}`\mRat_{t}` directly (treating the problem as though {math}`c_{t}` were a constant):
 

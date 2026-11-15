@@ -128,9 +128,11 @@ Now suppose that the consumer's utility is *time-separable*, and the felicity fu
 \ValueFunc(\cNbr_{1},\cNbr_{2}) = \uFunc(\cNbr_{1})+\DiscFac \uFunc(\cNbr_{2})
 ```
 
-where {math}`\DiscFac` is a *time preference factor* that specifies how the consumer trades off utility in period 1 against utility in period 2.[^samuelson]
+where {math}`\DiscFac` is a *time preference factor* that specifies how the consumer trades off utility in period 1 against utility in period 2.
 
-[^samuelson]: Paul {cite:t}`samuelson1937note,samuelsonOLG` introduced the discounting of future utility into the problem. See {cite:t}`floDiscounting` for a comprehensive review of the still-controversial topic of time discounting.
+:::{margin}
+Paul {cite:t}`samuelson1937note,samuelsonOLG` introduced the discounting of future utility into the problem. See {cite:t}`floDiscounting` for a comprehensive review of the still-controversial topic of time discounting.
+:::
 
 From our assumptions {eq}`eq:uprimepos` and {eq}`eq:uprimeprimeneg` we know that the felicity function must satisfy
 
@@ -250,9 +252,11 @@ Thus, we have solved the two-period life cycle saving problem for the *consumpti
 
 One of the surprising features of the solution goes by the name of "Fisherian Separation": Notice that the *profile* of consumption growth over the lifetime is given by {eq}`eq:c1euler` *regardless of the shape of the income profile*. For two consumers with the same total amount of lifetime wealth (combined {math}`\bNbr_{1}` and {math}`\hNbr_{1}`), the level and growth rates of consumption over the lifetime will be identical whether the consumer's lifetime wealth is entirely concentrated in the first period (that is, {math}`\hNbr_{1}=0`), entirely concentrated in the last period ({math}`\bNbr_{1}=0`), split half-and-half, or organized any other way. Fisherian Separation is a pervasive feature of models that combine perfect foresight and a lack of liquidity constraints.
 
-A common assumption (for simplicity, not realism) is that {math}`\CRRA=1`, which is equivalent to assuming that the utility function is logarithmic:[^crralim]
+A common assumption (for simplicity, not realism) is that {math}`\CRRA=1`, which is equivalent to assuming that the utility function is logarithmic:
 
-[^crralim]: See the math fact showing that {math}`\lim_{\CRRA \rightarrow 1} \frac{c^{1-\CRRA}}{1-\CRRA} = \log c` in the [Math Facts section](#fact:mathfactslist).
+:::{margin}
+See the math fact showing that {math}`\lim_{\CRRA \rightarrow 1} \frac{c^{1-\CRRA}}{1-\CRRA} = \log c` in the [Math Facts section](#fact:mathfactslist).
+:::
 
 ```{math}
 \lim_{\CRRA \rightarrow 1} \frac{\cNbr^{1-\CRRA}}{1-\CRRA} = \log c.
