@@ -40,7 +40,7 @@ MACROS = {
     '\\CLevBF': '\\mathbf{C}',
     '\\CLvl': '\\boldsymbol{\\mathit{C}}',
     '\\CNrm': 'C',
-    '\\CRRA': '\\rho',
+    '\\CRRA': '\\varrho',
     '\\CRat': '\\CNrm',
     '\\Chi': '\\mathrm{X}',
     '\\Cnct': 'Connector',

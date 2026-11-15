@@ -149,10 +149,17 @@ def is_definitions(cell) -> bool:
     return TAG in (cell.get("metadata", {}).get("tags") or [])
 
 
+# The book's notebooks run on the python3 kernel (the lint, CI, MyST and Colab rely on it); a kernel
+# chosen in an editor, which writes its own name here, is put back.
+KERNELSPEC = {"display_name": "Python 3 (ipykernel)", "language": "python", "name": "python3"}
+
+
 def with_definitions(nb, macros: dict[str, str]):
     """The SST with its definitions cell current: first, after the frontmatter cell, since MathJax
-    defines a macro only for the math that comes after the definition."""
+    defines a macro only for the math that comes after the definition. Its kernelspec is python3."""
     nb = copy.deepcopy(nb)
+    if (nb.metadata.get("kernelspec") or {}).get("name") != "python3":
+        nb.metadata["kernelspec"] = dict(KERNELSPEC)
     used = set()
     for cell in nb.cells:
         if cell.cell_type == "markdown" and not is_definitions(cell):
@@ -271,7 +278,7 @@ def hook(root: Path) -> int:
         if current == text:
             continue
         if path.name.endswith(f"{SUFFIX}.ipynb"):
-            problems.append(f"{path}: its definitions cell is not current: run code/notebook_math.py and add it again")
+            problems.append(f"{path}: its definitions cell or its kernelspec is not current: run code/notebook_math.py and add it again")
             continue
         head = git_text(root, f"HEAD:{path.as_posix()}")
         if raw is not None and head is not None and raw != head:
@@ -340,6 +347,13 @@ def self_test() -> bool:
         failures.append("the outputs were not carried over, or an execution count was")
     if n.metadata.get("intertemporal_choice", {}).get("generated_from") != "T_SST.ipynb":
         failures.append("the student notebook does not say which SST it was generated from")
+    if s.metadata["kernelspec"] != {"name": "python3", "display_name": "Python 3", "language": "python"}:
+        failures.append("a python3 kernelspec was rewritten")
+    editor = nbformat.reads(one, as_version=4)
+    editor.metadata["kernelspec"] = {"name": "perfforesight-approx", "display_name": "Another env", "language": "python"}
+    s3, n3 = (nbformat.reads(x, as_version=4) for x in generate(nbformat.writes(editor), macros, "T_SST.ipynb"))
+    if s3.metadata["kernelspec"] != KERNELSPEC or n3.metadata["kernelspec"] != KERNELSPEC:
+        failures.append("a kernel chosen in an editor was not put back to python3 in the SST and the student notebook")
     if notebooks.OPTIONS != ["--keep-output", "--keep-id", "--extra-keys", "metadata.language_info"]:
         failures.append("code/notebooks.py's options changed: check that stripped() still matches the filter")
     with tempfile.TemporaryDirectory() as tmp:
