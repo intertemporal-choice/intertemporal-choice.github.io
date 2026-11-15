@@ -96,9 +96,11 @@ where {math}`h_{0,i}` is human wealth,
 
 Each household solves the standard optimization problem taking
 the future paths of wages and interest rates as *given*. Thus
-the Hamiltonian[^p637GulAXn] is
+the Hamiltonian is
 
-[^p637GulAXn]: See the [RCK model](#sec:RamseyCassKoopmans) section for the discounted Hamiltonian optimality conditions and the [discrete and continuous time](#sec:HamiltonianVSDiscrete) appendix for the intuition of the logic behind the Hamiltonian.
+:::{margin}
+See the [RCK model](#sec:RamseyCassKoopmans) section for the discounted Hamiltonian optimality conditions and the [discrete and continuous time](#sec:HamiltonianVSDiscrete) appendix for the intuition of the logic behind the Hamiltonian.
+:::
 
 ```{math}
 \Ham(\cons_{t,i},\wNet_{t,i},\lambda_{t,i}) = \uFunc(\cons_{t,i}) + (\rfree_{t}\wNet_{t,i}+\Wage_{t}-\cons_{t,i})\lambda_{t,i}
@@ -138,7 +140,7 @@ in this economy, each of which has a production function identical to
 the aggregate Cobb-Douglas production function.
 
 :::{margin}
-Because of the perfect competition and constant-returns assumptions, the exact number of firms does not matter. Firms are 'atomistic' in the same way households are, and like households they take {math}`\Wage_{t}` and {math}`\rfree_{t}` as given.
+With perfect competition and constant returns, the number of firms is irrelevant; like households, firms are atomistic price-takers.
 :::
 
 Perfect competition
@@ -221,15 +223,17 @@ household. This assumption rules out the presence of any debt in
 equilibrium (if all households are identical, they cannot all be in
 debt: who would they owe the money to?). Indeed, in this case, the
 aggregate capital stock per capita will equal the aggregate level of
-net worth, {math}`\kap_{t}=\wNet_{t}`.[^byRa82hkCt]
+net worth, {math}`\kap_{t}=\wNet_{t}`.
 
-[^byRa82hkCt]: The results do not change if we permit differences in the
-    levels of wealth across households, but this is because we are assuming
-    CRRA utility, perfect certainty, perfect capital markets, and various
-    other things. When any of these assumptions is relaxed, the distribution
-    of assets does matter. For exploration of this more complex and realistic
-    framework, see {cite:t}`carroll:brookings`, {cite:t}`aiyagari:ge`,
-    {cite:t}`ksHetero`, {cite:t}`carrollRequiem`.
+:::{margin}
+The results do not change if we permit differences in the
+levels of wealth across households, but this is because we are assuming
+CRRA utility, perfect certainty, perfect capital markets, and various
+other things. When any of these assumptions is relaxed, the distribution
+of assets does matter. For exploration of this more complex and realistic
+framework, see {cite:t}`carroll:brookings`, {cite:t}`aiyagari:ge`,
+{cite:t}`ksHetero`, {cite:t}`carrollRequiem`.
+:::
 
 Thus, households' expectations about {math}`\Wage_{t}` and
 {math}`\rfree_{t}` determine their saving decisions, which in turn determine the

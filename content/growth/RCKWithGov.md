@@ -1,11 +1,13 @@
 (sec:RCKWithGov)=
 # The Ramsey/Cass-Koopmans (RCK) Model with Government
 
-This section solves the Ramsey/Cass-Koopmans (RCK) model with government.[^HjCxMX4C0F]
+This section solves the Ramsey/Cass-Koopmans (RCK) model with government.
+
+:::{margin}
+The treatment is similar to that in {cite:t}`blanchard&fischer:text`; see that source for more details.
+:::
 
 For simplicity we assume no technological progress, population growth, or depreciation, and a continuum of consumers with mass 1 distributed on the unit interval as per the [Aggregation](#sec:Aggregation) appendix.
-
-[^HjCxMX4C0F]: The treatment is similar to that in {cite:t}`blanchard&fischer:text`; see that source for more details.
 
 Consider first the case where government is financed by constant
 lump-sum taxes of amount {math}`\Tax` per period, and spending is at rate

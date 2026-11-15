@@ -12,15 +12,21 @@ The [consumption out of risky assets](#sec:CRRA-RateRisk) section shows that for
 where the precautionary effect of financial risk on the MPC is captured by the {math}`-(\CRRA-1)\left(\sigma_{\riskyAlt}^{2}/2\right)` term. Since {math}`\CRRA > 1` by assumption, this equation yields the plausible conclusion that an increase in *unavoidable* financial risk {math}`\sigma_{\riskyAlt}^{2}` reduces the level of consumption.
 
 We are interested here in understanding how the results change when the consumer
-can choose how much to invest in the risky asset, so that financial risk can be avoided by reducing the share of the portfolio allocated to the risky asset. The [CRRA portfolio choice](#sec:Portfolio-CRRA) section derives the portfolio share {math}`\riskyshare` that an optimizing consumer will invest in a risky asset earning return {math}`\log \RiskyAlt_{t+1} \sim \mathcal{N}(\riskyAlt - \sigma^{2}_{\riskyAlt}/2,\sigma^{2}_{\riskyAlt})`, so that {math}`\log \RiskyAlt = \riskyAlt` (where the subscriptless version of a variable denotes its expectation unless otherwise noted, e.g. {math}`\RiskyAlt \equiv \Ex_{t}[\RiskyAlt_{t+1}]`).[^footnote-lognormal]
+can choose how much to invest in the risky asset, so that financial risk can be avoided by reducing the share of the portfolio allocated to the risky asset. The [CRRA portfolio choice](#sec:Portfolio-CRRA) section derives the portfolio share {math}`\riskyshare` that an optimizing consumer will invest in a risky asset earning return {math}`\log \RiskyAlt_{t+1} \sim \mathcal{N}(\riskyAlt - \sigma^{2}_{\riskyAlt}/2,\sigma^{2}_{\riskyAlt})`, so that {math}`\log \RiskyAlt = \riskyAlt` (where the subscriptless version of a variable denotes its expectation unless otherwise noted, e.g. {math}`\RiskyAlt \equiv \Ex_{t}[\RiskyAlt_{t+1}]`).
 
-[^footnote-lognormal]: (See fact [LogMeanMPS](#fact:logmeanmps), and note that {math}`\RiskyAlt=\Risky` under the given assumptions; that is, an increase in the degree of risk {math}`\sigma^{2}_{\riskyAlt}` does not change the expected return factor in levels). Note that the subscriptless version of the log of the risky return, {math}`\riskyAlt_{t+1}`, is *not* equal to its mean: {math}`\Ex_{t}[\riskyAlt_{t+1}] = \riskyAlt-\sigma^{2}_{\riskyAlt}/2`.
+:::{margin}
+(See fact [LogMeanMPS](#fact:logmeanmps), and note that {math}`\RiskyAlt=\Risky` under the given assumptions; that is, an increase in the degree of risk {math}`\sigma^{2}_{\riskyAlt}` does not change the expected return factor in levels). Note that the subscriptless version of the log of the risky return, {math}`\riskyAlt_{t+1}`, is *not* equal to its mean: {math}`\Ex_{t}[\riskyAlt_{t+1}] = \riskyAlt-\sigma^{2}_{\riskyAlt}/2`.
+:::
 
-The remaining proportion {math}`(1-\riskyshare)` of the portfolio earns a riskless return {math}`\rfree = \log \Rfree`,[^riskfree-notation] and we write the log expected return premium factor as {math}`\EPrem \equiv \RiskyAlt/\Rfree` with log expected return premium {math}`\EpremLog \equiv \log \EPrem = \riskyAlt-\rfree = \log \RiskyAlt/\Rfree`; optimal choice of {math}`\riskyshare` yields a portfolio whose realized return factor is written {math}`\Rport` and the log of whose realization is well approximated by[^approximation-quality]
+The remaining proportion {math}`(1-\riskyshare)` of the portfolio earns a riskless return {math}`\rfree = \log \Rfree`, and we write the log expected return premium factor as {math}`\EPrem \equiv \RiskyAlt/\Rfree` with log expected return premium {math}`\EpremLog \equiv \log \EPrem = \riskyAlt-\rfree = \log \RiskyAlt/\Rfree`; optimal choice of {math}`\riskyshare` yields a portfolio whose realized return factor is written {math}`\Rport` and the log of whose realization is well approximated by
 
-[^riskfree-notation]: The bold font is used for the risky return and the narrow font for the safe return.
+:::{margin}
+The bold font is used for the risky return and the narrow font for the safe return.
+:::
 
-[^approximation-quality]: See the [CRRA portfolio choice](#sec:Portfolio-CRRA) section for a figure examining the quality of the approximation.
+:::{margin}
+See the [CRRA portfolio choice](#sec:Portfolio-CRRA) section for a figure examining the quality of the approximation.
+:::
 
 ```{math}
 :label: eq:portLogPrem
