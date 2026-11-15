@@ -38,9 +38,9 @@ produce perpetually more as time goes by with the same amount of
 physical capital. The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
 
 :::{margin}
-This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With a Cobb-Douglas production function the three are the same thing at different rates. With any other production function, a steady state with constant growth rates requires progress to be labor-augmenting (Uzawa 1961; Jones and Scrimgeour 2008 give a short proof).
+This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With a Cobb-Douglas production function the three are the same thing at different rates. With any other production function, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`; {cite:t}`jonesScrimgeourUzawa` give a short proof.
 
-Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`\Kap`. Solow (1960) and Phelps (1962) showed that steady-state growth does not depend on how much of technical progress is embodied in new capital, though convergence is faster the more of it is embodied; so the simpler disembodied form delivers the same steady-state growth rate.
+Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`\Kap`. {cite:t}`solowEmbodied` and {cite:t}`phelpsNewView` showed that steady-state growth does not depend on how much of technical progress is embodied in new capital, though convergence is faster the more of it is embodied; so the simpler disembodied form delivers the same steady-state growth rate.
 :::
 
 Aggregate capital accumulates according to
@@ -223,7 +223,7 @@ steady-state. The usual method for analyzing
 models of this kind is a [phase diagram](https://en.wikipedia.org/wiki/Phase_diagram) in {math}`\cons` and {math}`\kap`.
 
 :::{margin}
-The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` (Smith 2006). The saddle path is then the ray {math}`\cons = \left((\timeRate + (1-\kapShare)(\popGro+\depr))/\kapShare\right)\kap` through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - \left((\timeRate+\popGro+\depr)/\kapShare + \ptyGro\right)\kap` is a Bernoulli equation, so the transition has a closed form.
+The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` {cite:p}`smithClosedForm`. The saddle path is then the ray {math}`\cons = \left((\timeRate + (1-\kapShare)(\popGro+\depr))/\kapShare\right)\kap` through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - \left((\timeRate+\popGro+\depr)/\kapShare + \ptyGro\right)\kap` is a Bernoulli equation, so the transition has a closed form.
 :::
 
 The first step in constructing the phase diagram is to take the differential
@@ -299,7 +299,7 @@ be beginning their research on growth models.
 
 The most straightforward method of numerical solution for perfect foresight
 models of this kind is called the
-'time elimination' method (Mulligan and Sala-i-Martin 1993). It starts from the fact that
+'time elimination' method {cite:p}`Mulligan&sm:transdynam`. It starts from the fact that
 
 ```{math}
 \begin{gathered}\begin{aligned}
