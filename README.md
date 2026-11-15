@@ -70,6 +70,12 @@ Derivations and methods useful for macroeconomics:
 - Useful facts for graduate macroeconomics
 - Aggregation methods
 
+### Chapter Appendices
+
+Each chapter's appendix: the derivations of results the chapter states without proof, on the website and in the PDF:
+
+- Consumption under perfect foresight and CRRA utility
+
 ### Supplemental Notes
 
 Notes that supplement the main chapters, on the website only and not in the PDF:
@@ -81,7 +87,6 @@ Notes that supplement the main chapters, on the website only and not in the PDF:
 - An entrepreneur's problem under perfect foresight
 - The q-Ramsey model, and gross saving and growth in the RCK model
 - Equiprobable approximations to lognormal distributions
-- Chapter appendices: derivations of results a chapter states without proof
 
 ## License
 

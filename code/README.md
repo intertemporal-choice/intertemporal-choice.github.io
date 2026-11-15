@@ -17,7 +17,8 @@ The chapter is `index.md` so that its address stays `/content/consumption/envelo
 notebook is a plain `.ipynb`, committed **with** its outputs, so GitHub, Colab and a
 downloaded copy show the figures. Its first code cell installs the book's own package
 (which brings numpy, scipy and matplotlib) if it is missing, so it runs anywhere with
-`pip`; inside the book's environment that cell does nothing. A notebook that imports HARK
+`pip`, or with `uv` in a Python that has no pip (it says so if it has neither); inside the book's
+environment that cell does nothing. A notebook that imports HARK
 installs the package with its `hark` add-on instead, since HARK is not part of the core. Every figure cell ends with
 `style.save(fig, "<name>")`, from the shared `intertemporal_choice` package in `src/`,
 which writes `figures/<name>.png` deterministically (no version or date metadata, fixed
