@@ -11,7 +11,7 @@ whenever a page moves, so the Markdown is left alone and the fix happens here:
   1. stage a copy of the project in _build/pdf-src
   2. in the staged Markdown only, rewrite each `](#fact:...)` link to the fact's anchor
      on the site, so the export keeps it as a link; likewise each link to a label on a
-     page the PDF leaves out (the Supplemental Notes, chapter appendices among them),
+     page the PDF leaves out (the Supplemental Notes),
      which MyST would otherwise export as a \\ref to a label the PDF lacks, printed "??"
   3. run `myst build --pdf` in the staged copy
   4. rewrite every `\\href{/` in the generated LaTeX to an absolute URL on the site, and
