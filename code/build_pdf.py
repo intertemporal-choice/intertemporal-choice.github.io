@@ -15,7 +15,8 @@ whenever a page moves, so the Markdown is left alone and the fix happens here:
      as a \\ref to a label the PDF lacks, printed "??". A link with words to a label the
      PDF has, `[the golden rule](#eq:RCK-goldenRule)`, MyST would print as its number
      alone, "(7)", losing the words; it is pointed at a placeholder address instead, so
-     the export keeps the words
+     the export keeps the words. A `{margin}` note, which MyST's PDF export leaves out
+     altogether, becomes a footnote on the paragraph before it, so the PDF keeps it
   3. run `myst build --pdf` in the staged copy
   4. in the generated LaTeX, turn each placeholder link into `\\hyperref[label]{words}`, a
      link inside the PDF that keeps its words; give each page's first heading the labels
@@ -341,6 +342,60 @@ def internalize_tex() -> list[str]:
     return failures
 
 
+MARGIN = re.compile(r"^:::\{margin\}[^\n]*\n(.*?)\n:::[ \t]*$", re.S | re.M)
+FENCE_LINE = re.compile(r"^\s*(`{3,}|:{3,})")
+
+
+def margins_to_footnotes(text: str) -> tuple[str, int]:
+    """Each `{margin}` note as a footnote: its marker at the end of the last line of prose before
+    it (outside any fenced block, and not a heading or a label), its text as the definition, where
+    the note was. MyST's PDF export drops margin notes; the site keeps them in the margin."""
+    lines = text.split("\n")
+    fenced, inside = [False] * len(lines), None  # which lines sit inside a fenced block
+    for i, line in enumerate(lines):
+        m = FENCE_LINE.match(line)
+        if inside is None:
+            if m:
+                inside, fenced[i] = m.group(1), True
+        else:
+            fenced[i] = True
+            if line.strip() == inside:
+                inside = None
+    notes = []
+    for number, m in enumerate(MARGIN.finditer(text), 1):
+        first = text[: m.start()].count("\n")
+        anchor = next((j for j in range(first - 1, -1, -1)
+                       if lines[j].strip() and not fenced[j] and not lines[j].lstrip().startswith("#")
+                       and not re.fullmatch(r"\(\S+\)=", lines[j].strip())), None)
+        if anchor is None:
+            raise ValueError(f"the margin note at line {first + 1} has no prose before it to attach a footnote to")
+        label = f"marginnote{number}"
+        lines[anchor] = lines[anchor].rstrip() + f"[^{label}]"
+        body = m.group(1).strip("\n").split("\n")
+        definition = [f"[^{label}]: {body[0]}"] + [("    " + line) if line.strip() else "" for line in body[1:]]
+        notes.append((first, m.group(0).count("\n") + 1, definition))
+    for first, length, definition in reversed(notes):
+        lines[first : first + length] = definition
+    return "\n".join(lines), len(notes)
+
+
+def rewrite_staged_margins() -> None:
+    """Step 2, continued: in the pages the PDF has, margin notes become footnotes."""
+    n_notes = 0
+    for rel in sorted(pdf_articles((STAGE / "myst.yml").read_text())):
+        md = STAGE / rel
+        if md.suffix != ".md":
+            continue
+        try:
+            text, n = margins_to_footnotes(md.read_text())
+        except ValueError as e:
+            raise ValueError(f"{rel}: {e}") from None
+        if n:
+            md.write_text(text)
+            n_notes += n
+    log.info("margin notes made footnotes for the PDF: %d", n_notes)
+
+
 def absolutize(tex: str) -> tuple[str, int]:
     """Prefix site-relative \\href targets with the site's URL."""
     return REL_HREF.subn(lambda _: "\\href{" + SITE + "/", tex)
@@ -446,6 +501,7 @@ def build(root: Path) -> list[str]:
     stage(root)
     rewrite_staged_facts()
     rewrite_staged_web_only()
+    rewrite_staged_margins()
     rewrite_staged_link_words()
     if run(["myst", "build", "--pdf"], STAGE, root / MYST_LOG):
         return [f"myst build --pdf failed; see {MYST_LOG}"]
@@ -571,6 +627,30 @@ def link_words_failures() -> list[str]:
     ]
 
 
+def margin_failures() -> list[str]:
+    """Failures of turning margin notes into footnotes for the PDF."""
+    cases = {
+        "a note after a paragraph": ("Text one.\n\n:::{margin}\nA note.\n:::\n\nNext.",
+                                     "Text one.[^marginnote1]\n\n[^marginnote1]: A note.\n\nNext."),
+        "a note after display math": ("Prose before\n\n```{math}\nx = 1\n```\n\n:::{margin}\nOn x.\n:::\n",
+                                      "Prose before[^marginnote1]\n\n```{math}\nx = 1\n```\n\n[^marginnote1]: On x.\n"),
+        "a note of two paragraphs": ("P.\n\n:::{margin}\nFirst.\n\nSecond, $x$.\n:::\n",
+                                     "P.[^marginnote1]\n\n[^marginnote1]: First.\n\n    Second, $x$.\n"),
+        "a note after a heading": ("Earlier.\n\n## Head\n\n:::{margin}\nN.\n:::\n",
+                                   "Earlier.[^marginnote1]\n\n## Head\n\n[^marginnote1]: N.\n"),
+    }
+    failures = [f"{name} became {margins_to_footnotes(given)[0]!r}"
+                for name, (given, want) in cases.items() if margins_to_footnotes(given)[0] != want]
+    if margins_to_footnotes("Plain.\n") != ("Plain.\n", 0):
+        failures.append("a page with no margin note was changed")
+    try:
+        margins_to_footnotes(":::{margin}\nalone\n:::\n")
+        failures.append("a margin note with no prose before it was accepted")
+    except ValueError:
+        pass
+    return failures
+
+
 def href_failures() -> list[str]:
     """Failures of the LaTeX \\href rewrite and the page check."""
     tex, n = absolutize(
@@ -645,8 +725,8 @@ def clear_failures() -> list[str]:
 
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
-    failures = (fact_failures() + web_only_failures() + link_words_failures() + href_failures() + url_failures()
-                + clear_failures())
+    failures = (fact_failures() + web_only_failures() + margin_failures() + link_words_failures() + href_failures()
+                + url_failures() + clear_failures())
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")

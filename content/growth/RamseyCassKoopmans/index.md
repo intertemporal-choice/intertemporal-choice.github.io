@@ -13,9 +13,11 @@ The economy has a perfectly competitive production sector that uses a Cobb-Dougl
 \end{aligned}\end{gathered}
 ```
 
-to produce output using capital and labor.[^DGoP2Gjmvh] Labor hours (the same as population) increase exogenously at a constant rate
+to produce output using capital and labor. Labor hours (the same as population) increase exogenously at a constant rate
 
-[^DGoP2Gjmvh]: All Roman variables are functions of time, but putting time subscripts on everything would clutter the notation, so we do it only where necessary for clarity.
+:::{margin}
+All Roman variables are functions of time, but putting time subscripts on everything would clutter the notation, so we do it only where necessary for clarity.
+:::
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -33,13 +35,13 @@ and {math}`\PtyLab` is an index of labor productivity that grows at rate
 
 Thus, technological progress allows each worker to
 produce perpetually more as time goes by with the same amount of
-physical capital.[^QeBMSQU4dN] The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
+physical capital. The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
 
 :::{margin}
+This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With a Cobb-Douglas production function the three are the same thing at different rates. With any other production function, a steady state with constant growth rates requires progress to be labor-augmenting (Uzawa 1961; Jones and Scrimgeour 2008 give a short proof).
+
 Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`\Kap`. Solow (1960) and Phelps (1962) showed that steady-state growth does not depend on how much of technical progress is embodied in new capital, though convergence is faster the more of it is embodied; so the simpler disembodied form delivers the same steady-state growth rate.
 :::
-
-[^QeBMSQU4dN]: This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With a Cobb-Douglas production function the three are the same thing at different rates. With any other production function, a steady state with constant growth rates requires progress to be labor-augmenting (Uzawa 1961; Jones and Scrimgeour 2008 give a short proof).
 
 Aggregate capital accumulates according to
 
@@ -76,9 +78,11 @@ A steady state is a point where {math}`\dot{\kap} = 0`, so that {math}`\cons = \
 ## The Social Planner's Problem
 
 Now suppose that there is a social planner whose goal is to maximize the discounted
-sum of CRRA utility from per-capita consumption:[^RCKpopWeight]
+sum of CRRA utility from per-capita consumption:
 
-[^RCKpopWeight]: This objective counts each date's per capita utility once, as {cite:t}`blanchard&fischer:text` do. {cite:t}`romer:text` weights it by the size of the population, which replaces {math}`\timeRate` with {math}`\timeRate-\popGro` below, and takes {math}`\popGro` out of the steady-state condition.
+:::{margin}
+This objective counts each date's per capita utility once, as {cite:t}`blanchard&fischer:text` do. {cite:t}`romer:text` weights it by the size of the population, which replaces {math}`\timeRate` with {math}`\timeRate-\popGro` below, and takes {math}`\popGro` out of the steady-state condition.
+:::
 
 ```{math}
 :label: eq:RCK-maxprob
@@ -176,15 +180,17 @@ Ramsey with an explanation attributed to Keynes.
 It is just like [the Euler equation in the perfect foresight CRRA model](#eq:PFCRRA-cgrow), except that now the relevant interest rate can vary over
 time as {math}`\prodFunc^{\prime}(\kap)` varies.
 
-Since per capita consumption is {math}`\Cons/\Labor = \cons \PtyLab`, it grows at {math}`\dot{\cons}/\cons + \ptyGro = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth ({eq}`eq:cdotOc` with {math}`\ptyGro=0`). Productivity growth matters only through {math}`\kap`.
+Since per capita consumption is {math}`\Cons/\Labor = \cons \PtyLab`, it grows at {math}`\dot{\cons}/\cons + \ptyGro = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth, the [Euler equation](#eq:cdotOc) with {math}`\ptyGro=0`. Productivity growth matters only through {math}`\kap`.
 
 ## The Steady State
 
 The assumption of labor augmenting technological progress was made
 because it implies that in steady-state, per-capita consumption, income,
-and capital all grow at rate {math}`\ptyGro`.[^x66RuMjc3A]
+and capital all grow at rate {math}`\ptyGro`.
 
-[^x66RuMjc3A]: See {cite:t}`ghosDespiteUzawa` for a discussion of the realism of this requirement.
+:::{margin}
+See {cite:t}`ghosDespiteUzawa` for a discussion of the realism of this requirement.
+:::
 
 {math}`\dot{\cons}/\cons = 0` implies that at the steady-state value of {math}`\check{\kap}`,
 
@@ -209,10 +215,12 @@ depreciation is greater, or technological progress occurs more rapidly.
 
 While the RCK model has an analytical solution for its steady-state,
 it does not in general have an analytical solution for the transition to the
-steady-state.[^RCKclosedForm] The usual method for analyzing
+steady-state. The usual method for analyzing
 models of this kind is a [phase diagram](https://en.wikipedia.org/wiki/Phase_diagram) in {math}`\cons` and {math}`\kap`.
 
-[^RCKclosedForm]: The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` (Smith 2006). The saddle path is then the ray {math}`\cons = \left((\timeRate + (1-\kapShare)(\popGro+\depr))/\kapShare\right)\kap` through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - \left((\timeRate+\popGro+\depr)/\kapShare + \ptyGro\right)\kap` is a Bernoulli equation, so the transition has a closed form.
+:::{margin}
+The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` (Smith 2006). The saddle path is then the ray {math}`\cons = \left((\timeRate + (1-\kapShare)(\popGro+\depr))/\kapShare\right)\kap` through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - \left((\timeRate+\popGro+\depr)/\kapShare + \ptyGro\right)\kap` is a Bernoulli equation, so the transition has a closed form.
+:::
 
 The first step in constructing the phase diagram is to take the differential
 equations that describe the system and find the points where they are
