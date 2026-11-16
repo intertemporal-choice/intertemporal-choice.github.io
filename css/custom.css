@@ -9,3 +9,20 @@ div[id^="fact-"] > aside.myst-admonition {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+/* Justified, hyphenated text (Chris, 2026-11-15: "each line of regular text should be justified so that both the
+   left and the right margins are flush", with hyphenation, for the book's chapters as for the handouts). Only the
+   article's own prose: paragraphs and list items in Markdown pages and notebook cells, and in admonitions such as
+   the Math Facts. Margin notes, captions, the outline, the bibliography, tables, equations and code keep their own
+   alignment. Hyphenation follows the page's lang="en". */
+article.article-grid > p,
+article.article-grid > :is(ul, ol) > li,
+article.article-grid > div.myst-jp-nb-block > p,
+article.article-grid > div.myst-jp-nb-block > :is(ul, ol) > li,
+article.article-grid > div[id^="fact-"] aside.myst-admonition p,
+article.article-grid > aside.myst-admonition p,
+article.article-grid > blockquote p {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
