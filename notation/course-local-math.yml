@@ -10,7 +10,7 @@
 version: 1
 project:
   math:
-    # --- overrides (107): renderings that differ from the registry's; the course's kept until the sources are substituted
+    # --- overrides (106): renderings that differ from the registry's; the course's kept until the sources are substituted
     '\CLev': 'C'  # registry: \boldsymbol{\mathit{C}} via \CLvl; uses book 63 questions 200
     '\Target': '\check'  # registry: \hat via \TargetNrm; uses book 13 questions 146
     '\Labor': 'L'  # registry: \mathrm{L}; uses book 35 questions 104
@@ -43,7 +43,6 @@ project:
     '\WAllLev': '\mathbf{O}'  # registry: \boldsymbol{\mathit{O}} via \OLvl; uses book 9 questions 0
     '\hLevBF': '\mathbf{h}'  # registry: \boldsymbol{\mathit{h}} via \hLvl; uses book 8 questions 0
     '\aLevBF': '\mathbf{a}'  # registry: \boldsymbol{\mathit{a}} via \aLvl; uses book 7 questions 0
-    '\tranShkInd': '\theta'  # registry: \xi; uses book 0 questions 7
     '\mLev': 'm'  # registry: \boldsymbol{\mathit{m}} via \mLvl; uses book 0 questions 6
     '\SLev': 'S'  # registry: \boldsymbol{\mathit{S}} via \SLvl; uses book 0 questions 6
     '\LLev': 'L'  # registry: \boldsymbol{\mathit{L}} via \LLvl; uses book 5 questions 0
