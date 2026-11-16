@@ -1,7 +1,7 @@
 (sec:RamseyCassKoopmans)=
 # The Ramsey/Cass-Koopmans (RCK) Model
 
-{cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth for an economy with exogenous 'labor-augmenting' technological progress. This chapter follows the textbook treatment in {cite:t}`blanchard&fischer:text`, chapter 2; {cite:t}`barro&salaimartin:book`, chapter 2, is another.
+{cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth for an economy with exogenous 'labor-augmenting' technological progress. This chapter follows the textbook treatment in {cite:t}`blanchard&fischer:text`, chapter 2; {cite:t}`barro&salaimartin:book`, chapter 2, is another. For the facts the model is meant to explain, and the Solow model it builds on, see the undergraduate textbook of {cite:t}`ashrafWeilGrowth`.
 
 ## The Budget Constraint
 
@@ -38,9 +38,9 @@ produce perpetually more as time goes by with the same amount of
 physical capital. The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
 
 :::{margin}
-This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With a Cobb-Douglas production function the three are the same thing at different rates. With any other production function, a steady state with constant growth rates requires progress to be labor-augmenting (Uzawa 1961; Jones and Scrimgeour 2008 give a short proof).
+This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With a Cobb-Douglas production function the three are the same thing at different rates. With any other production function, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`; {cite:t}`jonesScrimgeourUzawa` give a short proof.
 
-Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`\Kap`. Solow (1960) and Phelps (1962) showed that steady-state growth does not depend on how much of technical progress is embodied in new capital, though convergence is faster the more of it is embodied; so the simpler disembodied form delivers the same steady-state growth rate.
+Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`\Kap`. {cite:t}`solowEmbodied` and {cite:t}`phelpsNewView` showed that steady-state growth does not depend on how much of technical progress is embodied in new capital, though convergence is faster the more of it is embodied; so the simpler disembodied form delivers the same steady-state growth rate.
 :::
 
 Aggregate capital accumulates according to
@@ -136,13 +136,17 @@ subject to
 \dot{\kap} = \kap^{\kapShare}-\cons-(\popGro+\ptyGro+\depr)k,
 ```
 
-which has a discounted Hamiltonian representation
+which has a current-value Hamiltonian representation
+
+:::{margin}
+If the Hamiltonian is new to you, Peter Thompson's [lecture notes on optimal control](https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf) derive the method from the economics of a firm's capital problem, and later work through this model. Wikipedia's worked example of this model, linked from the two optimization conditions, uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero.
+:::
 
 ```{math}
 \Ham(\kap,c,\lambda) = \util(c) + (\kap^{\kapShare} - \cons - (\popGro+\ptyGro+\depr)\kap)\lambda.
 ```
 
-The first [discounted Hamiltonian optimization condition](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)) requires {math}`\partial 
+The first [current-value Hamiltonian optimization condition](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model) requires {math}`\partial 
  \Ham/\partial \cons = 0`:
 
 ```{math}
@@ -155,7 +159,7 @@ The first [discounted Hamiltonian optimization condition](https://en.wikipedia.o
 \end{aligned}\end{gathered}
 ```
 
-The second discounted Hamiltonian optimization condition requires:
+The second [current-value Hamiltonian optimization condition](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model) requires:
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -219,7 +223,7 @@ steady-state. The usual method for analyzing
 models of this kind is a [phase diagram](https://en.wikipedia.org/wiki/Phase_diagram) in {math}`\cons` and {math}`\kap`.
 
 :::{margin}
-The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` (Smith 2006). The saddle path is then the ray {math}`\cons = \left((\timeRate + (1-\kapShare)(\popGro+\depr))/\kapShare\right)\kap` through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - \left((\timeRate+\popGro+\depr)/\kapShare + \ptyGro\right)\kap` is a Bernoulli equation, so the transition has a closed form.
+The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` {cite:p}`smithClosedForm`. The saddle path is then the ray {math}`\cons = \left((\timeRate + (1-\kapShare)(\popGro+\depr))/\kapShare\right)\kap` through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - \left((\timeRate+\popGro+\depr)/\kapShare + \ptyGro\right)\kap` is a Bernoulli equation, so the transition has a closed form.
 :::
 
 The first step in constructing the phase diagram is to take the differential
@@ -295,7 +299,7 @@ be beginning their research on growth models.
 
 The most straightforward method of numerical solution for perfect foresight
 models of this kind is called the
-'time elimination' method (Mulligan and Sala-i-Martin 1993). It starts from the fact that
+'time elimination' method {cite:p}`Mulligan&sm:transdynam`. It starts from the fact that
 
 ```{math}
 \begin{gathered}\begin{aligned}
