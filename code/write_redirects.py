@@ -4,7 +4,7 @@ GitHub Pages serves static files and has no server-side redirects, so an old URL
 page that has been renamed or moved simply 404s. For each `old new` line in
 code/redirects.txt this writes `_build/html<old>/index.html`, a page that sends the
 browser to `<new>` at once, carrying over any #anchor (so a link to a Math Facts entry
-still lands on the entry), with a meta refresh and a plain link as fallbacks.
+still reaches the entry), with a meta refresh and a plain link as fallbacks.
 
 It refuses rather than guesses:
 
@@ -23,6 +23,7 @@ import argparse
 import html
 import logging
 import sys
+import tempfile
 from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format="%(message)s", force=True)
@@ -75,7 +76,9 @@ def check(build: Path, pairs: list[tuple[str, str]]) -> list[str]:
         if not is_page(build, new):
             failures.append(f"{old} -> {new}, but {new} is not a page in the build")
         if is_page(build, old):
-            failures.append(f"{old} is a live page in the build; refusing to overwrite it")
+            failures.append(
+                f"{old} is a live page in the build; refusing to overwrite it"
+            )
     return failures
 
 
@@ -89,8 +92,6 @@ def write(build: Path, pairs: list[tuple[str, str]]) -> None:
 
 def self_test() -> bool:
     """Every check must reject input it is supposed to reject."""
-    import tempfile
-
     ok = True
     with tempfile.TemporaryDirectory() as tmp:
         build = Path(tmp)
@@ -106,7 +107,9 @@ def self_test() -> bool:
         if not check(build, [("/content/b", "/content/a")]):
             log.error("SELF-TEST FAIL: a redirect over a live page was accepted")
             ok = False
-        if not check(build, [("/content/old", "/content/a"), ("/content/old", "/content/b")]):
+        if not check(
+            build, [("/content/old", "/content/a"), ("/content/old", "/content/b")]
+        ):
             log.error("SELF-TEST FAIL: a duplicated old path was accepted")
             ok = False
     try:
@@ -116,7 +119,9 @@ def self_test() -> bool:
     except ValueError:
         pass
     if parse("# note\n/a/ /b  # why\n\n") != [("/a", "/b")]:
-        log.error("SELF-TEST FAIL: comments, blank lines or trailing slashes mishandled")
+        log.error(
+            "SELF-TEST FAIL: comments, blank lines or trailing slashes mishandled"
+        )
         ok = False
     log.info("self-test %s", "passed" if ok else "FAILED")
     return ok

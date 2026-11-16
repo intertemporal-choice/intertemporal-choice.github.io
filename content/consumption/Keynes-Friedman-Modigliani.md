@@ -15,7 +15,7 @@ The modern theory of consumption began as an argument about a single empirical r
 
 ## Keynes's Consumption Function
 
-{cite:t}`keynesGeneralTheory` held that the amount of aggregate consumption depends mainly on the amount of aggregate income, and called it a "fundamental psychological law" that when income rises, consumption rises by less than the increase in income. The simplest formalization is
+{cite:t}`keynes:generaltheory` held that the amount of aggregate consumption depends mainly on the amount of aggregate income, and called it a "fundamental psychological law" that when income rises, consumption rises by less than the increase in income. The simplest formalization is
 
 ```{math}
 :label: eq:KFM-KeynesianC
@@ -43,7 +43,7 @@ The disagreement between the levels and the first-difference estimates is the mo
 
 ## Duesenberry: Habits and Relative Income
 
-{cite:t}`duesenberryIncome` proposed that past consumption shapes current consumption through habits, and that households judge their consumption relative to that of their peers. In the aggregate data, lagged consumption does dominate: regressing consumption on income and on last quarter's consumption gives a coefficient of 0.98 on lagged consumption (t-statistic 31) and 0.02 on income, statistically indistinguishable from zero ([regression](https://econ-ark.github.io/DemARK/keynesfriedmanmodigliani/#kfm-habit-regression-outputs)). Because both series are non-stationary, this regression should not be taken at face value. The deeper problems are theoretical: Duesenberry's framework has no budget constraint and no serious treatment of the intertemporal nature of saving.
+{cite:t}`duesenberry:BOOK` proposed that past consumption shapes current consumption through habits, and that households judge their consumption relative to that of their peers. In the aggregate data, lagged consumption does dominate: regressing consumption on income and on last quarter's consumption gives a coefficient of 0.98 on lagged consumption (t-statistic 31) and 0.02 on income, statistically indistinguishable from zero ([regression](https://econ-ark.github.io/DemARK/keynesfriedmanmodigliani/#kfm-habit-regression-outputs)). Because both series are non-stationary, this regression should not be taken at face value. The deeper problems are theoretical: Duesenberry's framework has no budget constraint and no serious treatment of the intertemporal nature of saving.
 
 ## Friedman's Permanent Income Hypothesis
 
@@ -75,4 +75,4 @@ The same logic explains the aggregate evidence. Over one quarter, most changes i
 
 ## Modigliani and What Follows
 
-{cite:t}`modiglianiBrumberg` reached a closely related conclusion from a different starting point: households plan consumption over the whole life cycle, so consumption tracks lifetime resources rather than current income. The chapters that follow build that idea from the ground up, starting with the [Fisher two-period problem](#sec:2PeriodLCModel), and the [consumption function](#sec:ConsumptionFunction) section returns to Friedman's distinction between permanent and transitory shocks with an explicit model of optimal behavior.
+{cite:t}`modigliani&brumberg:lifecycle` reached a closely related conclusion from a different starting point: households plan consumption over the whole life cycle, so consumption tracks lifetime resources rather than current income. The chapters that follow build that idea from the ground up, starting with the [Fisher two-period problem](#sec:2PeriodLCModel), and the [consumption function](#sec:ConsumptionFunction) section returns to Friedman's distinction between permanent and transitory shocks with an explicit model of optimal behavior.
