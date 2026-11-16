@@ -9,14 +9,17 @@ math:
   '\WGroRtehFix': '\mathring{\mathrm{g}}'
   '\GPFachFix': '\APFac_{\WGroFachFix}'
   '\GPRtehFix': '\APRte_{\WGroRtehFix}'
-  '\aNrmE': '\aNrm^{e}'
-  '\bNrmE': '\bNrm^{e}'
-  '\cNrmE': '\cNrm^{e}'
-  '\cNrmU': '\cNrm^{u}'
-  '\mNrmE': '\mNrm^{e}'
-  '\mNrmU': '\mNrm^{u}'
-  '\vNrmE': '\vNrm^{e}'
-  '\MPCE': '\MPC^{e}'
+  # Labels are upright (Chris, 2026-11-15 12:07:32 EST: "labels upright"); the registry has no label macros yet.
+  '\EmpLbl': '\mathrm{e}'
+  '\UnempLbl': '\mathrm{u}'
+  '\aNrmE': '\aNrm^{\EmpLbl}'
+  '\bNrmE': '\bNrm^{\EmpLbl}'
+  '\cNrmE': '\cNrm^{\EmpLbl}'
+  '\cNrmU': '\cNrm^{\UnempLbl}'
+  '\mNrmE': '\mNrm^{\EmpLbl}'
+  '\mNrmU': '\mNrm^{\UnempLbl}'
+  '\vNrmE': '\vNrm^{\EmpLbl}'
+  '\MPCE': '\MPC^{\EmpLbl}'
   '\cTrgNrm': '\TargetNrm{\cNrm}'
   '\bTrgNrm': '\TargetNrm{\bNrm}'
   '\vTrgNrm': '\TargetNrm{\vNrm}'
@@ -96,7 +99,7 @@ See the [perfect foresight CRRA](#sec:PerfForesightCRRA) section for a derivatio
 ```{math}
 :label: eq:TBS-cpfinfhorunemp
 
-\cLvl^{u}_{t} = \underbrace{\left(1-\overbrace{\Rfree ^{-1}(\Rfree{\DiscFac})^{1/\CRRA}}^{\equiv \RPFac}\right)}_{\equiv \MPC} \bLvl_{t} ,
+\cLvl^{\UnempLbl}_{t} = \underbrace{\left(1-\overbrace{\Rfree ^{-1}(\Rfree{\DiscFac})^{1/\CRRA}}^{\equiv \RPFac}\right)}_{\equiv \MPC} \bLvl_{t} ,
 ```
 
 where the {math}`u` superscript signifies the consumer's (un)employment status; {math}`\MPC` is the marginal propensity to consume for the perfect foresight consumer, which is strictly below the MPC for the problem with uncertainty ({cite:p}`carroll&kimball:concavity`); and {math}`\RPFac` is what {cite:t}`BufferStockTheory` calls the "return patience factor."
@@ -165,7 +168,7 @@ If a person who is employed in period {math}`t` ({math}`\tranShkAll_{t}=1`) is s
 ```{math}
 :label: eq:TBS-MLevtp1
 
-\mLvl^{e}_{t+1} = (\mLvl^{e}_{t}-\cLvl^{e}_{t})\Rfree+\Wage_{t+1}\labor_{t+1}.
+\mLvl^{\EmpLbl}_{t+1} = (\mLvl^{\EmpLbl}_{t}-\cLvl^{\EmpLbl}_{t})\Rfree+\Wage_{t+1}\labor_{t+1}.
 ```
 
 But employed consumers face a constant risk {math}`\urate` of becoming unemployed. It will be convenient to define {math}`\erate\equiv 1-\urate` as the probability that a consumer does *not* become unemployed. Whether the consumer is employed or not, the consumer's labor productivity {math}`\labor` is well-defined: For convenience, {math}`\labor` is assumed to grow by a factor {math}`\erate^{-1}` every period,
@@ -206,22 +209,22 @@ The same solution methods used in the [perfect foresight CRRA](#sec:PerfForesigh
 :label: eq:TBS-ctp1Oct
 
 \begin{aligned}
-        \uFunc^{\prime}(\cLvl^{e}_{t}) & =  \Rfree\DiscFac \Ex_{t}\left[\uFunc^{\prime}(\cLvl^{\bullet}_{t+1}) \right]
-\\  1         & =  \Rfree\DiscFac \Ex_{t}\left[\left(\frac{\cLvl^{\bullet}_{t+1}}{\cLvl^{e}_{t}}\right)^{-\CRRA} \right]
+        \uFunc^{\prime}(\cLvl^{\EmpLbl}_{t}) & =  \Rfree\DiscFac \Ex_{t}\left[\uFunc^{\prime}(\cLvl^{\bullet}_{t+1}) \right]
+\\  1         & =  \Rfree\DiscFac \Ex_{t}\left[\left(\frac{\cLvl^{\bullet}_{t+1}}{\cLvl^{\EmpLbl}_{t}}\right)^{-\CRRA} \right]
 .
 \end{aligned}
 ```
 
-Defining nonbold variables as the bold equivalent divided by the level of permanent labor income for an employed consumer, e.g. {math}`{\cNrm}^{e}_{t}=\cLvl^{e}_{t}/(\Wage_{t}\labor_{t})`, we can rewrite the consumption Euler equation as
+Defining nonbold variables as the bold equivalent divided by the level of permanent labor income for an employed consumer, e.g. {math}`{\cNrm}^{\EmpLbl}_{t}=\cLvl^{\EmpLbl}_{t}/(\Wage_{t}\labor_{t})`, we can rewrite the consumption Euler equation as
 
 ```{math}
 :label: eq:TBS-Explicit
 
 \begin{aligned}
-  1         & =  \Rfree\DiscFac \Ex_{t}\left[\left(\frac{{c}^{\bullet}_{t+1} \Wage_{t+1}\labor_{t+1}}{{\cNrm}^{e}_{t} \Wage_{t}\labor_{t}}\right)^{-\CRRA} \right]
-\\          & =  \Rfree\DiscFac \Ex_{t}\left[\left(\frac{{c}^{\bullet}_{t+1}}{{\cNrm}^{e}_{t}}\WGroFachFix\right)^{-\CRRA} \right]
-\\          & =  \WGroFachFix^{-\CRRA}\Rfree\DiscFac \Ex_{t}\left[\left(\frac{{c}^{\bullet}_{t+1}}{{\cNrm}^{e}_{t}}\right)^{-\CRRA} \right]
-\\          & =  \WGroFachFix^{-\CRRA}\Rfree\DiscFac \left\{(1-\urate)\left(\frac{{\cNrm}^{e}_{t+1}}{{\cNrm}^{e}_{t}}\right)^{-\CRRA}+\urate \left(\frac{\cNrmU_{t+1}}{{\cNrm}^{e}_{t}}\right)^{-\CRRA}\right\}
+  1         & =  \Rfree\DiscFac \Ex_{t}\left[\left(\frac{{c}^{\bullet}_{t+1} \Wage_{t+1}\labor_{t+1}}{{\cNrm}^{\EmpLbl}_{t} \Wage_{t}\labor_{t}}\right)^{-\CRRA} \right]
+\\          & =  \Rfree\DiscFac \Ex_{t}\left[\left(\frac{{c}^{\bullet}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\WGroFachFix\right)^{-\CRRA} \right]
+\\          & =  \WGroFachFix^{-\CRRA}\Rfree\DiscFac \Ex_{t}\left[\left(\frac{{c}^{\bullet}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right)^{-\CRRA} \right]
+\\          & =  \WGroFachFix^{-\CRRA}\Rfree\DiscFac \left\{(1-\urate)\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right)^{-\CRRA}+\urate \left(\frac{\cNrmU_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right)^{-\CRRA}\right\}
 \end{aligned}
 ```
 
@@ -235,16 +238,16 @@ It will be useful now to define a "growth patience factor" (terminology justifie
 \GPFachFix = \left(\frac{(\Rfree\DiscFac)^{1/\CRRA}}{\WGroFachFix}\right),
 ```
 
-which is the factor by which {math}`{\cNrm}^{e}` would grow in the perfect foresight version of the model with permanent income growth factor {math}`\WGroFachFix` (again see the [perfect foresight CRRA](#sec:PerfForesightCRRA) section). Using this, {eq}`eq:TBS-Explicit` can be written as
+which is the factor by which {math}`{\cNrm}^{\EmpLbl}` would grow in the perfect foresight version of the model with permanent income growth factor {math}`\WGroFachFix` (again see the [perfect foresight CRRA](#sec:PerfForesightCRRA) section). Using this, {eq}`eq:TBS-Explicit` can be written as
 
 ```{math}
 :label: eq:TBS-BeforePFStep
 
 \begin{aligned}
-        1  & = \GPFachFix^{\CRRA} \left(\frac{{\cNrm}^{e}_{t+1}}{{\cNrm}^{e}_{t}}\right)^{-\CRRA} \left\{(1-\urate)+\urate\left[\left(\frac{\cNrmU_{t+1}}{{\cNrm}^{e}_{t}}\right)\left(\frac{{\cNrm}^{e}_{t}}{{\cNrm}^{e}_{t+1}}\right)\right]^{-\CRRA}\right\}
-\\       & = \GPFachFix^{\CRRA} \left(\frac{{\cNrm}^{e}_{t+1}}{{\cNrm}^{e}_{t}}\right)^{-\CRRA} \left\{1+\urate\left[\left(\frac{\cNrmU_{t+1}}{{\cNrm}^{e}_{t+1}}\right)^{-\CRRA}-1\right]\right\}
-\\       \left(\frac{{\cNrm}^{e}_{t+1}}{{\cNrm}^{e}_{t}}\right)^{\CRRA} & = \GPFachFix^{\CRRA} \left\{1+\urate\left[\left(\frac{{\cNrm}^{e}_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}
-\\       \left(\frac{{\cNrm}^{e}_{t+1}}{{\cNrm}^{e}_{t}}\right) & = {\GPFachFix} \left\{1+\urate\left[\left(\frac{{\cNrm}^{e}_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}.
+        1  & = \GPFachFix^{\CRRA} \left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right)^{-\CRRA} \left\{(1-\urate)+\urate\left[\left(\frac{\cNrmU_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right)\left(\frac{{\cNrm}^{\EmpLbl}_{t}}{{\cNrm}^{\EmpLbl}_{t+1}}\right)\right]^{-\CRRA}\right\}
+\\       & = \GPFachFix^{\CRRA} \left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right)^{-\CRRA} \left\{1+\urate\left[\left(\frac{\cNrmU_{t+1}}{{\cNrm}^{\EmpLbl}_{t+1}}\right)^{-\CRRA}-1\right]\right\}
+\\       \left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right)^{\CRRA} & = \GPFachFix^{\CRRA} \left\{1+\urate\left[\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}
+\\       \left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right) & = {\GPFachFix} \left\{1+\urate\left[\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}.
 \end{aligned}
 ```
 
@@ -253,12 +256,12 @@ which is the factor by which {math}`{\cNrm}^{e}` would grow in the perfect fores
 ```{math}
 :label: eq:TBS-BeforePFStepWithEx
 
-1 = \GPFachFix^{\CRRA} \Ex_{t}\left[\left(\frac{{\cNrm}^{e}_{t+1}}{{\cNrm}^{e}_{t}}\right)^{-\CRRA} \left\{1+\urate\left[\left(\frac{\cNrmU_{t+1}}{{\cNrm}^{e}_{t+1}}\right)^{-\CRRA}-1\right]\right\}\right]
+1 = \GPFachFix^{\CRRA} \Ex_{t}\left[\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right)^{-\CRRA} \left\{1+\urate\left[\left(\frac{\cNrmU_{t+1}}{{\cNrm}^{\EmpLbl}_{t+1}}\right)^{-\CRRA}-1\right]\right\}\right]
 ```
 
 and we would be unable to proceed.)
 
-Now define {math}`\nabla _{t+1} \equiv \left(\frac{{\cNrm}^{e}_{t+1}-\cNrmU_{t+1}}{\cNrmU_{t+1}}\right)` (which is the proportion by which consumption would be greater next period for an employed than for an unemployed person), and define an "excess prudence" factor
+Now define {math}`\nabla _{t+1} \equiv \left(\frac{{\cNrm}^{\EmpLbl}_{t+1}-\cNrmU_{t+1}}{\cNrmU_{t+1}}\right)` (which is the proportion by which consumption would be greater next period for an employed than for an unemployed person), and define an "excess prudence" factor
 
 :::{margin}
 Mnemonic: {math}`\nabla` is like {math}`\Delta`, a change, but it points down, because it measures the fall in consumption if unemployment strikes.
@@ -273,7 +276,7 @@ The [appendix on approximate consumption growth](#sec:TBS-CGroApprox) shows that
 ```{math}
 :label: eq:TBS-cedelapprox
 
-\left(\frac{{\cNrm}^{e}_{t+1}}{{\cNrm}^{e}_{t}}\right) \approx \left(1+ \urate (1+\prudEx\nabla _{t+1})\nabla _{t+1}\right) {\GPFachFix}
+\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right) \approx \left(1+ \urate (1+\prudEx\nabla _{t+1})\nabla _{t+1}\right) {\GPFachFix}
 ```
 
 which can be simplified in the logarithmic utility case (where {math}`\prudEx = 0`) to
@@ -281,10 +284,10 @@ which can be simplified in the logarithmic utility case (where {math}`\prudEx = 
 ```{math}
 :label: eq:TBS-cedelapproxLog
 
-\left(\frac{{\cNrm}^{e}_{t+1}}{{\cNrm}^{e}_{t}}\right) \approx \left(1+ \urate \nabla _{t+1}\right) {\GPFachFix} .
+\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right) \approx \left(1+ \urate \nabla _{t+1}\right) {\GPFachFix} .
 ```
 
-Now since consumption if employed {math}`{\cNrm}^{e}_{t+1}` is surely greater than consumption if unemployed {math}`\cNrmU_{t+1}`, {math}`\nabla _{t+1}` is certainly a positive number. But since {math}`{\GPFachFix}` is the value that {math}`{\cNrm}^{e}_{t+1}/{\cNrm}^{e}_{t}` would exhibit in a perfect foresight model, this equation tells us that uncertainty boosts consumption growth; in the logarithmic case, consumption growth is augmented by an amount proportional to the probability of becoming unemployed {math}`\urate` multiplied by the size of the "consumption risk" (the amount by which consumption would fall if unemployment occurs).
+Now since consumption if employed {math}`{\cNrm}^{\EmpLbl}_{t+1}` is surely greater than consumption if unemployed {math}`\cNrmU_{t+1}`, {math}`\nabla _{t+1}` is certainly a positive number. But since {math}`{\GPFachFix}` is the value that {math}`{\cNrm}^{\EmpLbl}_{t+1}/{\cNrm}^{\EmpLbl}_{t}` would exhibit in a perfect foresight model, this equation tells us that uncertainty boosts consumption growth; in the logarithmic case, consumption growth is augmented by an amount proportional to the probability of becoming unemployed {math}`\urate` multiplied by the size of the "consumption risk" (the amount by which consumption would fall if unemployment occurs).
 
 :::{margin}
 At least, for continuing-employed consumers.
@@ -296,18 +299,18 @@ Furthermore, under the (compelling) assumption that {math}`\CRRA > 1`, {eq}`eq:T
 
 #### Finding the Target
 
-The target level of {math}`\mNrm^{e}` (if one exists) will be the point of intersection between the {math}`\dcEqZero` and {math}`\dmEqZero` loci. Here and below, a variable without a time subscript denotes its steady-state value.
+The target level of {math}`\mNrm^{\EmpLbl}` (if one exists) will be the point of intersection between the {math}`\dcEqZero` and {math}`\dmEqZero` loci. Here and below, a variable without a time subscript denotes its steady-state value.
 
-The {math}`\dcEqZero` locus can be characterized by substituting {math}`{\cNrm}^{e}_{t+1}={\cNrm}^{e}_{t} \equiv {\cNrm}^{e}`:
+The {math}`\dcEqZero` locus can be characterized by substituting {math}`{\cNrm}^{\EmpLbl}_{t+1}={\cNrm}^{\EmpLbl}_{t} \equiv {\cNrm}^{\EmpLbl}`:
 
 ```{math}
 :label: eq:TBS-straightDef
 
 \begin{aligned}
-         1 & = \left\{1+\urate\left[\left(\frac{{\cNrm}^{e}_{t+1}}{\cNrm_{t+1}^{u}}\right)^{\CRRA}-1\right]\right\} \GPFachFix^{\CRRA}
-\\ \GPFachFix^{-\CRRA} & =  (1-\urate)+\urate\left(\frac{{\cNrm}^{e}}{\cNrm_{t+1}^{u} }\right)^{\CRRA}
-\\ \underbrace{\left(\frac{\GPFachFix^{-\CRRA}-1+\urate}{\urate}\right)^{1/\CRRA}}_{\equiv \straight} & =   \left(\frac{{\cNrm}^{e}}{\cNrmU_{t+1}}\right)
-  \\ \underbrace{\left(1+\urate^{-1}(\GPFachFix^{-\CRRA}-1)\right)^{1/\CRRA}}_{=\straight} & =   \left(\frac{{\cNrm}^{e}}{\cNrmU_{t+1}}\right)
+         1 & = \left\{1+\urate\left[\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{\cNrm_{t+1}^{\UnempLbl}}\right)^{\CRRA}-1\right]\right\} \GPFachFix^{\CRRA}
+\\ \GPFachFix^{-\CRRA} & =  (1-\urate)+\urate\left(\frac{{\cNrm}^{\EmpLbl}}{\cNrm_{t+1}^{\UnempLbl} }\right)^{\CRRA}
+\\ \underbrace{\left(\frac{\GPFachFix^{-\CRRA}-1+\urate}{\urate}\right)^{1/\CRRA}}_{\equiv \straight} & =   \left(\frac{{\cNrm}^{\EmpLbl}}{\cNrmU_{t+1}}\right)
+  \\ \underbrace{\left(1+\urate^{-1}(\GPFachFix^{-\CRRA}-1)\right)^{1/\CRRA}}_{=\straight} & =   \left(\frac{{\cNrm}^{\EmpLbl}}{\cNrmU_{t+1}}\right)
 \end{aligned}
 ```
 
@@ -316,18 +319,18 @@ which boils down to
 ```{math}
 :label: eq:TBS-cRatEtfmcRatUtp1
 
-{\cNrm}^{e} = \cNrm^{u}_{t+1} \straight .
+{\cNrm}^{\EmpLbl} = \cNrm^{\UnempLbl}_{t+1} \straight .
 ```
 
-The importance of the linearity of the consumption function of the unemployed consumer now becomes evident: It means that the RHS of {eq}`eq:TBS-cRatEtfmcRatUtp1` is linear in {math}`\cNrm^{e}_{t}`:
+The importance of the linearity of the consumption function of the unemployed consumer now becomes evident: It means that the RHS of {eq}`eq:TBS-cRatEtfmcRatUtp1` is linear in {math}`\cNrm^{\EmpLbl}_{t}`:
 
 ```{math}
 :label: eq:TBS-PSTerm
 
-\cNrm^{e}_{t} = \overbrace{(\mNrm^{e}_{t}-{\cNrm}^{e}_{t})\RNrmByG \MPC}^{\cNrm^{u}_{t+1}} \straight .
+\cNrm^{\EmpLbl}_{t} = \overbrace{(\mNrm^{\EmpLbl}_{t}-{\cNrm}^{\EmpLbl}_{t})\RNrmByG \MPC}^{\cNrm^{\UnempLbl}_{t+1}} \straight .
 ```
 
-We know that {math}`\mNrmE_{t}-{\cNrm}^{e}_{t} > 0` because a consumer in these circumstances (facing possible perpetual unemployment) will never borrow (see below for a full discussion of this point). Since the RIC imposes {math}`\MPC>0`, {eq}`eq:TBS-PSTerm` tells us that steady-state consumption (if it exists) is a positive finite number so long as {math}`\straight > 0`. That holds if and only if the numerator on the LHS of {eq}`eq:TBS-straightDef` is a positive finite number, which requires
+We know that {math}`\mNrmE_{t}-{\cNrm}^{\EmpLbl}_{t} > 0` because a consumer in these circumstances (facing possible perpetual unemployment) will never borrow (see below for a full discussion of this point). Since the RIC imposes {math}`\MPC>0`, {eq}`eq:TBS-PSTerm` tells us that steady-state consumption (if it exists) is a positive finite number so long as {math}`\straight > 0`. That holds if and only if the numerator on the LHS of {eq}`eq:TBS-straightDef` is a positive finite number, which requires
 
 :::{margin}
 Under some parameter values, the model has solutions under which the consumer always spends less than the amount that would leave {math}`\mNrmE` constant, and so accumulates forever.
@@ -416,16 +419,16 @@ Note that although {math}`\urate` is our measure of uncertainty, neither of thes
 
 #### The Target Level of {math}`\mNrmE`
 
-The [appendix on conditions for a target](#sec:TBS-mTargExists) demonstrates that the RIC and the GIC-TBS are necessary conditions for the existence of a target value of market resources {math}`\mTrgNrm^{e},` and that the {math}`\GIChFix` is sufficient. The [appendix on the exact target formula](#sec:TBS-mTargExact) solves for an explicit formula for that target.
+The [appendix on conditions for a target](#sec:TBS-mTargExists) demonstrates that the RIC and the GIC-TBS are necessary conditions for the existence of a target value of market resources {math}`\mTrgNrm^{\EmpLbl},` and that the {math}`\GIChFix` is sufficient. The [appendix on the exact target formula](#sec:TBS-mTargExact) solves for an explicit formula for that target.
 
-Briefly, this is accomplished as follows. We can obtain the {math}`\dcEqZero` locus by substituting {math}`{\cNrm}^{e}_{\prdt+1}={\cNrm}^{e}_{\prdt}={\cNrm}^{e}` into equation {eq}`eq:TBS-PSTerm`:
+Briefly, this is accomplished as follows. We can obtain the {math}`\dcEqZero` locus by substituting {math}`{\cNrm}^{\EmpLbl}_{\prdt+1}={\cNrm}^{\EmpLbl}_{\prdt}={\cNrm}^{\EmpLbl}` into equation {eq}`eq:TBS-PSTerm`:
 
 ```{math}
 :label: eq:TBS-cDelEqZero
 
 \begin{aligned}
-  {\cNrm}^{e} & =  \mNrmE \RNrmByG\MPC\straight - {\cNrm}^{e} \RNrmByG\MPC\straight
-\\  {\cNrm}^{e} & =  \left(\frac{\RNrmByG\MPC\straight}{1+\RNrmByG\MPC\straight}\right)\mNrmE.
+  {\cNrm}^{\EmpLbl} & =  \mNrmE \RNrmByG\MPC\straight - {\cNrm}^{\EmpLbl} \RNrmByG\MPC\straight
+\\  {\cNrm}^{\EmpLbl} & =  \left(\frac{\RNrmByG\MPC\straight}{1+\RNrmByG\MPC\straight}\right)\mNrmE.
 \end{aligned}
 ```
 
@@ -434,7 +437,7 @@ Now we need to use a normalized version of the DBC (equation {eq}`eq:TBS-MLevtp1
 ```{math}
 :label: eq:TBS-metp1
 
-\mNrmE_{t+1} = (\mNrmE_{t}-{\cNrm}^{e}_{t})\RNrmByG+1
+\mNrmE_{t+1} = (\mNrmE_{t}-{\cNrm}^{\EmpLbl}_{t})\RNrmByG+1
 ```
 
 to derive the {math}`\mNrmE_{t+1}=\mNrmE_{t}=\mNrmE` locus (also referred to as the {math}`\dmEqZero` locus):
@@ -443,20 +446,20 @@ to derive the {math}`\mNrmE_{t+1}=\mNrmE_{t}=\mNrmE` locus (also referred to as 
 :label: eq:TBS-mDelEqZero
 
 \begin{aligned}
-      \RNrmByG^{-1}(\mNrmE-1) & =  \mNrmE-{\cNrm}^{e}
-\\      {\cNrm}^{e} & =  \mNrmE-\RNrmByG^{-1}(\mNrmE-1)
+      \RNrmByG^{-1}(\mNrmE-1) & =  \mNrmE-{\cNrm}^{\EmpLbl}
+\\      {\cNrm}^{\EmpLbl} & =  \mNrmE-\RNrmByG^{-1}(\mNrmE-1)
 \\       & =  (1-\RNrmByG^{-1})\mNrmE+\RNrmByG^{-1}.
 \end{aligned}
 ```
 
-The steady-state levels of {math}`\mNrmE` and {math}`{\cNrm}^{e}` are the values of these two variables at which both {eq}`eq:TBS-mDelEqZero` and {eq}`eq:TBS-cDelEqZero` hold. This is just a set of two linear equations and two unknowns, and with a bit of algebra can be solved explicitly.
+The steady-state levels of {math}`\mNrmE` and {math}`{\cNrm}^{\EmpLbl}` are the values of these two variables at which both {eq}`eq:TBS-mDelEqZero` and {eq}`eq:TBS-cDelEqZero` hold. This is just a set of two linear equations and two unknowns, and with a bit of algebra can be solved explicitly.
 
 In the special case of logarithmic utility ({math}`\CRRA = 1`), the [approximation appendix](#sec:TBS-mTargApprox) shows that (under some strong assumptions) an approximation to target market resources will be given by
 
 ```{math}
 :label: eq:TBS-mTargetLogCase
 
-\mTrgNrm^{e} \approx 1 + \left(\frac{1}{(\WGroRtehFix-\rfree)+\discRte(1+(\WGroRtehFix+\discRte-\rfree)/\urate)}\right)
+\mTrgNrm^{\EmpLbl} \approx 1 + \left(\frac{1}{(\WGroRtehFix-\rfree)+\discRte(1+(\WGroRtehFix+\discRte-\rfree)/\urate)}\right)
 ```
 
 and that the GIC and the RIC guarantee that the denominator of the fraction is a positive number.
@@ -509,15 +512,15 @@ The consequence is that the limiting model (as {math}`\urate \downarrow 0`) exhi
 Phase Diagram
 :::
 
-The {math}`\Delta \mNrmE = 0` locus, given in {eq}`eq:TBS-mDelEqZero`, indicates, for a given level of {math}`\mNrmE`, how much consumption {math}`{\cNrm}^{e}` would be exactly the right amount to leave {math}`\mNrmE` unchanged. Call this the "permanently sustainable consumption locus," or for short "sustainable consumption." For any given {math}`\mNrmE`, consuming an amount less than the "sustainable" level will cause wealth to rise (and conversely for points above {math}`\Delta \mNrmE =0`). This provides the logic for the horizontal arrows of motion in the diagram: Above the sustainable consumption locus they point left, and below they point right.
+The {math}`\Delta \mNrmE = 0` locus, given in {eq}`eq:TBS-mDelEqZero`, indicates, for a given level of {math}`\mNrmE`, how much consumption {math}`{\cNrm}^{\EmpLbl}` would be exactly the right amount to leave {math}`\mNrmE` unchanged. Call this the "permanently sustainable consumption locus," or for short "sustainable consumption." For any given {math}`\mNrmE`, consuming an amount less than the "sustainable" level will cause wealth to rise (and conversely for points above {math}`\Delta \mNrmE =0`). This provides the logic for the horizontal arrows of motion in the diagram: Above the sustainable consumption locus they point left, and below they point right.
 
 :::{margin}
 Some authors refer to {math}`\Delta \mNrmE = 0` as giving the level of "permanent income," but this definition differs from {cite:t}`friedmanATheory`'s and is problematic because it could be confused with "permanent labor income" {math}`\Wage_{t} \labor_{t}`.
 :::
 
-The intuition for the {math}`\Delta {\cNrm}^{e}=0` locus (which comes from {eq}`eq:TBS-cDelEqZero`) is a bit subtler, because it reflects preferences: it comes from the Euler equation, not from the budget constraint, which gives the {math}`\Delta \mNrmE = 0` locus. Take a point on the {math}`\Delta {\cNrm}^{e}=0` locus, and consider how things would change if {math}`\mNrmE` were a bit higher at the same {math}`\cNrmE`. Recall that the growth rate of consumption consistent with the Euler equation {eq}`eq:TBS-ctp1Oct` depends on the amount by which consumption will fall if the bad state is realized, {math}`\nabla_{t+1} = \cNrmE_{t+1}/\cNrmU_{t+1}-1`. But {math}`\cNrmU_{t+1} = \MPC \RNrmByG (\mNrmE_{t} - \cNrmE_{t})` so at the same {math}`\cNrmE_{t}` but a greater {math}`\mNrmE_{t}`, {math}`\cNrmU_{t+1}` will be larger. If {math}`\cNrmE_{t+1}` were to remain unchanged, then with the larger {math}`\cNrmU_{t+1}` the ratio {math}`\nabla_{t+1} = \cNrmE_{t+1}/\cNrmU_{t+1}-1` would be smaller.
+The intuition for the {math}`\Delta {\cNrm}^{\EmpLbl}=0` locus (which comes from {eq}`eq:TBS-cDelEqZero`) is a bit subtler, because it reflects preferences: it comes from the Euler equation, not from the budget constraint, which gives the {math}`\Delta \mNrmE = 0` locus. Take a point on the {math}`\Delta {\cNrm}^{\EmpLbl}=0` locus, and consider how things would change if {math}`\mNrmE` were a bit higher at the same {math}`\cNrmE`. Recall that the growth rate of consumption consistent with the Euler equation {eq}`eq:TBS-ctp1Oct` depends on the amount by which consumption will fall if the bad state is realized, {math}`\nabla_{t+1} = \cNrmE_{t+1}/\cNrmU_{t+1}-1`. But {math}`\cNrmU_{t+1} = \MPC \RNrmByG (\mNrmE_{t} - \cNrmE_{t})` so at the same {math}`\cNrmE_{t}` but a greater {math}`\mNrmE_{t}`, {math}`\cNrmU_{t+1}` will be larger. If {math}`\cNrmE_{t+1}` were to remain unchanged, then with the larger {math}`\cNrmU_{t+1}` the ratio {math}`\nabla_{t+1} = \cNrmE_{t+1}/\cNrmU_{t+1}-1` would be smaller.
 
-The consequences of this are easiest to see in the logarithmic case whose consumption growth equation is derived in {eq}`eq:TBS-cedelapproxLog`, which tells us that {math}`{\cNrm}^{e}_{t+1} \approx {\cNrm}^{e}_{t}\left(1+ \urate \nabla _{t+1}\right) {\GPFachFix}`, which directly implies that the lower {math}`\nabla_{t+1}` will yield a lower {math}`\cNrmE_{t+1}`. That is, for any point to the right of the {math}`\Delta \cNrmE_{t+1}=0` locus, the growth rate of consumption will be lower than at the corresponding point on the locus. Since on the locus, growth was zero, this means that to the right of the locus, {math}`\cNrmE` is declining (hence the down arrow in the phase diagram). Reciprocally, for any point to the left of {math}`\Delta \cNrmE_{t+1}=0`, the Euler equation implies that consumption will rise.
+The consequences of this are easiest to see in the logarithmic case whose consumption growth equation is derived in {eq}`eq:TBS-cedelapproxLog`, which tells us that {math}`{\cNrm}^{\EmpLbl}_{t+1} \approx {\cNrm}^{\EmpLbl}_{t}\left(1+ \urate \nabla _{t+1}\right) {\GPFachFix}`, which directly implies that the lower {math}`\nabla_{t+1}` will yield a lower {math}`\cNrmE_{t+1}`. That is, for any point to the right of the {math}`\Delta \cNrmE_{t+1}=0` locus, the growth rate of consumption will be lower than at the corresponding point on the locus. Since on the locus, growth was zero, this means that to the right of the locus, {math}`\cNrmE` is declining (hence the down arrow in the phase diagram). Reciprocally, for any point to the left of {math}`\Delta \cNrmE_{t+1}=0`, the Euler equation implies that consumption will rise.
 
 #### The Consumption Function
 
@@ -536,7 +539,7 @@ where
 is the level of (normalized) human wealth. {math}`\bar{\cFunc}(\mNrm)` is the solution to a perfect foresight problem in which income grows by the factor {math}`\WGroFac`; it is depicted in order to introduce a final fact: As wealth approaches infinity, the solution to the problem with uncertain labor income approaches arbitrarily close to the perfect foresight solution.
 
 :::{margin}
-This limiting result requires that we impose the {math}`\FHWC (\WGroFachFix < \Rfree)`, because the perfect foresight consumption function is not defined if {math}`\WGroFachFix \geq \Rfree`. Informally, the proof is as follows. Define {math}`\underline{\cFunc} \equiv (\mNrm-1)\MPC=\cFunc^{u}(\mNrm)` as the consumption function for the unemployed consumer who will receive no future labor income. Then {math}`\underline{\cFunc}(\mNrm) < \cFunc(\mNrm) \leq \bar{\cFunc}(\mNrm)`, and so {math}`1 < \cFunc(\mNrm)/\underline{\cFunc}(\mNrm)<\bar{\cFunc}(\mNrm)/\underline{\cFunc}(\mNrm)`. In the limit as {math}`\mNrm \uparrow \infty`, however, human wealth accounts for an arbitrarily small proportion {math}`\MPC \hNrm/\MPC (\hNrm+\mNrm-1)` of consumption, so {math}`\lim_{\mNrm \uparrow \infty} \cFunc^{e}(\mNrm)/\cFunc^{u}(\mNrm) = 1` so the precautionary motive captured by {math}`\nabla` vanishes.
+This limiting result requires that we impose the {math}`\FHWC (\WGroFachFix < \Rfree)`, because the perfect foresight consumption function is not defined if {math}`\WGroFachFix \geq \Rfree`. Informally, the proof is as follows. Define {math}`\underline{\cFunc} \equiv (\mNrm-1)\MPC=\cFunc^{\UnempLbl}(\mNrm)` as the consumption function for the unemployed consumer who will receive no future labor income. Then {math}`\underline{\cFunc}(\mNrm) < \cFunc(\mNrm) \leq \bar{\cFunc}(\mNrm)`, and so {math}`1 < \cFunc(\mNrm)/\underline{\cFunc}(\mNrm)<\bar{\cFunc}(\mNrm)/\underline{\cFunc}(\mNrm)`. In the limit as {math}`\mNrm \uparrow \infty`, however, human wealth accounts for an arbitrarily small proportion {math}`\MPC \hNrm/\MPC (\hNrm+\mNrm-1)` of consumption, so {math}`\lim_{\mNrm \uparrow \infty} \cFunc^{\EmpLbl}(\mNrm)/\cFunc^{\UnempLbl}(\mNrm) = 1` so the precautionary motive captured by {math}`\nabla` vanishes.
 :::
 
 :::{figure} figures/cFunc.png
@@ -571,8 +574,8 @@ a condition that can be visually verified for our benchmark calibration in {numr
 :label: eq:TBS-cLevGro
 
 \begin{aligned}
-        \left(\frac{\cLvl^{e}_{t+1}}{\cLvl^{e}_{t}}\right) & =  (\Rfree\DiscFac)^{1/\CRRA} \left\{1+\urate\left[\left(\frac{{\cNrm}^{e}_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}
-\\       \Delta \log \cLvl^{e}_{t+1} & \approx  \CRRA^{-1}(\rfree-\discRte) +  \urate \nabla _{t+1},
+        \left(\frac{\cLvl^{\EmpLbl}_{t+1}}{\cLvl^{\EmpLbl}_{t}}\right) & =  (\Rfree\DiscFac)^{1/\CRRA} \left\{1+\urate\left[\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}
+\\       \Delta \log \cLvl^{\EmpLbl}_{t+1} & \approx  \CRRA^{-1}(\rfree-\discRte) +  \urate \nabla _{t+1},
 \end{aligned}
 ```
 
@@ -596,7 +599,7 @@ Next, note that the point where the consumption growth locus meets the income gr
 
 We are finally in position to get an intuitive understanding of how the model works, and why there is a target wealth ratio. On the one hand, consumers are growth-impatient. This prevents their wealth-to-income ratio from heading off to infinity. On the other hand, consumers have a precautionary motive that intensifies more and more as the level of wealth gets lower and lower. At some point the precautionary motive gets strong enough to counterbalance impatience. The point where impatience matches prudence defines the target wealth-to-income ratio.
 
-Now consider the results of increasing the interest rate to {math}`\grave{\rfree}>\rfree`, depicted in {numref}`fig:TBS-GrowthB`. Obviously the perfect foresight consumption growth locus will shift up, to {math}`\CRRA^{-1}(\grave{\rfree}-\discRte)`, inducing a corresponding increase in the expected consumption growth locus. But we have not changed the expected growth rate of income. It is clear from the figure, therefore, that the new target level of cash-on-hand {math}`\grave{\mTrgNrm}^{e}` will be greater than the original target. That is, an increase in the interest rate increases the target level of wealth, as would be expected on intuitive grounds.
+Now consider the results of increasing the interest rate to {math}`\grave{\rfree}>\rfree`, depicted in {numref}`fig:TBS-GrowthB`. Obviously the perfect foresight consumption growth locus will shift up, to {math}`\CRRA^{-1}(\grave{\rfree}-\discRte)`, inducing a corresponding increase in the expected consumption growth locus. But we have not changed the expected growth rate of income. It is clear from the figure, therefore, that the new target level of cash-on-hand {math}`\grave{\mTrgNrm}^{\EmpLbl}` will be greater than the original target. That is, an increase in the interest rate increases the target level of wealth, as would be expected on intuitive grounds.
 
 :::{figure} figures/GrowthB.png
 :name: fig:TBS-GrowthB
@@ -621,7 +624,7 @@ Effect of an Increase in {math}`\urate`
 ```{math}
 :label: eq:TBS-ceqg
 
-\Delta \log \cLvl^{e}_{t+1} = \WGroRtehFix.
+\Delta \log \cLvl^{\EmpLbl}_{t+1} = \WGroRtehFix.
 ```
 
 Yet the approximate Euler equation for consumption growth, {eq}`eq:TBS-cLevGro`, does not contain any term explicitly involving income growth; in the logarithmic utility case, for example, the expression is
@@ -629,7 +632,7 @@ Yet the approximate Euler equation for consumption growth, {eq}`eq:TBS-cLevGro`,
 ```{math}
 :label: eq:TBS-cdelapprox2
 
-\Delta \log \cLvl^{e}_{t+1} \approx \CRRA^{-1}(\rfree-\discRte) + \urate \nabla _{t+1}.
+\Delta \log \cLvl^{\EmpLbl}_{t+1} \approx \CRRA^{-1}(\rfree-\discRte) + \urate \nabla _{t+1}.
 ```
 
 How can we reconcile these two expressions for consumption growth? Only by realizing that the size of the precautionary term {math}`\urate \nabla_{t+1}` is *endogenous*: It depends on {math}`\WGroRtehFix`. Indeed, we can solve {eq}`eq:TBS-ceqg` and {eq}`eq:TBS-cdelapprox2` to determine that in steady-state we must have
@@ -692,7 +695,7 @@ Note again, however, that equilibrium steady-state consumption growth is still e
 :::{figure} figures/cPathAfterThetaDrop.png
 :name: fig:TBS-cPathAfterThetaDrop
 
-Path of {math}`{\cNrm}^{e}` Before and After {math}`\discRte` Decline
+Path of {math}`{\cNrm}^{\EmpLbl}` Before and After {math}`\discRte` Decline
 :::
 
 :::{figure} figures/mPathAfterThetaDrop.png
@@ -771,7 +774,7 @@ If a benevolent source outside the economy were to provide every newborn with an
 
 Thus, per-capita market resources for members of the newborn generation would be exactly equal to the target level of market resources for a person anticipating the future path of labor income that the members of the newborn generation actually anticipate (which is the same as the future path anticipated by all other generations as well).
 
-If such a transfer policy had been in place forever, the economy at every point in time would consist of employed households whose consumption had been equal to its steady-state value {math}`{\cNrm}^{e}` for their whole lives. That is, every individual agent in this economy would be identical in their *ratio* of consumption, market resources, etc. to permanent labor income. The behavior of any individual would therefore be fully captured by the behavior of a representative employed agent.
+If such a transfer policy had been in place forever, the economy at every point in time would consist of employed households whose consumption had been equal to its steady-state value {math}`{\cNrm}^{\EmpLbl}` for their whole lives. That is, every individual agent in this economy would be identical in their *ratio* of consumption, market resources, etc. to permanent labor income. The behavior of any individual would therefore be fully captured by the behavior of a representative employed agent.
 
 :::{margin}
 The *level* of permanent labor income will differ for different households, depending on their age and accumulated wage seniority; the circumstances of individuals are identical only after their problem has been normalized by their varying levels of permanent labor income.
@@ -782,7 +785,7 @@ The foregoing scenario assumed that the "stake" is provided by a mysterious "ben
 The size of the required tax rate is calculated as follows. The total size of the resources transferred to the newborn generation must be
 
 ```{math}
-\check{\BLvl}^{e}_{t,t} = \check{\bNrm} \PopnLvl_{t,t} \check{\Wage}_{t}
+\check{\BLvl}^{\EmpLbl}_{t,t} = \check{\bNrm} \PopnLvl_{t,t} \check{\Wage}_{t}
 ```
 
 where
@@ -809,7 +812,7 @@ so the aggregate wage tax rate required to finance a "stake" of size {math}`\che
 \end{aligned}
 ```
 
-Note, however, that in an economy where this tax has existed forever, the consequence of the tax is effectively just a permanent reduction in after-tax labor income by proportion {math}`(1-\TaxRte)`, compared to its value in the absence of the tax. Given the homotheticity of the model, a permanent rescaling by a constant factor leaves the scaled version of the individual's problem (and its solution) unchanged. Thus we can conclude not only that a representative agent exists in this economy, but that the steady-state characteristics of the representative agent's problem are identical (in ratio form) to the characteristics of the unrescaled individual's problem; that is, {math}`\check{\cFunc}(\mNrm) = \cFunc^{e}(\mNrm)`, {math}`\check{b} = \bTrgNrm`, and so on.
+Note, however, that in an economy where this tax has existed forever, the consequence of the tax is effectively just a permanent reduction in after-tax labor income by proportion {math}`(1-\TaxRte)`, compared to its value in the absence of the tax. Given the homotheticity of the model, a permanent rescaling by a constant factor leaves the scaled version of the individual's problem (and its solution) unchanged. Thus we can conclude not only that a representative agent exists in this economy, but that the steady-state characteristics of the representative agent's problem are identical (in ratio form) to the characteristics of the unrescaled individual's problem; that is, {math}`\check{\cFunc}(\mNrm) = \cFunc^{\EmpLbl}(\mNrm)`, {math}`\check{b} = \bTrgNrm`, and so on.
 
 Matters are not much more complicated outside the balanced growth steady state, so long as we assume that the government always transfers the amount {math}`\check{b}` to newborn households, financed by the tax {math}`\TaxRte` derived above. Consider, for example, an economy that was in steady-state equilibrium leading up to period {math}`\prdt`, and at the beginning of {math}`\prdt` there is a sudden realization that future growth rates will be higher than those anticipated and experienced in the past: {math}`\WGroFac^{\prime} > \WGroFac` after {math}`\prdt`. Since expected growth rates affect {math}`\bTrgNrm`, the tax rate must be immediately and permanently changed so that the generations born after {math}`\prdt-1` receive a "stake" of the proper new size. This change in {math}`\TaxRte` has two consequences for the generations that survive from periods prior to {math}`\prdt`. Under the old tax rate, they would have experienced {math}`\bNrmE_{t} = \bLvl_{t}/(1-\TaxRte)\Wage_{t} = \bTrgNrm`; the change in expectations has no effect on {math}`\bLvl_{t}` or {math}`\Wage_{t}` but changes the tax rate to {math}`\grave{\TaxRte}`. Thus these households will have an actual resource ratio that differs from its new target value, {math}`\bNrmE_{t} \neq \Alt{\bTrgNrm}`, both because the after-tax income scaling factor has changed and because the target ratio has changed from {math}`\bTrgNrm` to {math}`\Alt{\bTrgNrm}`.
 
@@ -824,7 +827,7 @@ If the economy has experienced multiple shocks, it will be necessary to retain a
 :::{figure} figures/SOEStakescPathAfterThetaDropPlot.png
 :name: fig:TBS-SOEStakescPathAfterThetaDropPlot
 
-Aggregate {math}`c` in PE/SOE Economy Before and After {math}`\discRte` Decline
+Aggregate {math}`\CNrm` in PE/SOE Economy Before and After {math}`\discRte` Decline
 :::
 
 #### No Stake
@@ -849,7 +852,7 @@ The absolute level of wages will have grown by {math}`\WGroFac/\erate` per perio
 
 ```{math}
 \begin{aligned}
-  \cLvl_{0} & =  \sum_{\tThen=0}^{-\infty} \cFunc(1) \erate^{\tThen} (\erate/\PopnGroFac)^{-\tThen}
+  \CLvl_{0} & =  \sum_{\tThen=0}^{-\infty} \cFunc(1) \erate^{\tThen} (\erate/\PopnGroFac)^{-\tThen}
 \\ & =  \cFunc(1) \sum_{\tThen=0}^{-\infty}  \PopnGroFac^{\tThen}
 \\ & =  \cFunc(1) \left(\frac{1}{1-\PopnGroFac^{-1}}\right)
 .
@@ -858,12 +861,12 @@ The absolute level of wages will have grown by {math}`\WGroFac/\erate` per perio
 
 The longer a generation lives, the more time it will have had to save toward its target level of wealth; but newborns always begin life with no assets. After period 0, therefore, age-heterogeneity in assets and consumption ratios creeps into the population.
 
-The foregoing discussion contains (in some cases implicitly) all the assumptions necessary to conduct a simulation of this economy. {numref}`fig:TBS-SOENoStakescPath` shows the path of the ratio {math}`\cLvl_{t}/\Wage_{t}\PopnLvl_{t}` starting from period 0 for an economy under our benchmark parameterization that generated our earlier figures. The only extra parameter required beyond those used before is {math}`\PopnGroFac`; we choose {math}`\PopnGroFac=1.01` corresponding roughly to the postwar population growth rate in the United States.
+The foregoing discussion contains (in some cases implicitly) all the assumptions necessary to conduct a simulation of this economy. {numref}`fig:TBS-SOENoStakescPath` shows the path of the ratio {math}`\CLvl_{t}/\Wage_{t}\PopnLvl_{t}` starting from period 0 for an economy under our benchmark parameterization that generated our earlier figures. The only extra parameter required beyond those used before is {math}`\PopnGroFac`; we choose {math}`\PopnGroFac=1.01` corresponding roughly to the postwar population growth rate in the United States.
 
 :::{figure} figures/SOENoStakescPath.png
 :name: fig:TBS-SOENoStakescPath
 
-Path of Aggregate {math}`c` in Stakeless PE/SOE Economy From Date 0
+Path of Aggregate {math}`\CNrm` in Stakeless PE/SOE Economy From Date 0
 :::
 
 ## Appendix
@@ -875,7 +878,7 @@ Using from [Math Facts](#fact:mathfactslist) the second-order and then the first
 
 ```{math}
 \begin{aligned}
-        \left\{1+\urate\left[\left(\frac{{\cNrm}^{e}_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA} & =  \left\{1+\urate\left[\left(\frac{\cNrmU_{t+1}+{\cNrm}^{e}_{t+1}-\cNrmU_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}
+        \left\{1+\urate\left[\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA} & =  \left\{1+\urate\left[\left(\frac{\cNrmU_{t+1}+{\cNrm}^{\EmpLbl}_{t+1}-\cNrmU_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}
 \\      & =  \left\{1+\urate\left[\left(1+\nabla _{t+1}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}
 \\      & \approx       \left\{1+\urate\left[1+\CRRA \nabla _{t+1}+ \CRRA (\nabla _{t+1})^{2}\prudEx-1\right]\right\}^{1/\CRRA}
 \\ & =          \left\{1+ \CRRA \urate (\nabla _{t+1}+ (\nabla _{t+1})^{2}\prudEx)\right\}^{1/\CRRA}
@@ -893,7 +896,7 @@ which leads directly to {eq}`eq:TBS-cedelapprox` in the main text.
 At a steady-state value of {math}`\mNrmE`, both {math}`\dcEqZero` and {math}`\dmEqZero` hold (equations {eq}`eq:TBS-cDelEqZero` and {eq}`eq:TBS-mDelEqZero`); for convenience defining {math}`\mathfrak{z} \equiv \RNrmByG \MPC \straight`,
 
 ```{math}
-0 = \overbrace{\left(\frac{\mathfrak{z}}{1+\mathfrak{z}}\right) \mNrmE}^{\Delta {\cNrm}^{e} } = \overbrace{\left(\frac{\RNrmByG-1}{\RNrmByG}\right)\mNrmE + \RNrmByG^{-1}}^{\Delta \mNrmE} = 0.
+0 = \overbrace{\left(\frac{\mathfrak{z}}{1+\mathfrak{z}}\right) \mNrmE}^{\Delta {\cNrm}^{\EmpLbl} } = \overbrace{\left(\frac{\RNrmByG-1}{\RNrmByG}\right)\mNrmE + \RNrmByG^{-1}}^{\Delta \mNrmE} = 0.
 ```
 
 But since {math}`\RNrmByG^{-1}` is a positive number, at {math}`\mNrmE=0` the {math}`\dmEqZero` locus's value is {math}`\RNrmByG^{-1}` while the value of the {math}`\dcEqZero` locus is zero, the two loci can intersect for a positive {math}`\mNrmE` only if the slope of the {math}`\dcEqZero` locus is greater:
@@ -965,7 +968,7 @@ but note that
 
 and in the case where {math}`\mathfrak{a}=1`, {math}`\RNrmByG` must also be 1, implying that {math}`\GPFachFix = \RPFac < 1` (the RIC) so that {math}`\GPFachFix^{-\CRRA} > 1` and hence {math}`\straight > 1 > 0`. The other interesting case is when {math}`\mathfrak{a}=0` so that {math}`\WGroFac=\Rfree` and {math}`\RNrmByG=\Rfree/\WGroFachFix=\Rfree(1-\urate)/\WGroFac=(1-\urate)<1`. In this case {math}`\GPFachFix < \RPFac` and so {math}`\GPFachFix^{-\CRRA} > \RPFac^{-\CRRA} > 1` and so {math}`\straight` is even further above 1, so that it is even more strongly {math}`>0`. Similar logic holds for any {math}`\mathfrak{a} \leq 1`.
 
-Thus, we can conclude that, when human wealth is infinite (that is, if {math}`\mathfrak{a} \leq 1`), a target {math}`\TargetNrm{\mNrm}^{e}` will exist.
+Thus, we can conclude that, when human wealth is infinite (that is, if {math}`\mathfrak{a} \leq 1`), a target {math}`\TargetNrm{\mNrm}^{\EmpLbl}` will exist.
 
 #### Conditions Under Which a Target Exists When Human Wealth is Finite
 
@@ -1017,7 +1020,7 @@ Somewhat miraculously, at this value of {math}`\DiscFac`, because that bracketed
 
 #### Solutions Exist Even When Growth Impatience Fails
 
-We have just demonstrated that satisfying the {math}`\GIChFix` condition is necessary and sufficient to guarantee existence of a target {math}`\mTrgNrm^{e}`. But we suggested earlier that a weaker condition, the GIC-TBS, guarantees the existence of a well-defined consumption function.
+We have just demonstrated that satisfying the {math}`\GIChFix` condition is necessary and sufficient to guarantee existence of a target {math}`\mTrgNrm^{\EmpLbl}`. But we suggested earlier that a weaker condition, the GIC-TBS, guarantees the existence of a well-defined consumption function.
 
 This can be understood as follows. Rewrite the requirement for existence of a target, {eq}`eq:TBS-cDelEq0SlopeCondAlt`, as
 
@@ -1035,7 +1038,7 @@ or taking logs we have approximately
 \MPC \straight > \rfree-\WGroRtehFix .
 ```
 
-The LHS captures the slope of the {math}`\dcEqZero` locus, which is {math}`\MPC` modified by {math}`\straight`, whose difference from 1 captures the degree of growth (im)patience. The RHS captures the slope of the {math}`\dmEqZero` locus. Recall that the inequality captures the fact that a target {math}`\mTrgNrm^{e}` exists if these two loci intercept, which happens if the slope of {math}`\dcEqZero` exceeds that of {math}`\dmEqZero`.
+The LHS captures the slope of the {math}`\dcEqZero` locus, which is {math}`\MPC` modified by {math}`\straight`, whose difference from 1 captures the degree of growth (im)patience. The RHS captures the slope of the {math}`\dmEqZero` locus. Recall that the inequality captures the fact that a target {math}`\mTrgNrm^{\EmpLbl}` exists if these two loci intercept, which happens if the slope of {math}`\dcEqZero` exceeds that of {math}`\dmEqZero`.
 
 :::{margin}
 "Captures" does not mean "is equal to." Equation {eq}`eq:TBS-cDelEq0SlopeCondAlt` provides the actual formula for the slope.
@@ -1054,7 +1057,7 @@ If the consumer is "growth patience poised" (that is, {math}`\GPFachFix = 1`), t
 
 which is the (log version of) the {math}`\GIChFix`. The condition cannot hold both as an equality {math}`\GPFachFix=1` (our starting assumption) and an inequality {math}`\GPFachFix < 1` (the conclusion of {eq}`eq:TBS-patpGroLT0`). This contradiction constitutes a proof that exactly at {math}`\GPFachFix=1` a target does not exist.
 
-As noted above, if the consumer is growth-impatient ({math}`\GPFachFix < 1`) then {math}`\straight > 1` and the slope of {math}`\dcEqZero` is monotonically increased as the degree of growth-impatience increases (so that target {math}`\TargetNrm{\mNrm}^{e}` is diminished).
+As noted above, if the consumer is growth-impatient ({math}`\GPFachFix < 1`) then {math}`\straight > 1` and the slope of {math}`\dcEqZero` is monotonically increased as the degree of growth-impatience increases (so that target {math}`\TargetNrm{\mNrm}^{\EmpLbl}` is diminished).
 
 But if the consumer is growth-patient ({math}`\GPFachFix > 1`) then {math}`\straight < 1` and the slope of {math}`\dcEqZero` is diminished (which reflects the fact that the greater the degree of patience, the lower will consumption be for any given {math}`\mNrmE`). The lower bound is defined by the point at which the degree of growth patience becomes so strong that the slope of {math}`\dcEqZero` reaches zero (when {math}`\straight=0`). This restricts the permissible degree of growth patience, because {math}`\straight > 0` requires (rewrite {eq}`eq:TBS-GICExistsSoln`):
 
@@ -1294,7 +1297,7 @@ It would be inappropriate to use the equation to consider the effect of an incre
 
 #### The Consumption Function
 
-To solve the model by the method of *reverse shooting*, we need {math}`{\cNrm}^{e}_{t}` as a function of {math}`{\cNrm}^{e}_{t+1}`. Starting with {eq}`eq:TBS-BeforePFStep`:
+To solve the model by the method of *reverse shooting*, we need {math}`{\cNrm}^{\EmpLbl}_{t}` as a function of {math}`{\cNrm}^{\EmpLbl}_{t+1}`. Starting with {eq}`eq:TBS-BeforePFStep`:
 
 :::{margin}
 See {cite:t}`judd:book` for a presentation of shooting methods of solution for numerical difference and differential equations.
@@ -1304,9 +1307,9 @@ See {cite:t}`judd:book` for a presentation of shooting methods of solution for n
 :label: eq:TBS-cReverse
 
 \begin{aligned}
-         \left(\frac{{\cNrm}^{e}_{t+1}}{{\cNrm}^{e}_{t}}\right) & =  \WGroFachFix^{-1} (\Rfree\DiscFac)^{1/\CRRA} \left\{1+\urate\left[\left(\frac{{\cNrm}^{e}_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}
-\\       {\cNrm}^{e}_{t} & =  \left(\frac{{\cNrm}^{e}_{t+1}}{\WGroFachFix^{-1} (\Rfree\DiscFac)^{1/\CRRA} \left\{1+\urate\left[\left(\frac{{\cNrm}^{e}_{t+1}}{\MPC (\mNrmE_{t+1}-1)}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA} }  \right)
-\\        & =  \WGroFachFix (\Rfree\DiscFac)^{-1/\CRRA} {\cNrm}^{e}_{t+1}\left\{1+\urate\left[\left(\frac{{\cNrm}^{e}_{t+1}}{\MPC (\mNrmE_{t+1}-1)}\right)^{\CRRA}-1\right]\right\}^{-1/\CRRA}        .
+         \left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{{\cNrm}^{\EmpLbl}_{t}}\right) & =  \WGroFachFix^{-1} (\Rfree\DiscFac)^{1/\CRRA} \left\{1+\urate\left[\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{\cNrmU_{t+1}}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}
+\\       {\cNrm}^{\EmpLbl}_{t} & =  \left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{\WGroFachFix^{-1} (\Rfree\DiscFac)^{1/\CRRA} \left\{1+\urate\left[\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{\MPC (\mNrmE_{t+1}-1)}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA} }  \right)
+\\        & =  \WGroFachFix (\Rfree\DiscFac)^{-1/\CRRA} {\cNrm}^{\EmpLbl}_{t+1}\left\{1+\urate\left[\left(\frac{{\cNrm}^{\EmpLbl}_{t+1}}{\MPC (\mNrmE_{t+1}-1)}\right)^{\CRRA}-1\right]\right\}^{-1/\CRRA}        .
 \end{aligned}
 ```
 
@@ -1315,7 +1318,7 @@ Inverting {eq}`eq:TBS-metp1`, the reverse shooting equation for {math}`\mNrmE_{t
 ```{math}
 :label: eq:TBS-mReverse
 
-\mNrmE_{t} = \RNrmByG^{-1} (\mNrmE_{t+1}-1)+{\cNrm}^{e}_{t} .
+\mNrmE_{t} = \RNrmByG^{-1} (\mNrmE_{t+1}-1)+{\cNrm}^{\EmpLbl}_{t} .
 ```
 
 The reverse shooting approximation will be more accurate if we use it to obtain estimates of the marginal propensity to consume as well. These are obtained by differentiating the consumption Euler equation with respect to {math}`m_{t}`:
@@ -1324,18 +1327,18 @@ The reverse shooting approximation will be more accurate if we use it to obtain 
 :label: eq:TBS-dEuler
 
 \begin{aligned}
-  \uP(\cFunc^{e}(\mNrm_{t})) & = \overbrace{\RNrmByG \DiscFac \WGroFachFix^{1-\CRRA}}^{\DiscFacAlt} \Ex_{t}[\uP(\cFunc^{\bullet}(\mNrm_{t+1}))]
-\\  \uFunc^{\prime\prime}(\cFunc^{e}(\mNrm_{t}))\MPCFunc^{e}(\mNrm_{t}) & = \DiscFacAlt  \RNrmByG (1-\MPCFunc^{e}(\mNrm_{t}))\Ex_{t}[\uFunc^{\prime\prime}(\cFunc^{\bullet}(\mNrm_{t+1}))\MPCFunc^{\bullet}(\mNrm_{t+1})]
+  \uP(\cFunc^{\EmpLbl}(\mNrm_{t})) & = \overbrace{\RNrmByG \DiscFac \WGroFachFix^{1-\CRRA}}^{\DiscFacAlt} \Ex_{t}[\uP(\cFunc^{\bullet}(\mNrm_{t+1}))]
+\\  \uFunc^{\prime\prime}(\cFunc^{\EmpLbl}(\mNrm_{t}))\MPCFunc^{\EmpLbl}(\mNrm_{t}) & = \DiscFacAlt  \RNrmByG (1-\MPCFunc^{\EmpLbl}(\mNrm_{t}))\Ex_{t}[\uFunc^{\prime\prime}(\cFunc^{\bullet}(\mNrm_{t+1}))\MPCFunc^{\bullet}(\mNrm_{t+1})]
 \end{aligned}
 ```
 
-so that defining, e.g., {math}`\MPCE_{t} = \MPCFunc^{e}(\mNrm_{t})` we have
+so that defining, e.g., {math}`\MPCE_{t} = \MPCFunc^{\EmpLbl}(\mNrm_{t})` we have
 
 ```{math}
 :label: eq:TBS-naturalMPC
 
 \begin{aligned}
- \MPCE_{t} & =  (1-\MPCE_{t}) \underbrace{\DiscFacAlt \RNrmByG (1/\uPP({\cNrm}^{e}_{t}))\Ex_{t}\left[\uPP(c^{\bullet}_{t+1})\MPC^{\bullet}_{t+1}\right]}_{\equiv \natural_{t+1}}
+ \MPCE_{t} & =  (1-\MPCE_{t}) \underbrace{\DiscFacAlt \RNrmByG (1/\uPP({\cNrm}^{\EmpLbl}_{t}))\Ex_{t}\left[\uPP(c^{\bullet}_{t+1})\MPC^{\bullet}_{t+1}\right]}_{\equiv \natural_{t+1}}
 \\ (1+\natural_{t+1})\MPCE_{t} & = \natural_{t+1}
 \\ \MPCE_{t} & = \left(\frac{\natural_{t+1}}{1+\natural_{t+1}}\right)
 .
@@ -1345,13 +1348,13 @@ so that defining, e.g., {math}`\MPCE_{t} = \MPCFunc^{e}(\mNrm_{t})` we have
 At the target level of {math}`\mNrmE` we have
 
 ```{math}
-\overbrace{(1/\uPP(\cTrgNrm^{e}))\Ex_{t}\left[\uPP(c^{\bullet})\MPC^{\bullet}\right]}^{\natural / \RNrmByG \DiscFacAlt} = \erate \overbrace{(\uPP(\cTrgNrm^{e})/\uPP(\cTrgNrm^{e}))}^{=1}\MPCE+\urate (\uPP(\cTrgNrm^{u})/\uPP(\cTrgNrm^{e}))\MPC
+\overbrace{(1/\uPP(\cTrgNrm^{\EmpLbl}))\Ex_{t}\left[\uPP(c^{\bullet})\MPC^{\bullet}\right]}^{\natural / \RNrmByG \DiscFacAlt} = \erate \overbrace{(\uPP(\cTrgNrm^{\EmpLbl})/\uPP(\cTrgNrm^{\EmpLbl}))}^{=1}\MPCE+\urate (\uPP(\cTrgNrm^{\UnempLbl})/\uPP(\cTrgNrm^{\EmpLbl}))\MPC
 ```
 
 so that
 
 ```{math}
-\natural = \DiscFacAlt \RNrmByG (\erate \MPCE + \urate (\cTrgNrm^{u}/\cTrgNrm^{e})^{-\CRRA-1} \MPC)
+\natural = \DiscFacAlt \RNrmByG (\erate \MPCE + \urate (\cTrgNrm^{\UnempLbl}/\cTrgNrm^{\EmpLbl})^{-\CRRA-1} \MPC)
 ```
 
 yielding from {eq}`eq:TBS-naturalMPC` a quadratic equation in {math}`\MPCE`:
@@ -1359,7 +1362,7 @@ yielding from {eq}`eq:TBS-naturalMPC` a quadratic equation in {math}`\MPCE`:
 ```{math}
 :label: eq:TBS-quadraticForTargetMPC
 
-\left(1+\DiscFacAlt \RNrmByG (\erate \MPCE + \urate (\cTrgNrm^{u}/\cTrgNrm^{e})^{-\CRRA-1} \MPC) \right)\MPCE = \DiscFacAlt \RNrmByG (\erate \MPCE + \urate (\cTrgNrm^{u}/\cTrgNrm^{e})^{-\CRRA-1} \MPC)
+\left(1+\DiscFacAlt \RNrmByG (\erate \MPCE + \urate (\cTrgNrm^{\UnempLbl}/\cTrgNrm^{\EmpLbl})^{-\CRRA-1} \MPC) \right)\MPCE = \DiscFacAlt \RNrmByG (\erate \MPCE + \urate (\cTrgNrm^{\UnempLbl}/\cTrgNrm^{\EmpLbl})^{-\CRRA-1} \MPC)
 ```
 
 which has one solution for {math}`\MPCE` in the interval {math}`[0,1]`, which is the MPC at target wealth.
@@ -1368,13 +1371,13 @@ which has one solution for {math}`\MPCE` in the interval {math}`[0,1]`, which is
 The *Mathematica* code in the handout's [repository](https://github.com/llorracc/TractableBufferStock) constructs this derivative and solves the quadratic equation analytically; its Matlab code simply copies the analytical formula generated by *Mathematica*. This chapter's figures instead use HARK's `TractableConsumerType`, which solves the model by the same reverse shooting.
 :::
 
-The limiting MPC as consumption approaches zero, {math}`\bar{\MPC}^{e},` will also be useful; this is obtained by noting that utility in the employed state next year becomes asymptotically irrelevant as {math}`{\cNrm}^{e}_{t}` approaches zero, so that
+The limiting MPC as consumption approaches zero, {math}`\bar{\MPC}^{\EmpLbl},` will also be useful; this is obtained by noting that utility in the employed state next year becomes asymptotically irrelevant as {math}`{\cNrm}^{\EmpLbl}_{t}` approaches zero, so that
 
 ```{math}
 \begin{aligned}
-  \lim_{{\cNrm}^{e}_{t} \rightarrow 0}  \overbrace{ \DiscFacAlt \RNrmByG \MPCE_{t+1} \left(\erate ({\cNrm}^{e}_{t+1}/{\cNrm}^{e}_{t})^{-\CRRA-1}  + \urate (\cNrmU_{t+1}/{\cNrm}^{e}_{t})^{-\CRRA-1}\MPC\right)}^{\natural_{t+1}} & =  \DiscFacAlt \RNrmByG \urate (\cNrmU_{t+1}/{\cNrm}^{e}_{t})^{-\CRRA-1}\MPC
-\\  & =  \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG \aNrmE_{t}/(\aNrmE_{t}(\bar{\MPC}^{e}/(1-\bar{\MPC}^{e})))^{-\CRRA-1})\MPC
-\\ & =  \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG ((1-\bar{\MPC}^{e})/\bar{\MPC}^{e}))^{-\CRRA-1}\MPC
+  \lim_{{\cNrm}^{\EmpLbl}_{t} \rightarrow 0}  \overbrace{ \DiscFacAlt \RNrmByG \MPCE_{t+1} \left(\erate ({\cNrm}^{\EmpLbl}_{t+1}/{\cNrm}^{\EmpLbl}_{t})^{-\CRRA-1}  + \urate (\cNrmU_{t+1}/{\cNrm}^{\EmpLbl}_{t})^{-\CRRA-1}\MPC\right)}^{\natural_{t+1}} & =  \DiscFacAlt \RNrmByG \urate (\cNrmU_{t+1}/{\cNrm}^{\EmpLbl}_{t})^{-\CRRA-1}\MPC
+\\  & =  \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG \aNrmE_{t}/(\aNrmE_{t}(\bar{\MPC}^{\EmpLbl}/(1-\bar{\MPC}^{\EmpLbl})))^{-\CRRA-1})\MPC
+\\ & =  \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG ((1-\bar{\MPC}^{\EmpLbl})/\bar{\MPC}^{\EmpLbl}))^{-\CRRA-1}\MPC
 \end{aligned}
 ```
 
@@ -1383,19 +1386,19 @@ so that from {eq}`eq:TBS-naturalMPC` we have
 ```{math}
 :label: eq:TBS-MPCat0
 
-\bar{\MPC}^{e} \equiv \lim_{\mNrm_{t} \rightarrow 0} \MPCFunc^{e}(\mNrm_{t}) = \left(\frac{ \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG ((1-\bar{\MPC}^{e})/\bar{\MPC}^{e}))^{-\CRRA-1}\MPC }{1+ \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG ((1-\bar{\MPC}^{e})/\bar{\MPC}^{e}))^{-\CRRA-1}\MPC }\right)
+\bar{\MPC}^{\EmpLbl} \equiv \lim_{\mNrm_{t} \rightarrow 0} \MPCFunc^{\EmpLbl}(\mNrm_{t}) = \left(\frac{ \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG ((1-\bar{\MPC}^{\EmpLbl})/\bar{\MPC}^{\EmpLbl}))^{-\CRRA-1}\MPC }{1+ \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG ((1-\bar{\MPC}^{\EmpLbl})/\bar{\MPC}^{\EmpLbl}))^{-\CRRA-1}\MPC }\right)
 ```
 
-which implicitly defines {math}`\bar{\MPC}^{e}`. An explicit solution is not available, but after parameter values have been defined a numerical rootfinder can calculate a solution almost instantly.
+which implicitly defines {math}`\bar{\MPC}^{\EmpLbl}`. An explicit solution is not available, but after parameter values have been defined a numerical rootfinder can calculate a solution almost instantly.
 
-Finally, it will be useful to have an estimate of the curvature (second derivative) of the consumption function. This can be obtained by a procedure analogous to the one used to obtain the MPC: differentiate the differentiated Euler equation {eq}`eq:TBS-dEuler` again. Noting that {math}`\MPC^{u\prime}=0` we can obtain:
+Finally, it will be useful to have an estimate of the curvature (second derivative) of the consumption function. This can be obtained by a procedure analogous to the one used to obtain the MPC: differentiate the differentiated Euler equation {eq}`eq:TBS-dEuler` again. Noting that {math}`\MPC^{\UnempLbl\prime}=0` we can obtain:
 
 ```{math}
 :label: eq:TBS-kappaPExpr
 
 \begin{aligned}
-(\MPCFunc^{e}_{t})^{2} \uPPP(\cFunc^{e}_{t}) +\MPCFunc_{t}^{e\prime}\uPP(\cFunc^{e}_{t}) & = \DiscFacAlt \RNrmByG \Big\{(-\MPCFunc_{t}^{e\prime}) \Ex_{t}[\uPP(\cFunc^{\bullet}_{t+1})\MPCFunc^{\bullet}_{t+1}]
-\\ & \quad +  \RNrmByG (1-\MPCFunc^{e}_{t})^{2}\left(\Ex_{t}[(\MPCFunc_{t+1}^{\bullet})^{2}\uPPP(\cFunc^{\bullet}_{t+1})]+\erate  \uPP(\cFunc^{e}_{t+1})\MPCFunc_{t+1}^{e\prime}\right)\Big\}
+(\MPC^{\EmpLbl}_{t})^{2} \uPPP(\cNrm^{\EmpLbl}_{t}) +\MPC_{t}^{\EmpLbl\prime}\uPP(\cNrm^{\EmpLbl}_{t}) & = \DiscFacAlt \RNrmByG \Big\{(-\MPC_{t}^{\EmpLbl\prime}) \Ex_{t}[\uPP(\cNrm^{\bullet}_{t+1})\MPC^{\bullet}_{t+1}]
+\\ & \quad +  \RNrmByG (1-\MPC^{\EmpLbl}_{t})^{2}\left(\Ex_{t}[(\MPC_{t+1}^{\bullet})^{2}\uPPP(\cNrm^{\bullet}_{t+1})]+\erate  \uPP(\cNrm^{\EmpLbl}_{t+1})\MPC_{t+1}^{\EmpLbl\prime}\right)\Big\}
 \end{aligned}
 ```
 
@@ -1404,35 +1407,35 @@ so that
 ```{math}
 :label: eq:TBS-kappaPReverse
 
-\MPCFunc^{e\prime}_{t} = \left(\frac{\DiscFacAlt \RNrmByG^{2} (1-\MPCFunc^{e}_{t})^{2} \left( \Ex_{t}[(\MPCFunc_{t+1}^{\bullet})^{2}\uPPP(\cFunc^{\bullet}_{t+1})] +\erate \uPP(\cFunc^{e}_{t+1}) \MPCFunc^{e \prime}_{t+1}\right)-(\MPCFunc^{e}_{t})^{2} \uPPP(\cFunc^{e}_{t})}{\uPP(\cFunc^{e}_{t})+\DiscFacAlt \RNrmByG \Ex_{t}[\uPP(\cFunc^{\bullet}_{t+1})\MPCFunc^{\bullet}_{t+1}] }\right)
+\MPC^{\EmpLbl\prime}_{t} = \left(\frac{\DiscFacAlt \RNrmByG^{2} (1-\MPC^{\EmpLbl}_{t})^{2} \left( \Ex_{t}[(\MPC_{t+1}^{\bullet})^{2}\uPPP(\cNrm^{\bullet}_{t+1})] +\erate \uPP(\cNrm^{\EmpLbl}_{t+1}) \MPC^{\EmpLbl \prime}_{t+1}\right)-(\MPC^{\EmpLbl}_{t})^{2} \uPPP(\cNrm^{\EmpLbl}_{t})}{\uPP(\cNrm^{\EmpLbl}_{t})+\DiscFacAlt \RNrmByG \Ex_{t}[\uPP(\cNrm^{\bullet}_{t+1})\MPC^{\bullet}_{t+1}] }\right)
 ```
 
-which can be further simplified at the target because {math}`\MPCFunc^{e \prime}_{t}(\mTrgNrm) = \MPCFunc^{e \prime}_{t+1}(\mTrgNrm) = \MPC^{e \prime}` so that
+which can be further simplified at the target because {math}`\MPCFunc^{\EmpLbl \prime}_{t}(\mTrgNrm) = \MPCFunc^{\EmpLbl \prime}_{t+1}(\mTrgNrm) = \MPC^{\EmpLbl \prime}` so that
 
 ```{math}
 :label: eq:TBS-MPCPrimeSS
 
-\MPC^{e\prime} = \left(\frac{\DiscFacAlt \RNrmByG^{2} (1-\MPCE)^{2}\Ex_{t}[(\MPC^{\bullet})^{2} \uPPP(c^{\bullet})] -(\MPCE)^{2} \uPPP(\cTrgNrm^{e})}{\uPP(\cTrgNrm^{e}) + \DiscFacAlt \RNrmByG \Ex_{t}[\uPP(c^{\bullet})\MPC^{\bullet}]- \DiscFacAlt \RNrmByG^{2} (1-\MPCE)^{2}\erate \uPP(\cTrgNrm^{e})}\right) .
+\MPC^{\EmpLbl\prime} = \left(\frac{\DiscFacAlt \RNrmByG^{2} (1-\MPCE)^{2}\Ex_{t}[(\MPC^{\bullet})^{2} \uPPP(c^{\bullet})] -(\MPCE)^{2} \uPPP(\cTrgNrm^{\EmpLbl})}{\uPP(\cTrgNrm^{\EmpLbl}) + \DiscFacAlt \RNrmByG \Ex_{t}[\uPP(c^{\bullet})\MPC^{\bullet}]- \DiscFacAlt \RNrmByG^{2} (1-\MPCE)^{2}\erate \uPP(\cTrgNrm^{\EmpLbl})}\right) .
 ```
 
-Another differentiation of {eq}`eq:TBS-kappaPExpr` similarly allows the construction of a formula for the value of {math}`\MPC^{e \prime\prime}` at the target {math}`\mTrgNrm`; in principle, any number of derivatives can be constructed in this manner.
+Another differentiation of {eq}`eq:TBS-kappaPExpr` similarly allows the construction of a formula for the value of {math}`\MPC^{\EmpLbl \prime\prime}` at the target {math}`\mTrgNrm`; in principle, any number of derivatives can be constructed in this manner.
 
 :::{margin}
 *Mathematica* permits the convenient computation of the analytical derivatives, and then the substitution of constant target values to obtain analytical expressions like {eq}`eq:TBS-MPCPrimeSS`. These solutions are simply imported by hand into the Matlab code.
 :::
 
-Reverse shooting requires us to solve separately for an approximation to the consumption function above the steady state and another approximation below the steady state. Using the approximate steady-state {math}`\MPCE` and {math}`\MPC^{e\prime}` obtained above, we begin by picking a very small number for {math}`\blacktriangle` and then creating a Taylor approximation to the consumption function near the steady state:
+Reverse shooting requires us to solve separately for an approximation to the consumption function above the steady state and another approximation below the steady state. Using the approximate steady-state {math}`\MPCE` and {math}`\MPC^{\EmpLbl\prime}` obtained above, we begin by picking a very small number for {math}`\blacktriangle` and then creating a Taylor approximation to the consumption function near the steady state:
 
 ```{math}
 :label: eq:TBS-revshootmstart
 
 \begin{aligned}
   \mNrmE_{\Alt{t}} & = \mTrgNrm + \blacktriangle
-\\ \tilde{\mathbf{c}}(\blacktriangle) & = \cTrgNrm^{e} + \blacktriangle \MPCE+ (\blacktriangle^{2}/2) \MPC^{e\prime}+ (\blacktriangle^{3}/6) \MPC^{e\prime\prime}
+\\ \tilde{\mathbf{c}}(\blacktriangle) & = \cTrgNrm^{\EmpLbl} + \blacktriangle \MPCE+ (\blacktriangle^{2}/2) \MPC^{\EmpLbl\prime}+ (\blacktriangle^{3}/6) \MPC^{\EmpLbl\prime\prime}
 \end{aligned}
 ```
 
-and then iterate the reverse-shooting equations until we reach some period {math}`n` in which {math}`\mNrmE_{\Alt{t}-n}` escapes some pre-specified interval {math}`[\underline{\mNrm}^{e},\bar{\mNrm}^{e}]` (where the natural value for {math}`\underline{\mNrm}^{e}` is 1 because this is the {math}`\mNrm` that would be owned by a consumer who had saved nothing in the prior period and therefore is below any feasible value of {math}`\mNrm` that could be realized by an optimizing consumer). This generates a sequence of points all of which are on the consumption function. A parallel procedure (substituting {math}`-` for {math}`+` in {eq}`eq:TBS-revshootmstart` and where appropriate in the corresponding equation for {math}`\cNrm`) generates the sequence of points for the approximation below the steady state. Taken together with the already-derived characterization of the function at the target level of wealth, these points constitute the basis for a piecewise second-order interpolating approximation to the consumption function on the interval {math}`[\underline{\mNrm}^{e},\bar{\mNrm}^{e}]`.
+and then iterate the reverse-shooting equations until we reach some period {math}`n` in which {math}`\mNrmE_{\Alt{t}-n}` escapes some pre-specified interval {math}`[\underline{\mNrm}^{\EmpLbl},\bar{\mNrm}^{\EmpLbl}]` (where the natural value for {math}`\underline{\mNrm}^{\EmpLbl}` is 1 because this is the {math}`\mNrm` that would be owned by a consumer who had saved nothing in the prior period and therefore is below any feasible value of {math}`\mNrm` that could be realized by an optimizing consumer). This generates a sequence of points all of which are on the consumption function. A parallel procedure (substituting {math}`-` for {math}`+` in {eq}`eq:TBS-revshootmstart` and where appropriate in the corresponding equation for {math}`\cNrm`) generates the sequence of points for the approximation below the steady state. Taken together with the already-derived characterization of the function at the target level of wealth, these points constitute the basis for a piecewise second-order interpolating approximation to the consumption function on the interval {math}`[\underline{\mNrm}^{\EmpLbl},\bar{\mNrm}^{\EmpLbl}]`.
 
 #### The Value Function
 
@@ -1440,9 +1443,9 @@ As a preliminary, note that since {math}`\uFunc(xy)=\uFunc(x)y^{1-\CRRA}`, value
 
 ```{math}
 \begin{aligned}
-  \VFunc_{t}^{u} & =  \uFunc(C_{t}^{u})+\DiscFac \uFunc(C_{t+1}^{u}) + \DiscFac^{2} \uFunc(C_{t+2}^{u})+...
-\\ & =  \uFunc(C_{t}^{u})\left(1+\DiscFac \{(\Rfree \DiscFac)^{1/\CRRA}\}^{1-\CRRA} + \DiscFac^{2}\left\{(\Rfree \DiscFac)^{2/\CRRA}\right\}^{1-\CRRA}+...\right)
-\\ & =  \uFunc(C_{t}^{u})\underbrace{\left(\frac{1}{1-\DiscFac (\Rfree \DiscFac)^{(1/\CRRA)-1}}\right)}_{\equiv \mathfrak{v}}
+  \vLvl_{t}^{\UnempLbl} & =  \uFunc(\cLvl_{t}^{\UnempLbl})+\DiscFac \uFunc(\cLvl_{t+1}^{\UnempLbl}) + \DiscFac^{2} \uFunc(\cLvl_{t+2}^{\UnempLbl})+...
+\\ & =  \uFunc(\cLvl_{t}^{\UnempLbl})\left(1+\DiscFac \{(\Rfree \DiscFac)^{1/\CRRA}\}^{1-\CRRA} + \DiscFac^{2}\left\{(\Rfree \DiscFac)^{2/\CRRA}\right\}^{1-\CRRA}+...\right)
+\\ & =  \uFunc(\cLvl_{t}^{\UnempLbl})\underbrace{\left(\frac{1}{1-\DiscFac (\Rfree \DiscFac)^{(1/\CRRA)-1}}\right)}_{\equiv \mathfrak{v}}
 \end{aligned}
 ```
 
@@ -1451,22 +1454,22 @@ where the RIC guarantees that the denominator in the fraction is a positive numb
 From this we can see that value for the normalized problem is similarly:
 
 ```{math}
-\vFunc^{u}(\mNrm_{t}) = \uFunc(\MPC m_{t}) \mathfrak{v} .
+\vFunc^{\UnempLbl}(\mNrm_{t}) = \uFunc(\MPC m_{t}) \mathfrak{v} .
 ```
 
 Turning to the problem of the employed consumer, we have
 
 ```{math}
-\vFunc^{e}(\mNrm_{t}) = \uFunc({\cNrm}^{e}_{t})+\DiscFac \WGroFachFix^{1-\CRRA} \Ex_{t}[\vFunc^{\bullet}(\mNrm_{t+1})]
+\vFunc^{\EmpLbl}(\mNrm_{t}) = \uFunc({\cNrm}^{\EmpLbl}_{t})+\DiscFac \WGroFachFix^{1-\CRRA} \Ex_{t}[\vFunc^{\bullet}(\mNrm_{t+1})]
 ```
 
 and at the target level of market resources this will be unchanging for a consumer who remains employed so that
 
 ```{math}
 \begin{aligned}
-  \vTrgNrm^{e} & =  \uFunc(\cTrgNrm^{e})+\DiscFac \WGroFachFix^{1-\CRRA} \left(\erate \vTrgNrm^{e} + \urate \vFunc^{u}(\aNrmE \RNrmByG)\right)
-\\ (1-\DiscFac \WGroFachFix^{1-\CRRA} \erate) \vTrgNrm^{e} & =  \uFunc(\cTrgNrm^{e})+\DiscFac \WGroFachFix^{1-\CRRA} \urate \vFunc^{u}(\aNrmE \RNrmByG)
-\\ \vTrgNrm^{e} & =  \left(\frac{\uFunc(\cTrgNrm^{e})+\DiscFac \WGroFachFix^{1-\CRRA} \urate \vFunc^{u}(\aNrmE \RNrmByG)}{(1-\DiscFac \WGroFachFix^{1-\CRRA} \erate) }\right)
+  \vTrgNrm^{\EmpLbl} & =  \uFunc(\cTrgNrm^{\EmpLbl})+\DiscFac \WGroFachFix^{1-\CRRA} \left(\erate \vTrgNrm^{\EmpLbl} + \urate \vFunc^{\UnempLbl}(\aNrmE \RNrmByG)\right)
+\\ (1-\DiscFac \WGroFachFix^{1-\CRRA} \erate) \vTrgNrm^{\EmpLbl} & =  \uFunc(\cTrgNrm^{\EmpLbl})+\DiscFac \WGroFachFix^{1-\CRRA} \urate \vFunc^{\UnempLbl}(\aNrmE \RNrmByG)
+\\ \vTrgNrm^{\EmpLbl} & =  \left(\frac{\uFunc(\cTrgNrm^{\EmpLbl})+\DiscFac \WGroFachFix^{1-\CRRA} \urate \vFunc^{\UnempLbl}(\aNrmE \RNrmByG)}{(1-\DiscFac \WGroFachFix^{1-\CRRA} \erate) }\right)
 .
 \end{aligned}
 ```
@@ -1474,19 +1477,19 @@ and at the target level of market resources this will be unchanging for a consum
 Given these facts, our recursion for generating a sequence of points on the consumption function can be used at the same time to generate corresponding points on the value function from
 
 ```{math}
-\vNrmE_{t} = \uFunc({\cNrm}^{e}_{t})+\DiscFac \WGroFachFix^{1-\CRRA} \left(\erate \vNrmE_{t+1} + \urate \vFunc^{u}(\aNrmE_{t} \RNrmByG)\right)
+\vNrmE_{t} = \uFunc({\cNrm}^{\EmpLbl}_{t})+\DiscFac \WGroFachFix^{1-\CRRA} \left(\erate \vNrmE_{t+1} + \urate \vFunc^{\UnempLbl}(\aNrmE_{t} \RNrmByG)\right)
 ```
 
 with the first iteration point generated by numerical integration from
 
 ```{math}
-v^{e}_{\Alt{t}} = \vTrgNrm^{e}+\int_{0}^{\blacktriangle} \uP(\tilde{\mathbf{c}}(\bullet)) d\bullet
+v^{\EmpLbl}_{\Alt{t}} = \vTrgNrm^{\EmpLbl}+\int_{0}^{\blacktriangle} \uP(\tilde{\mathbf{c}}(\bullet)) d\bullet
 ```
 
 (sec:TBS-Algorithm)=
 ### The Algorithm
 
-With the above results in hand, the model is solved and the various functions constructed as follows. Define {math}`\star_{t} = \{\mNrmE_{t},{\cNrm}^{e}_{t},\MPCE_{t},\vNrmE_{t},\MPC_{t}^{e\prime}\}` as a vector of points that characterizes a particular situation that an optimizing employed household might be in at any given point in time. Using the backwards-shooting functions derived above, for any point {math}`\star_{\Alt{t}}` we can construct the sequence of points that must have led up to it: {math}`\star_{\Alt{t}-1}` and {math}`\star_{\Alt{t}-2}` and so on. And using the approximations near the steady state like {eq}`eq:TBS-revshootmstart`, we can construct a vector-valued function {math}`\pmb{\circ}(\blacktriangle)` that generates, e.g., {math}`\{\mTrgNrm+\blacktriangle,\tilde{\mathbf{c}}(\blacktriangle), ... \}`.
+With the above results in hand, the model is solved and the various functions constructed as follows. Define {math}`\star_{t} = \{\mNrmE_{t},{\cNrm}^{\EmpLbl}_{t},\MPCE_{t},\vNrmE_{t},\MPC_{t}^{\EmpLbl\prime}\}` as a vector of points that characterizes a particular situation that an optimizing employed household might be in at any given point in time. Using the backwards-shooting functions derived above, for any point {math}`\star_{\Alt{t}}` we can construct the sequence of points that must have led up to it: {math}`\star_{\Alt{t}-1}` and {math}`\star_{\Alt{t}-2}` and so on. And using the approximations near the steady state like {eq}`eq:TBS-revshootmstart`, we can construct a vector-valued function {math}`\pmb{\circ}(\blacktriangle)` that generates, e.g., {math}`\{\mTrgNrm+\blacktriangle,\tilde{\mathbf{c}}(\blacktriangle), ... \}`.
 
 Now define an operator {math}`\cdots` as follows: {math}`\cdots` applied to some starting point {math}`\star_{t}` uses the backwards dynamic equations defined above to produce a vector of points {math}`\star_{t-1},\star_{t-2},...` consistent with the model until the {math}`\mNrmE_{t-n}` that is produced goes outside of the pre-defined bounds for solving the problem.
 
@@ -1498,12 +1501,12 @@ Designate, e.g., the vector of points on the consumption function generated in t
 :label: eq:TBS-cFuncMat
 
 \begin{aligned}
-   \{\overset{\dots}{\star}[m],\{\overset{\dots}{\star}[c],\overset{\dots}{\star}[\MPC^{e}],\overset{\dots}{\star}[\MPC^{e\prime}]\}^{\intercal}\}^{\intercal} & =
+   \{\overset{\dots}{\star}[m],\{\overset{\dots}{\star}[c],\overset{\dots}{\star}[\MPC^{\EmpLbl}],\overset{\dots}{\star}[\MPC^{\EmpLbl\prime}]\}^{\intercal}\}^{\intercal} & =
 \begin{pmatrix}
-m[1] & \{c[1],\MPC^{e}[1],\MPC^{e\prime}[1]\} \\
-m[2] & \{c[2],\MPC^{e}[2],\MPC^{e\prime}[2]\} \\
+m[1] & \{c[1],\MPC^{\EmpLbl}[1],\MPC^{\EmpLbl\prime}[1]\} \\
+m[2] & \{c[2],\MPC^{\EmpLbl}[2],\MPC^{\EmpLbl\prime}[2]\} \\
 ...  & ...              \\
-m[N] & \{c[N],\MPC^{e}[N],\MPC^{e\prime}[N]\} \\
+m[N] & \{c[N],\MPC^{\EmpLbl}[N],\MPC^{\EmpLbl\prime}[N]\} \\
 \end{pmatrix}
 \end{aligned}
 ```
@@ -1513,7 +1516,7 @@ where {math}`N` is the number of points that have been generated by the merger o
 The object {eq}`eq:TBS-cFuncMat` is not an arbitrary example; it reflects a set of values that uniquely define a fourth order piecewise polynomial spline such that at every point in the set the polynomial matches the level and first derivative included in the list. Standard numerical mathematics software can produce the interpolating function with this input; for example, the syntax in *Mathematica* is simply
 
 ```{math}
-\mathtt{cE} = \mathtt{Interpolation}[\{\overset{\dots}{\star}[m],\{\overset{\dots}{\star}[c],\overset{\dots}{\star}[\MPC^{e}],\overset{\dots}{\star}[\MPC^{e\prime}]\}^{\intercal}\}^{\intercal}].
+\mathtt{cE} = \mathtt{Interpolation}[\{\overset{\dots}{\star}[m],\{\overset{\dots}{\star}[c],\overset{\dots}{\star}[\MPC^{\EmpLbl}],\overset{\dots}{\star}[\MPC^{\EmpLbl\prime}]\}^{\intercal}\}^{\intercal}].
 ```
 
 which creates a function {math}`\texttt{cE}` that is a {math}`\mathbf{C}^4` interpolating polynomial connecting these points.
@@ -1579,103 +1582,3 @@ This proposition can be proven by careful analysis of the consumption Euler equa
 A footnote also claims that for employed consumers, {math}`\cFunc(\mNrm)` approaches a different, but still well-defined, limit even if {math}`\WGroFachFix \geq \Rfree`, so long as the impatience condition holds.
 
 It turns out that the limit in question is the one defined by the solution to a perfect foresight problem with liquidity constraints. A semi-analytical solution does exist in this case, but it requires formidable notation and analysis to present and understand, so the details are not presented here. A continuous-time treatment can be found in {cite:t}`parkLiqConstrContinuous`.
-
-(sec:TBS-MPCatTarget)=
-### The Marginal Propensity to Consume at Target Wealth
-
-This appendix is kept for reference. It is not part of the published handout: in the source it follows the end of the document, marked as superseded by the reverse-shooting derivation in the [numerical solution appendix](#sec:TBS-NumericalSolution), and preserved because its derivations are useful for checking.
-
-For any {math}`\mNrmE_{t} \neq \mTrgNrm` the marginal propensity to consume can be approximated by
-
-```{math}
-\MPCFunc^{e}(\mNrmE_{t}) \approx \left(\frac{\Delta {\cNrm}^{e}_{t+1}}{\Delta \mNrmE_{t+1}}\right)
-```
-
-but at the steady state {math}`\mNrmE_{\prdt}=\mTrgNrm` both numerator and denominator are zero. We get around this problem using L'Hôpital's rule. Define {math}`\blacktriangle=\mNrmE_{t}-\mTrgNrm` and assume that the consumption function can be approximated as
-
-```{math}
-\cFunc(\mNrmE_{t}) \approx \cTrgNrm^{e} + \blacktriangle_{t} \MPCE
-```
-
-where
-
-```{math}
-\MPCE \equiv \frac{d \cFunc(\mNrmE_{t})}{d \mNrmE_{t}} |_{\mNrmE_{t}=\mTrgNrm}
-```
-
-so that
-
-```{math}
-\begin{aligned}
-  \blacktriangle_{t+1} & =  (\mTrgNrm + \blacktriangle_{t} -\cFunc(\mTrgNrm+\blacktriangle_{t}))\RNrmByG + 1 - \mTrgNrm
-\\ & \approx  (\mTrgNrm+\blacktriangle_{t}- (\cTrgNrm^{e}+ \blacktriangle_{t} \MPCE))\RNrmByG + 1 - \mTrgNrm
-\\ & =  \underbrace{(\mTrgNrm-\cTrgNrm^{e})\RNrmByG+1}_{\mTrgNrm} -\mTrgNrm + (1-\MPCE) \RNrmByG\blacktriangle_{t}
-\\ & =  \left(1-\MPCE\right)\blacktriangle_{t}\RNrmByG
-\end{aligned}
-```
-
-and note for future use that
-
-```{math}
-\Delta \mNrmE_{t+1} = \blacktriangle_{t+1} - \blacktriangle_{t}
-```
-
-and
-
-```{math}
-\left(\frac{\blacktriangle_{t+1}}{\blacktriangle_{t}}\right) = (1-\MPCE)\RNrmByG
-```
-
-while using {eq}`eq:TBS-BeforePFStep` yields
-
-```{math}
-:label: eq:TBS-dc
-
-\begin{aligned}
-  c_{t+1}& =  {\GPFachFix} \left\{1+\urate\left[\left(\frac{\cFunc(\mNrmE_{t+1})}{(\mNrmE_{t}-\cFunc(\mNrmE_{t}))\RNrmByG\MPC}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}c_{t}
-\\ \Delta c_{t+1} & \approx  {\GPFachFix} \left\{1+\urate\left[\left(\frac{\cTrgNrm^{e}+\MPCE \blacktriangle_{t+1} }{\cTrgNrm^{u}(1 +\blacktriangle_{t}(1-\MPCE) \RNrmByG \MPC/\cTrgNrm^{u})}\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}c_{t}-c_{t}
-\\ & =  \left[{\GPFachFix} \left\{1+\urate\left[\left(\left(\frac{\cTrgNrm^{e}}{\cTrgNrm^{u}}\right)\left(\frac{1+\MPCE \blacktriangle_{t}(1-\MPCE)\RNrmByG/\cTrgNrm^{e} }{1 +\blacktriangle_{t}(1-\MPCE) \RNrmByG \MPC/\cTrgNrm^{u}}\right)\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}-1\right] (\cTrgNrm^{e}+\blacktriangle_{t})
-\\ \Delta c_{t+1} & \approx  \left[{\GPFachFix} \left\{1+\urate\left[\left(\left(\frac{\cTrgNrm^{e}}{\cTrgNrm^{u}}\right)\left(1+\MPCE \blacktriangle_{t}(1-\MPCE) \RNrmByG/\cTrgNrm^{e} -\blacktriangle_{t}(1-\MPCE) \RNrmByG \MPC/\cTrgNrm^{u}\right)\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}-1\right] c_{t}
-\\  & =  \left[{\GPFachFix} \left\{1+\urate\left[(\cTrgNrm^{e}/\cTrgNrm^{u})^{\CRRA}\left(1+ \blacktriangle_{t}(1-\MPCE) \RNrmByG (\MPCE/\cTrgNrm^{e} - \MPC/\cTrgNrm^{u})\right)^{\CRRA}-1\right]\right\}^{1/\CRRA}-1\right] c_{t}
-\\  & =  \left[{\GPFachFix} \left\{1+\urate\left[(\cTrgNrm^{e}/\cTrgNrm^{u})^{\CRRA}-1\right]+\urate(\cTrgNrm^{e}/\cTrgNrm^{u})^{\CRRA}\CRRA \blacktriangle_{t}(1-\MPCE) \RNrmByG (\MPCE/\cTrgNrm^{e} - \MPC/\cTrgNrm^{u})\right\}^{1/\CRRA}-1\right] c_{t}
-\\  & \approx  \left[\underbrace{{\GPFachFix} \left\{1+\urate\left[(\cTrgNrm^{e}/\cTrgNrm^{u})^{\CRRA}-1\right]\right\}}_{=1}(1+\GPFachFix^{-1}\urate(\cTrgNrm^{e}/\cTrgNrm^{u})^{\CRRA}\blacktriangle_{t}(1-\MPCE) \RNrmByG (\MPCE/\cTrgNrm^{e} - \MPC/\cTrgNrm^{u})-1\right] c_{t}
-\\  & =  \left[\GPFachFix^{-1}\urate(\cTrgNrm^{e}/\cTrgNrm^{u})^{\CRRA}\blacktriangle_{t}(1-\MPCE) \RNrmByG (\MPCE/\cTrgNrm^{e} - \MPC/\cTrgNrm^{u})\right] c_{t}
-\end{aligned}
-```
-
-so that
-
-```{math}
-\begin{aligned}
-  \lim_{\blacktriangle_{t} \rightarrow 0} \left(\frac{\Delta c_{t+1}}{\Delta m_{t+1}}\right) & =  \left(\frac{\left[\GPFachFix^{-1}\urate(\cTrgNrm^{e}/\cTrgNrm^{u})^{\CRRA}(1-\MPCE) \RNrmByG (\MPCE/\cTrgNrm^{e} - \MPC/\cTrgNrm^{u})\right] \cTrgNrm^{e}}{(1-\MPCE)\RNrmByG-1}\right)
-\\  \MPCE \GPFachFix & =  \left(\frac{\left[\urate(\cTrgNrm^{e}/\cTrgNrm^{u})^{\CRRA}(1-\MPCE) \RNrmByG (\MPCE/\cTrgNrm^{e} - \MPC/\cTrgNrm^{u})\right] \cTrgNrm^{e}}{(1-\MPCE)\RNrmByG-1}\right)
-\\  \MPCE \GPFachFix \left((1-\MPCE)\RNrmByG-1\right) & =  \urate(\cTrgNrm^{e}/\cTrgNrm^{u})^{\CRRA}(1-\MPCE) \RNrmByG (\MPCE/\cTrgNrm^{e} - \MPC/\cTrgNrm^{u}) \cTrgNrm^{e}
-\end{aligned}
-```
-
-which is a quadratic equation in {math}`\MPCE`. This equation has only one solution inside the unit interval, which will be the MPC at {math}`\mTrgNrm`.
-
-Note that an alternative approach would be to define {math}`\Delta \cTrgNrm^{e}` using the RHS of {eq}`eq:TBS-dc` and {math}`\Delta \mTrgNrm = ((1-\MPCE) \RNrmByG - 1)\blacktriangle_{t}` and to use a numerical rootfinding routine to locate the {math}`\check{\MPC}^{e}` that solves
-
-```{math}
-\check{\MPCFunc}^{e}(\blacktriangle_{t}) = \left(\frac{\Delta \cTrgNrm^{e}}{\Delta \mTrgNrm}\right)
-```
-
-using {math}`\MPCE` as the starting point for the numerical search. This approach has the virtue that it can produce estimates of the MPC at points near but not equal to the target level of wealth. (We will use this below).
-
-Differentiating {eq}`eq:TBS-naturalMPC`, dropping arguments, and evaluating at the steady state yields
-
-:::{margin}
-The source does not define {math}`\eta`; the derivation is reproduced as it stands there.
-:::
-
-```{math}
-\begin{aligned}
-  \MPC^{e\prime} & =  -\eta\MPC^{e\prime} (\erate \MPCE+\urate (\cTrgNrm^{u}/\cTrgNrm^{e})^{-\CRRA-1} \MPC)
-\\ &  + \eta  (1-\MPCE)^{2}\RNrmByG (\cTrgNrm^{e})^{\CRRA+1}(-\CRRA-1)(\erate  \MPCE + \urate (\cTrgNrm^{u})^{-\CRRA-2} \MPC)
-\\ &  + \eta  (1-\MPCE)^{2}\RNrmByG (\cTrgNrm^{e})^{\CRRA}(\CRRA+1)(\erate  \MPCE + \urate (\cTrgNrm^{u})^{-\CRRA-1} \MPC)
-\\ &  + \eta  (1-\MPCE)\erate \MPC^{e\prime}
-\\ \MPC^{e\prime} & =  \left(\frac{\eta  (1-\MPCE)^{2}\RNrmByG \left( (\cTrgNrm^{e})^{\CRRA+1}(-\CRRA-1)(\erate  \MPCE + \urate (\cTrgNrm^{u})^{-\CRRA-2} \MPC)+(\cTrgNrm^{e})^{\CRRA}(\CRRA+1)(\erate  \MPCE + \urate (\cTrgNrm^{u})^{-\CRRA-1} \MPC) \right)
-}{1+\eta (\erate \MPCE+\urate (\cTrgNrm^{u}/\cTrgNrm^{e})^{-\CRRA-1} \MPC)- \eta  (1-\MPCE)\erate}\right)
-\end{aligned}
-```
