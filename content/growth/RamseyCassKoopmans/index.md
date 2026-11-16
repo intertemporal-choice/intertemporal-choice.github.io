@@ -38,9 +38,7 @@ produce perpetually more as time goes by with the same amount of
 physical capital. The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
 
 :::{margin}
-This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With a Cobb-Douglas production function the three are the same thing at different rates. With any other production function, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`; {cite:t}`jonesScrimgeourUzawa` give a short proof.
-
-Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`\Kap`. {cite:t}`solowEmbodied` and {cite:t}`phelpsNewView` showed that steady-state growth does not depend on how much of technical progress is embodied in new capital, though convergence is faster the more of it is embodied; so the simpler disembodied form delivers the same steady-state growth rate.
+This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
 :::
 
 Aggregate capital accumulates according to
@@ -54,6 +52,10 @@ Aggregate capital accumulates according to
 ```
 
 Lower case variables are the upper case version divided by efficiency units, so {math}`\inc = \Inc/(\PtyLab \Labor) = (\Kap/\PtyLab \Labor)^{\kapShare} = \kap^{\kapShare}`. Since {math}`\kap = \Kap/(\PtyLab \Labor)`,
+
+:::{margin}
+NOT per-capita; this is required for '[balanced growth](#sec:RCK-SteadyState)'.
+:::
 
 ```{math}
 \dot{\kap}/\kap = \dot{\Kap}/\Kap - \dot{\PtyLab}/\PtyLab - \dot{\Labor}/\Labor = \dot{\Kap}/\Kap - (\ptyGro +\popGro),
@@ -186,6 +188,7 @@ time as {math}`\prodFunc^{\prime}(\kap)` varies.
 
 Since per capita consumption is {math}`\Cons/\Labor = \cons \PtyLab`, it grows at {math}`\dot{\cons}/\cons + \ptyGro = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth, the [Euler equation](#eq:cdotOc) with {math}`\ptyGro=0`. Productivity growth matters only through {math}`\kap`.
 
+(sec:RCK-SteadyState)=
 ## The Steady State
 
 The assumption of labor augmenting technological progress was made
