@@ -20,18 +20,32 @@ content/<part>/<Chapter>/<Chapter>.ipynb, into the chapter's figures/ folder (se
 code/build_site.py). MyST does not: a figure whose file is stale builds and deploys. So:
 
   4. every figure is exactly one image: `figures/<name>.png` beside a chapter that has its
-     notebook, or a static image listed in code/figure_exemptions.txt; no notebook output
-     is embedded, and no image appears outside a figure unless it is exempt
+     notebook, or an image listed in code/figure_exemptions.txt; no notebook output is
+     embedded, and no image appears outside a figure unless it is exempt
   5. the exemptions list stays honest: each entry has a kind (`exception`, data that cannot
-     be obtained; `pending`, not yet ported) and a reason, is used by a current page, and
-     every file under content/figures/ is listed
+     be obtained; `pending`, not yet ported; `remote`, drawn by a REMARK whose CI regenerates
+     and checks it) and a reason, is used by a current page, and every file under
+     content/figures/ is listed. A `remote` entry is a raw.githubusercontent.com/econ-ark/
+     URL pinned to a full commit SHA, never a branch or a tag, and its reason names the
+     repository (econ-ark/<repo>) that draws it; any other image from the web is rejected.
+     REMARKs only: DemARKs do not check their figures, so a chapter redraws them itself
   6. every notebook in the build sits beside its chapter, is listed in toc.yml as a child of
-     that chapter, and carries outputs
+     that chapter, and carries outputs; and both the chapter and the notebook's own page link
+     to open the notebook in Colab and in Binder (Chris, 2026-10-12), so a reader can run it
+     without installing anything
   7. the figures are current. A notebook the build re-ran (its code or the environment
      changed) redrew its figures over the committed files, so a file that now differs from
      the committed one beyond a small tolerance means the notebook was changed without its
      figures being re-run and committed; a figure drawn but never committed fails too. The
      tolerance allows the pixel or two of antialiasing that differs between machines.
+
+It also checks that links to labeled targets land (Chris, 2026-10-16):
+
+  8. every target MyST lists in myst.xref.json (each labeled equation, heading, figure, table,
+     proof and fact, and each heading's implicit anchor) carries its id in the served page.
+     MyST records a target's id in the page data whether or not the theme renders it, and a
+     browser can only land on an id in the HTML. Until 2026-10-16 the Math Facts boxes rendered
+     with no id, so every #fact- link opened the page at its top while the build passed
 
 `--self-test` runs every check against synthetic bad input and fails if any check passes
 it, so a check that has silently stopped discriminating is caught rather than trusted.
@@ -57,11 +71,16 @@ log = logging.getLogger(__name__)
 
 BUILD = Path("_build/html")
 REPO_SLUG = "intertemporal-choice.github.io"
+GITHUB_REPO = f"intertemporal-choice/{REPO_SLUG}"
 MIN_BYTES = 2000
 MIN_PAGES = 40
 EXEMPTIONS = Path("code/figure_exemptions.txt")
 FIGURES = Path("content/figures")
-KINDS = {"exception", "pending"}
+KINDS = {"exception", "pending", "remote"}
+# A remote figure comes from an Econ-ARK REMARK, pinned to a commit:
+# raw.githubusercontent.com/econ-ark/<repo>/<40-hex SHA>/<path>. DemARKs do not qualify (Chris, 2026-10-12):
+# their CI does not check their figures, so a chapter draws a DemARK figure in its own notebook.
+PINNED_REMOTE = re.compile(r"^https://raw\.githubusercontent\.com/(econ-ark)/([^/]+)/[0-9a-f]{40}/\S+\.(?:png|svg)$")
 # RMS difference over 0-255 pixel values below which a redrawn figure counts as the same.
 TOLERANCE = 3.0
 
@@ -128,6 +147,18 @@ def parse_exemptions(text: str) -> tuple[dict[str, tuple[str, str]], list[str]]:
         kind, path, reason = parts
         if kind not in KINDS:
             problems.append(f"{EXEMPTIONS} line {n}: kind {kind!r} is not one of {sorted(KINDS)}")
+        remote = path.startswith(("http://", "https://"))
+        if remote != (kind == "remote"):
+            problems.append(f"{EXEMPTIONS} line {n}: only a `remote` entry may be a URL, and a `remote` entry must be one")
+        elif remote:
+            m = PINNED_REMOTE.match(path)
+            if not m:
+                problems.append(
+                    f"{EXEMPTIONS} line {n}: {path} is not a raw.githubusercontent.com/econ-ark/ URL pinned"
+                    " to a full commit SHA (a branch or a tag can move)"
+                )
+            elif f"{m.group(1)}/{m.group(2)}" not in reason:
+                problems.append(f"{EXEMPTIONS} line {n}: the reason must name {m.group(1)}/{m.group(2)}, the repository that draws it")
         if path in entries:
             problems.append(f"{EXEMPTIONS} line {n}: {path} is listed twice")
         entries[path] = (kind, reason.strip())
@@ -169,7 +200,14 @@ def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, re
 
     def image_problem(src: str | None, what: str) -> None:
         src = src or ""
-        if src.startswith(f"/{FIGURES}/"):
+        if src.startswith(("http://", "https://")):
+            used.add(src)
+            if exempt.get(src, ("",))[0] != "remote":
+                problems.append(
+                    f"{slug}: {what} is the remote image {src}; list it in {EXEMPTIONS} as a `remote`"
+                    " figure pinned to a commit, or draw it in the chapter's notebook"
+                )
+        elif src.startswith(f"/{FIGURES}/"):
             used.add(src)
             if src not in exempt:
                 problems.append(
@@ -185,7 +223,7 @@ def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, re
         else:
             problems.append(
                 f"{slug}: {what} uses {src!r}, which is neither figures/<name>.png beside the"
-                " chapter nor an exempt static image"
+                " chapter nor an exempt image"
             )
 
     def one_figure(fig: dict) -> None:
@@ -245,8 +283,21 @@ def toc_parents(toc: str) -> dict[str, str | None]:
     return parents
 
 
+def launch_links(rel: str) -> dict[str, str]:
+    """The links that open the notebook at `rel` (relative to the repository) in Colab and Binder."""
+    return {
+        "Colab": f"https://colab.research.google.com/github/{GITHUB_REPO}/blob/main/{rel}",
+        "Binder": f"https://mybinder.org/v2/gh/{GITHUB_REPO}/main?labpath={rel}",
+    }
+
+
+def link_urls(mdast) -> set[str]:
+    return {n.get("url") for n in descendants(mdast) if n.get("type") == "link"}
+
+
 def notebook_problems(pages: dict[str, dict], toc: str) -> list[str]:
     parents = toc_parents(toc)
+    by_location = {record.get("location"): (slug, record) for slug, record in pages.items()}
     listed = [f for f in parents if f.endswith(".ipynb")]
     problems, built = [], 0
     for slug, record in pages.items():
@@ -266,6 +317,12 @@ def notebook_problems(pages: dict[str, dict], toc: str) -> list[str]:
             problems.append(f"{slug}: {rel} is not listed in toc.yml as a child of {chapter}")
         if not any(is_output(n) for n in descendants(record.get("mdast"))):
             problems.append(f"{slug}: notebook carries no cell output: committed without outputs?")
+        chapter_slug, chapter_record = by_location.get("/" + chapter, (chapter, {}))
+        for where, mdast in ((slug, record.get("mdast")), (chapter_slug, chapter_record.get("mdast"))):
+            urls = link_urls(mdast)
+            for service, url in launch_links(rel).items():
+                if url not in urls:
+                    problems.append(f"{where}: no link to open {rel} in {service} ({url})")
     if built != len(listed):
         problems.append(
             f"{len(listed)} notebooks are listed in toc.yml but {built} were built as notebooks"
@@ -351,6 +408,33 @@ def figure_freshness(repo: Path) -> list[str]:
     return problems
 
 
+# ---------------------------------------------------------------- anchors
+
+
+def anchor_problems(build: Path) -> list[str]:
+    """Targets in myst.xref.json whose id is missing from the served page."""
+    xref = build / "myst.xref.json"
+    if not xref.exists():
+        return [f"{xref} does not exist"]
+    pages: dict[Path, str | None] = {}
+    problems = []
+    for ref in json.loads(xref.read_text())["references"]:
+        if ref.get("kind") == "page":
+            continue
+        anchor = ref.get("html_id") or ref["identifier"]
+        page = build / ref["url"].lstrip("/") / "index.html"
+        if page not in pages:
+            pages[page] = page.read_text(errors="ignore") if page.exists() else None
+        if pages[page] is None:
+            problems.append(f"{ref['url']}#{anchor}: the page was not built")
+        elif f'id="{anchor}"' not in pages[page]:
+            problems.append(
+                f"{ref['url']}#{anchor}: the {ref['kind']} has no id in the served page, so a link to it"
+                " opens the page at its top (a Math Fact must sit inside its ::::{div})"
+            )
+    return problems
+
+
 # ---------------------------------------------------------------- self-tests
 
 
@@ -386,7 +470,12 @@ def _out(*mimes):
 def self_test_figures() -> list[str]:
     failures = []
     png, static = ("image/png", "text/plain"), "/content/figures/A/a.png"
-    exempt = {static: ("pending", "port to a notebook beside the chapter")}
+    sha = "0123456789abcdef0123456789abcdef01234567"
+    remote = f"https://raw.githubusercontent.com/econ-ark/REMARK/{sha}/figures/r.png"
+    exempt = {
+        static: ("pending", "port to a notebook beside the chapter"),
+        remote: ("remote", "drawn and checked by econ-ark/REMARK's CI"),
+    }
     with tempfile.TemporaryDirectory() as tmp:
         repo = Path(tmp) / "repo"
         chapter = repo / "content/part/A"
@@ -410,6 +499,7 @@ def self_test_figures() -> list[str]:
         good = {
             "a notebook-drawn figure beside its chapter": (at_a, _fig(_img("figures/a.png"))),
             "an exempt static image": (plain, _fig(_img(static))),
+            "an exempt remote image pinned to a commit": (at_a, _fig(_img(remote))),
         }
         bad = {
             "an embedded notebook output": (at_a, _fig(_out(*png))),
@@ -421,6 +511,7 @@ def self_test_figures() -> list[str]:
             "a figures/ file on a page that is not a chapter": (plain, _fig(_img("figures/x.png"))),
             "an image from somewhere else": (at_a, _fig(_img("../pictures/a.png"))),
             "an unlisted image outside a figure": (plain, {"type": "root", "children": [_img("/x.png")]}),
+            "an unlisted remote image": (at_a, _fig(_img(remote.replace("/r.png", "/s.png")))),
         }
         for name, (location, node) in good.items():
             if figure_problems("p", location, node, exempt, set(), repo):
@@ -433,11 +524,21 @@ def self_test_figures() -> list[str]:
             "a missing reason": "pending /content/figures/A/a.png\n",
             "an unknown kind": "maybe /content/figures/A/a.png some reason\n",
             "a duplicate": f"pending {static} r\npending {static} r\n",
+            "a remote figure on a branch": "remote https://raw.githubusercontent.com/econ-ark/REMARK/main/figures/r.png econ-ark/REMARK\n",
+            "a remote figure on a tag": "remote https://raw.githubusercontent.com/econ-ark/REMARK/v1.1.0/figures/r.png econ-ark/REMARK\n",
+            "a remote figure on a short SHA": "remote https://raw.githubusercontent.com/econ-ark/REMARK/0123456/figures/r.png econ-ark/REMARK\n",
+            "a remote figure from another host": f"remote https://example.org/econ-ark/REMARK/{sha}/r.png econ-ark/REMARK\n",
+            "a remote figure outside econ-ark": f"remote https://raw.githubusercontent.com/someone/REMARK/{sha}/r.png someone/REMARK\n",
+            "a remote figure whose reason names no repository": f"remote {remote} drawn elsewhere\n",
+            "a URL under a non-remote kind": f"exception {remote} econ-ark/REMARK\n",
+            "a remote kind on a local path": f"remote {static} econ-ark/REMARK\n",
         }.items():
             if not parse_exemptions(text)[1]:
                 failures.append(f"exemptions parser accepted {name}")
         if parse_exemptions(f"# comment\n\npending {static} port it # soon\n")[1]:
             failures.append("exemptions parser rejected a comment, a blank line or a # in a reason")
+        if parse_exemptions(f"remote {remote} drawn and checked by econ-ark/REMARK's CI\n")[1]:
+            failures.append("exemptions parser rejected a remote figure pinned to a commit")
         if not exemption_problems(exempt, set(), []):
             failures.append("an exemption no page uses was accepted")
         if not exemption_problems({}, set(), [static]):
@@ -456,11 +557,14 @@ def self_test_figures() -> list[str]:
         def write_config(slugs):
             (build / "config.json").write_text(json.dumps({"projects": [{"index": "index", "pages": [{"slug": s} for s in slugs]}]}))
 
+        launch = {"type": "paragraph", "children": [{"type": "link", "url": u} for u in launch_links(nb_loc[1:]).values()]}
+        colab_only = {"type": "paragraph", "children": [{"type": "link", "url": launch_links(nb_loc[1:])["Colab"]}]}
+
         def reset():
             page("index", "Article", "/README.md", {"type": "root", "children": []})
             page("content.a", "Article", plain, _fig(_img(static)))
-            page("content.part.a", "Article", at_a, _fig(_img("figures/a.png")))
-            page("content.part.a.a", "Notebook", nb_loc, _out(*png))
+            page("content.part.a", "Article", at_a, {"type": "root", "children": [_fig(_img("figures/a.png")), launch]})
+            page("content.part.a.a", "Notebook", nb_loc, {"type": "root", "children": [_out(*png), launch]})
             page("content.old", "Notebook", "/content/old.ipynb", {"children": []})  # stale, not current
             write_config(["content.a", "content.part.a", "content.part.a.a"])
 
@@ -472,6 +576,9 @@ def self_test_figures() -> list[str]:
             "a notebook not beside a chapter": lambda: (page("content.b", "Notebook", "/content/b.ipynb", _out(*png)), write_config(["content.a", "content.part.a", "content.part.a.a", "content.b"])),
             "a listed notebook that was not built as one": lambda: page("content.part.a.a", "Article", nb_loc, _out(*png)),
             "a notebook not listed under its chapter": lambda: (repo / "toc.yml").write_text(toc.replace("      children:\n        - file: content/part/A/A.ipynb\n", "    - file: content/part/A/A.ipynb\n")),
+            "a chapter with no launch links for its notebook": lambda: page("content.part.a", "Article", at_a, _fig(_img("figures/a.png"))),
+            "a notebook page with no launch links": lambda: page("content.part.a.a", "Notebook", nb_loc, _out(*png)),
+            "a chapter that links Colab but not Binder": lambda: page("content.part.a", "Article", at_a, {"type": "root", "children": [_fig(_img("figures/a.png")), colab_only]}),
         }
         for name, spoil in cases.items():
             reset()
@@ -538,9 +645,39 @@ def self_test_freshness() -> list[str]:
     return failures
 
 
+def self_test_anchors() -> list[str]:
+    failures = []
+    with tempfile.TemporaryDirectory() as tmp:
+        build = Path(tmp)
+        if not anchor_problems(build):
+            failures.append("a build with no myst.xref.json was accepted")
+        page = build / "content" / "facts"
+        page.mkdir(parents=True)
+        (page / "index.html").write_text('<h2 id="intro">Intro</h2><div id="fact-a"><aside>A</aside></div><aside>B</aside>')
+        refs = [
+            {"kind": "page", "url": "/content/facts"},
+            {"kind": "heading", "identifier": "intro", "url": "/content/facts", "implicit": True},
+            {"kind": "div", "identifier": "fact:a", "html_id": "fact-a", "url": "/content/facts"},
+        ]
+        (build / "myst.xref.json").write_text(json.dumps({"references": refs}))
+        if anchor_problems(build):
+            failures.append("targets whose ids are in the page were rejected")
+        refs.append({"kind": "admonition", "identifier": "fact:b", "html_id": "fact-b", "url": "/content/facts"})
+        refs.append({"kind": "equation", "identifier": "eq:c", "html_id": "eq-c", "url": "/content/gone"})
+        (build / "myst.xref.json").write_text(json.dumps({"references": refs}))
+        found = anchor_problems(build)
+        if not any("#fact-b:" in p for p in found):
+            failures.append("a target with no id in its page was accepted")
+        if not any("#eq-c:" in p for p in found):
+            failures.append("a target on a page that was not built was accepted")
+        if len(found) != 2:
+            failures.append(f"anchor check reported {len(found)} problems, expected 2: {found}")
+    return failures
+
+
 def self_test() -> bool:
     """Every check must reject input it is supposed to reject."""
-    failures = self_test_site() + self_test_figures() + self_test_freshness()
+    failures = self_test_site() + self_test_figures() + self_test_freshness() + self_test_anchors()
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")
@@ -558,12 +695,12 @@ if __name__ == "__main__":
     repo = Path(".")
     problems = check(BUILD, REPO_SLUG)
     if not problems:
-        problems = check_figures(BUILD, repo) + figure_freshness(repo)
+        problems = check_figures(BUILD, repo) + figure_freshness(repo) + anchor_problems(BUILD)
     for p in problems:
         log.error("FAIL: %s", p)
     if problems:
         sys.exit(1)
     log.info(
         "built site looks servable: index.html ok, asset paths root-relative,"
-        " every figure drawn by its notebook or exempt, and current"
+        " every figure drawn by its notebook or exempt, and current; every labeled target has its id"
     )

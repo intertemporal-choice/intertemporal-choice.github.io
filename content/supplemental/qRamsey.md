@@ -3,9 +3,11 @@
 
 Consider a Ramsey economy in which the capital stock
 cannot be freely adjusted; instead, as in the {math}`\q` model of investment,
-capital is subject to quadratic costs of adjustment.[^qramsey-provenance]
+capital is subject to quadratic costs of adjustment.
 
-[^qramsey-provenance]: This section descends from a handout Ilhan Ozen wrote up from a 2005 final exam question, revised by Damiano Sandri in 2009 for the growth sequence.
+:::{margin}
+This section descends from a handout Ilhan Ozen wrote up from a 2005 final exam question, revised by Damiano Sandri in 2009 for the growth sequence.
+:::
 
 The dynamic budget constraint is
 
@@ -52,9 +54,11 @@ The social planner's problem can be rewritten in the form of a Bellman equation,
 \end{aligned}\end{gathered}
 ```
 
-Because (given {math}`\kap_{t}`) choosing {math}`\aRat_t` is equivalent to choosing {math}`\cons_t`,[^ddyOSlXk7d] we can rewrite the problem as:
+Because (given {math}`\kap_{t}`) choosing {math}`\aRat_t` is equivalent to choosing {math}`\cons_t`, we can rewrite the problem as:
 
-[^ddyOSlXk7d]: Solving {eq}`eq:1perBC` for {math}`\cons_t` and substituting this expression in the place of {math}`\cons_t` in the Bellman equation, and then substituting {math}`\aRat_t` for {math}`\kap_{t+1}`.
+:::{margin}
+Solving {eq}`eq:1perBC` for {math}`\cons_t` and substituting this expression in the place of {math}`\cons_t` in the Bellman equation, and then substituting {math}`\aRat_t` for {math}`\kap_{t+1}`.
+:::
 
 ```{math}
 :label: eq:aEnd

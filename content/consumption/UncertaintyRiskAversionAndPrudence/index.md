@@ -1,9 +1,18 @@
+---
+math:
+  # The chapter's own object, which the shared registry lacks: the end-of-period value function, in
+  # BufferStockTheory's notation.
+  '\vEndFunc': '\mathfrak{v}'
+---
+
 (sec:UncertaintyRiskAversionAndPrudence)=
 # Uncertainty, Risk Aversion, and Prudence
 
 A consumer who faces a risk to future consumption suffers two distinct consequences, and it is easy to conflate them. The first is that the risk makes the consumer worse off; we would like to know how much the consumer would pay to be rid of it. The second is that the risk changes the consumer's behavior, inducing extra saving; we would like to know how much. The two questions have different answers, and each is governed by a different property of the utility function. The first part of this chapter defines the measure that answers each one. The rest follows the second question from a single decision about how much to save to the stock of wealth that such decisions build up, drawing on the theoretical parts of {cite:t}`CarrollKimballPSPW`.
 
 Two terms are worth separating at the outset. *Precautionary saving* is a flow: the cut in current spending that a consumer makes because the future is uncertain, given the resources the consumer has now. The stock of extra wealth that past precautionary saving has piled up is better called *precautionary wealth* than "precautionary savings," a phrase too easily confused with the flow. Throughout, labor income is taken as given, so the only way to save more is to spend less; a consumer could also respond to risk by working more, a margin we leave aside.
+
+The figures in this chapter are drawn by its [figure notebook](UncertaintyRiskAversionAndPrudence.ipynb), which also computes the chapter's numerical example and takes the consumption function from the [HARK](https://docs.econ-ark.org/) toolkit; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb) to run it without installing anything.
 
 ## Risk Premia and Precautionary Premia
 
@@ -69,9 +78,11 @@ in which the second factor is the coefficient of absolute risk aversion. The ide
 \mu^{*} \approx \left(\frac{\sigma^{2}}{2}\right)\left(\frac{-\uPPP(\bar{\cons})}{\uPP(\bar{\cons})}\right),
 ```
 
-in which the second factor is what Kimball calls the coefficient of absolute prudence. Absolute prudence therefore stands to the precautionary premium exactly as absolute risk aversion stands to the risk premium.[^kimball-relative]
+in which the second factor is what Kimball calls the coefficient of absolute prudence. Absolute prudence therefore stands to the precautionary premium exactly as absolute risk aversion stands to the risk premium.
 
-[^kimball-relative]: Multiplying each coefficient by {math}`\bar{\cons}` yields the relative measures, relative risk aversion {math}`-\bar{\cons}\uPP/\uP` and relative prudence {math}`-\bar{\cons}\uPPP/\uPP`.
+:::{margin}
+Multiplying each coefficient by {math}`\bar{\cons}` yields the relative measures, relative risk aversion {math}`-\bar{\cons}\uPP/\uP` and relative prudence {math}`-\bar{\cons}\uPPP/\uPP`.
+:::
 
 For the CRRA utility function used throughout these notes, absolute risk aversion is {math}`\CRRA/\bar{\cons}` while absolute prudence is {math}`(\CRRA+1)/\bar{\cons}`. Two things follow. First, prudence is implied by risk aversion in this family, so any CRRA consumer who dislikes risk also saves against it. Second, prudence strictly exceeds risk aversion, so {math}`\mu^{*}>\pi^{*}`: the risk moves behavior by more than it moves welfare. That the two coefficients differ by exactly one unit of relative curvature is a special feature of CRRA; a [later section](#sec:UR-PrudenceExceedsRiskAversion) shows when prudence exceeds risk aversion more generally.
 
@@ -171,14 +182,14 @@ Given impatience, the exact nature of the income risk matters less. A particular
 :name: fig:ConsFuncTarget
 :align: center
 
-The consumption function {math}`\cFunc(\mRat)` of a worker who faces a risk of forced retirement, the consumption function {math}`\cFuncAbove(\mRat)` of the same worker without the risk, and the level of consumption that would leave a worker who stays employed with unchanged {math}`\mRat`. The first and the last meet at the target {math}`\mTarg`. Drawn for the benchmark parameters of the tractable buffer stock model: {math}`\urate=0.005`, {math}`\DiscFac=1/1.10`, {math}`\Rfree=1.03`, {math}`\PGro=1` and {math}`\CRRA=2`.
+The consumption function {math}`\cFunc(\mRat)` of a worker who faces a risk of forced retirement, the consumption function {math}`\cFuncAbove(\mRat)` of the same worker without the risk, and the level of consumption that would leave a worker who stays employed with unchanged {math}`\mRat`. The first and the last meet at the target {math}`\mTrgNrm`. Drawn for the benchmark parameters of the tractable buffer stock model: {math}`\urate=0.005`, {math}`\DiscFac=1/1.10`, {math}`\Rfree=1.03`, {math}`\PGro=1` and {math}`\CRRA=2`.
 :::
 
 Start with the straight black line. For any {math}`\mRat`, it gives the spending at which a worker who keeps the job would start next period with the same {math}`\mRat`: labor income plus the interest earned on assets. It slopes upward because more resources earn more interest.
 
 The upper line, {math}`\cFuncAbove(\mRat)`, is the consumption function the worker would follow if the risk did not exist, with labor income adjusted so that removing the risk does not raise its expected growth. Impatience shows in the fact that this line lies everywhere above the black one: an impatient consumer who faced no risk would choose to spend more than could be sustained indefinitely. The lower curve is the consumption function {math}`\cFunc(\mRat)` when the risk is present. Because the only difference between the two is the risk, the gap {math}`\cFuncAbove(\mRat)-\cFunc(\mRat)` is the precautionary saving of a worker with resources {math}`\mRat`.
 
-Under standard assumptions about preferences and risk, the consumption function crosses the black line, and {cite:t}`BufferStockTheory` proves that it crosses it only once. The crossing defines a *target* level of resources, {math}`\mTarg`: a worker who has {math}`\mTarg` today, and stays employed, will have {math}`\mTarg` again next period. The target is stable. Below it, consumption is less than labor income plus interest, so {math}`\mRat` rises, and consumption climbs along {math}`\cFunc(\mRat)` toward the target; above it, consumption exceeds labor income plus interest, and {math}`\mRat` falls. The worker holds a *buffer stock* of wealth, and aims at the target.
+Under standard assumptions about preferences and risk, the consumption function crosses the black line, and {cite:t}`BufferStockTheory` proves that it crosses it only once. The crossing defines a *target* level of resources, {math}`\mTrgNrm`: a worker who has {math}`\mTrgNrm` today, and stays employed, will have {math}`\mTrgNrm` again next period. The target is stable. Below it, consumption is less than labor income plus interest, so {math}`\mRat` rises, and consumption climbs along {math}`\cFunc(\mRat)` toward the target; above it, consumption exceeds labor income plus interest, and {math}`\mRat` falls. The worker holds a *buffer stock* of wealth, and aims at the target.
 
 Three properties of {numref}`fig:ConsFuncTarget` summarize the effect of uncertainty:
 
@@ -186,7 +197,7 @@ Three properties of {numref}`fig:ConsFuncTarget` summarize the effect of uncerta
 2. {math}`\lim_{\mRat\to\infty}\left(\cFuncAbove(\mRat)-\cFunc(\mRat)\right) = 0`: as resources grow without bound, the effect of the labor income risk vanishes. (The approach is slow, and the figure's range does not show it.)
 3. {math}`\cFunc(\mRat)` is strictly concave, so {math}`\cFunc^{\prime}(\mRat)`, the share of an unexpected extra dollar that is spent, is larger for poorer consumers than for richer ones.
 
-The concavity has an intuition close to that of liquidity constraints. When a consumer's liquidity constraint binds, a little extra cash is spent in full, an MPC of one; after a large windfall the constraint no longer binds, and the MPC falls below one. With a precautionary motive, each extra unit of wealth eases the restraint that the risk places on spending, and the relief is greater for a consumer with few resources, living close to the edge, than for one with plenty. Liquidity constraints, precautionary motives, or both together therefore make the consumption function concave ({cite:t}`carroll&kimball:concavity`; {cite:t}`carrollHolmKimball:liquidity`), and {cite:t}`huggett:higherW` shows that concavity of the consumption function in turn means higher wealth in equilibrium.
+The concavity has an intuition close to that of liquidity constraints. When a consumer's liquidity constraint binds, a little extra cash is spent in full, an MPC of one; after a large windfall the constraint no longer binds, and the MPC falls below one. With a precautionary motive, each extra unit of wealth eases the restraint that the risk places on spending, and the relief is greater for a consumer with few resources, living close to the edge, than for one with plenty. Liquidity constraints, precautionary motives, or both together therefore make the consumption function concave ({cite:t}`carroll&kimball:concavity`; {cite:t}`LiqConstr`), and {cite:t}`huggett:higherW` shows that concavity of the consumption function in turn means higher wealth in equilibrium.
 
 ### Consumption Growth at the Target
 

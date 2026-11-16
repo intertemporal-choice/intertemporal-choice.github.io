@@ -15,10 +15,17 @@ picture is the same:
 `figures/` is resolved from the working directory, which Jupyter and the build both set to
 the notebook's folder. PNG rather than SVG because the LaTeX export includes images with
 \\includegraphics, which needs a raster or PDF file; an SVG would need a converter.
+
+In the browser copy (JupyterLite, which runs Pyodide), matplotlib 3.10 warns that "The width
+parameter as float was deprecated" whenever it lays out or draws math text, although matplotlib
+itself passes integers there; ordinary Python with the same matplotlib does not. The warning is a
+false alarm that a reader can do nothing about, so `use_book_style` silences it there, and only it.
 """
 
 import io
 import re
+import sys
+import warnings
 from pathlib import Path
 
 import matplotlib
@@ -39,11 +46,18 @@ RC = {
     "lines.linewidth": 1.8,
     "text.usetex": False,
 }
+FALSE_ALARM = r"The \w+ parameter as float was deprecated in Matplotlib 3\.10"  # see the docstring
 
 
 def use_book_style() -> None:
     """Apply the book's rcParams. Call once, after the imports."""
     matplotlib.rcParams.update(RC)
+    if sys.platform == "emscripten":  # the browser copy
+        _ignore_false_alarm()
+
+
+def _ignore_false_alarm() -> None:
+    warnings.filterwarnings("ignore", message=FALSE_ALARM, category=matplotlib.MatplotlibDeprecationWarning)
 
 
 def png_bytes(fig) -> bytes:
@@ -110,4 +124,14 @@ def self_test() -> list[str]:
                 failures.append(f"style: save accepted the name {bad!r}")
             except ValueError:
                 plt.close("all")
+    # the browser's false alarm is silenced, for each parameter it names, and nothing else is
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        _ignore_false_alarm()
+        for name in ("width", "height", "x", "y", "x0"):
+            warnings.warn(f"The {name} parameter as float was deprecated in Matplotlib 3.10 and will be removed "
+                          f"in 3.12. Use int({name}) instead.", matplotlib.MatplotlibDeprecationWarning)
+        warnings.warn("Another deprecation", matplotlib.MatplotlibDeprecationWarning)
+    if [str(w.message) for w in caught] != ["Another deprecation"]:
+        failures.append("style: the browser filter does not silence exactly matplotlib's float-parameter false alarm")
     return failures
