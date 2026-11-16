@@ -54,6 +54,7 @@ jobs:
           uv run python code/build_pdf.py --self-test
           uv run python code/derive_bib.py --self-test
           uv run python code/export_models.py --self-test
+          uv run python code/notebook_math.py --self-test
           uv run python code/check_core.py --self-test
           uv run python -m intertemporal_choice --self-test
       # The notebooks are committed with their outputs but without the metadata Jupyter
@@ -62,6 +63,10 @@ jobs:
         run: uv run python code/notebooks.py --check
       # A chapter's model, the cells of its notebook tagged `export`, is a module of the package,
       # written from the notebook and never edited by hand; see code/export_models.py.
+      # A converted chapter's notebook is generated from <Chapter>_SST.ipynb, its source written
+      # with the book's macros, and never edited by hand; see code/notebook_math.py.
+      - name: Student notebooks match their _SST sources
+        run: uv run python code/notebook_math.py --check
       - name: Models match their notebooks
         run: uv run python code/export_models.py --check
       # The package's core is what a notebook installs in Colab, and a page running Python in the
