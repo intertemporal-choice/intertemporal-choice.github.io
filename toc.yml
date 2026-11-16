@@ -8,6 +8,7 @@ project:
     - file: README.md
     - file: content/consumption/index.md
       children:
+        - file: content/consumption/Keynes-Friedman-Modigliani.md
         # Formerly 2PeriodLCModel.md. MyST drops a leading number from a page's URL
         # (it reads 01-, 2- as ordering prefixes), which served this chapter at
         # .../periodlcmodel. Keep digits out of the front of file names.
@@ -33,7 +34,9 @@ project:
             - file: content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb
         - file: content/consumption/Habits.md
         - file: content/consumption/Durables.md
-        - file: content/consumption/RiskAndPSPremia.md
+        - file: content/consumption/UncertaintyRiskAversionAndPrudence/index.md
+          children:
+            - file: content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb
         # Ported from the public repo llorracc/TractableBufferStock (the econ2 zip is a
         # private version); its figures are drawn by the notebook beside it.
         - file: content/consumption/TractableBufferStock/index.md

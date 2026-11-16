@@ -33,6 +33,9 @@
 /content/numerical/hamiltonianvsdiscrete        /content/appendices/mathematical/hamiltonianvsdiscrete
 /content/numerical/mathfactslist                /content/appendices/mathematical/mathfactslist
 
+# 2026-10-05: Risk Premia and Precautionary Premia became Uncertainty, Risk Aversion, and Prudence
+/content/consumption/riskandpspremia             /content/consumption/uncertaintyriskaversionandprudence
+
 # 2026-10-31: the bond-premium figures merged into the capital-market imperfections chapter
 /content/investment/imperfections               /content/investment/dynanimperfcapmkts
 
