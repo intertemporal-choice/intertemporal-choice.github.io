@@ -1,7 +1,7 @@
 (sec:iAndCashFlow)=
 # Investment and Cash Flow With Imperfect Capital Markets
 
-Many models of capital market imperfections reach the conclusion that financing an investment project is cheaper with "internal" than with "external" funds. (Internal funds are those that the firm owns, for example, in its bank account; external funds are obtained from outsiders like banks or new investors). For a lucid exposition of an example of models of this kind, see the discussion of financial market imperfections in {cite:t}`romer:text`.
+Many models of capital market imperfections reach the conclusion that financing an investment project is cheaper with "internal" than with "external" funds. (Internal funds are those that the firm owns, for example, in its bank account; external funds are obtained from outsiders like banks or new investors). For a lucid exposition of an example of models of this kind, see [Investment and Capital Market Imperfections](#sec:DynanImperfCapMkts) or the discussion of financial market imperfections in {cite:t}`romer:text`.
 
 Such models tend to be highly specialized, with entrepreneurs who miraculously receive exogenously specified endowments of "internal" cash and who make a one- (or at most two-) period investment decision. This is a striking contrast with the generality of the canonical {math}`\q` model of investment in which optimizing firms make investment decisions that take into account infinite future paths of adjustment costs, marginal products of capital, taxes, and all other features of the environment.
 
@@ -9,7 +9,7 @@ But models with imperfect capital markets are always very clear on who receives 
 
 ## Modigliani-Miller
 
-To see this, consider the benchmark discrete-time framework in the [marginal q model](#sec:qModel) section without taxes or depreciation, and (as in that section) assume that the firm issues or repurchases shares to maintain a number of shares {math}`s_{t}` outstanding equal to the size of the physical capital stock (so {math}`s_{t}=k_{t}` in every period). Suppose we assume that the firm has a "dividend policy": In every period, it pays to each shareholder a dividend equal to the flow of revenues per share.
+To see this, consider the benchmark discrete-time framework in the [marginal q model](#sec:qModel) section without taxes or depreciation, and (as in that section) assume that the firm issues or repurchases shares to maintain a number of shares {math}`s_{t}` outstanding equal to the size of the physical capital stock (so {math}`s_{t}=k_{t}` in every period). Suppose we assume that the firm has a "dividend policy": In every period, it pays to each shareholder a dividend equal to the flow of revenues net of investment expenditures, per share.
 
 In this case, the value of all the firm's shares {math}`s_{t}` (the equity value of the firm) will be
 
@@ -25,7 +25,7 @@ Now suppose the firm decides to deviate, just a little bit, from this dividend p
 
 ```{math}
 \begin{aligned}
-  \max_{\{i\}_{t}^{\infty}}~\Ex_{t}\left[\sum_{n=0}^{\infty} \Discount^{n} \left(\pi_{t+n}-\xpend_{t+n}\right)\right]+ \lambda_{t} - \Rfree\Discount \lambda_{t}.
+  \max_{\{i\}_{t}^{\infty}}~\Ex_{t}\left[\sum_{n=0}^{\infty} \Discount^{n} \left(\pi_{t+n}-\xpend_{t+n}\right)\right]+ \lambda_{t} - \Rfree\Discount \lambda_{t},
 \end{aligned}
 ```
 
@@ -33,9 +33,9 @@ but since by assumption {math}`\Discount = \Rfree^{-1}` this expression reduces 
 
 The point can be extended to show that the firm can raise an arbitrary amount of money in one period, paying it back in another, or vice versa, without having any effect on its value or its optimal investment plans.
 
-This is an example of the famous theorem by {cite:t}`mmTheorem`, who showed that under perfect capital markets the value of the firm is identical whether its investment is financed by equity, debt, or any combination of the two.
+This is an example of the result on dividend policy of {cite:t}`millerModiglianiDividend`, a companion to the famous theorem by {cite:t}`mmTheorem`, who showed that under perfect capital markets the value of the firm is identical whether its investment is financed by equity, debt, or any combination of the two.
 
-It is precisely to get around this result that models of imperfect capital markets were invented, since from the beginning many economists did not believe that the result is a plausible description of reality (including, I believe, Modigliani and Miller). Indeed, the existence (and high salaries) of corporate financial officers constitute a proof that the proposition is not true: if it were true, CFOs would have no effect on the value of the firm, and could all be fired (thus saving the firm their salaries!). What remains true, however, is that models of investment that relax the assumption of perfect capital markets are much more difficult to work with (and harder to extract implications from) than models that assume capital markets are perfect.
+It is precisely to get around this result that models of imperfect capital markets were invented, since from the beginning many economists did not believe that the result is a plausible description of reality (including, I believe, Modigliani and Miller; see {cite:t}`millerMM30` for Miller's own look back). Indeed, the existence (and high salaries) of chief financial officers constitutes a proof that the proposition is not true: if it were true, CFOs would have no effect on the value of the firm, and could all be fired (thus saving the firm their salaries!). What remains true, however, is that models of investment that relax the assumption of perfect capital markets are much more difficult to work with (and harder to extract implications from) than models that assume capital markets are perfect.
 
 A testable result that generally emerges from models of capital market imperfections, however, is that the amount of a firm's investment depends on the amount of cash the firm has on hand, with which it can finance that investment.
 
@@ -51,14 +51,18 @@ The [marginal q model](#sec:qModel) section shows that the {math}`\q` model can 
 \end{aligned}
 ```
 
-The simplest class of imperfect capital markets models is one in which the firm is constrained to pay dividends to shareholders equal to whatever is its flow of cash after subtracting off expenses. But the rate of return that the firm must pay for external funds exceeds the return it can earn on internal funds. Without going into details, the rough implication of this is that an empirical model of the firm's investment choices should augment {eq}`eq:iotaPerf` with a measure of the funds the firm has in its hands at the time the investment decision is made:
+The simplest class of imperfect capital markets models is one in which the firm is constrained to pay dividends to shareholders equal to whatever is its flow of cash after subtracting off expenses. In addition, the rate of return that the firm must pay for external funds exceeds the return it can earn on internal funds. Without going into details, the rough implication of this is that an empirical model of the firm's investment choices should augment {eq}`eq:iotaPerf` with a measure of the funds the firm has in its hands at the time the investment decision is made, its cash flow {math}`\pi` per unit of capital:
 
 ```{math}
 :label: eq:iotaImp
 
 \begin{aligned}
-   \iota & \approx \psi_{0} + \psi_{1} \q + \psi_{2} \pi.
+   \iota & \approx \psi_{0} + \psi_{1} \q + \psi_{2} (\pi/k).
 \end{aligned}
 ```
 
-A large literature spurred by the seminal paper of {cite:t}`fhp` estimates equations like this, and virtually always finds a statistically significant estimate of {math}`\psi_{2}`, interpreted as indicating the importance of "cash flow" for investment decisions. But there are many criticisms of this literature, and the importance of imperfections in capital markets remains a lively area of debate. My own view is that the most persuasive evidence of large deviations from the benchmark of the MM theorem is the fact that the financial services industry (including corporate CFOs) absorbs a very substantial amount of resources every year. Why would such a large industry exist if the informational problems were easy to solve? It would not, especially in the internet era, where it would be a trivial matter to match up borrowers and lenders in the absence of informational and enforcement difficulties.
+A large literature spurred by the seminal paper of {cite:t}`fhp` estimates equations like this, and virtually always finds a statistically significant estimate of {math}`\psi_{2}`, interpreted as indicating the importance of "cash flow" for investment decisions. But there are many criticisms of this literature, and the importance of imperfections in capital markets remains a lively area of debate. {cite:t}`kaplanZingalesCashFlow` found that the firms that look least constrained are the most sensitive to cash flow, and argued that the sensitivity does not measure financing constraints; {cite:t}`fhpReply` replied. Cash flow can predict investment even when financing is frictionless, because it carries information about profitability that a mismeasured {math}`\q` misses {cite:p}`gomesFinancing,altiFrictionless`.
+
+More convincing evidence comes from natural experiments, in which a firm's cash changes for reasons unrelated to its own investment opportunities. When the price of oil fell, oil companies cut investment in their non-oil divisions {cite:p}`lamontCashFlow`, and firms that had to make contributions to their pension plans cut their investment {cite:p}`rauhPension`, as financing constraints predict. Firms that won large cash windfalls in lawsuits, though, mostly kept the money or spent it on acquisitions, as models of the agency problems of managers predict {cite:p}`blsWindfalls`. The sensitivity of investment to cash flow has also declined over time, and had all but disappeared by the 2000s {cite:p}`chenChenSensitivity`. {cite:t}`hubbardImperfections` surveys the literature.
+
+My own view is that the most persuasive evidence of large deviations from the benchmark of the MM theorem is the fact that the financial services industry (including corporate CFOs) absorbs a very substantial amount of resources every year: {cite:t}`philipponFinance` finds that the cost of financial intermediation in the United States has been about 2 percent of the assets intermediated for more than a century, with no decline from the improvements in information technology. Why would such a large industry exist if the informational problems were easy to solve? It would not, especially in the internet era, where it would be a trivial matter to match up borrowers and lenders in the absence of informational and enforcement difficulties.

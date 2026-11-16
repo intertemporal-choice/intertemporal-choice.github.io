@@ -1,9 +1,15 @@
 # Consumption Theory
 
-Fisher's two-period problem opens the chapter. It exposes the logic of intertemporal
-choice in the simplest setting that contains anything interesting, one in which a budget
-constraint trades current against future consumption and a first-order condition equates
-the marginal rate of substitution between them to the interest factor.
+The chapter opens with the argument that started the modern theory: Keynes's
+consumption function, the evidence it could not explain, and Friedman's answer, that
+consumption follows permanent rather than current income.
+
+Fisher's two-period problem then lays the theoretical foundation. It exposes the logic
+of intertemporal choice in the simplest setting that contains anything interesting, one
+in which a budget constraint trades current against future consumption and the Euler
+equation {math}`\uFunc^{\prime}(\cNbr_{1}) = \Rfree \DiscFac \uFunc^{\prime}(\cNbr_{2})`
+sets the ratio of current to future marginal utility equal to the interest factor times
+the time preference factor.
 
 Extending that problem in one direction gives the Diamond overlapping generations
 model, which lets us ask how public pensions and government debt shift resources across
@@ -32,11 +38,18 @@ so only the template preamble could load them. Left undefined, LaTeX drops the w
 and prints the bare symbol, which would make Carroll's bliss point \cancel{\cRat}
 identical to ordinary consumption and \kPriceAfterITC identical to the ordinary price.
 KaTeX supports both natively, so the website is unaffected and these fallbacks stay out
-of its way. Replace them with the real packages if the template is ever vendored. -->
+of its way. Replace them with the real packages if the template is ever vendored.
+
+The contents list and the PDF's bookmarks show the parts and their notes by name only, not
+each note's own subsections. The template's \tableofcontents runs before this block, so
+tocdepth cannot simply be set here; \addtocontents writes the setting into the .toc file
+itself, ahead of the first note's entry, which is where the contents list reads it. -->
 
 
 ```{raw:latex}
 \counterwithin{equation}{section}
 \providecommand{\cancel}[1]{{\not{#1}}}
 \providecommand{\mathscr}[1]{\mathcal{#1}}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+\hypersetup{bookmarksdepth=1}
 ```

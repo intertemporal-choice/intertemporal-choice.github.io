@@ -1,11 +1,13 @@
 (sec:RCKWithGov)=
 # The Ramsey/Cass-Koopmans (RCK) Model with Government
 
-This section solves the Ramsey/Cass-Koopmans (RCK) model with government.[^HjCxMX4C0F]
+This section solves the Ramsey/Cass-Koopmans (RCK) model with government.
+
+:::{margin}
+The treatment is similar to that in {cite:t}`blanchard&fischer:text`; see that source for more details.
+:::
 
 For simplicity we assume no technological progress, population growth, or depreciation, and a continuum of consumers with mass 1 distributed on the unit interval as per the [Aggregation](#sec:Aggregation) appendix.
-
-[^HjCxMX4C0F]: The treatment is similar to that in {cite:t}`blanchard&fischer:text`; see that source for more details.
 
 Consider first the case where government is financed by constant
 lump-sum taxes of amount {math}`\Tax` per period, and spending is at rate
@@ -44,8 +46,8 @@ The first Hamiltonian optimization condition requires {math}`\partial  \Ham_{t}/
 :label: eq:RCKGov-H1A
 
 \begin{gathered}\begin{aligned}
-        c_{t}^{-\rho} & =  \lambda _{t}   \\
-        -\rho c^{-\rho-1}_{t}\dot{c}_{t} & =  \dot{\lambda}_{t}
+        c_{t}^{-\CRRA} & =  \lambda _{t}   \\
+        -\CRRA c^{-\CRRA-1}_{t}\dot{c}_{t} & =  \dot{\lambda}_{t}
 \end{aligned}\end{gathered}
 ```
 
@@ -56,7 +58,7 @@ The second Hamiltonian optimization condition requires:
         \dot{\lambda}_{t} & =  \timeRate\lambda_{t} - \partial \Ham_{t}/\partial a_{t}  \\
          & =  \timeRate\lambda_{t} - \lambda_{t} r_{t}
 \\      \dot{\lambda}_{t}/{\lambda_{t}} & =  (\timeRate-r_{t})
-\\  \dot{c}_{t}/c_{t}  & =  \rho^{-1}(r_{t}-\timeRate).
+\\  \dot{c}_{t}/c_{t}  & =  \CRRA^{-1}(r_{t}-\timeRate).
 \end{aligned}\end{gathered}
 ```
 
@@ -97,7 +99,7 @@ yielding the first order condition
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \dot{c}_{t}/c_{t} & =  \rho^{-1}(\fFunc'(k_{t})-\depr-\timeRate).
+        \dot{c}_{t}/c_{t} & =  \CRRA^{-1}(\fFunc'(k_{t})-\depr-\timeRate).
 \end{aligned}\end{gathered}
 ```
 
@@ -247,7 +249,7 @@ of
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \dot{c}_{t}/c_{t} & =  \rho^{-1}((1-\tau)r_{t}-\timeRate)
+        \dot{c}_{t}/c_{t} & =  \CRRA^{-1}((1-\tau)r_{t}-\timeRate)
 \end{aligned}\end{gathered}
 ```
 

@@ -16,8 +16,10 @@ content/consumption/Envelope/
 The chapter is `index.md` so that its address stays `/content/consumption/envelope`. The
 notebook is a plain `.ipynb`, committed **with** its outputs, so GitHub, Colab and a
 downloaded copy show the figures. Its first code cell installs the book's own package
-(which brings econ-ark, numpy and matplotlib) if it is missing, so it runs anywhere with
-`pip`; inside the book's environment that cell does nothing. Every figure cell ends with
+(which brings numpy, scipy and matplotlib) if it is missing, so it runs anywhere with
+`pip`, or with `uv` in a Python that has no pip (it says so if it has neither); inside the book's
+environment that cell does nothing. A notebook that imports HARK
+installs the package with its `hark` add-on instead, since HARK is not part of the core. Every figure cell ends with
 `style.save(fig, "<name>")`, from the shared `intertemporal_choice` package in `src/`,
 which writes `figures/<name>.png` deterministically (no version or date metadata, fixed
 size and resolution) and shows the same bytes as the cell's output.
@@ -33,6 +35,18 @@ Once per clone, run `uv run python code/notebooks.py --install`: it sets up the 
 that strips the metadata Jupyter rewrites on every save, so opening a notebook and saving
 it leaves nothing to commit.
 
+## `derive_bib.py`: the bibliography comes from economics.bib
+
+`content/minimal_bibliography.bib` is derived, never edited. The source of every reference is
+`bibtex/bib/economics.bib` in [llorracc/texmf-local](https://github.com/llorracc/texmf-local), and a correction
+goes there (Chris Carroll, 2026-11-08). The script copies, verbatim, the entries the chapters and notebooks cite in
+`{cite:t}` and `{cite:p}` roles, with any entry they name in a `crossref` field, and names the source's commit on
+the file's first line. Cite the source's key for a work, never a new one.
+
+- `uv run python code/derive_bib.py` derives from texmf-local's `main` and rewrites the file.
+- `--check`, run by the workflow, derives again from the commit the file names and fails if anything differs or a
+  cited key is missing from the source. After a correction in texmf-local, run the script and commit the result.
+
 ## `build_site.py`
 
 Runs `myst build --execute` (default `--html --strict`) against a Jupyter server it starts
@@ -41,9 +55,40 @@ itself, because MyST's own launcher times out on this book. It sets `IC_EXEC_ENV
 MyST's execution cache in `_build/execute` is invalidated when the code or data a notebook
 uses changes, not only when its cells do. A preflight lint refuses a notebook that is not
 `content/<part>/<Chapter>/<Chapter>.ipynb` beside its chapter, lacks the python3 kernel or
-that declaration, does not begin with the bootstrap cell, or whose saved figures are not
+that declaration, does not begin with the bootstrap cell (`BOOTSTRAP_HARK` when a later cell
+imports HARK or the Aiyagari code, `BOOTSTRAP` otherwise), or whose saved figures are not
 exactly the files in its `figures/` folder. `--print-env-hash` prints the hash CI keys its
 cache on.
+
+## `notebook_math.py`: a chapter notebook's source, `<Chapter>_SST.ipynb`
+
+The book writes every economic object with its macro (rule D, Chris Carroll 2026-11-15):
+`\CRRA`, `\kap`, `\ptyGro`. The website reads the macros' definitions, from the registry and
+the course block; Colab, Binder, JupyterLite, GitHub and VS Code do not. So a chapter whose
+notebook has been converted keeps two:
+
+```
+content/growth/RamseyCassKoopmans/
+  RamseyCassKoopmans_SST.ipynb   the source (single source of truth): math written with the macros
+  RamseyCassKoopmans.ipynb       generated from it: what the site, Colab, Binder and JupyterLite show
+```
+
+**Edit the `_SST` notebook, never the other.** The generated one has the same cells, ids and
+outputs, with every macro in its Markdown math spelled out in the LaTeX it prints, so it renders
+anywhere. The SST carries one hidden Markdown cell, tagged `notation-definitions`, with a
+`\newcommand` for each macro its Markdown uses, so the SST renders in Jupyter too; the script
+writes it, and the generated notebook leaves it out. Code is not rewritten: a figure label is
+written `notation.tex(r"$\ptyGro$ low")`, which prints the book's current symbol, so a change of
+notation reaches the figures with no edit. The site and JupyterLite never see the SST (`myst.yml`
+excludes it); `export_models.py` reads a model's cells from it.
+
+No spurious changes: the SST is read stripped by the same nbstripout command the filter uses,
+so execution counts, timings and versions never reach the generated notebook, and a file is
+rewritten only when its bytes would change. It stays current three ways: run
+`uv run python code/notebook_math.py` after editing an SST or the notation; the pre-commit hook
+(installed by `notebooks.py --install`) regenerates from what is staged and stages the result,
+and refuses a stale definitions cell or a hand-edited generated notebook; and CI's
+`notebook_math.py --check` fails when any generated file is not what the script writes.
 
 ## `notebooks.py`
 
@@ -51,6 +96,30 @@ The one place that says how notebooks are stripped: outputs and cell ids kept, e
 counts, timings and the Python version dropped. `--install` sets nbstripout up as a git
 filter in the clone; `--check` fails if a tracked notebook is committed unstripped (the
 workflow runs it); `--strip` strips the tracked notebooks in place.
+
+## `build_lite.py`
+
+Builds the in-browser copies of the figure notebooks, a JupyterLite site that the deploy
+serves at `/lite/`: a reader opens one and runs it with nothing installed, at
+`https://intertemporal-choice.github.io/lite/notebooks/index.html?path=<Chapter>.ipynb`. Only
+notebooks whose packages Pyodide has belong in its `NOTEBOOKS` list (numpy, matplotlib and
+ipywidgets are enough for those there); HARK cannot run in a browser. The browser's copy of a
+notebook opens on the economics: its frontmatter cell becomes its title, followed by one line
+telling the reader to run all the cells, and the launch-link and bootstrap cells are dropped.
+The book's pure-Python package is copied beside it, and `code/jupyterlite/jupyter-lite.json`,
+which names the site, has it load ipywidgets, which Pyodide lacks, when the page starts. The
+workflow step that runs it pins the JupyterLite tools.
+
+## `check_core.py`
+
+The package has a light core (`dependencies` in `pyproject.toml`: numpy, scipy, matplotlib,
+pandas, ipywidgets) and a `hark` add-on (econ-ark, sympy and the Aiyagari code). The core is
+what a notebook installs in Colab or Binder, and what a page running Python in the browser
+installs with micropip, so it must never need HARK, which needs numba, which the browser's
+Python lacks. The book's own environment has the add-on, so nothing else would notice a HARK
+import slipping into the core. This script builds the wheel, installs it core only in a fresh
+environment, fails if that brought in any package an add-on names (or numba), then imports
+every module and model and runs the package's self-test there. The workflow runs it.
 
 ## `mirror_check.py`
 
@@ -81,6 +150,26 @@ once the site carrying those pages has been deployed.
 
 `--self-test` checks the link rewriting, and the reimplementation of MyST's URL and
 anchor slugs, against cases they must handle.
+
+## `release_package.py`
+
+Publishes the book's package as permanent files on its site (Chris Carroll, 2026-11-13: "a
+package file on the book's site", "not on pypi", "automatic"). Every change to `src/` or
+`pyproject.toml` that reaches main becomes a release: one wheel, versioned by date and a counter
+(`2026.11.14.1`), at
+`https://intertemporal-choice.github.io/packages/intertemporal_choice-<version>-py3-none-any.whl`,
+listed at `/packages/`. A question's notebook installs a release by that address, so a posted
+answer key reruns later with the code it was written against. Always by the address, never by
+name: `intertemporal-choice` is not on PyPI, so `pip install intertemporal-choice` could fetch
+someone else's package.
+
+A published file is never rebuilt, changed or deleted. Since the deploy rebuilds the site whole,
+the files are kept on the `packages` branch, which only this script writes, by adding a wheel and
+its line in `releases.txt`. The build job (`stage`) copies that branch into the site, checks that
+every file the live site serves is still there byte for byte, writes the list page, and on a push
+that changed the package builds the next release. The release job (`publish`), the only job that
+can write, adds it to the branch, and the deploy waits for it. On a pull request, `stage` only
+checks that the release would build.
 
 ## `write_redirects.py`
 

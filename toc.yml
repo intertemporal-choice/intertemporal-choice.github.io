@@ -8,12 +8,17 @@ project:
     - file: README.md
     - file: content/consumption/index.md
       children:
+        - file: content/consumption/Keynes-Friedman-Modigliani.md
         # Formerly 2PeriodLCModel.md. MyST drops a leading number from a page's URL
         # (it reads 01-, 2- as ordering prefixes), which served this chapter at
         # .../periodlcmodel. Keep digits out of the front of file names.
-        - file: content/consumption/Fisher2Period.md
+        - file: content/consumption/Fisher2Period/index.md
+          children:
+            - file: content/consumption/Fisher2Period/Fisher2Period.ipynb
         - file: content/consumption/ConsAndLaborSupply.md
-        - file: content/consumption/OLGModel.md
+        - file: content/consumption/OLGModel/index.md
+          children:
+            - file: content/consumption/OLGModel/OLGModel.ipynb
         - file: content/consumption/GenAcctsAndGov.md
         - file: content/consumption/SocSecAndKAccum.md
         - file: content/consumption/Envelope/index.md
@@ -24,10 +29,19 @@ project:
             - file: content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb
         - file: content/consumption/RandomWalk.md
         - file: content/consumption/ConsumptionFunction.md
-        - file: content/consumption/StickyExpectationsC.md
+        - file: content/consumption/StickyExpectationsC/index.md
+          children:
+            - file: content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb
         - file: content/consumption/Habits.md
         - file: content/consumption/Durables.md
-        - file: content/consumption/RiskAndPSPremia.md
+        - file: content/consumption/UncertaintyRiskAversionAndPrudence/index.md
+          children:
+            - file: content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb
+        # Ported from the public repo llorracc/TractableBufferStock (the econ2 zip is a
+        # private version); its figures are drawn by the notebook beside it.
+        - file: content/consumption/TractableBufferStock/index.md
+          children:
+            - file: content/consumption/TractableBufferStock/TractableBufferStock.ipynb
         - file: content/consumption/BufferStockAgeProfiles.md
         - file: content/consumption/Aiyagari/index.md
           children:
@@ -36,24 +50,38 @@ project:
     - file: content/asset_pricing/index.md
       children:
         - file: content/asset_pricing/CARAPortfolio.md
-        - file: content/asset_pricing/Portfolio-CRRA.md
-        - file: content/asset_pricing/LucasAssetPrice.md
-        - file: content/asset_pricing/EquityPremiumPuzzle.md
+        - file: content/asset_pricing/Portfolio-CRRA/index.md
+          children:
+            - file: content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb
+        - file: content/asset_pricing/LucasAssetPrice/index.md
+          children:
+            - file: content/asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb
         - file: content/asset_pricing/C-CAPM.md
-        - file: content/asset_pricing/Bubbles.md
+        - file: content/asset_pricing/EquityPremiumPuzzle.md
+        - file: content/asset_pricing/Bubbles/index.md
+          children:
+            - file: content/asset_pricing/Bubbles/Bubbles.ipynb
     - file: content/investment/index.md
       children:
-        - file: content/investment/InvestmentNotes.md
+        - file: content/investment/InvestmentNotes/index.md
+          children:
+            - file: content/investment/InvestmentNotes/InvestmentNotes.ipynb
         - file: content/investment/HallJorgenson.md
-        - file: content/investment/qModel.md
+        - file: content/investment/qModel/index.md
+          children:
+            - file: content/investment/qModel/qModel.ipynb
         # Converted from the DynanImperfCapMkts handout, which the local sources/
-        # mirror never pulled; the mechanism chapter for the two that follow.
-        - file: content/investment/DynanImperfCapMkts.md
-        - file: content/investment/Imperfections.md
+        # mirror never pulled; the mechanism chapter for the one that follows. It also
+        # holds the bond-premium evidence that was the Imperfections page until 2026-10-31.
+        - file: content/investment/DynanImperfCapMkts/index.md
+          children:
+            - file: content/investment/DynanImperfCapMkts/DynanImperfCapMkts.ipynb
         - file: content/investment/iAndCashFlow.md
     - file: content/growth/index.md
       children:
-        - file: content/growth/RamseyCassKoopmans.md
+        - file: content/growth/RamseyCassKoopmans/index.md
+          children:
+            - file: content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb
         - file: content/growth/RCKWithGov.md
         - file: content/growth/DecentralizingRCK.md
         - file: content/growth/Romer86.md
@@ -65,11 +93,16 @@ project:
       children:
         - file: content/dsge/BrockMirman.md
         - file: content/dsge/RBC-Prescott.md
-    - file: content/numerical/index.md
+    - file: content/appendices/mathematical/index.md
       children:
-        - file: content/numerical/Aggregation.md
-        - file: content/numerical/HamiltonianVSDiscrete.md
-        - file: content/numerical/MathFactsList.md
+        - file: content/appendices/mathematical/Aggregation.md
+        - file: content/appendices/mathematical/HamiltonianVSDiscrete.md
+        - file: content/appendices/mathematical/MathFactsList.md
+    # Each chapter's appendix: the derivations of results the chapter states without proof. On the
+    # website and in the PDF, after Mathematical Appendices.
+    - file: content/appendices/chapters/index.md
+      children:
+        - file: content/appendices/chapters/PerfForesightCRRA.md
     # Notes that supplement the main chapters. Listed for the website only; the
     # PDF export in myst.yml deliberately omits this part.
     - file: content/supplemental/index.md

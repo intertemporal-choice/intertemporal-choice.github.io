@@ -1,9 +1,11 @@
 (sec:Laibson)=
 # The Laibson Model of Time Inconsistency
 
-This section provides a simple example of a discrete-time solution to the problem of a consumer with a self-control problem *à la* {cite:t}`laibson:goldeneggs`.[^laibson-notes]
+This section provides a simple example of a discrete-time solution to the problem of a consumer with a self-control problem *à la* {cite:t}`laibson:goldeneggs`.
 
-[^laibson-notes]: Laibson's own lecture notes are available on his website, and are very good; as of this writing, they are in lecture 6 of his course 2010c, handouts, lecture06.
+:::{margin}
+Laibson's own lecture notes are available on his website, and are very good; as of this writing, they are in lecture 6 of his course 2010c, handouts, lecture06.
+:::
 
 Suppose a value function {math}`\vFunc_{t+1}(m_{t+1})` exists for period {math}`t+1`. Then for any period-{math}`t` consumption function {math}`\pmb{\chi}_{t}` we can define
 
