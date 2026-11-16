@@ -80,18 +80,18 @@ we can rewrite the value function as
 \end{aligned}
 ```
 
-but since {math}`\DiscFac \Pat^{1-\CRRA} = \PatR`,[^patr-derivation] this reduces to
+but since {math}`\DiscFac \Pat^{1-\CRRA} = \PatR`, this reduces to
 
-[^patr-derivation]:
-
-    ```{math}
-    \begin{aligned}
-      \DiscFac \Pat^{1-\CRRA} & =  \DiscFac (\Rfree \DiscFac)^{\frac{1-\CRRA}{\CRRA}}
-      \\ & =                               \DiscFac (\Rfree \DiscFac)^{1/\CRRA-1}
-      \\ & =             (\Rfree \DiscFac)^{1/\CRRA} / \Rfree
-               \\ & =  \PatR
-    \end{aligned}
-    ```
+:::{margin}
+```{math}
+\begin{aligned}
+  \DiscFac \Pat^{1-\CRRA} & =  \DiscFac (\Rfree \DiscFac)^{\frac{1-\CRRA}{\CRRA}}
+  \\ & =                               \DiscFac (\Rfree \DiscFac)^{1/\CRRA-1}
+  \\ & =             (\Rfree \DiscFac)^{1/\CRRA} / \Rfree
+           \\ & =  \PatR
+\end{aligned}
+```
+:::
 
 
 ```{math}

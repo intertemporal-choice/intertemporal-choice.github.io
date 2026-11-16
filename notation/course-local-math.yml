@@ -10,26 +10,19 @@
 version: 1
 project:
   math:
-    # --- overrides (124): renderings that differ from the registry's; the course's kept until the sources are substituted
-    '\ptyGro': '\phi'  # registry: \PtyGroRte via \ptyGroRte; uses book 36 questions 244
+    # --- overrides (107): renderings that differ from the registry's; the course's kept until the sources are substituted
     '\CLev': 'C'  # registry: \boldsymbol{\mathit{C}} via \CLvl; uses book 63 questions 200
-    '\PGro': '\Gamma'  # registry: \mathsf{G} via \PermGroFac [growth-factor]; uses book 29 questions 196
-    '\pGro': '\gamma'  # registry: \mathsf{g} via \PermGroRte [growth-rate]; uses book 29 questions 148
     '\Target': '\check'  # registry: \hat via \TargetNrm; uses book 13 questions 146
-    '\popGro': '\xi'  # registry: \PopnGroRte via \popGroRte; uses book 64 questions 86
     '\Labor': 'L'  # registry: \mathrm{L}; uses book 35 questions 104
     '\CARA': '\alpha'  # registry: \upsilon [cara]; uses book 35 questions 98
-    '\wGro': '\mathsf{g}'  # registry: \mathrm{g} via \WGroRte; uses book 25 questions 88
     '\pLevBF': '\mathbf{p}'  # registry: \boldsymbol{\mathit{p}} via \pLvl; uses book 80 questions 32
     '\cLev': 'c'  # registry: \boldsymbol{\mathit{c}} via \cLvl; uses book 43 questions 46
     '\kLev': 'k'  # registry: \boldsymbol{\mathit{k}} via \kLvl; uses book 82 questions 0
     '\Cons': 'C'  # registry: \boldsymbol{\mathit{C}} via \CLvl; uses book 25 questions 46
     '\Pop': 'L'  # registry: \pmb{\mathrm{N}} via \PopnLvl; uses book 3 questions 66
     '\PLev': 'P'  # registry: \boldsymbol{\mathit{P}} via \PLvl; uses book 31 questions 30
-    '\patpGro': '\text{þ}_{\pGro}'  # registry: \text{\thorn}_{\PermGroRte} via \GPRte [log-growth-patience-rate]; uses book 0 questions 54
     '\YLev': 'Y'  # registry: \boldsymbol{\mathit{Y}} via \YLvl; uses book 4 questions 50
     '\Inc': 'Y'  # registry: \boldsymbol{\mathit{Y}} via \YLvl; uses book 28 questions 18
-    '\PLives': '\cancel{\PDies}'  # registry: \Alive via \LivPrb [survival-prob]; uses book 7 questions 36
     '\cLevBF': '\mathbf{c}'  # registry: \boldsymbol{\mathit{c}} via \cLvl; uses book 42 questions 0
     '\KLev': 'K'  # registry: \boldsymbol{\mathit{K}} via \KLvl; uses book 27 questions 10
     '\rport': '\tilde{r}'  # registry: \mathfrak{r}; uses book 30 questions 3
@@ -43,12 +36,10 @@ project:
     '\ValueFunc': 'V'  # registry: \mathrm{V} via \VFunc; uses book 17 questions 0
     '\bLevBF': '\mathbf{b}'  # registry: \boldsymbol{\mathit{b}} via \bLvl; uses book 15 questions 0
     '\BLev': 'B'  # registry: \boldsymbol{\mathit{B}} via \BLvl; uses book 8 questions 6
-    '\LivPrb': '\cancel{\DiePrb}'  # registry: \Alive [survival-prob]; uses book 14 questions 0
     '\MLev': 'M'  # registry: \boldsymbol{\mathit{M}} via \MLvl; uses book 0 questions 14
     '\srate': '\varsigma'  # registry: \mathrm{sav} via \savRte [saving-rate]; uses book 1 questions 13
     '\oLev': '\pmb{o}'  # registry: \boldsymbol{\mathit{o}} via \oLvl; uses book 13 questions 0
     '\PopLev': '\pmb{N}'  # registry: \pmb{\mathrm{N}} via \PopnLvl; uses book 13 questions 0
-    '\Alive': '\aleph'  # registry: \mathcal{L}; uses book 11 questions 0
     '\WAllLev': '\mathbf{O}'  # registry: \boldsymbol{\mathit{O}} via \OLvl; uses book 9 questions 0
     '\hLevBF': '\mathbf{h}'  # registry: \boldsymbol{\mathit{h}} via \hLvl; uses book 8 questions 0
     '\aLevBF': '\mathbf{a}'  # registry: \boldsymbol{\mathit{a}} via \aLvl; uses book 7 questions 0
@@ -90,7 +81,6 @@ project:
     '\JLev': 'J'  # registry: \boldsymbol{\mathit{J}} via \JLvl; uses book 0 questions 0
     '\KLevBF': '\mathbf{K}'  # registry: \boldsymbol{\mathit{K}} via \KLvl; uses book 0 questions 0
     '\kLevBF': '\mathbf{k}'  # registry: \boldsymbol{\mathit{k}} via \kLvl; uses book 0 questions 0
-    '\LivFac': '\Alive'  # registry: \Alive via \LivPrb [survival-prob]; uses book 0 questions 0
     '\lLev': '\ell'  # registry: \boldsymbol{\mathit{l}} via \lLvl; uses book 0 questions 0
     '\LLevBF': '\mathbf{L}'  # registry: \boldsymbol{\mathit{L}} via \LLvl; uses book 0 questions 0
     '\lLevBF': '\pmb{\ell}'  # registry: \boldsymbol{\mathit{l}} via \lLvl; uses book 0 questions 0
@@ -105,17 +95,8 @@ project:
     '\OLev': 'O'  # registry: \boldsymbol{\mathit{O}} via \OLvl; uses book 0 questions 0
     '\OLevBF': '\mathbf{O}'  # registry: \boldsymbol{\mathit{O}} via \OLvl; uses book 0 questions 0
     '\oLevBF': '\mathbf{o}'  # registry: \boldsymbol{\mathit{o}} via \oLvl; uses book 0 questions 0
-    '\PatPGro': '\textbf{Þ}_{\PGro}'  # registry: \GPFacRaw via \GPFac; uses book 0 questions 0
-    '\PermGroFac': '\pmb{\Gamma}'  # registry: \mathsf{G} [growth-factor]; uses book 0 questions 0
-    '\permGroFac': '\Gamma'  # registry: \mathsf{G} via \PermGroFac [growth-factor]; uses book 0 questions 0
-    '\PermGroRte': '\pmb{\gamma}'  # registry: \mathsf{g} [growth-rate]; uses book 0 questions 0
-    '\permGroRte': '\gamma'  # registry: \mathsf{g} via \PermGroRte [growth-rate]; uses book 0 questions 0
-    '\PGroAdj': '\underline{\PGro}'  # registry: \Min{\PermGroFac} via \PermGroFacAdj; uses book 0 questions 0
-    '\PGrouAdj': '\underline{\underline{\PGro}}'  # registry: \Min{\Min{\PermGroFac}} via \PermGroFacuAdj; uses book 0 questions 0
     '\PLevBF': '\mathbf{P}'  # registry: \boldsymbol{\mathit{P}} via \PLvl; uses book 0 questions 0
     '\pNotZero': '\cancel{\wp}'  # registry: (1-\pZero); uses book 0 questions 0
-    '\popRte': '\popGro'  # registry: \PopnGroRte via \popGroRte; uses book 0 questions 0
-    '\PtyGro': '\Phi'  # registry: \mathcal{G} via \PtyGroFac [productivity-growth]; uses book 0 questions 0
     '\QLev': 'Q'  # registry: \boldsymbol{\mathit{Q}} via \QLvl; uses book 0 questions 0
     '\RLev': 'R'  # registry: \boldsymbol{\mathit{R}} via \RLvl; uses book 0 questions 0
     '\SLevBF': '\mathbf{S}'  # registry: \boldsymbol{\mathit{S}} via \SLvl; uses book 0 questions 0
@@ -135,6 +116,8 @@ project:
     '\zLev': 'z'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
     '\ZLevBF': '\mathbf{Z}'  # registry: \boldsymbol{\mathit{Z}} via \ZLvl; uses book 0 questions 0
     '\zLevBF': '\mathbf{z}'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
+    '\PtyGroFac': '\mathrm{G}'  # registry: \mathcal{G}; roman, as \WGroFac, on Chris's ruling of 2026-11-15 14:45:52 EST, until a registry release carries it
+    '\PtyGroRte': '\mathrm{g}'  # registry: g; roman, as \WGroRte, on Chris's ruling of 2026-11-15 14:45:52 EST, until a registry release carries it
     # --- local-upstream (33): objects the registry lacks: candidates for registry rows
     '\Price': '\mathsf{P}'  # uses book 190 questions 206
     '\dvdnd': 'd'  # uses book 151 questions 213
@@ -236,7 +219,7 @@ project:
     '\TaxFree': '\cancel{\Tax}'  # uses book 30 questions 24
     '\PostITC': '\cancel{\zeta}'  # uses book 10 questions 0
     # --- local-unclassified (0): objects the registry lacks: not yet classified
-    # --- aliases (90): course names for registry objects, same rendering: pure renames to retire
+    # --- aliases (105): course names for registry objects, same rendering: pure renames to retire
     '\ARat': '\ANrm'  # alias of the registry's macro
     '\aRat': '\aNrm'  # alias of the registry's macro
     '\BRat': '\BNrm'  # alias of the registry's macro
@@ -257,6 +240,7 @@ project:
     '\iRat': '\iNrm'  # alias of the registry's macro
     '\KRat': '\KNrm'  # alias of the registry's macro
     '\kRat': '\kNrm'  # alias of the registry's macro
+    '\LivFac': '\LivPrb'  # alias of the registry's macro
     '\LRat': '\LNrm'  # alias of the registry's macro
     '\m': '\mNrm'  # alias of the registry's macro
     '\MRat': '\MNrm'  # alias of the registry's macro
@@ -266,11 +250,22 @@ project:
     '\ORat': '\ONrm'  # alias of the registry's macro
     '\oRat': '\oNrm'  # alias of the registry's macro
     '\Pat': '\APFac'  # alias of the registry's macro
+    '\PatPGro': '\GPFac'  # alias of the registry's macro
+    '\patpGro': '\GPRte'  # alias of the registry's macro
     '\PatR': '\RPFac'  # alias of the registry's macro
     '\PDies': '\DiePrb'  # alias of the registry's macro
     '\pDies': '\diePrb'  # alias of the registry's macro
+    '\permGroFac': '\PermGroFac'  # alias of the registry's macro
+    '\permGroRte': '\PermGroRte'  # alias of the registry's macro
+    '\PGro': '\PermGroFac'  # alias of the registry's macro
+    '\pGro': '\PermGroRte'  # alias of the registry's macro
+    '\PGroAdj': '\PermGroFacAdj'  # alias of the registry's macro
+    '\PGrouAdj': '\PermGroFacuAdj'  # alias of the registry's macro
+    '\PLives': '\LivPrb'  # alias of the registry's macro
     '\PopFac': '\PopGroFac'  # alias of the registry's macro
     '\PopGro': '\PopGroFac'  # alias of the registry's macro
+    '\popGro': '\popGroRte'  # alias of the registry's macro
+    '\popRte': '\popGroRte'  # alias of the registry's macro
     '\pRat': '\pNrm'  # alias of the registry's macro
     '\ProdFunc': '\FFunc'  # alias of the registry's macro
     '\prodFunc': '\fFunc'  # alias of the registry's macro
@@ -278,6 +273,8 @@ project:
     '\pShk': '\permShkInd'  # alias of the registry's macro
     '\pshk': '\permShkInd'  # alias of the registry's macro
     '\pShkMin': '\permShkIndMin'  # alias of the registry's macro
+    '\PtyGro': '\PtyGroFac'  # alias of the registry's macro
+    '\ptyGro': '\ptyGroRte'  # alias of the registry's macro
     '\R': '\Rfree'  # alias of the registry's macro
     '\SRat': '\SNrm'  # alias of the registry's macro
     '\sRat': '\sNrm'  # alias of the registry's macro
@@ -305,6 +302,7 @@ project:
     '\WEndRat': '\ANrm'  # alias of the registry's macro
     '\wEndRat': '\aNrm'  # alias of the registry's macro
     '\WGro': '\WGroFac'  # alias of the registry's macro
+    '\wGro': '\WGroRte'  # alias of the registry's macro
     '\Whum': '\HNrm'  # alias of the registry's macro
     '\wHum': '\hNrm'  # alias of the registry's macro
     '\whum': '\hNrm'  # alias of the registry's macro

@@ -181,11 +181,11 @@ def draw_output(top, bottom, alpha, xi, kgold, kbar=None, limits=None, kplanner=
     top.plot(k, xi * k, color="C0", lw=1.0, linestyle="--")
     if limits is None:
         top.annotate(r"$\mathrm{f}(k)$", (0.6 * kzero, (0.6 * kzero) ** alpha), xytext=(0, 8), textcoords="offset points")
-        top.annotate(r"$\xi k$", (0.6 * kzero, xi * 0.6 * kzero), xytext=(8, -14), textcoords="offset points")
+        top.annotate(r"$n k$", (0.6 * kzero, xi * 0.6 * kzero), xytext=(8, -14), textcoords="offset points")
     else:  # inside the fixed frame
         x = min(0.6 * right, 0.5 * limits[1] / xi)
         top.annotate(r"$\mathrm{f}(k)$", (0.75 * right, (0.75 * right) ** alpha), xytext=(0, 8), textcoords="offset points")
-        top.annotate(r"$\xi k$", (x, xi * x), xytext=(8, -14), textcoords="offset points")
+        top.annotate(r"$n k$", (x, xi * x), xytext=(8, -14), textcoords="offset points")
     bottom.plot(k, f - xi * k, color="black", lw=1.8)
     bottom.axvline(kgold, color="0.45", lw=0.8, linestyle=":", label=r"$k^{**}$, the golden rule")
     ticks, names = [kgold], [r"$k^{**}$"]
@@ -196,7 +196,7 @@ def draw_output(top, bottom, alpha, xi, kgold, kbar=None, limits=None, kplanner=
         bottom.axvline(kplanner, color="C2", lw=0.8, linestyle="-.", label=r"$k^{*}$, the planner's")
         ticks, names = ticks + [kplanner], names + [r"$k^{*}$"]
     x = 0.75 * min(kzero, right)
-    bottom.annotate(r"$\mathrm{f}(k)-\xi k$", (x, x**alpha - xi * x), xytext=(6, 6), textcoords="offset points")
+    bottom.annotate(r"$\mathrm{f}(k)-n k$", (x, x**alpha - xi * x), xytext=(6, 6), textcoords="offset points")
     for ax, height in ((top, None if limits is None else limits[1]), (bottom, None if limits is None else limits[2])):
         ax.set_xlim(0, right)
         ax.set_ylim(0, height)

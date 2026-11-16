@@ -81,9 +81,11 @@ so that the mass of the aggregate population is constant at 1, as above.
 
 Blanchard's original treatment was in continuous time, with a constant
 rate of death {math}`\pDies`, so that the probability of remaining alive (not dead)
-after {math}`t` periods for a consumer born in period 0 is[^Al1lRZREpv]
+after {math}`t` periods for a consumer born in period 0 is
 
-[^Al1lRZREpv]: The number of people who will die during the first period in the continuous-time model is measured by the difference between an initial population of size 1 and the size of the population remaining alive after one period, {math}`1-\Alive_{1}=1-e^{-\pDies}`. [ExpEps](#fact:expeps) in the [Math Facts](#fact:mathfactslist) list implies that {math}`e^{-\pDies} \approx 1-\pDies`; therefore the proportion who have died will be approximately {math}`1-(1- \pDies)=\pDies`. Hence for small death rates, in order for the same population to survive for one period in a continuous-time model with death rate {math}`\pDies` and the discrete-time model with death rate {math}`\PDies`, one would need {math}`\pDies \approx \PDies`.
+:::{margin}
+The number of people who will die during the first period in the continuous-time model is measured by the difference between an initial population of size 1 and the size of the population remaining alive after one period, {math}`1-\Alive_{1}=1-e^{-\pDies}`. [ExpEps](#fact:expeps) in the [Math Facts](#fact:mathfactslist) list implies that {math}`e^{-\pDies} \approx 1-\pDies`; therefore the proportion who have died will be approximately {math}`1-(1- \pDies)=\pDies`. Hence for small death rates, in order for the same population to survive for one period in a continuous-time model with death rate {math}`\pDies` and the discrete-time model with death rate {math}`\PDies`, one would need {math}`\pDies \approx \PDies`.
+:::
 
 ```{math}
 \begin{gathered}\begin{aligned}

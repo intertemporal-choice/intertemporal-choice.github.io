@@ -39,9 +39,11 @@ where the lower-case variables represent the logarithms of their upper-case equi
 \end{aligned}
 ```
 
-or, for simplicity defining a constant {math}`\xi = 1-\exp(x)` (which will be a number slightly less than one)[^xi-note]
+or, for simplicity defining a constant {math}`\xi = 1-\exp(x)` (which will be a number slightly less than one)
 
-[^xi-note]: {math}`\xi` slightly less than one because {math}`\exp(x) = C/W` is small.
+:::{margin}
+{math}`\xi` slightly less than one because {math}`\exp(x) = C/W` is small.
+:::
 
 ```{math}
 :label: eq:dw1

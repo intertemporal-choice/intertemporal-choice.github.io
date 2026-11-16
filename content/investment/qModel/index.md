@@ -8,15 +8,19 @@ The chapter's [notebook](qModel.ipynb) solves the model exactly, without the app
 (Definitions)=
 ## Definitions
 
-To simplify some algebra, we assume that a unit of investment purchased in period {math}`t` does not become productive until {math}`t+1`; the cost at {math}`t` reflects the present discounted value of the period-{math}`t+1` price of capital.[^timing-simplification]
+To simplify some algebra, we assume that a unit of investment purchased in period {math}`t` does not become productive until {math}`t+1`; the cost at {math}`t` reflects the present discounted value of the period-{math}`t+1` price of capital.
 
-[^timing-simplification]: This assumption simplifies many of the expressions that arise in the discrete-time framework; in continuous time the model presentation is simpler, but it is hard to map the continuous-time theory into a transparent computational solution like the one that accompanies these notes.
+:::{margin}
+This simplifies the discrete-time algebra. Continuous time is simpler to present, but hard to map into a transparent computational solution like the chapter's notebook.
+:::
 
-Adjustment costs are priced the same way.[^itc-resale] We repeatedly make approximations motivated by results from the continuous-time model; the key approximation will be the usual calculus result that if {math}`\epsilon` and {math}`\gamma` are "small" then {math}`\epsilon\gamma` can be approximated by zero. (We will call this fact [SmallSmallZero](#fact:smallsmallzero) in the MathFactsList.)[^tax-depreciation]
+Adjustment costs are priced the same way. We repeatedly make approximations motivated by results from the continuous-time model; the key approximation will be the usual calculus result that if {math}`\epsilon` and {math}`\gamma` are "small" then {math}`\epsilon\gamma` can be approximated by zero. (We will call this fact [SmallSmallZero](#fact:smallsmallzero) in the MathFactsList.)
 
-[^itc-resale]: To avoid arbitrage opportunities, assume that if you claimed an investment tax credit on a unit of investment in period {math}`t`, then if you resell the portion that remains after depreciation in a future period, you must repay the ITC corresponding to the remaining capital. Actual tax treatment of depreciation is too complicated to be worth incorporating into the model; these assumptions capture the core of it.
+:::{margin}
+To avoid arbitrage opportunities, assume that if you claimed an investment tax credit on a unit of investment in period {math}`t`, then if you resell the portion that remains after depreciation in a future period, you must repay the ITC corresponding to the remaining capital. Actual tax treatment of depreciation is too complicated to be worth incorporating into the model; these assumptions capture the core of it.
 
-[^tax-depreciation]: We neglect tax depreciation because, as shown in the [Hall-Jorgenson](#HallJorgensonTaxes) section, it matters only through the after-tax price of capital: deductions worth {math}`z` per dollar of investment work exactly like an investment tax credit at the rate {math}`{\TaxCorp} z`, for a given tax rate. So the ITC here can be read as including them, and including tax depreciation separately would add complication without adding any fundamental insights to the analysis. See {cite:t}`hsITC` for elaboration.
+We neglect tax depreciation because, as shown in the [Hall-Jorgenson](#HallJorgensonTaxes) section, it matters only through the after-tax price of capital: deductions worth {math}`z` per dollar of investment work exactly like an investment tax credit at the rate {math}`{\TaxCorp} z`, for a given tax rate. So the ITC here can be read as including them, and including tax depreciation separately would add complication without adding any fundamental insights to the analysis. See {cite:t}`hsITC` for elaboration.
+:::
 
 | Symbol | | Definition |
 | --- | --- | --- |
@@ -61,9 +65,11 @@ k_{t+1} & = k_{t}\daleth+i_{t}.
 
 If capital markets are efficient, {math}`\vFirm_{t}(k_{t})` will also be the stock market value ("**e**quity" is the mnemonic) of the profit-maximizing firm because it is precisely the amount that a rational investor will be willing to pay if they care only about discounted after-tax income derived from owning (a share of) the firm.
 
-We can simplify by thinking about the firm's shareholders as the suppliers of physical capital, not just financial capital. In this interpretation, {math}`k` represents not just the value of the physical machinery owned by the firm, but also the number of shares of stock outstanding in the firm. We can think of the firm in this way if we suppose that every time the firm purchases new physical capital, it does so by issuing new shares at a price equal to the marginal valuation of the firm's capital stock, purchasing the unit of capital at the price given by the after-tax cost of that capital (and after paying any associated adjustment costs).[^itc-share-price]
+We can simplify by thinking about the firm's shareholders as the suppliers of physical capital, not just financial capital. In this interpretation, {math}`k` represents not just the value of the physical machinery owned by the firm, but also the number of shares of stock outstanding in the firm. We can think of the firm in this way if we suppose that every time the firm purchases new physical capital, it does so by issuing new shares at a price equal to the marginal valuation of the firm's capital stock, purchasing the unit of capital at the price given by the after-tax cost of that capital (and after paying any associated adjustment costs).
 
-[^itc-share-price]: This leads to some subtlety in thinking about what happens to the firm's share price when an ITC is introduced; we discuss this briefly below.
+:::{margin}
+This leads to some subtlety in thinking about what happens to the firm's share price when an ITC is introduced; we discuss this briefly below.
+:::
 
 The Bellman equation for the firm's value can be derived from
 
@@ -86,9 +92,11 @@ which is equivalent to
 \end{aligned}
 ```
 
-and defining {math}`j_{t}^{i}=\adj^{i}(i_{t},k_{t})` as the derivative of adjustment costs with respect to the level of investment,[^adj-function-structure] the first order condition for optimization with respect to {math}`k_{t+1}` (or, equivalently, {math}`i_{t}`) is
+and defining {math}`j_{t}^{i}=\adj^{i}(i_{t},k_{t})` as the derivative of adjustment costs with respect to the level of investment, the first order condition for optimization with respect to {math}`k_{t+1}` (or, equivalently, {math}`i_{t}`) is
 
-[^adj-function-structure]: We implicitly assume in the following derivations that the structure of the {math}`\adj` function is appropriate to our needs; later we will define a specific {math}`\adj` that will always work, but here we want to leave the structure of the function general.
+:::{margin}
+We implicitly assume in the following derivations that the structure of the {math}`\adj` function is appropriate to our needs; later we will define a specific {math}`\adj` that will always work, but here we want to leave the structure of the function general.
+:::
 
 ```{math}
 :label: eq:qMod-iFOC
@@ -228,9 +236,11 @@ where the last approximation uses [SmallSmallZero](#fact:smallsmallzero) in the 
 \end{aligned}
 ```
 
-This equation can best be understood as an arbitrage equation for the share price of the company if capital markets are efficient.[^arbitrage-interpretation] The first term on the RHS {math}`\rfree\vk_{t}` is the flow of income that would be obtained from putting the value of an extra unit of capital in the bank. The term in brackets {math}`[]` is the flow value of having an extra unit of capital inside the firm: Extra after-tax revenues are measured by the first term, the second term accounts for the effect of the extra capital on costs of adjustment, and the final term reflects the cost to the firm of the extra depreciation that results from having more capital.
+This equation can best be understood as an arbitrage equation for the share price of the company if capital markets are efficient. The first term on the RHS {math}`\rfree\vk_{t}` is the flow of income that would be obtained from putting the value of an extra unit of capital in the bank. The term in brackets {math}`[]` is the flow value of having an extra unit of capital inside the firm: Extra after-tax revenues are measured by the first term, the second term accounts for the effect of the extra capital on costs of adjustment, and the final term reflects the cost to the firm of the extra depreciation that results from having more capital.
 
-[^arbitrage-interpretation]: This interpretation requires the assumption (made above) that the number of shares outstanding for the firm is equal to the number of units of capital the firm has; this is justifiable by the assumption that in an efficient capital market shares can always be issued or repurchased at an implicit interest rate corresponding to the riskless rate.
+:::{margin}
+This interpretation requires the assumption (made above) that the number of shares outstanding for the firm is equal to the number of units of capital the firm has; this is justifiable by the assumption that in an efficient capital market shares can always be issued or repurchased at an implicit interest rate corresponding to the riskless rate.
+:::
 
 Think first about the {math}`\Ex_{t} [\Delta \vk_{t+1}] = 0` case, in which the firm's value, share price, and size will be unchanging because the marginal value of capital inside the firm is equal to the opportunity cost of employing that capital outside the firm (leaving it in the bank). If these two options yield equivalent returns, it is because the firm is already the "right" size and should be neither growing nor shrinking.
 
@@ -242,13 +252,17 @@ Now consider the case where {math}`\Ex_{t} [\Delta \vk_{t+1}] < 0`, because
 \end{aligned}
 ```
 
-This says that an extra unit of capital is more valuable inside the firm than outside it, which means that 1) {math}`\vk_{t}` is above its steady-state value; 2) the firm will have positive net investment; and 3) the firm's share value will be falling over time (because the *level* of its share value today is high, reflecting the fact that the high marginal valuation of the firm's future investment has already been incorporated into {math}`\vk_{t}`).[^rising-prices-symmetric]
+This says that an extra unit of capital is more valuable inside the firm than outside it, which means that 1) {math}`\vk_{t}` is above its steady-state value; 2) the firm will have positive net investment; and 3) the firm's share value will be falling over time (because the *level* of its share value today is high, reflecting the fact that the high marginal valuation of the firm's future investment has already been incorporated into {math}`\vk_{t}`).
 
-[^rising-prices-symmetric]: The case with rising share prices is symmetric.
+:::{margin}
+The case with rising share prices is symmetric.
+:::
 
-Now define "marginal {math}`\q`" as the value of an additional unit of capital inside the firm divided by the after-tax purchase price of an additional unit of capital,[^romer-notation]
+Now define "marginal {math}`\q`" as the value of an additional unit of capital inside the firm divided by the after-tax purchase price of an additional unit of capital,
 
-[^romer-notation]: The variable naming conventions here differ subtly from those in {cite:t}`romer:text`: what we call {math}`\vk` Romer calls {math}`\q`. Romer also makes different assumptions about the production function.
+:::{margin}
+The variable naming conventions here differ subtly from those in {cite:t}`romer:text`: what we call {math}`\vk` Romer calls {math}`\q`. Romer also makes different assumptions about the production function.
+:::
 
 ```{math}
 \begin{aligned}
@@ -477,9 +491,11 @@ To determine the short run dynamics, notice several things. First, there can be 
 \end{aligned}
 ```
 
-But because the equilibrium capital stock is larger, we know that {math}`{j}^{k}_{\geq t+n}<0` and will stay negative thereafter (asymptoting to zero from below). This reflects the fact that if you know you will need higher capital in the future, the most efficient way to minimize the cost of obtaining that capital is to gradually start building some of it even before you need it, rather than trying to do it all at once. Note further that before period {math}`t+n` the model behaves according to the equations of motion defined by the problem under the {math}`{<}` parameter values,[^jk-path-note] while at {math}`t+n` and after it behaves according to the new {math}`\geq` equations of motion.
+But because the equilibrium capital stock is larger, we know that {math}`{j}^{k}_{\geq t+n}<0` and will stay negative thereafter (asymptoting to zero from below). This reflects the fact that if you know you will need higher capital in the future, the most efficient way to minimize the cost of obtaining that capital is to gradually start building some of it even before you need it, rather than trying to do it all at once. Note further that before period {math}`t+n` the model behaves according to the equations of motion defined by the problem under the {math}`{<}` parameter values, while at {math}`t+n` and after it behaves according to the new {math}`\geq` equations of motion.
 
-[^jk-path-note]: Strictly speaking, the path of {math}`j_{t}^{k}` changes the equations of motion before {math}`t+n` too. The phase diagrams set that effect aside; the chapter's notebook solves the model exactly, and its paths ({numref}`fig:FutureProductivityIncrease` and {numref}`fig:FutureITCIncrease`) have the shapes described here.
+:::{margin}
+Strictly speaking, the path of {math}`j_{t}^{k}` changes the equations of motion before {math}`t+n` too. The phase diagrams set that effect aside; the chapter's notebook solves the model exactly, and its paths ({numref}`fig:FutureProductivityIncrease` and {numref}`fig:FutureITCIncrease`) have the shapes described here.
+:::
 
 Putting all this together, the story is as follows. Upon announcement of the productivity increase, {math}`\vk` jumps to the level such that, evolving exactly according to its {math}`{<}` equations of motion, it will arrive in period {math}`t+n` at a point exactly on the saddle path of the model corresponding to the {math}`{\geq}` equations of motion. Thereafter it will evolve toward the steady state, which will be at a higher level of capital than before, {math}`\check{k}_{\geq} > \check{k}_{<}`, because the greater productivity justifies a higher equilibrium capital stock.
 
