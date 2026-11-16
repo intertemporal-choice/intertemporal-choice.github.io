@@ -16,7 +16,7 @@ The economy has a perfectly competitive production sector that uses a Cobb-Dougl
 to produce output using capital and labor. Labor hours (the same as population) increase exogenously at a constant rate
 
 :::{margin}
-Except for the parameters, such as the growth rates {math}`\popGro` and {math}`\ptyGro`, every variable is a function of time, but putting time subscripts on everything would clutter the notation, so we do it only where necessary for clarity.
+States and controls are a function of time, but putting time subscripts on everything would add clutter; we do it only where necessary for clarity.
 :::
 
 ```{math}
@@ -35,13 +35,13 @@ and {math}`\PtyLab` is an index of labor productivity that grows at rate
 
 Thus, technological progress allows each worker to
 produce perpetually more as time goes by with the same amount of
-physical capital. The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
+physical capital.
 
 :::{margin}
-This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With a Cobb-Douglas production function the three are the same thing at different rates. With any other production function, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`; {cite:t}`jonesScrimgeourUzawa` give a short proof.
-
-Writing progress in {math}`\PtyLab \Labor` form is a peculiar assumption; it seems more natural to imagine technology embodied in new {math}`\Kap`. {cite:t}`solowEmbodied` and {cite:t}`phelpsNewView` showed that steady-state growth does not depend on how much of technical progress is embodied in new capital, though convergence is faster the more of it is embodied; so the simpler disembodied form delivers the same steady-state growth rate.
+This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
 :::
+
+The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
 
 Aggregate capital accumulates according to
 
@@ -54,6 +54,10 @@ Aggregate capital accumulates according to
 ```
 
 Lower case variables are the upper case version divided by efficiency units, so {math}`\inc = \Inc/(\PtyLab \Labor) = (\Kap/\PtyLab \Labor)^{\kapShare} = \kap^{\kapShare}`. Since {math}`\kap = \Kap/(\PtyLab \Labor)`,
+
+:::{margin}
+NOT per-capita; this is required for '[balanced growth](#sec:RCK-SteadyState)'.
+:::
 
 ```{math}
 \dot{\kap}/\kap = \dot{\Kap}/\Kap - \dot{\PtyLab}/\PtyLab - \dot{\Labor}/\Labor = \dot{\Kap}/\Kap - (\ptyGro +\popGro),
@@ -186,6 +190,7 @@ time as {math}`\prodFunc^{\prime}(\kap)` varies.
 
 Since per capita consumption is {math}`\Cons/\Labor = \cons \PtyLab`, it grows at {math}`\dot{\cons}/\cons + \ptyGro = \CRRA^{-1}(\prodFunc^{\prime}(\kap)-(\popGro+\depr)-\timeRate)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth, the [Euler equation](#eq:cdotOc) with {math}`\ptyGro=0`. Productivity growth matters only through {math}`\kap`.
 
+(sec:RCK-SteadyState)=
 ## The Steady State
 
 The assumption of labor augmenting technological progress was made
@@ -196,19 +201,19 @@ and capital all grow at rate {math}`\ptyGro`.
 See {cite:t}`ghosDespiteUzawa` for a discussion of the realism of this requirement.
 :::
 
-{math}`\dot{\cons}/\cons = 0` implies that at the steady-state value of {math}`\check{\kap}`,
+{math}`\dot{\cons}/\cons = 0` implies that at the steady-state value of {math}`\Steady{\kap}`,
 
 ```{math}
 :label: eq:RCK-modGoldenRule
 
 \begin{gathered}\begin{aligned}
-  \prodFunc^{\prime}(\check{\kap}) & =  \timeRate +\popGro+\depr+\CRRA \ptyGro  \\
-  \kapShare \check{\kap}^{\kapShare-1} & =  \timeRate +\popGro+\depr+\CRRA \ptyGro  \\
-  \check{\kap} & =  \left(\frac{\kapShare}{\timeRate +\popGro+\depr+\CRRA \ptyGro}\right)^{\frac{1}{1-\kapShare}}   
+  \prodFunc^{\prime}(\Steady{\kap}) & =  \timeRate +\popGro+\depr+\CRRA \ptyGro  \\
+  \kapShare \Steady{\kap}^{\kapShare-1} & =  \timeRate +\popGro+\depr+\CRRA \ptyGro  \\
+  \Steady{\kap} & =  \left(\frac{\kapShare}{\timeRate +\popGro+\depr+\CRRA \ptyGro}\right)^{\frac{1}{1-\kapShare}}   
 \end{aligned}\end{gathered}
 ```
 
-This is the "modified golden rule" of {cite:t}`blanchard&fischer:text`, chapter 2. Comparing it with the [golden rule](#eq:RCK-goldenRule), {math}`\prodFunc^{\prime}(\check{\kap}) - \prodFunc^{\prime}(\GoldRule{\kap}) = \timeRate - (1-\CRRA)\ptyGro`, so {math}`\check{\kap} < \GoldRule{\kap}` exactly when {math}`\timeRate > (1-\CRRA)\ptyGro`: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
+This is the "modified golden rule" of {cite:t}`blanchard&fischer:text`, chapter 2. Comparing it with the [golden rule](#eq:RCK-goldenRule), {math}`\prodFunc^{\prime}(\Steady{\kap}) - \prodFunc^{\prime}(\GoldRule{\kap}) = \timeRate - (1-\CRRA)\ptyGro`, so {math}`\Steady{\kap} < \GoldRule{\kap}` exactly when {math}`\timeRate > (1-\CRRA)\ptyGro`: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
 
 Thus, the steady-state {math}`\kap` will be higher if capital
 is more productive ({math}`\kapShare` is higher), and will be lower if
@@ -238,7 +243,7 @@ zero. Thus, from {eq}`eq:RCK-kdot` we have that {math}`\dot{\kap}=0` implies
 \end{aligned}\end{gathered}
 ```
 
-and we have already solved for the (constant) {math}`\check{\kap}` that characterizes
+and we have already solved for the (constant) {math}`\Steady{\kap}` that characterizes
 the {math}`\dot{\cons}/\cons=0` locus. These can be combined to generate the borders between
 the phases in the phase diagram, as illustrated in {numref}`fig:RamseySSPlot`.
 
@@ -328,6 +333,6 @@ so we can obtain
 
 which is a differential equation with, in general, no analytical solution. Many numerical math packages can solve differential equations numerically, yielding a numerical version of the {math}`\cFunc(\kap)` function.
 
-There is one problem, however, which is that at the steady-state values of {math}`\cons` and {math}`\kap` both numerator and denominator of this equation are zero. The alternative is to solve the differential equation twice: Once for a domain extending from {math}`\kap=0` to {math}`\check{\kap}-\epsilon`, yielding {math}`\cFunc_{-}(\kap)`, and once for a domain from {math}`\check{\kap}+\epsilon` to some large value of {math}`\kap`, yielding {math}`\cFunc_{+}(\kap)`. The true consumption policy function can then be approximated by interpolating between the upper endpoint of {math}`\cFunc_{-}(\kap)` and the lower endpoint of {math}`\cFunc_{+}(\kap)`.
+There is one problem, however, which is that at the steady-state values of {math}`\cons` and {math}`\kap` both numerator and denominator of this equation are zero. The alternative is to solve the differential equation twice: Once for a domain extending from {math}`\kap=0` to {math}`\Steady{\kap}-\epsilon`, yielding {math}`\cFunc_{-}(\kap)`, and once for a domain from {math}`\Steady{\kap}+\epsilon` to some large value of {math}`\kap`, yielding {math}`\cFunc_{+}(\kap)`. The true consumption policy function can then be approximated by interpolating between the upper endpoint of {math}`\cFunc_{-}(\kap)` and the lower endpoint of {math}`\cFunc_{+}(\kap)`.
 
 {cite:t}`judd:book` covers numerical methods for saddle paths more generally. The [notebook](RamseyCassKoopmans.ipynb) solves the model this way and draws both figures; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).

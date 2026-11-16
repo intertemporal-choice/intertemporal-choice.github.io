@@ -80,11 +80,13 @@ SKIP = {
 FACT_DEF = re.compile(r"^\((fact:[^)\s]+)\)=", re.MULTILINE)
 # A label directly above a page's first heading names the page: MyST lifts that heading
 # into the page title, which has no anchor on the site.
-TITLE_LABEL = re.compile(r"\A\s*\((fact:[^)\s]+)\)=\s*\n#\s")
+# A page may open with front matter (a `math:` block, say) before its title's label.
+FRONT_MATTER = r"(?s:---\n.*?\n---\n)?"
+TITLE_LABEL = re.compile(r"\A" + FRONT_MATTER + r"\s*\((fact:[^)\s]+)\)=\s*\n#\s")
 FACT_LINK = re.compile(r"\]\(#(fact:[^)\s]+)\)")
 # Any label: a `(label)=` target, or a directive's `:label:` or `:name:` option.
 LABEL_DEF = re.compile(r"^[ \t]*(?:\(([^)\s]+)\)=|:(?:label|name):[ \t]*(\S+))", re.MULTILINE)
-PAGE_TITLE_LABEL = re.compile(r"\A\s*\(([^)\s]+)\)=\s*\n#\s")
+PAGE_TITLE_LABEL = re.compile(r"\A" + FRONT_MATTER + r"\s*\(([^)\s]+)\)=\s*\n#\s")
 LINK = re.compile(r"\]\(#([^)\s]+)\)")
 ROLE = re.compile(r"\{(?:eq|ref|numref)\}`(?:[^`<]*<)?([^`<>]+)>?`")
 REL_HREF = re.compile(r"\\href\{/")
@@ -723,9 +725,28 @@ def clear_failures() -> list[str]:
         return ["clear left a stage with a read-only folder in place"] if stage_dir.exists() else []
 
 
+def title_label_failures() -> list[str]:
+    """Failures of finding a page's title label, with and without front matter before it."""
+    cases = {
+        "a title label": ("(sec:A)=\n# A\n\nText.\n", "sec:A"),
+        "a title label after front matter": ("---\nmath:\n  '\\x': 'y'\n---\n(sec:A)=\n# A\n", "sec:A"),
+        "a section label, not the title's": ("# A\n\n(sec:B)=\n## B\n", None),
+        "front matter, then a heading with no label": ("---\ntitle: T\n---\n# A\n\n(sec:B)=\n## B\n", None),
+    }
+    failures = []
+    for name, (page, want) in cases.items():
+        m = PAGE_TITLE_LABEL.match(page)
+        if (m.group(1) if m else None) != want:
+            failures.append(f"{name}: found {m.group(1) if m else None}, not {want}")
+    m = TITLE_LABEL.match("---\nmath: {}\n---\n(fact:f)=\n# F\n")
+    if not m or m.group(1) != "fact:f":
+        failures.append("a Math Fact's title label after front matter was not found")
+    return failures
+
+
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
-    failures = (fact_failures() + web_only_failures() + margin_failures() + link_words_failures() + href_failures()
+    failures = (fact_failures() + web_only_failures() + margin_failures() + link_words_failures() + title_label_failures() + href_failures()
                 + url_failures() + clear_failures())
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
