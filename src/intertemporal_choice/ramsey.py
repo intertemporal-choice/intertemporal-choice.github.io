@@ -4,7 +4,7 @@ The notebook, content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb, shows 
 the loci where consumption and capital per efficiency unit stop changing, the saddle path found
 by time elimination, and the paths that start off it. It computes them with its own functions and
 passes the numbers here. This module only draws, in the letters the book prints: k and c per
-efficiency unit, the steady state ǩ, the golden rule k̿, productivity growth φ.
+efficiency unit, the steady state k̄, the golden rule k̿, productivity growth g.
 
 `python -m intertemporal_choice --self-test` runs `self_test`.
 """
@@ -14,10 +14,10 @@ import numpy as np
 from intertemporal_choice.notation import tex
 
 # Labels are written with the book's macros and spelled out by notation.tex, so the figures print
-# whatever the book prints. These two stay Unicode, in italic text: mathtext sets the check of
-# \check{k} beside the k, not above it.
-STEADY = "\u01e9"        # ǩ
-GOLDEN = "k\u033f"       # k̿, k with a double bar
+# whatever the book prints: the steady state is the registry's \Steady, a bar. The golden rule stays
+# Unicode, in italic text, as the figures have printed it.
+STEADY = tex(r"$\Steady{\kap}$")   # k̄
+GOLDEN = "k\u033f"                 # k̿, k with a double bar
 
 
 def _axes(ax, k_max, c_max):
@@ -37,9 +37,9 @@ def _tick(ax, k, label):
 
 def draw_loci(ax, k, loci, golden=None, c_max=None):
     """The kdot = 0 curve and the cdot/c = 0 line of each economy in `loci`, a dict from its label
-    (such as tex(r"$\\ptyGro$ low")) to (c on the kdot = 0 curve at each k, its steady state ǩ). The first
+    (such as tex(r"$\\ptyGro$ low")) to (c on the kdot = 0 curve at each k, its steady state k̄). The first
     economy is drawn solid and labeled to the right of its lines, the others dashed and labeled to
-    the left, so that no label crosses a line. The first economy's steady state is marked ǩ on the
+    the left, so that no label crosses a line. The first economy's steady state is marked k̄ on the
     axis; `golden`, if given, is its golden rule k̿, marked on the axis with a dotted line up to the
     top of its curve."""
     k_max = k[-1]
