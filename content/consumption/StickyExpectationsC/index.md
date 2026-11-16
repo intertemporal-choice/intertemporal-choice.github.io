@@ -7,7 +7,7 @@ reproduces the results of the paper this section draws on.
 
 The figures in this section are drawn by its [figure notebook](StickyExpectationsC.ipynb),
 which takes the consumption function from the [HARK](https://docs.econ-ark.org/) toolkit; the
-parameters can be changed there and the figures redrawn.
+parameters can be changed there and the figures redrawn; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) to run it without installing anything.
 
 Consider a consumer subject to the dynamic budget constraint
 
