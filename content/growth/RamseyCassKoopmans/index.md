@@ -9,7 +9,7 @@ The economy has a perfectly competitive production sector that uses a Cobb-Dougl
 
 ```{math}
 \begin{gathered}\begin{aligned}
-                   \YLvl & =  \FFunc(\KLvl,\Labor) = \KLvl^{\kapShare}(\PtyLab \Labor)^{1-\kapShare}
+                   \YLvl & =  \FFunc(\KLvl,\LLvl) = \KLvl^{\kapShare}(\PtyLab \LLvl)^{1-\kapShare}
 \end{aligned}\end{gathered}
 ```
 
@@ -21,7 +21,7 @@ States and controls are a function of time, but putting time subscripts on every
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{\Labor}/\Labor & =  \PopnGroRte
+  \dot{\LLvl}/\LLvl & =  \PopnGroRte
 \end{aligned}\end{gathered}
 ```
 
@@ -38,10 +38,10 @@ produce perpetually more as time goes by with the same amount of
 physical capital.
 
 :::{margin}
-This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\FFunc(\PtyLab \KLvl,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \FFunc(\KLvl,\Labor)` ('Hicks-neutral'). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
+This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\FFunc(\PtyLab \KLvl,\LLvl)` ('Solow-neutral'), or output, {math}`\PtyLab \FFunc(\KLvl,\LLvl)` ('Hicks-neutral'). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
 :::
 
-The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
+The quantity {math}`\PtyLab \LLvl` is known as the number of 'efficiency units' of labor in the economy.
 
 Aggregate capital accumulates according to
 
@@ -53,17 +53,17 @@ Aggregate capital accumulates according to
 \end{aligned}\end{gathered}
 ```
 
-Lower case variables are the upper case version divided by efficiency units, so {math}`\yNrm = \YLvl/(\PtyLab \Labor) = (\KLvl/\PtyLab \Labor)^{\kapShare} = \kap^{\kapShare}`. Since {math}`\kap = \KLvl/(\PtyLab \Labor)`,
+Lower case variables are the upper case version divided by efficiency units, so {math}`\yNrm = \YLvl/(\PtyLab \LLvl) = (\KLvl/\PtyLab \LLvl)^{\kapShare} = \kap^{\kapShare}`. Since {math}`\kap = \KLvl/(\PtyLab \LLvl)`,
 
 :::{margin}
 NOT per-capita; this is required for '[balanced growth](#sec:RCK-SteadyState)'.
 :::
 
 ```{math}
-\dot{\kap}/\kap = \dot{\KLvl}/\KLvl - \dot{\PtyLab}/\PtyLab - \dot{\Labor}/\Labor = \dot{\KLvl}/\KLvl - (\PtyGroRte +\PopnGroRte),
+\dot{\kap}/\kap = \dot{\KLvl}/\KLvl - \dot{\PtyLab}/\PtyLab - \dot{\LLvl}/\LLvl = \dot{\KLvl}/\KLvl - (\PtyGroRte +\PopnGroRte),
 ```
 
-so dividing {eq}`eq:Kdotlevel` by {math}`\PtyLab \Labor` and using it gives
+so dividing {eq}`eq:Kdotlevel` by {math}`\PtyLab \LLvl` and using it gives
 
 ```{math}
 :label: eq:RCK-kdot
@@ -91,10 +91,10 @@ This objective counts each date's per capita utility once, as {cite:t}`blanchard
 ```{math}
 :label: eq:RCK-maxprob
 
-\max \int_{0}^{\infty} \left(\frac{(\CLvl/\Labor)^{1-\CRRA}}{1-\CRRA}\right) e^{-\discRte  t}\,dt .
+\max \int_{0}^{\infty} \left(\frac{(\CLvl/\LLvl)^{1-\CRRA}}{1-\CRRA}\right) e^{-\discRte  t}\,dt .
 ```
 
-But {math}`\CLvl/\Labor = \PtyLab (\CLvl/\PtyLab \Labor)= \PtyLab \cNrm`. Recall that for a variable growing at rate {math}`\PtyGroRte`,
+But {math}`\CLvl/\LLvl = \PtyLab (\CLvl/\PtyLab \LLvl)= \PtyLab \cNrm`. Recall that for a variable growing at rate {math}`\PtyGroRte`,
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -108,7 +108,7 @@ so if the economy started off in period 0 with productivity {math}`\PtyLab_{0}`,
 :label: eq:cRat
 
 \begin{gathered}\begin{aligned}
-  \CLvl/\Labor & =  \cNrm\PtyLab   \\
+  \CLvl/\LLvl & =  \cNrm\PtyLab   \\
                & =  \cNrm\PtyLab _{0}e^{\PtyGroRte t}. 
 \end{aligned}\end{gathered}
 ```
@@ -188,7 +188,7 @@ Ramsey with an explanation attributed to Keynes.
 It is just like [the Euler equation in the perfect foresight CRRA model](#eq:PFCRRA-cgrow), except that now the relevant interest rate can vary over
 time as {math}`\fFunc^{\prime}(\kap)` varies.
 
-Since per capita consumption is {math}`\CLvl/\Labor = \cNrm \PtyLab`, it grows at {math}`\dot{\cNrm}/\cNrm + \PtyGroRte = \CRRA^{-1}(\fFunc^{\prime}(\kap)-(\PopnGroRte+\deprRte)-\discRte)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth, the [Euler equation](#eq:cdotOc) with {math}`\PtyGroRte=0`. Productivity growth matters only through {math}`\kap`.
+Since per capita consumption is {math}`\CLvl/\LLvl = \cNrm \PtyLab`, it grows at {math}`\dot{\cNrm}/\cNrm + \PtyGroRte = \CRRA^{-1}(\fFunc^{\prime}(\kap)-(\PopnGroRte+\deprRte)-\discRte)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth, the [Euler equation](#eq:cdotOc) with {math}`\PtyGroRte=0`. Productivity growth matters only through {math}`\kap`.
 
 (sec:RCK-SteadyState)=
 ## The Steady State
