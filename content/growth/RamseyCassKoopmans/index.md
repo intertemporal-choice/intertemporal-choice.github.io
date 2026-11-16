@@ -35,11 +35,13 @@ and {math}`\PtyLab` is an index of labor productivity that grows at rate
 
 Thus, technological progress allows each worker to
 produce perpetually more as time goes by with the same amount of
-physical capital. The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
+physical capital.
 
 :::{margin}
 This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\ProdFunc(\PtyLab \Kap,\Labor)` ('Solow-neutral'), or output, {math}`\PtyLab \ProdFunc(\Kap,\Labor)` ('Hicks-neutral'). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
 :::
+
+The quantity {math}`\PtyLab \Labor` is known as the number of 'efficiency units' of labor in the economy.
 
 Aggregate capital accumulates according to
 
