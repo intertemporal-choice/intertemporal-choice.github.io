@@ -1,9 +1,11 @@
 (sec:Durables)=
 # Durables
 
-A durable good is one that provides utility over multiple periods rather than being consumed immediately. The consumer here derives utility from nondurable consumption {math}`c_{t}` as well as from a stock of durable goods {math}`d_{t}`.[^durables-sources] The consumer's goal is to
+A durable good is one that provides utility over multiple periods rather than being consumed immediately. The consumer here derives utility from nondurable consumption {math}`c_{t}` as well as from a stock of durable goods {math}`d_{t}`. The consumer's goal is to
 
-[^durables-sources]: The basic ideas in this section are derived from {cite:t}`mankiw:durgoods`. See {cite:t}`cdSs` for further discussion of the frictionless model and empirical estimates, as well as a model that incorporates transactions costs.
+:::{margin}
+The basic ideas in this section are derived from {cite:t}`mankiw:durgoods`. See {cite:t}`cdSs` for further discussion of the frictionless model and empirical estimates, as well as a model that incorporates transactions costs.
+:::
 
 ```{math}
 \max \sum_{s=t}^{T} \Discount^{s-t} \uFunc(c_{s},d_{s})
@@ -107,9 +109,11 @@ but the Envelope theorem tells us to ignore all the terms that involve {math}`\p
 \vFunc_{t}^{{m}} = \Rfree \Discount \vFunc_{t+1}^{{m}}
 ```
 
-Applying the same Envelope theorem logic for {math}`d_{t-1}` yields:[^derivative-note]
+Applying the same Envelope theorem logic for {math}`d_{t-1}` yields:
 
-[^derivative-note]: Both here and in {eq}`eq:vmt`, the derivative {math}`\vFunc^{d}_{t}` should be understood as a differentiation with respect to {math}`d_{t-1}`.
+:::{margin}
+Both here and in {eq}`eq:vmt`, the derivative {math}`\vFunc^{d}_{t}` should be understood as a differentiation with respect to {math}`d_{t-1}`.
+:::
 
 ```{math}
 :label: eq:vdvsvx
@@ -196,6 +200,6 @@ c_{t-1}]\\
 
 Assuming {math}`\delta < 1`, this equation implies that *spending on durable goods should be more variable than spending on nondurable goods*. For goods with a low depreciation rate, spending should be much more variable. This is true because the ratio of the stock of durables to income is much larger than the ratio of the average level of spending on durables to income. Consider housing: a house might be worth 3 times permanent income, so fluctuations in permanent income mean perpetually buying new "chunks" of house (when {math}`P` rises) or selling off portions (when {math}`P` falls). This model abstracts from transactions costs, which are important in reality; durables spending is in fact empirically much more volatile than nondurables spending.
 
-A further implication of this model is that the degree of correlation between nondurables spending growth and durables spending growth depends on the frequency under consideration. For a given quarterly depreciation rate (say, 5 percent per quarter), the durable good will have almost completely depreciated over the course of 10 years = 40 quarters because {math}`0.95^{40}=0.12`. According to the model, over an interval long enough for the durable to have completely depreciated, the rate of growth of spending on the durable should match the rate of growth of spending of the nondurable, because over such a long interval they are really both nondurable.
+A further implication of this model is that the degree of correlation between nondurables spending growth and durables spending growth depends on the frequency under consideration. For a given quarterly depreciation rate (say, 5 percent per quarter), the durable good will have almost completely depreciated over the course of 10 years = 40 quarters because {math}`0.95^{40} \approx 0.13`. According to the model, over an interval long enough for the durable to have completely depreciated, the rate of growth of spending on the durable should match the rate of growth of spending of the nondurable, because over such a long interval they are really both nondurable.
 
 Some evidence on this proposition is provided in the Jupyter notebook available [here](https://github.com/econ-ark/DemARK/blob/main/notebooks/Durables-vs-Nondurables-At-Low-And-High-Frequencies.ipynb).

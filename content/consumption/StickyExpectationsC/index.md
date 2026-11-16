@@ -43,9 +43,11 @@ We will assume that the consumer behaves according to the consumption rule
 \cLev_{t} = \underbrace{(\bLev_{t}+(\tShkEmp_{t}-1)\pLevBF_{t}+\hLev_{t})}_{\equiv \wAllLev_{t}}\underbrace{(\rfree/\Rfree)}_{\equiv \MPC},
 ```
 
-where {math}`\MPC` is the "marginal propensity to consume" out of total wealth {math}`\wAllLev`.[^pih-derivation]
+where {math}`\MPC` is the "marginal propensity to consume" out of total wealth {math}`\wAllLev`.
 
-[^pih-derivation]: This is the optimal consumption function for a utility-maximizing consumer with {math}`\Rfree \Discount = 1` if that consumer has quadratic utility ({cite:t}`hallRandomWalk`) or if the consumer has CRRA utility and perfect foresight and anticipates {math}`\tShkEmp_{t+n}=\pShk_{t+n}=1~\forall~n>0`. See the [consumption function](#sec:ConsumptionFunction) section for a derivation of this consumption function under quadratic utility, and the [perfect foresight CRRA](#sec:PerfForesightCRRA) section for the derivation in the perfect foresight CRRA case. {cite:t}`deatonUnderstandingC` argues that the "Permanent Income Hypothesis" should be **defined** as the hypothesis that consumption is determined according to {eq}`eq:DeatonPIH`; but this differs sharply from {cite:t}`friedmanATheory`'s definition, and has not become universally accepted.
+:::{margin}
+This is the optimal consumption function, with {math}`\Rfree \Discount = 1`, for a consumer with quadratic utility ({cite:t}`hallRandomWalk`) or with CRRA utility and perfect foresight who anticipates {math}`\tShkEmp_{t+n}=\pShk_{t+n}=1~\forall~n>0`. The [consumption function](#sec:ConsumptionFunction) section derives it under quadratic utility, and the [perfect foresight CRRA](#sec:PerfForesightCRRA) section in the CRRA case. {cite:t}`deatonUnderstandingC` argues that the "Permanent Income Hypothesis" should be **defined** as the hypothesis that consumption is determined according to {eq}`eq:DeatonPIH`; but this differs sharply from {cite:t}`friedmanATheory`'s definition, and has not become universally accepted.
+:::
 
 Under these circumstances, the [random walk](#sec:RandomWalk) section shows that consumption will follow a random walk,
 
@@ -61,9 +63,11 @@ Now assume that the economy is populated by a set of measure one of consumers in
 \CLev_{t} = \int_{0}^{1} \cLev_{t}^{i} di = \int_{0}^{1} (\rfree/\Rfree)  \wAllLev_{t}^{i} di = \WAllLev_{t} \MPC.
 ```
 
-This equation implies that an aggregate version of equation {eq}`eq:StickyE-rwc` holds,[^aggregation-linearity]
+This equation implies that an aggregate version of equation {eq}`eq:StickyE-rwc` holds,
 
-[^aggregation-linearity]: The crucial feature of the model that allows us to aggregate analytically is the linearity of the consumption rule in {math}`p, b,` and {math}`\TShkEmp`.
+:::{margin}
+The crucial feature of the model that allows us to aggregate analytically is the linearity of the consumption rule in {math}`p, b,` and {math}`\TShkEmp`.
+:::
 
 ```{math}
 \Delta \CLev_{t+1} = \error_{t+1}.
@@ -114,11 +118,15 @@ We need a notation to represent sets of consumers defined by the period of their
 
 Dropping the {math}`i` superscript for notational simplicity, the level of consumption per capita that would prevail if all consumers were to update in period {math}`t` is {math}`\CLev_{t|=t} = \int_{0}^{1} \cLev_{t|=t} di`. But since the set of consumers who updated was randomly selected from the population, the average level of consumption-per-capita for the updaters must equal the average level of consumption-per-capita that would characterize the population as a whole if everyone in the economy were to update. This is the key step that allows aggregation to work analytically.
 
-In periods when expectations are not updated, the consumer continues to spend the same amount as in the most recent period when his expectations **were** updated.[^random-walk-assumption] If the economy is large the proportion of consumers who update their expectations every period will be {math}`\Pi`.[^non-updaters-integral] Average consumption among those who are not updating in the current period (for whom {math}`1-\pi_{t}=1`) is then
+In periods when expectations are not updated, the consumer continues to spend the same amount as in the most recent period when his expectations **were** updated. If the economy is large the proportion of consumers who update their expectations every period will be {math}`\Pi`. Average consumption among those who are not updating in the current period (for whom {math}`1-\pi_{t}=1`) is then
 
-[^random-walk-assumption]: This makes sense because under the {cite:t}`hallRandomWalk` assumptions the expected change in consumption is zero under our assumption that {math}`\Rfree \Discount=1`.
+:::{margin}
+This makes sense because under the {cite:t}`hallRandomWalk` assumptions the expected change in consumption is zero under our assumption that {math}`\Rfree \Discount=1`.
+:::
 
-[^non-updaters-integral]: For consumers who are not updating at date {math}`t`, {math}`\cLev_{t} > 0` but {math}`\pi_{t} = 0`, so the integral produces the sum of consumption among only those {math}`i` who are updating in period {math}`t`.
+:::{margin}
+For consumers who are not updating at date {math}`t`, {math}`\cLev_{t} > 0` but {math}`\pi_{t} = 0`, so the integral produces the sum of consumption among only those {math}`i` who are updating in period {math}`t`.
+:::
 
 ```{math}
 \CLev_{t|\tau_{t} < t} = (1-\Pi)^{-1} \int_{0}^{1} (1-\pi_{t}) \cLev_{t} di = \CLev_{t-1}

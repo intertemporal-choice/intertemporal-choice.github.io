@@ -14,12 +14,14 @@ by local builds.
     code only, so a notebook that has not changed is not re-run. A change to the shared
     package, the data snapshots or the locked environment would reuse stale outputs, though:
     every notebook declares `execute: {depends_on_env: [IC_EXEC_ENV]}`, and this script sets
-    IC_EXEC_ENV to a hash of uv.lock, src/**/*.py and data/**, which puts all three into the
-    cache key.
+    IC_EXEC_ENV to a hash of uv.lock, src/**/*.py, data/** and every chapter's own data/
+    folder (content/<part>/<Chapter>/data/**), which puts them all into the cache key.
   - A preflight lint refuses to build when a notebook breaks the conventions the checks rely
-    on: it must sit beside its chapter as content/<part>/<Chapter>/<Chapter>.ipynb, declare the
+    on: it must sit beside its chapter as content/<part>/<Chapter>/<Chapter>.ipynb (or be that
+    notebook's source, <Chapter>_SST.ipynb, which code/notebook_math.py turns into it), declare the
     python3 kernel, declare depends_on_env in the frontmatter of its first cell, begin with the
-    bootstrap cell (so a downloaded copy runs anywhere), and the figures it saves must be
+    bootstrap cell (so a downloaded copy runs anywhere; the HARK one if it imports HARK, which is
+    not part of the package's core), and the figures it saves must be
     exactly the files in its figures/ folder (a saved figure that was not committed, or a file
     no code draws, fails here rather than in the built site).
 
@@ -56,18 +58,44 @@ DEFAULT_ARGS = ["--html", "--strict"]
 STARTUP_SECONDS = 60
 ENV_VAR = "IC_EXEC_ENV"
 # What the notebooks' outputs depend on besides their own cells.
-HASHED = [("uv.lock", "*"), ("src", "**/*.py"), ("data", "**/*")]
+# A chapter keeps the data its notebook reads in its own folder (everything to do with a chapter
+# lives there), so those files count too.
+HASHED = [("uv.lock", "*"), ("src", "**/*.py"), ("data", "**/*"), ("content", "*/*/data/**/*")]
 
-# The first code cell of every notebook, verbatim: a downloaded copy installs what it needs.
-BOOTSTRAP = """\
-# Run anywhere: install the book's package (it brings econ-ark, numpy and matplotlib) if it
+# The first code cell of every notebook, verbatim: a downloaded copy installs what it needs. The
+# package's core has no HARK (see pyproject.toml), so a notebook that imports HARK, or the Aiyagari
+# code built on it, begins with BOOTSTRAP_HARK, which installs the `hark` add-on too; every other
+# notebook begins with BOOTSTRAP. Which one is read from the notebook's imports (`bootstrap`).
+PACKAGE = "git+https://github.com/intertemporal-choice/intertemporal-choice.github.io"
+# With pip (Colab, Binder, most environments) it installs with %pip; in a Python without pip, as
+# uv makes, it installs with uv; with neither, it says so instead of failing on "No module named pip".
+NO_INSTALLER = "Neither pip nor uv can install the book's package here: choose a kernel whose Python has pip, or the course's own environment."
+BOOTSTRAP = f"""\
+# Run anywhere: install the book's package (it brings numpy, scipy and matplotlib) if it
 # is missing. Inside the book's own environment this does nothing.
 try:
     import intertemporal_choice
 except ImportError:
-    %pip install -q git+https://github.com/intertemporal-choice/intertemporal-choice.github.io"""
+    import importlib.util, sys
+    if importlib.util.find_spec("pip"):
+        %pip install -q {PACKAGE}
+    else:  # a Python without pip, as uv makes: install with uv, or say what to do
+        !uv pip install -q --python {{sys.executable}} {PACKAGE} || echo "{NO_INSTALLER}\""""
+BOOTSTRAP_HARK = f"""\
+# Run anywhere: install the book's package with its HARK add-on if either is missing.
+# Inside the book's own environment this does nothing.
+try:
+    import intertemporal_choice, HARK, aiyagari1994qje
+except ImportError:
+    import importlib.util, sys
+    if importlib.util.find_spec("pip"):
+        %pip install -q "intertemporal-choice[hark] @ {PACKAGE}"
+    else:  # a Python without pip, as uv makes: install with uv, or say what to do
+        !uv pip install -q --python {{sys.executable}} "intertemporal-choice[hark] @ {PACKAGE}" || echo "{NO_INSTALLER}\""""
+USES_HARK = re.compile(r"^[ \t]*(?:from|import)[ \t]+(?:HARK|aiyagari1994qje)\b", re.M)
 
 FRONTMATTER = re.compile(r"\A\s*---\n(.*?)\n---", re.S)
+SST = "_SST"  # <Chapter>_SST.ipynb, the source of <Chapter>.ipynb (code/notebook_math.py)
 SAVE = re.compile(r"\bsave\(\s*[^,()]+,\s*[\"']([^\"']+)[\"']")
 
 
@@ -108,15 +136,25 @@ def frontmatter(nb: dict) -> dict:
     return (yaml.safe_load(m.group(1)) or {}) if m else {}
 
 
+def bootstrap(nb: dict) -> str:
+    """The cell a notebook must begin with: BOOTSTRAP_HARK if a later code cell imports HARK."""
+    code = [source(c) for c in nb.get("cells") or [] if c.get("cell_type") == "code"]
+    return BOOTSTRAP_HARK if any(USES_HARK.search(s) for s in code[1:]) else BOOTSTRAP
+
+
 def lint(root: Path, rel: Path, nb: dict) -> list[str]:
     """Why a notebook would build wrongly, or break the checks the build relies on."""
     problems = []
     folder = rel.parent
-    if rel.stem != folder.name or not (root / folder / "index.md").is_file() or len(folder.parts) != 3:
+    sst = rel.stem.endswith(SST)
+    name = rel.stem[: -len(SST)] if sst else rel.stem
+    if name != folder.name or not (root / folder / "index.md").is_file() or len(folder.parts) != 3:
         problems.append(
             f"{rel}: a notebook lives beside its chapter, as content/<part>/<Chapter>/<Chapter>.ipynb"
-            " next to that chapter's index.md"
+            " next to that chapter's index.md (or is its source, <Chapter>_SST.ipynb)"
         )
+    if sst and not (root / folder / f"{name}.ipynb").is_file():
+        problems.append(f"{rel}: a source notebook needs its student notebook, {name}.ipynb: run code/notebook_math.py")
     if ((nb.get("metadata") or {}).get("kernelspec") or {}).get("name") != "python3":
         problems.append(f"{rel}: the notebook's kernelspec must be python3")
     depends = ((frontmatter(nb).get("execute") or {}).get("depends_on_env")) or []
@@ -126,8 +164,9 @@ def lint(root: Path, rel: Path, nb: dict) -> list[str]:
             f" execute: depends_on_env: [{ENV_VAR}]"
         )
     code = [c for c in nb.get("cells") or [] if c.get("cell_type") == "code"]
-    if not code or source(code[0]).strip() != BOOTSTRAP.strip():
-        problems.append(f"{rel}: the first code cell must be the bootstrap cell (build_site.BOOTSTRAP)")
+    if not code or source(code[0]).strip() != bootstrap(nb).strip():
+        which = "BOOTSTRAP_HARK, since it imports HARK" if bootstrap(nb) == BOOTSTRAP_HARK else "BOOTSTRAP"
+        problems.append(f"{rel}: the first code cell must be the bootstrap cell (build_site.{which})")
     saved = {name for c in code for name in SAVE.findall(source(c))}
     figures = root / folder / "figures"
     present = {p.stem for p in figures.glob("*.png")} if figures.is_dir() else set()
@@ -275,7 +314,8 @@ def self_test() -> bool:
         (chapter / "Test.ipynb").write_text(json.dumps(good_notebook()))
         if env_hash(root) != base:
             failures.append("env hash changed on a __pycache__ file or a notebook")
-        for path, text in [("uv.lock", "lock 2"), ("src/pkg/mod.py", "x = 2"), ("data/a.csv", "1")]:
+        for path, text in [("uv.lock", "lock 2"), ("src/pkg/mod.py", "x = 2"), ("data/a.csv", "1"),
+                           ("content/part/Test/data/b.csv", "1"), ("content/part/Test/data/b.csv", "2")]:
             (root / path).parent.mkdir(parents=True, exist_ok=True)
             (root / path).write_text(text)
             if env_hash(root) == base:
@@ -284,6 +324,11 @@ def self_test() -> bool:
         if preflight(root):
             failures.append(f"preflight rejected a good notebook: {preflight(root)}")
         rel = Path("content/part/Test/Test.ipynb")
+        hark = good_notebook()
+        hark["cells"][1]["source"] = BOOTSTRAP_HARK
+        hark["cells"][2]["source"] = "from HARK.utilities import plot_funcs\n" + hark["cells"][2]["source"]
+        if lint(root, rel, hark):
+            failures.append(f"preflight rejected a good notebook that uses HARK: {lint(root, rel, hark)}")
 
         def spoiled(mutate) -> dict:
             nb = good_notebook()
@@ -297,6 +342,8 @@ def self_test() -> bool:
             "frontmatter not in the first cell": spoiled(lambda nb: nb["cells"].insert(0, {"cell_type": "markdown", "source": "intro"})),
             "no bootstrap cell": spoiled(lambda nb: nb["cells"].pop(1)),
             "altered bootstrap cell": spoiled(lambda nb: nb["cells"][1].update(source=BOOTSTRAP.replace("-q ", ""))),
+            "HARK imported under the core's bootstrap cell": spoiled(lambda nb: nb["cells"][2].update(source="import aiyagari1994qje\n" + source(nb["cells"][2]))),
+            "the HARK bootstrap cell without HARK": spoiled(lambda nb: nb["cells"][1].update(source=BOOTSTRAP_HARK)),
             "a saved figure that is not committed": spoiled(lambda nb: nb["cells"][2].update(source='style.save(fig, "Test")\nstyle.save(g, "Other")')),
             "a figure file no cell draws": spoiled(lambda nb: nb["cells"][2].update(source="x = 1")),
         }
@@ -306,9 +353,12 @@ def self_test() -> bool:
         for name, where in {
             "a notebook not named after its folder": Path("content/part/Test/Other.ipynb"),
             "a notebook outside a chapter folder": Path("content/part/Test.ipynb"),
+            "a source notebook with no student notebook": Path("content/part/Test/Other_SST.ipynb"),
         }.items():
             if not lint(root, where, good_notebook()):
                 failures.append(f"preflight accepted {name}")
+        if lint(root, Path("content/part/Test/Test_SST.ipynb"), good_notebook()):
+            failures.append("preflight rejected a chapter's source notebook beside its student notebook")
         (chapter / "Test.ipynb").write_text("{not json")
         if not preflight(root):
             failures.append("preflight accepted a file that is not a notebook")
