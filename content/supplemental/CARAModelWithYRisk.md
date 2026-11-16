@@ -1,9 +1,11 @@
 (sec:CARAModelWithYRisk)=
 # Consumption with Constant Absolute Risk Aversion (CARA) Utility
 
-Consider the optimization problem of a consumer with a constant absolute risk aversion instantaneous utility function {math}`\uFunc(\CRat)= -(1/\CARA) e^{-\CARA \CRat}` implying {math}`\uFunc^{\prime}(\CRat) = e^{-\CARA \CRat}` facing an interest rate that is constant at {math}`\rfree=\Rfree-1`.[^caballero-ref] The consumer's optimization problem is
+Consider the optimization problem of a consumer with a constant absolute risk aversion instantaneous utility function {math}`\uFunc(\CRat)= -(1/\CARA) e^{-\CARA \CRat}` implying {math}`\uFunc^{\prime}(\CRat) = e^{-\CARA \CRat}` facing an interest rate that is constant at {math}`\rfree=\Rfree-1`. The consumer's optimization problem is
 
-[^caballero-ref]: A problem like this was considered in a well-known paper by {cite:t}`caballero:jme`.
+:::{margin}
+A problem like this was considered in a well-known paper by {cite:t}`caballero:jme`.
+:::
 
 ```{math}
 :label: eq:CARA-maxprob
@@ -94,9 +96,11 @@ Define {math}`\kappa = \log (\Rfree\Discount)^{1/\CARA} + \CARA \sigma^{2}_{\PSh
 \CRat_{t+1} = \CRat_{t} + \PShk_{t+1} + \kappa.
 ```
 
-The expected present discounted value of consumption is[^pshk-disappears]
+The expected present discounted value of consumption is
 
-[^pshk-disappears]: The {math}`\PShk_{t+n}` terms disappear when expectations are taken.
+:::{margin}
+The {math}`\PShk_{t+n}` terms disappear when expectations are taken.
+:::
 
 ```{math}
 \begin{aligned}

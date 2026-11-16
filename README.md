@@ -63,12 +63,18 @@ Dynamic stochastic general equilibrium frameworks:
 - The Brock-Mirman stochastic growth model
 - Real business cycle theory
 
-### Numerical
+### Mathematical Appendices
 
 Derivations and methods useful for macroeconomics:
 
 - Useful facts for graduate macroeconomics
 - Aggregation methods
+
+### Chapter Appendices
+
+Each chapter's appendix: the derivations of results the chapter states without proof, on the website and in the PDF:
+
+- Consumption under perfect foresight and CRRA utility
 
 ### Supplemental Notes
 
@@ -89,7 +95,7 @@ Notes that supplement the main chapters, on the website only and not in the PDF:
 
 ## Acknowledgments
 
-Development supported by the [Econ-ARK](https://econ-ark.org/) project with funding from the Alfred P. Sloan Foundation.
+Development supported by the [Econ-ARK](https://econ-ark.org/) project with funding from the Alfred P. Sloan Foundation and T. Rowe Price.
 
 :::{seealso}
 The [HARK](https://docs.econ-ark.org/) toolkit provides computational implementations of many models covered in these notes, including buffer-stock consumption, portfolio choice, and lifecycle models.

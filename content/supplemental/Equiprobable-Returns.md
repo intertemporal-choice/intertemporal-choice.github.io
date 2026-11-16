@@ -170,11 +170,13 @@ the return shocks as:
 ```
 
 where {math}`\FFunc(\tilde{\Risky}_{1},\tilde{\Risky}_{2})` is the cumulative distribution
-function for a multivariate lognormal with the covariance matrix defined by {eq}`eq:CovMat`.[^YO5HNPAPo4]
+function for a multivariate lognormal with the covariance matrix defined by {eq}`eq:CovMat`.
+
+:::{margin}
+Under the lognormal assumption, {math}`\underline{\tilde{\Risky}}_{i}=0` and {math}`\bar{\Risky}_{i}=\infty` for both shocks {math}`i \in \{1,2\}`.
+:::
 
 Standard numerical computation software can compute this double integral, but at such a slow speed as to be unusable for many purposes.
-
-[^YO5HNPAPo4]: Under the lognormal assumption, {math}`\underline{\tilde{\Risky}}_{i}=0` and {math}`\bar{\Risky}_{i}=\infty` for both shocks {math}`i \in \{1,2\}`.
 
 Computation of the expectation can be massively speeded up by
 advance construction of a numerical approximation to
@@ -238,6 +240,8 @@ at an evenly-spaced grid of points (blue dots).
 Careful examination indicates that the numerical approximation is quite close to the full numerical solution, while the CV approximation diverges substantially from the numerical answer. The tradeoff is that the
 equiprobable solution is about 2000 times slower than the CV approximation, while the direct solution is more than 100 times slower
 than the equiprobable solution. Depending on the requirements of the problem being examined, these differences in
-efficiency can make a tremendous difference in the feasibility of a research project.[^hnigNljL7a]
+efficiency can make a tremendous difference in the feasibility of a research project.
 
-[^hnigNljL7a]: Details can be found in the Mathematica notebook associated with this section.
+:::{margin}
+Details can be found in the Mathematica notebook associated with this section.
+:::

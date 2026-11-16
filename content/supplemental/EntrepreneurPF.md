@@ -32,9 +32,11 @@ subject to the transition equation for capital,
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\DeprFac = (1-\depr)` is the amount of capital left after one period of depreciation at rate {math}`\depr`.[^timing-note] {math}`\vFirm_{t}` is the value of the profit-maximizing firm: If capital markets are efficient this is the equity value that the firm would command if somebody wanted to buy it.
+where {math}`\DeprFac = (1-\depr)` is the amount of capital left after one period of depreciation at rate {math}`\depr`. {math}`\vFirm_{t}` is the value of the profit-maximizing firm: If capital markets are efficient this is the equity value that the firm would command if somebody wanted to buy it.
 
-[^timing-note]: There are some small differences between the formulation of the model here and in the [marginal q model](#sec:qModel) section. Here, investment costs are paid at the time of investment and the depreciation factor applies to {math}`(\kap_{t}+\inv_{t})` rather than just {math}`\kap_{t}`. These changes simplify the computational solution without changing any key results.
+:::{margin}
+There are some small differences between the formulation of the model here and in the [marginal q model](#sec:qModel) section. Here, investment costs are paid at the time of investment and the depreciation factor applies to {math}`(\kap_{t}+\inv_{t})` rather than just {math}`\kap_{t}`. These changes simplify the computational solution without changing any key results.
+:::
 
 The firm's Bellman equation can be written:
 
@@ -378,9 +380,11 @@ Investment is more complicated. The firm's capital stock is obviously reduced be
 
 ## Numerical Solution
 
-The solution code uses the following definitions for the production and adjustment cost functions:[^numerical-note]
+The solution code uses the following definitions for the production and adjustment cost functions:
 
-[^numerical-note]: The slight modification to the cost-of-adjustment function (relative to the formulation in the [marginal q model](#sec:qModel) section) reflects the changed timing of depreciation in {eq}`eq:kAccum` compared to the corresponding equation in the [marginal q model](#sec:qModel) section. In the continuous-time limit the two equations become the same, but the formulation here makes the representation of the problem slightly more transparent in the discrete-time computer code.
+:::{margin}
+The cost-of-adjustment function differs slightly from the [marginal q model](#sec:qModel)'s because depreciation is timed differently in {eq}`eq:kAccum`. The two coincide in the continuous-time limit; this form is more transparent in discrete-time code.
+:::
 
 ```{math}
 :label: eq:fjFuncs
@@ -391,9 +395,11 @@ The solution code uses the following definitions for the production and adjustme
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\Psi` is the firm's productivity and {math}`\labor` is the labor supplied by the entrepreneur (assumed equal to 1).[^tax-parameters]
+where {math}`\Psi` is the firm's productivity and {math}`\labor` is the labor supplied by the entrepreneur (assumed equal to 1).
 
-[^tax-parameters]: The code also includes the parameters {math}`\kPriceAfterITC` and {math}`\TaxFree` (respectively the investment cost after the Investment Tax Credit and the untaxed portion of earnings) in order to study the impact of tax policies. Both parameters are however assumed equal to 1 and thus the equations in the code are equivalent to the simpler ones described in this section.
+:::{margin}
+The code also includes the parameters {math}`\kPriceAfterITC` and {math}`\TaxFree` (respectively the investment cost after the Investment Tax Credit and the untaxed portion of earnings) in order to study the impact of tax policies. Both parameters are however assumed equal to 1 and thus the equations in the code are equivalent to the simpler ones described in this section.
+:::
 
 The policy functions are obtained using the method of *reverse shooting*, which is based on recovering for a given {math}`k_{t+1}` and {math}`\vFirm_{t+1}(k_{t+1})` the values of {math}`k_t`, {math}`i_t` and {math}`\vFirm_{t}(k_{t})` consistent with the first order conditions and transition equations.
 

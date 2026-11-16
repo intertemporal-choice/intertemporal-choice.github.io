@@ -202,10 +202,10 @@ can sustain growth only so long.
 
 The bottom line is that there are only two configurations of the model
 that are capable of generating perpetual growth in a way that makes any
-sense: 1.b. (the Rebelo {math}`AK` model) and 2.a.ii.
+sense: 1.b. (the Rebelo {math}`AK` model) and 2.b.ii.
 
 :::{margin}
-Case 2.a.ii, the increasing-returns growth models, is taken up in the [Romer (1986) model](#sec:Romer86) section.
+Case 2.b.ii, the increasing-returns growth models, is taken up in the [Romer (1986) model](#sec:Romer86) section.
 :::
 
 What this means is that any model that aims to permit perpetual

@@ -6,9 +6,11 @@ presented a model of increasing returns in which there was a stable
 positive equilibrium growth rate that resulted from endogenous accumulation
 of knowledge. This was an important break with the existing literature,
 in which technological progress had largely been treated as completely
-exogenous.[^nAMCrIHY0T]
+exogenous.
 
-[^nAMCrIHY0T]: See also the prescient paper by {cite:t}`arrowGrowth`; Afred Marshall articulated similar ideas in the late 19th century.
+:::{margin}
+See also the prescient paper by {cite:t}`arrowGrowth`; Afred Marshall articulated similar ideas in the late 19th century.
+:::
 
 In Romer's model, firm {math}`j`'s production function is of the form
 

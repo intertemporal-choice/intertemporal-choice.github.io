@@ -1,0 +1,5 @@
+# The figure notebooks are committed with their outputs but without the metadata that
+# Jupyter rewrites on every save. `uv run python code/notebooks.py --install` sets the
+# filter up in a clone; the workflow checks that nothing is committed unstripped.
+*.ipynb filter=nbstripout
+*.ipynb diff=ipynb
