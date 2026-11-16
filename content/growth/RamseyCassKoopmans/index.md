@@ -16,7 +16,7 @@ The economy has a perfectly competitive production sector that uses a Cobb-Dougl
 to produce output using capital and labor. Labor hours (the same as population) increase exogenously at a constant rate
 
 :::{margin}
-All Roman variables are functions of time, but putting time subscripts on everything would clutter the notation, so we do it only where necessary for clarity.
+Except for the parameters, such as the growth rates {math}`\popGro` and {math}`\ptyGro`, every variable is a function of time, but putting time subscripts on everything would clutter the notation, so we do it only where necessary for clarity.
 :::
 
 ```{math}

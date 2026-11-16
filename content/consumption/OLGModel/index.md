@@ -134,7 +134,7 @@ The old at time {math}`t` are generation {math}`t-1`, so the planner weights the
 :::
 
 ```{math}
-\VLev_{t} = \beth^{-1}\Discount \uFunc(\cLev_{2,t}) + \sum_{n=0}^{\infty} \beth^{n} \vLev_{t+n}
+\VLev_{t} = \beth^{-1}\Discount \uFunc(\cLev_{2,t}) + \sum_{j=0}^{\infty} \beth^{j} \vLev_{t+j}
 ```
 
 subject to the economy's aggregate resource constraint
