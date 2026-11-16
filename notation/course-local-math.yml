@@ -7,116 +7,114 @@
 # registry row, or a name to retire. The comment on each entry says which, and how much it is used.
 # Built 2026-11-09T11:15:50-05:00 from the registry at 02df18ac5e (v9.2.0), the course's definitions in
 # notation/course-macros.yml (641 macros) and the book at 249a3ed439.
+# 2026-11-16, cc:course-choice: edited for econ-ark-tools v10.0.0 (8d34f224) from the book's block at main
+# 09ee17a, applying only what is ruled; see notation/proposed/README.md.
 version: 1
 project:
   math:
-    # --- overrides (106): renderings that differ from the registry's; the course's kept until the sources are substituted
-    '\CLev': 'C'  # registry: \boldsymbol{\mathit{C}} via \CLvl; uses book 63 questions 200
+    # --- overrides (102): renderings that differ from the registry's; the course's kept until the sources are substituted
+    '\CLev': 'C'  # registry: \boldsymbol{C} via \CLvl; uses book 63 questions 200
     '\Target': '\check'  # registry: \hat via \TargetNrm; uses book 13 questions 146
-    '\Labor': 'L'  # registry: \mathrm{L}; uses book 35 questions 104
     '\CARA': '\alpha'  # registry: \upsilon [cara]; uses book 35 questions 98
-    '\pLevBF': '\mathbf{p}'  # registry: \boldsymbol{\mathit{p}} via \pLvl; uses book 80 questions 32
-    '\cLev': 'c'  # registry: \boldsymbol{\mathit{c}} via \cLvl; uses book 43 questions 46
-    '\kLev': 'k'  # registry: \boldsymbol{\mathit{k}} via \kLvl; uses book 82 questions 0
-    '\Cons': 'C'  # registry: \boldsymbol{\mathit{C}} via \CLvl; uses book 25 questions 46
-    '\Pop': 'L'  # registry: \pmb{\mathrm{N}} via \PopnLvl; uses book 3 questions 66
-    '\PLev': 'P'  # registry: \boldsymbol{\mathit{P}} via \PLvl; uses book 31 questions 30
-    '\YLev': 'Y'  # registry: \boldsymbol{\mathit{Y}} via \YLvl; uses book 4 questions 50
-    '\Inc': 'Y'  # registry: \boldsymbol{\mathit{Y}} via \YLvl; uses book 28 questions 18
-    '\cLevBF': '\mathbf{c}'  # registry: \boldsymbol{\mathit{c}} via \cLvl; uses book 42 questions 0
-    '\KLev': 'K'  # registry: \boldsymbol{\mathit{K}} via \KLvl; uses book 27 questions 10
+    '\pLevBF': '\mathbf{p}'  # registry: \boldsymbol{p} via \pLvl; uses book 80 questions 32
+    '\cLev': 'c'  # registry: \boldsymbol{c} via \cLvl; uses book 43 questions 46
+    '\kLev': 'k'  # registry: \boldsymbol{k} via \kLvl; uses book 82 questions 0
+    '\Cons': 'C'  # registry: \boldsymbol{C} via \CLvl; uses book 25 questions 46
+    '\Pop': 'L'  # registry: \boldsymbol{N} via \PopnLvl; uses book 3 questions 66
+    '\PLev': 'P'  # registry: \boldsymbol{P} via \PLvl; uses book 31 questions 30
+    '\YLev': 'Y'  # registry: \boldsymbol{Y} via \YLvl; uses book 4 questions 50
+    '\Inc': 'Y'  # registry: \boldsymbol{Y} via \YLvl; uses book 28 questions 18
+    '\cLevBF': '\mathbf{c}'  # registry: \boldsymbol{c} via \cLvl; uses book 42 questions 0
+    '\KLev': 'K'  # registry: \boldsymbol{K} via \KLvl; uses book 27 questions 10
     '\rport': '\tilde{r}'  # registry: \mathfrak{r}; uses book 30 questions 3
     '\patr': '\text{þ}_{\rfree}'  # registry: \text{\thorn}_{\rfree} via \RPRte; uses book 2 questions 26
     '\cov': '\operatorname{cov}'  # registry: \textup{cov}; uses book 16 questions 10
-    '\aLev': 'a'  # registry: \boldsymbol{\mathit{a}} via \aLvl; uses book 13 questions 12
+    '\aLev': 'a'  # registry: \boldsymbol{a} via \aLvl; uses book 13 questions 12
     '\itc': '\zeta'  # registry: \chi via \itcRte [investment-tax-credit]; uses book 12 questions 12
-    '\mLevBF': '\mathbf{m}'  # registry: \boldsymbol{\mathit{m}} via \mLvl; uses book 23 questions 0
+    '\mLevBF': '\mathbf{m}'  # registry: \boldsymbol{m} via \mLvl; uses book 23 questions 0
     '\Rport': '\tilde{R}'  # registry: \mathfrak{R}; uses book 16 questions 3
-    '\bLev': 'b'  # registry: \boldsymbol{\mathit{b}} via \bLvl; uses book 4 questions 14
+    '\bLev': 'b'  # registry: \boldsymbol{b} via \bLvl; uses book 4 questions 14
     '\ValueFunc': 'V'  # registry: \mathrm{V} via \VFunc; uses book 17 questions 0
-    '\bLevBF': '\mathbf{b}'  # registry: \boldsymbol{\mathit{b}} via \bLvl; uses book 15 questions 0
-    '\BLev': 'B'  # registry: \boldsymbol{\mathit{B}} via \BLvl; uses book 8 questions 6
-    '\MLev': 'M'  # registry: \boldsymbol{\mathit{M}} via \MLvl; uses book 0 questions 14
-    '\srate': '\varsigma'  # registry: \mathrm{sav} via \savRte [saving-rate]; uses book 1 questions 13
-    '\oLev': '\pmb{o}'  # registry: \boldsymbol{\mathit{o}} via \oLvl; uses book 13 questions 0
-    '\PopLev': '\pmb{N}'  # registry: \pmb{\mathrm{N}} via \PopnLvl; uses book 13 questions 0
-    '\WAllLev': '\mathbf{O}'  # registry: \boldsymbol{\mathit{O}} via \OLvl; uses book 9 questions 0
-    '\hLevBF': '\mathbf{h}'  # registry: \boldsymbol{\mathit{h}} via \hLvl; uses book 8 questions 0
-    '\aLevBF': '\mathbf{a}'  # registry: \boldsymbol{\mathit{a}} via \aLvl; uses book 7 questions 0
-    '\mLev': 'm'  # registry: \boldsymbol{\mathit{m}} via \mLvl; uses book 0 questions 6
-    '\SLev': 'S'  # registry: \boldsymbol{\mathit{S}} via \SLvl; uses book 0 questions 6
-    '\LLev': 'L'  # registry: \boldsymbol{\mathit{L}} via \LLvl; uses book 5 questions 0
+    '\bLevBF': '\mathbf{b}'  # registry: \boldsymbol{b} via \bLvl; uses book 15 questions 0
+    '\BLev': 'B'  # registry: \boldsymbol{B} via \BLvl; uses book 8 questions 6
+    '\MLev': 'M'  # registry: \boldsymbol{M} via \MLvl; uses book 0 questions 14
+    '\oLev': '\pmb{o}'  # registry: \boldsymbol{o} via \oLvl; uses book 13 questions 0
+    '\PopLev': '\pmb{N}'  # registry: \boldsymbol{N} via \PopnLvl; uses book 13 questions 0
+    '\WAllLev': '\mathbf{O}'  # registry: \boldsymbol{O} via \OLvl; uses book 9 questions 0
+    '\hLevBF': '\mathbf{h}'  # registry: \boldsymbol{h} via \hLvl; uses book 8 questions 0
+    '\aLevBF': '\mathbf{a}'  # registry: \boldsymbol{a} via \aLvl; uses book 7 questions 0
+    '\mLev': 'm'  # registry: \boldsymbol{m} via \mLvl; uses book 0 questions 6
+    '\SLev': 'S'  # registry: \boldsymbol{S} via \SLvl; uses book 0 questions 6
+    '\LLev': 'L'  # registry: \boldsymbol{L} via \LLvl; uses book 5 questions 0
     '\pat': '\text{þ}'  # registry: \text{\thorn} via \APRte; uses book 1 questions 4
-    '\BLevBF': '\mathbf{B}'  # registry: \boldsymbol{\mathit{B}} via \BLvl; uses book 4 questions 0
-    '\sLev': 's'  # registry: \boldsymbol{\mathit{s}} via \sLvl; uses book 0 questions 4
+    '\BLevBF': '\mathbf{B}'  # registry: \boldsymbol{B} via \BLvl; uses book 4 questions 0
+    '\sLev': 's'  # registry: \boldsymbol{s} via \sLvl; uses book 0 questions 4
     '\thorn': 'þ'  # registry: \text{þ} [thorn-glyph]; uses book 0 questions 4
-    '\yLev': 'y'  # registry: \boldsymbol{\mathit{y}} via \yLvl; uses book 4 questions 0
-    '\ALevBF': '\mathbf{A}'  # registry: \boldsymbol{\mathit{A}} via \ALvl; uses book 3 questions 0
-    '\HLev': 'H'  # registry: \boldsymbol{\mathit{H}} via \HLvl; uses book 3 questions 0
+    '\yLev': 'y'  # registry: \boldsymbol{y} via \yLvl; uses book 4 questions 0
+    '\ALevBF': '\mathbf{A}'  # registry: \boldsymbol{A} via \ALvl; uses book 3 questions 0
+    '\HLev': 'H'  # registry: \boldsymbol{H} via \HLvl; uses book 3 questions 0
     '\Thorn': 'Þ'  # registry: \text{Þ}; uses book 0 questions 3
-    '\wAllLev': '\mathbf{o}'  # registry: \boldsymbol{\mathit{o}} via \oLvl; uses book 3 questions 0
-    '\WHum': '\HLev'  # registry: \boldsymbol{\mathit{H}} via \HLvl; uses book 0 questions 3
-    '\hLev': 'h'  # registry: \boldsymbol{\mathit{h}} via \hLvl; uses book 2 questions 0
-    '\sLevBF': '\mathbf{s}'  # registry: \boldsymbol{\mathit{s}} via \sLvl; uses book 2 questions 0
+    '\wAllLev': '\mathbf{o}'  # registry: \boldsymbol{o} via \oLvl; uses book 3 questions 0
+    '\WHum': '\HLev'  # registry: \boldsymbol{H} via \HLvl; uses book 0 questions 3
+    '\hLev': 'h'  # registry: \boldsymbol{h} via \hLvl; uses book 2 questions 0
+    '\sLevBF': '\mathbf{s}'  # registry: \boldsymbol{s} via \sLvl; uses book 2 questions 0
     '\vInv': '\scriptstyle \Lambda \displaystyle'  # registry: {\scriptstyle \VInv \displaystyle}; uses book 2 questions 0
-    '\vLev': 'v'  # registry: \boldsymbol{\mathit{v}} via \vLvl; uses book 2 questions 0
-    '\CLevBF': '\mathbf{C}'  # registry: \boldsymbol{\mathit{C}} via \CLvl; uses book 1 questions 0
-    '\VLev': 'V'  # registry: \boldsymbol{\mathit{V}} via \VLvl; uses book 1 questions 0
-    '\ALev': 'A'  # registry: \boldsymbol{\mathit{A}} via \ALvl; uses book 0 questions 0
+    '\vLev': 'v'  # registry: \boldsymbol{v} via \vLvl; uses book 2 questions 0
+    '\CLevBF': '\mathbf{C}'  # registry: \boldsymbol{C} via \CLvl; uses book 1 questions 0
+    '\VLev': 'V'  # registry: \boldsymbol{V} via \VLvl; uses book 1 questions 0
+    '\ALev': 'A'  # registry: \boldsymbol{A} via \ALvl; uses book 0 questions 0
     '\cFuncAbove': '\bar{\mathrm{c}}'  # registry: \Max{\cFunc}; uses book 0 questions 0
     '\cFuncBelow': '\uline{\mathrm{c}}'  # registry: \Min{\cFunc}; uses book 0 questions 0
     '\cncl': ''  # registry: {\cancel{#1}}; uses book 0 questions 0
-    '\DLev': 'D'  # registry: \boldsymbol{\mathit{D}} via \DLvl; uses book 0 questions 0
-    '\ELev': 'E'  # registry: \boldsymbol{\mathit{E}} via \ELvl; uses book 0 questions 0
+    '\DLev': 'D'  # registry: \boldsymbol{D} via \DLvl; uses book 0 questions 0
+    '\ELev': 'E'  # registry: \boldsymbol{E} via \ELvl; uses book 0 questions 0
     '\EpShkInv': '\Ex[\pShk^{-1}]'  # registry: \Ex[\permShk^{-1}] via \EPermShkInv [e-perm-shk-inv]; uses book 0 questions 0
     '\fDist': '\mathcal{f}'  # registry: {\mathrm{f}}; uses book 0 questions 0
-    '\FLev': 'F'  # registry: \boldsymbol{\mathit{F}} via \FLvl; uses book 0 questions 0
-    '\fLev': 'f'  # registry: \boldsymbol{\mathit{f}} via \fLvl; uses book 0 questions 0
-    '\GLev': 'G'  # registry: \boldsymbol{\mathit{G}} via \GLvl; uses book 0 questions 0
-    '\HLevBF': '\mathbf{H}'  # registry: \boldsymbol{\mathit{H}} via \HLvl; uses book 0 questions 0
-    '\ILev': 'I'  # registry: \boldsymbol{\mathit{I}} via \ILvl; uses book 0 questions 0
-    '\iLev': 'i'  # registry: \boldsymbol{\mathit{i}} via \iLvl; uses book 0 questions 0
+    '\FLev': 'F'  # registry: \boldsymbol{F} via \FLvl; uses book 0 questions 0
+    '\fLev': 'f'  # registry: \boldsymbol{f} via \fLvl; uses book 0 questions 0
+    '\GLev': 'G'  # registry: \boldsymbol{G} via \GLvl; uses book 0 questions 0
+    '\HLevBF': '\mathbf{H}'  # registry: \boldsymbol{H} via \HLvl; uses book 0 questions 0
+    '\ILev': 'I'  # registry: \boldsymbol{I} via \ILvl; uses book 0 questions 0
+    '\iLev': 'i'  # registry: \boldsymbol{i} via \iLvl; uses book 0 questions 0
     '\InvEpShkInv': '\underline{\psi}'  # registry: {\PowMean_{-1}[\permShk]} via \InvEPermShkInv [inv-e-perm-shk-inv]; uses book 0 questions 0
-    '\JLev': 'J'  # registry: \boldsymbol{\mathit{J}} via \JLvl; uses book 0 questions 0
-    '\KLevBF': '\mathbf{K}'  # registry: \boldsymbol{\mathit{K}} via \KLvl; uses book 0 questions 0
-    '\kLevBF': '\mathbf{k}'  # registry: \boldsymbol{\mathit{k}} via \kLvl; uses book 0 questions 0
-    '\lLev': '\ell'  # registry: \boldsymbol{\mathit{l}} via \lLvl; uses book 0 questions 0
-    '\LLevBF': '\mathbf{L}'  # registry: \boldsymbol{\mathit{L}} via \LLvl; uses book 0 questions 0
-    '\lLevBF': '\pmb{\ell}'  # registry: \boldsymbol{\mathit{l}} via \lLvl; uses book 0 questions 0
+    '\JLev': 'J'  # registry: \boldsymbol{J} via \JLvl; uses book 0 questions 0
+    '\KLevBF': '\mathbf{K}'  # registry: \boldsymbol{K} via \KLvl; uses book 0 questions 0
+    '\kLevBF': '\mathbf{k}'  # registry: \boldsymbol{k} via \kLvl; uses book 0 questions 0
+    '\lLev': '\ell'  # registry: \boldsymbol{l} via \lLvl; uses book 0 questions 0
+    '\LLevBF': '\mathbf{L}'  # registry: \boldsymbol{L} via \LLvl; uses book 0 questions 0
+    '\lLevBF': '\pmb{\ell}'  # registry: \boldsymbol{l} via \lLvl; uses book 0 questions 0
     '\MaxMaxMPC': '\bar{\bar{\kappa}}'  # registry: \Max{\Max{\MPC}} via \MPCmaxmax; uses book 0 questions 0
     '\MaxMinMPC': '\hat{\underline{\kappa}}'  # registry: \Max{\Min{\MPC}} via \MPCmaxmin; uses book 0 questions 0
     '\MaxMPC': '\bar{\kappa}'  # registry: \Max{\MPC} via \MPCmax [mpc-max]; uses book 0 questions 0
     '\MinMinMPC': '\underline{\kappa}'  # registry: \Min{\Min{\MPC}} via \MPCminmin; uses book 0 questions 0
     '\MinMPC': '\uline{\kappa}'  # registry: \Min{\MPC} via \MPCmin [mpc-min]; uses book 0 questions 0
-    '\MLevBF': '\mathbf{M}'  # registry: \boldsymbol{\mathit{M}} via \MLvl; uses book 0 questions 0
-    '\NLev': 'N'  # registry: \boldsymbol{\mathit{N}} via \NLvl; uses book 0 questions 0
-    '\nLev': 'n'  # registry: \boldsymbol{\mathit{n}} via \nLvl; uses book 0 questions 0
-    '\OLev': 'O'  # registry: \boldsymbol{\mathit{O}} via \OLvl; uses book 0 questions 0
-    '\OLevBF': '\mathbf{O}'  # registry: \boldsymbol{\mathit{O}} via \OLvl; uses book 0 questions 0
-    '\oLevBF': '\mathbf{o}'  # registry: \boldsymbol{\mathit{o}} via \oLvl; uses book 0 questions 0
-    '\PLevBF': '\mathbf{P}'  # registry: \boldsymbol{\mathit{P}} via \PLvl; uses book 0 questions 0
+    '\MLevBF': '\mathbf{M}'  # registry: \boldsymbol{M} via \MLvl; uses book 0 questions 0
+    '\NLev': 'N'  # registry: \boldsymbol{N} via \NLvl; uses book 0 questions 0
+    '\nLev': 'n'  # registry: \boldsymbol{n} via \nLvl; uses book 0 questions 0
+    '\OLev': 'O'  # registry: \boldsymbol{O} via \OLvl; uses book 0 questions 0
+    '\OLevBF': '\mathbf{O}'  # registry: \boldsymbol{O} via \OLvl; uses book 0 questions 0
+    '\oLevBF': '\mathbf{o}'  # registry: \boldsymbol{o} via \oLvl; uses book 0 questions 0
+    '\PLevBF': '\mathbf{P}'  # registry: \boldsymbol{P} via \PLvl; uses book 0 questions 0
     '\pNotZero': '\cancel{\wp}'  # registry: (1-\pZero); uses book 0 questions 0
-    '\QLev': 'Q'  # registry: \boldsymbol{\mathit{Q}} via \QLvl; uses book 0 questions 0
-    '\RLev': 'R'  # registry: \boldsymbol{\mathit{R}} via \RLvl; uses book 0 questions 0
-    '\SLevBF': '\mathbf{S}'  # registry: \boldsymbol{\mathit{S}} via \SLvl; uses book 0 questions 0
+    '\QLev': 'Q'  # registry: \boldsymbol{Q} via \QLvl; uses book 0 questions 0
+    '\RLev': 'R'  # registry: \boldsymbol{R} via \RLvl; uses book 0 questions 0
+    '\SLevBF': '\mathbf{S}'  # registry: \boldsymbol{S} via \SLvl; uses book 0 questions 0
     '\TaxRate': 't'  # registry: \tau via \TaxRte; uses book 0 questions 0
-    '\TLev': 'T'  # registry: \boldsymbol{\mathit{T}} via \TLvl; uses book 0 questions 0
+    '\TLev': 'T'  # registry: \boldsymbol{T} via \TLvl; uses book 0 questions 0
     '\TMap': '\mathscr{T}'  # registry: \mathbb{T}; uses book 0 questions 0
-    '\ULev': 'U'  # registry: \boldsymbol{\mathit{U}} via \ULvl; uses book 0 questions 0
-    '\uLev': 'u'  # registry: \boldsymbol{\mathit{u}} via \uLvl; uses book 0 questions 0
-    '\vLevBF': '\mathbf{v}'  # registry: \boldsymbol{\mathit{v}} via \vLvl; uses book 0 questions 0
-    '\WLev': 'W'  # registry: \boldsymbol{\mathit{W}} via \WLvl; uses book 0 questions 0
-    '\wLev': '\pmb{w}'  # registry: \boldsymbol{\mathit{w}} via \wLvl; uses book 0 questions 0
-    '\XLev': 'X'  # registry: \boldsymbol{\mathit{X}} via \XLvl; uses book 0 questions 0
-    '\xLev': 'x'  # registry: \boldsymbol{\mathit{x}} via \xLvl; uses book 0 questions 0
-    '\YLevBF': '\mathbf{Y}'  # registry: \boldsymbol{\mathit{Y}} via \YLvl; uses book 0 questions 0
-    '\yLevBF': '\mathbf{y}'  # registry: \boldsymbol{\mathit{y}} via \yLvl; uses book 0 questions 0
-    '\ZLev': 'Z'  # registry: \boldsymbol{\mathit{Z}} via \ZLvl; uses book 0 questions 0
-    '\zLev': 'z'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
-    '\ZLevBF': '\mathbf{Z}'  # registry: \boldsymbol{\mathit{Z}} via \ZLvl; uses book 0 questions 0
-    '\zLevBF': '\mathbf{z}'  # registry: \boldsymbol{\mathit{z}} via \zLvl; uses book 0 questions 0
-    '\PtyGroFac': '\mathrm{G}'  # registry: \mathcal{G}; roman, as \WGroFac, on Chris's ruling of 2026-11-15 14:45:52 EST, until a registry release carries it
-    '\PtyGroRte': '\mathrm{g}'  # registry: g; roman, as \WGroRte, on Chris's ruling of 2026-11-15 14:45:52 EST, until a registry release carries it
+    '\ULev': 'U'  # registry: \boldsymbol{U} via \ULvl; uses book 0 questions 0
+    '\uLev': 'u'  # registry: \boldsymbol{u} via \uLvl; uses book 0 questions 0
+    '\vLevBF': '\mathbf{v}'  # registry: \boldsymbol{v} via \vLvl; uses book 0 questions 0
+    '\WLev': 'W'  # registry: \boldsymbol{W} via \WLvl; uses book 0 questions 0
+    '\wLev': '\pmb{w}'  # registry: \boldsymbol{w} via \wLvl; uses book 0 questions 0
+    '\XLev': 'X'  # registry: \boldsymbol{X} via \XLvl; uses book 0 questions 0
+    '\xLev': 'x'  # registry: \boldsymbol{x} via \xLvl; uses book 0 questions 0
+    '\YLevBF': '\mathbf{Y}'  # registry: \boldsymbol{Y} via \YLvl; uses book 0 questions 0
+    '\yLevBF': '\mathbf{y}'  # registry: \boldsymbol{y} via \yLvl; uses book 0 questions 0
+    '\ZLev': 'Z'  # registry: \boldsymbol{Z} via \ZLvl; uses book 0 questions 0
+    '\zLev': 'z'  # registry: \boldsymbol{z} via \zLvl; uses book 0 questions 0
+    '\ZLevBF': '\mathbf{Z}'  # registry: \boldsymbol{Z} via \ZLvl; uses book 0 questions 0
+    '\zLevBF': '\mathbf{z}'  # registry: \boldsymbol{z} via \zLvl; uses book 0 questions 0
     # --- local-upstream (33): objects the registry lacks: candidates for registry rows
     '\Price': '\mathsf{P}'  # uses book 190 questions 206
     '\dvdnd': 'd'  # uses book 151 questions 213
@@ -218,7 +216,8 @@ project:
     '\TaxFree': '\cancel{\Tax}'  # uses book 30 questions 24
     '\PostITC': '\cancel{\zeta}'  # uses book 10 questions 0
     # --- local-unclassified (0): objects the registry lacks: not yet classified
-    # --- aliases (105): course names for registry objects, same rendering: pure renames to retire
+    # --- aliases (106): course names for registry objects, same rendering: pure renames to retire
+    '\srate': '\savRte'  # alias of the registry's macro (saving-rate ruling, 2026-11-03 08:08:44)
     '\ARat': '\ANrm'  # alias of the registry's macro
     '\aRat': '\aNrm'  # alias of the registry's macro
     '\BRat': '\BNrm'  # alias of the registry's macro
