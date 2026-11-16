@@ -649,7 +649,7 @@ MACROS = {
     '\\tranShkEmp': '\\theta',
     '\\tranShkEmpMax': '\\Max{\\tranShkEmp}',
     '\\tranShkEmpMin': '\\Min{\\tranShkEmp}',
-    '\\tranShkInd': '\\theta',
+    '\\tranShkInd': '\\xi',
     '\\tranShkIndStd': '\\std_{\\tranShkInd}',
     '\\tranShkIndVar': '\\std^{2}_{\\tranShkInd}',
     '\\tranShkMax': '\\Max{\\xi}',
