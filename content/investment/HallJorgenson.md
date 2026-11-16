@@ -65,9 +65,11 @@ Now to simplify our lives we will assume constant capital goods prices, {math}`\
 
 Now let's introduce taxes. Let {math}`\taxCorp` be the corporate tax rate, and {math}`\itc` the rate of the investment tax credit (ITC), which returns to the firm the fraction {math}`\itc` of what it spends on new capital. In the United States, the federal corporate tax rate has been 21 percent since the Tax Cuts and Jobs Act of 2017 took effect in 2018; it was 35 percent from 1993, 34 percent from 1988, and 46 percent from 1979 until the Tax Reform Act of 1986. A general investment tax credit was introduced at 7 percent in 1962, suspended in 1966-67 and repealed in 1969, restored in 1971, raised to 10 percent in 1975, and repealed for good by the Tax Reform Act of 1986.
 
-The tax code also lets the firm deduct the depreciation of its capital from its taxable income, on a schedule the code sets, and these deductions are the heart of the analysis of {cite:t}`hall&jorgenson:i`. Let {math}`z` be the present value of the deductions per dollar of investment. Each dollar of investment then reduces the firm's taxes by {math}`\taxCorp z` in present value, and the net, discounted, after-tax price of capital to the firm is[^footnote1]
+The tax code also lets the firm deduct the depreciation of its capital from its taxable income, on a schedule the code sets, and these deductions are the heart of the analysis of {cite:t}`hall&jorgenson:i`. Let {math}`z` be the present value of the deductions per dollar of investment. Each dollar of investment then reduces the firm's taxes by {math}`\taxCorp z` in present value, and the net, discounted, after-tax price of capital to the firm is
 
-[^footnote1]: Assume that if the firm sells the capital, it must repay the ITC on a pro-rata basis; this prevents tax arbitrage opportunities.
+:::{margin}
+Assume that if the firm sells the capital, it must repay the ITC on a pro-rata basis; this prevents tax arbitrage opportunities.
+:::
 
 ```{math}
 \hat{\Price}_{t} = (1-\itc-\taxCorp z) \Price_{t}.

@@ -9,9 +9,11 @@ Using their framework, here we study a consumer who has wealth {math}`\aRat_{t}`
 \Sigma=\left(\begin{array}{cc}\sigma_1^2 & \sigma_{12} \\ \sigma_{12}& \sigma_2^2\end{array}\right).
 ```
 
-If the period-{math}`t` consumer invests proportion {math}`\riskyshare_i` of {math}`\aRat_{t}` in risky asset {math}`i`, {math}`i=1,2` (so that {math}`\riskyshare_{1}=(1-\riskyshare_{2})` and vice-versa), spending all available resources in the last period of life[^samuelson] {math}`t+1` will yield:
+If the period-{math}`t` consumer invests proportion {math}`\riskyshare_i` of {math}`\aRat_{t}` in risky asset {math}`i`, {math}`i=1,2` (so that {math}`\riskyshare_{1}=(1-\riskyshare_{2})` and vice-versa), spending all available resources in the last period of life {math}`t+1` will yield:
 
-[^samuelson]: The portfolio allocation solution obtained below carries back, by induction, to earlier periods of life, as {cite:t}`samuelsonFallacy` and {cite:t}`samuelsonJudgment` famously emphasized.
+:::{margin}
+The portfolio allocation solution obtained below carries back, by induction, to earlier periods of life, as {cite:t}`samuelsonFallacy` and {cite:t}`samuelsonJudgment` famously emphasized.
+:::
 
 ```{math}
 :label: eq:PortMulti-RportDef

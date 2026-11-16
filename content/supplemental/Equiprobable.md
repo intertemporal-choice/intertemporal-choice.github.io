@@ -17,9 +17,11 @@ distribution.
 
 ## Theory
 
-Consider a consumer who faces both a risk to transitory noncapital income[^gOxRS4n81Q]
+Consider a consumer who faces both a risk to transitory noncapital income
 
-[^gOxRS4n81Q]: The assumed distribution has the property {math}`\Ex[\ShkMeanOne_{1,t+1}]=1`, cf. [Math Facts](#fact:mathfactslist).
+:::{margin}
+The assumed distribution has the property {math}`\Ex[\ShkMeanOne_{1,t+1}]=1`, cf. [Math Facts](#fact:mathfactslist).
+:::
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -100,9 +102,11 @@ into a vector {math}`\vec{\ShkMeanOneLog}`, we can write
 
 where {math}`\vec{\mu}= \{-0.5 \sigma^{2}_{1},-0.5 \sigma^{2}_{2}\}^{\prime}` and the
 covariance matrix {math}`\Sigma` is diagonal, carrying {math}`\sigma^{2}_{1}` and
-{math}`\sigma^{2}_{2}`.[^independent-representation]
+{math}`\sigma^{2}_{2}`.
 
-[^independent-representation]: An alternative would be to work with {math}`\ShkMeanOneLog_{1,t+1}` and {math}`\risky_{t+1}` directly, which would require a multivariate normal with nonzero off-diagonal elements. The two approaches are mathematically indistinguishable, and we take the independent one because it is the more convenient to integrate against below.
+:::{margin}
+An alternative would be to work with {math}`\ShkMeanOneLog_{1,t+1}` and {math}`\risky_{t+1}` directly, which would require a multivariate normal with nonzero off-diagonal elements. The two approaches are mathematically indistinguishable, and we take the independent one because it is the more convenient to integrate against below.
+:::
 
 ## Computation
 

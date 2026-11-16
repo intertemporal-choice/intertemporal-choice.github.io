@@ -8,7 +8,7 @@ The problem is to choose a path of consumption per capita {math}`\cons` from the
 ```{math}
 :label: eq:HVD-maxprob
 
-\max_{\{c\}_{0}^{\infty}} \int_{0}^{\infty} \uFunc(\cons) e^{-\timeRate t}
+\max_{\{c\}_{0}^{\infty}} \int_{0}^{\infty} \uFunc(\cons) e^{-\timeRate t}\,dt
 ```
 
 subject to
@@ -228,9 +228,11 @@ utility. In that model, recall that {math}`\cons_{t+1}= (\Rfree\Discount)^{1/\CR
 
 What this says is that you cannot behave in such a way that you expect
 {math}`\kap_{t}` to grow faster than the interest rate
-forever.[^h2DGSZMi5A]
+forever.
 
-[^h2DGSZMi5A]: Note that this also rules out negative {math}`\kap_{t}` values that grow faster than the interest rate.
+:::{margin}
+Note that this also rules out negative {math}`\kap_{t}` values that grow faster than the interest rate.
+:::
 
 This is the infinite-horizon version of the intertemporal budget constraint.
 

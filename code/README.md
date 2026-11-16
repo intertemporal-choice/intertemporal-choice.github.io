@@ -16,8 +16,10 @@ content/consumption/Envelope/
 The chapter is `index.md` so that its address stays `/content/consumption/envelope`. The
 notebook is a plain `.ipynb`, committed **with** its outputs, so GitHub, Colab and a
 downloaded copy show the figures. Its first code cell installs the book's own package
-(which brings econ-ark, numpy and matplotlib) if it is missing, so it runs anywhere with
-`pip`; inside the book's environment that cell does nothing. Every figure cell ends with
+(which brings numpy, scipy and matplotlib) if it is missing, so it runs anywhere with
+`pip`, or with `uv` in a Python that has no pip (it says so if it has neither); inside the book's
+environment that cell does nothing. A notebook that imports HARK
+installs the package with its `hark` add-on instead, since HARK is not part of the core. Every figure cell ends with
 `style.save(fig, "<name>")`, from the shared `intertemporal_choice` package in `src/`,
 which writes `figures/<name>.png` deterministically (no version or date metadata, fixed
 size and resolution) and shows the same bytes as the cell's output.
@@ -53,7 +55,8 @@ itself, because MyST's own launcher times out on this book. It sets `IC_EXEC_ENV
 MyST's execution cache in `_build/execute` is invalidated when the code or data a notebook
 uses changes, not only when its cells do. A preflight lint refuses a notebook that is not
 `content/<part>/<Chapter>/<Chapter>.ipynb` beside its chapter, lacks the python3 kernel or
-that declaration, does not begin with the bootstrap cell, or whose saved figures are not
+that declaration, does not begin with the bootstrap cell (`BOOTSTRAP_HARK` when a later cell
+imports HARK or the Aiyagari code, `BOOTSTRAP` otherwise), or whose saved figures are not
 exactly the files in its `figures/` folder. `--print-env-hash` prints the hash CI keys its
 cache on.
 
@@ -77,6 +80,17 @@ The book's pure-Python package is copied beside it, and `code/jupyterlite/jupyte
 which names the site, has it load ipywidgets, which Pyodide lacks, when the page starts. The
 workflow step that runs it pins the JupyterLite tools.
 
+## `check_core.py`
+
+The package has a light core (`dependencies` in `pyproject.toml`: numpy, scipy, matplotlib,
+pandas, ipywidgets) and a `hark` add-on (econ-ark, sympy and the Aiyagari code). The core is
+what a notebook installs in Colab or Binder, and what a page running Python in the browser
+installs with micropip, so it must never need HARK, which needs numba, which the browser's
+Python lacks. The book's own environment has the add-on, so nothing else would notice a HARK
+import slipping into the core. This script builds the wheel, installs it core only in a fresh
+environment, fails if that brought in any package an add-on names (or numba), then imports
+every module and model and runs the package's self-test there. The workflow runs it.
+
 ## `mirror_check.py`
 
 Reconciles `sources/` against Carroll's lecture-notes page at econ2.jhu.edu.
@@ -95,19 +109,37 @@ to the `LaTeX/<stem>.tex` inside their source zip.
 Builds `exports/intertemporal-choice.pdf`. Use it instead of a bare `myst build --pdf`.
 
 MyST exports every link to another page as a site-relative `\href{/content/...}`, which
-goes nowhere in a PDF, and drops links to Math Facts entries altogether. A link with text
-to a section heading becomes `Section~\ref{...}`, losing the text; for an unnumbered
-subsection, such as an appendix inside a chapter, the number is its parent's. The
-script builds from a staged copy in `_build/pdf-src`, points all of these links at the
-published site (`https://intertemporal-choice.github.io/...`, with the anchor), and fails
-if any link names a page the book does not have. The Markdown keeps its `#label` links,
-so the website's cross-references stay internal and follow pages when they move.
+goes nowhere in a PDF, and drops links to Math Facts entries altogether. The script
+builds from a staged copy in `_build/pdf-src`, points those links at the published site
+(`https://intertemporal-choice.github.io/...`, with the fact's anchor), and fails if any
+link names a page the book does not have. The Markdown keeps its `#label` links, so the
+website's cross-references stay internal and follow pages when they move.
 
 Links into Supplemental Notes, which the PDF omits, work the same way. They resolve
 once the site carrying those pages has been deployed.
 
 `--self-test` checks the link rewriting, and the reimplementation of MyST's URL and
 anchor slugs, against cases they must handle.
+
+## `release_package.py`
+
+Publishes the book's package as permanent files on its site (Chris Carroll, 2026-11-13: "a
+package file on the book's site", "not on pypi", "automatic"). Every change to `src/` or
+`pyproject.toml` that reaches main becomes a release: one wheel, versioned by date and a counter
+(`2026.11.14.1`), at
+`https://intertemporal-choice.github.io/packages/intertemporal_choice-<version>-py3-none-any.whl`,
+listed at `/packages/`. A question's notebook installs a release by that address, so a posted
+answer key reruns later with the code it was written against. Always by the address, never by
+name: `intertemporal-choice` is not on PyPI, so `pip install intertemporal-choice` could fetch
+someone else's package.
+
+A published file is never rebuilt, changed or deleted. Since the deploy rebuilds the site whole,
+the files are kept on the `packages` branch, which only this script writes, by adding a wheel and
+its line in `releases.txt`. The build job (`stage`) copies that branch into the site, checks that
+every file the live site serves is still there byte for byte, writes the list page, and on a push
+that changed the package builds the next release. The release job (`publish`), the only job that
+can write, adds it to the branch, and the deploy waits for it. On a pull request, `stage` only
+checks that the release would build.
 
 ## `write_redirects.py`
 

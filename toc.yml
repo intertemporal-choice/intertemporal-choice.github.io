@@ -48,7 +48,9 @@ project:
         - file: content/asset_pricing/Portfolio-CRRA/index.md
           children:
             - file: content/asset_pricing/Portfolio-CRRA/Portfolio-CRRA.ipynb
-        - file: content/asset_pricing/LucasAssetPrice.md
+        - file: content/asset_pricing/LucasAssetPrice/index.md
+          children:
+            - file: content/asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb
         - file: content/asset_pricing/C-CAPM.md
         - file: content/asset_pricing/EquityPremiumPuzzle.md
         - file: content/asset_pricing/Bubbles/index.md
@@ -72,7 +74,9 @@ project:
         - file: content/investment/iAndCashFlow.md
     - file: content/growth/index.md
       children:
-        - file: content/growth/RamseyCassKoopmans.md
+        - file: content/growth/RamseyCassKoopmans/index.md
+          children:
+            - file: content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb
         - file: content/growth/RCKWithGov.md
         - file: content/growth/DecentralizingRCK.md
         - file: content/growth/Romer86.md
@@ -84,11 +88,16 @@ project:
       children:
         - file: content/dsge/BrockMirman.md
         - file: content/dsge/RBC-Prescott.md
-    - file: content/numerical/index.md
+    - file: content/appendices/mathematical/index.md
       children:
-        - file: content/numerical/Aggregation.md
-        - file: content/numerical/HamiltonianVSDiscrete.md
-        - file: content/numerical/MathFactsList.md
+        - file: content/appendices/mathematical/Aggregation.md
+        - file: content/appendices/mathematical/HamiltonianVSDiscrete.md
+        - file: content/appendices/mathematical/MathFactsList.md
+    # Each chapter's appendix: the derivations of results the chapter states without proof. On the
+    # website and in the PDF, after Mathematical Appendices.
+    - file: content/appendices/chapters/index.md
+      children:
+        - file: content/appendices/chapters/PerfForesightCRRA.md
     # Notes that supplement the main chapters. Listed for the website only; the
     # PDF export in myst.yml deliberately omits this part.
     - file: content/supplemental/index.md
@@ -103,6 +112,3 @@ project:
         - file: content/supplemental/GrowthAndGrossSaving.md
         - file: content/supplemental/Equiprobable.md
         - file: content/supplemental/Equiprobable-Returns.md
-        - file: content/supplemental/appendices/index.md
-          children:
-            - file: content/supplemental/appendices/PerfForesightCRRA.md

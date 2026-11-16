@@ -1,11 +1,15 @@
 (sec:LucasAssetPrice)=
 # The Lucas Asset Pricing Model
 
+The chapter's [notebook](LucasAssetPrice.ipynb) solves the model for every case below, numerically and with the exact series, and prices a small tree whose dividends move only partly with the economy's; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=LucasAssetPrice.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb).
+
 ## Introduction/Setup
 
-{cite:t}`lucas:assetpricing` considers an economy populated by infinitely many[^aggregation-note] identical individual consumers, in which the only assets are a set of identical infinitely-lived trees. Aggregate output is the fruit that falls from the trees, and cannot be stored (it would rot!); because {math}`\uFunc^{\prime}(\cRat)>0~\forall~\cRat`, the fruit is all eaten:
+{cite:t}`lucas:assetpricing` considers an economy populated by infinitely many identical individual consumers, in which the only assets are a set of identical infinitely-lived trees. Aggregate output is the fruit that falls from the trees, and cannot be stored (it would rot!); because {math}`\uFunc^{\prime}(\cRat)>0~\forall~\cRat`, the fruit is all eaten:
 
-[^aggregation-note]: As in [Aggregation](#sec:Aggregation).
+:::{margin}
+As in [Aggregation](#sec:Aggregation).
+:::
 
 ```{math}
 :label: eq:CeqY
@@ -13,16 +17,20 @@
 \cRat_{t}\Pop_{t} = \dvdnd_{t}\Kap_{t}
 ```
 
-where {math}`\cRat_{t}` is consumption of fruit per person, {math}`\Pop_{t}` is the population, {math}`\Kap_{t}` measures the stock of trees, and {math}`\dvdnd_{t}` is the exogenous output of fruit that drops from each tree. A crucial assumption is that the stock of trees is exogenous: you cannot consume a little less fruit and have more trees next period. In a given year, each tree produces exactly the same amount of fruit as every other tree, but {math}`\dvdnd_{t}` varies from year to year depending on the weather. An economy like this, in which output arrives without any deliberate actions on the part of residents, is called an "endowment" economy (or, sometimes, an "exchange" economy).[^production-economy]
+where {math}`\cRat_{t}` is consumption of fruit per person, {math}`\Pop_{t}` is the population, {math}`\Kap_{t}` measures the stock of trees, and {math}`\dvdnd_{t}` is the exogenous output of fruit that drops from each tree. A crucial assumption is that the stock of trees is exogenous: you cannot consume a little less fruit and have more trees next period. In a given year, each tree produces exactly the same amount of fruit as every other tree, but {math}`\dvdnd_{t}` varies from year to year depending on the weather. An economy like this, in which output arrives without any deliberate actions on the part of residents, is called an "endowment" economy (or, sometimes, an "exchange" economy).
 
-[^production-economy]: The alternative is a "production" economy, in which factors of production (labor, capital, maybe land, maybe knowledge) combine somehow to generate the output.
+:::{margin}
+The alternative is a "production" economy, in which factors of production (labor, capital, maybe land, maybe knowledge) combine somehow to generate the output.
+:::
 
 (The-Market-for-Trees)=
 ## The Market for Trees
 
-We now consider a market in which individual consumers can buy and sell trees. This requires some mental gymnastics: with infinitely many identical consumers, we must find a price at which every one of them is simultaneously satisfied. If there is a perfect capital market for trees, the price of trees {math}`\Price_{t}` must be such that, each period, each (identical) consumer does not want either to increase or to decrease their holding of trees.[^equilibrium-price]
+We now consider a market in which individual consumers can buy and sell trees. This requires some mental gymnastics: with infinitely many identical consumers, we must find a price at which every one of them is simultaneously satisfied. If there is a perfect capital market for trees, the price of trees {math}`\Price_{t}` must be such that, each period, each (identical) consumer does not want either to increase or to decrease their holding of trees.
 
-[^equilibrium-price]: If, at a hypothesized equilibrium price, every identical consumer wanted (say) to increase their holdings, that price could not be an equilibrium price, because with a fixed supply of trees everyone cannot increase their holding of trees at once!
+:::{margin}
+If, at a hypothesized equilibrium price, every identical consumer wanted (say) to increase their holdings, that price could not be an equilibrium price, because with a fixed supply of trees everyone cannot increase their holding of trees at once!
+:::
 
 If a tree is sold, the sale is assumed to occur after the existing owner receives that period's fruit ({math}`\Price_{t}` is the "ex-dividend" price). Total resources available to consumer {math}`i` in period {math}`t` are the sum of the fruit received from the trees owned, {math}`\dvdnd_{t}\kap_{t}^{i}`, plus the potential proceeds if the consumer were to sell their whole stock of trees, {math}`\Price_{t}\kap_{t}^{i}`. Total resources are divided into two uses: Current consumption {math}`c_{t}^{i}` and the purchase of trees for next period {math}`\kap_{t+1}^{i}` at price {math}`\Price_{t}`,
 
@@ -192,9 +200,11 @@ If the price-dividend ratio is bounded (there is no [bubble](#sec:Bubbles)), the
 \Price_{t} = \dvdnd_{t}\left(\frac{\DiscFac}{1-\DiscFac} \right) = \dvdnd_{t}\left(\frac{1}{1/\DiscFac-1} \right) = \dvdnd_{t}\left(\frac{1}{1+\timeRate-1} \right) = \frac{\dvdnd_{t}}{\timeRate}
 ```
 
-or, equivalently, the "dividend-price ratio" is always {math}`\dvdnd_{t}/\Price_{t} = \timeRate`.[^crra-derivation]
+or, equivalently, the "dividend-price ratio" is always {math}`\dvdnd_{t}/\Price_{t} = \timeRate`.
 
-[^crra-derivation]: With CRRA utility and IID dividends the solution is {math}`\dvdnd_{t}^{\CRRA}/\Price_{t} = \timeRate/\edvdnd`, where {math}`\edvdnd \equiv \Ex_{t}[\dvdnd_{t+n}^{1-\CRRA}]` (see [When Dividends are IID](#When-Dividends-are-IID)).
+:::{margin}
+With CRRA utility and IID dividends the solution is {math}`\dvdnd_{t}^{\CRRA}/\Price_{t} = \timeRate/\edvdnd`, where {math}`\edvdnd \equiv \Ex_{t}[\dvdnd_{t+n}^{1-\CRRA}]` (see [When Dividends are IID](#When-Dividends-are-IID)).
+:::
 
 It may surprise you that the equilibrium price of trees today does not depend on the expected level of fruit output in the future. If the weather was bad this year, but is expected to return to normal next year (and, by definition, is expected to be equal to normal in subsequent years), you might think that the price today would mostly reflect the "normal" value of fruit production that the trees produce, not the (temporarily low) value that happens to obtain today.
 
@@ -222,9 +232,11 @@ so the net rate of return is
 
 which is a useful decomposition because the two components have natural interpretations: The first is a "capital gain" (or loss), and the second can plausibly be identified as "the interest rate" paid by the asset (because it corresponds to income received regardless of whether the asset is liquidated).
 
-In models that do not explicitly discuss asset pricing, the implicit assumption is usually that the price of capital is constant (which might be plausible if capital consists mostly of reproducible items like machines,[^capital-price-trend] rather than Lucas trees). In this case
+In models that do not explicitly discuss asset pricing, the implicit assumption is usually that the price of capital is constant (which might be plausible if capital consists mostly of reproducible items like machines, rather than Lucas trees). In this case
 
-[^capital-price-trend]: The argument holds even if there is a gradual trend in the real price of capital goods, as there has in fact been.
+:::{margin}
+The argument holds even if there is a gradual trend in the real price of capital goods, as there has in fact been.
+:::
 
 ```{math}
 \Risky_{t+1} = \left(1+\frac{\dvdnd_{t+1}}{\Price_{t}}\right)
@@ -244,7 +256,7 @@ Aristotle was a smart guy!
 
 ## Analytical and Numerical Solutions
 
-The model has analytical solutions (such as {math}`\Price_{t} = \dvdnd_{t}/\timeRate`) or approximate analytical solutions only in very special circumstances; [Analytical Solutions in CRRA Utility Case](#Appendix-Analytical-Solutions-in-CRRA-Utility-Case) derives them. When dividends follow an AR(1) process there is no closed form, though [When Dividends Follow an AR(1) Process](#When-Dividends-Follow-an-AR-1-Process) gives an exact series. The accompanying [DemARK notebook](https://mybinder.org/v2/gh/econ-ark/DemARK/HEAD?filepath=notebooks/Lucas-Asset-Pricing-Model.ipynb) shows how to solve that case numerically, and also shows how the numerical solution compares with the approximate analytical solution in the CRRA utility case.
+The model has analytical solutions (such as {math}`\Price_{t} = \dvdnd_{t}/\timeRate`) or approximate analytical solutions only in very special circumstances; [Analytical Solutions in CRRA Utility Case](#Appendix-Analytical-Solutions-in-CRRA-Utility-Case) derives them. When dividends follow an AR(1) process there is no closed form, though [When Dividends Follow an AR(1) Process](#When-Dividends-Follow-an-AR-1-Process) gives an exact series. The chapter's [notebook](LucasAssetPrice.ipynb) solves that case numerically, by iterating {eq}`eq:pofdCRRA` to its fixed point, and checks the solution against the series and against the closed forms of the polar cases.
 
 (Appendix-Analytical-Solutions-in-CRRA-Utility-Case)=
 ## Appendix: Analytical Solutions in CRRA Utility Case

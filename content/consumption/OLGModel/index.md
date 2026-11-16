@@ -1,9 +1,11 @@
 (sec:OLGModel)=
 # The Diamond OLG Model
 
-This chapter and its [notebook](OLGModel.ipynb) present a canonical overlapping generations (OLG) model, like the one originally proposed by {cite:t}`diamond:olg`, building on {cite:t}`samuelsonOLG`.[^olg-references]
+This chapter and its [notebook](OLGModel.ipynb) present a canonical overlapping generations (OLG) model, like the one originally proposed by {cite:t}`diamond:olg`, building on {cite:t}`samuelsonOLG`.
 
-[^olg-references]: For a remarkably clear statement of the questions addressed by OLG models, see {cite:t}`jeffersonOLG`. For a review of the influence of {cite:t}`samuelsonOLG`'s model, see {cite:t}`weilSamuelson`.
+:::{margin}
+For a remarkably clear statement of the questions addressed by OLG models, see {cite:t}`jeffersonOLG`. For a review of the influence of {cite:t}`samuelsonOLG`'s model, see {cite:t}`weilSamuelson`.
+:::
 
 ## Setup
 
@@ -125,12 +127,14 @@ As a preliminary, let's define the lifetime utility experienced by the young gen
 \vLev_{t} = \uFunc(\cLev_{1,t})+\Discount \uFunc(\cLev_{2,t+1}).
 ```
 
-Suppose our definition of optimality reflects the choices that would be made by a benevolent social planner who maximizes a social welfare function of the form[^time-inconsistency]
+Suppose our definition of optimality reflects the choices that would be made by a benevolent social planner who maximizes a social welfare function of the form
 
-[^time-inconsistency]: The old at time {math}`t` are generation {math}`t-1`, so the planner weights their old-age utility by their own {math}`\Discount` and, as an earlier generation, by {math}`\beth^{-1}`. With any other weight the planner at {math}`t` would value the old relative to the young differently than the planner at {math}`t-1` did, and would revise that planner's plan: the problem would be time inconsistent.
+:::{margin}
+The old at time {math}`t` are generation {math}`t-1`, so the planner weights their old-age utility by their own {math}`\Discount` and, as an earlier generation, by {math}`\beth^{-1}`. With any other weight the planner at {math}`t` would value the old relative to the young differently than the planner at {math}`t-1` did, and would revise that planner's plan: the problem would be time inconsistent.
+:::
 
 ```{math}
-\VLev_{t} = \beth^{-1}\Discount \uFunc(\cLev_{2,t}) + \sum_{n=0}^{\infty} \beth^{n} \vLev_{t+n}
+\VLev_{t} = \beth^{-1}\Discount \uFunc(\cLev_{2,t}) + \sum_{j=0}^{\infty} \beth^{j} \vLev_{t+j}
 ```
 
 subject to the economy's aggregate resource constraint

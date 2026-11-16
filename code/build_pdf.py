@@ -3,22 +3,27 @@
 `myst build --pdf` exports every link to another page as a site-relative
 `\\href{/content/...}`, which goes nowhere in a PDF, and drops links to Math Facts
 entries (`[LogELogNormTimes](#fact:logelognormtimes)`) altogether, leaving bare text.
-A link with text to a section heading (`[the appendix on X](#sec:x)`) comes out as
-`Section~\\ref{sec:x}`, which drops the text and, for a section too deep to be numbered,
-names its numbered parent instead. A page link cannot become a LaTeX \\ref at all, so a
-link to the published site is the best the PDF can carry. Writing those URLs into the Markdown would fix the PDF but
+MyST never emits a LaTeX \\ref to another chapter, so a link to the published site is
+the best the PDF can carry. Writing those URLs into the Markdown would fix the PDF but
 turn every cross-reference on the website into an unchecked external link that breaks
 whenever a page moves, so the Markdown is left alone and the fix happens here:
 
   1. stage a copy of the project in _build/pdf-src
-  2. in the staged Markdown only, rewrite each `](#fact:...)` link, and each link with
-     text to a section heading, to that anchor on the site, so the export keeps the link
-     and its text; likewise each link to a label on a page the PDF leaves out (the
-     Supplemental Notes, chapter appendices among them), which MyST would otherwise
-     export as a \\ref to a label the PDF lacks, printed "??"
+  2. in the staged Markdown only, rewrite each `](#fact:...)` link to the fact's anchor
+     on the site, so the export keeps it as a link; likewise each link to a label on a
+     page the PDF leaves out (the Supplemental Notes), which MyST would otherwise export
+     as a \\ref to a label the PDF lacks, printed "??". A link with words to a label the
+     PDF has, `[the golden rule](#eq:RCK-goldenRule)`, MyST would print as its number
+     alone, "(7)", losing the words; it is pointed at a placeholder address instead, so
+     the export keeps the words. A `{margin}` note, which MyST's PDF export leaves out
+     altogether, becomes a footnote on the paragraph before it, so the PDF keeps it
   3. run `myst build --pdf` in the staged copy
-  4. rewrite every `\\href{/` in the generated LaTeX to an absolute URL on the site, and
-     check that each one names a page the book actually has
+  4. in the generated LaTeX, turn each placeholder link into `\\hyperref[label]{words}`, a
+     link inside the PDF that keeps its words; give each page's first heading the labels
+     MyST leaves off (the page's own label, and `page:<its path on the site>`), so a link
+     to a whole page in the PDF, `\\href{/content/...}`, becomes one inside it too; check
+     that every such link has its label. Then rewrite every remaining `\\href{/` to an
+     absolute URL on the site, and check that each one names a page the book actually has
   5. rerun MyST's own latexmk command and copy the PDF (with its .tex and logs) back
      to exports/
 
@@ -77,15 +82,22 @@ FACT_DEF = re.compile(r"^\((fact:[^)\s]+)\)=", re.MULTILINE)
 # into the page title, which has no anchor on the site.
 TITLE_LABEL = re.compile(r"\A\s*\((fact:[^)\s]+)\)=\s*\n#\s")
 FACT_LINK = re.compile(r"\]\(#(fact:[^)\s]+)\)")
-SECTION_DEF = re.compile(r"^\(((?:sub)*sec:[^)\s]+)\)=\s*\n#", re.MULTILINE)
-TITLE_SECTION = re.compile(r"\A\s*\(((?:sub)*sec:[^)\s]+)\)=\s*\n#\s")
-SECTION_LINK = re.compile(r"\[([^\]]+)\]\(#((?:sub)*sec:[^)\s]+)\)")
 # Any label: a `(label)=` target, or a directive's `:label:` or `:name:` option.
 LABEL_DEF = re.compile(r"^[ \t]*(?:\(([^)\s]+)\)=|:(?:label|name):[ \t]*(\S+))", re.MULTILINE)
 PAGE_TITLE_LABEL = re.compile(r"\A\s*\(([^)\s]+)\)=\s*\n#\s")
 LINK = re.compile(r"\]\(#([^)\s]+)\)")
 ROLE = re.compile(r"\{(?:eq|ref|numref)\}`(?:[^`<]*<)?([^`<>]+)>?`")
 REL_HREF = re.compile(r"\\href\{/")
+# Where step 2 points a link with words to a label the PDF has; no such site exists.
+PLACEHOLDER = "https://pdf-internal.invalid/"
+PLACEHOLDER_HREF = re.compile(r"\\href\{" + re.escape(PLACEHOLDER) + r"([^}]*)\}\{")
+PAGE_HREF = re.compile(r"\\href\{(/[^}#\\]*)\}\{")
+# A label \\hyperref can take as it stands.
+PLAIN_LABEL = re.compile(r"\A[A-Za-z0-9:._/-]+\Z")
+HEADING = re.compile(r"^\\(?:part|chapter|section|subsection|subsubsection)\*?\{.*$", re.MULTILINE)
+INCLUDE = re.compile(r"^\\include\{([^}]+)\}", re.MULTILINE)
+DEFINED_LABEL = re.compile(r"\\label\{([^}]+)\}")
+USED_LABEL = re.compile(r"\\hyperref\[([^\]]+)\]")
 SITE_HREF = re.compile(r"\\href\{" + re.escape(SITE) + r"(/[^}#\\]*)")
 
 
@@ -147,44 +159,9 @@ def rewrite_fact_links(text: str, targets: dict[str, str]) -> tuple[str, int]:
     return FACT_LINK.subn(sub, text)
 
 
-def section_label_targets(text: str, url: str) -> dict[str, str]:
-    """The `(sec:x)=` labels on one page's headings, each mapped to its anchor on the site.
-
-    A label on the page's title is left out: MyST exports a link to it as a link to the
-    page, which step 4 makes absolute.
-    """
-    title = TITLE_SECTION.match(text)
-    return {
-        label: f"{url}#{html_id(label)}"
-        for label in SECTION_DEF.findall(text)
-        if not (title and label == title.group(1))
-    }
-
-
-def rewrite_section_links(text: str, targets: dict[str, str]) -> tuple[str, int]:
-    """Point `[text](#sec:x)` links to a heading below a page title at the site.
-
-    A link without text is left alone: MyST fills in the section's title, and
-    `Section~\\ref` is then the right rendering.
-    """
-    count = 0
-
-    def sub(m):
-        nonlocal count
-        if m.group(2) not in targets:
-            return m.group(0)
-        count += 1
-        return f"[{m.group(1)}]({targets[m.group(2)]})"
-
-    return SECTION_LINK.sub(sub, text), count
-
-
 def pdf_articles(config: str) -> set[str]:
     """The files the tex+pdf export in myst.yml's text puts in the PDF."""
-    import yaml
-
-    exports = yaml.safe_load(config)["project"]["exports"]
-    return {a["file"] for e in exports if "pdf" in e.get("format", "") for a in e.get("articles", [])}
+    return set(pdf_article_list(config))
 
 
 def all_label_targets(text: str, url: str) -> dict[str, str]:
@@ -235,6 +212,190 @@ def rewrite_staged_web_only() -> None:
     log.info("links to pages left out of the PDF pointed at the site: %d", n_links)
 
 
+def pdf_article_list(config: str) -> list[str]:
+    """The files the tex+pdf export puts in the PDF, in its order, which is the order of its \\include's."""
+    import yaml
+
+    exports = yaml.safe_load(config)["project"]["exports"]
+    return [a["file"] for e in exports if "pdf" in e.get("format", "") for a in e.get("articles", [])]
+
+
+def pdf_labels(root: Path) -> set[str]:
+    """Every label on a page the PDF has."""
+    labels = set()
+    for rel in pdf_article_list((root / "myst.yml").read_text()):
+        if rel.endswith(".md"):
+            labels |= {a or b for a, b in LABEL_DEF.findall((root / rel).read_text())}
+    return labels
+
+
+def keep_link_words(text: str, labels: set[str]) -> tuple[str, int]:
+    """Point each `[words](#label)` link to a label the PDF has at the placeholder address, so
+    the export keeps its words; step 4 turns it into \\hyperref. A link without words,
+    `[](#label)`, is left for MyST to print as the label's number, and roles are left alone."""
+    count = 0
+
+    def sub(m):
+        nonlocal count
+        label = m.group(1)
+        if label not in labels or text[m.start() - 1] == "[":
+            return m.group(0)
+        if not PLAIN_LABEL.match(label):
+            raise ValueError(f"label {label!r} has a character \\hyperref can't take as it stands")
+        count += 1
+        return f"]({PLACEHOLDER}{label})"
+
+    return LINK.sub(sub, text), count
+
+
+def rewrite_staged_link_words() -> None:
+    """Step 2, last: in the pages the PDF has, keep the words of links to labels it has."""
+    labels = pdf_labels(STAGE)
+    n_links = 0
+    for rel in pdf_article_list((STAGE / "myst.yml").read_text()):
+        md = STAGE / rel
+        if md.suffix != ".md":
+            continue
+        try:
+            text, n = keep_link_words(md.read_text(), labels)
+        except ValueError as e:
+            raise ValueError(f"{rel}: {e}") from None
+        if n:
+            md.write_text(text)
+            n_links += n
+    log.info("links with words to labels in the PDF kept for \\hyperref: %d", n_links)
+
+
+def hyperref_placeholders(tex: str) -> tuple[str, int]:
+    """Turn each placeholder link back into \\hyperref[label]{words}, a link inside the PDF."""
+    def sub(m):
+        label = m.group(1).replace("\\_", "_")
+        return f"\\hyperref[{label}]{{"
+
+    return PLACEHOLDER_HREF.subn(sub, tex)
+
+
+def label_first_heading(tex: str, labels: list[str]) -> str:
+    """Put labels on a page's first heading, which MyST leaves without the page's own."""
+    m = HEADING.search(tex)
+    if not m:
+        raise ValueError("no heading to label")
+    line = m.group(0)
+    if line.count("{") != line.count("}"):
+        raise ValueError(f"the first heading does not end on its line: {line[:60]}")
+    return tex[: m.end()] + "".join(f"\\label{{{label}}}" for label in labels) + tex[m.end() :]
+
+
+def hyperref_pages(tex: str, pages: set[str]) -> tuple[str, int]:
+    """Turn each \\href{/path} to a page the PDF has into \\hyperref[page:/path], a link inside it."""
+    count = 0
+
+    def sub(m):
+        nonlocal count
+        if m.group(1) not in pages:
+            return m.group(0)
+        count += 1
+        return f"\\hyperref[page:{m.group(1)}]{{"
+
+    return PAGE_HREF.sub(sub, tex), count
+
+
+def missing_labels(tex_files: dict[str, str]) -> list[str]:
+    """Labels a \\hyperref names that no \\label defines, each with a file that uses it."""
+    defined = {label for tex in tex_files.values() for label in DEFINED_LABEL.findall(tex)}
+    return sorted(
+        {f"{name}: \\hyperref[{label}] has no \\label"
+         for name, tex in tex_files.items() for label in USED_LABEL.findall(tex) if label not in defined}
+    )
+
+
+def internalize_tex() -> list[str]:
+    """Step 4, first: links to labels and pages the PDF has become links inside it."""
+    tex_dir = STAGE / TEX_DIR
+    articles = pdf_article_list((STAGE / "myst.yml").read_text())
+    includes = INCLUDE.findall((tex_dir / f"{NAME}.tex").read_text())
+    if len(includes) != len(articles):
+        return [f"{NAME}.tex includes {len(includes)} files for {len(articles)} articles; cannot match them"]
+    pages = {page_url(STAGE / rel, STAGE) for rel in articles}
+    tex_files = {path.name: path.read_text() for path in tex_dir.glob("*.tex")}
+    n_words = n_pages = 0
+    for rel, include in zip(articles, includes):
+        name = f"{include}.tex"
+        if name not in tex_files:
+            return [f"{NAME}.tex includes {name}, which MyST did not write"]
+        title = PAGE_TITLE_LABEL.match((STAGE / rel).read_text()) if rel.endswith(".md") else None
+        labels = ([title.group(1)] if title else []) + [f"page:{page_url(STAGE / rel, STAGE)}"]
+        try:
+            tex_files[name] = label_first_heading(tex_files[name], labels)
+        except ValueError as e:
+            return [f"{name}: {e}"]
+    for name, tex in tex_files.items():
+        tex, n = hyperref_placeholders(tex)
+        tex, m = hyperref_pages(tex, pages)
+        tex_files[name] = tex
+        n_words, n_pages = n_words + n, n_pages + m
+    failures = missing_labels(tex_files)
+    failures += [f"{name} still has a placeholder link" for name, tex in tex_files.items() if PLACEHOLDER in tex]
+    for name, tex in tex_files.items():
+        (tex_dir / name).write_text(tex)
+    log.info("links kept inside the PDF: %d with their words, %d to whole pages", n_words, n_pages)
+    return failures
+
+
+MARGIN = re.compile(r"^:::\{margin\}[^\n]*\n(.*?)\n:::[ \t]*$", re.S | re.M)
+FENCE_LINE = re.compile(r"^\s*(`{3,}|:{3,})")
+
+
+def margins_to_footnotes(text: str) -> tuple[str, int]:
+    """Each `{margin}` note as a footnote: its marker at the end of the last line of prose before
+    it (outside any fenced block, and not a heading or a label), its text as the definition, where
+    the note was. MyST's PDF export drops margin notes; the site keeps them in the margin."""
+    lines = text.split("\n")
+    fenced, inside = [False] * len(lines), None  # which lines sit inside a fenced block
+    for i, line in enumerate(lines):
+        m = FENCE_LINE.match(line)
+        if inside is None:
+            if m:
+                inside, fenced[i] = m.group(1), True
+        else:
+            fenced[i] = True
+            if line.strip() == inside:
+                inside = None
+    notes = []
+    for number, m in enumerate(MARGIN.finditer(text), 1):
+        first = text[: m.start()].count("\n")
+        anchor = next((j for j in range(first - 1, -1, -1)
+                       if lines[j].strip() and not fenced[j] and not lines[j].lstrip().startswith("#")
+                       and not re.fullmatch(r"\(\S+\)=", lines[j].strip())), None)
+        if anchor is None:
+            raise ValueError(f"the margin note at line {first + 1} has no prose before it to attach a footnote to")
+        label = f"marginnote{number}"
+        lines[anchor] = lines[anchor].rstrip() + f"[^{label}]"
+        body = m.group(1).strip("\n").split("\n")
+        definition = [f"[^{label}]: {body[0]}"] + [("    " + line) if line.strip() else "" for line in body[1:]]
+        notes.append((first, m.group(0).count("\n") + 1, definition))
+    for first, length, definition in reversed(notes):
+        lines[first : first + length] = definition
+    return "\n".join(lines), len(notes)
+
+
+def rewrite_staged_margins() -> None:
+    """Step 2, continued: in the pages the PDF has, margin notes become footnotes."""
+    n_notes = 0
+    for rel in sorted(pdf_articles((STAGE / "myst.yml").read_text())):
+        md = STAGE / rel
+        if md.suffix != ".md":
+            continue
+        try:
+            text, n = margins_to_footnotes(md.read_text())
+        except ValueError as e:
+            raise ValueError(f"{rel}: {e}") from None
+        if n:
+            md.write_text(text)
+            n_notes += n
+    log.info("margin notes made footnotes for the PDF: %d", n_notes)
+
+
 def absolutize(tex: str) -> tuple[str, int]:
     """Prefix site-relative \\href targets with the site's URL."""
     return REL_HREF.subn(lambda _: "\\href{" + SITE + "/", tex)
@@ -282,21 +443,15 @@ def stage(root: Path) -> None:
 
 
 def rewrite_staged_facts() -> None:
-    """Step 2: point every fact link, and every link with text to a section, at the site."""
+    """Step 2: point every fact link in the staged Markdown at the site."""
     targets = fact_targets(STAGE)
-    sections = {}
-    for md in sorted((STAGE / "content").rglob("*.md")):
-        sections |= section_label_targets(md.read_text(), SITE + page_url(md, STAGE))
-    n_facts = n_sections = 0
+    n_facts = 0
     for md in (STAGE / "content").rglob("*.md"):
         text, n = rewrite_fact_links(md.read_text(), targets)
-        text, m = rewrite_section_links(text, sections)
-        if n or m:
+        if n:
             md.write_text(text)
             n_facts += n
-            n_sections += m
     log.info("fact links pointed at the site: %d", n_facts)
-    log.info("section links pointed at the site: %d", n_sections)
 
 
 def absolutize_tex() -> list[str]:
@@ -346,9 +501,11 @@ def build(root: Path) -> list[str]:
     stage(root)
     rewrite_staged_facts()
     rewrite_staged_web_only()
+    rewrite_staged_margins()
+    rewrite_staged_link_words()
     if run(["myst", "build", "--pdf"], STAGE, root / MYST_LOG):
         return [f"myst build --pdf failed; see {MYST_LOG}"]
-    return absolutize_tex() or compile_and_copy(root)
+    return internalize_tex() or absolutize_tex() or compile_and_copy(root)
 
 
 def raises_key_error(fn, *args) -> bool:
@@ -390,32 +547,6 @@ def fact_failures() -> list[str]:
     ]
 
 
-def section_failures() -> list[str]:
-    """Failures of the section-link rewrite."""
-    page = "(sec:page)=\n# Title\n\n(sec:here)=\n## Here\n\n(eq:x)=\n"
-    targets = section_label_targets(page, "U")
-    links = (
-        "See [the part here](#sec:here), [the title](#sec:page), [](#sec:here)"
-        " and [elsewhere](#sec:elsewhere)."
-    )
-    text, n = rewrite_section_links(links, targets)
-    return [
-        msg
-        for bad, msg in [
-            (targets != {"sec:here": "U#sec-here"}, f"section labels mapped to {targets}"),
-            (n != 1, f"rewrote {n} section links, not 1"),
-            ("[the part here](U#sec-here)" not in text, "section link not pointed at its anchor"),
-            ("[the title](#sec:page)" not in text, "link to a page's title label was rewritten"),
-            (
-                "[](#sec:here)" not in text,
-                "a link without text was rewritten; MyST fills in its title",
-            ),
-            ("[elsewhere](#sec:elsewhere)" not in text, "link to an unknown label was rewritten"),
-        ]
-        if bad
-    ]
-
-
 def web_only_failures() -> list[str]:
     """Failures of the rewrite of links to labels on pages the PDF leaves out."""
     page = ("(sec:page)=\n# Title\n\n(sec:x)=\n## X\n\n```{math}\n:label: eq:y\n```\n\n"
@@ -446,6 +577,78 @@ def web_only_failures() -> list[str]:
         ]
         if bad
     ]
+
+
+def link_words_failures() -> list[str]:
+    """Failures of keeping links inside the PDF with their words."""
+    labels = {"eq:rule", "sec:Page", "fig:a_b"}
+    text, n = keep_link_words(
+        "the [golden rule](#eq:rule), [](#eq:rule), [the page](#sec:Page), [a figure](#fig:a_b), "
+        "[elsewhere](#sec:web) and {eq}`eq:rule`", labels)
+    try:
+        keep_link_words("[odd](#eq:a#b)", {"eq:a#b"})
+        odd_refused = False
+    except ValueError:
+        odd_refused = True
+    tex, n_tex = hyperref_placeholders(rf"the \href{{{PLACEHOLDER}eq:rule}}{{golden rule}} and \href{{{PLACEHOLDER}fig:a\_b}}{{x}}")
+    labeled = label_first_heading("\\chapter{The \\acrshort{mpc} Page}\nText \\section{Later}", ["sec:Page", "page:/c/p"])
+    try:
+        label_first_heading("\\section{A heading\nthat goes on}", ["x"])
+        split_refused = False
+    except ValueError:
+        split_refused = True
+    pages, n_pages = hyperref_pages(r"\href{/c/p}{P}, \href{/c/q}{Q} and \href{/c/p\#x}{X}", {"/c/p"})
+    missing = missing_labels({"a.tex": r"\label{eq:rule} \hyperref[eq:rule]{r} \hyperref[sec:gone]{g}"})
+    return [
+        msg
+        for bad, msg in [
+            (
+                n != 3 or f"]({PLACEHOLDER}eq:rule)" not in text or "[](#eq:rule)" not in text
+                or "](#sec:web)" not in text or "{eq}`eq:rule`" not in text,
+                f"links with words to labels in the PDF were not all kept, or something else was touched: {text}",
+            ),
+            (not odd_refused, "a label \\hyperref can't take was accepted"),
+            (
+                n_tex != 2 or tex != r"the \hyperref[eq:rule]{golden rule} and \hyperref[fig:a_b]{x}",
+                f"placeholder links became {tex}",
+            ),
+            (
+                labeled != "\\chapter{The \\acrshort{mpc} Page}\\label{sec:Page}\\label{page:/c/p}\nText \\section{Later}",
+                f"the page's first heading was labeled as {labeled!r}",
+            ),
+            (not split_refused, "a heading that goes on past its line was labeled inside its argument"),
+            (
+                n_pages != 1 or pages != r"\hyperref[page:/c/p]{P}, \href{/c/q}{Q} and \href{/c/p\#x}{X}",
+                f"links to whole pages became {pages}",
+            ),
+            (missing != ["a.tex: \\hyperref[sec:gone] has no \\label"], f"missing labels reported as {missing}"),
+        ]
+        if bad
+    ]
+
+
+def margin_failures() -> list[str]:
+    """Failures of turning margin notes into footnotes for the PDF."""
+    cases = {
+        "a note after a paragraph": ("Text one.\n\n:::{margin}\nA note.\n:::\n\nNext.",
+                                     "Text one.[^marginnote1]\n\n[^marginnote1]: A note.\n\nNext."),
+        "a note after display math": ("Prose before\n\n```{math}\nx = 1\n```\n\n:::{margin}\nOn x.\n:::\n",
+                                      "Prose before[^marginnote1]\n\n```{math}\nx = 1\n```\n\n[^marginnote1]: On x.\n"),
+        "a note of two paragraphs": ("P.\n\n:::{margin}\nFirst.\n\nSecond, $x$.\n:::\n",
+                                     "P.[^marginnote1]\n\n[^marginnote1]: First.\n\n    Second, $x$.\n"),
+        "a note after a heading": ("Earlier.\n\n## Head\n\n:::{margin}\nN.\n:::\n",
+                                   "Earlier.[^marginnote1]\n\n## Head\n\n[^marginnote1]: N.\n"),
+    }
+    failures = [f"{name} became {margins_to_footnotes(given)[0]!r}"
+                for name, (given, want) in cases.items() if margins_to_footnotes(given)[0] != want]
+    if margins_to_footnotes("Plain.\n") != ("Plain.\n", 0):
+        failures.append("a page with no margin note was changed")
+    try:
+        margins_to_footnotes(":::{margin}\nalone\n:::\n")
+        failures.append("a margin note with no prose before it was accepted")
+    except ValueError:
+        pass
+    return failures
 
 
 def href_failures() -> list[str]:
@@ -522,8 +725,8 @@ def clear_failures() -> list[str]:
 
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
-    failures = (fact_failures() + section_failures() + web_only_failures() + href_failures() + url_failures()
-                + clear_failures())
+    failures = (fact_failures() + web_only_failures() + margin_failures() + link_words_failures() + href_failures()
+                + url_failures() + clear_failures())
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")

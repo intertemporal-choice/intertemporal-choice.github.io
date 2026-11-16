@@ -192,7 +192,7 @@ project:
           level: 1
         - file: content/asset_pricing/Portfolio-CRRA/index.md
           level: 1
-        - file: content/asset_pricing/LucasAssetPrice.md
+        - file: content/asset_pricing/LucasAssetPrice/index.md
           level: 1
         - file: content/asset_pricing/C-CAPM.md
           level: 1
@@ -214,7 +214,7 @@ project:
           level: 1
         - file: content/growth/index.md
           level: 0
-        - file: content/growth/RamseyCassKoopmans.md
+        - file: content/growth/RamseyCassKoopmans/index.md
           level: 1
         - file: content/growth/RCKWithGov.md
           level: 1
@@ -236,13 +236,17 @@ project:
           level: 1
         - file: content/dsge/RBC-Prescott.md
           level: 1
-        - file: content/numerical/index.md
+        - file: content/appendices/mathematical/index.md
           level: 0
-        - file: content/numerical/Aggregation.md
+        - file: content/appendices/mathematical/Aggregation.md
           level: 1
-        - file: content/numerical/HamiltonianVSDiscrete.md
+        - file: content/appendices/mathematical/HamiltonianVSDiscrete.md
           level: 1
-        - file: content/numerical/MathFactsList.md
+        - file: content/appendices/mathematical/MathFactsList.md
+          level: 1
+        - file: content/appendices/chapters/index.md
+          level: 0
+        - file: content/appendices/chapters/PerfForesightCRRA.md
           level: 1
 
   # No `jupyter` block. The book carries no executable pages: a reader runs a chapter's

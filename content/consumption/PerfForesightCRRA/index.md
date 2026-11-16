@@ -37,9 +37,11 @@ where {math}`\pLevBF_{\tNow+1}` is "permanent labor income," which always grows 
 
 ## The Solution
 
-It will be convenient to think of both market resources {math}`\mLevBF_{\tNow}` and permanent noncapital (labor) income {math}`\pLevBF_{\tNow}` as state variables in this problem. Bellman's equation is[^bellman-form]
+It will be convenient to think of both market resources {math}`\mLevBF_{\tNow}` and permanent noncapital (labor) income {math}`\pLevBF_{\tNow}` as state variables in this problem. Bellman's equation is
 
-[^bellman-form]: Bellman's equation relates {math}`\vFunc_{\tNow}` and {math}`\vFunc_{\tNow+1}` through the controls and the states, so it does not necessarily require writing out the budget constraint.
+:::{margin}
+Bellman's equation relates {math}`\vFunc_{\tNow}` and {math}`\vFunc_{\tNow+1}` through the controls and the states, so it does not necessarily require writing out the budget constraint.
+:::
 
 ```{math}
 :label: eq:PFCRRA-vmax
@@ -91,10 +93,11 @@ Thus, consumption grows in every period by a factor {math}`\Pat \equiv (\Rfree\D
 
 we will say that the consumer exhibits "absolute impatience" because this is the condition that guarantees that the level of consumption will be falling (and what better definition of absolute impatience could there be than deliberately spending so much that you will have to cut your spending in the future?). If {math}`\Pat > 1` the consumer exhibits "absolute patience" (the consumer wants to defer resources into the future in order to achieve consumption growth).
 
-The Intertemporal Budget Constraint tells us[^infsum-note]
+The Intertemporal Budget Constraint tells us that the present discounted value of consumption must match the PDV of total resources:
 
-[^infsum-note]: [InfSum](#fact:infsum) is the immediate implication of [FinSum](#fact:finsum) as {math}`\TEnd \rightarrow \infty`.
- that the present discounted value of consumption must match the PDV of total resources:
+:::{margin}
+[InfSum](#fact:infsum) is the immediate implication of [FinSum](#fact:finsum) as {math}`\TEnd \rightarrow \infty`.
+:::
 
 ```{math}
 :label: eq:PFCRRA-ibc
@@ -146,9 +149,11 @@ Human wealth as defined in [the PDV of labor income](#eq:PFCRRA-yfin) includes t
 \hNrmEnd_{t} \equiv \hRat_{t}-1 = \sum_{n=1}^{\TEnd-\tNow} ({\WGro}/\Rfree)^{n} = ({\WGro}/\Rfree)\left(\frac{1-({\WGro}/\Rfree)^{\TEnd-\tNow}}{1-({\WGro}/\Rfree)}\right),
 ```
 
-which approaches {math}`({\WGro}/\Rfree)/(1-{\WGro}/\Rfree)` as {math}`\TEnd \rightarrow \infty` when the [finite human wealth condition](#eq:FHWCPF) below holds.[^pfcrra-edge-cases]
+which approaches {math}`({\WGro}/\Rfree)/(1-{\WGro}/\Rfree)` as {math}`\TEnd \rightarrow \infty` when the [finite human wealth condition](#eq:FHWCPF) below holds.
 
-[^pfcrra-edge-cases]: The closed forms divide by zero in two cases, and the sums they come from give the answer. If the return patience factor {math}`\PatR=1`, [the inverse of the MPC as a sum](#eq:MPCrecursiveSum) gives {math}`\MPC_{t}=1/(\TEnd-\tNow+1)`. If {math}`\WGro=\Rfree`, every term of the human wealth sum is 1, so {math}`\hRat_{t}=\TEnd-\tNow+1` and {math}`\hNrmEnd_{t}=\TEnd-\tNow`.
+:::{margin}
+The closed forms divide by zero in two cases, and the sums they come from give the answer. If the return patience factor {math}`\PatR=1`, [the inverse of the MPC as a sum](#eq:MPCrecursiveSum) gives {math}`\MPC_{t}=1/(\TEnd-\tNow+1)`. If {math}`\WGro=\Rfree`, every term of the human wealth sum is 1, so {math}`\hRat_{t}=\TEnd-\tNow+1` and {math}`\hNrmEnd_{t}=\TEnd-\tNow`.
+:::
 
 In order to apply [InfSum](#fact:infsum) to move to the infinite-horizon case ({math}`\TEnd=\infty`), we need to impose the condition
 
@@ -173,9 +178,11 @@ Similarly, if consumption starts at a positive level and grows by the factor {ma
 
 and we will henceforth call {math}`\PatR` the "return patience factor" whose log is the "return patience rate" {math}`\patr \equiv \log \PatR` ({math}`\pat` is the lower-case version of {math}`\Pat`) and what {eq}`eq:PatR` says is that the desired growth rate of consumption must be less than the interest rate in order for the model to have a well-defined solution. This condition therefore imposes a requirement that "impatience" be greater than some minimum amount. (For (much) more on the various definitions of impatience used in this section, their implications, and parallel conditions for models with uncertainty, see {cite:t}`BufferStockTheory`).
 
-If both the RIC and the FHWC hold, then the model has a well-defined infinite horizon solution,[^conditions-fail] as can be seen by realizing that
+If both the RIC and the FHWC hold, then the model has a well-defined infinite horizon solution, as can be seen by realizing that
 
-[^conditions-fail]: See {cite:t}`BufferStockTheory` for a discussion of the case where the conditions do not hold.
+:::{margin}
+See {cite:t}`BufferStockTheory` for a discussion of the case where the conditions do not hold.
+:::
 
 ```{math}
 \begin{aligned}
@@ -409,9 +416,11 @@ Now substituting the definitions of {math}`\RnormWGro` and {math}`\DiscAlt` we s
 \end{aligned}
 ```
 
-where {math}`\PatWGro` is the "growth patience factor." We call {eq}`eq:PatWGroCond` the "growth impatience condition" (GIC),[^gic-pf] and we say that the consumer is "growth impatient" if {eq}`eq:PatWGroCond` holds.
+where {math}`\PatWGro` is the "growth patience factor." We call {eq}`eq:PatWGroCond` the "growth impatience condition" (GIC), and we say that the consumer is "growth impatient" if {eq}`eq:PatWGroCond` holds.
 
-[^gic-pf]: Or, GIC-PF if we want to highlight that this is the condition for the perfect foresight model.
+:::{margin}
+Or, GIC-PF if we want to highlight that this is the condition for the perfect foresight model.
+:::
 
 Thus, whether the consumer is patient or impatient in the sense of building up or drawing down a wealth-to-income *ratio* depends on whether the growth rate of labor income is less than, equal to, or greater than the growth rate of consumption. Analogously to our earlier usages, a consumer for whom {math}`\PatWGro=1` (equivalently, {math}`\patwGro= 0`) would be "growth poised."
 
@@ -525,9 +534,11 @@ The first thing to notice about this expression is that as {math}`\aRat_{\tNow-1
 \varsigma_{\tNow} \approx \left(\frac{\CRRA^{-1}(\rfree-\DiscRate)}{\rfree}\right)
 ```
 
-and whether the saving rate is positive or negative depends on whether the consumer is absolutely impatient, absolutely poised, or absolutely patient.[^partial-eq]
+and whether the saving rate is positive or negative depends on whether the consumer is absolutely impatient, absolutely poised, or absolutely patient.
 
-[^partial-eq]: In this partial equilibrium framework, we are assuming that the consumer's wealth can go to infinity without any effect on the aggregate interest rate.
+:::{margin}
+In this partial equilibrium framework, we are assuming that the consumer's wealth can go to infinity without any effect on the aggregate interest rate.
+:::
 
 Finally, if we rewrite this as
 
@@ -550,9 +561,8 @@ If we consider almost any plausible configuration of parameter values, say {math
 
 The [appendix](#sec:PerfForesightCRRA-Appendix) derives three further results, which are stated here without their derivations.
 
-- *Infinite human wealth.* If the finite human wealth condition fails, consumption out of human wealth grows without bound as the horizon extends, so long as the growth impatience condition holds.
-  In that case the return impatience condition implies the growth impatience condition.
-- *Value in closed form.* Value is current utility times the inverse of the MPC: {math}`\vFunc_{t} = \uFunc(c_{t})\MPC_{t}^{-1} = \uFunc(\oRat_{t})\MPC_{t}^{-\CRRA}`.
-- *The MPC recursion.* The inverse of the MPC satisfies {math}`\MPC_{t}^{-1} = 1+\PatR\MPC_{t+1}^{-1}`.
+- *[The limiting solution if the FHWC fails](#sec:PFwhenFHWfails).* If the finite human wealth condition fails, the limit of the finite-horizon solutions depends on the growth impatience condition. If it holds, as it must when the return impatience condition holds, consumption out of human wealth grows without bound. If the return and growth impatience conditions both fail, consumption goes to zero; on the boundary between the two, {math}`\PatWGro=1`, it converges to permanent income.
+- *[The MPC recursion](#sec:PerfForesightCRRA-MPCRecursion).* The inverse of the MPC satisfies {math}`\MPC_{t}^{-1} = 1+\PatR\MPC_{t+1}^{-1}`.
   Starting from {math}`\MPC_{T}=1`, this makes {math}`\MPC_{t}^{-1}` the sum {math}`1+\PatR+\PatR^{2}+\dots+\PatR^{T-t}`.
+- *[Value in closed form](#sec:PerfForesightCRRA-ValueClosedForm).* Value is current utility times the inverse of the MPC: {math}`\vFunc_{t} = \uFunc(\cLevBF_{t})\MPC_{t}^{-1} = \uFunc(\oLev_{t})\MPC_{t}^{-\CRRA}`.
   One consequence is that the utility-inverse of value is linear in market resources above their minimum, so value is easy to compute.
