@@ -99,7 +99,7 @@ the future paths of wages and interest rates as *given*. Thus
 the Hamiltonian is
 
 :::{margin}
-See the [RCK model](#sec:RamseyCassKoopmans) section for the discounted Hamiltonian optimality conditions and the [discrete and continuous time](#sec:HamiltonianVSDiscrete) appendix for the intuition of the logic behind the Hamiltonian.
+See the [RCK model](#sec:RamseyCassKoopmans) section for the current-value Hamiltonian optimality conditions and the [discrete and continuous time](#sec:HamiltonianVSDiscrete) appendix for the intuition of the logic behind the Hamiltonian.
 :::
 
 ```{math}
