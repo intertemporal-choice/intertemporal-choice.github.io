@@ -36,7 +36,7 @@ In words, {math}`\pi^{*}` measures willingness to pay, in units of certain consu
 :name: fig:RiskPremium
 :align: center
 
-The Pratt-Arrow risk premium {math}`\pi^{*}`, drawn for the numerical illustration below. Expected utility is the midpoint of the chord, which lies below the utility function because {math}`\uFunc` is concave.
+The Pratt-Arrow risk premium {math}`\pi^{*}`, drawn for the numerical illustration below. Expected utility is the midpoint of the chord, which lies below the utility function because {math}`\uFunc` is concave. Drawn by the chapter's [notebook](UncertaintyRiskAversionAndPrudence.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb).
 :::
 
 ### The Kimball Precautionary Premium
@@ -57,7 +57,7 @@ The definition is {eq}`eq:RiskPrem` with {math}`\uP` written everywhere in place
 :name: fig:PrecautionaryPremium
 :align: center
 
-The Kimball precautionary premium {math}`\mu^{*}`, drawn for the numerical illustration below. Expected marginal utility is the midpoint of the chord, which lies above {math}`\uP` because {math}`\uP` is convex.
+The Kimball precautionary premium {math}`\mu^{*}`, drawn for the numerical illustration below. Expected marginal utility is the midpoint of the chord, which lies above {math}`\uP` because {math}`\uP` is convex. Drawn by the chapter's [notebook](UncertaintyRiskAversionAndPrudence.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb).
 :::
 
 ### Absolute Risk Aversion and Absolute Prudence
@@ -138,7 +138,7 @@ If the two sides differed, moving a little of the resources from consumption to 
 :name: fig:EquateMargUtils
 :align: center
 
-Marginal utility of consumption and marginal value of end-of-period assets. With risky income, {math}`\vEndFunc_{t}^{\prime}(\aRat) = \DiscFac\Rfree\,\Ex_{t}[\vFunc_{t+1}^{\prime}(\Rfree\aRat+\tilde{\yRat}_{t+1})]`; with income certain at its mean, it is {math}`\DiscFac\Rfree\,\vFunc_{t+1}^{\prime}(\Rfree\aRat+\Ex_{t}[\tilde{\yRat}_{t+1}])`. Drawn for a consumer for whom period {math}`t+1` is the last, so that {math}`\vFunc_{t+1}=\uFunc`, with {math}`\CRRA=2`, {math}`\DiscFac=\Rfree=1`, {math}`\mRat_{t}=3`, and next period's income {math}`1-0.75` or {math}`1+0.75`.
+Marginal utility of consumption and marginal value of end-of-period assets. With risky income, {math}`\vEndFunc_{t}^{\prime}(\aRat) = \DiscFac\Rfree\,\Ex_{t}[\vFunc_{t+1}^{\prime}(\Rfree\aRat+\tilde{\yRat}_{t+1})]`; with income certain at its mean, it is {math}`\DiscFac\Rfree\,\vFunc_{t+1}^{\prime}(\Rfree\aRat+\Ex_{t}[\tilde{\yRat}_{t+1}])`. Drawn for a consumer for whom period {math}`t+1` is the last, so that {math}`\vFunc_{t+1}=\uFunc`, with {math}`\CRRA=2`, {math}`\DiscFac=\Rfree=1`, {math}`\mRat_{t}=3`, and next period's income {math}`1-0.75` or {math}`1+0.75`. Drawn by the chapter's [notebook](UncertaintyRiskAversionAndPrudence.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb).
 :::
 
 Why does the risk raise the marginal value of assets? Differentiating {eq}`eq:UR-vEnd` gives
@@ -182,7 +182,7 @@ Given impatience, the exact nature of the income risk matters less. A particular
 :name: fig:ConsFuncTarget
 :align: center
 
-The consumption function {math}`\cFunc(\mRat)` of a worker who faces a risk of forced retirement, the consumption function {math}`\cFuncAbove(\mRat)` of the same worker without the risk, and the level of consumption that would leave a worker who stays employed with unchanged {math}`\mRat`. The first and the last meet at the target {math}`\mTrgNrm`. Drawn for the benchmark parameters of the tractable buffer stock model: {math}`\urate=0.005`, {math}`\DiscFac=1/1.10`, {math}`\Rfree=1.03`, {math}`\PGro=1` and {math}`\CRRA=2`.
+The consumption function {math}`\cFunc(\mRat)` of a worker who faces a risk of forced retirement, the consumption function {math}`\cFuncAbove(\mRat)` of the same worker without the risk, and the level of consumption that would leave a worker who stays employed with unchanged {math}`\mRat`. The first and the last meet at the target {math}`\mTrgNrm`. Drawn for the benchmark parameters of the tractable buffer stock model: {math}`\urate=0.005`, {math}`\DiscFac=1/1.10`, {math}`\Rfree=1.03`, {math}`\PGro=1` and {math}`\CRRA=2`. Drawn by the chapter's [notebook](UncertaintyRiskAversionAndPrudence.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/UncertaintyRiskAversionAndPrudence/UncertaintyRiskAversionAndPrudence.ipynb).
 :::
 
 Start with the straight black line. For any {math}`\mRat`, it gives the spending at which a worker who keeps the job would start next period with the same {math}`\mRat`: labor income plus the interest earned on assets. It slopes upward because more resources earn more interest.

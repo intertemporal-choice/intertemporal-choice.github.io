@@ -509,7 +509,7 @@ The consequence is that the limiting model (as {math}`\urate \downarrow 0`) exhi
 :::{figure} figures/PhaseDiag.png
 :name: fig:TBS-PhaseDiag
 
-Phase Diagram
+Phase Diagram. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 The {math}`\Delta \mNrmE = 0` locus, given in {eq}`eq:TBS-mDelEqZero`, indicates, for a given level of {math}`\mNrmE`, how much consumption {math}`{\cNrm}^{\EmpLbl}` would be exactly the right amount to leave {math}`\mNrmE` unchanged. Call this the "permanently sustainable consumption locus," or for short "sustainable consumption." For any given {math}`\mNrmE`, consuming an amount less than the "sustainable" level will cause wealth to rise (and conversely for points above {math}`\Delta \mNrmE =0`). This provides the logic for the horizontal arrows of motion in the diagram: Above the sustainable consumption locus they point left, and below they point right.
@@ -545,7 +545,7 @@ This limiting result requires that we impose the {math}`\FHWC (\WGroFachFix < \R
 :::{figure} figures/cFunc.png
 :name: fig:TBS-cFunc
 
-The Consumption Function
+The Consumption Function. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 Note that {math}`\cFunc(\mNrm)` is *concave*. That is, the marginal propensity to consume {math}`\MPCFunc(\mNrm) \equiv d \cFunc(\mNrm)/d \mNrm` is higher at low levels of {math}`m`. This is because of the increase in the intensity of the precautionary motive as resources {math}`\mNrm` decline; the consequences of becoming unemployed with little wealth are very painful. The MPC is high at low levels of {math}`\mNrm` because at low levels of {math}`\mNrm` the *relaxation* in the intensity of the precautionary motive with each extra bit of {math}`\mNrm` is quite large ({cite:p}`kimball:smallandlarge`). This diminution in the precautionary motive translates into an increase in consumption; for {math}`m`-poor consumers even a modest increase in {math}`\mNrm` can give a substantial boost to {math}`c`.
@@ -590,7 +590,7 @@ Thus consumption growth is equal to what it would be in the absence of uncertain
 :::{figure} figures/GrowthA.png
 :name: fig:TBS-GrowthA
 
-Income and Consumption Growth
+Income and Consumption Growth. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 Next, note that the point where the consumption growth locus meets the income growth line is labeled {math}`\mTrgNrm`. This is because the place where consumption growth is equal to income growth is at the target value of {math}`\mNrmE`.
@@ -604,7 +604,7 @@ Now consider the results of increasing the interest rate to {math}`\grave{\rfree
 :::{figure} figures/GrowthB.png
 :name: fig:TBS-GrowthB
 
-Effect of An Increase In {math}`\rfree`
+Effect of An Increase In {math}`\rfree`. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 The next exercise, shown in {numref}`fig:TBS-cGroIncreaseMhoPlot`, is an increase in the risk of unemployment {math}`\urate`. The principal effect we are interested in is the upward shift in the expected consumption growth locus to {math}`\Delta \grave{\cLvl}_{t+1}`. If the household starts at the original target level of resources {math}`\mTrgNrm`, the size of the upward shift at that point is captured by the arrow originating at {math}`\{\mTrgNrm,\WGroRtehFix\}`.
@@ -614,7 +614,7 @@ In the absence of other consequences of the rise in {math}`\urate`, the effect o
 :::{figure} figures/cGroIncreaseMhoPlot.png
 :name: fig:TBS-cGroIncreaseMhoPlot
 
-Effect of an Increase in {math}`\urate`
+Effect of an Increase in {math}`\urate`. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 #### Death to the Log-Linearized Consumption Euler Equation!
@@ -683,7 +683,7 @@ We could also analyze the effects on growth, but the results would be essentiall
 :::{figure} figures/DecreaseTheta.png
 :name: fig:TBS-DecreaseTheta
 
-Effect of Lower {math}`\discRte` On Consumption Function
+Effect of Lower {math}`\discRte` On Consumption Function. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 Eventually consumption approaches its new, higher equilibrium ratio to permanent income at a new, higher level of equilibrium {math}`\mNrmE`. This higher level of consumption is financed in the long run by the higher interest income earned on the higher level of wealth.
@@ -695,19 +695,19 @@ Note again, however, that equilibrium steady-state consumption growth is still e
 :::{figure} figures/cPathAfterThetaDrop.png
 :name: fig:TBS-cPathAfterThetaDrop
 
-Path of {math}`{\cNrm}^{\EmpLbl}` Before and After {math}`\discRte` Decline
+Path of {math}`{\cNrm}^{\EmpLbl}` Before and After {math}`\discRte` Decline. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 :::{figure} figures/mPathAfterThetaDrop.png
 :name: fig:TBS-mPathAfterThetaDrop
 
-Path of {math}`\mNrmE` Before and After {math}`\discRte` Decline
+Path of {math}`\mNrmE` Before and After {math}`\discRte` Decline. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 :::{figure} figures/MPCPathAfterThetaDrop.png
 :name: fig:TBS-MPCPathAfterThetaDrop
 
-Marginal Propensity to Consume {math}`\MPC_{t}` Before and After {math}`\discRte` Decline
+Marginal Propensity to Consume {math}`\MPC_{t}` Before and After {math}`\discRte` Decline. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 ## A Macroeconomic Interpretation
@@ -827,7 +827,7 @@ If the economy has experienced multiple shocks, it will be necessary to retain a
 :::{figure} figures/SOEStakescPathAfterThetaDropPlot.png
 :name: fig:TBS-SOEStakescPathAfterThetaDropPlot
 
-Aggregate {math}`\CNrm` in PE/SOE Economy Before and After {math}`\discRte` Decline
+Aggregate {math}`\CNrm` in PE/SOE Economy Before and After {math}`\discRte` Decline. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 #### No Stake
@@ -866,7 +866,7 @@ The foregoing discussion contains (in some cases implicitly) all the assumptions
 :::{figure} figures/SOENoStakescPath.png
 :name: fig:TBS-SOENoStakescPath
 
-Path of Aggregate {math}`\CNrm` in Stakeless PE/SOE Economy From Date 0
+Path of Aggregate {math}`\CNrm` in Stakeless PE/SOE Economy From Date 0. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 ## Appendix

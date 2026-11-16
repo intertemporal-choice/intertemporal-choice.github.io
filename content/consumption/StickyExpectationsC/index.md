@@ -80,13 +80,13 @@ Assuming (here and henceforth) that the growth factor for permanent income is {m
 :::{figure} figures/cPlot.png
 :name: fig:aftershock
 
-Path of {math}`\CLev` after a shock {math}`\TShkEmp_{t}=2`, Omniscient Consumers
+Path of {math}`\CLev` after a shock {math}`\TShkEmp_{t}=2`, Omniscient Consumers. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
 :::
 
 :::{figure} figures/bPlot.png
 :name: fig:epidshock
 
-Path of {math}`\BLev` after a shock {math}`\TShkEmp_{t}=2`, Omniscient Consumers
+Path of {math}`\BLev` after a shock {math}`\TShkEmp_{t}=2`, Omniscient Consumers. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
 :::
 
 Now suppose that not every consumer updates expectations in every period. Instead, expectations are "sticky": each consumer updates with probability {math}`\Pi` in each period. Whether the consumer at location {math}`i` updates in period {math}`t` is determined by the realization of the dichotomous random variable
@@ -185,13 +185,13 @@ Consider the case of a positive shock of size {math}`\hat{\TShkEmp}_{t}=1`, as b
 :::{figure} figures/StickyExpectationsCc.png
 :name: fig:StickyExpectationsCc
 
-Path of {math}`\CLev` after a shock {math}`\TShkEmp_{t}=2`; Sticky Expectations in Red/Gray
+Path of {math}`\CLev` after a shock {math}`\TShkEmp_{t}=2`; Sticky Expectations in Red/Gray. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
 :::
 
 :::{figure} figures/StickyExpectationsCb.png
 :name: fig:StickyExpectationsCb
 
-Path of {math}`\BLev` after a shock {math}`\TShkEmp_{t}=2`; Sticky Expectations in Red/Gray
+Path of {math}`\BLev` after a shock {math}`\TShkEmp_{t}=2`; Sticky Expectations in Red/Gray. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
 :::
 
 The sticky expectations model says that consumption growth today can be statistically related to any variable that is related to lagged consumption growth. In particular, if lagged consumption growth is related to lagged income growth (as it certainly will be), then there **should** be a statistically significant effect of lagged income growth on current consumption growth if expectations are sticky.
