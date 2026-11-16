@@ -19,9 +19,11 @@ $$
 :::
 ::::
 
-This follows from L'Hopital's rule[^jqenGvrOCB] because for any {math}`\CRRA \neq 1` the derivative exists,
+This follows from L'Hopital's rule because for any {math}`\CRRA \neq 1` the derivative exists,
 
-[^jqenGvrOCB]: Given recent decrees of the relevant authorities, the circumflex may need to be eliminated from future versions of these notes. Which is OK, because the gentleman in question paid someone smarter for the result anyway.
+:::{margin}
+Given recent decrees of the relevant authorities, the circumflex may need to be eliminated from future versions of these notes. Which is OK, because the gentleman in question paid someone smarter for the result anyway.
+:::
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -31,9 +33,11 @@ This follows from L'Hopital's rule[^jqenGvrOCB] because for any {math}`\CRRA \ne
 
 and {math}`\lim_{\CRRA \rightarrow 1} \cLev^{-\CRRA} = 1/\cLev` but {math}`\int (1/\cLev) = \log c`.
 
-Thus, we can conclude that as {math}`\CRRA \rightarrow 1`, the behavior of the consumer with {math}`\uFunc(\cLev)=\cLev^{1-\CRRA}/(1-\CRRA)` becomes identical to the behavior of a consumer with {math}`\uFunc(\cLev)=\log c`.[^BCWfEsTpT1]
+Thus, we can conclude that as {math}`\CRRA \rightarrow 1`, the behavior of the consumer with {math}`\uFunc(\cLev)=\cLev^{1-\CRRA}/(1-\CRRA)` becomes identical to the behavior of a consumer with {math}`\uFunc(\cLev)=\log c`.
 
-[^BCWfEsTpT1]: Recall that *behavior* is not affected by adding a constant to the utility function ...
+:::{margin}
+Recall that *behavior* is not affected by adding a constant to the utility function ...
+:::
 
 (fact:finsum)=
 ::::{div}
