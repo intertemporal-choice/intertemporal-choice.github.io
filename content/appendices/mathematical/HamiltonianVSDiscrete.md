@@ -66,19 +66,19 @@ The current-value Hamiltonian is
 ```{math}
 :label: eq:hamilt
 
-\mathcal{H}(\kap,\cons,\lambda) = \uFunc(\cons) + (\fFunc(\kap)-\cons-(\popGro+\depr)\kap)\lambda
+\Ham(\kap,\cons,\vk) = \uFunc(\cons) + (\fFunc(\kap)-\cons-(\popGro+\depr)\kap)\vk
 ```
 
 where {math}`\kap` is the state variable, {math}`\cons` is the control variable, and
-{math}`\lambda` is the costate variable.
+{math}`\vk` is the costate variable.
 
-{math}`\lambda` is the continuous-time equivalent of a Lagrange
+{math}`\vk` is the continuous-time equivalent of a Lagrange
 multiplier, so its value should be equivalent to the value of relaxing
 the corresponding constraint by an infinitesimal amount. But the
 constraint in question is the capital-accumulation constraint. Thus
-{math}`\lambda` should be equal to the value of having a tiny bit more
+{math}`\vk` should be equal to the value of having a tiny bit more
 capital, {math}`\frac{\mathcal{V}(\kap+\Delta \kap)-\mathcal{V}(\kap)}{\Delta \kap}`. In other words,
-you can think of {math}`\lambda=\mathcal{V}'(\kap)`.
+you can think of {math}`\vk=\mathcal{V}'(\kap)`.
 
 The condition for optimal consumption is
 
@@ -86,8 +86,8 @@ The condition for optimal consumption is
 :label: eq:uceqvk
 
 \begin{gathered}\begin{aligned}
-        \frac{\partial \mathcal{H}}{\partial \cons} & =  0  \\
-        \uFunc^{\prime}(\cons) & =  \lambda
+        \frac{\partial \Ham}{\partial \cons} & =  0  \\
+        \uFunc^{\prime}(\cons) & =  \vk
 \\  \uFunc^{\prime}(\cons) & =  \mathcal{V}'(\kap) .
 \end{aligned}\end{gathered}
 ```
@@ -104,8 +104,8 @@ The costate equation is
 :label: eq:lamgrow
 
 \begin{gathered}\begin{aligned}
-        \dot{\lambda} & =  \timeRate\lambda - \lambda(\fFunc^{\prime}(\kap)-(\popGro+\depr))
-\\      \dot{\lambda}/\lambda & =  \timeRate-(\rfree-\popGro) .
+        \dot{\vk} & =  \timeRate\vk - \vk(\fFunc^{\prime}(\kap)-(\popGro+\depr))
+\\      \dot{\vk}/\vk & =  \timeRate-(\rfree-\popGro) .
 \end{aligned}\end{gathered}
 ```
 
@@ -148,14 +148,14 @@ and multiplying by {math}`J`,
 J(\log \VFunc^{\prime}(\mNrm_{t+1}) - \log \VFunc^{\prime}(\mNrm_{t})) \approx \timeRate-(\rfree-\popGro) .
 ```
 
-The left side is the change in {math}`\log \VFunc^{\prime}` over one period, expressed at an annual rate. As {math}`J \rightarrow \infty`, {math}`\mNrm_{t}` becomes {math}`\kap`, {math}`\VFunc^{\prime}` becomes {math}`\mathcal{V}'`, and the left side becomes {math}`(d/dt)\log \mathcal{V}'(\kap) = \dot{\lambda}/\lambda`. The approximations become exact in the limit, which leaves [the costate equation](#eq:lamgrow). So the costate equation of the Hamiltonian method is the discrete-time condition {math}`\VFunc^{\prime}(\mNrm_{t})=\Discount\Rfree_{t+1}\VFunc^{\prime}(\mNrm_{t+1})`, taken to continuous time.
+The left side is the change in {math}`\log \VFunc^{\prime}` over one period, expressed at an annual rate. As {math}`J \rightarrow \infty`, {math}`\mNrm_{t}` becomes {math}`\kap`, {math}`\VFunc^{\prime}` becomes {math}`\mathcal{V}'`, and the left side becomes {math}`(d/dt)\log \mathcal{V}'(\kap) = \dot{\vk}/\vk`. The approximations become exact in the limit, which leaves [the costate equation](#eq:lamgrow). So the costate equation of the Hamiltonian method is the discrete-time condition {math}`\VFunc^{\prime}(\mNrm_{t})=\Discount\Rfree_{t+1}\VFunc^{\prime}(\mNrm_{t+1})`, taken to continuous time.
 
 ## The Transversality Condition
 
 Finally, the transversality condition is
 
 ```{math}
-\lim_{t \rightarrow \infty} e^{-\timeRate t} \lambda \kap = 0
+\lim_{t \rightarrow \infty} e^{-\timeRate t} \vk \kap = 0
 ```
 
 and its discrete-time counterpart is
@@ -166,7 +166,7 @@ and its discrete-time counterpart is
 \lim_{t \rightarrow \infty} \Discount^{t} \uFunc^{\prime}(\cons_{t}) \kap_{t} = 0.
 ```
 
-By the discrete-time conditions, for any utility function, {math}`\Discount^{t}\uFunc^{\prime}(\cons_{t}) = \uFunc^{\prime}(\cons_{0})/\prod_{s=1}^{t}\Rfree_{s}`, so the condition says {math}`\lim_{t \rightarrow \infty} \kap_{t}/\prod_{s=1}^{t}\Rfree_{s} = 0`: the present value of capital in the far future is zero. (With a constant {math}`\Rfree` it reads {math}`\lim_{t \rightarrow \infty} \Rfree^{-t}\kap_{t} = 0`.) In continuous time, the costate equation gives {math}`e^{-\timeRate t}\lambda = \lambda(0)e^{-\int_{0}^{t}(\rfree_{\tau}-\popGro)\,d\tau}`, so the condition is {math}`\lim_{t \rightarrow \infty} e^{-\int_{0}^{t}(\rfree_{\tau}-\popGro)\,d\tau}\kap = 0`.
+By the discrete-time conditions, for any utility function, {math}`\Discount^{t}\uFunc^{\prime}(\cons_{t}) = \uFunc^{\prime}(\cons_{0})/\prod_{s=1}^{t}\Rfree_{s}`, so the condition says {math}`\lim_{t \rightarrow \infty} \kap_{t}/\prod_{s=1}^{t}\Rfree_{s} = 0`: the present value of capital in the far future is zero. (With a constant {math}`\Rfree` it reads {math}`\lim_{t \rightarrow \infty} \Rfree^{-t}\kap_{t} = 0`.) In continuous time, the costate equation gives {math}`e^{-\timeRate t}\vk = \vk(0)e^{-\int_{0}^{t}(\rfree_{\tau}-\popGro)\,d\tau}`, so the condition is {math}`\lim_{t \rightarrow \infty} e^{-\int_{0}^{t}(\rfree_{\tau}-\popGro)\,d\tau}\kap = 0`.
 
 The constraint {math}`\kap > 0`, like the no-Ponzi condition in the consumer's problem, rules out ending with negative wealth in present value; the transversality condition, an optimality condition, rules out ending with positive wealth in present value, which would be capital never consumed. Together they make the intertemporal budget constraint hold with equality.
 
@@ -182,10 +182,10 @@ too low accumulates capital past the golden rule, where its return
 Now differentiate [the condition for optimal consumption](#eq:uceqvk) with respect to time,
 
 ```{math}
-\dot{\cons} \uFunc^{\prime\prime}(\cons) =  \dot{\lambda} ,
+\dot{\cons} \uFunc^{\prime\prime}(\cons) =  \dot{\vk} ,
 ```
 
-divide by {math}`\lambda = \uFunc^{\prime}(\cons)`, and use [the costate equation](#eq:lamgrow):
+divide by {math}`\vk = \uFunc^{\prime}(\cons)`, and use [the costate equation](#eq:lamgrow):
 
 ```{math}
 :label: eq:trans1
@@ -213,10 +213,10 @@ Modern treatments write a continuous-time problem like this one as a single equa
 ```{math}
 :label: eq:HVD-hjb
 
-\timeRate \mathcal{V}(\kap) = \max_{\cons} \{\uFunc(\cons) + \mathcal{V}'(\kap)(\fFunc(\kap)-\cons-(\popGro+\depr)\kap)\} = \max_{\cons} \mathcal{H}(\kap,\cons,\mathcal{V}'(\kap)) .
+\timeRate \mathcal{V}(\kap) = \max_{\cons} \{\uFunc(\cons) + \mathcal{V}'(\kap)(\fFunc(\kap)-\cons-(\popGro+\depr)\kap)\} = \max_{\cons} \Ham(\kap,\cons,\mathcal{V}'(\kap)) .
 ```
 
-It is the [Bellman equation](#eq:HVD-bellman) taken to continuous time. Read as an asset-pricing equation, it says that the return required on the value of the problem, {math}`\timeRate \mathcal{V}(\kap)`, equals the dividend, the flow of utility {math}`\uFunc(\cons)`, plus the capital gain, {math}`\mathcal{V}'(\kap)\dot{\kap}`. Its maximand is the current-value Hamiltonian with the costate set to {math}`\lambda = \mathcal{V}'(\kap)`, hence the "Hamilton" in its name. Its first-order condition is [the condition for optimal consumption](#eq:uceqvk); and differentiating it with respect to {math}`\kap`, by the envelope theorem, gives {math}`\timeRate \mathcal{V}'(\kap) = \mathcal{V}''(\kap)\dot{\kap} + \mathcal{V}'(\kap)(\rfree-\popGro)`, which, since {math}`\dot{\lambda} = \mathcal{V}''(\kap)\dot{\kap}`, is [the costate equation](#eq:lamgrow). The Hamiltonian's conditions describe the optimal path from one starting point; the HJB equation describes the whole value function at once, which is what many numerical methods solve for.
+It is the [Bellman equation](#eq:HVD-bellman) taken to continuous time. Read as an asset-pricing equation, it says that the return required on the value of the problem, {math}`\timeRate \mathcal{V}(\kap)`, equals the dividend, the flow of utility {math}`\uFunc(\cons)`, plus the capital gain, {math}`\mathcal{V}'(\kap)\dot{\kap}`. Its maximand is the current-value Hamiltonian with the costate set to {math}`\vk = \mathcal{V}'(\kap)`, hence the "Hamilton" in its name. Its first-order condition is [the condition for optimal consumption](#eq:uceqvk); and differentiating it with respect to {math}`\kap`, by the envelope theorem, gives {math}`\timeRate \mathcal{V}'(\kap) = \mathcal{V}''(\kap)\dot{\kap} + \mathcal{V}'(\kap)(\rfree-\popGro)`, which, since {math}`\dot{\vk} = \mathcal{V}''(\kap)\dot{\kap}`, is [the costate equation](#eq:lamgrow). The Hamiltonian's conditions describe the optimal path from one starting point; the HJB equation describes the whole value function at once, which is what many numerical methods solve for.
 
 Benjamin Moll's [lecture notes on HJB equations](https://benjaminmoll.com/wp-content/uploads/2019/07/Lecture3_2149.pdf) derive the equation from the discrete-time Bellman equation of the neoclassical growth model and show its connection to the Hamiltonian; Wikipedia's [article on the HJB equation](https://en.wikipedia.org/wiki/Hamilton%E2%80%93Jacobi%E2%80%93Bellman_equation) states it in general. {cite:t}`achdouHACT` write the problem of each household facing uninsurable income risk as an HJB equation and the distribution of wealth as a Kolmogorov forward equation, which makes a heterogeneous-agent model a system of two partial differential equations; theirs is the form much of the modern continuous-time literature in macroeconomics uses.
 
@@ -228,11 +228,11 @@ Each condition of the continuous-time solution, beside its discrete-time counter
 \begin{array}{lll}
   & \text{continuous time} & \text{discrete time}
 \\ \text{value} & \timeRate\mathcal{V}(\kap) & \VFunc(\mNrm_{t})=\max_{\cons_{t}}\{\uFunc(\cons_{t})
-\\ & \quad {}=\max_{\cons}\mathcal{H}(\kap,\cons,\mathcal{V}'(\kap)) & \quad {}+\Discount\VFunc(\mNrm_{t+1})\}
-\\ \text{consumption} & \uFunc^{\prime}(\cons)=\lambda=\mathcal{V}'(\kap) & \uFunc^{\prime}(\cons_{t})=\VFunc^{\prime}(\mNrm_{t})
-\\ \text{marginal value} & \dot{\lambda}/\lambda=\timeRate-(\rfree-\popGro) & \VFunc^{\prime}(\mNrm_{t})=\Discount\Rfree_{t+1}\VFunc^{\prime}(\mNrm_{t+1})
+\\ & \quad {}=\max_{\cons}\Ham(\kap,\cons,\mathcal{V}'(\kap)) & \quad {}+\Discount\VFunc(\mNrm_{t+1})\}
+\\ \text{consumption} & \uFunc^{\prime}(\cons)=\vk=\mathcal{V}'(\kap) & \uFunc^{\prime}(\cons_{t})=\VFunc^{\prime}(\mNrm_{t})
+\\ \text{marginal value} & \dot{\vk}/\vk=\timeRate-(\rfree-\popGro) & \VFunc^{\prime}(\mNrm_{t})=\Discount\Rfree_{t+1}\VFunc^{\prime}(\mNrm_{t+1})
 \\ \text{resources} & \dot{\kap}=\fFunc(\kap)-\cons-(\popGro+\depr)\kap & \kap_{t+1}=(\mNrm_{t}-\cons_{t})/(1+\popGro)
-\\ \text{transversality} & \lim_{t\rightarrow\infty}e^{-\timeRate t}\lambda\kap=0 & \lim_{t\rightarrow\infty}\Discount^{t}\uFunc^{\prime}(\cons_{t})\kap_{t}=0
+\\ \text{transversality} & \lim_{t\rightarrow\infty}e^{-\timeRate t}\vk\kap=0 & \lim_{t\rightarrow\infty}\Discount^{t}\uFunc^{\prime}(\cons_{t})\kap_{t}=0
 \\ \text{consumption growth} & \dot{\cons}/\cons=\CRRA^{-1}(\rfree-\popGro-\timeRate) & \cons_{t+1}/\cons_{t}=(\Discount\Rfree_{t+1})^{1/\CRRA}
 \end{array}
 ```
