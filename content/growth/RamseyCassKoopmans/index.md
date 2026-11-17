@@ -50,7 +50,7 @@ produce perpetually more as time goes by with the same amount of
 physical capital.
 
 :::{margin}
-This is the definition of 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\FFunc(\PtyLab \KLvl,\LLvl)` ('Solow-neutral'), or output, {math}`\PtyLab \FFunc(\KLvl,\LLvl)` ('Hicks-neutral'). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
+This is 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\FFunc(\PtyLab \KLvl,\LLvl)` ('Solow-neutral'), or output, {math}`\PtyLab \FFunc(\KLvl,\LLvl)` ('Hicks-neutral'). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
 :::
 
 The quantity {math}`\PtyLab \LLvl` is known as the number of 'efficiency units' of labor in the economy.
