@@ -15,15 +15,15 @@ The economy has a perfectly competitive production sector that uses a Cobb-Dougl
 
 to produce output using capital and labor. Under perfect competition firms must make zero profits in equilibrium, which means, by [Euler's theorem](#fact:eulerstheorem), that
 
+:::{margin}
+An important insight here is that all of output is absorbed by payments to labor and to capital; there is nothing left over (say, to fund research).
+:::
+
 ```{math}
 :label: eq:RCK-outputExhausted
 
 \YLvl = \FFunc_{\KLvl}\KLvl + \FFunc_{\LLvl}\LLvl .
 ```
-
-:::{margin}
-An important insight here is that all of output is absorbed by payments to labor and to capital; there is nothing left over (say, to fund research).
-:::
 
 Labor hours (the same as population) increase exogenously at a constant rate
 
