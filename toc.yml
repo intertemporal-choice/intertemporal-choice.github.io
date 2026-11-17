@@ -82,8 +82,10 @@ project:
         - file: content/growth/RamseyCassKoopmans/index.md
           children:
             - file: content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb
-        - file: content/growth/RCKWithGov.md
         - file: content/growth/DecentralizingRCK.md
+        - file: content/growth/RCKWithGov/index.md
+          children:
+            - file: content/growth/RCKWithGov/RCKWithGov.ipynb
         - file: content/growth/Romer86.md
         - file: content/growth/Endogenous.md
         - file: content/growth/RebeloAK.md
