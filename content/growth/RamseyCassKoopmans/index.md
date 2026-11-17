@@ -71,13 +71,29 @@ so dividing {eq}`eq:Kdotlevel` by {math}`\PtyLab \LLvl` and using it gives
 \dot{\kap} = \fFunc(\kap) - \cNrm - (\PtyGroRte +\PopnGroRte+\deprRte) \kap .
 ```
 
-A steady state is a point where {math}`\dot{\kap} = 0`, so that {math}`\cNrm = \fFunc(\kap) - (\PtyGroRte +\PopnGroRte+\deprRte) \kap`. A first candidate for the best steady state is the one with the highest {math}`\cNrm`. Setting the derivative with respect to {math}`\kap` to zero gives the "golden rule" of {cite:t}`phelps:golden`, an article well worth reading:
+A steady state is a point where {math}`\dot{\kap} = 0`, so that
+
+```{math}
+:label: eq:RCK-cSteadyState
+
+\cNrm = \fFunc(\kap) - (\PtyGroRte +\PopnGroRte+\deprRte) \kap .
+```
+
+A first candidate for the best steady state is the one with the highest {math}`\cNrm`. Maximizing steady-state consumption with respect to {math}`\kap` requires
+
+```{math}
+\frac{d\cNrm}{d\kap} = \fFunc^{\prime}(\kap) - (\PtyGroRte +\PopnGroRte+\deprRte) = 0 ,
+```
+
+and since {math}`d^{2}\cNrm/d\kap^{2} = \fFunc^{\prime\prime}(\kap) < 0`, this is a maximum. The capital stock that satisfies it, {math}`\GoldRule{\kap}`, obeys the "golden rule" of {cite:t}`phelps:golden`, an article well worth reading:
 
 ```{math}
 :label: eq:RCK-goldenRule
 
 \fFunc^{\prime}(\GoldRule{\kap}) = \PtyGroRte +\PopnGroRte+\deprRte .
 ```
+
+One more unit of {math}`\kap` adds {math}`\fFunc^{\prime}(\kap)` to output, but holding it steady as effective labor grows and capital depreciates takes {math}`\PtyGroRte +\PopnGroRte+\deprRte` more investment; consumption is highest where the two are equal. With the Cobb-Douglas {math}`\fFunc(\kap) = \kap^{\kapShare}`, the golden rule is {math}`\GoldRule{\kap} = \left(\kapShare/(\PtyGroRte +\PopnGroRte+\deprRte)\right)^{1/(1-\kapShare)}`.
 
 ## The Social Planner's Problem
 
