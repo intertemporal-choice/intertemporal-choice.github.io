@@ -199,7 +199,6 @@ project:
     '\MPCU': '\MPC^{u}'  # uses book 0 questions 6
     '\shk': '\phi'  # uses book 0 questions 6
     '\aNbr': 'a'  # uses book 5 questions 0
-    '\cPDVFunc': '\mathbb{C}'  # uses book 4 questions 0
     '\csDiscFac': '\rho'  # uses book 4 questions 0
     '\SeveranceRatio': '\varsigma'  # uses book 0 questions 4
     '\sTarg': '\Target{\sRat}'  # uses book 0 questions 4

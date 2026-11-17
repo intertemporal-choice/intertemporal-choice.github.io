@@ -1,6 +1,8 @@
 (sec:PerfForesightCRRA)=
 # Consumption Under Perfect Foresight and CRRA Utility
 
+The perfect foresight model with constant relative risk aversion is the benchmark for the models of consumption that follow. It has a closed-form solution, so every question about it has an exact answer: how much the consumer spends out of wealth, whether spending rises or falls over time, and how both respond to the interest rate. Three conditions organize the answers. The return impatience condition makes the marginal propensity to consume positive, the finite human wealth condition makes the present value of future income finite, and the growth impatience condition decides whether a consumer with no assets wants to borrow, and where the consumer ends up. The chapter derives the solution and the conditions, and then applies the model to two questions about interest rates: how much consumption responds through the value of future income, and how the saving rate responds. Its answers are large, larger than the evidence supports, and the reasons they are too large motivate the models of uncertainty and liquidity constraints that come later.
+
 Two companion notebooks in the Econ-ARK DemARK collection work this model numerically.
 [How Close Is HARK's Infinite-Horizon Solution?](https://econ-ark.github.io/DemARK/perfforesightcrra-convergence/)
 measures how a numerical solution, found by iterating backward from the last period of life, approaches the exact formulas derived here.
@@ -34,6 +36,10 @@ where {math}`\pLevBF_{\tNow+1}` is "permanent labor income," which always grows 
 ```{math}
 \pLevBF_{\tNow+1}/\pLevBF_{\tNow} = {\PermGroFac}.
 ```
+
+Here {math}`\Rfree = 1+\rfree` is the interest factor and {math}`\PermGroFac = 1+\PermGroRte` the growth factor of permanent income.
+
+The consumer can borrow or lend any amount at the interest factor {math}`\Rfree`, against future income as well as current resources, but cannot die in debt: {math}`\aLevBF_{\TEnd} \geq 0`. Since nothing is gained by leaving resources unspent, this constraint binds, {math}`\aLevBF_{\TEnd} = 0`. In the infinite-horizon case it becomes the no-Ponzi condition {math}`\lim_{n \rightarrow \infty} \Rfree^{-n}\aLevBF_{\tNow+n} \geq 0`, which binds for the same reason. Throughout, {math}`\CRRA \neq 1`; logarithmic utility is the limit as {math}`\CRRA \rightarrow 1`.
 
 ## The Solution
 
@@ -93,11 +99,7 @@ Thus, consumption grows in every period by a factor {math}`\APFac \equiv (\Rfree
 
 we will say that the consumer exhibits "absolute impatience" because this is the condition that guarantees that the level of consumption will be falling (and what better definition of absolute impatience could there be than deliberately spending so much that you will have to cut your spending in the future?). If {math}`\APFac > 1` the consumer exhibits "absolute patience" (the consumer wants to defer resources into the future in order to achieve consumption growth).
 
-The Intertemporal Budget Constraint tells us that the present discounted value of consumption must match the PDV of total resources:
-
-:::{margin}
-[InfSum](#fact:infsum) is the immediate implication of [FinSum](#fact:finsum) as {math}`\TEnd \rightarrow \infty`.
-:::
+Combining the constraints from period {math}`\tNow` to period {math}`\TEnd` and imposing {math}`\aLevBF_{\TEnd}=0`, the Intertemporal Budget Constraint tells us that the present discounted value of consumption must match the PDV of total resources:
 
 ```{math}
 :label: eq:PFCRRA-ibc
@@ -152,7 +154,7 @@ Human wealth as defined in [the PDV of labor income](#eq:PFCRRA-yfin) includes t
 which approaches {math}`({\PermGroFac}/\Rfree)/(1-{\PermGroFac}/\Rfree)` as {math}`\TEnd \rightarrow \infty` when the [finite human wealth condition](#eq:FHWCPF) below holds.
 
 :::{margin}
-The closed forms divide by zero in two cases, and the sums they come from give the answer. If the return patience factor {math}`\RPFac=1`, [the inverse of the MPC as a sum](#eq:MPCrecursiveSum) gives {math}`\MPC_{t}=1/(\TEnd-\tNow+1)`. If {math}`\PermGroFac=\Rfree`, every term of the human wealth sum is 1, so {math}`\hNrm_{t}=\TEnd-\tNow+1` and {math}`\hNrmEnd_{t}=\TEnd-\tNow`.
+The closed forms divide by zero in two cases, and the sums they come from give the answer. If {math}`(\Rfree\DiscFac)^{1/\CRRA}=\Rfree`, every term of the sum in [the PDV of consumption](#eq:cfin) is 1, so {math}`\MPC_{t}=1/(\TEnd-\tNow+1)`. If {math}`\PermGroFac=\Rfree`, every term of the human wealth sum is 1, so {math}`\hNrm_{t}=\TEnd-\tNow+1` and {math}`\hNrmEnd_{t}=\TEnd-\tNow`.
 :::
 
 In order to apply [InfSum](#fact:infsum) to move to the infinite-horizon case ({math}`\TEnd=\infty`), we need to impose the condition
@@ -168,6 +170,10 @@ In order to apply [InfSum](#fact:infsum) to move to the infinite-horizon case ({
 
 Why? Because if income were expected to grow at a rate greater than the interest rate forever, then the PDV of future income would be infinite; with infinite human wealth, the problem has no well-defined solution. We henceforth call {eq}`eq:FHWCPF` the Finite Human Wealth Condition (FHWC).
 
+:::{margin}
+[InfSum](#fact:infsum) is the immediate implication of [FinSum](#fact:finsum) as {math}`\TEnd \rightarrow \infty`.
+:::
+
 Similarly, if consumption starts at a positive level and grows by the factor {math}`\APFac=(\Rfree \DiscFac)^{1/\CRRA}`, in order for the PDV of consumption to be finite we must impose:
 
 ```{math}
@@ -178,10 +184,12 @@ Similarly, if consumption starts at a positive level and grows by the factor {ma
 
 and we will henceforth call {math}`\RPFac` the "return patience factor" whose log is the "return patience rate" {math}`\patr \equiv \log \RPFac` ({math}`\pat` is the lower-case version of {math}`\APFac`) and what {eq}`eq:PatR` says is that the desired growth rate of consumption must be less than the interest rate in order for the model to have a well-defined solution. This condition therefore imposes a requirement that "impatience" be greater than some minimum amount. (For (much) more on the various definitions of impatience used in this section, their implications, and parallel conditions for models with uncertainty, see {cite:t}`BufferStockTheory`).
 
+We call {eq}`eq:PatR` the "return impatience condition" (RIC).
+
 If both the RIC and the FHWC hold, then the model has a well-defined infinite horizon solution, as can be seen by realizing that
 
 :::{margin}
-See {cite:t}`BufferStockTheory` for a discussion of the case where the conditions do not hold.
+The [appendix](#sec:PerfForesightCRRA-Appendix) derives [the limiting solution when they do not](#sec:PFwhenFHWfails); see {cite:t}`BufferStockTheory` for a fuller discussion.
 :::
 
 ```{math}
@@ -241,7 +249,7 @@ Finally, if {math}`\Rfree\DiscFac=1` (which is to say, the interest rate exactly
 
 The two conditions do different work. Return impatience guarantees a positive marginal propensity to consume, while absolute impatience guarantees a falling level of consumption. Whenever {math}`\rfree > 0`, return impatience holds even for a consumer who is poised with respect to absolute patience.
 
-(The consumer will be impatient, spending more than his income, if {math}`\Rfree\DiscFac<1`, and patient, spending less than his income, if {math}`\Rfree\DiscFac>1`. Income here means income inclusive of the interest earnings on total wealth.)
+(The consumer will be impatient, spending more than income, if {math}`\Rfree\DiscFac<1`, and patient, spending less than income, if {math}`\Rfree\DiscFac>1`. Income here means income inclusive of the interest earnings on total wealth.)
 
 Equation {eq}`eq:PFCRRA-cOfw` can be simplified into something a bit easier to handle by making some approximations. If {math}`\DiscFac = 1/(1+\discRte)`, then we can use facts from the [MathFacts section](#fact:mathfactslist) to discover that
 
@@ -274,9 +282,9 @@ and the marginal propensity to consume in {eq}`eq:PFCRRA-capprox` is {math}`\MPC
 
 The consumption function {eq}`eq:PFCRRA-cOfw` is exact; {eq}`eq:PFCRRA-capprox` treats {math}`\rfree`, {math}`\discRte` and the return patience rate {math}`\patr` as small. Its error is a different thing from the error of a numerical solution, which approaches the exact formula, not the approximation.
 
-From this we can see again that whether the consumer is return patient, return poised, or return impatient depends on the relationship between {math}`\rfree` and {math}`\discRte`. Note also that if {math}`\CRRA = \infty` then the consumer is infinitely averse to changing the level of consumption, and so once again the consumer spends exactly the sustainable amount. (This consumer is "absolutely poised" but "return impatient").
+From this we can see again that whether the consumer is absolutely patient, absolutely poised, or absolutely impatient depends on the relationship between {math}`\rfree` and {math}`\discRte`. Note also that if {math}`\CRRA = \infty` then the consumer is infinitely averse to changing the level of consumption, and so once again the consumer spends exactly the sustainable amount. (This consumer is "absolutely poised" but "return impatient").
 
-Now a brief digression on what "income" means in this model. Suppose for simplicity that the consumer had no capital assets ("bank balances" {math}`\bLevBF_{\tNow}=0`), and suppose that income was expected to stay constant at level {math}`\pLevBF_{\tNow+n}=\pLevBF~\forall~n>0` forever. In this case human wealth would be:
+Now a brief digression on what "income" means in this model. Suppose for simplicity that the consumer had no capital assets ("bank balances" {math}`\bLevBF_{\tNow}=0`), and suppose that income was expected to stay constant at level {math}`\pLevBF_{\tNow+n}=\pLevBF~\forall~n\geq 0` forever. In this case human wealth would be:
 
 ```{math}
 \begin{aligned}
@@ -307,7 +315,7 @@ With constant {math}`\pLevBF` we can rewrite {eq}`eq:PFCRRA-capprox` as
 \cLevBF_{\tNow} \approx \left(\rfree-\CRRA^{-1}(\rfree-\discRte)\right)\left(\bLevBF_{\tNow}+ \pLevBF\left(\frac{\Rfree}{\rfree}\right)\right).
 ```
 
-{math}`\rfree` appears in three expressions of this equation. In order, the three are the income effect, the substitution effect and the human wealth effect, as the [two-period model](#sec:2PeriodLCModel) defines them. The first two are inside the marginal propensity to consume out of total wealth, so they are the effects of {math}`\rfree` on consumption for a given total wealth {math}`\bLevBF_{\tNow}+\hLevBF_{\tNow}`. An increase in the first {math}`\rfree` raises the payout rate on total wealth (set {math}`\pLevBF = 0` and use {eq}`eq:PIHMPC` for {math}`\PIHMPC`, with {math}`\rfree/\Rfree \approx \rfree` for small {math}`\rfree`): this is the income effect. The second is the substitution effect, as its dependence on the intertemporal elasticity of substitution {math}`\CRRA^{-1}` shows. The third, in {math}`\pLevBF(\Rfree/\rfree)`, is the human wealth effect: the effect of {math}`\rfree` on human wealth itself, which comes from the budget constraint and involves no preference parameter. Bank balances {math}`\bLevBF_{\tNow}` are in none of the three; they are part of the total wealth that the marginal propensity to consume applies to. Because consumption depends on {math}`\bLevBF_{\tNow}` and {math}`\hLevBF_{\tNow}` only through their sum, this formula, like the two-period model, assumes that the consumer can borrow against future income at no penalty. [How Large is the Human Wealth Effect?](#subsec:HWEffect) measures what the human wealth effect does to consumption under that assumption.
+{math}`\rfree` appears in three expressions of this equation. In order, the three are the income effect, the substitution effect and the human wealth effect, as the [two-period model](#sec:2PeriodLCModel) defines them. The first two are inside the marginal propensity to consume out of total wealth, so they are the effects of {math}`\rfree` on consumption for a given total wealth {math}`\bLevBF_{\tNow}+\hLevBF_{\tNow}`. An increase in the first {math}`\rfree` raises the payout rate on total wealth (set {math}`\pLevBF = 0` and use {eq}`eq:PIHMPC` for {math}`\PIHMPC`, with {math}`\rfree/\Rfree \approx \rfree` for small {math}`\rfree`): this is the income effect. The second is the substitution effect, as its dependence on the intertemporal elasticity of substitution {math}`\CRRA^{-1}` shows. The third, in {math}`\pLevBF(\Rfree/\rfree)`, is the human wealth effect: the effect of {math}`\rfree` on human wealth itself, which comes from the budget constraint and involves no preference parameter. Bank balances {math}`\bLevBF_{\tNow}` are in none of the three; they are part of the total wealth that the marginal propensity to consume applies to. Because consumption depends on {math}`\bLevBF_{\tNow}` and {math}`\hLevBF_{\tNow}` only through their sum, this formula, like the two-period model, rests on the assumption, made at the start, that the consumer can borrow against future income at no penalty. [How Large is the Human Wealth Effect?](#subsec:HWEffect) measures what the human wealth effect does to consumption under that assumption.
 
 ## Normalizing By {math}`\pLevBF`
 
@@ -404,7 +412,7 @@ Now note that {eq}`eq:normC` can be rewritten
 
 where {math}`\oNrm_{\tNow}` is the consumer's total wealth-to-permanent-labor-income ratio, and {math}`\MPC` is the "marginal propensity to consume" out of wealth.
 
-As before, whether {math}`\oNrm` is rising or falling depends upon the relationship between {math}`\RNrmByG-1` and {math}`\RNrmByG-(\RNrmByG\DiscAlt)^{1/\CRRA}`. A consumer will be drawing down his wealth-to-income ratio if
+As before, whether {math}`\oNrm` is rising or falling depends upon the relationship between {math}`\RNrmByG-1` and {math}`\RNrmByG-(\RNrmByG\DiscAlt)^{1/\CRRA}`. A consumer will be drawing down the wealth-to-income ratio if
 
 ```{math}
 \begin{aligned}
@@ -432,9 +440,26 @@ where {math}`\GPFac` is the "growth patience factor." We call {eq}`eq:PatWGroCon
 Or, GIC-PF if we want to highlight that this is the condition for the perfect foresight model.
 :::
 
-Thus, whether the consumer is patient or impatient in the sense of building up or drawing down a wealth-to-income *ratio* depends on whether the growth rate of labor income is less than, equal to, or greater than the growth rate of consumption. Analogously to our earlier usages, a consumer for whom {math}`\GPFac=1` (equivalently, {math}`\GPRte= 0`) would be "growth poised."
+Thus, whether the consumer is patient or impatient in the sense of building up or drawing down a wealth-to-income *ratio* depends on whether the growth rate of labor income is less than, equal to, or greater than the growth rate of consumption. Analogously to our earlier usages, a consumer for whom {math}`\GPFac=1` (equivalently, a growth patience rate {math}`\GPRte \equiv \log \GPFac = 0`) would be "growth poised."
 
-To get the intuition for this, consider the case of a consumer with no nonhuman wealth, {math}`\bNrm_{\tNow}=0`. This consumer's absolute level of consumption will grow at {math}`(\Rfree\DiscFac)^{1/\CRRA}` and absolute level of income grows at {math}`{\PermGroFac}`, but the PDV of future consumption and future income must be equal. If income is growing faster than consumption but has the same PDV, consumption must be *starting out* at a level *higher* than income, which is the sense in which this consumer is impatient (spending more than his income). "Growth impatience" is therefore the condition that causes consumers with no assets to want to borrow.
+To get the intuition for this, consider the case of a consumer with no nonhuman wealth, {math}`\bNrm_{\tNow}=0`. This consumer's absolute level of consumption will grow at {math}`(\Rfree\DiscFac)^{1/\CRRA}` and absolute level of income grows at {math}`{\PermGroFac}`, but the PDV of future consumption and future income must be equal. If income is growing faster than consumption but has the same PDV, consumption must be *starting out* at a level *higher* than income, which is the sense in which this consumer is impatient (spending more than income). "Growth impatience" is therefore the condition that causes consumers with no assets to want to borrow.
+
+The condition also decides where the consumer ends up. Total wealth relative to permanent income evolves as {math}`\oNrm_{\tNow+1} = (\oNrm_{\tNow}-\cNrm_{\tNow})\RNrmByG = (1-\MPC)\RNrmByG\,\oNrm_{\tNow}`, and since {math}`(1-\MPC)\RNrmByG = \RPFac\Rfree/\PermGroFac = \GPFac`,
+
+```{math}
+:label: eq:oNrmPath
+
+\oNrm_{\tNow+1} = \GPFac\,\oNrm_{\tNow}.
+```
+
+A growth impatient consumer's total wealth therefore shrinks toward zero relative to income. Consumption relative to permanent income falls toward zero, and market resources approach {math}`-\hNrmEnd`, minus end-of-period human wealth: the consumer ends up owing the present value of all future income, the most that could ever be repaid. A consumer whose GIC fails instead accumulates wealth relative to income without bound. [The figure of the paths](#fig:PathsGIC) shows both. Neither end is plausible, which is one reason later chapters add uncertainty and liquidity constraints.
+
+:::{figure} figures/PerfForesightPathsGIC.png
+:name: fig:PathsGIC
+:align: center
+
+Consumption and market resources relative to permanent income over 100 years, for a consumer who starts with no bank balances, when the GIC holds ({math}`\PermGroRte=0.02`) and when it fails ({math}`\PermGroRte=-0.01`). In both, {math}`\rfree=\discRte=0.04` and {math}`\CRRA=2`, so the RIC and the FHWC hold. The dotted line is {math}`-\hNrmEnd` when the GIC holds. Drawn by the chapter's [notebook](PerfForesightCRRA.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) to run it without installing anything.
+:::
 
 ## Applications
 
@@ -454,15 +479,15 @@ For simplicity, assume that {math}`\bNrm_{\tNow} = 0`. Then the original version
 \end{aligned}
 ```
 
-We are interested only in calibrations of the model in which the consumer is "growth impatient" so that {math}`\PermGroRte > \CRRA^{-1}(\rfree-\discRte)` so if we define the growth patience rate as
+We are interested only in calibrations of the model in which the consumer is "growth impatient" so that {math}`\PermGroRte > \CRRA^{-1}(\rfree-\discRte)`. By the same approximation as {eq}`eq:patrApprox`, the growth patience rate is
 
 ```{math}
 :label: eq:patwGro
 
-\GPRte \equiv \CRRA^{-1}(\rfree-\discRte)-\PermGroRte
+\GPRte \approx \CRRA^{-1}(\rfree-\discRte)-\PermGroRte
 ```
 
-we can write this as
+so we can write this as
 
 ```{math}
 :label: eq:CvsP
@@ -473,7 +498,7 @@ we can write this as
 \end{aligned}
 ```
 
-Remembering that imposition of the growth impatience condition is equivalent to assuming {math}`\GPRte < 0`, while the FHWC requires {math}`\rfree > \PermGroRte`, it is clear that the expression {math}`-\GPRte/(\rfree-\PermGroRte)` will be positive: The consumer will spend more than his permanent labor income.
+Remembering that imposition of the growth impatience condition is equivalent to assuming {math}`\GPRte < 0`, while the FHWC requires {math}`\rfree > \PermGroRte`, it is clear that the expression {math}`-\GPRte/(\rfree-\PermGroRte)` will be positive: The consumer will spend more than permanent labor income.
 
 Now suppose we choose plausible values for {math}`(\rfree, \discRte, \PermGroRte, \CRRA) = (0.04,0.04,0.02,2)`. Then {eq}`eq:PFCRRA-cofw2` becomes:
 
@@ -503,7 +528,9 @@ In terms of the three effects of {math}`\rfree` in {eq}`eq:PFCRRA-capprox`, with
 
 The income and substitution terms are positive because the RIC makes {math}`\MPC>0`; the human wealth term is negative because the FHWC requires {math}`\rfree>\PermGroRte`. At the calibration above the three terms are 25, −12.5 and −50. In the example, the fall in {math}`\rfree` lowers the marginal propensity to consume from 0.04 to 0.035 (the income effect lowers it by 0.01, the substitution effect raises it by 0.005), while human wealth doubles, from 50 to 100 times permanent income: −0.13 against +0.69 in logs. The human wealth effect exceeds the income effect whenever the consumer is growth impatient, because the two net to {math}`\GPRte/(\MPC(\rfree-\PermGroRte))`, here −25.
 
-The point of this example is that for plausible parameter values, the human wealth effect is enormously stronger than the income and substitution effects, so that we should see large drops in consumption when interest rates rise and conversely strong gains when interest rates fall. This is a summary of the main point of the famous paper by {cite:t}`summersCapTax`; Summers derives formulas for an economy with overlapping generations of finite-lifetime consumers, but those complications do not change the basic message.
+These magnitudes depend on the infinite horizon. A consumer with {math}`\TEnd-\tNow+1=40` years left, earning permanent income in each of them, has human wealth of 28 times permanent income by [the PDV of labor income](#eq:PFCRRA-yfin), against 52 with no end (50 by the approximation above), and by [the finite-horizon consumption function](#eq:PFCRRA-cfinhoriz) consumes 1.36 times permanent income. When {math}`\rfree` falls to 0.03, that consumer's human wealth rises by 18.5 percent rather than doubling, and consumption rises by 10 percent rather than by about three-quarters. The human wealth effect still outweighs the other two together, but by about 2.3 to 1 rather than 4 to 1, because a finite horizon shortens the stream of income that the interest rate discounts.
+
+The point of this example is that for plausible parameter values, the human wealth effect is enormously stronger than the income and substitution effects, so that we should see large drops in consumption when interest rates rise and conversely strong gains when interest rates fall. This is a summary of the main point of the famous paper by {cite:t}`summersCapTax`; Summers derives formulas for an economy with overlapping generations of finite-lifetime consumers. Finite lifetimes shrink the effect, as the calculation above shows, but in his model it is still large.
 
 Nor is a change of a percentage point in the long-term real interest rate unusual. [The long-term real interest rate figure](#fig:LongTermRealRate) shows two measures of it. One is the Federal Reserve Bank of Cleveland's estimate of the real rate expected over the next ten years, from a model fitted to Treasury yields, inflation, inflation swaps and surveys of expected inflation {cite:p}`haubrichInflationSwaps`. The other is the yield on ten-year inflation-indexed Treasury bonds (TIPS). The expected rate averaged 5.3 percent a year in the 1980s and 0.6 percent in the 2010s, and reached a low of −0.4 percent in August 2020. The TIPS yield rose by 3.5 percentage points in two years, from −1.07 percent in August 2021 to 2.41 percent in October 2023. Since 1982 the expected rate has moved by a percentage point or more within a year in 13 percent of months, and within two years in 24 percent. The [notebook](PerfForesightCRRA.ipynb) computes these numbers from FRED's data; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) to run it without installing anything.
 
@@ -514,13 +541,15 @@ Nor is a change of a percentage point in the long-term real interest rate unusua
 Two measures of the U.S. long-term real interest rate, monthly, in percent a year: the Federal Reserve Bank of Cleveland's estimate of the real rate expected over the next ten years (FRED series REAINTRATREARAT10Y, from 1982), and the yield on ten-year inflation-indexed Treasury bonds (FRED series FII10, from 2003). Downloaded from FRED on 2026-10-20. Drawn by the chapter's [notebook](PerfForesightCRRA.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/PerfForesightCRRA/PerfForesightCRRA.ipynb) to run it without installing anything.
 :::
 
+The model's predictions for these episodes are not borne out. With {math}`\PermGroRte=0.02`, the finite human wealth condition fails whenever {math}`\rfree<0.02`, as the expected real rate did throughout the 2010s; the infinite-horizon formula then has no answer, and only a finite horizon gives one. At the same calibration, with 40 years left, the rise in the TIPS yield from −1.07 to 2.41 percent would cut consumption by about a third, from 2.5 to 1.6 times permanent income. Nothing of the kind happened: real consumer spending in the United States kept growing through 2022 and 2023. The model's response is too large for several reasons. It takes the change in the interest rate to be permanent and known. Its consumers can borrow freely against future income, so the whole change in human wealth reaches their spending. And it ignores general equilibrium, in which incomes and other prices move with the interest rate: in a model with uninsurable income risk and assets of different liquidity, the indirect effects of a change in the interest rate, through labor demand, far outweigh direct effects such as intertemporal substitution {cite:p}`kmvHANK`.
+
 (subsec:SavingRateResponse)=
 ### How Does the Saving Rate Respond to Interest Rates?
 
 The level of saving can be defined as total income minus total consumption:
 
 ```{math}
-\sLevBF_{\tNow} \approx \rfree \aLevBF_{\tNow-1} + \pLevBF_{\tNow} - \cLevBF_{\tNow}
+\sLevBF_{\tNow} = \rfree \aLevBF_{\tNow-1} + \pLevBF_{\tNow} - \cLevBF_{\tNow}
 ```
 
 but substituting from {eq}`eq:CvsP` and {eq}`eq:PFCRRA-capprox`,
@@ -591,6 +620,18 @@ All three effects are at work, each measured in its own terms and then turned in
 With the calibration of [How Large is the Human Wealth Effect?](#subsec:HWEffect), {math}`(\rfree, \discRte, \PermGroRte, \CRRA) = (0.04,0.04,0.02,2)`, human wealth is 50 times income and {math}`\MPC=0.04`, so the three terms are −50, 25 and 100, and the response is 75, six times the 12.5 that {eq}`eq:dsdr` gives at the same parameter values. When {math}`\rfree` falls to 0.03, the saving rate falls from −1 to −2.5, the mirror image of that section's rise in consumption from 2 to 3.5 times income.
 
 The human wealth effect is the largest of the three here, and it exceeds the income effect whenever the consumer is growth impatient: {math}`\MPC\hNrm^{2}>\hNrm` exactly when {math}`\MPC\hNrm>1`, that is, when a consumer with no wealth spends more than income, which is {math}`\GPRte<0`. It is also the effect that mechanisms later in the course, liquidity constraints and precautionary saving, drastically attenuate for some households while leaving a meaningful income effect in place. Their human wealth falls by just as much when {math}`\rfree` rises, but because they will not borrow against future income, the fall does much less to their consumption and their saving.
+
+The evidence also tempers the response at the other end. For a consumer with large wealth the response is entirely intertemporal substitution, and many estimates of the elasticity of intertemporal substitution are below the 0.5 used here; {cite:t}`hallSubstitution` finds it close to zero.
+
+(sec:PerfForesightCRRA-Exercises)=
+## Exercises
+
+- *Logarithmic utility.* Show that as {math}`\CRRA \rightarrow 1` the infinite-horizon marginal propensity to consume out of total wealth becomes {math}`1-\DiscFac`, whatever the interest rate. Which two of [the three effects](#eq:dlogcdr) cancel, and why?
+- *Retirement.* Suppose the consumer of the finite-horizon calculation in [How Large is the Human Wealth Effect?](#subsec:HWEffect) earns permanent income for 30 of the 40 remaining years and nothing in the last 10. Write human wealth as a sum, and recompute the response of consumption to a fall in {math}`\rfree` from 0.04 to 0.03. Is the human wealth effect larger or smaller than with income in all 40 years?
+- *The speed of borrowing.* For the growth impatient consumer of [the figure of the paths](#fig:PathsGIC), use [the path of total wealth](#eq:oNrmPath) to find how many years it takes total wealth relative to permanent income to fall by half.
+- *The Euler equation as a test.* Under perfect foresight, consumption grows by the factor {math}`\APFac` every period, whatever happens to income. {cite:t}`hallRandomWalk` tested the version of this prediction that holds when future income is uncertain. What does the theory say about whether information available last period, such as last period's income growth, should help predict this period's consumption growth? Why?
+- *Little substitution.* Redo the human wealth example with {math}`\CRRA=10`, an elasticity of intertemporal substitution of 0.1, closer to the estimates of {cite:t}`hallSubstitution`. Which of [the three effects](#eq:dlogcdr) change, and by how much?
+- *Realistic wealth.* Evaluate the response of the saving rate to {math}`\rfree` at a wealth-to-income ratio {math}`\aNrm_{\tNow-1}=4`, with the calibration of [How Large is the Human Wealth Effect?](#subsec:HWEffect), and compare it with the two ends in [How Does the Saving Rate Respond to Interest Rates?](#subsec:SavingRateResponse)
 
 (sec:PerfForesightCRRA-AppendixResults)=
 ## Results in the Appendix
