@@ -12,12 +12,12 @@ There is no population or productivity growth, so per capita quantities are the 
 (sec:RCKGov-LumpSum)=
 ## Spending Paid for by Lump-Sum Taxes
 
-The government spends {math}`\GovSpend` per unit of time, which yields no utility, and pays for it with a lump-sum tax {math}`\TaxLev` on each household; it balances its budget, {math}`\TaxLev = \GovSpend` at every date, so it never borrows. Taking the paths of the interest rate, the wage and the tax as given, a household with net worth {math}`\aNrm` solves the problem of the [decentralized economy](#sec:decentralizingrck) with the tax subtracted from its income:
+The government spends {math}`\GovSpend` per unit of time, which yields no utility, and pays for it with a lump-sum tax {math}`\TaxLev` on each household; it balances its budget, {math}`\TaxLev = \GovSpend` at every date, so it never borrows. Identical households owe each other nothing in equilibrium, as in the [decentralized economy](#sec:decentralizingrck), so a household's net worth, {math}`\netWorth`, is its capital, {math}`\kNrm`. Taking the paths of the interest rate, the wage and the tax as given, the household solves the decentralized economy's problem with the tax subtracted from its income:
 
 ```{math}
 :label: eq:hhbc
 
-\dot{\aNrm} = \rfree\aNrm + \Wage - \cNrm - \TaxLev .
+\dot{\kNrm} = \rfree\kNrm + \Wage - \cNrm - \TaxLev .
 ```
 
 The tax depends on nothing the household chooses, so it drops out of the household's costate equation, [the planner's](#eq:lamgrow) with the household's return {math}`\rfree` in its place, and consumption grows as in the [economy without government](#eq:cdotindiv):
@@ -28,15 +28,15 @@ The tax depends on nothing the household chooses, so it drops out of the househo
 \dot{\cNrm}/\cNrm = \CRRA^{-1}(\rfree - \discRte) .
 ```
 
-The tax does change the household's lifetime budget. As without government, the no-Ponzi condition and the transversality condition together make the intertemporal budget constraint hold with equality. With {math}`\PDV_{0}(\bullet) \equiv \int_{0}^{\infty} \bullet_{t}\, e^{-\int_{0}^{t}\rfree_{s}\,ds}\,dt` the present discounted value at date 0 of a flow {math}`\bullet`, and [human wealth](#eq:humwealth) {math}`\hNrm_{0} = \PDV_{0}(\Wage)`,
+The tax does change the household's lifetime budget. As without government, the no-Ponzi condition and the transversality condition together make the intertemporal budget constraint hold with equality. With {math}`\PDV_{0}(\bullet) \equiv \int_{0}^{\infty} \bullet_{t}\, e^{-\int_{0}^{t}\rfree_{t'}\,dt'}\,dt` the present discounted value at date 0 of a flow {math}`\bullet`, and [human wealth](#eq:humwealth) {math}`\hNrm_{0} = \PDV_{0}(\Wage)`,
 
 ```{math}
 :label: eq:RCKGov-hhibc
 
-\PDV_{0}(\cNrm) = \aNrm_{0} + \hNrm_{0} - \PDV_{0}(\TaxLev) :
+\PDV_{0}(\cNrm) = \kNrm_{0} + \hNrm_{0} - \PDV_{0}(\TaxLev) :
 ```
 
-the present discounted value of consumption equals net worth plus human wealth minus the present discounted value of taxes.
+the present discounted value of consumption equals capital plus human wealth minus the present discounted value of taxes.
 
 A planner who must provide the same spending, and who has the households' utility function, maximizes the same objective subject to the economy's resource constraint:
 
@@ -46,7 +46,7 @@ A planner who must provide the same spending, and who has the households' utilit
 \dot{\kap} = \fFunc(\kap) - \deprRte\kap - \cNrm - \GovSpend .
 ```
 
-Net output is consumed, spent by the government, or invested. Spending does not depend on {math}`\kap`, so it drops out of the planner's costate equation too, and the planner's consumption follows the [Keynes-Ramsey rule](#eq:cdotOc) with {math}`\PopnGroRte=\PtyGroRte=0`, {math}`\dot{\cNrm}/\cNrm = \CRRA^{-1}(\fFunc^{\prime}(\kap) - \deprRte - \discRte)`, which is the household's Euler equation, since {math}`\rfree = \fFunc^{\prime}(\kap) - \deprRte`. In equilibrium a household's net worth is the capital stock, {math}`\aNrm = \kap`, because identical households owe each other nothing, as in the [decentralized economy](#sec:decentralizingrck), and this government does not borrow; and by [Euler's theorem](#fact:eulerstheorem) the factor payments exhaust output, so that, net of depreciation, {math}`\rfree\kap + \Wage = \fFunc(\kap) - \deprRte\kap`. So with {math}`\TaxLev = \GovSpend` the household's budget constraint is the planner's resource constraint, and with {math}`\aNrm = \kap` its transversality condition is the planner's. The two economies follow the same equations from the same {math}`\kap_{0}`, with the same condition at infinity: spending paid for by lump-sum taxes takes resources, but leaves the market's allocation of what remains efficient.
+Net output is consumed, spent by the government, or invested. Spending does not depend on {math}`\kap`, so it drops out of the planner's costate equation too, and the planner's consumption follows the [Keynes-Ramsey rule](#eq:cdotOc) with {math}`\PopnGroRte=\PtyGroRte=0`, {math}`\dot{\cNrm}/\cNrm = \CRRA^{-1}(\fFunc^{\prime}(\kap) - \deprRte - \discRte)`, which is the household's Euler equation, since {math}`\rfree = \fFunc^{\prime}(\kap) - \deprRte`. In equilibrium a household's capital is the economy's capital per household, and by [Euler's theorem](#fact:eulerstheorem) the factor payments exhaust output, so that, net of depreciation, {math}`\rfree\kap + \Wage = \fFunc(\kap) - \deprRte\kap`. So with {math}`\TaxLev = \GovSpend` the household's budget constraint is the planner's resource constraint, and its transversality condition is the planner's. The two economies follow the same equations from the same {math}`\kap_{0}`, with the same condition at infinity: spending paid for by lump-sum taxes takes resources, but leaves the market's allocation of what remains efficient.
 
 (sec:RCKGov-Spending)=
 ## Permanent and Temporary Increases in Spending
@@ -84,7 +84,7 @@ Now let the government borrow. Spending keeps its path, but taxes {math}`\TaxLev
 \dot{\Debt}_{t} = \GovSpend_{t} + \rfree_{t}\Debt_{t} - \TaxLev_{t} :
 ```
 
-debt rises by the amount by which spending, including the interest on the debt, exceeds taxes. The government cannot pay the interest on its debt by borrowing more forever, {math}`\lim_{t\rightarrow\infty} e^{-\int_{0}^{t}\rfree_{s}\,ds}\Debt_{t} \leq 0`, and it does not end with assets it never uses, so the limit is zero; integrating its budget constraint then gives its intertemporal budget constraint, the counterpart of [the discrete-time one](#eq:govibc2): its taxes are worth its initial debt plus its spending,
+debt rises by the amount by which spending, including the interest on the debt, exceeds taxes. The government cannot pay the interest on its debt by borrowing more forever, {math}`\lim_{t\rightarrow\infty} e^{-\int_{0}^{t}\rfree_{t'}\,dt'}\Debt_{t} \leq 0`, and it does not end with assets it never uses, so the limit is zero; integrating its budget constraint then gives its intertemporal budget constraint, the counterpart of [the discrete-time one](#eq:govibc2): its taxes are worth its initial debt plus its spending,
 
 ```{math}
 :label: eq:RCKGov-govibc
@@ -92,15 +92,15 @@ debt rises by the amount by which spending, including the interest on the debt, 
 \PDV_{0}(\TaxLev) = \Debt_{0} + \PDV_{0}(\GovSpend) .
 ```
 
-Households can now hold government bonds as well as capital, {math}`\aNrm = \kap + \Debt`. Both are riskless, so they must pay the same return, {math}`\rfree = \fFunc^{\prime}(\kap)-\deprRte`, or no one would hold the one that pays less. Unlike the households' loans to one another in the [decentralized economy](#sec:decentralizingrck), government bonds do not net out: the households hold them, and no household owes them. The household's problem is unchanged, so its Euler equation is too, and so is its [intertemporal budget constraint](#eq:RCKGov-hhibc), now with {math}`\aNrm_{0} = \kap_{0} + \Debt_{0}`. Substituting the government's intertemporal budget constraint into it eliminates both the taxes and the debt:
+Households can now hold government bonds as well as capital, so a household's net worth is {math}`\netWorth = \kNrm + \Debt`. Both are riskless, so they must pay the same return, {math}`\rfree = \fFunc^{\prime}(\kap)-\deprRte`, or no one would hold the one that pays less. Unlike the households' loans to one another in the [decentralized economy](#sec:decentralizingrck), government bonds do not net out: the households hold them, and no household owes them. The household's problem is unchanged, so its Euler equation is too, and so is its [intertemporal budget constraint](#eq:RCKGov-hhibc), now with net worth {math}`\netWorth_{0} = \kNrm_{0} + \Debt_{0}` in place of {math}`\kNrm_{0}`. Substituting the government's intertemporal budget constraint into it eliminates both the taxes and the debt:
 
 ```{math}
 :label: eq:famibc
 
-\PDV_{0}(\cNrm) = \kap_{0} + \Debt_{0} + \hNrm_{0} - \PDV_{0}(\TaxLev) = \kap_{0} + \hNrm_{0} - \PDV_{0}(\GovSpend) .
+\PDV_{0}(\cNrm) = \kNrm_{0} + \Debt_{0} + \hNrm_{0} - \PDV_{0}(\TaxLev) = \kNrm_{0} + \hNrm_{0} - \PDV_{0}(\GovSpend) .
 ```
 
-The bonds a household holds are matched by the present value of the taxes that will service them: government bonds are not net wealth {cite:p}`barro:bondsnetworth`. Taxes and debt drop out date by date too: subtracting the government's budget constraint from the household's gives {math}`\dot{\kap} = \dot{\aNrm} - \dot{\Debt} = \rfree\kap + \Wage - \cNrm - \GovSpend`, the economy's [resource constraint](#eq:RCKGov-kdot), with neither taxes nor debt in it; and the household's transversality condition, with the government's condition on its debt at infinity, is the planner's. Since taxes enter neither the resource constraint nor the Euler equation, every path of lump-sum taxes that satisfies the government's intertemporal budget constraint supports the same path of consumption, capital and interest rates. This is [Ricardian equivalence](https://en.wikipedia.org/wiki/Ricardian_equivalence), in a perfect foresight economy; {cite:t}`elmendorfMankiw` survey the theory and the evidence.
+The bonds a household holds are matched by the present value of the taxes that will service them: government bonds are not net wealth {cite:p}`barro:bondsnetworth`. Taxes and debt drop out date by date too: the household's budget constraint is now {math}`\dot{\netWorth} = \rfree\netWorth + \Wage - \cNrm - \TaxLev`, and subtracting the government's from it gives {math}`\dot{\kNrm} = \dot{\netWorth} - \dot{\Debt} = \rfree\kNrm + \Wage - \cNrm - \GovSpend`, the economy's [resource constraint](#eq:RCKGov-kdot), with neither taxes nor debt in it; and the household's transversality condition, with the government's condition on its debt at infinity, is the planner's. Since taxes enter neither the resource constraint nor the Euler equation, every path of lump-sum taxes that satisfies the government's intertemporal budget constraint supports the same path of consumption, capital and interest rates. This is [Ricardian equivalence](https://en.wikipedia.org/wiki/Ricardian_equivalence), in a perfect foresight economy; {cite:t}`elmendorfMankiw` survey the theory and the evidence.
 
 :::{margin}
 Ricardian equivalence needs lump-sum taxes ([a tax on capital income](#sec:RCKGov-CapitalTax) is not one), households that borrow and lend at the government's interest rate, and households that in effect live as long as the government, as generations linked by operative bequests or gifts do {cite:p}`barro:bondsnetworth`. When lives are finite and unlinked, debt is net wealth to the generations alive and crowds out capital, as in [Diamond's model](#sec:OLGModel) {cite:p}`diamond:olg` and [Blanchard's](#sec:BlanchardFiniteHorizon) {cite:p}`blanchardFinite`. Equivalence also fails when households cannot borrow against future income, as in [Aiyagari's economy](#sec:Aiyagari) {cite:p}`aiyagari:ge`, and when the taxes that later service the debt fall on risky income, insuring it and so reducing precautionary saving {cite:p}`barskymankiwzeldes:aer`.
@@ -109,13 +109,13 @@ Ricardian equivalence needs lump-sum taxes ([a tax on capital income](#sec:RCKGo
 (sec:RCKGov-CapitalTax)=
 ## A Tax on Capital Income
 
-Finally, let the government tax capital income, net of depreciation, at the rate {math}`\TaxRte`, and return the revenue to households as a lump sum, {math}`\TaxRte\rfree\kap` to each, so that it neither spends nor borrows. The household's budget constraint becomes
+Finally, let the government tax capital income, net of depreciation, at the rate {math}`\TaxRte`, and return the revenue to households as a lump sum, {math}`\TaxRte\rfree\KLvl` to each, with {math}`\KLvl` the economy's capital stock, so that it neither spends nor borrows. The household's budget constraint becomes
 
 ```{math}
-\dot{\aNrm} = (1-\TaxRte)\rfree\aNrm + \Wage - \cNrm + \TaxRte\rfree\kap .
+\dot{\kNrm} = (1-\TaxRte)\rfree\kNrm + \Wage - \cNrm + \TaxRte\rfree\KLvl .
 ```
 
-The rebate depends on aggregate capital {math}`\kap`, not on the household's own net worth {math}`\aNrm`, and the household takes it as given: one household's saving changes aggregate capital by nothing ([Aggregation](#sec:Aggregation)). So in its current-value Hamiltonian {math}`\partial\Ham/\partial\aNrm = (1-\TaxRte)\rfree\vk` rather than {math}`\rfree\vk`: the tax lowers the return on saving in the household's costate equation, and the Euler equation becomes
+The rebate depends on aggregate capital {math}`\KLvl`, not on the household's own capital {math}`\kNrm`, and the household takes it as given: one household's saving changes aggregate capital by nothing ([Aggregation](#sec:Aggregation)). So in its current-value Hamiltonian {math}`\partial\Ham/\partial\kNrm = (1-\TaxRte)\rfree\vk` rather than {math}`\rfree\vk`: the tax lowers the return on saving in the household's costate equation, and the Euler equation becomes
 
 ```{math}
 \dot{\cNrm}/\cNrm = \CRRA^{-1}((1-\TaxRte)\rfree - \discRte) .
@@ -131,7 +131,7 @@ In the steady state with the tax, the after-tax return equals the time preferenc
 
 so the marginal product of capital is higher, and the capital stock lower, than at the planner's [modified golden rule](#eq:RCK-modGoldenRule), where the marginal product of capital is only {math}`\deprRte + \discRte`: before tax, capital must earn {math}`\discRte/(1-\TaxRte)` to pay savers {math}`\discRte` after it, as in the [cost of capital with taxes](#HallJorgensonTaxes) of {cite:t}`hall&jorgenson:i` when depreciation deductions match economic depreciation, as they do for a tax on income net of depreciation.
 
-Yet the resource constraint does not change, because the revenue comes back to households: with {math}`\aNrm = \kap`,
+Yet the resource constraint does not change, because the revenue comes back to households: in equilibrium a household's capital is the economy's, {math}`\kNrm = \KLvl`, so
 
 ```{math}
 \dot{\kap} = (1-\TaxRte)\rfree\kap + \Wage - \cNrm + \TaxRte\rfree\kap = \fFunc(\kap) - \deprRte\kap - \cNrm .
@@ -142,5 +142,5 @@ So the planner's problem, and with it the planner's steady state, the modified g
 Why does a tax whose revenue all comes back change anything? A household that saves one more unit earns the after-tax return {math}`(1-\TaxRte)\rfree` on it. The tax on that unit's income, {math}`\TaxRte\rfree`, is spread over the whole population as rebates, so the saver gets none of it back: the others get it. When every household saves one more unit, the rebates return the tax to them, and the economy as a whole earns the full {math}`\rfree`. The tax drives a wedge between the private return to saving, {math}`(1-\TaxRte)\rfree`, and its social return, {math}`\rfree`: the return the household earns on its own saving is no longer the net marginal product of capital, which is what [the decentralization](#sec:decentralizingrck) said it would take for the two solutions to differ. A knowledge externality drives the same kind of wedge in [Paul Romer's model](#sec:Romer86) {cite:p}`romer:growth`.
 
 :::{margin}
-A constant tax on capital income taxes consumption at a date the more heavily the later the date: it raises the price of consumption at {math}`t`, in units of consumption at date 0, by the factor {math}`e^{\TaxRte\int_{0}^{t}\rfree_{s}\,ds}`, which grows without bound. This is the usual intuition for the result of {cite:t}`juddRedistributive` and {cite:t}`chamleyCapitalTax` that the optimal tax on capital income is zero in the long run. {cite:t}`straubWerningChamleyJudd` overturn the result and undercut its intuition: in Judd's model the optimal long-run tax on capital is positive whenever {math}`\CRRA > 1`, as in this chapter's calibration. {cite:t}`aiyagari:opttax` finds it positive with uninsurable income risk and borrowing constraints, which push the interest rate [below the time preference rate](#res:aiyagari-r-below-time-preference).
+A constant tax on capital income taxes consumption at a date the more heavily the later the date: it raises the price of consumption at {math}`t`, in units of consumption at date 0, by the factor {math}`e^{\TaxRte\int_{0}^{t}\rfree_{t'}\,dt'}`, which grows without bound. This is the usual intuition for the result of {cite:t}`juddRedistributive` and {cite:t}`chamleyCapitalTax` that the optimal tax on capital income is zero in the long run. {cite:t}`straubWerningChamleyJudd` overturn the result and undercut its intuition: in Judd's model the optimal long-run tax on capital is positive whenever {math}`\CRRA > 1`, as in this chapter's calibration. {cite:t}`aiyagari:opttax` finds it positive with uninsurable income risk and borrowing constraints, which push the interest rate [below the time preference rate](#res:aiyagari-r-below-time-preference).
 :::
