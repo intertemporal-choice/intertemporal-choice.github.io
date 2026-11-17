@@ -226,25 +226,25 @@ given by
 > The current-value Hamiltonian is written
 >
 > ```{math}
-> \Ham(c,w,\lambda) = \log c(s,t) + \lambda(\hat{\rfree} w(s,t) + y(s,t) - c(s,t))
+> \Ham(w,c,\vk) = \log c(s,t) + (\hat{\rfree} w(s,t) + y(s,t) - c(s,t))\vk
 > ```
 >
-> so the first optimality condition {math}`\partial \Ham/\partial c(s,t) = 0` implies
+> so the optimality condition for consumption, {math}`\partial \Ham/\partial c(s,t) = 0`, implies
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         1/c(s,t) & =  \lambda
-> \\  - \dot{c}(s,t)/c(s,t)^{2} & =  \dot{\lambda}       
+>         1/c(s,t) & =  \vk
+> \\  - \dot{c}(s,t)/c(s,t)^{2} & =  \dot{\vk}       
 > \end{aligned}\end{gathered}
 > ```
 >
-> and the second optimization condtion implies
+> and the costate equation implies
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         \dot{\lambda} & =  \hat{\timeRate} \lambda - \partial \Ham/\partial w(s,t)  
-> \\       & =  \hat{\timeRate} \lambda - \hat{\rfree} \lambda  
-> \\      \left(\frac{\dot{\lambda}}{\lambda}\right) & =  \hat{\timeRate}-\hat{\rfree}
+>         \dot{\vk} & =  \hat{\timeRate} \vk - \partial \Ham/\partial w(s,t)  
+> \\       & =  \hat{\timeRate} \vk - \hat{\rfree} \vk  
+> \\      \left(\frac{\dot{\vk}}{\vk}\right) & =  \hat{\timeRate}-\hat{\rfree}
 > \\  \left(\frac{-\dot{c}(s,t) c(s,t)}{c(s,t)^{2}}\right) & =  \hat{\timeRate}-\hat{\rfree}
 > \\  \left(\frac{\dot{c}(s,t)}{c(s,t)}\right) & =  \hat{\rfree}-\hat{\timeRate} 
 > \\   & =  \rfree-\timeRate     .
