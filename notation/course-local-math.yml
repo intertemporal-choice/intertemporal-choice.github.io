@@ -147,7 +147,6 @@ project:
     '\rev': '\pi'  # uses book 5 questions 0
     '\divGro': '\mathsf{g}'  # uses book 4 questions 0
     '\TaxCorp': '\Large \tau'  # uses book 4 questions 0
-    '\RCpnd': '\mathbf{R}'  # uses book 3 questions 0
     '\DivGro': '\mathrm{G}'  # uses book 2 questions 0
     # --- local-local (62): objects the registry lacks: course-local for now
     '\tNow': 't'  # uses book 347 questions 55
@@ -185,7 +184,6 @@ project:
     '\kTarg': '\Target{k}'  # uses book 0 questions 12
     '\patwGro': '\text{þ}_{\wGro}'  # uses book 12 questions 0
     '\surplus': 'z'  # uses book 12 questions 0
-    '\wNet': 'x'  # uses book 12 questions 0
     '\save': 's'  # uses book 4 questions 7
     '\GovSpend': 'X'  # uses book 7 questions 3
     '\hNbr': 'h'  # uses book 9 questions 0
@@ -206,9 +204,7 @@ project:
     '\rProd': '\mathsf{r}'  # uses book 1 questions 2
     '\uPPP': '\mathrm{u}^{\prime\prime\prime}'  # uses book 3 questions 0
     '\age': 'z'  # uses book 2 questions 0
-    '\debt': 'd'  # uses book 2 questions 0
     '\Hours': '\mathfrak{H}'  # uses book 2 questions 0
-    '\WNet': 'X'  # uses book 2 questions 0
     '\hours': '\mathfrak{h}'  # uses book 1 questions 0
     '\Save': 'S'  # uses book 0 questions 1
     # --- local-retire (2): objects the registry lacks: to retire (plain LaTeX or a registry macro instead)
