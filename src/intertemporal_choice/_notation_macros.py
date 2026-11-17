@@ -409,7 +409,6 @@ MACROS = {
     '\\cNrm': 'c',
     '\\cNrmNow': 'c\\Now',
     '\\cNrmNxt': 'c\\Nxt',
-    '\\cPDVFunc': '\\mathbb{C}',
     '\\cRat': '\\cNrm',
     '\\cRatBF': '\\pmb{c}',
     '\\cRatE': '\\cRat^{e}',

@@ -97,12 +97,12 @@ but since {math}`\DiscFac \APFac^{1-\CRRA} = \RPFac`, this reduces to
 ```{math}
 :label: eq:vFuncAnalytical
 
-\vFunc_{t} = \uFunc(\cLevBF_{t})\overbrace{(1+\RPFac+\RPFac^{2}+...+\RPFac^{T-t})}^{\equiv \cPDVFunc_{t}}
+\vFunc_{t} = \uFunc(\cLevBF_{t})\overbrace{(1+\RPFac+\RPFac^{2}+...+\RPFac^{T-t})}^{= \PDV_{t}^{T}(\cLevBF)/\cLevBF_{t}}
 ```
 
-where {math}`\cPDVFunc_{t}` is the discounted value of future consumption growth (that is, the discounted value of the ratio of future consumption to today's consumption).
+where {math}`\PDV_{t}^{T}(\cLevBF)/\cLevBF_{t}`, the chapter's [present discounted value of consumption](#eq:cfin) divided by today's consumption, is the discounted value of future consumption growth (that is, the discounted value of the ratio of future consumption to today's consumption).
 
-The sum that defines {math}`\cPDVFunc_{t}` is the sum in [the MPC recursion](#eq:MPCrecursiveSum), so {math}`\cPDVFunc_{t} = \MPC_{t}^{-1}`, and we can write value as
+This sum is the sum in [the MPC recursion](#eq:MPCrecursiveSum), so {math}`\PDV_{t}^{T}(\cLevBF)/\cLevBF_{t} = \MPC_{t}^{-1}`, and we can write value as
 
 ```{math}
 \begin{aligned}
