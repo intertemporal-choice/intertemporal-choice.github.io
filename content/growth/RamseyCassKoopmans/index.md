@@ -43,6 +43,10 @@ States and controls are functions of time; time subscripts appear only where cla
 
 and {math}`\PtyLab` is an index of labor productivity that grows at rate
 
+:::{margin}
+This is "labor-augmenting" (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\FFunc(\PtyLab \KLvl,\LLvl)` ("Solow-neutral"), or output, {math}`\PtyLab \FFunc(\KLvl,\LLvl)` ("Hicks-neutral"). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
+:::
+
 ```{math}
 \begin{gathered}\begin{aligned}
   \dot{\PtyLab }/\PtyLab  & =  \PtyGroRte. 
@@ -50,10 +54,6 @@ and {math}`\PtyLab` is an index of labor productivity that grows at rate
 ```
 
 Technological progress thus lets each worker produce ever more with the same physical capital.
-
-:::{margin}
-This is "labor-augmenting" (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\FFunc(\PtyLab \KLvl,\LLvl)` ("Solow-neutral"), or output, {math}`\PtyLab \FFunc(\KLvl,\LLvl)` ("Hicks-neutral"). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
-:::
 
 The quantity {math}`\PtyLab \LLvl` is the number of "efficiency units" of labor.
 
