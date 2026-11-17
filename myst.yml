@@ -218,9 +218,9 @@ project:
           level: 0
         - file: content/growth/RamseyCassKoopmans/index.md
           level: 1
-        - file: content/growth/RCKWithGov.md
-          level: 1
         - file: content/growth/DecentralizingRCK.md
+          level: 1
+        - file: content/growth/RCKWithGov/index.md
           level: 1
         - file: content/growth/Romer86.md
           level: 1
