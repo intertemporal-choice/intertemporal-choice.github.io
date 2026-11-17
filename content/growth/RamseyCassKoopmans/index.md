@@ -159,7 +159,7 @@ subject to
 which has a current-value Hamiltonian representation
 
 :::{margin}
-If the Hamiltonian is new to you, Peter Thompson's [lecture notes on optimal control](https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf) derive the method from the economics of a firm's capital problem, and later work through this model. Wikipedia's [worked example of the RCK model](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model), linked from the two optimization conditions, uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero.
+If the Hamiltonian is new to you, Peter Thompson's [lecture notes on optimal control](https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf) derive the method from the economics of a firm's capital problem, and later work through this model. Wikipedia's [worked example of the RCK model](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model), linked from the two optimization conditions, uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero. [Ramsey Growth in Discrete and Continuous Time](#sec:HamiltonianVSDiscrete), in the mathematical appendices, solves a version of this model without productivity growth with the Hamiltonian and shows how that method relates to the discrete-time Bellman approach.
 :::
 
 ```{math}
