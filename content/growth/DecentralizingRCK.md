@@ -15,7 +15,7 @@ With population growth, each household is a dynasty whose members grow in number
 
 ## The Household's Problem
 
-Household {math}`i` supplies its labor inelastically at the wage {math}`\Wage_{t}` and holds net worth {math}`\aNrm_{t,i}`: capital, plus loans to other households, minus debts to them. Under perfect foresight a loan and a unit of capital must pay the same net return, the interest rate {math}`\rfree_{t}`, so only net worth matters. Taking the paths of {math}`\Wage_{t}` and {math}`\rfree_{t}` as given, the household chooses consumption to solve
+Household {math}`i` supplies its labor inelastically at the wage {math}`\Wage_{t}` and holds net worth {math}`\netWorth_{t,i}`: capital, plus loans to other households, minus debts to them. Under perfect foresight a loan and a unit of capital must pay the same net return, the interest rate {math}`\rfree_{t}`, so only net worth matters. Taking the paths of {math}`\Wage_{t}` and {math}`\rfree_{t}` as given, the household chooses consumption to solve
 
 ```{math}
 :label: eq:DecRCK-maxprob
@@ -28,10 +28,10 @@ with the [planner's](#eq:RCK-maxprob) CRRA utility, {math}`\uFunc(\cNrm) = \cNrm
 ```{math}
 :label: eq:DecRCK-dbc
 
-\dot{\aNrm}_{t,i} = \rfree_{t}\aNrm_{t,i} + \Wage_{t} - \cNrm_{t,i}
+\dot{\netWorth}_{t,i} = \rfree_{t}\netWorth_{t,i} + \Wage_{t} - \cNrm_{t,i}
 ```
 
-and the no-Ponzi condition {math}`\lim_{t \rightarrow \infty} e^{-\int_{0}^{t}\rfree_{s}\,ds}\aNrm_{t,i} \geq 0`, which forbids paying the interest on debt by borrowing more, forever.
+and the no-Ponzi condition {math}`\lim_{t \rightarrow \infty} e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}\netWorth_{t,i} \geq 0`, which forbids paying the interest on debt by borrowing more, forever.
 
 The household's current-value Hamiltonian is
 
@@ -40,10 +40,10 @@ The [planner's](#eq:RCK-H1A) conditions have the same form. [Ramsey Growth in Di
 :::
 
 ```{math}
-\Ham(\aNrm,\cNrm,\vk) = \uFunc(\cNrm) + (\rfree_{t}\aNrm + \Wage_{t} - \cNrm)\vk .
+\Ham(\netWorth,\cNrm,\vk) = \uFunc(\cNrm) + (\rfree_{t}\netWorth + \Wage_{t} - \cNrm)\vk .
 ```
 
-The [condition for optimal consumption](#eq:uceqvk) is {math}`\uP(\cNrm_{t,i}) = \vk_{t,i}`, and the [costate equation](#eq:lamgrow), with the household's return {math}`\rfree_{t}` in place of the planner's, is {math}`\dot{\vk}_{t,i} = \discRte\vk_{t,i} - \partial\Ham/\partial\aNrm = (\discRte-\rfree_{t})\vk_{t,i}`. Since {math}`\uP(\cNrm) = \cNrm^{-\CRRA}`, differentiating the condition for optimal consumption with respect to time gives {math}`\dot{\vk}/\vk = -\CRRA\dot{\cNrm}/\cNrm`, so
+The [condition for optimal consumption](#eq:uceqvk) is {math}`\uP(\cNrm_{t,i}) = \vk_{t,i}`, and the [costate equation](#eq:lamgrow), with the household's return {math}`\rfree_{t}` in place of the planner's, is {math}`\dot{\vk}_{t,i} = \discRte\vk_{t,i} - \partial\Ham/\partial\netWorth = (\discRte-\rfree_{t})\vk_{t,i}`. Since {math}`\uP(\cNrm) = \cNrm^{-\CRRA}`, differentiating the condition for optimal consumption with respect to time gives {math}`\dot{\vk}/\vk = -\CRRA\dot{\cNrm}/\cNrm`, so
 
 ```{math}
 :label: eq:cdotindiv
@@ -53,12 +53,12 @@ The [condition for optimal consumption](#eq:uceqvk) is {math}`\uP(\cNrm_{t,i}) =
 
 the [Euler equation](#eq:PFCRRA-cgrow) of the perfect foresight model, in continuous time. Nothing on its right side is specific to household {math}`i`: every household's consumption grows at the same rate, whatever its wealth.
 
-Since the costate equation gives {math}`e^{-\discRte t}\vk_{t,i} = \vk_{0,i}e^{-\int_{0}^{t}\rfree_{s}\,ds}`, the transversality condition {math}`\lim_{t \rightarrow \infty} e^{-\discRte t}\vk_{t,i}\aNrm_{t,i} = 0` is {math}`\lim_{t \rightarrow \infty} e^{-\int_{0}^{t}\rfree_{s}\,ds}\aNrm_{t,i} = 0`. The no-Ponzi condition rules out ending with negative net worth in present value; the transversality condition, an optimality condition, rules out ending with positive net worth in present value, resources never consumed. Together they make the dynamic budget constraint, integrated forward, the [intertemporal budget constraint](#eq:PFCRRA-ibc), with equality. Writing {math}`\PDV_{0}(\bullet) \equiv \int_{0}^{\infty} \bullet_{t}\, e^{-\int_{0}^{t}\rfree_{s}\,ds}\,dt` for the present discounted value at date 0 of a flow {math}`\bullet`, it says
+Since the costate equation gives {math}`e^{-\discRte t}\vk_{t,i} = \vk_{0,i}e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}`, the transversality condition {math}`\lim_{t \rightarrow \infty} e^{-\discRte t}\vk_{t,i}\netWorth_{t,i} = 0` is {math}`\lim_{t \rightarrow \infty} e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}\netWorth_{t,i} = 0`. The no-Ponzi condition rules out ending with negative net worth in present value; the transversality condition, an optimality condition, rules out ending with positive net worth in present value, resources never consumed. Together they make the dynamic budget constraint, integrated forward, the [intertemporal budget constraint](#eq:PFCRRA-ibc), with equality. Writing {math}`\PDV_{0}(\bullet) \equiv \int_{0}^{\infty} \bullet_{t}\, e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}\,dt` for the present discounted value at date 0 of a flow {math}`\bullet`, it says
 
 ```{math}
 :label: eq:DecRCK-ibc
 
-\PDV_{0}(\cNrm_{i}) = \aNrm_{0,i} + \hNrm_{0},
+\PDV_{0}(\cNrm_{i}) = \netWorth_{0,i} + \hNrm_{0},
 ```
 
 where [human wealth](#eq:PFCRRA-yfin), the present discounted value of labor income,
@@ -118,7 +118,7 @@ Firms employ the one unit of labor that households supply. In a closed economy w
 ```{math}
 :label: eq:DecRCK-clear
 
-\aNrm_{t} \equiv \int_{0}^{1} \aNrm_{t,i}\,di = \kap_{t},
+\NetWorth_{t} \equiv \int_{0}^{1} \netWorth_{t,i}\,di = \kap_{t},
 ```
 
 where, with a unit mass of workers, capital per worker {math}`\kap_{t}` is also the aggregate capital stock. If households are identical, each holds {math}`\kap_{t}` and no loans.
@@ -144,7 +144,7 @@ Only one set of expectations is self-fulfilling here: from a given {math}`\kap_{
 \end{aligned}\end{gathered}
 ```
 
-the planner's [accumulation equation](#eq:RCK-kdot) and [Keynes-Ramsey rule](#eq:cdotOc) with {math}`\PopnGroRte=\PtyGroRte=0`. With {math}`\aNrm_{t}=\kap_{t}`, the household's transversality condition is the planner's [transversality condition](#eq:tvc). The same two differential equations, from the same {math}`\kap_{0}` and with the same condition at infinity, select the same path: the economy follows the planner's [saddle path](#fig:RamseySaddlePlot) to the [modified golden rule](#eq:RCK-modGoldenRule), where the interest rate equals the time preference rate, {math}`\rfree = \discRte`.
+the planner's [accumulation equation](#eq:RCK-kdot) and [Keynes-Ramsey rule](#eq:cdotOc) with {math}`\PopnGroRte=\PtyGroRte=0`. With {math}`\NetWorth_{t}=\kap_{t}`, the household's transversality condition is the planner's [transversality condition](#eq:tvc). The same two differential equations, from the same {math}`\kap_{0}` and with the same condition at infinity, select the same path: the economy follows the planner's [saddle path](#fig:RamseySaddlePlot) to the [modified golden rule](#eq:RCK-modGoldenRule), where the interest rate equals the time preference rate, {math}`\rfree = \discRte`.
 
 :::{margin}
 So human wealth is finite, and the economy cannot save too much: its interest rate exceeds its growth rate, zero. With population and productivity growth, the steady-state interest rate exceeds the growth rate {math}`\PopnGroRte+\PtyGroRte` by {math}`\discRte-(1-\CRRA)\PtyGroRte`, which is positive under the condition that keeps [the planner's objective](#eq:maxprobmod) finite. The competitive economy is therefore dynamically efficient, which the [Diamond OLG economy](#sec:OLGModel) need not be.
