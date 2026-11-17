@@ -223,13 +223,9 @@ depreciation is greater, or technological progress occurs more rapidly.
 ## A Phase Diagram
 
 While the RCK model has an analytical solution for its steady-state,
-it does not in general have an analytical solution for the transition to the
+it does not have an analytical solution for the transition to the
 steady-state. The usual method for analyzing
 models of this kind is a [phase diagram](https://en.wikipedia.org/wiki/Phase_diagram) in {math}`\cNrm` and {math}`\kap`.
-
-:::{margin}
-The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` {cite:p}`smithClosedForm`. The saddle path is then the ray {math}`\cNrm = \left((\discRte + (1-\kapShare)(\PopnGroRte+\deprRte))/\kapShare\right)\kap` through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - \left((\discRte+\PopnGroRte+\deprRte)/\kapShare + \PtyGroRte\right)\kap` is a Bernoulli equation, so the transition has a closed form.
-:::
 
 The first step in constructing the phase diagram is to take the differential
 equations that describe the system and find the points where they are
