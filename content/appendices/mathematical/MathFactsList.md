@@ -517,14 +517,14 @@ Now $y_{t}=\tau\,p_{t-1}+(\psi_{t}+\xi_{t})$ and $y_{t-1}=p_{t-1}+\xi_{t-1}$, so
 ::::{div}
 :::{tip} Fact: EulersTheorem
 
-If $Y=\FFunc(K,L)$ is a constant returns to scale production function, then
+If $\YLvl=\FFunc(\KLvl,\LLvl)$ is a constant returns to scale production function, then
 
 $$
 \begin{gathered}\begin{aligned}
-        Y & =  \FFunc_{K} K + \FFunc_{L} L,
+        \YLvl & =  \FFunc_{\KLvl} \KLvl + \FFunc_{\LLvl} \LLvl,
 \end{aligned}\end{gathered}
 $$
 
-and if this production function characterizes output in a perfectly competitive economy then $\FFunc_{K}$ is the interest factor and $\FFunc_{L}$ is the wage rate.
+and if this production function characterizes output in a perfectly competitive economy then $\FFunc_{\KLvl}$ is the rental rate of capital, the interest rate plus the depreciation rate, and $\FFunc_{\LLvl}$ is the wage: paying each factor its marginal product exhausts output, so profits are zero.
 :::
 ::::
