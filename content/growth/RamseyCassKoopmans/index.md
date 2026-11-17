@@ -142,7 +142,7 @@ Using {eq}`eq:cRat` and the other results above, we can rewrite the social plann
 \end{aligned}\end{gathered}
 ```
 
-Thus, assuming {math}`\discRte > (1-\CRRA) \PtyGroRte`, so that the objective is finite (that is, imposing the [growth impatience condition](#eq:PatWGroCond)), and normalizing the initial
+Thus, assuming {math}`\discRte > (1-\CRRA) \PtyGroRte`, so that the objective is finite (that is, imposing the [finite value of autarky condition](https://llorracc.github.io/BufferStockTheory/#pffvac)), and normalizing the initial
 level of productivity to {math}`\PtyLab _{0}=1`, the complete optimization problem
 can be formulated as
 

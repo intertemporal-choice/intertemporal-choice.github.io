@@ -1,4 +1,4 @@
-<!-- AUTO-GENERATED from econark-shortcuts.sty (registry v10.0.0) by @resources/notation/gen/gen_shortcuts.py. DO NOT EDIT. -->
+<!-- AUTO-GENERATED from econark-shortcuts.sty (registry v10.3.0) by @resources/notation/gen/gen_shortcuts.py. DO NOT EDIT. -->
 {% raw %}
 
 \newcommand{\kapShare}{\alpha}
@@ -314,6 +314,7 @@
 \newcommand{\Alive}{\mathcal{L}}
 \newcommand{\diePrb}{\mathsf{d}}
 \newcommand{\DiePrb}{\mathsf{D}}
+\newcommand{\UpdatePrb}{\varPi}
 \newcommand{\DeprFac}{\daleth}
 \newcommand{\deprRte}{\delta}
 \newcommand{\DiscFac}{\beta}
@@ -403,6 +404,8 @@
 \newcommand{\leisure}{z}
 \newcommand{\itcRte}{\chi}
 \newcommand{\savRte}{\mathrm{sav}}
+\newcommand{\netWorth}{s}
+\newcommand{\NetWorth}{S}
 \newcommand{\EEndMap}{{\mathsf{E}}}
 \newcommand{\CEndFunc}{{\mathfrak{C}}}
 \newcommand{\cEndFunc}{{\mathfrak{c}}}
