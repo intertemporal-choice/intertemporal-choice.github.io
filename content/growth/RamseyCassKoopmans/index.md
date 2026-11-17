@@ -71,13 +71,29 @@ so dividing {eq}`eq:Kdotlevel` by {math}`\PtyLab \LLvl` and using it gives
 \dot{\kap} = \fFunc(\kap) - \cNrm - (\PtyGroRte +\PopnGroRte+\deprRte) \kap .
 ```
 
-A steady state is a point where {math}`\dot{\kap} = 0`, so that {math}`\cNrm = \fFunc(\kap) - (\PtyGroRte +\PopnGroRte+\deprRte) \kap`. A first candidate for the best steady state is the one with the highest {math}`\cNrm`. Setting the derivative with respect to {math}`\kap` to zero gives the "golden rule" of {cite:t}`phelps:golden`, an article well worth reading:
+A steady state is a point where {math}`\dot{\kap} = 0`, so that
+
+```{math}
+:label: eq:RCK-cSteadyState
+
+\cNrm = \fFunc(\kap) - (\PtyGroRte +\PopnGroRte+\deprRte) \kap .
+```
+
+A first candidate for the best steady state is the one with the highest {math}`\cNrm`. Maximizing steady-state consumption with respect to {math}`\kap` requires
+
+```{math}
+\frac{d\cNrm}{d\kap} = \fFunc^{\prime}(\kap) - (\PtyGroRte +\PopnGroRte+\deprRte) = 0 ,
+```
+
+and since {math}`d^{2}\cNrm/d\kap^{2} = \fFunc^{\prime\prime}(\kap) < 0`, this is a maximum. The capital stock that satisfies it, {math}`\GoldRule{\kap}`, obeys the "golden rule" of {cite:t}`phelps:golden`, an article well worth reading:
 
 ```{math}
 :label: eq:RCK-goldenRule
 
 \fFunc^{\prime}(\GoldRule{\kap}) = \PtyGroRte +\PopnGroRte+\deprRte .
 ```
+
+One more unit of {math}`\kap` adds {math}`\fFunc^{\prime}(\kap)` to output, but holding it steady as effective labor grows and capital depreciates takes {math}`\PtyGroRte +\PopnGroRte+\deprRte` more investment; consumption is highest where the two are equal. With the Cobb-Douglas {math}`\fFunc(\kap) = \kap^{\kapShare}`, the golden rule is {math}`\GoldRule{\kap} = \left(\kapShare/(\PtyGroRte +\PopnGroRte+\deprRte)\right)^{1/(1-\kapShare)}`.
 
 ## The Social Planner's Problem
 
@@ -143,7 +159,7 @@ subject to
 which has a current-value Hamiltonian representation
 
 :::{margin}
-If the Hamiltonian is new to you, Peter Thompson's [lecture notes on optimal control](https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf) derive the method from the economics of a firm's capital problem, and later work through this model. Wikipedia's worked example of this model, linked from the two optimization conditions, uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero.
+If the Hamiltonian is new to you, Peter Thompson's [lecture notes on optimal control](https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf) derive the method from the economics of a firm's capital problem, and later work through this model. Wikipedia's [worked example of the RCK model](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model), linked from the two optimization conditions, uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero. [Ramsey Growth in Discrete and Continuous Time](#sec:HamiltonianVSDiscrete), in the mathematical appendices, derives the Hamiltonian's conditions for a version of this model without productivity growth and shows how each relates to the discrete-time Bellman approach.
 :::
 
 ```{math}
@@ -223,13 +239,9 @@ depreciation is greater, or technological progress occurs more rapidly.
 ## A Phase Diagram
 
 While the RCK model has an analytical solution for its steady-state,
-it does not in general have an analytical solution for the transition to the
+it does not have an analytical solution for the transition to the
 steady-state. The usual method for analyzing
 models of this kind is a [phase diagram](https://en.wikipedia.org/wiki/Phase_diagram) in {math}`\cNrm` and {math}`\kap`.
-
-:::{margin}
-The exception is the case in which the coefficient of relative risk aversion equals the capital share, {math}`\CRRA = \kapShare` {cite:p}`smithClosedForm`. The saddle path is then the ray {math}`\cNrm = \left((\discRte + (1-\kapShare)(\PopnGroRte+\deprRte))/\kapShare\right)\kap` through the steady state; along it, {math}`\dot{\kap} = \kap^{\kapShare} - \left((\discRte+\PopnGroRte+\deprRte)/\kapShare + \PtyGroRte\right)\kap` is a Bernoulli equation, so the transition has a closed form.
-:::
 
 The first step in constructing the phase diagram is to take the differential
 equations that describe the system and find the points where they are
@@ -333,6 +345,6 @@ so we can obtain
 
 which is a differential equation with, in general, no analytical solution. Many numerical math packages can solve differential equations numerically, yielding a numerical version of the {math}`\cFunc(\kap)` function.
 
-There is one problem, however, which is that at the steady-state values of {math}`\cNrm` and {math}`\kap` both numerator and denominator of this equation are zero. The alternative is to solve the differential equation twice: Once for a domain extending from {math}`\kap=0` to {math}`\Steady{\kap}-\epsilon`, yielding {math}`\cFunc_{-}(\kap)`, and once for a domain from {math}`\Steady{\kap}+\epsilon` to some large value of {math}`\kap`, yielding {math}`\cFunc_{+}(\kap)`. The true consumption policy function can then be approximated by interpolating between the upper endpoint of {math}`\cFunc_{-}(\kap)` and the lower endpoint of {math}`\cFunc_{+}(\kap)`.
+There is one problem, however: at the steady state both {math}`\dot{\cNrm}` and {math}`\dot{\kap}` are zero, so the right-hand side of this equation is {math}`0/0`, and the solution cannot start there. It starts instead a small step {math}`\epsilon` away from the steady state on each side, along the saddle path's slope there, and integrates the equation outward, away from the steady state: once down toward {math}`\kap=0`, yielding {math}`\cFunc_{-}(\kap)`, and once up to some large value of {math}`\kap`, yielding {math}`\cFunc_{+}(\kap)`. The slope comes from the system linearized at the steady state: it is the direction of the eigenvector with the negative eigenvalue, the one direction from which the economy converges. Within {math}`\epsilon` of the steady state, the consumption function is the straight line along that slope.
 
 {cite:t}`judd:book` covers numerical methods for saddle paths more generally. The [notebook](RamseyCassKoopmans.ipynb) solves the model this way and draws both figures; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).
