@@ -34,6 +34,8 @@ so the limit depends on the growth impatience condition:
 
 The same limits hold when {math}`\PermGroFac = \Rfree`, where the closed form for human wealth divides by zero and the sum gives {math}`\hNrm_{n} = n+1`: then {math}`\GPFac = \RPFac > 1`, and consumption goes to zero. (In the case treated above, where the RIC holds rather than fails, {math}`\GPFac<1` follows automatically, because {math}`\APFac < \Rfree` and {math}`\Rfree \leq \PermGroFac` together imply the GIC {math}`\APFac < \PermGroFac`.) The boundary of the RIC, {math}`\RPFac = 1`, behaves like the case where it holds: the closed form for the MPC divides by zero and the sum gives {math}`\MPC_{n} = 1/(n+1)`, while {math}`\hNrm_{n}` grows geometrically when {math}`\PermGroFac > \Rfree`, so consumption out of human wealth grows without bound; the GIC holds, since {math}`\APFac = \Rfree < \PermGroFac`.
 
+Finally, for completeness: when the RIC fails but the FHWC holds, human wealth is finite while the MPC goes to zero, so consumption goes to zero too: {math}`\cFunc(\mNrm)=0`.
+
 (sec:PerfForesightCRRA-MPCRecursion)=
 ## The MPC Recursion
 
@@ -97,12 +99,12 @@ but since {math}`\DiscFac \APFac^{1-\CRRA} = \RPFac`, this reduces to
 ```{math}
 :label: eq:vFuncAnalytical
 
-\vFunc_{t} = \uFunc(\cLevBF_{t})\overbrace{(1+\RPFac+\RPFac^{2}+...+\RPFac^{T-t})}^{\equiv \cPDVFunc_{t}}
+\vFunc_{t} = \uFunc(\cLevBF_{t})\overbrace{(1+\RPFac+\RPFac^{2}+...+\RPFac^{T-t})}^{= \PDV_{t}^{T}(\cLevBF)/\cLevBF_{t}}
 ```
 
-where {math}`\cPDVFunc_{t}` is the discounted value of future consumption growth (that is, the discounted value of the ratio of future consumption to today's consumption).
+where {math}`\PDV_{t}^{T}(\cLevBF)/\cLevBF_{t}`, the chapter's [present discounted value of consumption](#eq:cfin) divided by today's consumption, is the discounted value of future consumption growth (that is, the discounted value of the ratio of future consumption to today's consumption).
 
-The sum that defines {math}`\cPDVFunc_{t}` is the sum in [the MPC recursion](#eq:MPCrecursiveSum), so {math}`\cPDVFunc_{t} = \MPC_{t}^{-1}`, and we can write value as
+This sum is the sum in [the MPC recursion](#eq:MPCrecursiveSum), so {math}`\PDV_{t}^{T}(\cLevBF)/\cLevBF_{t} = \MPC_{t}^{-1}`, and we can write value as
 
 ```{math}
 \begin{aligned}
