@@ -525,6 +525,6 @@ $$
 \end{aligned}\end{gathered}
 $$
 
-and if this production function characterizes output in a perfectly competitive economy then $\FFunc_{\KLvl}$ is the rental rate of capital, the interest rate plus the depreciation rate, and $\FFunc_{\LLvl}$ is the wage: paying each factor its marginal product exhausts output, so profits are zero.
+and if this production function characterizes output in a perfectly competitive economy then $\FFunc_{\KLvl}$ is the rental rate of capital (in a one-good economy, the interest rate plus the depreciation rate) and $\FFunc_{\LLvl}$ is the wage: paying each factor its marginal product exhausts output, so profits are zero.
 :::
 ::::
