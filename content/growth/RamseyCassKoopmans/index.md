@@ -235,14 +235,21 @@ and capital all grow at rate {math}`\PtyGroRte`.
 ```{math}
 :label: eq:RCK-modGoldenRule
 
-\begin{gathered}\begin{aligned}
-  \fFunc^{\prime}(\Steady{\kap}) & =  \discRte +\PopnGroRte+\deprRte+\CRRA \PtyGroRte  \\
-  \kapShare \Steady{\kap}^{\kapShare-1} & =  \discRte +\PopnGroRte+\deprRte+\CRRA \PtyGroRte  \\
-  \Steady{\kap} & =  \left(\frac{\kapShare}{\discRte +\PopnGroRte+\deprRte+\CRRA \PtyGroRte}\right)^{\frac{1}{1-\kapShare}}   
-\end{aligned}\end{gathered}
+\fFunc^{\prime}(\Steady{\kap}) = \discRte +\PopnGroRte+\deprRte+\CRRA \PtyGroRte .
 ```
 
 This is the "modified golden rule" of {cite:t}`blanchard&fischer:text`, chapter 2. Comparing it with the [golden rule](#eq:RCK-goldenRule), {math}`\fFunc^{\prime}(\Steady{\kap}) - \fFunc^{\prime}(\GoldRule{\kap}) = \discRte - (1-\CRRA)\PtyGroRte`, so {math}`\Steady{\kap} < \GoldRule{\kap}` exactly when {math}`\discRte > (1-\CRRA)\PtyGroRte`: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
+
+Using {math}`\fFunc^{\prime}(\kap) = \kapShare \kap^{\kapShare-1}`, the modified golden rule gives an analytical formula for the steady state:
+
+```{math}
+:label: eq:RCK-kSteadyCobbDouglas
+
+\begin{gathered}\begin{aligned}
+  \kapShare \Steady{\kap}^{\kapShare-1} & =  \discRte +\PopnGroRte+\deprRte+\CRRA \PtyGroRte  \\
+  \Steady{\kap} & =  \left(\frac{\kapShare}{\discRte +\PopnGroRte+\deprRte+\CRRA \PtyGroRte}\right)^{\frac{1}{1-\kapShare}} .
+\end{aligned}\end{gathered}
+```
 
 Thus {math}`\Steady{\kap}` is higher when capital's share of output, {math}`\kapShare`, is higher, and lower when consumers are more impatient, population grows faster, capital depreciates faster, or productivity grows faster. When productivity grows, it is also lower when {math}`\CRRA` is higher: consumers who dislike differences in consumption over time save less when they expect their consumption to grow.
 
