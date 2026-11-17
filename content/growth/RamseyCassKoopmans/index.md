@@ -16,7 +16,7 @@ The economy has a perfectly competitive production sector that uses a constant-r
 to produce output using capital and labor. Under perfect competition firms must make zero profits in equilibrium, which means, by [Euler's theorem](#fact:eulerstheorem), that
 
 :::{margin}
-An important insight here is that all of output is absorbed by payments to labor and to capital; there is nothing left over (say, to fund research).
+An important insight here is that all of output is absorbed by payments to labor and to capital; there is nothing left over (say, to fund corporate research to invent new technologies to augment productivity).
 :::
 
 ```{math}
