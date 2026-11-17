@@ -95,7 +95,7 @@ the Hall-Jorgenson firm's problem with labor added. With {math}`\kap = \KLvl/\LL
 \kapRent_{t} = \fFunc^{\prime}(\kap_{t}), \qquad \Wage_{t} = \fFunc(\kap_{t}) - \kap_{t}\fFunc^{\prime}(\kap_{t}),
 ```
 
-as in the [Diamond OLG model](#eq:rEqfp), where capital does not depreciate. By [Euler's theorem](#fact:eulerstheorem) for [homogeneous functions](https://en.wikipedia.org/wiki/Homogeneous_function#Euler's_theorem), these payments exhaust output, {math}`\fFunc(\kap_{t}) = \Wage_{t} + \kapRent_{t}\kap_{t}`, so profits are zero whatever the firm's size.
+as in the [Diamond OLG model](#eq:rEqfp), where capital does not depreciate. These payments exhaust output, as in the [RCK model](#eq:RCK-outputExhausted), by [Euler's theorem](#fact:eulerstheorem) for [homogeneous functions](https://en.wikipedia.org/wiki/Homogeneous_function#Euler's_theorem), so profits are zero whatever the firm's size.
 
 ## Equilibrium
 
