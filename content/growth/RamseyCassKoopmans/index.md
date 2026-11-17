@@ -32,7 +32,7 @@ An important insight here is that all of output is absorbed by payments to labor
 Labor hours (the same as population) increase exogenously at a constant rate
 
 :::{margin}
-States and controls are a function of time, but putting time subscripts on everything would add clutter; we do it only where necessary for clarity.
+States and controls are functions of time; time subscripts appear only where clarity needs them.
 :::
 
 ```{math}
@@ -49,15 +49,13 @@ and {math}`\PtyLab` is an index of labor productivity that grows at rate
 \end{aligned}\end{gathered}
 ```
 
-Thus, technological progress allows each worker to
-produce perpetually more as time goes by with the same amount of
-physical capital.
+Technological progress thus lets each worker produce ever more with the same physical capital.
 
 :::{margin}
-This is 'labor-augmenting' (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\FFunc(\PtyLab \KLvl,\LLvl)` ('Solow-neutral'), or output, {math}`\PtyLab \FFunc(\KLvl,\LLvl)` ('Hicks-neutral'). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
+This is "labor-augmenting" (Harrod-neutral) productivity growth. Progress can also augment capital, {math}`\FFunc(\PtyLab \KLvl,\LLvl)` ("Solow-neutral"), or output, {math}`\PtyLab \FFunc(\KLvl,\LLvl)` ("Hicks-neutral"). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
 :::
 
-The quantity {math}`\PtyLab \LLvl` is known as the number of "efficiency units" of labor in the economy.
+The quantity {math}`\PtyLab \LLvl` is the number of "efficiency units" of labor.
 
 Aggregate capital accumulates according to
 
@@ -113,7 +111,7 @@ One more unit of {math}`\kap` adds {math}`\fFunc^{\prime}(\kap)` to output, but 
 
 ## The Social Planner's Problem
 
-Now suppose that there is a social planner whose goal is to maximize the discounted
+Now suppose a social planner maximizes the discounted
 sum of CRRA utility from per capita consumption, with time preference rate {math}`\discRte`:
 
 :::{margin}
@@ -134,7 +132,7 @@ But {math}`\CLvl/\LLvl = \PtyLab (\CLvl/(\PtyLab \LLvl))= \PtyLab \cNrm`. Recall
 \end{aligned}\end{gathered}
 ```
 
-so if the economy started off at date 0 with productivity {math}`\PtyLab_{0}`, by date {math}`t` we can rewrite
+so if productivity at date 0 is {math}`\PtyLab_{0}`, at date {math}`t`
 
 ```{math}
 :label: eq:cRat
@@ -145,7 +143,7 @@ so if the economy started off at date 0 with productivity {math}`\PtyLab_{0}`, b
 \end{aligned}\end{gathered}
 ```
 
-Using {eq}`eq:cRat`, and writing {math}`\uFunc(\cNrm) = \cNrm^{1-\CRRA}/(1-\CRRA)`, with {math}`\CRRA` the coefficient of relative risk aversion, we can rewrite the social planner's objective function as
+Using {eq}`eq:cRat`, and writing {math}`\uFunc(\cNrm) = \cNrm^{1-\CRRA}/(1-\CRRA)`, with {math}`\CRRA` the coefficient of relative risk aversion, rewrite the social planner's objective function as
 
 ```{math}
 :label: eq:maxprobmod
@@ -160,7 +158,7 @@ Using {eq}`eq:cRat`, and writing {math}`\uFunc(\cNrm) = \cNrm^{1-\CRRA}/(1-\CRRA
 
 Thus, assuming {math}`\discRte > (1-\CRRA) \PtyGroRte`, so that the objective is finite (that is, imposing the [finite value of autarky condition](https://llorracc.github.io/BufferStockTheory/#pffvac)), and normalizing the initial
 level of productivity to {math}`\PtyLab _{0}=1`, the complete optimization problem
-can be formulated as
+is
 
 ```{math}
 \max \int_{0}^{\infty} \uFunc(\cNrm) e^{-(\discRte - (1-\CRRA)\PtyGroRte) t}\,dt
@@ -172,7 +170,7 @@ subject to
 \dot{\kap} = \kap^{\kapShare}-\cNrm-(\PopnGroRte+\PtyGroRte+\deprRte)\kap,
 ```
 
-which has a current-value Hamiltonian representation
+whose current-value Hamiltonian is
 
 :::{margin}
 If the Hamiltonian is new to you, Peter Thompson's [lecture notes on optimal control](https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf) derive the method from the economics of a firm's capital problem, and later work through this model. Wikipedia's [worked example of the RCK model](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model), linked from the two optimization conditions, uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero. [Ramsey Growth in Discrete and Continuous Time](#sec:HamiltonianVSDiscrete), in the mathematical appendices, derives the Hamiltonian's conditions for a version of this model without productivity growth and shows how each relates to the discrete-time Bellman approach.
@@ -215,21 +213,21 @@ Since {eq}`eq:RCK-H1A` gives {math}`\dot{\vk}/\vk = -\CRRA\dot{\cNrm}/\cNrm`, th
 
 or, with {math}`\rfree \equiv \fFunc^{\prime}(\kap) - \deprRte` the interest rate, {math}`\dot{\cNrm}/\cNrm = \CRRA^{-1}(\rfree - \discRte - \PopnGroRte) - \PtyGroRte`.
 
-This Euler equation is called the "Keynes-Ramsey rule," because it was originally derived by
-Ramsey with an explanation attributed to Keynes.
-Apart from the {math}`-\PtyGroRte`, which comes from measuring consumption per efficiency unit, it is just like [the Euler equation in the perfect foresight CRRA model](#eq:PFCRRA-cgrow) in continuous time, with two differences: the return that matters is {math}`\rfree-\PopnGroRte` rather than {math}`\rfree`, because population growth dilutes each person's capital, and that return varies over time as {math}`\fFunc^{\prime}(\kap)` does.
+This Euler equation is called the "Keynes-Ramsey rule," because Ramsey derived it
+with an explanation attributed to Keynes.
+Apart from the {math}`-\PtyGroRte`, which comes from measuring consumption per efficiency unit, it is like [the Euler equation in the perfect foresight CRRA model](#eq:PFCRRA-cgrow) in continuous time, with two differences: the return that matters is {math}`\rfree-\PopnGroRte` rather than {math}`\rfree`, because population growth dilutes each person's capital, and that return varies over time as {math}`\fFunc^{\prime}(\kap)` does.
 
 Since per capita consumption is {math}`\CLvl/\LLvl = \cNrm \PtyLab`, it grows at {math}`\dot{\cNrm}/\cNrm + \PtyGroRte = \CRRA^{-1}(\fFunc^{\prime}(\kap)-(\PopnGroRte+\deprRte)-\discRte)`: the same formula, as a function of {math}`\kap`, as in the model with no productivity growth, the [Euler equation](#eq:cdotOc) with {math}`\PtyGroRte=0`. Productivity growth matters only through {math}`\kap`.
 
 (sec:RCK-SteadyState)=
 ## The Steady State
 
-The assumption of labor-augmenting technological progress was made
-because it implies that in the steady state, per capita consumption, income,
+Technological progress is assumed to be labor-augmenting because then,
+in the steady state, per capita consumption, income
 and capital all grow at rate {math}`\PtyGroRte`.
 
 :::{margin}
-See {cite:t}`ghosDespiteUzawa` for a discussion of the realism of this requirement.
+{cite:t}`ghosDespiteUzawa` discuss how realistic this requirement is.
 :::
 
 {math}`\dot{\cNrm}/\cNrm = 0` implies that at the steady-state value of {math}`\Steady{\kap}`,
@@ -254,14 +252,11 @@ Strictly, {math}`\Steady{\kap}` rises with {math}`\kapShare` when {math}`\kapSha
 
 ## A Phase Diagram
 
-While the RCK model has an analytical solution for its steady state,
-it does not have one for the transition to the
-steady state. The usual method for analyzing
-models of this kind is a [phase diagram](https://en.wikipedia.org/wiki/Phase_portrait) in {math}`\cNrm` and {math}`\kap`.
+The RCK model's steady state has an analytical solution, but its transition
+does not. The usual tool for analyzing it is a [phase diagram](https://en.wikipedia.org/wiki/Phase_portrait) in {math}`\cNrm` and {math}`\kap`.
 
-The first step in constructing the phase diagram is to take the differential
-equations that describe the system and find the points where they are
-zero. Thus, from {eq}`eq:RCK-kdot` we have that {math}`\dot{\kap}=0` implies
+The first step is to find where the system's differential equations are
+zero. By {eq}`eq:RCK-kdot`, {math}`\dot{\kap}=0` implies
 
 ```{math}
 :label: eq:RCK-kdotEq0
@@ -271,9 +266,8 @@ zero. Thus, from {eq}`eq:RCK-kdot` we have that {math}`\dot{\kap}=0` implies
 \end{aligned}\end{gathered}
 ```
 
-and we have already solved for the (constant) {math}`\Steady{\kap}` that characterizes
-the {math}`\dot{\cNrm}/\cNrm=0` locus. These can be combined to generate the borders between
-the phases in the phase diagram, as illustrated in {numref}`fig:RamseySSPlot`.
+and the {math}`\dot{\cNrm}/\cNrm=0` locus is the constant {math}`\Steady{\kap}` found above.
+The two loci divide the diagram into its phases, as {numref}`fig:RamseySSPlot` shows.
 
 :::{figure} figures/RamseySSPlot.png
 :name: fig:RamseySSPlot
@@ -321,9 +315,9 @@ How much of observed growth can the transition explain? Little, {cite:t}`king&re
 
 Since the transition has, in general, no analytical solution, its quantitative implications must be computed. This appendix shows how, for students beginning research on growth models.
 
-The most straightforward method of numerical solution for perfect foresight
-models of this kind is called the
-"time elimination" method {cite:p}`Mulligan&sm:transdynam`. It starts from the fact that
+The most straightforward numerical method for perfect foresight
+models of this kind is the
+"time elimination" method {cite:p}`Mulligan&sm:transdynam`. It starts from
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -331,7 +325,7 @@ models of this kind is called the
   \end{aligned}\end{gathered}
 ```
 
-Note from {eq}`eq:cdotOc` that we can write
+By {eq}`eq:cdotOc`,
 
 ```{math}
 :label: eq:cdot
@@ -341,7 +335,7 @@ Note from {eq}`eq:cdotOc` that we can write
   \end{aligned}\end{gathered}
 ```
 
-so we can obtain
+so
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -350,8 +344,8 @@ so we can obtain
   \end{aligned}\end{gathered}
 ```
 
-which is a differential equation with, in general, no analytical solution. Many numerical math packages can solve differential equations numerically, yielding a numerical version of the {math}`\cFunc(\kap)` function.
+which is a differential equation with, in general, no analytical solution. Many numerical math packages can solve it, yielding a numerical version of the {math}`\cFunc(\kap)` function.
 
-There is one problem, however: at the steady state both {math}`\dot{\cNrm}` and {math}`\dot{\kap}` are zero, so the right-hand side of this equation is {math}`0/0`, and the solution cannot start there. It starts instead a small step {math}`\epsilon` away from the steady state on each side, along the saddle path's slope there, and integrates the equation outward, away from the steady state: once down toward {math}`\kap=0`, yielding {math}`\cFunc_{-}(\kap)`, and once up to some large value of {math}`\kap`, yielding {math}`\cFunc_{+}(\kap)`. The slope comes from the system linearized at the steady state: it is the direction of the eigenvector with the negative eigenvalue, the one direction from which the economy converges. Within {math}`\epsilon` of the steady state, the consumption function is the straight line along that slope.
+One problem: at the steady state both {math}`\dot{\cNrm}` and {math}`\dot{\kap}` are zero, so the right-hand side of this equation is {math}`0/0`, and the solution cannot start there. It starts instead a small step {math}`\epsilon` away from the steady state on each side, along the saddle path's slope there, and integrates the equation outward, away from the steady state: once down toward {math}`\kap=0`, yielding {math}`\cFunc_{-}(\kap)`, and once up to some large value of {math}`\kap`, yielding {math}`\cFunc_{+}(\kap)`. The slope comes from the system linearized at the steady state: it is the direction of the eigenvector with the negative eigenvalue, the one direction from which the economy converges. Within {math}`\epsilon` of the steady state, the consumption function is the straight line along that slope.
 
 {cite:t}`judd:book` covers numerical methods for saddle paths more generally. The [notebook](RamseyCassKoopmans.ipynb) solves the model this way and draws both figures; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).
