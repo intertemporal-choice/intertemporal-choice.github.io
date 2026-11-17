@@ -35,6 +35,8 @@ where {math}`\pLevBF_{\tNow+1}` is "permanent labor income," which always grows 
 \pLevBF_{\tNow+1}/\pLevBF_{\tNow} = {\PermGroFac}.
 ```
 
+Here {math}`\Rfree = 1+\rfree` is the interest factor and {math}`\PermGroFac = 1+\PermGroRte` the growth factor of permanent income.
+
 ## The Solution
 
 It will be convenient to think of both market resources {math}`\mLevBF_{\tNow}` and permanent noncapital (labor) income {math}`\pLevBF_{\tNow}` as state variables in this problem. Bellman's equation is
@@ -95,10 +97,6 @@ we will say that the consumer exhibits "absolute impatience" because this is the
 
 The Intertemporal Budget Constraint tells us that the present discounted value of consumption must match the PDV of total resources:
 
-:::{margin}
-[InfSum](#fact:infsum) is the immediate implication of [FinSum](#fact:finsum) as {math}`\TEnd \rightarrow \infty`.
-:::
-
 ```{math}
 :label: eq:PFCRRA-ibc
 
@@ -152,7 +150,7 @@ Human wealth as defined in [the PDV of labor income](#eq:PFCRRA-yfin) includes t
 which approaches {math}`({\PermGroFac}/\Rfree)/(1-{\PermGroFac}/\Rfree)` as {math}`\TEnd \rightarrow \infty` when the [finite human wealth condition](#eq:FHWCPF) below holds.
 
 :::{margin}
-The closed forms divide by zero in two cases, and the sums they come from give the answer. If the return patience factor {math}`\RPFac=1`, [the inverse of the MPC as a sum](#eq:MPCrecursiveSum) gives {math}`\MPC_{t}=1/(\TEnd-\tNow+1)`. If {math}`\PermGroFac=\Rfree`, every term of the human wealth sum is 1, so {math}`\hNrm_{t}=\TEnd-\tNow+1` and {math}`\hNrmEnd_{t}=\TEnd-\tNow`.
+The closed forms divide by zero in two cases, and the sums they come from give the answer. If {math}`(\Rfree\DiscFac)^{1/\CRRA}=\Rfree`, every term of the sum in [the PDV of consumption](#eq:cfin) is 1, so {math}`\MPC_{t}=1/(\TEnd-\tNow+1)`. If {math}`\PermGroFac=\Rfree`, every term of the human wealth sum is 1, so {math}`\hNrm_{t}=\TEnd-\tNow+1` and {math}`\hNrmEnd_{t}=\TEnd-\tNow`.
 :::
 
 In order to apply [InfSum](#fact:infsum) to move to the infinite-horizon case ({math}`\TEnd=\infty`), we need to impose the condition
@@ -168,6 +166,10 @@ In order to apply [InfSum](#fact:infsum) to move to the infinite-horizon case ({
 
 Why? Because if income were expected to grow at a rate greater than the interest rate forever, then the PDV of future income would be infinite; with infinite human wealth, the problem has no well-defined solution. We henceforth call {eq}`eq:FHWCPF` the Finite Human Wealth Condition (FHWC).
 
+:::{margin}
+[InfSum](#fact:infsum) is the immediate implication of [FinSum](#fact:finsum) as {math}`\TEnd \rightarrow \infty`.
+:::
+
 Similarly, if consumption starts at a positive level and grows by the factor {math}`\APFac=(\Rfree \DiscFac)^{1/\CRRA}`, in order for the PDV of consumption to be finite we must impose:
 
 ```{math}
@@ -178,10 +180,12 @@ Similarly, if consumption starts at a positive level and grows by the factor {ma
 
 and we will henceforth call {math}`\RPFac` the "return patience factor" whose log is the "return patience rate" {math}`\patr \equiv \log \RPFac` ({math}`\pat` is the lower-case version of {math}`\APFac`) and what {eq}`eq:PatR` says is that the desired growth rate of consumption must be less than the interest rate in order for the model to have a well-defined solution. This condition therefore imposes a requirement that "impatience" be greater than some minimum amount. (For (much) more on the various definitions of impatience used in this section, their implications, and parallel conditions for models with uncertainty, see {cite:t}`BufferStockTheory`).
 
+We call {eq}`eq:PatR` the "return impatience condition" (RIC).
+
 If both the RIC and the FHWC hold, then the model has a well-defined infinite horizon solution, as can be seen by realizing that
 
 :::{margin}
-See {cite:t}`BufferStockTheory` for a discussion of the case where the conditions do not hold.
+The [appendix](#sec:PerfForesightCRRA-Appendix) derives [the limiting solution when they do not](#sec:PFwhenFHWfails); see {cite:t}`BufferStockTheory` for a fuller discussion.
 :::
 
 ```{math}
@@ -241,7 +245,7 @@ Finally, if {math}`\Rfree\DiscFac=1` (which is to say, the interest rate exactly
 
 The two conditions do different work. Return impatience guarantees a positive marginal propensity to consume, while absolute impatience guarantees a falling level of consumption. Whenever {math}`\rfree > 0`, return impatience holds even for a consumer who is poised with respect to absolute patience.
 
-(The consumer will be impatient, spending more than his income, if {math}`\Rfree\DiscFac<1`, and patient, spending less than his income, if {math}`\Rfree\DiscFac>1`. Income here means income inclusive of the interest earnings on total wealth.)
+(The consumer will be impatient, spending more than income, if {math}`\Rfree\DiscFac<1`, and patient, spending less than income, if {math}`\Rfree\DiscFac>1`. Income here means income inclusive of the interest earnings on total wealth.)
 
 Equation {eq}`eq:PFCRRA-cOfw` can be simplified into something a bit easier to handle by making some approximations. If {math}`\DiscFac = 1/(1+\discRte)`, then we can use facts from the [MathFacts section](#fact:mathfactslist) to discover that
 
@@ -274,9 +278,9 @@ and the marginal propensity to consume in {eq}`eq:PFCRRA-capprox` is {math}`\MPC
 
 The consumption function {eq}`eq:PFCRRA-cOfw` is exact; {eq}`eq:PFCRRA-capprox` treats {math}`\rfree`, {math}`\discRte` and the return patience rate {math}`\patr` as small. Its error is a different thing from the error of a numerical solution, which approaches the exact formula, not the approximation.
 
-From this we can see again that whether the consumer is return patient, return poised, or return impatient depends on the relationship between {math}`\rfree` and {math}`\discRte`. Note also that if {math}`\CRRA = \infty` then the consumer is infinitely averse to changing the level of consumption, and so once again the consumer spends exactly the sustainable amount. (This consumer is "absolutely poised" but "return impatient").
+From this we can see again that whether the consumer is absolutely patient, absolutely poised, or absolutely impatient depends on the relationship between {math}`\rfree` and {math}`\discRte`. Note also that if {math}`\CRRA = \infty` then the consumer is infinitely averse to changing the level of consumption, and so once again the consumer spends exactly the sustainable amount. (This consumer is "absolutely poised" but "return impatient").
 
-Now a brief digression on what "income" means in this model. Suppose for simplicity that the consumer had no capital assets ("bank balances" {math}`\bLevBF_{\tNow}=0`), and suppose that income was expected to stay constant at level {math}`\pLevBF_{\tNow+n}=\pLevBF~\forall~n>0` forever. In this case human wealth would be:
+Now a brief digression on what "income" means in this model. Suppose for simplicity that the consumer had no capital assets ("bank balances" {math}`\bLevBF_{\tNow}=0`), and suppose that income was expected to stay constant at level {math}`\pLevBF_{\tNow+n}=\pLevBF~\forall~n\geq 0` forever. In this case human wealth would be:
 
 ```{math}
 \begin{aligned}
@@ -404,7 +408,7 @@ Now note that {eq}`eq:normC` can be rewritten
 
 where {math}`\oNrm_{\tNow}` is the consumer's total wealth-to-permanent-labor-income ratio, and {math}`\MPC` is the "marginal propensity to consume" out of wealth.
 
-As before, whether {math}`\oNrm` is rising or falling depends upon the relationship between {math}`\RNrmByG-1` and {math}`\RNrmByG-(\RNrmByG\DiscAlt)^{1/\CRRA}`. A consumer will be drawing down his wealth-to-income ratio if
+As before, whether {math}`\oNrm` is rising or falling depends upon the relationship between {math}`\RNrmByG-1` and {math}`\RNrmByG-(\RNrmByG\DiscAlt)^{1/\CRRA}`. A consumer will be drawing down the wealth-to-income ratio if
 
 ```{math}
 \begin{aligned}
@@ -432,9 +436,9 @@ where {math}`\GPFac` is the "growth patience factor." We call {eq}`eq:PatWGroCon
 Or, GIC-PF if we want to highlight that this is the condition for the perfect foresight model.
 :::
 
-Thus, whether the consumer is patient or impatient in the sense of building up or drawing down a wealth-to-income *ratio* depends on whether the growth rate of labor income is less than, equal to, or greater than the growth rate of consumption. Analogously to our earlier usages, a consumer for whom {math}`\GPFac=1` (equivalently, {math}`\GPRte= 0`) would be "growth poised."
+Thus, whether the consumer is patient or impatient in the sense of building up or drawing down a wealth-to-income *ratio* depends on whether the growth rate of labor income is less than, equal to, or greater than the growth rate of consumption. Analogously to our earlier usages, a consumer for whom {math}`\GPFac=1` (equivalently, a growth patience rate {math}`\GPRte \equiv \log \GPFac = 0`) would be "growth poised."
 
-To get the intuition for this, consider the case of a consumer with no nonhuman wealth, {math}`\bNrm_{\tNow}=0`. This consumer's absolute level of consumption will grow at {math}`(\Rfree\DiscFac)^{1/\CRRA}` and absolute level of income grows at {math}`{\PermGroFac}`, but the PDV of future consumption and future income must be equal. If income is growing faster than consumption but has the same PDV, consumption must be *starting out* at a level *higher* than income, which is the sense in which this consumer is impatient (spending more than his income). "Growth impatience" is therefore the condition that causes consumers with no assets to want to borrow.
+To get the intuition for this, consider the case of a consumer with no nonhuman wealth, {math}`\bNrm_{\tNow}=0`. This consumer's absolute level of consumption will grow at {math}`(\Rfree\DiscFac)^{1/\CRRA}` and absolute level of income grows at {math}`{\PermGroFac}`, but the PDV of future consumption and future income must be equal. If income is growing faster than consumption but has the same PDV, consumption must be *starting out* at a level *higher* than income, which is the sense in which this consumer is impatient (spending more than income). "Growth impatience" is therefore the condition that causes consumers with no assets to want to borrow.
 
 ## Applications
 
@@ -454,15 +458,15 @@ For simplicity, assume that {math}`\bNrm_{\tNow} = 0`. Then the original version
 \end{aligned}
 ```
 
-We are interested only in calibrations of the model in which the consumer is "growth impatient" so that {math}`\PermGroRte > \CRRA^{-1}(\rfree-\discRte)` so if we define the growth patience rate as
+We are interested only in calibrations of the model in which the consumer is "growth impatient" so that {math}`\PermGroRte > \CRRA^{-1}(\rfree-\discRte)`. By the same approximation as {eq}`eq:patrApprox`, the growth patience rate is
 
 ```{math}
 :label: eq:patwGro
 
-\GPRte \equiv \CRRA^{-1}(\rfree-\discRte)-\PermGroRte
+\GPRte \approx \CRRA^{-1}(\rfree-\discRte)-\PermGroRte
 ```
 
-we can write this as
+so we can write this as
 
 ```{math}
 :label: eq:CvsP
@@ -473,7 +477,7 @@ we can write this as
 \end{aligned}
 ```
 
-Remembering that imposition of the growth impatience condition is equivalent to assuming {math}`\GPRte < 0`, while the FHWC requires {math}`\rfree > \PermGroRte`, it is clear that the expression {math}`-\GPRte/(\rfree-\PermGroRte)` will be positive: The consumer will spend more than his permanent labor income.
+Remembering that imposition of the growth impatience condition is equivalent to assuming {math}`\GPRte < 0`, while the FHWC requires {math}`\rfree > \PermGroRte`, it is clear that the expression {math}`-\GPRte/(\rfree-\PermGroRte)` will be positive: The consumer will spend more than permanent labor income.
 
 Now suppose we choose plausible values for {math}`(\rfree, \discRte, \PermGroRte, \CRRA) = (0.04,0.04,0.02,2)`. Then {eq}`eq:PFCRRA-cofw2` becomes:
 
@@ -520,7 +524,7 @@ Two measures of the U.S. long-term real interest rate, monthly, in percent a yea
 The level of saving can be defined as total income minus total consumption:
 
 ```{math}
-\sLevBF_{\tNow} \approx \rfree \aLevBF_{\tNow-1} + \pLevBF_{\tNow} - \cLevBF_{\tNow}
+\sLevBF_{\tNow} = \rfree \aLevBF_{\tNow-1} + \pLevBF_{\tNow} - \cLevBF_{\tNow}
 ```
 
 but substituting from {eq}`eq:CvsP` and {eq}`eq:PFCRRA-capprox`,

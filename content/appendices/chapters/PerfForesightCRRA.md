@@ -34,6 +34,8 @@ so the limit depends on the growth impatience condition:
 
 The same limits hold when {math}`\PermGroFac = \Rfree`, where the closed form for human wealth divides by zero and the sum gives {math}`\hNrm_{n} = n+1`: then {math}`\GPFac = \RPFac > 1`, and consumption goes to zero. (In the case treated above, where the RIC holds rather than fails, {math}`\GPFac<1` follows automatically, because {math}`\APFac < \Rfree` and {math}`\Rfree \leq \PermGroFac` together imply the GIC {math}`\APFac < \PermGroFac`.) The boundary of the RIC, {math}`\RPFac = 1`, behaves like the case where it holds: the closed form for the MPC divides by zero and the sum gives {math}`\MPC_{n} = 1/(n+1)`, while {math}`\hNrm_{n}` grows geometrically when {math}`\PermGroFac > \Rfree`, so consumption out of human wealth grows without bound; the GIC holds, since {math}`\APFac = \Rfree < \PermGroFac`.
 
+Finally, for completeness: when the RIC fails but the FHWC holds, human wealth is finite while the MPC goes to zero, so consumption goes to zero too: {math}`\cFunc(\mNrm)=0`.
+
 (sec:PerfForesightCRRA-MPCRecursion)=
 ## The MPC Recursion
 
