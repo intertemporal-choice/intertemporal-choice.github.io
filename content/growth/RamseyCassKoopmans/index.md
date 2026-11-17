@@ -5,7 +5,7 @@
 
 ## The Budget Constraint
 
-The economy has a perfectly competitive production sector that uses a Cobb-Douglas aggregate production function
+The economy has a perfectly competitive production sector that uses a constant-returns-to-scale Cobb-Douglas production function
 
 ```{math}
 \begin{gathered}\begin{aligned}
