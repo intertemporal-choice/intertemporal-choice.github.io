@@ -16,7 +16,7 @@ In Romer's model, firm {math}`j`'s production function is of the form
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  y_{t,j} & =  \PtyAgg_{t} \FFunc(\kap_{t,j},\ell_{t,j})
+  y_{t,j} & =  \PtyAgg_{t} \FFunc(\kap_{t,j},\labor_{t,j})
 \end{aligned}\end{gathered}
 ```
 
@@ -75,11 +75,11 @@ Cobb-Douglas production function can be written
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  y_{j} & =  \kap_{j}^{\kapShare}\ell_{j}^{1-\kapShare}\Xi^{\eta}
+  y_{j} & =  \kap_{j}^{\kapShare}\labor_{j}^{1-\kapShare}\Xi^{\eta}
 \end{aligned}\end{gathered}
 ```
 
-which is CRS at the firm level in {math}`(k,\ell)` holding aggregate knowledge {math}`\Xi` fixed.
+which is CRS at the firm level in {math}`(k,\labor)` holding aggregate knowledge {math}`\Xi` fixed.
 
 Aggregate output is
 
@@ -102,7 +102,7 @@ but each household ignores the trivial effect its own investment
 decision has on aggregate knowledge. Thus from the individual
 firm/consumer's perspective, the marginal product of capital is
 {math}`\kapShare \kap_{t,i}^{\kapShare-1}
- \ell_{t,i}^{1-\kapShare}\Xi_{t}^{\eta}`. If we normalize the model by
+ \labor_{t,i}^{1-\kapShare}\Xi_{t}^{\eta}`. If we normalize the model by
 assuming that the aggregate quantity of labor adds upt to {math}`L_{t}=1`,
 we can set up and solve the Hamiltonian to obtain
 
