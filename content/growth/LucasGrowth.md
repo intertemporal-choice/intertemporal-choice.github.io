@@ -33,7 +33,7 @@ Capital accumulation proceeds via the usual differential equation,
 ```
 
 :::{margin}
-The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\logOp` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
+The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\lnat` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
 :::
 
 while {math}`\hLucas` accumulates according to

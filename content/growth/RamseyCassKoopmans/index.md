@@ -40,7 +40,7 @@ States and controls are a function of time, but putting time subscripts on every
 and {math}`\PtyLab` is an index of labor productivity that grows at rate
 
 :::{margin}
-The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\logOp` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
+The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\lnat` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
 :::
 
 ```{math}
