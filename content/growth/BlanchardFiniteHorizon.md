@@ -1,7 +1,7 @@
 (sec:BlanchardFiniteHorizon)=
 # The Blanchard (1985) Model of Perpetual Youth
 
-This section analyzes a way to relax the standard assumption of infinite
+This chapter analyzes a way to relax the standard assumption of infinite
 lifetimes in the Ramsey/Cass-Koopmans
 growth model. The trick, introduced by
 {cite:t}`blanchardFinite`, is to assume that the economy
@@ -47,7 +47,7 @@ you may wish to define
 > *Answer:*
 >
 >
-> A consumer with a pure time preference rate of zero will downweight
+> A consumer with a pure time preference rate of {math}`\discRte` will downweight
 >
 > the utility he receives conditional on being alive by the probability
 >
@@ -75,7 +75,7 @@ you may wish to define
 > \VFunc_{t} = \max \uFunc(\cNrm_{t}) + \left(\frac{1}{1+\discRte}\right) \uFunc(\cNrm_{t+1})
 > ```
 >
-> while if there is a probability {math}`\diePrb` of dying between {math}`t+1` and {math}`t+2`
+> while if there is a probability {math}`\diePrb` of dying between {math}`t` and {math}`t+1`
 >
 > value would be:
 >
@@ -83,7 +83,7 @@ you may wish to define
 > :label: eq:approx
 >
 > \begin{gathered}\begin{aligned}
->    \VFunc_{t} & =  \max \uFunc(\cNrm_{t}) + (1-\diePrb)\left(\frac{1}{1+\discRte}\right) \uFunc(\cNrm_{t+1}) + \diePrb \DiscFac \cdot 0 
+>    \VFunc_{t} & =  \max \uFunc(\cNrm_{t}) + (1-\diePrb)\left(\frac{1}{1+\discRte}\right) \uFunc(\cNrm_{t+1}) + \diePrb \left(\frac{1}{1+\discRte}\right) \cdot 0 
 > \\   & =  \max \uFunc(\cNrm_{t}) + \left(\frac{1-\diePrb}{1+\discRte}\right) \uFunc(\cNrm_{t+1})
 > \\   & \approx  \max \uFunc(\cNrm_{t}) + \left(\frac{1}{1+\discRte+\diePrb}\right) \uFunc(\cNrm_{t+1})  
 > \end{aligned}\end{gathered}
@@ -164,9 +164,7 @@ and show that this formula implies that the population is {math}`\PopnLvl_{t}=1`
 > \end{aligned}\end{gathered}
 > ```
 >
-> where the second line comes from a change of variables {math}`\tau = s-t`
->
-> and {eq}`eq:fmhint` follows from the hint.
+> where the third line comes from a change of variables {math}`\tau = s-t`.
 
 Now some notation. We will define variable {math}`x(s,t)` as the value at
 date {math}`t` of the variable {math}`x` for a consumer who was born at date {math}`s`.
@@ -276,9 +274,9 @@ where
 \end{aligned}\end{gathered}
 ```
 
-(this is simply the compound discount factor necessary to take
+(the second line is simply the compound interest factor necessary to take
 account of time-varying interest rates; if interest rates are
-constant at {math}`\rfree` it reduces to the usual term {math}`e^{-\rfree(\tau-t)}`).
+constant at {math}`\rfree` it reduces to {math}`e^{(\rfree+\diePrb)(\tau-t)}`, and dividing by it discounts at {math}`\rfree+\diePrb`).
 
 > *Answer:*
 >
@@ -289,7 +287,7 @@ constant at {math}`\rfree` it reduces to the usual term {math}`e^{-\rfree(\tau-t
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         \PDVEff_{t}(\cNrm(s,\cdot)) & =  \netWorth(s,t) + \PDVEff_{t}(\wage(\cdot,t))
+>         \PDVEff_{t}(\cNrm(s,\cdot)) & =  \netWorth(s,t) + \PDVEff_{t}(\wage(s,\cdot))
 > \\      \PDVEff_{t}(\cNrm(s,\cdot)) & =  \netWorth(s,t) + \hNrm(s,t).
 > \end{aligned}\end{gathered}
 > ```
@@ -298,7 +296,7 @@ constant at {math}`\rfree` it reduces to the usual term {math}`e^{-\rfree(\tau-t
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         \cNrm(s,\tau) & =  \cNrm(s,t)e^{\int_{s}^{\tau}\rfreeEff_\mu d\mu}e^{-\discRteEff(\tau-t)}
+>         \cNrm(s,\tau) & =  \cNrm(s,t)e^{\int_{t}^{\tau}\rfreeEff_\mu d\mu}e^{-\discRteEff(\tau-t)}
 > \end{aligned}\end{gathered}
 > ```
 >
@@ -307,7 +305,7 @@ constant at {math}`\rfree` it reduces to the usual term {math}`e^{-\rfree(\tau-t
 > ```{math}
 > \begin{gathered}\begin{aligned}
 >         \PDVEff_{t}(\cNrm(s,\cdot)) & =  
-> \int_{t}^{\infty} \cNrm(s,t) e^{\int_{s}^{\tau}\rfreeEff_\mu  d\mu}e^{-\discRteEff(\tau-t)}e^{-\int_{s}^{\tau}\rfreeEff_\mu d\mu} d\tau
+> \int_{t}^{\infty} \cNrm(s,t) e^{\int_{t}^{\tau}\rfreeEff_\mu  d\mu}e^{-\discRteEff(\tau-t)}e^{-\int_{t}^{\tau}\rfreeEff_\mu d\mu} d\tau
 > \\         & =  \cNrm(s,t) \int_{t}^{\infty} e^{-\discRteEff(\tau-t)} d\tau
 > \\   & =  \cNrm(s,t)/\discRteEff
 > \end{aligned}\end{gathered}
@@ -382,11 +380,11 @@ shown to be
 :label: eq:Wdot
 
 \begin{gathered}\begin{aligned}
-        \dot{\NetWorth}(t) & =  \netWorth(t,t) - \diePrb \NetWorth(t) + \int_{-\infty}^{t} \dot{\netWorth}(s,t) \diePrb e^{-\diePrb(t-s)} ds,
+        \dot{\NetWorth}(t) & =  \diePrb \netWorth(t,t) - \diePrb \NetWorth(t) + \int_{-\infty}^{t} \dot{\netWorth}(s,t) \diePrb e^{-\diePrb(t-s)} ds,
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\netWorth(t,t)=0` is the wealth of newly born generations, {math}`\diePrb \NetWorth(t)` is
+where {math}`\diePrb \netWorth(t,t)=0` is the wealth of newly born generations, {math}`\diePrb \NetWorth(t)` is
 the wealth of those who are dying at the moment, and the last term is
 the change in wealth for those who neither die nor are born in this
 period. But {eq}`eq:budconstr` implies that
@@ -447,15 +445,15 @@ Hint: Differentiate {eq}`eq:clevel` and substitute out for {math}`\HNrm` by solv
 > \end{aligned}\end{gathered}
 > ```
 
-Now assume there is a standard production function
-{math}`\FFunc(\KNrm)=\KNrm^{\kapShare}-\deprRte \KNrm` and assume perfect competition so that the
+Now assume there is a standard production function, with output {math}`\KNrm^{\kapShare}`
+and output net of depreciation {math}`\FFunc(\KNrm)=\KNrm^{\kapShare}-\deprRte \KNrm`, and assume perfect competition so that the
 net interest rate {math}`\rfree` is equal to the net marginal product of capital,
 
 ```{math}
 \rfree = \FFunc^{\prime}(\KNrm) = \kapShare \KNrm^{\kapShare-1}-\deprRte
 ```
 
-and the aggregate capital stock at time {math}`t` is the same as aggregate
+and, without government debt, the aggregate capital stock at time {math}`t` is the same as aggregate
 nonhuman wealth, {math}`\KNrm(t)=\NetWorth(t)`. The aggregate accumulation equation is
 just the usual
 
@@ -484,7 +482,7 @@ describes the {math}`\dot{\CNrm}=0` locus. Use this equation to show that
 
 \begin{gathered}\begin{aligned}
   \lim_{\CNrm \rightarrow 0} \KNrm & =  0
-\\ \lim_{\CNrm \rightarrow \infty} \KNrm & =  ((\discRte+\deprRte)/\kapShare)^{1/{\kapShare-1}}.
+\\ \lim_{\CNrm \rightarrow \infty} \KNrm & =  ((\discRte+\deprRte)/\kapShare)^{1/(\kapShare-1)}.
 \end{aligned}\end{gathered}
 ```
 
@@ -518,7 +516,7 @@ describes the {math}`\dot{\CNrm}=0` locus. Use this equation to show that
 > \diePrb(\diePrb+\discRte) \KNrm = 0
 > ```
 >
-> which can be true only if {math}`\lim_{\{\CNrm \rightarrow 0\}} \KNrm = 0`.
+> which can be true only if {math}`\lim_{\CNrm \rightarrow 0} \KNrm = 0`.
 >
 > On the other hand, as {math}`\CNrm \rightarrow \infty` we know that {math}`\KNrm`
 >
@@ -530,15 +528,15 @@ describes the {math}`\dot{\CNrm}=0` locus. Use this equation to show that
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
-> \lim_{\{\CNrm \rightarrow \infty\}} \kapShare \KNrm^{\kapShare-1} & =  (\discRte+\deprRte)
-> \\ \KNrm^{*} & =  ((\discRte+\deprRte)/\kapShare)^{1/{\kapShare-1}}.
+> \lim_{\CNrm \rightarrow \infty} \kapShare \KNrm^{\kapShare-1} & =  (\discRte+\deprRte)
+> \\ \KNrm^{*} & =  ((\discRte+\deprRte)/\kapShare)^{1/(\kapShare-1)}.
 > \end{aligned}\end{gathered}
 > ```
 
 Using your results from the previous question and the aggregate
 dynamic budget constraint, draw the phase diagram for this model and
 discuss how and why it differs from the phase diagram for the
-standard Ramsey-Cass/Koopmans model. (please use {math}`\KNrm^{*}` to
+standard Ramsey/Cass-Koopmans model. (please use {math}`\KNrm^{*}` to
 designate the RCK steady-state capital stock and {math}`\Steady{\KNrm}` to
 designate this model's steady-state {math}`\KNrm`.)
 
@@ -553,54 +551,13 @@ designate this model's steady-state {math}`\KNrm`.)
 > ```
 >
 > which yields the usual hump-shaped {math}`\dot{\KNrm}=0` locus.
->
-> Rewriting the {math}`\dot{\CNrm}` equation as a function of {math}`\KNrm` yields
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->   \dot{\CNrm} & =  (\kapShare \KNrm^{\kapShare-1} - \discRte - \deprRte)\CNrm - (\diePrb+\discRte)\diePrb \KNrm.
-> \end{aligned}\end{gathered}
-> ```
->
-> The {math}`\dot{\CNrm}=0` locus is therefore given by
->
-> ```{math}
-> :label: eq:CvsK
->
-> \begin{gathered}\begin{aligned}
->       0 & =  (\kapShare \KNrm^{\kapShare-1}-\discRte-\deprRte) - \diePrb(\diePrb+\discRte) \KNrm/\CNrm
-> \\  \diePrb(\diePrb+\discRte) \KNrm/\CNrm       & =  (\kapShare \KNrm^{\kapShare-1}-\deprRte-\discRte)
-> \\  \diePrb(\diePrb+\discRte) \KNrm      & =  \CNrm(\kapShare \KNrm^{\kapShare-1}-\deprRte-\discRte)
-> \end{aligned}\end{gathered}
-> ```
->
-> In the limit as {math}`\CNrm \rightarrow 0` this expression approaches
->
-> ```{math}
-> \diePrb(\diePrb+\discRte) \KNrm = 0
-> ```
->
-> which can be true only if {math}`\lim_{\{\CNrm \rightarrow 0\}} \KNrm = 0`.
->
-> On the other hand, as {math}`\CNrm \rightarrow \infty` we know that {math}`\KNrm`
->
-> must remain finite (because the DBC does not allow infinite
->
-> accumulation of {math}`\KNrm`), which means that
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
-> \lim_{\{\CNrm \rightarrow \infty\}} \kapShare \KNrm^{\kapShare-1} & =  (\discRte+\deprRte)
-> \\ \KNrm^{*} & =  ((\discRte+\deprRte)/\kapShare)^{1/{(\kapShare-1)}}.
-> \end{aligned}\end{gathered}
-> ```
 
 :::{figure} /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase1.png
 :::
 
 > In the infinite horizon economy we have {math}`\diePrb = 0` and so the
 >
-> steady-state interest rate would be the {math}`\KNrm^{*}` where {math}`\kapShare \KNrm^{\kapShare-1}-\deprRte = \discRte`. But since {math}`\KNrm/\CNrm` and {math}`\diePrb(\diePrb+\discRte)` are
+> steady-state capital stock would be the {math}`\KNrm^{*}` where {math}`\kapShare \KNrm^{\kapShare-1}-\deprRte = \discRte`. But since {math}`\KNrm/\CNrm` and {math}`\diePrb(\diePrb+\discRte)` are
 >
 > strictly positive, in this finite-horizon economy we would have
 >
@@ -620,9 +577,9 @@ designate this model's steady-state {math}`\KNrm`.)
 >
 > they die but a representative agent does not.
 >
-> These results are combined in the figure, which shows that the intersection
+> These results are combined in the figure, which shows that the
 >
-> of the {math}`\dot{\CNrm}=0` locus intersects the {math}`\dot{\KNrm}=0` locus at point {math}`A`
+> {math}`\dot{\CNrm}=0` locus intersects the {math}`\dot{\KNrm}=0` locus at point {math}`A`
 >
 > which corresponds to a lower level of the capital stock than in the
 >
@@ -645,23 +602,23 @@ where {math}`\Debt` is government debt, {math}`\GovSpend` is government spending
 ```
 
 as the compound interest factor between time {math}`t` and time {math}`\tau`, the
-government is also required to satisfy the transversality condition
+government is also required to satisfy its no-Ponzi condition with equality
 
 ```{math}
-:label: eq:10
+:label: eq:BFH-govDebtLimit
 
-\lim_{t \rightarrow \infty} \Debt_t/e^{\int_t^{\tau}\rfree_\mu d\mu} = 0.
+\lim_{\tau \rightarrow \infty} \Debt_\tau/e^{\int_t^{\tau}\rfree_\mu d\mu} = 0.
 ```
 
-Consider the following fiscal policy experiment. Until time {math}`t` there
-has been no government ({math}`\GovSpend_\tau = \Debt_\tau = \TaxLev_\tau=0~\forall~\tau<t`). At date
-{math}`t` the government issues a quantity {math}`\Debt` of debt and announces that
+Consider the following fiscal policy experiment. Until time 0 there
+has been no government ({math}`\GovSpend_\tau = \Debt_\tau = \TaxLev_\tau=0~\forall~\tau<0`). At date
+0 the government issues a quantity {math}`\Debt` of debt and announces that
 future lump sum taxes will be imposed in amounts exactly large enough
 to pay the interest on this debt (so subsequently, {math}`\dot{\Debt}=0`
 forever). The government rebates the proceeds of its sale of debt to
 the public as a per-capita lump sum of {math}`\Debt` per person. The government
 will never engage in any spending (aside from paying interest on the
-debt). Define the new variables
+debt). Aggregate net worth, and human wealth net of taxes, are now
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -699,7 +656,7 @@ specification of the economy to
 >
 > equal to the present discounted value of the taxes.
 >
-> The change in (redefined) wealth is now  net income {math}`\Wage-\discRte`
+> The change in (redefined) wealth is now  net income {math}`\rfree\NetWorth + \Wage - \TaxLev`
 >
 > minus consumption.
 
@@ -769,7 +726,7 @@ of the policy on different generations in the economy.
 >
 > of the original equilibrium. This is because at a given level of the aggregate
 >
-> capital stock, consumers spend more because {math}`\NetWorth>\KNrm`. Thus,
+> capital stock, consumers spend more: they hold the bonds, {math}`\NetWorth>\KNrm`, but will pay only part of the taxes that service them; the rest falls on generations not yet born. Thus,
 >
 > Ricardian equivalence does not hold in this model, because a tax cut today
 >
@@ -798,7 +755,7 @@ of the policy on different generations in the economy.
 >
 > to current generations. However, the higher level of consumption runs
 >
-> down the capital stock per capita, and so over time consumption asypmtotically
+> down the capital stock per capita, and so over time consumption asymptotically
 >
 > approaches a new, lower equilibrium level of consumption {math}`\CNrm'`.
 
@@ -868,7 +825,7 @@ experiment examined above?
 >
 > This is implied by the fact that the net interest rate is negative, which
 >
-> means that the net interest rate could be increased by reducing
+> means that output net of depreciation, and with it consumption at every date, could be increased by reducing
 >
 > the capital stock.
 >
@@ -876,7 +833,7 @@ experiment examined above?
 >
 > possible for the economy to be in a condition of dynamic inefficiency,
 >
-> just as in the 2-period OLG models discussed early in the class. The idea
+> just as in the Diamond OLG model. The idea
 >
 > is to think of declining labor income as a way to generate a 'life cycle'
 >

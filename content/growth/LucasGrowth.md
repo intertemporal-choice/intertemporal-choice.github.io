@@ -9,7 +9,7 @@
 \YLvl = \PtyAgg \KLvl^{\kapShare} (\labor \hCap \LLvl)^{1-\kapShare}
 ```
 
-where {math}`\YLvl, \PtyAgg,` and {math}`\KLvl` are as usually defined and {math}`0 < \kapShare < 1`, where {math}`\labor` is defined as the proportion of total labor time
+where {math}`\YLvl`, {math}`\PtyAgg`, {math}`\KLvl` and {math}`\LLvl` are as usually defined, {math}`0 < \kapShare < 1`, {math}`\labor` is the proportion of total labor time
 spent working, and {math}`\hCap` is what Lucas calls the stock of 'human
 capital.'
 
@@ -173,6 +173,10 @@ present the conclusion, which is that the steady-state growth rate is
 \dot{\cNrm}/\cNrm = \CRRA^{-1}(\hCapProd - \discRte).
 ```
 
+:::{margin}
+The planner maximizes the discounted sum of CRRA utility from per capita consumption, with time preference rate {math}`\discRte`, counting each date's per capita utility once, as the RCK model's planner does. Lucas weights utility by the size of the population, which replaces {math}`\discRte` with {math}`\discRte-\PopnGroRte` here and in the decentralized growth rate below.
+:::
+
 Note that this confirms the crucial role of the CRS accumulation
 equation for human capital: The key parameter that corresponds to
 the interest rate is {math}`\hCapProd`, the parameter that determines the efficiency
@@ -190,7 +194,7 @@ the individual's production function is
 \yNrm_i = \PtyAgg \kNrm_{i}^{\kapShare} (\labor _{i}\hCap_{i})^{1-\kapShare} \hCapAvg^{\extElas}
 ```
 
-where {math}`\hCapAvg` is average human wealth in the population (and the
+where {math}`\hCapAvg` is average human capital in the population (and the
 other variables reflect the values for the individual).
 
 Working through the decentralized solution, Lucas shows that the
@@ -206,15 +210,15 @@ will be
 ```
 
 Since every individual is assumed to be identical, the growth rate
-of aggregate human capital (and everything else) is the same as
+of average human capital is the same as
 the rate for this individual.
 
 It is easy to see that if there is no externality to human capital
 accumulation (that is, if {math}`\extElas = 0`), this solution is identical to
-{eq}`eq:Lucas-ssg`. If there is an externality, its effect depends on
+{eq}`eq:Lucas-ssg`. If there is an externality, its effect on the growth of human capital depends on
 whether {math}`1/\CRRA` is greater than, equal to, or less than 1. This is
-because the effect depends on whether the externality causes the
-saving rate to rise or to fall (since in endogenous growth models,
+because the effect depends on whether the externality causes
+saving, here the time spent studying, to rise or to fall (since in endogenous growth models,
 saving is the source of all growth). The {math}`\hCapAvg` externality is like an
 increase in the interest rate, and thus its effect will be determined
 by the balance between the income and substitution effects. We know
@@ -228,11 +232,11 @@ consumption (that is, if the intertemporal elasticity of substitution
 {math}`(1/\CRRA)` is greater than 1), then the externality boosts saving
 and therefore growth. If consumers have an intertemporal elasticity
 of less than one, the income effect outweighs the substitution effect,
-saving falls, and growth is slower.
+saving falls, and human capital grows more slowly. In every case, physical capital, output and consumption per capita grow faster than they would without the externality.
 
 Lucas also shows that this decentralized solution is suboptimal,
 because individual consumers do not obtain the full benefits to
-society of increasing their own stock of knowledge. Devoting more
+society of increasing their own human capital. Devoting more
 time to {math}`\hCap_i` accumulation they increase {math}`\hCapAvg`, which benefits all
 others in the economy in addition to themselves. Lucas shows,
 unsurprisingly, that the socially optimal solution requires greater

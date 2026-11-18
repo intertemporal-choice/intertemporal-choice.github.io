@@ -1,7 +1,7 @@
 (sec:RamseyCassKoopmans)=
 # The Ramsey/Cass-Koopmans (RCK) Model
 
-{cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth for an economy with exogenous "labor-augmenting" technological progress. For the facts the model is meant to explain, and the Solow model it builds on, see the undergraduate textbook of {cite:t}`ashrafWeilGrowth`.
+{cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth, presented here for an economy with exogenous "labor-augmenting" technological progress. For the facts the model is meant to explain, and the Solow model it builds on, see the undergraduate textbook of {cite:t}`ashrafWeilGrowth`.
 
 :::{margin}
 Graduate textbook treatments are in {cite:t}`blanchard&fischer:text`, chapter 2, {cite:t}`barro&salaimartin:book`, chapter 2, and {cite:t}`acemogluGrowth`, chapter 8.
@@ -17,7 +17,7 @@ States and controls are functions of time; time subscripts appear only where cla
 
 ```{math}
 \begin{gathered}\begin{aligned}
-                   \YLvl & =  \FFunc(\KLvl,\LLvl) = \KLvl^{\kapShare}(\PtyLab \LLvl)^{1-\kapShare}
+                   \YLvl & =  \FFunc(\KLvl,\PtyLab \LLvl) = \KLvl^{\kapShare}(\PtyLab \LLvl)^{1-\kapShare}
 \end{aligned}\end{gathered}
 ```
 
@@ -30,7 +30,7 @@ An important insight here is that all of output is absorbed by payments to labor
 ```{math}
 :label: eq:RCK-outputExhausted
 
-\YLvl = \FFunc_{\KLvl}\KLvl + \FFunc_{\LLvl}\LLvl .
+\YLvl = \FFunc_{\KLvl}\KLvl + \FFunc_{\LLvl}\LLvl , \qquad \FFunc_{\KLvl} \equiv \partial\YLvl/\partial\KLvl , \quad \FFunc_{\LLvl} \equiv \partial\YLvl/\partial\LLvl .
 ```
 
 Labor hours (the same as population) increase exogenously at a constant rate
@@ -74,7 +74,7 @@ Aggregate capital accumulates according to
 Lower case variables are the upper case version divided by efficiency units, so {math}`\yNrm = \YLvl/(\PtyLab \LLvl) = (\KLvl/(\PtyLab \LLvl))^{\kapShare} = \kNrm^{\kapShare}`. Since {math}`\kNrm = \KLvl/(\PtyLab \LLvl)`,
 
 :::{margin}
-NOT per-capita; this is required for '[balanced growth](#sec:RCK-SteadyState)'.
+NOT per-capita; this makes the '[balanced growth](#sec:RCK-SteadyState)' path a steady state.
 :::
 
 ```{math}
@@ -309,7 +309,7 @@ The transversality condition is an optimality condition, not the intertemporal b
 \end{aligned}\end{gathered}
 ```
 
-{numref}`fig:RamseySaddlePlot` shows three paths for {math}`\cNrm` and {math}`\kNrm` that satisfy the dynamic equations for consumption and assets, {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot`, all from the same {math}`\kNrm_{0}`. The path that starts above the middle one, the "saddle path," runs capital to zero in finite time, after which consumption would have to collapse, which the Euler equation forbids. The path that starts below it accumulates capital past the golden rule, toward the point where the {math}`\dot{\kNrm}=0` locus meets the {math}`\kNrm` axis, with consumption falling toward zero; there the interest rate is below {math}`\PopnGroRte+\PtyGroRte`, so the discount term grows without bound and the [transversality condition](#eq:tvc) fails. Only the saddle path satisfies all three conditions.
+{numref}`fig:RamseySaddlePlot` shows three paths for {math}`\cNrm` and {math}`\kNrm` that satisfy the dynamic equations for consumption and assets, {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot`, all from the same {math}`\kNrm_{0}`. The path that starts above the "saddle path" (the middle one) runs capital to zero in finite time, after which consumption would have to collapse, which the Euler equation forbids. The path that starts below it accumulates capital past the golden rule, toward the point where the {math}`\dot{\kNrm}=0` locus meets the {math}`\kNrm` axis, with consumption falling toward zero; there the interest rate is below {math}`\PopnGroRte+\PtyGroRte`, so the discount term grows without bound and the [transversality condition](#eq:tvc) fails. Only the saddle path satisfies all three conditions.
 
 :::{figure} figures/RamseySaddlePlot.png
 :name: fig:RamseySaddlePlot
