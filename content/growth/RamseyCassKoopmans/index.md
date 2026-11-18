@@ -1,12 +1,3 @@
----
-math:
-  # The chapter's own objects, which the shared registry lacks (Chris, 2026-11-17 18:22:09 EST).
-  # Productivity, sans-serif A, and the three ways it can augment production.
-  '\PtyRCK': '\mathsf{A}'
-  '\PtyRCKharrod': '\PtyRCK_{\labor}'
-  '\PtyRCKsolow': '\PtyRCK_{\kap}'
-  '\PtyRCKhicks': '\PtyRCK'
----
 (sec:RamseyCassKoopmans)=
 # The Ramsey/Cass-Koopmans (RCK) Model
 
@@ -53,7 +44,7 @@ States and controls are functions of time; time subscripts appear only where cla
 and {math}`\PtyLab` is an index of labor productivity that grows at rate
 
 :::{margin}
-This is "labor-augmenting" (Harrod-neutral) productivity growth, {math}`\FFunc(\KLvl,\PtyRCKharrod \LLvl)`. Progress can also augment capital, {math}`\FFunc(\PtyRCKsolow \KLvl,\LLvl)` ("Solow-neutral"), or output, {math}`\PtyRCKhicks \FFunc(\KLvl,\LLvl)` ("Hicks-neutral"). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
+This is "labor-augmenting" (Harrod-neutral) productivity growth: {math}`\PtyLab` multiplies labor, {math}`\FFunc(\KLvl,\PtyLab \LLvl)`. The alternative is productivity {math}`\PtyAgg` that multiplies total output, {math}`\PtyAgg \FFunc(\KLvl,\LLvl)` ("Hicks-neutral"). With any production function other than Cobb-Douglas, a steady state with constant growth rates requires progress to be labor-augmenting {cite:p}`uzawaNeutral`.
 :::
 
 ```{math}
