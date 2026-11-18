@@ -147,6 +147,8 @@ so if productivity at date 0 is {math}`\PtyLab_{0}`, at date {math}`t`
 \end{aligned}\end{gathered}
 ```
 
+Since {math}`\PtyLab_{0}` multiplies consumption at every date, it only scales the objective, by the positive constant {math}`\PtyLab_{0}^{1-\CRRA}`, so we can impose {math}`\PtyLab_{0}=1` without loss of generality.
+
 Using {eq}`eq:cRat`, and writing {math}`\uFunc(\cNrm) = \cNrm^{1-\CRRA}/(1-\CRRA)`, with {math}`\CRRA` the coefficient of relative risk aversion, rewrite the social planner's objective function as
 
 ```{math}
@@ -154,13 +156,11 @@ Using {eq}`eq:cRat`, and writing {math}`\uFunc(\cNrm) = \cNrm^{1-\CRRA}/(1-\CRRA
 
 \begin{gathered}\begin{aligned}
   \int_{0}^{\infty} \left(\frac{(\PtyLab \cNrm)^{1-\CRRA}}{1-\CRRA}\right) e^{-\discRte  t}\,dt & =  
-                                                                                               \PtyLab _{0}^{1-\CRRA}\int_{0}^{\infty} \left(\frac{\cNrm^{1-\CRRA}}{1-\CRRA}\right) e^{-\discRte  t}e^{(1-\CRRA)\PtyGroRte  t}\,dt 
-  \\ & =  \PtyLab _{0}^{1-\CRRA}\int_{0}^{\infty} \uFunc(\cNrm) e^{\left((1-\CRRA)\PtyGroRte -\discRte \right) t}\,dt
+                                                                                               \int_{0}^{\infty} \left(\frac{\cNrm^{1-\CRRA}}{1-\CRRA}\right) e^{-\discRte  t}e^{(1-\CRRA)\PtyGroRte  t}\,dt 
+  \\ & =  \int_{0}^{\infty} \uFunc(\cNrm) e^{\left((1-\CRRA)\PtyGroRte -\discRte \right) t}\,dt
            .
 \end{aligned}\end{gathered}
 ```
-
-The positive constant {math}`\PtyLab_{0}^{1-\CRRA}` does not change the optimal plan, so we can impose {math}`\PtyLab_{0}=1` without loss of generality.
 
 Thus, assuming {math}`\discRte > (1-\CRRA) \PtyGroRte`, so that the objective is finite (that is, imposing the [finite value of autarky condition](https://llorracc.github.io/BufferStockTheory/#pffvac)), the complete optimization problem
 is
@@ -260,7 +260,7 @@ Using {math}`\fFunc^{\prime}(\kap) = \kapShare \kap^{\kapShare-1}`, the modified
 \end{aligned}\end{gathered}
 ```
 
-Thus {math}`\Steady{\kap}` is higher when capital's share of output, {math}`\kapShare`, is higher, and lower when consumers are more impatient, population grows faster, capital depreciates faster, or productivity grows faster. When productivity grows, it is also lower when {math}`\CRRA` is higher: consumers who dislike differences in consumption over time save less when they expect their consumption to grow.
+Thus {math}`\Steady{\kap}` is higher when capital's share of output, {math}`\kapShare`, is higher, and lower when consumers are more impatient, population grows faster, capital depreciates faster, or productivity grows faster. Faster productivity growth lowers it for the reason behind the [growth impatience condition](#eq:PatWGroCond): consumers who know they will be richer in the future want to spend more today. When productivity grows, it is also lower when {math}`\CRRA` is higher: consumers who dislike differences in consumption over time save less when they expect their consumption to grow.
 
 :::{margin}
 Strictly, {math}`\Steady{\kap}` rises with {math}`\kapShare` when {math}`\kapShare/(\discRte+\PopnGroRte+\deprRte+\CRRA\PtyGroRte) > e^{-(1-\kapShare)/\kapShare}`, which holds for any plausible parameters: with the notebook's, the left side is 1.76 and the right 0.097.
@@ -309,7 +309,7 @@ The transversality condition is an optimality condition, not the intertemporal b
 \end{aligned}\end{gathered}
 ```
 
-{numref}`fig:RamseySaddlePlot` shows three paths for {math}`\cNrm` and {math}`\kap` that satisfy the [Euler equation](#eq:cdotOc) and the [accumulation equation](#eq:RCK-kdot), all from the same {math}`\kap_{0}`. The path that starts above the middle one, the "saddle path," runs capital to zero in finite time, after which consumption would have to collapse, which the Euler equation forbids. The path that starts below it accumulates capital past the golden rule, toward the point where the {math}`\dot{\kap}=0` locus meets the {math}`\kap` axis, with consumption falling toward zero; there the interest rate is below {math}`\PopnGroRte+\PtyGroRte`, so the discount term grows without bound and the [transversality condition](#eq:tvc) fails. Only the saddle path satisfies all three conditions.
+{numref}`fig:RamseySaddlePlot` shows three paths for {math}`\cNrm` and {math}`\kap` that satisfy the dynamic equations for consumption and assets, {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot`, all from the same {math}`\kap_{0}`. The path that starts above the middle one, the "saddle path," runs capital to zero in finite time, after which consumption would have to collapse, which the Euler equation forbids. The path that starts below it accumulates capital past the golden rule, toward the point where the {math}`\dot{\kap}=0` locus meets the {math}`\kap` axis, with consumption falling toward zero; there the interest rate is below {math}`\PopnGroRte+\PtyGroRte`, so the discount term grows without bound and the [transversality condition](#eq:tvc) fails. Only the saddle path satisfies all three conditions.
 
 :::{figure} figures/RamseySaddlePlot.png
 :name: fig:RamseySaddlePlot
