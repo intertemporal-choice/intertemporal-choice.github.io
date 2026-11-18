@@ -623,16 +623,6 @@ The human wealth effect is the largest of the three here, and it exceeds the inc
 
 The evidence also tempers the response at the other end. For a consumer with large wealth the response is entirely intertemporal substitution, and many estimates of the elasticity of intertemporal substitution are below the 0.5 used here; {cite:t}`hallSubstitution` finds it close to zero.
 
-(sec:PerfForesightCRRA-Exercises)=
-## Exercises
-
-- *Logarithmic utility.* Show that as {math}`\CRRA \rightarrow 1` the infinite-horizon marginal propensity to consume out of total wealth becomes {math}`1-\DiscFac`, whatever the interest rate. Which two of [the three effects](#eq:dlogcdr) cancel, and why?
-- *Retirement.* Suppose the consumer of the finite-horizon calculation in [How Large is the Human Wealth Effect?](#subsec:HWEffect) earns permanent income for 30 of the 40 remaining years and nothing in the last 10. Write human wealth as a sum, and recompute the response of consumption to a fall in {math}`\rfree` from 0.04 to 0.03. Is the human wealth effect larger or smaller than with income in all 40 years?
-- *The speed of borrowing.* For the growth impatient consumer of [the figure of the paths](#fig:PathsGIC), use [the path of total wealth](#eq:oNrmPath) to find how many years it takes total wealth relative to permanent income to fall by half.
-- *The Euler equation as a test.* Under perfect foresight, consumption grows by the factor {math}`\APFac` every period, whatever happens to income. {cite:t}`hallRandomWalk` tested the version of this prediction that holds when future income is uncertain. What does the theory say about whether information available last period, such as last period's income growth, should help predict this period's consumption growth? Why?
-- *Little substitution.* Redo the human wealth example with {math}`\CRRA=10`, an elasticity of intertemporal substitution of 0.1, closer to the estimates of {cite:t}`hallSubstitution`. Which of [the three effects](#eq:dlogcdr) change, and by how much?
-- *Realistic wealth.* Evaluate the response of the saving rate to {math}`\rfree` at a wealth-to-income ratio {math}`\aNrm_{\tNow-1}=4`, with the calibration of [How Large is the Human Wealth Effect?](#subsec:HWEffect), and compare it with the two ends in [How Does the Saving Rate Respond to Interest Rates?](#subsec:SavingRateResponse)
-
 (sec:PerfForesightCRRA-AppendixResults)=
 ## Results in the Appendix
 
