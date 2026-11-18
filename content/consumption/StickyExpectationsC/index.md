@@ -148,9 +148,11 @@ and
 ```{math}
 :label: eq:DCvsCmC
 
-\CLev_{t} = \Pi \CLev_{t|\tau_{t}=t} + (1-\Pi) \CLev_{t-1}, \quad
-\Delta \CLev_{t} = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t-1}) = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t}+\CLev_{t}-\CLev_{t-1}), \quad
-(1-\Pi) \Delta \CLev_{t} = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t})
+\begin{aligned}
+\CLev_{t} & = \Pi \CLev_{t|\tau_{t}=t} + (1-\Pi) \CLev_{t-1},
+\\ \Delta \CLev_{t} & = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t-1}) = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t}+\CLev_{t}-\CLev_{t-1}),
+\\ (1-\Pi) \Delta \CLev_{t} & = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t})
+\end{aligned}
 ```
 
 while, defining {math}`\hat{\TShkEmp}=\TShkEmp-1` and {math}`\hat{\Psi}=\Psi-1`,

@@ -527,11 +527,15 @@ The arguments above say which way things move. The chapter's notebook solves the
 
 The table gives the net investment rate, in percent, period by period. {numref}`fig:FutureProductivityIncrease`, {numref}`fig:FutureCorporateTaxReduction` and {numref}`fig:FutureITCIncrease` show the paths of all the variables.
 
-| announced at 0, in effect from 5 | {math}`\iota_{0}` | {math}`\iota_{1}` | {math}`\iota_{2}` | {math}`\iota_{3}` | {math}`\iota_{4}` | {math}`\iota_{5}` | {math}`\iota_{6}` |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| productivity up 10 percent | 0.99 | 1.07 | 1.20 | 1.40 | 1.66 | 1.35 | 1.10 |
-| corporate tax from 30 to 20 percent | 1.41 | 1.52 | 1.71 | 1.98 | 2.34 | 1.90 | 1.54 |
-| investment tax credit of 10 percent | −0.72 | −0.79 | −0.90 | −1.06 | 3.52 | 2.84 | 2.30 |
+| announced at 0, in effect from 5 | productivity up 10 percent | corporate tax from 30 to 20 percent | investment tax credit of 10 percent |
+| --- | --- | --- | --- |
+| {math}`\iota_{0}` | 0.99 | 1.41 | −0.72 |
+| {math}`\iota_{1}` | 1.07 | 1.52 | −0.79 |
+| {math}`\iota_{2}` | 1.20 | 1.71 | −0.90 |
+| {math}`\iota_{3}` | 1.40 | 1.98 | −1.06 |
+| {math}`\iota_{4}` | 1.66 | 2.34 | 3.52 |
+| {math}`\iota_{5}` | 1.35 | 1.90 | 2.84 |
+| {math}`\iota_{6}` | 1.10 | 1.54 | 2.30 |
 
 **A rise in productivity, or a cut in the corporate tax.** Both raise the after-tax return to capital from date 5 on without changing what capital costs, so the value of installed capital rises as soon as the change is announced. {math}`\vk` jumps up at date 0, by 1.9 percent with the rise in productivity and by 2.7 percent with the tax cut. Since the price of capital has not changed, {math}`\q` jumps with it. Investment rises above replacement at once, and keeps rising until date 4. The investment made at date 4 becomes capital at date 5, the first to earn the higher return, so it is the largest. The firm still starts at date 0, because convex costs of adjustment make several moderate steps cheaper than one large one. {math}`\vk` and {math}`\q` keep rising as the higher returns draw nearer, peak at date 5, and then fall back toward the price of capital as the new capital accumulates and its marginal product declines. Capital converges to a steady state 14.6 percent above the old one with the rise in productivity, and 21.0 percent above it with the tax cut.
 
