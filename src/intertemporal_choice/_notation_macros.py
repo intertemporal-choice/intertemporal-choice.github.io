@@ -533,7 +533,6 @@ MACROS = {
     '\\lPNrm': '\\logOp\\PNrm',
     '\\lPtyAgg': '\\logOp\\PtyAgg',
     '\\lPtyLab': '\\logOp\\PtyLab',
-    '\\lPtyLev': '\\logOp\\PtyLev',
     '\\lQLvl': '\\logOp\\QLvl',
     '\\lQNrm': '\\logOp\\QNrm',
     '\\lRLvl': '\\logOp\\RLvl',
