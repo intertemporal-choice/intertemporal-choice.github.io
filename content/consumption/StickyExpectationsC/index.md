@@ -139,8 +139,10 @@ Now note that
 ```{math}
 :label: eq:DCtp1
 
-\CLev_{t+1} = \Pi \CLev_{t+1|\tau_{t+1}=t+1} + (1-\Pi) \overbrace{\CLev_{t+1|\tau_{t+1}<t+1}}^{=\CLev_{t}}, \quad
-\Delta \CLev_{t+1} = \Pi (\CLev_{t+1|\tau_{t+1}=t+1}-\CLev_{t|\tau_{t}=t}) + (1-\Pi) \Delta \CLev_{t}
+\begin{aligned}
+\CLev_{t+1} & = \Pi \CLev_{t+1|\tau_{t+1}=t+1} + (1-\Pi) \overbrace{\CLev_{t+1|\tau_{t+1}<t+1}}^{=\CLev_{t}},
+\\ \Delta \CLev_{t+1} & = \Pi (\CLev_{t+1|\tau_{t+1}=t+1}-\CLev_{t|\tau_{t}=t}) + (1-\Pi) \Delta \CLev_{t}
+\end{aligned}
 ```
 
 and
