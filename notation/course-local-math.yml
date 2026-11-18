@@ -180,7 +180,6 @@ project:
     '\kTarg': '\TargetNrm{k}'  # uses book 0 questions 12
     '\patwGro': '\text{þ}_{\wGro}'  # uses book 12 questions 0
     '\surplus': 'z'  # uses book 12 questions 0
-    '\save': 's'  # uses book 4 questions 7
     '\GovSpend': 'X'  # uses book 7 questions 3
     '\hNbr': 'h'  # uses book 9 questions 0
     '\HMin': '\underline{H}'  # uses book 0 questions 8

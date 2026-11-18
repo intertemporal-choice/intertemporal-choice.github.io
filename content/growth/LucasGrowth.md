@@ -110,10 +110,10 @@ capital accumulation equation becomes
 :label: eq:kdots
 
 \begin{gathered}\begin{aligned}
-  \dot{\kap} & =  \save \yRat - (\popGro+\depr) \kap
-\\ \dot{\kap}/\kap & =  \save (\yRat/\kap) - (\popGro+\depr)
-\\ & =  \save \PtyAgg \kRat^{\kapShare - 1} (\labor \hLucas)^{1-\kapShare}-(\popGro+\depr)
-\\ & =  \save \PtyAgg (\kap/\hLucas)^{\kapShare-1} \labor^{1-\kapShare} -(\popGro+\depr).
+  \dot{\kap} & =  \savRte \yRat - (\popGro+\depr) \kap
+\\ \dot{\kap}/\kap & =  \savRte (\yRat/\kap) - (\popGro+\depr)
+\\ & =  \savRte \PtyAgg \kRat^{\kapShare - 1} (\labor \hLucas)^{1-\kapShare}-(\popGro+\depr)
+\\ & =  \savRte \PtyAgg (\kap/\hLucas)^{\kapShare-1} \labor^{1-\kapShare} -(\popGro+\depr).
 \end{aligned}\end{gathered}
 ```
 
