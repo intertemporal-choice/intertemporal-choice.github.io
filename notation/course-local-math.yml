@@ -163,7 +163,6 @@ project:
     '\hLucas': 'h'  # uses book 24 questions 0
     '\cE': '\cRat^{e}'  # uses book 0 questions 23
     '\taxNetTrans': 'z'  # uses book 21 questions 0
-    '\ek': '\lambda'  # uses book 20 questions 0
     '\RnormWGro': '\mathcal{R}_{\WGro}'  # uses book 20 questions 0
     '\uPmt': '\mu'  # uses book 0 questions 20
     '\GovNW': 'N'  # uses book 0 questions 16

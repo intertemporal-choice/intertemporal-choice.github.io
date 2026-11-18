@@ -435,7 +435,6 @@ MACROS = {
     '\\eNrm': 'e',
     '\\edvdnd': '\\grave{\\dvdnd}',
     '\\effUnits': 'X',
-    '\\ek': '\\lambda',
     '\\empState': '\\xi',
     '\\eprem': '\\phi',
     '\\erate': '\\cancel{\\mho}',

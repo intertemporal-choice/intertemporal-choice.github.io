@@ -105,30 +105,30 @@ so that the capital stock is equal to the value that causes its marginal product
 
 ## Phase Diagram Analysis
 
-Another way to analyze this problem is in terms of the marginal value of capital, {math}`\ek_{t} \equiv \vFirm_{t}^{\kap}(\kap_{t})`.
+Another way to analyze this problem is in terms of the marginal value of capital, {math}`\vk_{t} \equiv \vFirm_{t}^{\kap}(\kap_{t})`.
 
 Rewrite {eq}`eq:iEnvelope` as
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \ek_{t} & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Discount \DeprFac (\ek_{t}+\ek_{t+1}-\ek_{t})
-\\ & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Discount \DeprFac (\ek_{t}+\Delta \ek_{t+1})
-\\ (1-\Discount\DeprFac) \ek_{t} & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Delta \ek_{t+1}
-\\ \ek_{t} & =  \frac{\fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Delta \ek_{t+1}}{(1-\Discount\DeprFac)}
+  \vk_{t} & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Discount \DeprFac (\vk_{t}+\vk_{t+1}-\vk_{t})
+\\ & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Discount \DeprFac (\vk_{t}+\Delta \vk_{t+1})
+\\ (1-\Discount\DeprFac) \vk_{t} & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Delta \vk_{t+1}
+\\ \vk_{t} & =  \frac{\fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Delta \vk_{t+1}}{(1-\Discount\DeprFac)}
 \end{aligned}\end{gathered}
 ```
 
-and the phase diagram is constructed using the {math}`\Delta \ek_{t+1} = 0` locus. In the vicinity of the steady state, we can assume {math}`\adj_{t}^{\kap} \approx 0` in which case the {math}`\Delta \ek_{t+1}=0` locus becomes
+and the phase diagram is constructed using the {math}`\Delta \vk_{t+1} = 0` locus. In the vicinity of the steady state, we can assume {math}`\adj_{t}^{\kap} \approx 0` in which case the {math}`\Delta \vk_{t+1}=0` locus becomes
 
 ```{math}
 :label: eq:lamNearSS
 
 \begin{gathered}\begin{aligned}
- \ek_{t} & =  \frac{\fFunc^{\kap}(\kap_{t})}{(1-\Discount\DeprFac)}
+ \vk_{t} & =  \frac{\fFunc^{\kap}(\kap_{t})}{(1-\Discount\DeprFac)}
 \end{aligned}\end{gathered}
 ```
 
-which implies (since {math}`\fFunc^{\kap}(\kap_{t})` is downward sloping in {math}`\kap_{t}`) that the {math}`\Delta \ek_{t}=0` locus (that is, the {math}`\lambda_{t}(\kap_{t})` function that corresponds to {math}`\Delta \ek_{t}=0`) is downward sloping.
+which implies (since {math}`\fFunc^{\kap}(\kap_{t})` is downward sloping in {math}`\kap_{t}`) that the {math}`\Delta \vk_{t}=0` locus (that is, the {math}`\vk_{t}(\kap_{t})` function that corresponds to {math}`\Delta \vk_{t}=0`) is downward sloping.
 
 The phase diagram is depicted in {numref}`fig:Entrep-lPhaseDiag`.
 
@@ -136,7 +136,7 @@ The phase diagram is depicted in {numref}`fig:Entrep-lPhaseDiag`.
 :name: fig:Entrep-lPhaseDiag
 :width: 80%
 
-Phase diagram showing the {math}`\Delta \ek=0` and {math}`\Delta \kap=0` loci.
+Phase diagram showing the {math}`\Delta \vk=0` and {math}`\Delta \kap=0` loci.
 :::
 
 The steady state of the model will be the point at which {math}`\kap_{t+1}=\kap_{t}=\check{\kap}`, implying from {eq}`eq:kAccum` a steady-state investment rate of
@@ -158,11 +158,11 @@ and solving {eq}`eq:kSSimplicit` for {math}`\fFunc^{\kap}(\check{k})`
 \end{aligned}\end{gathered}
 ```
 
-which can be substituted into {eq}`eq:lamNearSS` to obtain the steady-state value of {math}`\ek`:
+which can be substituted into {eq}`eq:lamNearSS` to obtain the steady-state value of {math}`\vk`:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-\check{\ek} & =   \left(\frac{\Rfree}{\DeprFac}\right) .
+\check{\vk} & =   \left(\frac{\Rfree}{\DeprFac}\right) .
 \end{aligned}\end{gathered}
 ```
 
@@ -461,7 +461,7 @@ The steady-state level of capital can be obtained from {eq}`eq:kSSimplicit`:
 \end{aligned}\end{gathered}
 ```
 
-while the steady-state value of {math}`\ek` comes from substituting {math}`\check{\kap}` into {eq}`eq:lamNearSS`. Steady-state value is straightforward to compute, given that in the steady state the capital stock and amount of investment are constant:
+while the steady-state value of {math}`\vk` comes from substituting {math}`\check{\kap}` into {eq}`eq:lamNearSS`. Steady-state value is straightforward to compute, given that in the steady state the capital stock and amount of investment are constant:
 
 ```{math}
 \begin{gathered}\begin{aligned}
