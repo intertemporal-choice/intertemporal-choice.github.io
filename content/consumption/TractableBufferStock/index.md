@@ -1375,9 +1375,10 @@ The limiting MPC as consumption approaches zero, {math}`\bar{\MPC}^{\EmpLbl},` w
 
 ```{math}
 \begin{aligned}
-  \lim_{{\cNrm}^{\EmpLbl}_{t} \rightarrow 0}  \overbrace{ \DiscFacAlt \RNrmByG \MPCE_{t+1} \left(\erate ({\cNrm}^{\EmpLbl}_{t+1}/{\cNrm}^{\EmpLbl}_{t})^{-\CRRA-1}  + \urate (\cNrmU_{t+1}/{\cNrm}^{\EmpLbl}_{t})^{-\CRRA-1}\MPC\right)}^{\natural_{t+1}} & =  \DiscFacAlt \RNrmByG \urate (\cNrmU_{t+1}/{\cNrm}^{\EmpLbl}_{t})^{-\CRRA-1}\MPC
-\\  & =  \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG \aNrmE_{t}/(\aNrmE_{t}(\bar{\MPC}^{\EmpLbl}/(1-\bar{\MPC}^{\EmpLbl})))^{-\CRRA-1})\MPC
-\\ & =  \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG ((1-\bar{\MPC}^{\EmpLbl})/\bar{\MPC}^{\EmpLbl}))^{-\CRRA-1}\MPC
+& \lim_{{\cNrm}^{\EmpLbl}_{t} \rightarrow 0}  \overbrace{ \DiscFacAlt \RNrmByG \MPCE_{t+1} \left(\erate ({\cNrm}^{\EmpLbl}_{t+1}/{\cNrm}^{\EmpLbl}_{t})^{-\CRRA-1}  + \urate (\cNrmU_{t+1}/{\cNrm}^{\EmpLbl}_{t})^{-\CRRA-1}\MPC\right)}^{\natural_{t+1}}
+\\ & \quad =  \DiscFacAlt \RNrmByG \urate (\cNrmU_{t+1}/{\cNrm}^{\EmpLbl}_{t})^{-\CRRA-1}\MPC
+\\ & \quad =  \DiscFacAlt \RNrmByG \urate \left(\MPC \RNrmByG \aNrmE_{t}/(\aNrmE_{t}\bar{\MPC}^{\EmpLbl}/(1-\bar{\MPC}^{\EmpLbl}))\right)^{-\CRRA-1}\MPC
+\\ & \quad =  \DiscFacAlt \RNrmByG \urate (\MPC \RNrmByG ((1-\bar{\MPC}^{\EmpLbl})/\bar{\MPC}^{\EmpLbl}))^{-\CRRA-1}\MPC
 \end{aligned}
 ```
 
