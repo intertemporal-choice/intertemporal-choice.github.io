@@ -93,7 +93,9 @@ project:
         - file: content/growth/BlanchardFiniteHorizon.md
     - file: content/dsge/index.md
       children:
-        - file: content/dsge/BrockMirman.md
+        - file: content/dsge/BrockMirman/index.md
+          children:
+            - file: content/dsge/BrockMirman/BrockMirman.ipynb
         - file: content/dsge/RBC-Prescott.md
     - file: content/appendices/mathematical/index.md
       children:

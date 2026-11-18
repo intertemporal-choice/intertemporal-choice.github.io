@@ -688,7 +688,6 @@ MACROS = {
     '\\ptyGro': '\\ptyGroRte',
     '\\ptyGroFac': '\\PtyGroFac',
     '\\ptyGroRte': '\\PtyGroRte',
-    '\\ptyLev': 'a',
     '\\q': '\\koppa',
     '\\qFunc': '\\mathrm{q}',
     '\\qHi': 'q_{\\infty}',

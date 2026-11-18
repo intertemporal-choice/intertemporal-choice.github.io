@@ -119,7 +119,6 @@ project:
     '\dvdnd': 'd'  # uses book 151 questions 213
     '\q': '\koppa'  # uses book 100 questions 156
     '\riskyAlt': '\acute{\mathbf{r}}'  # uses book 82 questions 0
-    '\ptyLev': 'a'  # uses book 26 questions 50
     '\vk': '\lambda'  # uses book 66 questions 4
     '\Tax': '\tau'  # uses book 14 questions 55
     '\adj': '\mathrm{j}'  # uses book 64 questions 0

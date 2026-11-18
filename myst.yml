@@ -234,7 +234,7 @@ project:
           level: 1
         - file: content/dsge/index.md
           level: 0
-        - file: content/dsge/BrockMirman.md
+        - file: content/dsge/BrockMirman/index.md
           level: 1
         - file: content/dsge/RBC-Prescott.md
           level: 1

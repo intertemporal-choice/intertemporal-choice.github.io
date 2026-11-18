@@ -64,8 +64,7 @@ The first order condition says
 
 An important way of judging a macroeconomic
 model and deciding whether it makes sense is to examine the model's
-implications for the dynamics of aggregate variables. Defining lower
-case variables as the log of the corresponding upper case variable,
+implications for the dynamics of aggregate variables. Writing {math}`\lnat` for the natural log, so that {math}`\lnat\Kap` is the log of {math}`\Kap`,
 this model says that the dynamics of the capital stock are given by
 
 ```{math}
@@ -74,30 +73,30 @@ this model says that the dynamics of the capital stock are given by
 \begin{gathered}\begin{aligned}
    \Kap_{t+1} & =  (1-\MPC) \Inc_{t}
 \\ & =  \kapShare\Discount \PtyAgg_{t}\Kap_{t}^{\kapShare}
-\\ \kap_{t+1} & =  \log \kapShare\Discount + \ptyLev_{t} + \kapShare \kap_{t}
+\\ \lnat\Kap_{t+1} & =  \log \kapShare\Discount + \lPtyAgg_{t} + \kapShare \lnat\Kap_{t}
 \end{aligned}\end{gathered}
 ```
 
 which tells us that the dynamics of the (log) capital stock have two
-components: One component ({math}`\ptyLev_{t}`) mirrors whatever happens
+components: One component ({math}`\lPtyAgg_{t}`) mirrors whatever happens
 to the aggregate production technology; the other
 is serially correlated with coefficient {math}`\kapShare` equal
 to capital's share in output.
 
-Similarly, since log output is simply {math}`\inc = \ptyLev + \kapShare \kap`, the dynamics
+Similarly, since log output is simply {math}`\lnat\Inc = \lPtyAgg + \kapShare \lnat\Kap`, the dynamics
 of output can be obtained from
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \inc_{t+1} & =  \ptyLev_{t+1} + \kapShare \kap_{t+1}
-\\ & =  \kapShare (\log \Kap_{t+1}) + \ptyLev_{t+1}
-\\ & =  \kapShare (\log \kapShare \Discount \Inc_{t}) + \ptyLev_{t+1}
-\\ & =  \kapShare (\inc_{t} + \log \kapShare \Discount ) + \ptyLev_{t+1}
+  \lnat\Inc_{t+1} & =  \lPtyAgg_{t+1} + \kapShare \lnat\Kap_{t+1}
+\\ & =  \kapShare \lnat\Kap_{t+1} + \lPtyAgg_{t+1}
+\\ & =  \kapShare (\log \kapShare \Discount \Inc_{t}) + \lPtyAgg_{t+1}
+\\ & =  \kapShare (\lnat\Inc_{t} + \log \kapShare \Discount ) + \lPtyAgg_{t+1}
 \end{aligned}\end{gathered}
 ```
 
 so the dynamics of aggregate output, like aggregate capital,
-reflect a component that mirrors {math}`\ptyLev` and a serially correlated
+reflect a component that mirrors {math}`\lPtyAgg` and a serially correlated
 component with serial correlation coefficient {math}`\kapShare`.
 
 The simplest assumption to make about the level of technology
@@ -105,31 +104,31 @@ is that its log follows a random walk:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \ptyLev_{t+1} & =  \ptyLev_{t} + \epsilon_{t+1}.
+  \lPtyAgg_{t+1} & =  \lPtyAgg_{t} + \epsilon_{t+1}.
 \end{aligned}\end{gathered}
 ```
 
 Under this assumption, consider the dynamic effects on the level of
 output from a unit positive shock to
 the log of technology in period {math}`t` (that is, {math}`\epsilon_{t+1}=1` where {math}`\epsilon_{s} = 0~\forall~s \neq t+1`). Suppose that
-the economy had been at its original steady-state level of output {math}`\TargetNrm{y}`
+the economy had been at its original steady-state log output {math}`\lnat\TargetNrm{\Inc}`
 in the prior period. Then the expected dynamics of output would be given
 by
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \inc_{t} & =  \TargetNrm{y} + \ptyLev_{t}
-\\ \Ex_{t}[\inc_{t+1}] & =  \TargetNrm{y}+\ptyLev_{t}+\kapShare \ptyLev_{t}
-\\ \Ex_{t}[\inc_{t+2}] & =  \TargetNrm{y}+\ptyLev_{t}+\kapShare \ptyLev_{t}+\kapShare^{2} \ptyLev_{t}
+  \lnat\Inc_{t} & =  \lnat\TargetNrm{\Inc} + \lPtyAgg_{t}
+\\ \Ex_{t}[\lnat\Inc_{t+1}] & =  \lnat\TargetNrm{\Inc}+\lPtyAgg_{t}+\kapShare \lPtyAgg_{t}
+\\ \Ex_{t}[\lnat\Inc_{t+2}] & =  \lnat\TargetNrm{\Inc}+\lPtyAgg_{t}+\kapShare \lPtyAgg_{t}+\kapShare^{2} \lPtyAgg_{t}
 \end{aligned}\end{gathered}
 ```
 
 and so on, as depicted in {numref}`fig:zRandWalk`.
 
-:::{figure} /content/figures/BrockMirman/yPlotBrockMirman.png
+:::{figure} figures/RandomWalkShock.png
 :name: fig:zRandWalk
 
-Dynamics of Output With a Random Walk Shock
+Dynamics of Output With a Random Walk Shock. Drawn by the chapter's [notebook](BrockMirman.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/dsge/BrockMirman/BrockMirman.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/dsge/BrockMirman/BrockMirman.ipynb) to run it without installing anything.
 :::
 
 Also interesting is the case where the level of
@@ -137,16 +136,16 @@ technology follows a white noise process,
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \ptyLev_{t+1} & =  \TargetNrm{\ptyLev} + \epsilon_{t+1}.
+  \lPtyAgg_{t+1} & =  \lnat\TargetNrm{\PtyAgg} + \epsilon_{t+1}.
 \end{aligned}\end{gathered}
 ```
 
 The dynamics of income in this case are depicted in {numref}`fig:zWhiteNoise`.
 
-:::{figure} /content/figures/BrockMirman/zWhiteNoise.png
+:::{figure} figures/WhiteNoiseShock.png
 :name: fig:zWhiteNoise
 
-Dynamics of Output With A White Noise Shock
+Dynamics of Output With A White Noise Shock. Drawn by the chapter's [notebook](BrockMirman.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/dsge/BrockMirman/BrockMirman.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/dsge/BrockMirman/BrockMirman.ipynb) to run it without installing anything.
 :::
 
 The key point of this analysis, again, is that the dynamics of the model
@@ -166,22 +165,22 @@ But this is an economy with no technological progress, so the steady-state
 interest rate must take on the value such that {math}`\Cons_{t+1}/\Cons_{t}=1`. Thus we
 must have {math}`\Discount \Rfree = 1` or {math}`\Rfree = 1/\Discount`.
 
-We can further derive the steady state level of capital of a nonstochastic version of the model in which {math}`\ptyLev_{t}=\ptyLev~\forall~t`
+We can further derive the steady state level of capital of a nonstochastic version of the model in which {math}`\lPtyAgg_{t}=\lPtyAgg~\forall~t`
 from {eq}`eq:BM-kDyn`:
 
 ```{math}
 :label: eq:BM-kSS
 
 \begin{gathered}\begin{aligned}
-  \kap & =  \log \kapShare\Discount  + \ptyLev + \kapShare \kap
-  \\ (1-\kapShare) \kap & =  \log \kapShare\Discount + \ptyLev
-\\ \kap & =  \frac{\log \kapShare\Discount + \ptyLev}{1-\kapShare}
+  \lnat\Kap & =  \log \kapShare\Discount  + \lPtyAgg + \kapShare \lnat\Kap
+  \\ (1-\kapShare) \lnat\Kap & =  \log \kapShare\Discount + \lPtyAgg
+\\ \lnat\Kap & =  \frac{\log \kapShare\Discount + \lPtyAgg}{1-\kapShare}
 \end{aligned}\end{gathered}
 ```
 
 The nonstochastic version of the model is of course not very interesting, except as a point of comparison to the stochastic version of the model. But what could be meant by the 'steady state' of a stochastic model that never settles down? We can define a 'stochastic steady state' for such models in a number of (potentially) different ways:
 
-*   The location (if one exists) to which the model will converge after an arbitrarily long period in which no shocks occurred {math}`\ptyLev_{t+1}=\ptyLev_{t}~\forall~t` (even if in every period agents *expect* that shocks will occur)
+*   The location (if one exists) to which the model will converge after an arbitrarily long period in which no shocks occurred {math}`\lPtyAgg_{t+1}=\lPtyAgg_{t}~\forall~t` (even if in every period agents *expect* that shocks will occur)
 
 *   The mean value of some variable in the model (say, {math}`\Kap`)
 
@@ -204,7 +203,7 @@ where the expectations operator disappears because no variables are stochastic (
 ```{math}
 \begin{gathered}\begin{aligned}
   1 & =  \Discount \kapShare \PtyAgg_{t} \TargetNrm{\Kap}_{t}^{\kapShare-1}
-\\ \TargetNrm{\kap} & =  \frac{\log \Discount \kapShare + \ptyLev_{t}}{1-\kapShare}
+\\ \lnat\TargetNrm{\Kap} & =  \frac{\log \Discount \kapShare + \lPtyAgg_{t}}{1-\kapShare}
 \end{aligned}\end{gathered}
 ```
 
