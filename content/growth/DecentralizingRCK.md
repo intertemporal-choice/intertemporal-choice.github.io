@@ -15,12 +15,12 @@ The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` i
 
 ## The Household's Problem
 
-Household {math}`i` supplies its labor inelastically at the wage {math}`\Wage_{t}` and holds net worth {math}`\netWorth_{t,i}`: capital, plus loans to other households, minus debts to them. Under perfect foresight a loan and a unit of capital must pay the same net return, the interest rate {math}`\rfree_{t}`, so only net worth matters. Taking the paths of {math}`\Wage_{t}` and {math}`\rfree_{t}` as given, the household chooses consumption to solve
+Household {math}`i` supplies its labor inelastically at the wage {math}`\Wage_{t}` and holds net worth {math}`\netWorth_{i,t}`: capital, plus loans to other households, minus debts to them. Under perfect foresight a loan and a unit of capital must pay the same net return, the interest rate {math}`\rfree_{t}`, so only net worth matters. Taking the paths of {math}`\Wage_{t}` and {math}`\rfree_{t}` as given, the household chooses consumption to solve
 
 ```{math}
 :label: eq:DecRCK-maxprob
 
-\max_{\{\cNrm_{t,i}\}_{0}^{\infty}} \int_{0}^{\infty} \uFunc(\cNrm_{t,i}) e^{-\discRte t}\,dt
+\max_{\{\cNrm_{i,t}\}_{0}^{\infty}} \int_{0}^{\infty} \uFunc(\cNrm_{i,t}) e^{-\discRte t}\,dt
 ```
 
 with the [planner's](#eq:RCK-maxprob) CRRA utility, {math}`\uFunc(\cNrm) = \cNrm^{1-\CRRA}/(1-\CRRA)`, and time preference rate {math}`\discRte > 0`, subject to the dynamic budget constraint
@@ -28,10 +28,10 @@ with the [planner's](#eq:RCK-maxprob) CRRA utility, {math}`\uFunc(\cNrm) = \cNrm
 ```{math}
 :label: eq:DecRCK-dbc
 
-\dot{\netWorth}_{t,i} = \rfree_{t}\netWorth_{t,i} + \Wage_{t} - \cNrm_{t,i}
+\dot{\netWorth}_{i,t} = \rfree_{t}\netWorth_{i,t} + \Wage_{t} - \cNrm_{i,t}
 ```
 
-and the no-Ponzi condition {math}`\lim_{t \rightarrow \infty} e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}\netWorth_{t,i} \geq 0`, which forbids paying the interest on debt by borrowing more, forever.
+and the no-Ponzi condition {math}`\lim_{t \rightarrow \infty} e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}\netWorth_{i,t} \geq 0`, which forbids paying the interest on debt by borrowing more, forever.
 
 The household's current-value Hamiltonian is
 
@@ -43,22 +43,22 @@ The [planner's](#eq:RCK-H1A) conditions have the same form. [Ramsey Growth in Di
 \Ham(\netWorth,\cNrm,\vk) = \uFunc(\cNrm) + (\rfree_{t}\netWorth + \Wage_{t} - \cNrm)\vk .
 ```
 
-The [condition for optimal consumption](#eq:uceqvk) is {math}`\uP(\cNrm_{t,i}) = \vk_{t,i}`, and the [costate equation](#eq:lamgrow), with the household's return {math}`\rfree_{t}` in place of the planner's, is {math}`\dot{\vk}_{t,i} = \discRte\vk_{t,i} - \partial\Ham/\partial\netWorth = (\discRte-\rfree_{t})\vk_{t,i}`. Since {math}`\uP(\cNrm) = \cNrm^{-\CRRA}`, differentiating the condition for optimal consumption with respect to time gives {math}`\dot{\vk}/\vk = -\CRRA\dot{\cNrm}/\cNrm`, so
+The [condition for optimal consumption](#eq:uceqvk) is {math}`\uP(\cNrm_{i,t}) = \vk_{i,t}`, and the [costate equation](#eq:lamgrow), with the household's return {math}`\rfree_{t}` in place of the planner's, is {math}`\dot{\vk}_{i,t} = \discRte\vk_{i,t} - \partial\Ham/\partial\netWorth = (\discRte-\rfree_{t})\vk_{i,t}`. Since {math}`\uP(\cNrm) = \cNrm^{-\CRRA}`, differentiating the condition for optimal consumption with respect to time gives {math}`\dot{\vk}/\vk = -\CRRA\dot{\cNrm}/\cNrm`, so
 
 ```{math}
 :label: eq:cdotindiv
 
-\dot{\cNrm}_{t,i}/\cNrm_{t,i} = \CRRA^{-1}(\rfree_{t}-\discRte),
+\dot{\cNrm}_{i,t}/\cNrm_{i,t} = \CRRA^{-1}(\rfree_{t}-\discRte),
 ```
 
 the [Euler equation](#eq:PFCRRA-cgrow) of the perfect foresight model, in continuous time. Nothing on its right side is specific to household {math}`i`: every household's consumption grows at the same rate, whatever its wealth.
 
-Since the costate equation gives {math}`e^{-\discRte t}\vk_{t,i} = \vk_{0,i}e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}`, the transversality condition {math}`\lim_{t \rightarrow \infty} e^{-\discRte t}\vk_{t,i}\netWorth_{t,i} = 0` is {math}`\lim_{t \rightarrow \infty} e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}\netWorth_{t,i} = 0`. The no-Ponzi condition rules out ending with negative net worth in present value; the transversality condition, an optimality condition, rules out ending with positive net worth in present value, resources never consumed. Together they make the dynamic budget constraint, integrated forward, the [intertemporal budget constraint](#eq:PFCRRA-ibc), with equality. Writing {math}`\PDV_{0}(\bullet) \equiv \int_{0}^{\infty} \bullet_{t}\, e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}\,dt` for the present discounted value at date 0 of a flow {math}`\bullet`, it says
+Since the costate equation gives {math}`e^{-\discRte t}\vk_{i,t} = \vk_{i,0}e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}`, the transversality condition {math}`\lim_{t \rightarrow \infty} e^{-\discRte t}\vk_{i,t}\netWorth_{i,t} = 0` is {math}`\lim_{t \rightarrow \infty} e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}\netWorth_{i,t} = 0`. The no-Ponzi condition rules out ending with negative net worth in present value; the transversality condition, an optimality condition, rules out ending with positive net worth in present value, resources never consumed. Together they make the dynamic budget constraint, integrated forward, the [intertemporal budget constraint](#eq:PFCRRA-ibc), with equality. Writing {math}`\PDV_{0}(\bullet) \equiv \int_{0}^{\infty} \bullet_{t}\, e^{-\int_{0}^{t}\rfree_{\tau}\,d\tau}\,dt` for the present discounted value at date 0 of a flow {math}`\bullet`, it says
 
 ```{math}
 :label: eq:DecRCK-ibc
 
-\PDV_{0}(\cNrm_{i}) = \netWorth_{0,i} + \hNrm_{0},
+\PDV_{0}(\cNrm_{i}) = \netWorth_{i,0} + \hNrm_{0},
 ```
 
 where [human wealth](#eq:PFCRRA-yfin), the present discounted value of labor income,
@@ -87,12 +87,12 @@ With constant returns to scale, a firm's size is indeterminate and the number of
 \max_{\KLvl_{t},\,\LLvl_{t}}\ \FFunc(\KLvl_{t},\LLvl_{t}) - \Wage_{t}\LLvl_{t} - \kapRent_{t}\KLvl_{t},
 ```
 
-the Hall-Jorgenson firm's problem with labor added. With {math}`\kap = \KLvl/\LLvl` and {math}`\fFunc(\kap) = \FFunc(\KLvl,\LLvl)/\LLvl = \kap^{\kapShare}`, its first-order conditions, [the Hall-Jorgenson firm's](#eq:khj) with a wage added, set each price to a marginal product,
+the Hall-Jorgenson firm's problem with labor added. With {math}`\kNrm = \KLvl/\LLvl` and {math}`\fFunc(\kNrm) = \FFunc(\KLvl,\LLvl)/\LLvl = \kNrm^{\kapShare}`, its first-order conditions, [the Hall-Jorgenson firm's](#eq:khj) with a wage added, set each price to a marginal product,
 
 ```{math}
 :label: eq:DecRCK-prices
 
-\kapRent_{t} = \fFunc^{\prime}(\kap_{t}), \qquad \Wage_{t} = \fFunc(\kap_{t}) - \kap_{t}\fFunc^{\prime}(\kap_{t}),
+\kapRent_{t} = \fFunc^{\prime}(\kNrm_{t}), \qquad \Wage_{t} = \fFunc(\kNrm_{t}) - \kNrm_{t}\fFunc^{\prime}(\kNrm_{t}),
 ```
 
 as in the [Diamond OLG model](#eq:rEqfp), where capital does not depreciate. These payments exhaust output, as in the [RCK model](#eq:RCK-outputExhausted), by [Euler's theorem](#fact:eulerstheorem) for [homogeneous functions](https://en.wikipedia.org/wiki/Homogeneous_function#Euler's_theorem), so profits are zero whatever the firm's size.
@@ -104,7 +104,7 @@ Households own the capital and rent it to firms. A unit of capital earns {math}`
 ```{math}
 :label: eq:DecRCK-r
 
-\rfree_{t} = \kapRent_{t} - \deprRte = \fFunc^{\prime}(\kap_{t}) - \deprRte,
+\rfree_{t} = \kapRent_{t} - \deprRte = \fFunc^{\prime}(\kNrm_{t}) - \deprRte,
 ```
 
 the [Hall-Jorgenson](#eq:ctarb) no-arbitrage condition with the price of capital fixed at one, since output turns into capital one for one; with the wage, it gives the [Aiyagari model's prices](#eq:Aiyagari-Prices).
@@ -118,33 +118,33 @@ Firms employ the one unit of labor that households supply. In a closed economy w
 ```{math}
 :label: eq:DecRCK-clear
 
-\NetWorth_{t} \equiv \int_{0}^{1} \netWorth_{t,i}\,di = \kap_{t},
+\NetWorth_{t} \equiv \int_{0}^{1} \netWorth_{i,t}\,di = \kNrm_{t},
 ```
 
-where, with a unit mass of workers, capital per worker {math}`\kap_{t}` is also the aggregate capital stock. If households are identical, each holds {math}`\kap_{t}` and no loans.
+where, with a unit mass of workers, capital per worker {math}`\kNrm_{t}` is also the aggregate capital stock. If households are identical, each holds {math}`\kNrm_{t}` and no loans.
 
-A perfect foresight equilibrium is a path of capital {math}`\{\kap_{t}\}_{0}^{\infty}` from the given {math}`\kap_{0}`, with the interest rates and wages it implies through {eq}`eq:DecRCK-r` and {eq}`eq:DecRCK-prices`, such that households who expect those prices and optimize hold, in total, exactly that capital. Their expectations of the path of capital are then self-fulfilling.
+A perfect foresight equilibrium is a path of capital {math}`\{\kNrm_{t}\}_{0}^{\infty}` from the given {math}`\kNrm_{0}`, with the interest rates and wages it implies through {eq}`eq:DecRCK-r` and {eq}`eq:DecRCK-prices`, such that households who expect those prices and optimize hold, in total, exactly that capital. Their expectations of the path of capital are then self-fulfilling.
 
 ## The Equilibrium Is the Planner's Solution
 
-Write {math}`\cNrm_{t} \equiv \int_{0}^{1}\cNrm_{t,i}\,di` for aggregate consumption, which grows at the rate every household's does. Integrating the households' budget constraints over {math}`i` and substituting market clearing and the prices into them and into the Euler equation gives
+Write {math}`\cNrm_{t} \equiv \int_{0}^{1}\cNrm_{i,t}\,di` for aggregate consumption, which grows at the rate every household's does. Integrating the households' budget constraints over {math}`i` and substituting market clearing and the prices into them and into the Euler equation gives
 
 :::{margin}
-Only one set of expectations is self-fulfilling here: from a given {math}`\kap_{0}`, only the [saddle path](#fig:RamseySaddlePlot) satisfies the equilibrium conditions and the [transversality condition](#eq:tvc). In other models several paths can each be self-fulfilling; Wikipedia's article on [sunspots](https://en.wikipedia.org/wiki/Sunspots_\(economics\)#Sunspots_and_the_Indeterminacy_School_in_Macroeconomics) discusses such multiple equilibria.
+Only one set of expectations is self-fulfilling here: from a given {math}`\kNrm_{0}`, only the [saddle path](#fig:RamseySaddlePlot) satisfies the equilibrium conditions and the [transversality condition](#eq:tvc). In other models several paths can each be self-fulfilling; Wikipedia's article on [sunspots](https://en.wikipedia.org/wiki/Sunspots_\(economics\)#Sunspots_and_the_Indeterminacy_School_in_Macroeconomics) discusses such multiple equilibria.
 :::
 
 ```{math}
 :label: eq:DecRCK-aggkdot
 
 \begin{gathered}\begin{aligned}
-  \dot{\kap}_{t} & =  \rfree_{t}\kap_{t} + \Wage_{t} - \cNrm_{t}
-\\ & = (\fFunc^{\prime}(\kap_{t})-\deprRte)\kap_{t} + \fFunc(\kap_{t}) - \kap_{t}\fFunc^{\prime}(\kap_{t}) - \cNrm_{t}
-\\ & = \fFunc(\kap_{t}) - \deprRte\kap_{t} - \cNrm_{t}
-\\ \dot{\cNrm}_{t}/\cNrm_{t} & = \CRRA^{-1}(\fFunc^{\prime}(\kap_{t})-\deprRte-\discRte),
+  \dot{\kNrm}_{t} & =  \rfree_{t}\kNrm_{t} + \Wage_{t} - \cNrm_{t}
+\\ & = (\fFunc^{\prime}(\kNrm_{t})-\deprRte)\kNrm_{t} + \fFunc(\kNrm_{t}) - \kNrm_{t}\fFunc^{\prime}(\kNrm_{t}) - \cNrm_{t}
+\\ & = \fFunc(\kNrm_{t}) - \deprRte\kNrm_{t} - \cNrm_{t}
+\\ \dot{\cNrm}_{t}/\cNrm_{t} & = \CRRA^{-1}(\fFunc^{\prime}(\kNrm_{t})-\deprRte-\discRte),
 \end{aligned}\end{gathered}
 ```
 
-the planner's [accumulation equation](#eq:RCK-kdot) and [Keynes-Ramsey rule](#eq:cdotOc) with {math}`\PopnGroRte=\PtyGroRte=0`. With {math}`\NetWorth_{t}=\kap_{t}`, the household's transversality condition is the planner's [transversality condition](#eq:tvc). The same two differential equations, from the same {math}`\kap_{0}` and with the same condition at infinity, select the same path: the economy follows the planner's [saddle path](#fig:RamseySaddlePlot) to the [modified golden rule](#eq:RCK-modGoldenRule), where the interest rate equals the time preference rate, {math}`\rfree = \discRte`.
+the planner's [accumulation equation](#eq:RCK-kdot) and [Keynes-Ramsey rule](#eq:cdotOc) with {math}`\PopnGroRte=\PtyGroRte=0`. With {math}`\NetWorth_{t}=\kNrm_{t}`, the household's transversality condition is the planner's [transversality condition](#eq:tvc). The same two differential equations, from the same {math}`\kNrm_{0}` and with the same condition at infinity, select the same path: the economy follows the planner's [saddle path](#fig:RamseySaddlePlot) to the [modified golden rule](#eq:RCK-modGoldenRule), where the interest rate equals the time preference rate, {math}`\rfree = \discRte`.
 
 :::{margin}
 So human wealth is finite, and the economy cannot save too much: its interest rate exceeds its growth rate, zero. With population and productivity growth, the steady-state interest rate exceeds the growth rate {math}`\PopnGroRte+\PtyGroRte` by {math}`\discRte-(1-\CRRA)\PtyGroRte`, which is positive under the condition that keeps [the planner's objective](#eq:maxprobmod) finite. The competitive economy is therefore dynamically efficient, which the [Diamond OLG economy](#sec:OLGModel) need not be.
