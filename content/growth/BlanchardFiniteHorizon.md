@@ -631,10 +631,10 @@ Now consider the introduction of a government that finances spending
 either by lump-sum taxes or by debt. Its dynamic budget constraint is
 
 ```{math}
-\dot{D} =  \rfree D + G - \TaxLev
+\dot{\Debt} =  \rfree \Debt + \GovSpend - \TaxLev
 ```
 
-where {math}`D` is government debt, {math}`G` is government spending, and
+where {math}`\Debt` is government debt, {math}`\GovSpend` is government spending, and
 {math}`\TaxLev` is a lump-sum per capita tax. Defining
 
 ```{math}
@@ -649,22 +649,22 @@ government is also required to satisfy the transversality condition
 ```{math}
 :label: eq:10
 
-\lim_{t \rightarrow \infty} D_t/\mathcal{R}_t^{s} = 0.
+\lim_{t \rightarrow \infty} \Debt_t/\mathcal{R}_t^{s} = 0.
 ```
 
 Consider the following fiscal policy experiment. Until time {math}`t` there
-has been no government ({math}`G_s = D_s = \TaxLev_s=0~\forall~s<t`). At date
-{math}`t` the government issues a quantity {math}`D` of debt and announces that
+has been no government ({math}`\GovSpend_s = \Debt_s = \TaxLev_s=0~\forall~s<t`). At date
+{math}`t` the government issues a quantity {math}`\Debt` of debt and announces that
 future lump sum taxes will be imposed in amounts exactly large enough
-to pay the interest on this debt (so subsequently, {math}`\dot{D}=0`
+to pay the interest on this debt (so subsequently, {math}`\dot{\Debt}=0`
 forever). The government rebates the proceeds of its sale of debt to
-the public as a per-capita lump sum of {math}`D` per person. The government
+the public as a per-capita lump sum of {math}`\Debt` per person. The government
 will never engage in any spending (aside from paying interest on the
 debt). Define the new variables
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \mathcal{W} & =  K + D
+  \mathcal{W} & =  K + \Debt
 \\ \mathcal{Y} & =  Y - \TaxLev
 \\ \mathcal{H} & =  \int_{t}^{\infty} \mathcal{Y}/\hat{\mathcal{R}}_{t}^{s} ds
 \end{aligned}\end{gathered}
@@ -708,7 +708,7 @@ the economy are
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{C} & =  (\rfree - \timeRate)C - \pDies(\pDies+\timeRate)(K+D)
+  \dot{C} & =  (\rfree - \timeRate)C - \pDies(\pDies+\timeRate)(K+\Debt)
 \\ \dot{K} & =  K^{\alpha}-\delta K - C
 \end{aligned}\end{gathered}
 ```
@@ -747,15 +747,15 @@ of the policy on different generations in the economy.
 > \begin{gathered}\begin{aligned}
 >   \dot{C} & =  (\pDies+\timeRate)(\rfree \mathcal{W}+(\rfree+\pDies)(C(\pDies+\timeRate)^{-1} - \mathcal{W})-C)
 > \\        & =  (\rfree+\pDies)C - (\pDies+\timeRate)C- \pDies(\pDies+\timeRate)\mathcal{W}
-> \\ & =  (\rfree-\timeRate)C - \pDies(\pDies+\timeRate)(K+D).
+> \\ & =  (\rfree-\timeRate)C - \pDies(\pDies+\timeRate)(K+\Debt).
 > \end{aligned}\end{gathered}
 > ```
 >
-> Since we are assuming that {math}`D` is a constant (after the fiscal
+> Since we are assuming that {math}`\Debt` is a constant (after the fiscal
 >
 > experiment), any combination of {math}`C` and {math}`W` that would have been on
 >
-> the {math}`\dot{C}=0` locus before the policy shift now has a value {math}`\dot{C} = -\pDies(\pDies+\timeRate)D`. This means that the {math}`C` that would restore
+> the {math}`\dot{C}=0` locus before the policy shift now has a value {math}`\dot{C} = -\pDies(\pDies+\timeRate)\Debt`. This means that the {math}`C` that would restore
 >
 > {math}`\dot{C}=0` must be a larger {math}`C`, which says that the {math}`\dot{C}=0`
 >
