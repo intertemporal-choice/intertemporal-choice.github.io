@@ -63,7 +63,7 @@ where {math}`\Rfree_{t+1}` is the gross return, per person, on a unit of resourc
 
 ## The Hamiltonian's Conditions
 
-The value of the continuous-time problem as a function of initial capital is {math}`\mathcal{V}(\kap)`, a curly V to parallel the roman {math}`V` of the discrete-time value function.
+The value of the continuous-time problem as a function of initial capital is {math}`\VFuncCts(\kap)`, a curly V to parallel the roman {math}`\VFunc` of the discrete-time value function.
 
 The current-value Hamiltonian is
 
@@ -81,8 +81,8 @@ multiplier, so its value should be equivalent to the value of relaxing
 the corresponding constraint by an infinitesimal amount. But the
 constraint in question is the capital-accumulation constraint. Thus
 {math}`\vk` should be equal to the value of having a tiny bit more
-capital, {math}`\frac{\mathcal{V}(\kap+\Delta \kap)-\mathcal{V}(\kap)}{\Delta \kap}`. In other words,
-you can think of {math}`\vk=\mathcal{V}'(\kap)`.
+capital, {math}`\frac{\VFuncCts(\kap+\Delta \kap)-\VFuncCts(\kap)}{\Delta \kap}`. In other words,
+you can think of {math}`\vk=\VFuncCts'(\kap)`.
 
 The condition for optimal consumption is
 
@@ -92,7 +92,7 @@ The condition for optimal consumption is
 \begin{gathered}\begin{aligned}
         \frac{\partial \Ham}{\partial \cons} & =  0  \\
         \uFunc^{\prime}(\cons) & =  \vk
-\\  \uFunc^{\prime}(\cons) & =  \mathcal{V}'(\kap) .
+\\  \uFunc^{\prime}(\cons) & =  \VFuncCts'(\kap) .
 \end{aligned}\end{gathered}
 ```
 
@@ -152,7 +152,7 @@ and multiplying by {math}`J`,
 J(\log \VFunc^{\prime}(\mNrm_{t+1}) - \log \VFunc^{\prime}(\mNrm_{t})) \approx \timeRate-(\rfree-\popGro) .
 ```
 
-The left side is the change in {math}`\log \VFunc^{\prime}` over one period, expressed at an annual rate. As {math}`J \rightarrow \infty`, {math}`\mNrm_{t}` becomes {math}`\kap`, {math}`\VFunc^{\prime}` becomes {math}`\mathcal{V}'`, and the left side becomes {math}`(d/dt)\log \mathcal{V}'(\kap) = \dot{\vk}/\vk`. The approximations become exact in the limit, which leaves [the costate equation](#eq:lamgrow). So the costate equation of the Hamiltonian method is the discrete-time condition {math}`\VFunc^{\prime}(\mNrm_{t})=\Discount\Rfree_{t+1}\VFunc^{\prime}(\mNrm_{t+1})`, taken to continuous time.
+The left side is the change in {math}`\log \VFunc^{\prime}` over one period, expressed at an annual rate. As {math}`J \rightarrow \infty`, {math}`\mNrm_{t}` becomes {math}`\kap`, {math}`\VFunc^{\prime}` becomes {math}`\VFuncCts'`, and the left side becomes {math}`(d/dt)\log \VFuncCts'(\kap) = \dot{\vk}/\vk`. The approximations become exact in the limit, which leaves [the costate equation](#eq:lamgrow). So the costate equation of the Hamiltonian method is the discrete-time condition {math}`\VFunc^{\prime}(\mNrm_{t})=\Discount\Rfree_{t+1}\VFunc^{\prime}(\mNrm_{t+1})`, taken to continuous time.
 
 ## The Transversality Condition
 
@@ -217,10 +217,10 @@ Modern treatments write a continuous-time problem like this one as a single equa
 ```{math}
 :label: eq:HVD-hjb
 
-\timeRate \mathcal{V}(\kap) = \max_{\cons} \{\uFunc(\cons) + \mathcal{V}'(\kap)(\fFunc(\kap)-\cons-(\popGro+\depr)\kap)\} = \max_{\cons} \Ham(\kap,\cons,\mathcal{V}'(\kap)) .
+\timeRate \VFuncCts(\kap) = \max_{\cons} \{\uFunc(\cons) + \VFuncCts'(\kap)(\fFunc(\kap)-\cons-(\popGro+\depr)\kap)\} = \max_{\cons} \Ham(\kap,\cons,\VFuncCts'(\kap)) .
 ```
 
-It is the [Bellman equation](#eq:HVD-bellman) taken to continuous time. Read as an asset-pricing equation, it says that the return required on the value of the problem, {math}`\timeRate \mathcal{V}(\kap)`, equals the dividend, the flow of utility {math}`\uFunc(\cons)`, plus the capital gain, {math}`\mathcal{V}'(\kap)\dot{\kap}`. Its maximand is the current-value Hamiltonian with the costate set to {math}`\vk = \mathcal{V}'(\kap)`, hence the "Hamilton" in its name. Its first-order condition is [the condition for optimal consumption](#eq:uceqvk); and differentiating it with respect to {math}`\kap`, by the envelope theorem, gives {math}`\timeRate \mathcal{V}'(\kap) = \mathcal{V}''(\kap)\dot{\kap} + \mathcal{V}'(\kap)(\rfree-\popGro)`, which, since {math}`\dot{\vk} = \mathcal{V}''(\kap)\dot{\kap}`, is [the costate equation](#eq:lamgrow). The Hamiltonian's conditions describe the optimal path from one starting point; the HJB equation describes the whole value function at once, which is what many numerical methods solve for.
+It is the [Bellman equation](#eq:HVD-bellman) taken to continuous time. Read as an asset-pricing equation, it says that the return required on the value of the problem, {math}`\timeRate \VFuncCts(\kap)`, equals the dividend, the flow of utility {math}`\uFunc(\cons)`, plus the capital gain, {math}`\VFuncCts'(\kap)\dot{\kap}`. Its maximand is the current-value Hamiltonian with the costate set to {math}`\vk = \VFuncCts'(\kap)`, hence the "Hamilton" in its name. Its first-order condition is [the condition for optimal consumption](#eq:uceqvk); and differentiating it with respect to {math}`\kap`, by the envelope theorem, gives {math}`\timeRate \VFuncCts'(\kap) = \VFuncCts''(\kap)\dot{\kap} + \VFuncCts'(\kap)(\rfree-\popGro)`, which, since {math}`\dot{\vk} = \VFuncCts''(\kap)\dot{\kap}`, is [the costate equation](#eq:lamgrow). The Hamiltonian's conditions describe the optimal path from one starting point; the HJB equation describes the whole value function at once, which is what many numerical methods solve for.
 
 Benjamin Moll's [lecture notes on HJB equations](https://benjaminmoll.com/wp-content/uploads/2019/07/Lecture3_2149.pdf) derive the equation from the discrete-time Bellman equation of the neoclassical growth model and show its connection to the Hamiltonian; Wikipedia's [article on the HJB equation](https://en.wikipedia.org/wiki/Hamilton%E2%80%93Jacobi%E2%80%93Bellman_equation) states it in general. {cite:t}`achdouHACT` write the problem of each household facing uninsurable income risk as an HJB equation and the distribution of wealth as a Kolmogorov forward equation, which makes a heterogeneous-agent model a system of two partial differential equations; theirs is the form much of the modern continuous-time literature in macroeconomics uses.
 
@@ -231,9 +231,9 @@ Each condition of the continuous-time solution, beside its discrete-time counter
 ```{math}
 \begin{array}{lll}
   & \text{continuous time} & \text{discrete time}
-\\ \text{value} & \timeRate\mathcal{V}(\kap) & \VFunc(\mNrm_{t})=\max_{\cons_{t}}\{\uFunc(\cons_{t})
-\\ & \quad {}=\max_{\cons}\Ham(\kap,\cons,\mathcal{V}'(\kap)) & \quad {}+\Discount\VFunc(\mNrm_{t+1})\}
-\\ \text{consumption} & \uFunc^{\prime}(\cons)=\vk=\mathcal{V}'(\kap) & \uFunc^{\prime}(\cons_{t})=\VFunc^{\prime}(\mNrm_{t})
+\\ \text{value} & \timeRate\VFuncCts(\kap) & \VFunc(\mNrm_{t})=\max_{\cons_{t}}\{\uFunc(\cons_{t})
+\\ & \quad {}=\max_{\cons}\Ham(\kap,\cons,\VFuncCts'(\kap)) & \quad {}+\Discount\VFunc(\mNrm_{t+1})\}
+\\ \text{consumption} & \uFunc^{\prime}(\cons)=\vk=\VFuncCts'(\kap) & \uFunc^{\prime}(\cons_{t})=\VFunc^{\prime}(\mNrm_{t})
 \\ \text{marginal value} & \dot{\vk}/\vk=\timeRate-(\rfree-\popGro) & \VFunc^{\prime}(\mNrm_{t})=\Discount\Rfree_{t+1}\VFunc^{\prime}(\mNrm_{t+1})
 \\ \text{resources} & \dot{\kap}=\fFunc(\kap)-\cons-(\popGro+\depr)\kap & \kap_{t+1}=(\mNrm_{t}-\cons_{t})/(1+\popGro)
 \\ \text{transversality} & \lim_{t\rightarrow\infty}e^{-\timeRate t}\vk\kap=0 & \lim_{t\rightarrow\infty}\Discount^{t}\uFunc^{\prime}(\cons_{t})\kap_{t}=0

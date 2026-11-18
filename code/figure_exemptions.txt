@@ -24,10 +24,6 @@ pending  /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase1.png 
 pending  /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase2.png  port to a notebook beside the chapter
 pending  /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase3.png  port to a notebook beside the chapter
 
-# BrockMirman
-pending  /content/figures/BrockMirman/yPlotBrockMirman.png                       port to a notebook beside the chapter
-pending  /content/figures/BrockMirman/zWhiteNoise.png                            port to a notebook beside the chapter
-
 # BufferStockAgeProfiles
 pending  /content/figures/BufferStockAgeProfiles/AgeProfilesData.png             exception planned: Carroll (1997 QJE) Figure IV, 1960-61 CEX microdata not obtainable
 pending  /content/figures/BufferStockAgeProfiles/AgeProfilesTheory.png           port to a notebook beside the chapter

@@ -119,11 +119,11 @@ high cost of adjustment (the '{math}`q`-Ramsey' model).
 
 The differences between the solid and the dashed loci indicate that a
 faster rate of convergence to the steady state requires a high level
-of {math}`\iRat` below the steady state at which {math}`\kap=\Target{\kap}` and
-low level of {math}`\iRat` when {math}`\kap` is above {math}`\Target{\kap}`. Higher
+of {math}`\iRat` below the steady state at which {math}`\kap=\TargetNrm{\kap}` and
+low level of {math}`\iRat` when {math}`\kap` is above {math}`\TargetNrm{\kap}`. Higher
 adjustment costs work against fast convergence, since, when {math}`\kap` is
 below the steady state (and positive investment is needed to increase
-{math}`\kap` toward {math}`\Target{\kap}`, adjustment costs reduce investment,
+{math}`\kap` toward {math}`\TargetNrm{\kap}`, adjustment costs reduce investment,
 while they increase investment (making it less negative) when {math}`\kap`
 is above the equilibrium. In both cases, the difference occurs because
 because adjusting capital involves convex costs, and thus it is

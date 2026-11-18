@@ -162,7 +162,7 @@ The aggregate production function is assumed to be Cobb-Douglas,
 ```{math}
 \begin{gathered}\begin{aligned}
         \Kap_{t+1} & =  \overbrace{\daleth}^{1-\depr} \Kap_{t}+\Inc_{t}-\Cons_{t}  \\
-        \Inc_{t} & =  \PtyLev_{t}\Kap_{t}^{1-\labShare}\Labor_{t}^{\labShare}
+        \Inc_{t} & =  \PtyAgg_{t}\Kap_{t}^{1-\labShare}\Labor_{t}^{\labShare}
 \end{aligned}\end{gathered}
 ```
 
@@ -174,7 +174,7 @@ shares and perfect competition imply
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \FFunc_{\Labor}\Labor/\Inc & =  \labShare \PtyLev_{t}\Kap_{t}^{1-\labShare}\Labor^{\labShare-1}\Labor_{t}/\Inc_{t}  \\
+        \FFunc_{\Labor}\Labor/\Inc & =  \labShare \PtyAgg_{t}\Kap_{t}^{1-\labShare}\Labor^{\labShare-1}\Labor_{t}/\Inc_{t}  \\
          & =  \labShare
 \end{aligned}\end{gathered}
 ```
@@ -198,7 +198,7 @@ which implies from the production function that
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \hat{\PtyLev}_{t} & \approx  \hat{\Inc}_{t}-\labShare \hat{\Labor}_{t} - (1-\labShare)\hat{\Kap}_{t}.
+        \hat{\PtyAgg}_{t} & \approx  \hat{\Inc}_{t}-\labShare \hat{\Labor}_{t} - (1-\labShare)\hat{\Kap}_{t}.
 \end{aligned}\end{gathered}
 ```
 
@@ -208,7 +208,7 @@ Prescott 'estimates' a productivity process that takes the form
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \hat{\PtyLev}_{t} & =  \ptyGro_{t} + \epsilon_{t}
+        \hat{\PtyAgg}_{t} & =  \ptyGro_{t} + \epsilon_{t}
 \end{aligned}\end{gathered}
 ```
 
@@ -228,8 +228,8 @@ subject to
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \kap_{t+1} & =  \daleth \kap_{t}+\PtyLev_{t}\kap_{t}^{1-\labShare}\labor_{t}^{\labShare} - \cons_{t}  \\
-        \hat{\PtyLev}_{t} & =  \ptyGro + \epsilon_{t}.
+        \kap_{t+1} & =  \daleth \kap_{t}+\PtyAgg_{t}\kap_{t}^{1-\labShare}\labor_{t}^{\labShare} - \cons_{t}  \\
+        \hat{\PtyAgg}_{t} & =  \ptyGro + \epsilon_{t}.
 \end{aligned}\end{gathered}
 ```
 
