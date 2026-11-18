@@ -14,7 +14,6 @@ project:
   math:
     # --- overrides (102): renderings that differ from the registry's; the course's kept until the sources are substituted
     '\CLev': 'C'  # registry: \boldsymbol{C} via \CLvl; uses book 63 questions 200
-    '\Target': '\check'  # registry: \hat via \TargetNrm; uses book 13 questions 146
     '\CARA': '\alpha'  # registry: \upsilon [cara]; uses book 35 questions 98
     '\pLevBF': '\mathbf{p}'  # registry: \boldsymbol{p} via \pLvl; uses book 80 questions 32
     '\cLev': 'c'  # registry: \boldsymbol{c} via \cLvl; uses book 43 questions 46
@@ -179,7 +178,7 @@ project:
     '\ShkLogZeroLog': '\cancel{\ShkMeanOneLog}'  # uses book 13 questions 0
     '\vNum': 'v'  # uses book 13 questions 0
     '\empState': '\xi'  # uses book 0 questions 12
-    '\kTarg': '\Target{k}'  # uses book 0 questions 12
+    '\kTarg': '\TargetNrm{k}'  # uses book 0 questions 12
     '\patwGro': '\text{þ}_{\wGro}'  # uses book 12 questions 0
     '\surplus': 'z'  # uses book 12 questions 0
     '\save': 's'  # uses book 4 questions 7
@@ -197,7 +196,7 @@ project:
     '\aNbr': 'a'  # uses book 5 questions 0
     '\csDiscFac': '\rho'  # uses book 4 questions 0
     '\SeveranceRatio': '\varsigma'  # uses book 0 questions 4
-    '\sTarg': '\Target{\sRat}'  # uses book 0 questions 4
+    '\sTarg': '\TargetNrm{\sRat}'  # uses book 0 questions 4
     '\error': '\epsilon'  # uses book 3 questions 0
     '\rProd': '\mathsf{r}'  # uses book 1 questions 2
     '\uPPP': '\mathrm{u}^{\prime\prime\prime}'  # uses book 3 questions 0

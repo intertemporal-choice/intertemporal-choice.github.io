@@ -112,15 +112,15 @@ is that its log follows a random walk:
 Under this assumption, consider the dynamic effects on the level of
 output from a unit positive shock to
 the log of technology in period {math}`t` (that is, {math}`\epsilon_{t+1}=1` where {math}`\epsilon_{s} = 0~\forall~s \neq t+1`). Suppose that
-the economy had been at its original steady-state level of output {math}`\Target{y}`
+the economy had been at its original steady-state level of output {math}`\TargetNrm{y}`
 in the prior period. Then the expected dynamics of output would be given
 by
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \inc_{t} & =  \Target{y} + \ptyLev_{t}
-\\ \Ex_{t}[\inc_{t+1}] & =  \Target{y}+\ptyLev_{t}+\kapShare \ptyLev_{t}
-\\ \Ex_{t}[\inc_{t+2}] & =  \Target{y}+\ptyLev_{t}+\kapShare \ptyLev_{t}+\kapShare^{2} \ptyLev_{t}
+  \inc_{t} & =  \TargetNrm{y} + \ptyLev_{t}
+\\ \Ex_{t}[\inc_{t+1}] & =  \TargetNrm{y}+\ptyLev_{t}+\kapShare \ptyLev_{t}
+\\ \Ex_{t}[\inc_{t+2}] & =  \TargetNrm{y}+\ptyLev_{t}+\kapShare \ptyLev_{t}+\kapShare^{2} \ptyLev_{t}
 \end{aligned}\end{gathered}
 ```
 
@@ -137,7 +137,7 @@ technology follows a white noise process,
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \ptyLev_{t+1} & =  \Target{\ptyLev} + \epsilon_{t+1}.
+  \ptyLev_{t+1} & =  \TargetNrm{\ptyLev} + \epsilon_{t+1}.
 \end{aligned}\end{gathered}
 ```
 
@@ -185,7 +185,7 @@ The nonstochastic version of the model is of course not very interesting, except
 
 *   The mean value of some variable in the model (say, {math}`\Kap`)
 
-*   The value of some state variable, say {math}`\Target{\Kap}`, such that {math}`\Ex_{t}[\Kap_{t+1}] = \Kap_{t}` if {math}`\Kap_{t}=\Target{\Kap}`.
+*   The value of some state variable, say {math}`\TargetNrm{\Kap}`, such that {math}`\Ex_{t}[\Kap_{t+1}] = \Kap_{t}` if {math}`\Kap_{t}=\TargetNrm{\Kap}`.
 
 We consider here the last of these, which we will show reduces (in this special case) to the same equation as for the nonstochastic version of the model, {math}`\Kap_{t+1}=\Kap_{t}`. To see this, rewrite the Euler equation as:
 
@@ -199,12 +199,12 @@ We consider here the last of these, which we will show reduces (in this special 
 \end{aligned}\end{gathered}
 ```
 
-where the expectations operator disappears because no variables are stochastic (the {math}`\PtyAgg_{t+1}` terms in the numerator and denominator cancel, and {math}`\Kap_{t+1}` is directly chosen in {math}`t` so is known). For any given {math}`\PtyAgg_{t}`, the steady state where {math}`\Kap_{t+1}=\Kap_{t}=\Target{\Kap}` is then where
+where the expectations operator disappears because no variables are stochastic (the {math}`\PtyAgg_{t+1}` terms in the numerator and denominator cancel, and {math}`\Kap_{t+1}` is directly chosen in {math}`t` so is known). For any given {math}`\PtyAgg_{t}`, the steady state where {math}`\Kap_{t+1}=\Kap_{t}=\TargetNrm{\Kap}` is then where
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  1 & =  \Discount \kapShare \PtyAgg_{t} \Target{\Kap}_{t}^{\kapShare-1}
-\\ \Target{\kap} & =  \frac{\log \Discount \kapShare + \ptyLev_{t}}{1-\kapShare}
+  1 & =  \Discount \kapShare \PtyAgg_{t} \TargetNrm{\Kap}_{t}^{\kapShare-1}
+\\ \TargetNrm{\kap} & =  \frac{\log \Discount \kapShare + \ptyLev_{t}}{1-\kapShare}
 \end{aligned}\end{gathered}
 ```
 
