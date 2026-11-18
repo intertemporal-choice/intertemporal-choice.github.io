@@ -128,7 +128,6 @@ project:
     '\RiskyAlt': '\acute{\mathbf{R}}'  # uses book 31 questions 0
     '\vFirm': '\mathrm{e}'  # uses book 31 questions 0
     '\Evarr': '\sigma_{\risky}^{2}'  # uses book 18 questions 8
-    '\taxCorp': '\tau'  # uses book 14 questions 0
     '\TaxComb': '\mathcal{T}'  # uses book 10 questions 0
     '\adjPar': '\omega'  # uses book 9 questions 0
     '\argmax': '\operatorname*{arg\,max}'  # uses book 3 questions 3
@@ -137,7 +136,6 @@ project:
     '\TaxCombInv': '\mathcal{T}^{-1}'  # uses book 6 questions 0
     '\rev': '\pi'  # uses book 5 questions 0
     '\divGro': '\mathsf{g}'  # uses book 4 questions 0
-    '\TaxCorp': '\Large \tau'  # uses book 4 questions 0
     '\DivGro': '\mathrm{G}'  # uses book 2 questions 0
     # --- local-local (62): objects the registry lacks: course-local for now
     '\tNow': 't'  # uses book 347 questions 55
