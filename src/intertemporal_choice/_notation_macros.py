@@ -318,6 +318,7 @@ MACROS = {
     '\\UNrm': 'U',
     '\\UpdatePrb': '\\varPi',
     '\\VFunc': '\\mathrm{V}',
+    '\\VFuncCts': '\\mathcal{V}',
     '\\VInv': '\\Lambda',
     '\\VLev': 'V',
     '\\VLvl': '\\boldsymbol{V}',
