@@ -35,9 +35,9 @@ requires
 ```
 
 Note that this equation comes about because the marginal product of
-capital in this model is always {math}`\PtyAgg = \rfree`, because {math}`\fFunc^{\prime}(\KLvl) = \PtyAgg`. Note
+capital in this model is always {math}`\PtyAgg = \rfree`. Note
 further that according to this equation, the growth rate of consumption
-is always the same; unlike the Cass-Koopmans model with a normal
+is always the same; unlike the Ramsey/Cass-Koopmans model with a normal
 production function, this model has no transitional dynamics.
 
 We can also use {eq}`eq:Rebelo-kdot` to obtain an expression for the
@@ -91,7 +91,7 @@ solution is that
 
 Recalling that {math}`\PtyAgg` is effectively the real interest rate
 in this model, this equation can be interpreted as the
-'impatience' condition that we imposed in the infinite
+return impatience condition that we imposed in the infinite
 horizon perfect foresight consumption model. In fact,
 the Rebelo {math}`\PtyAgg\KLvl` model is essentially just a way of
 reinterpreting the perfect foresight infinite horizon

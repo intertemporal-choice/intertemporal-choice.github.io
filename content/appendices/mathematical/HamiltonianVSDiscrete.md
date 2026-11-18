@@ -1,7 +1,7 @@
 (sec:HamiltonianVSDiscrete)=
 # Ramsey Growth in Discrete and Continuous Time
 
-This section derives the optimality conditions of a continuous-time version of the Ramsey/Cass-Koopmans (RCK) model, without productivity growth, using the Hamiltonian, and maps each to its counterpart in the discrete-time (Bellman) solution. It ends with the equation that unites the two methods, the Hamilton-Jacobi-Bellman (HJB) equation, the form in which modern macroeconomics usually writes continuous-time problems.
+This appendix derives the optimality conditions of a continuous-time version of the Ramsey/Cass-Koopmans (RCK) model, without productivity growth, using the Hamiltonian, and maps each to its counterpart in the discrete-time (Bellman) solution. It ends with the equation that unites the two methods, the Hamilton-Jacobi-Bellman (HJB) equation, the form in which modern macroeconomics usually writes continuous-time problems.
 
 ## The Problem, in Continuous and Discrete Time
 
@@ -125,7 +125,7 @@ the continuous-time counterpart of the [discrete-time accumulation equation](#eq
 
 ## The Costate Equation as a Limit
 
-Up to now in this course we haven't thought very much about what the
+Up to now in this book we haven't thought very much about what the
 time period is. Generally, we have expressed things in terms of
 yearly rates, so that for example we might choose {math}`\Rfree=1.04` and
 {math}`\DiscFac=1/1.04` to represent an interest rate of
@@ -165,7 +165,7 @@ Finally, the transversality condition is
 and its discrete-time counterpart is
 
 ```{math}
-:label: eq:ibc
+:label: eq:HVD-discTVC
 
 \lim_{t \rightarrow \infty} \DiscFac^{t} \uFunc^{\prime}(\cNrm_{t}) \kNrm_{t} = 0.
 ```
@@ -192,7 +192,7 @@ Now differentiate [the condition for optimal consumption](#eq:uceqvk) with respe
 divide by {math}`\vk = \uFunc^{\prime}(\cNrm)`, and use [the costate equation](#eq:lamgrow):
 
 ```{math}
-:label: eq:trans1
+:label: eq:HVD-cdot
 
 \begin{gathered}\begin{aligned}
         \frac{\dot{\cNrm} \uFunc^{\prime\prime}(\cNrm)}{\uFunc^{\prime}(\cNrm)} & =  \discRte-(\rfree-\PopnGroRte)  \\
@@ -203,7 +203,7 @@ divide by {math}`\vk = \uFunc^{\prime}(\cNrm)`, and use [the costate equation](#
 For a CRRA utility function {math}`\uFunc(\cNrm)=\cNrm^{1-\CRRA}/(1-\CRRA)`, {math}`-\uFunc^{\prime\prime}(\cNrm) \cNrm/\uFunc^{\prime}(\cNrm) = \CRRA`, so this becomes
 
 ```{math}
-:label: eq:trans2
+:label: eq:HVD-cgrow
 
 \dot{\cNrm}/\cNrm = \CRRA^{-1}(\rfree-\PopnGroRte-\discRte) ,
 ```

@@ -9,7 +9,7 @@ in which technological progress had largely been treated as completely
 exogenous.
 
 :::{margin}
-See also the prescient paper by {cite:t}`arrowGrowth`; Afred Marshall articulated similar ideas in the late 19th century.
+See also the prescient paper by {cite:t}`arrowGrowth`; Alfred Marshall articulated similar ideas in the late 19th century.
 :::
 
 In Romer's model, firm {math}`j`'s production function is of the form
@@ -45,7 +45,7 @@ importantly, there is no population growth). Thus, aggregate investment is, e.g.
 ```
 
 Romer assumes that the aggregate stock of knowledge in the economy is
-proportional to the cumulative sum of past aggregate investment
+proportional to the cumulative sum of past aggregate investment. Measured in units that make the factor of proportionality one,
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -103,7 +103,7 @@ decision has on aggregate knowledge. Thus from the individual
 firm/consumer's perspective, the marginal product of capital is
 {math}`\kapShare \kNrm_{j,t}^{\kapShare-1}
  \labor_{j,t}^{1-\kapShare}\Knwl_{t}^{\extElas}`. If we normalize the model by
-assuming that the aggregate quantity of labor adds upt to {math}`\LLvl_{t}=1`,
+assuming that the aggregate quantity of labor adds up to {math}`\LLvl_{t}=1`,
 we can set up and solve the Hamiltonian to obtain
 
 ```{math}
