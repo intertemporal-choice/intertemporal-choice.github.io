@@ -36,7 +36,7 @@ An important insight here is that all of output is absorbed by payments to labor
 Labor hours (the same as population) increase exogenously at a constant rate
 
 :::{margin}
-The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\logOp` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
+The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\lnat` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
 :::
 
 ```{math}

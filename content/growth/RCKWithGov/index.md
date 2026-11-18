@@ -49,7 +49,7 @@ A planner who must provide the same spending, and who has the households' utilit
 Net output is consumed, spent by the government, or invested. Spending does not depend on {math}`\kap`, so it drops out of the planner's costate equation too, and the planner's consumption follows the [Keynes-Ramsey rule](#eq:cdotOc) with {math}`\PopnGroRte=\PtyGroRte=0`, {math}`\dot{\cNrm}/\cNrm = \CRRA^{-1}(\fFunc^{\prime}(\kap) - \deprRte - \discRte)`, which is the household's Euler equation, since {math}`\rfree = \fFunc^{\prime}(\kap) - \deprRte`. In equilibrium a household's capital is the economy's capital per household, and by [Euler's theorem](#fact:eulerstheorem) the factor payments exhaust output, so that, net of depreciation, {math}`\rfree\kap + \Wage = \fFunc(\kap) - \deprRte\kap`. So with {math}`\TaxLev = \GovSpend` the household's budget constraint is the planner's resource constraint, and its transversality condition is the planner's. The two economies follow the same equations from the same {math}`\kap_{0}`, with the same condition at infinity: spending paid for by lump-sum taxes takes resources, but leaves the market's allocation of what remains efficient.
 
 :::{margin}
-The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\logOp` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
+The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\lnat` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
 :::
 
 (sec:RCKGov-Spending)=
