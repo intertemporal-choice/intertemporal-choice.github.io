@@ -245,7 +245,6 @@ MACROS = {
     '\\PtyGroFac': '\\mathrm{G}',
     '\\PtyGroRte': '\\mathrm{g}',
     '\\PtyLab': 'Z',
-    '\\PtyLev': 'A',
     '\\QFunc': '\\mathrm{Q}',
     '\\QLev': 'Q',
     '\\QLvl': '\\boldsymbol{Q}',

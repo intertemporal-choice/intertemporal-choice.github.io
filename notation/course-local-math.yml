@@ -126,7 +126,6 @@ project:
     '\adj': '\mathrm{j}'  # uses book 64 questions 0
     '\inv': 'i'  # uses book 56 questions 6
     '\kPriceAfterITC': '\mathscr{P}'  # uses book 62 questions 0
-    '\PtyLev': 'A'  # uses book 39 questions 12
     '\var': '\operatorname{var}'  # uses book 2 questions 41
     '\labShare': '\nu'  # uses book 34 questions 0
     '\edvdnd': '\grave{\dvdnd}'  # uses book 19 questions 14

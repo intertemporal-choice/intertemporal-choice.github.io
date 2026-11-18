@@ -16,12 +16,12 @@ In Romer's model, firm {math}`j`'s production function is of the form
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  y_{t,j} & =  \PtyLev_{t} \FFunc(\kap_{t,j},\ell_{t,j})
+  y_{t,j} & =  \PtyAgg_{t} \FFunc(\kap_{t,j},\ell_{t,j})
 \end{aligned}\end{gathered}
 ```
 
 where aggregate output-augmenting technological progress is captured by
-{math}`\PtyLev_{t}`. Its capital accumulates without depreciation,
+{math}`\PtyAgg_{t}`. Its capital accumulates without depreciation,
 
 ```{math}
 :label: eq:Kdot
@@ -66,7 +66,7 @@ productivity via
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \PtyLev_{t} & =  \Xi_{t}^{\eta}
+  \PtyAgg_{t} & =  \Xi_{t}^{\eta}
 \end{aligned}\end{gathered}
 ```
 

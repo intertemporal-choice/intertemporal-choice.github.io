@@ -6,10 +6,10 @@
 ```{math}
 :label: eq:aggY
 
-\YLev = \PtyLev \Kap^{\kapShare} (\labor \hLucas \Labor)^{1-\kapShare}
+\YLev = \PtyAgg \Kap^{\kapShare} (\labor \hLucas \Labor)^{1-\kapShare}
 ```
 
-where {math}`\YLev, \PtyLev,` and {math}`\KLev` are as usually defined and {math}`0 < \kapShare < 1`, where {math}`\labor` is defined as the proportion of total labor time
+where {math}`\YLev, \PtyAgg,` and {math}`\KLev` are as usually defined and {math}`0 < \kapShare < 1`, where {math}`\labor` is defined as the proportion of total labor time
 spent working, and {math}`\hLucas` is what Lucas calls the stock of 'human
 capital.'
 
@@ -18,7 +18,7 @@ The production function can be rewritten in per-capita terms as
 ```{math}
 :label: eq:pcy
 
-\yRat = \PtyLev \kRat^\kapShare (\labor \hLucas)^{1-\kapShare}
+\yRat = \PtyAgg \kRat^\kapShare (\labor \hLucas)^{1-\kapShare}
 ```
 
 which is a constant returns to scale production function in
@@ -112,8 +112,8 @@ capital accumulation equation becomes
 \begin{gathered}\begin{aligned}
   \dot{\kap} & =  \save \yRat - (\popGro+\depr) \kap
 \\ \dot{\kap}/\kap & =  \save (\yRat/\kap) - (\popGro+\depr)
-\\ & =  \save \PtyLev \kRat^{\kapShare - 1} (\labor \hLucas)^{1-\kapShare}-(\popGro+\depr)
-\\ & =  \save \PtyLev (\kap/\hLucas)^{\kapShare-1} \labor^{1-\kapShare} -(\popGro+\depr).
+\\ & =  \save \PtyAgg \kRat^{\kapShare - 1} (\labor \hLucas)^{1-\kapShare}-(\popGro+\depr)
+\\ & =  \save \PtyAgg (\kap/\hLucas)^{\kapShare-1} \labor^{1-\kapShare} -(\popGro+\depr).
 \end{aligned}\end{gathered}
 ```
 
@@ -122,14 +122,14 @@ rate in this model (if one exists) requires a constant
 ratio of {math}`\kap` to {math}`\hLucas`. Thus, {math}`\kap` and {math}`\hLucas` must be growing
 at the same rate in equilibrium.
 
-Further insight can be obtained by defining {math}`\hat{A} = \PtyLev \labor^{1-\kapShare}`
+Further insight can be obtained by defining {math}`\hat{A} = \PtyAgg \labor^{1-\kapShare}`
 and rewriting the per-capita production function as
 
 ```{math}
 :label: eq:CRSprodfunc
 
 \begin{gathered}\begin{aligned}
-  \yRat & =  \hat{\PtyLev} \kRat^{\kapShare} \hLucas^{1-\kapShare}.
+  \yRat & =  \hat{\PtyAgg} \kRat^{\kapShare} \hLucas^{1-\kapShare}.
 \end{aligned}\end{gathered}
 ```
 
@@ -147,15 +147,15 @@ the model becomes
 ```{math}
 :label: eq:ak
 
-\yRat = \hat{\PtyLev} \kappa.
+\yRat = \hat{\PtyAgg} \kappa.
 ```
 
 So if {math}`\labor` is constant and if {math}`\kap` and {math}`\hLucas` are growing at the same rate,
 then the exponent on 'broad capital' is 1, and we are effectively back
-at the usual Rebelo {math}`\PtyLev \Kap` model.
+at the usual Rebelo {math}`\PtyAgg \Kap` model.
 
 The key assumption that permits this to work is the accumulation
-equation for human capital, which is itself like an {math}`\PtyLev \Kap` model, in the
+equation for human capital, which is itself like an {math}`\PtyAgg \Kap` model, in the
 sense that the exponent on human capital in the accumulation equation
 for human capital is one. Human capital can be accumulated without
 bound and without diminishing returns.
@@ -188,7 +188,7 @@ the individual's production function is
 ```{math}
 :label: eq:pcyext
 
-\yRat_i = \PtyLev \kap_{i}^{\kapShare} (\labor _{i}\hLucas_{i})^{1-\kapShare} \bar{\hLucas}^{\psi}
+\yRat_i = \PtyAgg \kap_{i}^{\kapShare} (\labor _{i}\hLucas_{i})^{1-\kapShare} \bar{\hLucas}^{\psi}
 ```
 
 where {math}`\bar{\hLucas}` is average human wealth in the population (and the

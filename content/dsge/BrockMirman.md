@@ -15,14 +15,14 @@ The social planner's goal is to solve the problem:
 \begin{gathered}\begin{aligned}
          & \text{s.t.}
 \\      \Kap_{t+1} & =  \Inc_{t}-\Cons_{t}
-  \\  \Inc_{t+1}   & =  \PtyLev_{t+1} \Kap_{t+1}^{\kapShare}
+  \\  \Inc_{t+1}   & =  \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare}
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\PtyLev_{t}` is the level of productivity in period {math}`t`, which is now allowed to be stochastic (alternative assumptions about the nature of productivity shocks are explored below). Note the key assumption
+where {math}`\PtyAgg_{t}` is the level of productivity in period {math}`t`, which is now allowed to be stochastic (alternative assumptions about the nature of productivity shocks are explored below). Note the key assumption
 that the depreciation rate on capital is 100 percent.
 
-In this model the capital stock is not useful as a state variable: Because capital has a 100 percent depreciation rate, all that matters to the consumer when choosing how much to consume is how much income they have now, and not how that income breaks down into a part due to {math}`\Kap` and a part due to {math}`\PtyLev`.
+In this model the capital stock is not useful as a state variable: Because capital has a 100 percent depreciation rate, all that matters to the consumer when choosing how much to consume is how much income they have now, and not how that income breaks down into a part due to {math}`\Kap` and a part due to {math}`\PtyAgg`.
 
 The first step is to rewrite the problem in Bellman equation form
 
@@ -34,9 +34,9 @@ and take the first order condition:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \uP(\Cons_{t}) & =  \Discount \Ex_{t}\left[\PtyLev_{t+1} \kapShare \Kap_{t+1}^{\kapShare-1} \uP(\Cons_{t+1})\right]  \\
-        \frac{1}{\Cons_{t}} & =  \Discount \Ex_{t}\left[\frac{\PtyLev_{t+1} \kapShare \Kap_{t+1}^{\kapShare-1}}{\Cons_{t+1}}\right]  \\
-        1 & =  \Discount \Ex_{t} \left[\underbrace{\kapShare \PtyLev_{t+1} \Kap_{t+1}^{\kapShare-1}}_{\equiv \Risky_{t+1}}\frac{\Cons_{t}}{\Cons_{t+1}}\right]
+        \uP(\Cons_{t}) & =  \Discount \Ex_{t}\left[\PtyAgg_{t+1} \kapShare \Kap_{t+1}^{\kapShare-1} \uP(\Cons_{t+1})\right]  \\
+        \frac{1}{\Cons_{t}} & =  \Discount \Ex_{t}\left[\frac{\PtyAgg_{t+1} \kapShare \Kap_{t+1}^{\kapShare-1}}{\Cons_{t+1}}\right]  \\
+        1 & =  \Discount \Ex_{t} \left[\underbrace{\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}}_{\equiv \Risky_{t+1}}\frac{\Cons_{t}}{\Cons_{t+1}}\right]
 \end{aligned}\end{gathered}
 ```
 
@@ -51,7 +51,7 @@ The first order condition says
 
 ```{math}
 \begin{gathered}\begin{aligned}
-1  & =  \Discount \Ex_{t} \left[\kapShare \frac{\PtyLev_{t+1} \Kap_{t+1}^{\kapShare}}{\Kap_{t+1}}\frac{\MPC \Inc_{t}}{\MPC \Inc_{t+1}}\right]
+1  & =  \Discount \Ex_{t} \left[\kapShare \frac{\PtyAgg_{t+1} \Kap_{t+1}^{\kapShare}}{\Kap_{t+1}}\frac{\MPC \Inc_{t}}{\MPC \Inc_{t+1}}\right]
 \\  & =  \Discount \Ex_{t} \left[\kapShare \frac{\Inc_{t+1}}{\Kap_{t+1}}\frac{\MPC \Inc_{t}}{\MPC \Inc_{t+1}}\right]
 \\ & =  \Discount \phantom{\Ex_{t}} \left[\kapShare \frac{\Inc_{t}}{\Kap_{t+1}}\right]
 \\ & =  \Discount \phantom{\Ex_{t}} \left[\kapShare \frac{\Inc_{t}}{\Inc_{t}-\Cons_{t}}\right]
@@ -73,7 +73,7 @@ this model says that the dynamics of the capital stock are given by
 
 \begin{gathered}\begin{aligned}
    \Kap_{t+1} & =  (1-\MPC) \Inc_{t}
-\\ & =  \kapShare\Discount \PtyLev_{t}\Kap_{t}^{\kapShare}
+\\ & =  \kapShare\Discount \PtyAgg_{t}\Kap_{t}^{\kapShare}
 \\ \kap_{t+1} & =  \log \kapShare\Discount + \ptyLev_{t} + \kapShare \kap_{t}
 \end{aligned}\end{gathered}
 ```
@@ -154,7 +154,7 @@ are governed by two components: The dynamics of the technology shock, and
 the assumption about the saving/accumulation process.
 
 For further analysis, consider a nonstochastic version of this model,
-with {math}`\PtyLev_{t} = 1 ~ \forall ~ t`. The consumption Euler equation is
+with {math}`\PtyAgg_{t} = 1 ~ \forall ~ t`. The consumption Euler equation is
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -191,19 +191,19 @@ We consider here the last of these, which we will show reduces (in this special 
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  1 & =  \Discount \Ex_{t} \left[\underbrace{\kapShare \PtyLev_{t+1} \Kap_{t+1}^{\kapShare-1}}_{\equiv \Risky_{t+1}}\frac{\Cons_{t}}{\Cons_{t+1}}\right]
-  \\   1 & =  \Discount \Ex_{t} \left[\kapShare \PtyLev_{t+1} \Kap_{t+1}^{\kapShare-1}\frac{\Inc_{t}}{\Inc_{t+1}}\right]
-  \\   1 & =  \Discount \Ex_{t} \left[\kapShare \PtyLev_{t+1} \Kap_{t+1}^{\kapShare-1}\frac{\PtyLev_{t} \Kap_{t}^{\kapShare}}{\PtyLev_{t+1} \Kap_{t+1}^{\kapShare}}\right]
-  \\   1 & =  \Discount \Ex_{t} \left[\kapShare \Kap_{t+1}^{\kapShare-1}\frac{\PtyLev_{t} \Kap_{t}^{\kapShare}}{\Kap_{t+1}^{\kapShare}}\right]
-  \\   1 & =  \Discount \left[\kapShare \Kap_{t+1}^{\kapShare-1}\frac{\PtyLev_{t} \Kap_{t}^{\kapShare}}{\Kap_{t+1}^{\kapShare}}\right]
+  1 & =  \Discount \Ex_{t} \left[\underbrace{\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}}_{\equiv \Risky_{t+1}}\frac{\Cons_{t}}{\Cons_{t+1}}\right]
+  \\   1 & =  \Discount \Ex_{t} \left[\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}\frac{\Inc_{t}}{\Inc_{t+1}}\right]
+  \\   1 & =  \Discount \Ex_{t} \left[\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}\frac{\PtyAgg_{t} \Kap_{t}^{\kapShare}}{\PtyAgg_{t+1} \Kap_{t+1}^{\kapShare}}\right]
+  \\   1 & =  \Discount \Ex_{t} \left[\kapShare \Kap_{t+1}^{\kapShare-1}\frac{\PtyAgg_{t} \Kap_{t}^{\kapShare}}{\Kap_{t+1}^{\kapShare}}\right]
+  \\   1 & =  \Discount \left[\kapShare \Kap_{t+1}^{\kapShare-1}\frac{\PtyAgg_{t} \Kap_{t}^{\kapShare}}{\Kap_{t+1}^{\kapShare}}\right]
 \end{aligned}\end{gathered}
 ```
 
-where the expectations operator disappears because no variables are stochastic (the {math}`\PtyLev_{t+1}` terms in the numerator and denominator cancel, and {math}`\Kap_{t+1}` is directly chosen in {math}`t` so is known). For any given {math}`\PtyLev_{t}`, the steady state where {math}`\Kap_{t+1}=\Kap_{t}=\Target{\Kap}` is then where
+where the expectations operator disappears because no variables are stochastic (the {math}`\PtyAgg_{t+1}` terms in the numerator and denominator cancel, and {math}`\Kap_{t+1}` is directly chosen in {math}`t` so is known). For any given {math}`\PtyAgg_{t}`, the steady state where {math}`\Kap_{t+1}=\Kap_{t}=\Target{\Kap}` is then where
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  1 & =  \Discount \kapShare \PtyLev_{t} \Target{\Kap}_{t}^{\kapShare-1}
+  1 & =  \Discount \kapShare \PtyAgg_{t} \Target{\Kap}_{t}^{\kapShare-1}
 \\ \Target{\kap} & =  \frac{\log \Discount \kapShare + \ptyLev_{t}}{1-\kapShare}
 \end{aligned}\end{gathered}
 ```
