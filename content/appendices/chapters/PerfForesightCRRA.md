@@ -39,14 +39,14 @@ Finally, for completeness: when the RIC fails but the FHWC holds, human wealth i
 (sec:PerfForesightCRRA-MPCRecursion)=
 ## The MPC Recursion
 
-Consumption is proportional to overall wealth {math}`\oLev_{t}`, the sum of human and nonhuman wealth: {math}`\cLevBF_{t} = \MPC_{t}\oLev_{t}`, where overall wealth evolves as {math}`\oLev_{t+1} = (\oLev_{t}-\cLevBF_{t})\Rfree`. Substituting both into the chapter's [Euler equation for consumption](#eq:PFCRRA-cgrow) gives a convenient recursive formula for the inverse of the MPC:
+Consumption is proportional to overall wealth {math}`\oLvl_{t}`, the sum of human and nonhuman wealth: {math}`\cLvl_{t} = \MPC_{t}\oLvl_{t}`, where overall wealth evolves as {math}`\oLvl_{t+1} = (\oLvl_{t}-\cLvl_{t})\Rfree`. Substituting both into the chapter's [Euler equation for consumption](#eq:PFCRRA-cgrow) gives a convenient recursive formula for the inverse of the MPC:
 
 ```{math}
 :label: eq:MPCrecursive
 
 \begin{aligned}
-  \uFunc^{\prime}(\MPC_{t} \oLev_{t}) & = \Rfree \DiscFac \uFunc^{\prime}(\MPC_{t+1}\overbrace{\oLev_{t}(1-\MPC_{t})\Rfree}^{\oLev_{t+1}})
-\\ \MPC_{t} \oLev_{t} & = (\Rfree \DiscFac)^{-1/\CRRA} \MPC_{t+1}\oLev_{t}(1-\MPC_{t}) \Rfree
+  \uFunc^{\prime}(\MPC_{t} \oLvl_{t}) & = \Rfree \DiscFac \uFunc^{\prime}(\MPC_{t+1}\overbrace{\oLvl_{t}(1-\MPC_{t})\Rfree}^{\oLvl_{t+1}})
+\\ \MPC_{t} \oLvl_{t} & = (\Rfree \DiscFac)^{-1/\CRRA} \MPC_{t+1}\oLvl_{t}(1-\MPC_{t}) \Rfree
 \\ \underbrace{\Rfree^{-1} (\Rfree \DiscFac)^{1/\CRRA}}_{\RPFac} \MPC_{t}  & =  \MPC_{t+1}(1-\MPC_{t})
 \\ (\RPFac \MPC_{t})^{-1}  & =  \MPC_{t+1}^{-1}(1-\MPC_{t})^{-1}
 \\ (1-\MPC_{t}) \MPC_{t}^{-1}  & = \RPFac  \MPC_{t+1}^{-1}
@@ -69,16 +69,16 @@ which implies that if the MPC in the last period {math}`T` is {math}`\MPC_{T}=1`
 Given the result from the chapter's [Euler equation for consumption](#eq:PFCRRA-cgrow) that
 
 ```{math}
-\cLevBF_{t+n} = \APFac^{n} \cLevBF_{t}
+\cLvl_{t+n} = \APFac^{n} \cLvl_{t}
 ```
 
 we can rewrite the value function as
 
 ```{math}
 \begin{aligned}
-  \vFunc_{t} & =  \uFunc(\cLevBF_{t}) + \DiscFac \uFunc(\cLevBF_{t}\APFac) + \DiscFac^{2} \uFunc(\cLevBF_{t} \APFac^{2}) + \dots + \DiscFac^{T-t} \uFunc(\cLevBF_{t} \APFac^{T-t})
-  \\ & =  (1-\CRRA)^{-1}\cLevBF_{t}^{1-\CRRA}\left(1+\DiscFac \APFac^{1-\CRRA} + (\DiscFac \APFac^{1-\CRRA})^{2} + \dots + (\DiscFac \APFac^{1-\CRRA})^{T-t} \right)
-\\ & =  \uFunc(\cLevBF_{t})\left(1+\DiscFac \APFac^{1-\CRRA} + (\DiscFac \APFac^{1-\CRRA})^{2} + \dots + (\DiscFac \APFac^{1-\CRRA})^{T-t} \right)
+  \vLvl_{t} & =  \uFunc(\cLvl_{t}) + \DiscFac \uFunc(\cLvl_{t}\APFac) + \DiscFac^{2} \uFunc(\cLvl_{t} \APFac^{2}) + \dots + \DiscFac^{T-t} \uFunc(\cLvl_{t} \APFac^{T-t})
+  \\ & =  (1-\CRRA)^{-1}\cLvl_{t}^{1-\CRRA}\left(1+\DiscFac \APFac^{1-\CRRA} + (\DiscFac \APFac^{1-\CRRA})^{2} + \dots + (\DiscFac \APFac^{1-\CRRA})^{T-t} \right)
+\\ & =  \uFunc(\cLvl_{t})\left(1+\DiscFac \APFac^{1-\CRRA} + (\DiscFac \APFac^{1-\CRRA})^{2} + \dots + (\DiscFac \APFac^{1-\CRRA})^{T-t} \right)
 \end{aligned}
 ```
 
@@ -99,18 +99,18 @@ but since {math}`\DiscFac \APFac^{1-\CRRA} = \RPFac`, this reduces to
 ```{math}
 :label: eq:vFuncAnalytical
 
-\vFunc_{t} = \uFunc(\cLevBF_{t})\overbrace{(1+\RPFac+\RPFac^{2}+...+\RPFac^{T-t})}^{= \PDV_{t}^{T}(\cLevBF)/\cLevBF_{t}}
+\vLvl_{t} = \uFunc(\cLvl_{t})\overbrace{(1+\RPFac+\RPFac^{2}+...+\RPFac^{T-t})}^{= \PDV_{t}^{T}(\cLvl)/\cLvl_{t}}
 ```
 
-where {math}`\PDV_{t}^{T}(\cLevBF)/\cLevBF_{t}`, the chapter's [present discounted value of consumption](#eq:cfin) divided by today's consumption, is the discounted value of future consumption growth (that is, the discounted value of the ratio of future consumption to today's consumption).
+where {math}`\PDV_{t}^{T}(\cLvl)/\cLvl_{t}`, the chapter's [present discounted value of consumption](#eq:cfin) divided by today's consumption, is the discounted value of future consumption growth (that is, the discounted value of the ratio of future consumption to today's consumption).
 
-This sum is the sum in [the MPC recursion](#eq:MPCrecursiveSum), so {math}`\PDV_{t}^{T}(\cLevBF)/\cLevBF_{t} = \MPC_{t}^{-1}`, and we can write value as
+This sum is the sum in [the MPC recursion](#eq:MPCrecursiveSum), so {math}`\PDV_{t}^{T}(\cLvl)/\cLvl_{t} = \MPC_{t}^{-1}`, and we can write value as
 
 ```{math}
 \begin{aligned}
-  \vFunc_{t} & =  \uFunc(\cLevBF_{t})\MPC^{-1}_{t}
-  \\ & =  \left(\frac{(\oLev_{t}\MPC_{t})^{1-\CRRA}}{1-\CRRA}\right)\MPC_{t}^{-1}
-\\ & =  \uFunc(\oLev_{t})\MPC_{t}^{-\CRRA}
+  \vLvl_{t} & =  \uFunc(\cLvl_{t})\MPC^{-1}_{t}
+  \\ & =  \left(\frac{(\oLvl_{t}\MPC_{t})^{1-\CRRA}}{1-\CRRA}\right)\MPC_{t}^{-1}
+\\ & =  \uFunc(\oLvl_{t})\MPC_{t}^{-\CRRA}
 \end{aligned}
 ```
 
