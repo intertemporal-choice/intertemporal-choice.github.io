@@ -15,32 +15,32 @@ Consider a consumer subject to the dynamic budget constraint
 \bLev_{t+1} = (\bLev_{t}+\yLev_{t}-\cLev_{t})\Rfree
 ```
 
-where {math}`\bLev_{t}` is beginning-of-period bank balances, {math}`\yLev_{t}` is current labor income, and {math}`\Rfree=(1+\rfree)` is the constant interest factor. Actual labor income {math}`\yLev` is permanent labor income {math}`\pLevBF` modified by a transitory shock factor {math}`\tShkEmp`:
+where {math}`\bLev_{t}` is beginning-of-period bank balances, {math}`\yLev_{t}` is current labor income, and {math}`\Rfree=(1+\rfree)` is the constant interest factor. Actual labor income {math}`\yLev` is permanent labor income {math}`\pLvl` modified by a transitory shock factor {math}`\tShkEmp`:
 
 ```{math}
-\yLev_{t+1} = \pLevBF_{t+1} \tShkEmp_{t+1}
+\yLev_{t+1} = \pLvl_{t+1} \tShkEmp_{t+1}
 ```
 
 where {math}`\Ex_{t}[\tShkEmp_{t+n}]=1~\forall~n>0`. Permanent labor income grows by a predictable factor {math}`\WGro` from period to period, subject to a mean-one permanent shock {math}`\psi`:
 
 ```{math}
-\pLevBF_{t+1} = \WGro \pLevBF_{t}\psi_{t+1},
+\pLvl_{t+1} = \WGro \pLvl_{t}\psi_{t+1},
 ```
 
 so that the expected present discounted value of permanent labor income ("human wealth") for an infinite-horizon consumer is
 
 ```{math}
-\hLev_{t} = \left(\frac{\pLevBF_{t}}{1-\WGro/\Rfree}\right).
+\hLev_{t} = \left(\frac{\pLvl_{t}}{1-\WGro/\Rfree}\right).
 ```
 
-We carry permanent shocks throughout what follows. The simpler model without them is the restriction {math}`\psi_{t+1}=1~\forall~t`, under which permanent income grows deterministically as {math}`\pLevBF_{t+1} = \WGro \pLevBF_{t}`; because {math}`\hat{\Psi}_{t+1} \equiv \Psi_{t+1}-1` is then zero, every {math}`\hat{\Psi}` term drops out of the expressions derived below. Both cases are therefore covered by the general expressions.
+We carry permanent shocks throughout what follows. The simpler model without them is the restriction {math}`\psi_{t+1}=1~\forall~t`, under which permanent income grows deterministically as {math}`\pLvl_{t+1} = \WGro \pLvl_{t}`; because {math}`\hat{\Psi}_{t+1} \equiv \Psi_{t+1}-1` is then zero, every {math}`\hat{\Psi}` term drops out of the expressions derived below. Both cases are therefore covered by the general expressions.
 
 We will assume that the consumer behaves according to the consumption rule
 
 ```{math}
 :label: eq:DeatonPIH
 
-\cLev_{t} = \underbrace{(\bLev_{t}+(\tShkEmp_{t}-1)\pLevBF_{t}+\hLev_{t})}_{\equiv \wAllLev_{t}}\underbrace{(\rfree/\Rfree)}_{\equiv \MPC},
+\cLev_{t} = \underbrace{(\bLev_{t}+(\tShkEmp_{t}-1)\pLvl_{t}+\hLev_{t})}_{\equiv \wAllLev_{t}}\underbrace{(\rfree/\Rfree)}_{\equiv \MPC},
 ```
 
 where {math}`\MPC` is the "marginal propensity to consume" out of total wealth {math}`\wAllLev`.
@@ -139,8 +139,10 @@ Now note that
 ```{math}
 :label: eq:DCtp1
 
-\CLev_{t+1} = \Pi \CLev_{t+1|\tau_{t+1}=t+1} + (1-\Pi) \overbrace{\CLev_{t+1|\tau_{t+1}<t+1}}^{=\CLev_{t}}, \quad
-\Delta \CLev_{t+1} = \Pi (\CLev_{t+1|\tau_{t+1}=t+1}-\CLev_{t|\tau_{t}=t}) + (1-\Pi) \Delta \CLev_{t}
+\begin{aligned}
+\CLev_{t+1} & = \Pi \CLev_{t+1|\tau_{t+1}=t+1} + (1-\Pi) \overbrace{\CLev_{t+1|\tau_{t+1}<t+1}}^{=\CLev_{t}},
+\\ \Delta \CLev_{t+1} & = \Pi (\CLev_{t+1|\tau_{t+1}=t+1}-\CLev_{t|\tau_{t}=t}) + (1-\Pi) \Delta \CLev_{t}
+\end{aligned}
 ```
 
 and
@@ -148,9 +150,11 @@ and
 ```{math}
 :label: eq:DCvsCmC
 
-\CLev_{t} = \Pi \CLev_{t|\tau_{t}=t} + (1-\Pi) \CLev_{t-1}, \quad
-\Delta \CLev_{t} = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t-1}) = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t}+\CLev_{t}-\CLev_{t-1}), \quad
-(1-\Pi) \Delta \CLev_{t} = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t})
+\begin{aligned}
+\CLev_{t} & = \Pi \CLev_{t|\tau_{t}=t} + (1-\Pi) \CLev_{t-1},
+\\ \Delta \CLev_{t} & = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t-1}) = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t}+\CLev_{t}-\CLev_{t-1}),
+\\ (1-\Pi) \Delta \CLev_{t} & = \Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t})
+\end{aligned}
 ```
 
 while, defining {math}`\hat{\TShkEmp}=\TShkEmp-1` and {math}`\hat{\Psi}=\Psi-1`,

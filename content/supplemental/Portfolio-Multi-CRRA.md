@@ -51,8 +51,11 @@ where the first term is a negative constant under the usual assumption that rela
 Our foregoing assumptions imply that
 
 ```{math}
+\begin{aligned}
 (1-\CRRA) (\riskyshare_1 \risky_{1,t+1}+\riskyshare_2 \risky_{2,t+1})
-   \sim \mathcal{N}( (1-\CRRA)(\riskyshare_1(\risky_1-\sigma_1^2/2)+\riskyshare_2 (\risky_2-\sigma_2^2/2)),      (1-\CRRA)^2 (   \riskyshare_1^2\sigma_1^2+\riskyshare_2^2\sigma_2^2+2\riskyshare_1\riskyshare_2\sigma_{12}))
+   \sim \mathcal{N}\big( & (1-\CRRA)(\riskyshare_1(\risky_1-\sigma_1^2/2)+\riskyshare_2 (\risky_2-\sigma_2^2/2)),
+\\ & (1-\CRRA)^2 (\riskyshare_1^2\sigma_1^2+\riskyshare_2^2\sigma_2^2+2\riskyshare_1\riskyshare_2\sigma_{12})\big)
+\end{aligned}
 ```
 
 (using [NormTimes](#fact:normtimes) and [SumJointNormsIsNorm](#fact:sumjointnormsisnorm)). With a couple of extra lines of derivation we can show that the log of the expectation in {eq}`eq:PortMulti-exputil` is
@@ -60,14 +63,20 @@ Our foregoing assumptions imply that
 ```{math}
 :label: eq:PortMulti-Ex
 
-  \log \Ex_{t}\left[e^{(\risky_{1,t+1}+\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1}))  (1-\CRRA)}\right]  =  {(1-\CRRA)(\riskyshare_1 (\risky_1-\sigma_1^2/2)+\riskyshare_2 (\risky_2-\sigma_2^2/2)) + (1-\CRRA)^2 (\riskyshare_1^2\sigma_1^2+\riskyshare_2^2\sigma_2^2+2\riskyshare_1\riskyshare_2\sigma_{12})/2}
+\begin{aligned}
+  \log \Ex_{t}\left[e^{(\risky_{1,t+1}+\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1}))  (1-\CRRA)}\right]  & =  (1-\CRRA)(\riskyshare_1 (\risky_1-\sigma_1^2/2)+\riskyshare_2 (\risky_2-\sigma_2^2/2))
+\\ & \quad + (1-\CRRA)^2 (\riskyshare_1^2\sigma_1^2+\riskyshare_2^2\sigma_2^2+2\riskyshare_1\riskyshare_2\sigma_{12})/2
+\end{aligned}
 ```
 
 Substituting from {eq}`eq:PortMulti-Ex` for the log of the expectation in {eq}`eq:PortMulti-exputil`, the log of the "portfolio return utility factor" in {eq}`eq:PortMulti-exputil` is
 
 ```{math}
-  (1-\CRRA)\riskyshare_2(1-\riskyshare_2)\eta/2+(1-\CRRA) (\risky_1-\sigma_1^2/2+\riskyshare_2(\risky_2-\risky_1+(\sigma_1^2-\sigma_2^2)/2))+(\CRRA-1)^2 (\sigma_1^2+\riskyshare_2^2 \eta+2\riskyshare_2(\sigma_{12}-\sigma_1^2))/2
-.
+\begin{aligned}
+  & (1-\CRRA)\riskyshare_2(1-\riskyshare_2)\eta/2
+\\ & + (1-\CRRA) (\risky_1-\sigma_1^2/2+\riskyshare_2(\risky_2-\risky_1+(\sigma_1^2-\sigma_2^2)/2))
+\\ & + (\CRRA-1)^2 (\sigma_1^2+\riskyshare_2^2 \eta+2\riskyshare_2(\sigma_{12}-\sigma_1^2))/2 .
+\end{aligned}
 ```
 
 The {math}`\riskyshare` that minimizes this log will also minimize the level; the FOC for minimizing this expression is

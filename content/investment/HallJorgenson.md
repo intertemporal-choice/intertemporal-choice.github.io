@@ -63,22 +63,22 @@ Now to simplify our lives we will assume constant capital goods prices, {math}`\
 (HallJorgensonTaxes)=
 ## Taxes
 
-Now let's introduce taxes. Let {math}`\taxCorp` be the corporate tax rate, and {math}`\itc` the rate of the investment tax credit (ITC), which returns to the firm the fraction {math}`\itc` of what it spends on new capital. In the United States, the federal corporate tax rate has been 21 percent since the Tax Cuts and Jobs Act of 2017 took effect in 2018; it was 35 percent from 1993, 34 percent from 1988, and 46 percent from 1979 until the Tax Reform Act of 1986. A general investment tax credit was introduced at 7 percent in 1962, suspended in 1966-67 and repealed in 1969, restored in 1971, raised to 10 percent in 1975, and repealed for good by the Tax Reform Act of 1986.
+Now let's introduce taxes. Let {math}`\TaxRte` be the corporate tax rate, and {math}`\itc` the rate of the investment tax credit (ITC), which returns to the firm the fraction {math}`\itc` of what it spends on new capital. In the United States, the federal corporate tax rate has been 21 percent since the Tax Cuts and Jobs Act of 2017 took effect in 2018; it was 35 percent from 1993, 34 percent from 1988, and 46 percent from 1979 until the Tax Reform Act of 1986. A general investment tax credit was introduced at 7 percent in 1962, suspended in 1966-67 and repealed in 1969, restored in 1971, raised to 10 percent in 1975, and repealed for good by the Tax Reform Act of 1986.
 
-The tax code also lets the firm deduct the depreciation of its capital from its taxable income, on a schedule the code sets, and these deductions are the heart of the analysis of {cite:t}`hall&jorgenson:i`. Let {math}`z` be the present value of the deductions per dollar of investment. Each dollar of investment then reduces the firm's taxes by {math}`\taxCorp z` in present value, and the net, discounted, after-tax price of capital to the firm is
+The tax code also lets the firm deduct the depreciation of its capital from its taxable income, on a schedule the code sets, and these deductions are the heart of the analysis of {cite:t}`hall&jorgenson:i`. Let {math}`z` be the present value of the deductions per dollar of investment. Each dollar of investment then reduces the firm's taxes by {math}`\TaxRte z` in present value, and the net, discounted, after-tax price of capital to the firm is
 
 :::{margin}
 Assume that if the firm sells the capital, it must repay the ITC on a pro-rata basis; this prevents tax arbitrage opportunities.
 :::
 
 ```{math}
-\hat{\Price}_{t} = (1-\itc-\taxCorp z) \Price_{t}.
+\hat{\Price}_{t} = (1-\itc-\TaxRte z) \Price_{t}.
 ```
 
-Now let's rewrite the arbitrage equation {eq}`eq:ctarb` taking account of taxes. The rental income {math}`\kapRent_{t}` must be multiplied by {math}`(1-\taxCorp)` because the capital-rental business must pay taxes too:
+Now let's rewrite the arbitrage equation {eq}`eq:ctarb` taking account of taxes. The rental income {math}`\kapRent_{t}` must be multiplied by {math}`(1-\TaxRte)` because the capital-rental business must pay taxes too:
 
 ```{math}
-(\rfree+\depr) \hat{\Price}_{t} = (1-\taxCorp) \kapRent_{t}+\dot{\hat{\Price}}_{t}.
+(\rfree+\depr) \hat{\Price}_{t} = (1-\TaxRte) \kapRent_{t}+\dot{\hat{\Price}}_{t}.
 ```
 
 If we simplify again by assuming that {math}`\dot{\hat{\Price}}_{t}=0`, we have the Hall-Jorgenson cost of capital,
@@ -86,10 +86,10 @@ If we simplify again by assuming that {math}`\dot{\hat{\Price}}_{t}=0`, we have 
 ```{math}
 :label: eq:hjUserCost
 
-\kapRent_{t} = (\rfree+\depr)\Price_{t}\frac{1-\itc-\taxCorp z}{1-\taxCorp}.
+\kapRent_{t} = (\rfree+\depr)\Price_{t}\frac{1-\itc-\TaxRte z}{1-\TaxRte}.
 ```
 
-(If the price of capital is changing, the same steps give {math}`\kapRent_{t} = (\rfree+\depr-\dot{\Price}_{t}/\Price_{t})\Price_{t}(1-\itc-\taxCorp z)/(1-\taxCorp)`.)
+(If the price of capital is changing, the same steps give {math}`\kapRent_{t} = (\rfree+\depr-\dot{\Price}_{t}/\Price_{t})\Price_{t}(1-\itc-\TaxRte z)/(1-\TaxRte)`.)
 
 Two special cases show why the deductions matter so much. If investment can be deducted in full at once ("expensing"), {math}`z=1`, and with no ITC
 
@@ -97,15 +97,15 @@ Two special cases show why the deductions matter so much. If investment can be d
 \kapRent_{t} = (\rfree+\depr)\Price_{t},
 ```
 
-so the corporate tax has no effect on the cost of capital, and so none on the capital stock. The government takes the share {math}`\taxCorp` of the returns, but it also pays the same share of the cost; this is the neutrality of a tax on cash flow {cite:p}`brownCashFlowTax`. If instead the deductions match the true economic depreciation of the capital, a deduction of {math}`\depr` per period on capital that is itself depreciating at the rate {math}`\depr`, then {math}`z = \depr/(\rfree+\depr)` and
+so the corporate tax has no effect on the cost of capital, and so none on the capital stock. The government takes the share {math}`\TaxRte` of the returns, but it also pays the same share of the cost; this is the neutrality of a tax on cash flow {cite:p}`brownCashFlowTax`. If instead the deductions match the true economic depreciation of the capital, a deduction of {math}`\depr` per period on capital that is itself depreciating at the rate {math}`\depr`, then {math}`z = \depr/(\rfree+\depr)` and
 
 ```{math}
-\kapRent_{t} = \left(\frac{\rfree}{1-\taxCorp}+\depr\right)\Price_{t},
+\kapRent_{t} = \left(\frac{\rfree}{1-\TaxRte}+\depr\right)\Price_{t},
 ```
 
-so the tax falls in full on the return to capital, which must be {math}`\rfree/(1-\taxCorp)` before tax to pay {math}`\rfree` after it. Actual tax codes lie in between. No general investment tax credit has been enacted since the repeal of 1986, so the credit itself has not been a business-cycle tool for decades. Its place has been taken by "bonus depreciation," an immediate deduction of a fraction {math}`b` of the cost of new equipment, the rest being depreciated on the usual schedule. Financially that is an investment tax credit in all but name: it raises {math}`z` by {math}`b(1-z_{0})`, where {math}`z_{0}` is the present value of the deductions the firm would otherwise have taken, and the next paragraph shows that this is a credit at the rate {math}`\taxCorp b(1-z_{0})`. It was enacted as stimulus after the 2001 recession (30 percent in 2002, 50 percent in 2003) and in the Great Recession (50 percent from 2008, 100 percent in 2010-2011), and then made a fixture: 100 percent from 2017 under the Tax Cuts and Jobs Act, falling by 20 percentage points a year after 2022, and 100 percent again, permanently, for property acquired after 19 January 2025 (Public Law 119-21). {cite:t}`hsITC` measure the response to the first episode. A temporary subsidy barely changes the value of a unit of long-lived capital, so the quantity of investment has to do the adjusting, and it did: they estimate an elasticity of 6 to 14 with respect to the tax-adjusted price of capital. {cite:t}`hmsBonus` find that about half of the equipment bought was imported, so the stimulus to domestic production was smaller than the response of investment.
+so the tax falls in full on the return to capital, which must be {math}`\rfree/(1-\TaxRte)` before tax to pay {math}`\rfree` after it. Actual tax codes lie in between. No general investment tax credit has been enacted since the repeal of 1986, so the credit itself has not been a business-cycle tool for decades. Its place has been taken by "bonus depreciation," an immediate deduction of a fraction {math}`b` of the cost of new equipment, the rest being depreciated on the usual schedule. Financially that is an investment tax credit in all but name: it raises {math}`z` by {math}`b(1-z_{0})`, where {math}`z_{0}` is the present value of the deductions the firm would otherwise have taken, and the next paragraph shows that this is a credit at the rate {math}`\TaxRte b(1-z_{0})`. It was enacted as stimulus after the 2001 recession (30 percent in 2002, 50 percent in 2003) and in the Great Recession (50 percent from 2008, 100 percent in 2010-2011), and then made a fixture: 100 percent from 2017 under the Tax Cuts and Jobs Act, falling by 20 percentage points a year after 2022, and 100 percent again, permanently, for property acquired after 19 January 2025 (Public Law 119-21). {cite:t}`hsITC` measure the response to the first episode. A temporary subsidy barely changes the value of a unit of long-lived capital, so the quantity of investment has to do the adjusting, and it did: they estimate an elasticity of 6 to 14 with respect to the tax-adjusted price of capital. {cite:t}`hmsBonus` find that about half of the equipment bought was imported, so the stimulus to domestic production was smaller than the response of investment.
 
-For the [{math}`\q` model](#sec:qModel), the point is that deductions worth {math}`z` per dollar of investment work exactly like an investment tax credit at the rate {math}`\taxCorp z`, since both lower the after-tax price of capital by the same amount. So, for a given tax rate, a model with an ITC alone covers tax depreciation too.
+For the [{math}`\q` model](#sec:qModel), the point is that deductions worth {math}`z` per dollar of investment work exactly like an investment tax credit at the rate {math}`\TaxRte z`, since both lower the after-tax price of capital by the same amount. So, for a given tax rate, a model with an ITC alone covers tax depreciation too.
 
 Much of what is known about how strongly investment responds to the cost of capital comes from changes in taxes. {cite:t}`chh:reconsider` use tax reforms as natural experiments, and {cite:t}`hsITC` and {cite:t}`zwickMahonBonus` find large responses to bonus depreciation, especially in the timing of investment and among small firms; {cite:t}`czzTCJA` review the effects of the 2017 tax cuts. The neoclassical model with a Cobb-Douglas production function implies that the capital stock has an elasticity of {math}`-1` with respect to the cost of capital, while {cite:t}`cfmUserCost` estimate about {math}`-0.25` in firm-level data.
 
