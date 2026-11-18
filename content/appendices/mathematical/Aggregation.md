@@ -112,7 +112,11 @@ mass is constant at
 
 ### Population Growth
 
-Now suppose that the population in the discrete-time model is growing by a factor {math}`\PopGro=(1+\popGro)` from period to period; if the number of newborns in period 0 was 1, then the number of newborns in period {math}`t` is given by
+Now suppose that the population in the discrete-time model is growing by a factor {math}`\PopGro \approx 1+\popGro` from period to period; if the number of newborns in period 0 was 1, then the number of newborns in period {math}`t` is given by
+
+:::{margin}
+The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\logOp` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`. In discrete time, where the population grows by the factor {math}`\PopnGroFac` a period, {math}`\PopnGroRte` stands for the net rate {math}`\PopnGroFac-1`, which it approximates when growth is slow.
+:::
 
 ```{math}
 \begin{gathered}\begin{aligned}

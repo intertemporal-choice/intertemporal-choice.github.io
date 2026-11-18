@@ -39,8 +39,8 @@
 % Levels are \boldsymbol{x}: bold italic in LaTeX and KaTeX alike (owner ruling 2026-11-15;
 % was \boldsymbol{\mathit{x}}, which KaTeX prints unbolded). Normalized: plain italic. Functions: upright.
 % Bold marks a level that can be or will be divided by a normalizer; a normalizer itself is never bold:
-% labor-augmenting productivity Z, in k = K/(ZL), is one (owner ruling 2026-11-16). \ZLvl is a generic level Z,
-% not productivity. Labor \LLvl, population \NLvl and permanent income \pLvl stay bold.
+% labor-augmenting productivity Z, in k = K/(ZL), is one (owner ruling 2026-11-16). \ZLvl is a generic level Z;
+% productivity Z is \PtyLab. Labor \LLvl, population \NLvl and permanent income \pLvl stay bold.
 % Lowercase a-z
 \ARKcommand{\aLvl}{\boldsymbol{a}}
 \ARKcommand{\aNrm}{a}
@@ -201,9 +201,10 @@
 \ARKcommand{\ZNrm}{Z}
 \ARKcommand{\ZFunc}{\mathrm{Z}}
 
-% Logs (owner ruling 2026-11-15): \l<macro> is the log of <macro>, printed "log c", "log \cLvl";
-% no lower case for logs. The print is set once, in \logOp; switching to ln is that one line.
-\ARKcommand{\logOp}{\log}
+% Logs (owner rulings 2026-11-15 and 2026-11-17): \l<macro> is the natural log of <macro>, printed with ell:
+% \lcNrm = \ell c, \lcLvl = \ell\cLvl; no lower case for logs. The print is set once, in \logOp (was \log, "log c",
+% until v11.0.0, when labor moved from \ell to l).
+\ARKcommand{\logOp}{\ell}
 \ARKcommand{\laNrm}{\logOp\aNrm}
 \ARKcommand{\laLvl}{\logOp\aLvl}
 \ARKcommand{\lbNrm}{\logOp\bNrm}
@@ -466,7 +467,8 @@
 \ARKcommand{\RfreeEff}{\mathring{\Rfree}} % Blanchard-adjusted return R/\LivPrb: the survival ring (owner ruling 2026-10-22); R-bar is \RBoro
 
 \ARKcommand{\PopnGroFac}{\varXi}
-\ARKcommand{\PopnGroRte}{n}   % Solow's letter (owner ruling 2026-11-02); was \ln\PopnGroFac, and before that xi, the transitory shock
+\ARKcommand{\PopnGroRte}{\ell\varXi}   % the log of the factor, ell-Xi (\logOp), explained where a document first introduces it
+                                         % (owner ruling 2026-11-17); was n (2026-11-02), \ln\PopnGroFac, and before that xi
 \ARKcommand{\PopnLvl}{\NLvl}   % population, a level: bold italic N (owner ruling 2026-11-15: a quantity is italic; was \pmb{\mathrm{N}})
   
 \ARKcommand{\LivPrb}{\Alive}
@@ -567,12 +569,12 @@
 % \zeta is the leisure share (\leiShare).
 
 \ARKcommand{\Labor}{\LLvl}   % aggregate labor, a level: bold italic L (owner ruling 2026-11-15: a quantity is italic; was \mathrm{L})
-\ARKcommand{\labor}{\ell}
-\ARKcommand{\leisure}{z}       % time not worked, z = 1 - \ell with a unit endowment (owner ruling 2026-11-03); the share is \leiShare
+\ARKcommand{\labor}{l}   % labor: italic l (owner ruling 2026-11-17; was \ell, which is now the natural log, \logOp)
+\ARKcommand{\leisure}{z}       % time not worked, z = 1 - l with a unit endowment (owner ruling 2026-11-03); the share is \leiShare
 \ARKcommand{\itcRte}{\chi}     % investment tax credit rate: chi, the Greek C, for credit (owner ruling 2026-11-03); write 1-\chi out
 \ARKcommand{\savRte}{\mathrm{sav}}  % saving rate, a word (owner ruling 2026-11-03); \varsigma is \riskyshare
-\ARKcommand{\netWorth}{s}  % net worth (savings), assets minus debt (owner ruling 2026-11-17)
-\ARKcommand{\NetWorth}{S}  % aggregate net worth (owner ruling 2026-11-17)
+\ARKcommand{\netWorth}{\mathsf{n}}  % net worth, assets minus debt: sans-serif n (owner ruling 2026-11-17 16:43; was s)
+\ARKcommand{\NetWorth}{\mathsf{N}}  % aggregate net worth: sans-serif N (owner ruling 2026-11-17 16:43; was S)
 
 \ARKcommand{\EEndMap}{{\mathsf{E}}}
 
@@ -649,11 +651,18 @@
 % Productivity growth, which is also aggregate permanent growth (\PermGroFacAgg): calligraphic G, rate italic g (owner
 % rulings 2026-11-02; calligraphic has no lowercase, so the rate is plain g). It was sans-serif from 2026-10-22, now
 % permanent-income growth's; before that script G, a script g that no font has, and Roman G and g.
-\ARKcommand{\PtyGroFac}{\mathrm{G}}   % growth of labor-augmenting productivity Z, itself a normalizer and so never bold (owner ruling 2026-11-16);
+\ARKcommand{\PtyGroFac}{\mathrm{G}}   % growth of labor-augmenting productivity Z (\PtyLab), itself a normalizer and so never bold (owner ruling 2026-11-16);
                                       % wage growth's letters, roman G and g (owner ruling 2026-11-15; was \mathcal{G} and italic g)
 \ARKcommand{\PtyGroRte}{\mathrm{g}}
 \ARKcommand{\ptyGroFac}{\PtyGroFac}
 \ARKcommand{\ptyGroRte}{\PtyGroRte}
+% Productivity (owner rulings 2026-11-17): the Z that multiplies labor, an italic number (rule C) and plain (a
+% normalizer), and the sans-serif A that multiplies total output. With Cobb-Douglas, \PtyAgg = \PtyLab^{1-\alpha};
+% Z grows by \PtyGroFac. \PtyLev (italic A, v11.1.0) was retired in v12.0.0 in favor of \PtyAgg.
+\ARKcommand{\PtyLab}{Z}     % labor-augmenting (Harrod-neutral) productivity: Y = F(K, Z L)
+\ARKcommand{\lPtyLab}{\logOp\PtyLab}   % its log, \ell Z
+\ARKcommand{\PtyAgg}{\mathsf{A}}   % productivity multiplying total output (Hicks-neutral): Y = \PtyAgg F(K, L)
+\ARKcommand{\lPtyAgg}{\logOp\PtyAgg}   % its log, \ell 𝖠 (no lower case for logs: not a)
 
 % agg vs ind?  upper vs lower conflicts with upper vs lower for factors and rates
 
