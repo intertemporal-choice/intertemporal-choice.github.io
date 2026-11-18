@@ -3,6 +3,52 @@
 Versioning: SemVer on `notation.yml`'s `meta.version`. MAJOR = change to an
 existing rendering or meaning; MINOR = additions; PATCH = gloss/typo fixes.
 
+## v11.2.0 — 2026-11-17
+
+MINOR: additions only; nothing that already exists prints differently.
+- **`\PtyAgg` = 𝖠 (sans-serif A),** productivity that multiplies total output, Y = 𝖠 F(K, L), with its log
+  `\lPtyAgg` = ℓ𝖠. The owner, in the book session (as relayed by it), 20:16:27 EST: "OK, I want two alternatives:
+  \PtyLab should be the Z that multiplies labor, and \PtyAgg should be the sans-serif A that multiplies total
+  output." It names the same object as v11.1.0's `\PtyLev` (italic A), which is unchanged until the owner says
+  whether it prints 𝖠 or goes.
+- **Letter-locality** (terminology.yml): the accent-locality rule now holds for letters. A letter may name more than
+  one object, each in a row scoped to the documents that use it, provided no document uses two; where one must, the
+  row without a scope keeps the letter; π, r and R keep one meaning everywhere. The owner, 20:17:39 EST: "yes,
+  extend the rule".
+- **The course's local definitions** (terminology.yml) either adopt something from the registry or are proposed as
+  new rows. The owner, 20:03:23 EST.
+- **The registry always wins** (terminology.yml): where a document prints an object differently from the registry,
+  the document takes the registry's print; a different print comes only from re-ruling the row for every document.
+  The owner, 20:22:56 EST: "registry always wins".
+
+## v11.1.0 — 2026-11-17
+
+**Productivity, globalized:** two new rows, so every document defines the productivity parameters the same way. The
+owner, in this session: 18:40:56 EST, "I'm particularly keen on globalizing the definitions of these productivity
+technical change parameters."; 18:44:25 EST, "italic Z; start with the productivity rows". MINOR: additions only.
+- **`\PtyLab` = Z,** labor-augmenting (Harrod-neutral) productivity, Y = F(K, Z L): italic by rule C, plain because it
+  is a normalizer (rule B). It grows by `\PtyGroFac` (roman G). The course has printed it upright, through its own
+  definition; its Z turns italic when it drops that definition.
+- **`\PtyLev` = A,** total-factor (Hicks-neutral) productivity, Y = A F(K, L); with Cobb-Douglas, A = Z^(1−α).
+- **Their logs,** `\lPtyLab` = ℓZ and `\lPtyLev` = ℓA, in `econark-shortcuts.sty`. The course's lower-case `\ptyLev` =
+  a, where it means log A, gives way to `\lPtyLev` (no lower case for logs, 2026-11-15).
+- Rule B's normalizer clause names `\PtyLab` instead of describing the course's upright Z.
+
+## v11.0.0 — 2026-11-17
+
+The owner's rulings of 2026-11-17 in this session, after a request relayed from the session for the course's
+problem-set questions (15:55:31 EST) to free n for net worth. Adopted here at 17:02:11 EST ("merge it now"). MAJOR: five renderings change.
+- **Labor is italic l:** `\labor` = l (was ℓ). 16:53:08 EST: "let's change labor to use the regular (computer modern)
+  l.  Then we can use \ell for the natural log". TractableBufferStock (ten uses) and NARK's table print l; the leisure
+  row's z = 1 − l follows.
+- **ℓ is the natural log:** `\logOp` = ℓ (was log), so the 104 log macros print ℓc, ℓ𝒄, ℓ𝑲 (were log c, log 𝒄).
+- **The population growth rate is ℓ𝛯,** the log of the factor 𝛯 (was n). 16:38:44 EST: "I want to use \varXi instead
+  of \Xi for the growth factor for the population, and '\ell\varXi' for the growth rate (with an explanation for the
+  notation when it is first introduced)." The factor has printed 𝛯 since v10.0.0. ξ is untouched.
+- **Net worth is sans-serif:** `\netWorth` = 𝗇 and `\NetWorth` = 𝖭 (were s and S). 16:43:09 EST: "Net worth is the
+  sans-serif upper and lower case n.  You should NOT attempt to replace all the counting n's, just leave them alone."
+  Counting indices stay italic n, raw.
+
 ## v10.3.0 — 2026-11-17
 
 **Net worth takes its own macros: `\netWorth` = s and `\NetWorth` = S.** v10.1.0's savings row wrote net worth with

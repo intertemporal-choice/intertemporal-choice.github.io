@@ -11,6 +11,10 @@ Graduate textbook treatments are in {cite:t}`blanchard&fischer:text`, chapter 2,
 
 The economy has a perfectly competitive production sector that uses a constant-returns-to-scale Cobb-Douglas production function
 
+:::{margin}
+States and controls are functions of time; time subscripts appear only where clarity needs them.
+:::
+
 ```{math}
 \begin{gathered}\begin{aligned}
                    \YLvl & =  \FFunc(\KLvl,\LLvl) = \KLvl^{\kapShare}(\PtyLab \LLvl)^{1-\kapShare}
@@ -32,7 +36,7 @@ An important insight here is that all of output is absorbed by payments to labor
 Labor hours (the same as population) increase exogenously at a constant rate
 
 :::{margin}
-States and controls are functions of time; time subscripts appear only where clarity needs them.
+The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\logOp` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
 :::
 
 ```{math}
