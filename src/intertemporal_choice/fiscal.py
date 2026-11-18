@@ -40,7 +40,7 @@ def draw_phase(ax, k, kdot0_low, kdot0_high, steady, saddle, temporary, returnin
 
     The permanent increase drops consumption from E to E' with capital unchanged (purple). The
     temporary increase drops it from E to A, then capital runs down to B while spending is high, and
-    the economy returns along the saddle path (brown)."""
+    the economy returns along the saddle path (brown). Each is labeled with its experiment's name."""
     k_bar, c_low, c_high = steady
     spending = tex(r"$\GovSpend$")
     ax.plot(k, kdot0_low, color="C0")
@@ -66,6 +66,12 @@ def draw_phase(ax, k, kdot0_low, kdot0_high, steady, saddle, temporary, returnin
     _arrow(ax, k_t, c_t, TEMPORARY, at=len(k_t) // 2)
     ax.plot(k_r, c_r, color=TEMPORARY, linewidth=1.6)
     _arrow(ax, k_r, c_r, TEMPORARY, at=len(k_r) // 3)
+    # Which path is which (Chris, in class, 2026-11-17).
+    ax.annotate("permanent", (k_bar, (c_low + c_t[0]) / 2), xytext=(6, 0), textcoords="offset points",
+                ha="left", va="center", color=PERMANENT)
+    mid = len(k_t) // 2
+    ax.annotate("temporary", (k_t[mid], c_t[mid]), xytext=(0, -8), textcoords="offset points",
+                ha="center", va="top", color=TEMPORARY)
     _point(ax, k_bar, c_low, "E", (-14, 6))
     _point(ax, k_bar, c_high, "E′", (6, -12))
     _point(ax, k_t[0], c_t[0], "A", (6, -6))
