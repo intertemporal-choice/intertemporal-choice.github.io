@@ -29,7 +29,7 @@ subject to
 where {math}`\timeRate` is the time preference rate, {math}`\popGro` is the population growth rate, and {math}`\depr` is the depreciation rate. Every variable is a function of time; the argument {math}`t` is omitted. Capital at date 0, {math}`\kap(0)`, is given. Write {math}`\rfree \equiv \fFunc^{\prime}(\kap)-\depr` for the net return on capital, so that {math}`\rfree-\popGro` is its return per person, net of the dilution that population growth brings. All of these rates are measured at an annual rate.
 
 :::{margin}
-The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\logOp` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`. In discrete time, where the population grows by the factor {math}`\PopnGroFac` a period, {math}`\PopnGroRte` stands for the net rate {math}`\PopnGroFac-1`, which it approximates when growth is slow.
+The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\lnat` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`. In discrete time, where the population grows by the factor {math}`\PopnGroFac` a period, {math}`\PopnGroRte` stands for the net rate {math}`\PopnGroFac-1`, which it approximates when growth is slow.
 :::
 
 The discrete-time version of the problem measures the state at the start of period {math}`t` by market resources, {math}`\mNrm_{t} = \fFunc(\kap_{t}) + (1-\depr)\kap_{t}`. What is not consumed becomes the next period's capital, shared among a population larger by the factor {math}`1+\popGro`, and the value function {math}`\VFunc` satisfies the Bellman equation:
