@@ -6,11 +6,11 @@
 ```{math}
 :label: eq:aggY
 
-\YLev = \PtyAgg \Kap^{\kapShare} (\labor \hLucas \Labor)^{1-\kapShare}
+\YLvl = \PtyAgg \KLvl^{\kapShare} (\labor \hCap \LLvl)^{1-\kapShare}
 ```
 
-where {math}`\YLev, \PtyAgg,` and {math}`\KLev` are as usually defined and {math}`0 < \kapShare < 1`, where {math}`\labor` is defined as the proportion of total labor time
-spent working, and {math}`\hLucas` is what Lucas calls the stock of 'human
+where {math}`\YLvl, \PtyAgg,` and {math}`\KLvl` are as usually defined and {math}`0 < \kapShare < 1`, where {math}`\labor` is defined as the proportion of total labor time
+spent working, and {math}`\hCap` is what Lucas calls the stock of 'human
 capital.'
 
 The production function can be rewritten in per-capita terms as
@@ -18,32 +18,32 @@ The production function can be rewritten in per-capita terms as
 ```{math}
 :label: eq:pcy
 
-\yRat = \PtyAgg \kRat^\kapShare (\labor \hLucas)^{1-\kapShare}
+\yNrm = \PtyAgg \kNrm^\kapShare (\labor \hCap)^{1-\kapShare}
 ```
 
 which is a constant returns to scale production function in
-{math}`\kap` and {math}`\labor \hLucas`.
+{math}`\kNrm` and {math}`\labor \hCap`.
 
 Capital accumulation proceeds via the usual differential equation,
 
 ```{math}
 :label: eq:Lucas-kdot
 
-\dot{k} = \yRat - \cRat - (\popGro+\depr) \kap,
+\dot{\kNrm} = \yNrm - \cNrm - (\PopnGroRte+\deprRte) \kNrm,
 ```
 
 :::{margin}
 The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\lnat` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
 :::
 
-while {math}`\hLucas` accumulates according to
+while {math}`\hCap` accumulates according to
 
 ```{math}
 :label: eq:hdot
 
 \begin{gathered}\begin{aligned}
-  \dot{\hLucas} & =  \phi \hLucas (1-\labor)
-\\ \dot{\hLucas}/h & =  \phi (1-\labor).
+  \dot{\hCap} & =  \hCapProd \hCap (1-\labor)
+\\ \dot{\hCap}/\hCap & =  \hCapProd (1-\labor).
 \end{aligned}\end{gathered}
 ```
 
@@ -90,7 +90,7 @@ function of the form in {eq}`eq:pcy`, where {math}`(1-\labor)` is now interprete
 From the point of view of
 Mankiw's distinction, it is hard to interpret Lucas's model as being
 either about human capital accumulation or about knowledge. It can't
-be about human capital because {math}`\hLucas` can be accumulated without bound,
+be about human capital because {math}`\hCap` can be accumulated without bound,
 and without diminishing returns, neither of which makes sense for an
 individual. It can't be about generalized knowledge, because the
 optimization problem reflects the return for an individual, while only
@@ -103,33 +103,32 @@ model as a tool for normative than for positive analysis.
 ## The Solow Version
 
 We analyze first the 'Solow' version of the model, in which
-the saving rate is exogenously fixed at {math}`s`. Thus the
+the saving rate is exogenously fixed at {math}`\savRte`. Thus the
 capital accumulation equation becomes
 
 ```{math}
 :label: eq:kdots
 
 \begin{gathered}\begin{aligned}
-  \dot{\kap} & =  \savRte \yRat - (\popGro+\depr) \kap
-\\ \dot{\kap}/\kap & =  \savRte (\yRat/\kap) - (\popGro+\depr)
-\\ & =  \savRte \PtyAgg \kRat^{\kapShare - 1} (\labor \hLucas)^{1-\kapShare}-(\popGro+\depr)
-\\ & =  \savRte \PtyAgg (\kap/\hLucas)^{\kapShare-1} \labor^{1-\kapShare} -(\popGro+\depr).
+  \dot{\kNrm} & =  \savRte \yNrm - (\PopnGroRte+\deprRte) \kNrm
+\\ \dot{\kNrm}/\kNrm & =  \savRte (\yNrm/\kNrm) - (\PopnGroRte+\deprRte)
+\\ & =  \savRte \PtyAgg \kNrm^{\kapShare - 1} (\labor \hCap)^{1-\kapShare}-(\PopnGroRte+\deprRte)
+\\ & =  \savRte \PtyAgg (\kNrm/\hCap)^{\kapShare-1} \labor^{1-\kapShare} -(\PopnGroRte+\deprRte).
 \end{aligned}\end{gathered}
 ```
 
 This equation tells us that the steady-state growth
 rate in this model (if one exists) requires a constant
-ratio of {math}`\kap` to {math}`\hLucas`. Thus, {math}`\kap` and {math}`\hLucas` must be growing
+ratio of {math}`\kNrm` to {math}`\hCap`. Thus, {math}`\kNrm` and {math}`\hCap` must be growing
 at the same rate in equilibrium.
 
-Further insight can be obtained by defining {math}`\hat{A} = \PtyAgg \labor^{1-\kapShare}`
-and rewriting the per-capita production function as
+Further insight can be obtained by rewriting the per-capita production function as
 
 ```{math}
 :label: eq:CRSprodfunc
 
 \begin{gathered}\begin{aligned}
-  \yRat & =  \hat{\PtyAgg} \kRat^{\kapShare} \hLucas^{1-\kapShare}.
+  \yNrm & =  (\PtyAgg \labor^{1-\kapShare}) \kNrm^{\kapShare} \hCap^{1-\kapShare}.
 \end{aligned}\end{gathered}
 ```
 
@@ -139,7 +138,7 @@ of physical capital and human capital,
 ```{math}
 :label: eq:kappa
 
-\kappa \equiv \kRat^\kapShare \hLucas^{1-\kapShare},
+\kNrm^\kapShare \hCap^{1-\kapShare},
 ```
 
 the model becomes
@@ -147,15 +146,15 @@ the model becomes
 ```{math}
 :label: eq:ak
 
-\yRat = \hat{\PtyAgg} \kappa.
+\yNrm = (\PtyAgg \labor^{1-\kapShare}) (\kNrm^\kapShare \hCap^{1-\kapShare}).
 ```
 
-So if {math}`\labor` is constant and if {math}`\kap` and {math}`\hLucas` are growing at the same rate,
+So if {math}`\labor` is constant and if {math}`\kNrm` and {math}`\hCap` are growing at the same rate,
 then the exponent on 'broad capital' is 1, and we are effectively back
-at the usual Rebelo {math}`\PtyAgg \Kap` model.
+at the usual Rebelo {math}`\PtyAgg \KLvl` model.
 
 The key assumption that permits this to work is the accumulation
-equation for human capital, which is itself like an {math}`\PtyAgg \Kap` model, in the
+equation for human capital, which is itself like an {math}`\PtyAgg \KLvl` model, in the
 sense that the exponent on human capital in the accumulation equation
 for human capital is one. Human capital can be accumulated without
 bound and without diminishing returns.
@@ -164,19 +163,19 @@ bound and without diminishing returns.
 
 Lucas does not examine the Solow version of the model with a constant
 saving rate, but instead the version in which a social planner solves
-for the optimal perfect foresight paths of the two state variables {math}`\kap`
-and {math}`\hLucas`. It's not worth going through the math here; I'll just
+for the optimal perfect foresight paths of the two state variables {math}`\kNrm`
+and {math}`\hCap`. It's not worth going through the math here; I'll just
 present the conclusion, which is that the steady-state growth rate is
 
 ```{math}
 :label: eq:Lucas-ssg
 
-\dot{c}/c = \CRRA^{-1}(\phi - \theta).
+\dot{\cNrm}/\cNrm = \CRRA^{-1}(\hCapProd - \discRte).
 ```
 
 Note that this confirms the crucial role of the CRS accumulation
 equation for human capital: The key parameter that corresponds to
-the interest rate is {math}`\phi`, the parameter that determines the efficiency
+the interest rate is {math}`\hCapProd`, the parameter that determines the efficiency
 of human capital accumulation in equation {eq}`eq:hdot`.
 
 Lucas also solves a version of the model in which there is an
@@ -188,10 +187,10 @@ the individual's production function is
 ```{math}
 :label: eq:pcyext
 
-\yRat_i = \PtyAgg \kap_{i}^{\kapShare} (\labor _{i}\hLucas_{i})^{1-\kapShare} \bar{\hLucas}^{\psi}
+\yNrm_i = \PtyAgg \kNrm_{i}^{\kapShare} (\labor _{i}\hCap_{i})^{1-\kapShare} \hCapAvg^{\extElas}
 ```
 
-where {math}`\bar{\hLucas}` is average human wealth in the population (and the
+where {math}`\hCapAvg` is average human wealth in the population (and the
 other variables reflect the values for the individual).
 
 Working through the decentralized solution, Lucas shows that the
@@ -202,7 +201,7 @@ will be
 :label: eq:indgrow
 
 \begin{gathered}\begin{aligned}
-  \gamma_\hLucas &  =  \left(\frac{\CRRA^{-1}(\phi-\theta)}{1+\psi(1-1/\CRRA)/(1-\kapShare)}\right) .
+  \dot{\hCap}/\hCap &  =  \left(\frac{\CRRA^{-1}(\hCapProd-\discRte)}{1+\extElas(1-1/\CRRA)/(1-\kapShare)}\right) .
 \end{aligned}\end{gathered}
 ```
 
@@ -211,12 +210,12 @@ of aggregate human capital (and everything else) is the same as
 the rate for this individual.
 
 It is easy to see that if there is no externality to human capital
-accumulation (that is, if {math}`\psi = 0`), this solution is identical to
+accumulation (that is, if {math}`\extElas = 0`), this solution is identical to
 {eq}`eq:Lucas-ssg`. If there is an externality, its effect depends on
 whether {math}`1/\CRRA` is greater than, equal to, or less than 1. This is
 because the effect depends on whether the externality causes the
 saving rate to rise or to fall (since in endogenous growth models,
-saving is the source of all growth). The {math}`\bar{\hLucas}` externality is like an
+saving is the source of all growth). The {math}`\hCapAvg` externality is like an
 increase in the interest rate, and thus its effect will be determined
 by the balance between the income and substitution effects. We know
 that for {math}`\CRRA=1` the income and substitution effects exactly offset
@@ -234,7 +233,7 @@ saving falls, and growth is slower.
 Lucas also shows that this decentralized solution is suboptimal,
 because individual consumers do not obtain the full benefits to
 society of increasing their own stock of knowledge. Devoting more
-time to {math}`\hLucas_i` accumulation they increase {math}`\bar{\hLucas}`, which benefits all
+time to {math}`\hCap_i` accumulation they increase {math}`\hCapAvg`, which benefits all
 others in the economy in addition to themselves. Lucas shows,
 unsurprisingly, that the socially optimal solution requires greater
 investment in human capital accumulation than is obtained in the

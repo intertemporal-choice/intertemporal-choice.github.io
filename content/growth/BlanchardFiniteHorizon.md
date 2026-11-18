@@ -11,36 +11,36 @@ Thus, an agent who has lived a thousand years is no more likely to die
 in the next year than an agent who was born yesterday.
 
 Time is measured continuously. If there is an instantaneous
-probability {math}`\pDies` of dying, the probability (as viewed by a person
+probability {math}`\diePrb` of dying, the probability (as viewed by a person
 alive in period {math}`t`) of still being alive (not dead) in period
-{math}`\tThen` is
+{math}`\tau` is
 
 ```{math}
 :label: eq:living
 
 \begin{gathered}\begin{aligned}
-        \Alive_{t}^{\tThen} & =  e^{-\pDies(\tThen-t)} . 
+        \Alive_{t}^{\tau} & =  e^{-\diePrb(\tau-t)} . 
 \end{aligned}\end{gathered}
 ```
 
-Assuming the instantaneous utility function is {math}`\uFunc(c) =  \log c`, and that the pure rate of time preference is {math}`\timeRate`,
+Assuming the instantaneous utility function is {math}`\uFunc(\cNrm) =  \lcNrm`, and that the pure rate of time preference is {math}`\discRte`,
 explain why the objective function at time {math}`t` of an individual
 household in this model will be to maximize
 
 ```{math}
 :label: eq:objfunc
 
-\int_{t}^{\infty} (\log c_{\tThen}) e^{-(\timeRate+\pDies)(\tThen-t)} d\tThen.
+\int_{t}^{\infty} (\lcNrm_{\tau}) e^{-(\discRte+\diePrb)(\tau-t)} d\tau.
 ```
 
-where {math}`c_{\tThen}` is the consumer's consumption at time {math}`\tThen`. For convenience,
+where {math}`\cNrm_{\tau}` is the consumer's consumption at time {math}`\tau`. For convenience,
 you may wish to define
 
 ```{math}
 :label: eq:thetahat
 
 \begin{gathered}\begin{aligned}
-        \hat{\timeRate} & =  \timeRate+\pDies. 
+        \discRteEff & =  \discRte+\diePrb. 
 \end{aligned}\end{gathered}
 ```
 
@@ -55,13 +55,13 @@ you may wish to define
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         \int_{t}^{\infty} (\log c_{\tThen}) \Alive_{t}^{\tThen} e^{-\timeRate (\tThen-t)}d\tThen & =  \int_{t}^{\infty} (\log c_{\tThen}) e^{-\timeRate (\tThen-t)} e^{-\pDies (\tThen-t)} d\tThen \\
->          & =    \int_{t}^{\infty} (\log c_{\tThen}) e^{-(\timeRate+\pDies) (\tThen-t)} d\tThen
-> \\       & =    \int_{t}^{\infty} (\log c_{\tThen}) e^{-\hat{\timeRate} (\tThen-t)} d\tThen
+>         \int_{t}^{\infty} (\lcNrm_{\tau}) \Alive_{t}^{\tau} e^{-\discRte (\tau-t)}d\tau & =  \int_{t}^{\infty} (\lcNrm_{\tau}) e^{-\discRte (\tau-t)} e^{-\diePrb (\tau-t)} d\tau \\
+>          & =    \int_{t}^{\infty} (\lcNrm_{\tau}) e^{-(\discRte+\diePrb) (\tau-t)} d\tau
+> \\       & =    \int_{t}^{\infty} (\lcNrm_{\tau}) e^{-\discRteEff (\tau-t)} d\tau
 > \end{aligned}\end{gathered}
 > ```
 >
-> where {math}`\hat{\timeRate} = \timeRate+\pDies`.
+> where {math}`\discRteEff = \discRte+\diePrb`.
 >
 > A similar point holds in the discrete time model. A sensible thing to
 >
@@ -69,13 +69,13 @@ you may wish to define
 >
 > {math}`t+1` and after. Thus, in the two-period context, if the probability
 >
-> of death between {math}`T-1` and {math}`T` was zero we would have
+> of death between {math}`t` and {math}`t+1` was zero we would have
 >
 > ```{math}
-> V_{T-1} = \max \uFunc(C_{T-1}) + \left(\frac{1}{1+\timeRate}\right) \uFunc(C_{T})
+> \VFunc_{t} = \max \uFunc(\cNrm_{t}) + \left(\frac{1}{1+\discRte}\right) \uFunc(\cNrm_{t+1})
 > ```
 >
-> while if there is a probability {math}`\pDies` of dying between {math}`T` and {math}`T+1`
+> while if there is a probability {math}`\diePrb` of dying between {math}`t+1` and {math}`t+2`
 >
 > value would be:
 >
@@ -83,9 +83,9 @@ you may wish to define
 > :label: eq:approx
 >
 > \begin{gathered}\begin{aligned}
->    V_{T-1} & =  \max \uFunc(C_{T-1}) + (1-\pDies)\left(\frac{1}{1+\timeRate}\right) \uFunc(C_{T}) + \pDies \Discount \cdot 0 
-> \\   & =  \max \uFunc(C_{T-1}) + \left(\frac{1-\pDies}{1+\timeRate}\right) \uFunc(C_{T})
-> \\   & \approx  \max \uFunc(C_{T-1}) + \left(\frac{1}{1+\timeRate+\pDies}\right) \uFunc(C_{T})  
+>    \VFunc_{t} & =  \max \uFunc(\cNrm_{t}) + (1-\diePrb)\left(\frac{1}{1+\discRte}\right) \uFunc(\cNrm_{t+1}) + \diePrb \DiscFac \cdot 0 
+> \\   & =  \max \uFunc(\cNrm_{t}) + \left(\frac{1-\diePrb}{1+\discRte}\right) \uFunc(\cNrm_{t+1})
+> \\   & \approx  \max \uFunc(\cNrm_{t}) + \left(\frac{1}{1+\discRte+\diePrb}\right) \uFunc(\cNrm_{t+1})  
 > \end{aligned}\end{gathered}
 > ```
 >
@@ -93,7 +93,7 @@ you may wish to define
 >
 > behavior that would be induced if the consumer had a time preference
 >
-> rate of {math}`\timeRate+\pDies`. In continuous time, the approximation in
+> rate of {math}`\discRte+\diePrb`. In continuous time, the approximation in
 >
 > {eq}`eq:approx` becomes exact.
 
@@ -101,27 +101,27 @@ If the probability of death is constant, the expected remaining life
 for an agent of any age is given by
 
 ```{math}
-\int_{0}^{\infty} \pDies \tau e^{-\pDies \tau}d\tau = \pDies^{-1}.
+\int_{0}^{\infty} \diePrb \tau e^{-\diePrb \tau}d\tau = \diePrb^{-1}.
 ```
 
 which we will call the agent's 'horizon.' For example, if the chances
-of dying per year are {math}`\pDies=1/50`, then the agent's horizon is 50 years.
+of dying per year are {math}`\diePrb=1/50`, then the agent's horizon is 50 years.
 
 We will assume that at every instant of time, a large cohort, whose size
-is normalized to be {math}`\pDies`, is born.
+is normalized to be {math}`\diePrb`, is born.
 
 For an economy that has existed forever, explain why the
-formula for the aggregate population at time {math}`t`, {math}`P_{t}`, will be
+formula for the aggregate population at time {math}`t`, {math}`\PopnLvl_{t}`, will be
 
 ```{math}
 :label: eq:totpop
 
 \begin{gathered}\begin{aligned}
-        P_{t} & =  \pDies \int_{-\infty}^{t} \Alive_{s}^{\tNow} ds 
+        \PopnLvl_{t} & =  \diePrb \int_{-\infty}^{t} \Alive_{s}^{t} ds 
 \end{aligned}\end{gathered}
 ```
 
-and show that this formula implies that the population is {math}`P_{t}=1`.
+and show that this formula implies that the population is {math}`\PopnLvl_{t}=1`.
 
 > *Answer:*
 >
@@ -132,11 +132,11 @@ and show that this formula implies that the population is {math}`P_{t}=1`.
 >
 > The proportion of a population born at time {math}`s` that is still living
 >
-> at time {math}`\tThen` is {math}`\Alive_{s}^{\tThen}` by equation {eq}`eq:living`.
+> at time {math}`\tau` is {math}`\Alive_{s}^{\tau}` by equation {eq}`eq:living`.
 >
-> Thus, the absolute size at time {math}`\tThen` of a cohort of size {math}`\pDies` born at
+> Thus, the absolute size at time {math}`\tau` of a cohort of size {math}`\diePrb` born at
 >
-> time {math}`s` is {math}`\pDies \Alive_{s}^{\tThen} = \pDies e^{-\pDies (\tThen-s)}`. The economy's
+> time {math}`s` is {math}`\diePrb \Alive_{s}^{\tau} = \diePrb e^{-\diePrb (\tau-s)}`. The economy's
 >
 > total population will be the sum of the populations of all the cohorts
 >
@@ -156,22 +156,22 @@ and show that this formula implies that the population is {math}`P_{t}=1`.
 > :label: eq:fmhint
 >
 > \begin{gathered}\begin{aligned}
->         P_{t} & =  \pDies \int_{-\infty}^{t} e^{-\pDies(t-s)} ds 
-> \\        & =  \pDies \int_{t}^{\infty} e^{-\pDies(s-t)} ds 
-> \\        & =  \pDies \int_{0}^{\infty} e^{-\pDies \tThen}d\tThen
-> \\        & =  \pDies \pDies^{-1}  
+>         \PopnLvl_{t} & =  \diePrb \int_{-\infty}^{t} e^{-\diePrb(t-s)} ds 
+> \\        & =  \diePrb \int_{t}^{\infty} e^{-\diePrb(s-t)} ds 
+> \\        & =  \diePrb \int_{0}^{\infty} e^{-\diePrb \tau}d\tau
+> \\        & =  \diePrb \diePrb^{-1}  
 > \\        & =  1 
 > \end{aligned}\end{gathered}
 > ```
 >
-> where the second line comes from a change of variables {math}`\tThen = s-t`
+> where the second line comes from a change of variables {math}`\tau = s-t`
 >
 > and {eq}`eq:fmhint` follows from the hint.
 
 Now some notation. We will define variable {math}`x(s,t)` as the value at
 date {math}`t` of the variable {math}`x` for a consumer who was born at date {math}`s`.
 
-Thus, {math}`c(s,t)` is consumption at {math}`t` of a consumer born at {math}`s`.
+Thus, {math}`\cNrm(s,t)` is consumption at {math}`t` of a consumer born at {math}`s`.
 
 Suppose that the consumers in this economy do not have a bequest
 motive. If they have positive assets at the instant when they die,
@@ -180,20 +180,20 @@ someone were willing to pay them something while they are still alive
 for the right to inherit their assets whenever they die, these consumers would
 happily take that deal.
 
-For a consumer with wealth {math}`w(s,t)` who has probability of dying {math}`\pDies`,
-the flow value of the right to inherit that wealth is {math}`\pDies w(s,t)`. We
+For a consumer with wealth {math}`\netWorth(s,t)` who has probability of dying {math}`\diePrb`,
+the flow value of the right to inherit that wealth is {math}`\diePrb \netWorth(s,t)`. We
 will therefore assume that insurance companies exist that pay a
-consumer with wealth {math}`w(s,t)` an amount {math}`\pDies w(s,t)` in exchange for the
+consumer with wealth {math}`\netWorth(s,t)` an amount {math}`\diePrb \netWorth(s,t)` in exchange for the
 right to receive that consumer's wealth when he dies. (The insurance
 company will make zero profits).
 
 But notice that from the standpoint of the consumer, this is
 equivalent to saying that the interest rate received on wealth is
-higher by amount {math}`\pDies`.
+higher by amount {math}`\diePrb`.
 
 Now suppose the marginal product of capital in this
 perfectly-competitive economy is constant at {math}`\rfree` and suppose an agent
-born in {math}`s` receives exogenous labor income in period {math}`t` of {math}`y(s,t)`.
+born in {math}`s` receives exogenous labor income in period {math}`t` of {math}`\wage(s,t)`.
 
 This plus the insurance scheme implies that the agent's dynamic budget
 constraint is given by
@@ -202,11 +202,11 @@ constraint is given by
 :label: eq:budconstr
 
 \begin{gathered}\begin{aligned}
-        \dot{w}(s,t) & =  (\rfree+\pDies) w(s,t) + y(s,t)-c(s,t) .
+        \dot{\netWorth}(s,t) & =  (\rfree+\diePrb) \netWorth(s,t) + \wage(s,t)-\cNrm(s,t) .
 \end{aligned}\end{gathered}
 ```
 
-Define the 'effective' interest rate as viewed by a consumer as {math}`\hat{\rfree}  = \rfree+\pDies`.
+Define the 'effective' interest rate as viewed by a consumer as {math}`\rfreeEff  = \rfree+\diePrb`.
 
 Write the current-value Hamiltonian for the
 individual's maximization problem and use it to show that the growth
@@ -215,8 +215,8 @@ given by
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \left(\frac{\dot{c}(s,t)}{c(s,t)}\right) & =  \hat{\rfree} - \hat{\timeRate}
-\\  & =  \rfree-\timeRate.     
+        \left(\frac{\dot{\cNrm}(s,t)}{\cNrm(s,t)}\right) & =  \rfreeEff - \discRteEff
+\\  & =  \rfree-\discRte.     
 \end{aligned}\end{gathered}
 ```
 
@@ -226,15 +226,15 @@ given by
 > The current-value Hamiltonian is written
 >
 > ```{math}
-> \Ham(w,c,\vk) = \log c(s,t) + (\hat{\rfree} w(s,t) + y(s,t) - c(s,t))\vk
+> \Ham(\netWorth,\cNrm,\vk) = \lcNrm(s,t) + (\rfreeEff \netWorth(s,t) + \wage(s,t) - \cNrm(s,t))\vk
 > ```
 >
-> so the optimality condition for consumption, {math}`\partial \Ham/\partial c(s,t) = 0`, implies
+> so the optimality condition for consumption, {math}`\partial \Ham/\partial \cNrm(s,t) = 0`, implies
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         1/c(s,t) & =  \vk
-> \\  - \dot{c}(s,t)/c(s,t)^{2} & =  \dot{\vk}       
+>         1/\cNrm(s,t) & =  \vk
+> \\  - \dot{\cNrm}(s,t)/\cNrm(s,t)^{2} & =  \dot{\vk}       
 > \end{aligned}\end{gathered}
 > ```
 >
@@ -242,12 +242,12 @@ given by
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         \dot{\vk} & =  \hat{\timeRate} \vk - \partial \Ham/\partial w(s,t)  
-> \\       & =  \hat{\timeRate} \vk - \hat{\rfree} \vk  
-> \\      \left(\frac{\dot{\vk}}{\vk}\right) & =  \hat{\timeRate}-\hat{\rfree}
-> \\  \left(\frac{-\dot{c}(s,t) c(s,t)}{c(s,t)^{2}}\right) & =  \hat{\timeRate}-\hat{\rfree}
-> \\  \left(\frac{\dot{c}(s,t)}{c(s,t)}\right) & =  \hat{\rfree}-\hat{\timeRate} 
-> \\   & =  \rfree-\timeRate     .
+>         \dot{\vk} & =  \discRteEff \vk - \partial \Ham/\partial \netWorth(s,t)  
+> \\       & =  \discRteEff \vk - \rfreeEff \vk  
+> \\      \left(\frac{\dot{\vk}}{\vk}\right) & =  \discRteEff-\rfreeEff
+> \\  \left(\frac{-\dot{\cNrm}(s,t) \cNrm(s,t)}{\cNrm(s,t)^{2}}\right) & =  \discRteEff-\rfreeEff
+> \\  \left(\frac{\dot{\cNrm}(s,t)}{\cNrm(s,t)}\right) & =  \rfreeEff-\discRteEff 
+> \\   & =  \rfree-\discRte     .
 > \end{aligned}\end{gathered}
 > ```
 
@@ -258,26 +258,27 @@ show that the level of consumption in time {math}`t` for an individual born
 at time {math}`s` is
 
 ```{math}
-c(s,t) = \hat{\timeRate}(w(s,t)+h(s,t))
+\cNrm(s,t) = \discRteEff(\netWorth(s,t)+\hNrm(s,t))
 ```
 
-where recall that {math}`\hat{\timeRate}=\timeRate+\pDies` and human wealth is
+where recall that {math}`\discRteEff=\discRte+\diePrb` and human wealth is
 
 ```{math}
-h(s,t) = \int_{t}^{\infty} \left(y(s,\tThen)/\hat{\mathcal{R}}_{t}^{\tThen}\right) d\tThen
+\hNrm(s,t) = \PDVEff_{t}(\wage(s,\cdot))
 ```
 
 where
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \hat{\mathcal{R}}_{t}^{\tThen} & =  e^{\int_{t}^{\tThen} (\rfree_{\mu}+\pDies) d\mu}
+  \PDVEff_{t}(\bullet) & \equiv  \int_{t}^{\infty} \bullet_{\tau}\, e^{-\int_{t}^{\tau} \rfreeEff_{\mu} d\mu}\, d\tau
+\\ e^{\int_{t}^{\tau} \rfreeEff_{\mu} d\mu} & =  e^{\int_{t}^{\tau} (\rfree_{\mu}+\diePrb) d\mu}
 \end{aligned}\end{gathered}
 ```
 
 (this is simply the compound discount factor necessary to take
 account of time-varying interest rates; if interest rates are
-constant at {math}`\rfree` it reduces to the usual term {math}`e^{-\rfree(\tThen-t)}`).
+constant at {math}`\rfree` it reduces to the usual term {math}`e^{-\rfree(\tau-t)}`).
 
 > *Answer:*
 >
@@ -288,16 +289,16 @@ constant at {math}`\rfree` it reduces to the usual term {math}`e^{-\rfree(\tThen
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         \int_{t}^{\infty} (c(s,\tThen)/\hat{\mathcal{R}}_{t}^{\tThen})  d\tThen & =  w(s,t) + \int_{t}^{\infty} y(\tThen,t)/\hat{\mathcal{R}}_{t}^{\tThen} d\tThen
-> \\      \int_{t}^{\infty} (c(s,\tThen)/\hat{\mathcal{R}}_{t}^{\tThen}) d\tThen & =  w(s,t) + h(s,t).
+>         \PDVEff_{t}(\cNrm(s,\cdot)) & =  \netWorth(s,t) + \PDVEff_{t}(\wage(\cdot,t))
+> \\      \PDVEff_{t}(\cNrm(s,\cdot)) & =  \netWorth(s,t) + \hNrm(s,t).
 > \end{aligned}\end{gathered}
 > ```
 >
-> But if {math}`\dot{c}(s,t)/c(s,t) = \hat{\rfree}_{t}-\hat{\timeRate}` then
+> But if {math}`\dot{\cNrm}(s,t)/\cNrm(s,t) = \rfreeEff_{t}-\discRteEff` then
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         c(s,\tThen) & =  c(s,t)e^{\int_{s}^{\tThen}\hat{\rfree}_\mu d\mu}e^{-\hat{\timeRate}(\tThen-t)}
+>         \cNrm(s,\tau) & =  \cNrm(s,t)e^{\int_{s}^{\tau}\rfreeEff_\mu d\mu}e^{-\discRteEff(\tau-t)}
 > \end{aligned}\end{gathered}
 > ```
 >
@@ -305,10 +306,10 @@ constant at {math}`\rfree` it reduces to the usual term {math}`e^{-\rfree(\tThen
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         \int_{t}^{\infty} (c(s,\tThen)/\hat{\mathcal{R}}_{t}^{\tThen}) d\tThen & =  
-> \int_{t}^{\infty} c(s,t) e^{\int_{s}^{\tThen}\hat{\rfree}_\mu  d\mu}e^{-\hat{\timeRate}(\tThen-t)}e^{-\int_{s}^{\tThen}\hat{\rfree}_\mu d\mu} d\tThen
-> \\         & =  c(s,t) \int_{t}^{\infty} e^{-\hat{\timeRate}(\tThen-t)} d\tThen
-> \\   & =  c(s,t)/\hat{\timeRate}
+>         \PDVEff_{t}(\cNrm(s,\cdot)) & =  
+> \int_{t}^{\infty} \cNrm(s,t) e^{\int_{s}^{\tau}\rfreeEff_\mu  d\mu}e^{-\discRteEff(\tau-t)}e^{-\int_{s}^{\tau}\rfreeEff_\mu d\mu} d\tau
+> \\         & =  \cNrm(s,t) \int_{t}^{\infty} e^{-\discRteEff(\tau-t)} d\tau
+> \\   & =  \cNrm(s,t)/\discRteEff
 > \end{aligned}\end{gathered}
 > ```
 >
@@ -316,8 +317,8 @@ constant at {math}`\rfree` it reduces to the usual term {math}`e^{-\rfree(\tThen
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         c(s,t)/\hat{\timeRate} & =  w(s,t)+h(s,t)  \\
->         c(s,t) & =  \hat{\timeRate} (w(s,t)+h(s,t)) .
+>         \cNrm(s,t)/\discRteEff & =  \netWorth(s,t)+\hNrm(s,t)  \\
+>         \cNrm(s,t) & =  \discRteEff (\netWorth(s,t)+\hNrm(s,t)) .
 > \end{aligned}\end{gathered}
 > ```
 
@@ -328,7 +329,7 @@ aggregate consumption is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        C(t) & =  \int_{-\infty}^{t} \pDies c(\tThen,t) \Alive_{\tThen}^{t} d\tThen.
+        \CNrm(t) & =  \int_{-\infty}^{t} \diePrb \cNrm(s,t) \Alive_{s}^{t} ds.
 \end{aligned}\end{gathered}
 ```
 
@@ -339,7 +340,7 @@ this economy is
 :label: eq:cagg
 
 \begin{gathered}\begin{aligned}
-        C(t) & =  \hat{\timeRate} (W(t) + H(t)) . 
+        \CNrm(t) & =  \discRteEff (\NetWorth(t) + \HNrm(t)) . 
 \end{aligned}\end{gathered}
 ```
 
@@ -347,22 +348,22 @@ this economy is
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         C(t) & =   \int_{-\infty}^{t} \pDies c(\tThen,t) \Alive_{\tThen}^{t} d\tThen \\
->          & =  \int_{-\infty}^{t} \pDies \hat{\timeRate}(w(\tThen,t)+h(\tThen,t)) \Alive_{\tThen}^{t} d\tThen \\
->          & =  \hat{\timeRate} (W(t)+H(t))
+>         \CNrm(t) & =   \int_{-\infty}^{t} \diePrb \cNrm(s,t) \Alive_{s}^{t} ds \\
+>          & =  \int_{-\infty}^{t} \diePrb \discRteEff(\netWorth(s,t)+\hNrm(s,t)) \Alive_{s}^{t} ds \\
+>          & =  \discRteEff (\NetWorth(t)+\HNrm(t))
 > \end{aligned}\end{gathered}
 > ```
 >
-> from the definition of {math}`W(t)` and {math}`H(t)`.
+> from the definition of {math}`\NetWorth(t)` and {math}`\HNrm(t)`.
 
 Suppose all living agents in this economy receive the same noncapital
-income, {math}`y(s,t) = Y(t)`. Since every member of the population has the
+income, {math}`\wage(s,t) = \Wage(t)`. Since every member of the population has the
 same income, and the size of the population is one, aggregate income
-will also be {math}`Y(t)`. Aggregate human wealth at {math}`t` is therefore
+will also be {math}`\Wage(t)`. Aggregate human wealth at {math}`t` is therefore
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        H(t) & =  \int_{t}^{\infty} (Y(\tThen)/\hat{\mathcal{R}}_{t}^{\tThen}) d\tThen
+        \HNrm(t) & =  \PDVEff_{t}(\Wage)
 \end{aligned}\end{gathered}
 ```
 
@@ -370,7 +371,7 @@ where
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \dot{H}(t) & =  \hat{\rfree}_{t} H(t) - Y(t) .
+        \dot{\HNrm}(t) & =  \rfreeEff_{t} \HNrm(t) - \Wage(t) .
 \end{aligned}\end{gathered}
 ```
 
@@ -381,18 +382,18 @@ shown to be
 :label: eq:Wdot
 
 \begin{gathered}\begin{aligned}
-        \dot{W}(t) & =  w(t,t) - \pDies W(t) + \int_{-\infty}^{t} \dot{w}(\tThen,t) \pDies e^{-\pDies(t-\tThen)} d\tThen,
+        \dot{\NetWorth}(t) & =  \netWorth(t,t) - \diePrb \NetWorth(t) + \int_{-\infty}^{t} \dot{\netWorth}(s,t) \diePrb e^{-\diePrb(t-s)} ds,
 \end{aligned}\end{gathered}
 ```
 
-where {math}`w(t,t)=0` is the wealth of newly born generations, {math}`\pDies W(t)` is
+where {math}`\netWorth(t,t)=0` is the wealth of newly born generations, {math}`\diePrb \NetWorth(t)` is
 the wealth of those who are dying at the moment, and the last term is
 the change in wealth for those who neither die nor are born in this
 period. But {eq}`eq:budconstr` implies that
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \int_{-\infty}^{t} \dot{w}(\tThen,t) \pDies e^{-\pDies(t-\tThen)} d\tThen & =  (\rfree+\pDies) W(t) + Y(t)-C(t)
+  \int_{-\infty}^{t} \dot{\netWorth}(s,t) \diePrb e^{-\diePrb(t-s)} ds & =  (\rfree+\diePrb) \NetWorth(t) + \Wage(t)-\CNrm(t)
 \end{aligned}\end{gathered}
 ```
 
@@ -400,11 +401,11 @@ so {eq}`eq:Wdot` becomes
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \dot{W}(t) & =  \rfree W(t) + Y(t)-C(t).
+        \dot{\NetWorth}(t) & =  \rfree \NetWorth(t) + \Wage(t)-\CNrm(t).
 \end{aligned}\end{gathered}
 ```
 
-Collecting, writing out {math}`\hat{\rfree}=\rfree+\pDies` and {math}`\hat{\timeRate}=\timeRate+\pDies`, and
+Collecting, writing out {math}`\rfreeEff=\rfree+\diePrb` and {math}`\discRteEff=\discRte+\diePrb`, and
 dropping the {math}`(t)` arguments gives us the following equations for
 aggregate variables:
 
@@ -412,9 +413,9 @@ aggregate variables:
 :label: eq:clevel
 
 \begin{gathered}\begin{aligned}
-        C & =  (\pDies+\timeRate) (H+W)  \\
-        \dot{H} & =  (\rfree+\pDies) H - Y  \\
-        \dot{W} & =  \rfree W + Y - C
+        \CNrm & =  (\diePrb+\discRte) (\HNrm+\NetWorth)  \\
+        \dot{\HNrm} & =  (\rfree+\diePrb) \HNrm - \Wage  \\
+        \dot{\NetWorth} & =  \rfree \NetWorth + \Wage - \CNrm
 \end{aligned}\end{gathered}
 ```
 
@@ -424,45 +425,45 @@ Use these equations to show that in this economy
 :label: eq:aggCdot
 
 \begin{gathered}\begin{aligned}
-        \dot{C} & =  (\rfree-\timeRate) C - \pDies(\pDies+\timeRate) W
+        \dot{\CNrm} & =  (\rfree-\discRte) \CNrm - \diePrb(\diePrb+\discRte) \NetWorth
 \end{aligned}\end{gathered}
 ```
 
-Hint: Differentiate {eq}`eq:clevel` and substitute out for {math}`H` by solving
-{eq}`eq:clevel` for {math}`H`.
+Hint: Differentiate {eq}`eq:clevel` and substitute out for {math}`\HNrm` by solving
+{eq}`eq:clevel` for {math}`\HNrm`.
 > *Answer:*
 >
-> Time differentiate {eq}`eq:clevel` and substitute for {math}`\dot{H}`,
+> Time differentiate {eq}`eq:clevel` and substitute for {math}`\dot{\HNrm}`,
 >
-> {math}`\dot{W}`, and {math}`H` to get
+> {math}`\dot{\NetWorth}`, and {math}`\HNrm` to get
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->         \dot{C} & =  (\pDies+\timeRate)\left[(\rfree+\pDies) H - Y + \rfree W + Y - C\right]
-> \\       & =  (\pDies+\timeRate)\left[(\rfree+\pDies) H + \rfree W \right] - C (\pDies+\timeRate)
-> \\       & =  (\pDies+\timeRate)\left[(\rfree+\pDies) \left(\frac{C}{\pDies+\timeRate}-W\right)+r W\right] - C (\pDies+\timeRate)
-> \\   & =  (\rfree+\pDies) C + (\pDies+\timeRate)\left[    rW - (\rfree+\pDies) W \right] - C(\pDies+\timeRate)
-> \\   & =  (\rfree-\timeRate) C - (\pDies+\timeRate)\pDies W.
+>         \dot{\CNrm} & =  (\diePrb+\discRte)\left[(\rfree+\diePrb) \HNrm - \Wage + \rfree \NetWorth + \Wage - \CNrm\right]
+> \\       & =  (\diePrb+\discRte)\left[(\rfree+\diePrb) \HNrm + \rfree \NetWorth \right] - \CNrm (\diePrb+\discRte)
+> \\       & =  (\diePrb+\discRte)\left[(\rfree+\diePrb) \left(\frac{\CNrm}{\diePrb+\discRte}-\NetWorth\right)+\rfree \NetWorth\right] - \CNrm (\diePrb+\discRte)
+> \\   & =  (\rfree+\diePrb) \CNrm + (\diePrb+\discRte)\left[    \rfree\NetWorth - (\rfree+\diePrb) \NetWorth \right] - \CNrm(\diePrb+\discRte)
+> \\   & =  (\rfree-\discRte) \CNrm - (\diePrb+\discRte)\diePrb \NetWorth.
 > \end{aligned}\end{gathered}
 > ```
 
 Now assume there is a standard production function
-{math}`\FFunc(K)=K^{\alpha}-\delta K` and assume perfect competition so that the
-net interest rate {math}`r` is equal to the net marginal product of capital,
+{math}`\FFunc(\KNrm)=\KNrm^{\kapShare}-\deprRte \KNrm` and assume perfect competition so that the
+net interest rate {math}`\rfree` is equal to the net marginal product of capital,
 
 ```{math}
-\rfree = \FFunc^{\prime}(K) = \alpha K^{\alpha-1}-\delta
+\rfree = \FFunc^{\prime}(\KNrm) = \kapShare \KNrm^{\kapShare-1}-\deprRte
 ```
 
 and the aggregate capital stock at time {math}`t` is the same as aggregate
-nonhuman wealth, {math}`K(t)=W(t)`. The aggregate accumulation equation is
+nonhuman wealth, {math}`\KNrm(t)=\NetWorth(t)`. The aggregate accumulation equation is
 just the usual
 
 ```{math}
 :label: eq:BFH-aggkdot
 
 \begin{gathered}\begin{aligned}
-  \dot{K} & =  K^{\alpha}-\delta K -C.
+  \dot{\KNrm} & =  \KNrm^{\kapShare}-\deprRte \KNrm -\CNrm.
 \end{aligned}\end{gathered}
 ```
 
@@ -472,146 +473,146 @@ Show that the following equation
 :label: eq:CvsK1
 
 \begin{gathered}\begin{aligned}
-  \pDies(\pDies+\timeRate) K      & =  C(\alpha K^{\alpha-1}-\delta-\timeRate)
+  \diePrb(\diePrb+\discRte) \KNrm      & =  \CNrm(\kapShare \KNrm^{\kapShare-1}-\deprRte-\discRte)
 \end{aligned}\end{gathered}
 ```
 
-describes the {math}`\dot{C}=0` locus. Use this equation to show that
+describes the {math}`\dot{\CNrm}=0` locus. Use this equation to show that
 
 ```{math}
 :label: eq:BFH-1
 
 \begin{gathered}\begin{aligned}
-  \lim_{C \rightarrow 0} K & =  0
-\\ \lim_{C \rightarrow \infty} K & =  ((\timeRate+\delta)/\alpha)^{1/{\alpha-1}}.
+  \lim_{\CNrm \rightarrow 0} \KNrm & =  0
+\\ \lim_{\CNrm \rightarrow \infty} \KNrm & =  ((\discRte+\deprRte)/\kapShare)^{1/{\kapShare-1}}.
 \end{aligned}\end{gathered}
 ```
 
 > *Answer:*
 >
-> Rewriting the {math}`\dot{C}` equation as a function of {math}`K` yields
+> Rewriting the {math}`\dot{\CNrm}` equation as a function of {math}`\KNrm` yields
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->   \dot{C} & =  (\alpha K^{\alpha-1} - \timeRate - \delta)C - (\pDies+\timeRate)\pDies K.
+>   \dot{\CNrm} & =  (\kapShare \KNrm^{\kapShare-1} - \discRte - \deprRte)\CNrm - (\diePrb+\discRte)\diePrb \KNrm.
 > \end{aligned}\end{gathered}
 > ```
 >
-> The {math}`\dot{C}=0` locus is therefore given by
+> The {math}`\dot{\CNrm}=0` locus is therefore given by
 >
 > ```{math}
 > :label: eq:aggCdotmod
 >
 > \begin{gathered}\begin{aligned}
->       0 & =  (\alpha K^{\alpha-1}-\timeRate-\delta) - \pDies(\pDies+\timeRate) K/C
-> \\  \pDies(\pDies+\timeRate) K/C       & =  (\alpha K^{\alpha-1}-\delta-\timeRate)
-> \\  \pDies(\pDies+\timeRate) K      & =  C(\alpha K^{\alpha-1}-\delta-\timeRate)
+>       0 & =  (\kapShare \KNrm^{\kapShare-1}-\discRte-\deprRte) - \diePrb(\diePrb+\discRte) \KNrm/\CNrm
+> \\  \diePrb(\diePrb+\discRte) \KNrm/\CNrm       & =  (\kapShare \KNrm^{\kapShare-1}-\deprRte-\discRte)
+> \\  \diePrb(\diePrb+\discRte) \KNrm      & =  \CNrm(\kapShare \KNrm^{\kapShare-1}-\deprRte-\discRte)
 > \end{aligned}\end{gathered}
 > ```
 >
-> In the limit as {math}`C \rightarrow 0` this expression approaches
+> In the limit as {math}`\CNrm \rightarrow 0` this expression approaches
 >
 > ```{math}
 > :label: eq:2
 >
-> \pDies(\pDies+\timeRate) K = 0
+> \diePrb(\diePrb+\discRte) \KNrm = 0
 > ```
 >
-> which can be true only if {math}`\lim_{\{C \rightarrow 0\}} K = 0`.
+> which can be true only if {math}`\lim_{\{\CNrm \rightarrow 0\}} \KNrm = 0`.
 >
-> On the other hand, as {math}`C \rightarrow \infty` we know that {math}`K`
+> On the other hand, as {math}`\CNrm \rightarrow \infty` we know that {math}`\KNrm`
 >
 > must remain finite (because the DBC does not allow infinite
 >
-> accumulation of {math}`K`; infinite {math}`K` would imply infinite depreciation which
+> accumulation of {math}`\KNrm`; infinite {math}`\KNrm` would imply infinite depreciation which
 >
 > could never be paid for by a production function with diminishing marginal returns), which means that
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
-> \lim_{\{C \rightarrow \infty\}} \alpha K^{\alpha-1} & =  (\timeRate+\delta)
-> \\ K^{*} & =  ((\timeRate+\delta)/\alpha)^{1/{\alpha-1}}.
+> \lim_{\{\CNrm \rightarrow \infty\}} \kapShare \KNrm^{\kapShare-1} & =  (\discRte+\deprRte)
+> \\ \KNrm^{*} & =  ((\discRte+\deprRte)/\kapShare)^{1/{\kapShare-1}}.
 > \end{aligned}\end{gathered}
 > ```
 
 Using your results from the previous question and the aggregate
 dynamic budget constraint, draw the phase diagram for this model and
 discuss how and why it differs from the phase diagram for the
-standard Ramsey-Cass/Koopmans model. (please use {math}`K^{*}` to
-designate the RCK steady-state capital stock and {math}`\bar{K}` to
-designate this model's steady-state {math}`K`.)
+standard Ramsey-Cass/Koopmans model. (please use {math}`\KNrm^{*}` to
+designate the RCK steady-state capital stock and {math}`\Steady{\KNrm}` to
+designate this model's steady-state {math}`\KNrm`.)
 
 > *Answer:*
 >
-> Using {eq}`eq:BFH-aggkdot`, the {math}`\dot{K}=0` locus is
+> Using {eq}`eq:BFH-aggkdot`, the {math}`\dot{\KNrm}=0` locus is
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->   C & =  K^{\alpha}-\delta K
+>   \CNrm & =  \KNrm^{\kapShare}-\deprRte \KNrm
 > \end{aligned}\end{gathered}
 > ```
 >
-> which yields the usual hump-shaped {math}`\dot{K}=0` locus.
+> which yields the usual hump-shaped {math}`\dot{\KNrm}=0` locus.
 >
-> Rewriting the {math}`\dot{C}` equation as a function of {math}`K` yields
+> Rewriting the {math}`\dot{\CNrm}` equation as a function of {math}`\KNrm` yields
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->   \dot{C} & =  (\alpha K^{\alpha-1} - \timeRate - \delta)C - (\pDies+\timeRate)\pDies K.
+>   \dot{\CNrm} & =  (\kapShare \KNrm^{\kapShare-1} - \discRte - \deprRte)\CNrm - (\diePrb+\discRte)\diePrb \KNrm.
 > \end{aligned}\end{gathered}
 > ```
 >
-> The {math}`\dot{C}=0` locus is therefore given by
+> The {math}`\dot{\CNrm}=0` locus is therefore given by
 >
 > ```{math}
 > :label: eq:CvsK
 >
 > \begin{gathered}\begin{aligned}
->       0 & =  (\alpha K^{\alpha-1}-\timeRate-\delta) - \pDies(\pDies+\timeRate) K/C
-> \\  \pDies(\pDies+\timeRate) K/C       & =  (\alpha K^{\alpha-1}-\delta-\timeRate)
-> \\  \pDies(\pDies+\timeRate) K      & =  C(\alpha K^{\alpha-1}-\delta-\timeRate)
+>       0 & =  (\kapShare \KNrm^{\kapShare-1}-\discRte-\deprRte) - \diePrb(\diePrb+\discRte) \KNrm/\CNrm
+> \\  \diePrb(\diePrb+\discRte) \KNrm/\CNrm       & =  (\kapShare \KNrm^{\kapShare-1}-\deprRte-\discRte)
+> \\  \diePrb(\diePrb+\discRte) \KNrm      & =  \CNrm(\kapShare \KNrm^{\kapShare-1}-\deprRte-\discRte)
 > \end{aligned}\end{gathered}
 > ```
 >
-> In the limit as {math}`C \rightarrow 0` this expression approaches
+> In the limit as {math}`\CNrm \rightarrow 0` this expression approaches
 >
 > ```{math}
-> \pDies(\pDies+\timeRate) K = 0
+> \diePrb(\diePrb+\discRte) \KNrm = 0
 > ```
 >
-> which can be true only if {math}`\lim_{\{C \rightarrow 0\}} K = 0`.
+> which can be true only if {math}`\lim_{\{\CNrm \rightarrow 0\}} \KNrm = 0`.
 >
-> On the other hand, as {math}`C \rightarrow \infty` we know that {math}`K`
+> On the other hand, as {math}`\CNrm \rightarrow \infty` we know that {math}`\KNrm`
 >
 > must remain finite (because the DBC does not allow infinite
 >
-> accumulation of {math}`K`), which means that
+> accumulation of {math}`\KNrm`), which means that
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
-> \lim_{\{C \rightarrow \infty\}} \alpha K^{\alpha-1} & =  (\timeRate+\delta)
-> \\ K^{*} & =  ((\timeRate+\delta)/\alpha)^{1/{(\alpha-1)}}.
+> \lim_{\{\CNrm \rightarrow \infty\}} \kapShare \KNrm^{\kapShare-1} & =  (\discRte+\deprRte)
+> \\ \KNrm^{*} & =  ((\discRte+\deprRte)/\kapShare)^{1/{(\kapShare-1)}}.
 > \end{aligned}\end{gathered}
 > ```
 
 :::{figure} /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase1.png
 :::
 
-> In the infinite horizon economy we have {math}`\pDies = 0` and so the
+> In the infinite horizon economy we have {math}`\diePrb = 0` and so the
 >
-> steady-state interest rate would be the {math}`K^{*}` where {math}`\alpha K^{\alpha-1}-\delta = \timeRate`. But since {math}`K/C` and {math}`\pDies(\pDies+\timeRate)` are
+> steady-state interest rate would be the {math}`\KNrm^{*}` where {math}`\kapShare \KNrm^{\kapShare-1}-\deprRte = \discRte`. But since {math}`\KNrm/\CNrm` and {math}`\diePrb(\diePrb+\discRte)` are
 >
 > strictly positive, in this finite-horizon economy we would have
 >
-> {math}`\dot{C}/C < 0` at {math}`K=K^{*}`. It is clear therefore that in order
+> {math}`\dot{\CNrm}/\CNrm < 0` at {math}`\KNrm=\KNrm^{*}`. It is clear therefore that in order
 >
-> for {eq}`eq:aggCdotmod` to hold we will need {math}`\alpha K^{\alpha-1}`
+> for {eq}`eq:aggCdotmod` to hold we will need {math}`\kapShare \KNrm^{\kapShare-1}`
 >
-> to be larger than it is at {math}`K^{*}`, which is to say we need a higher
+> to be larger than it is at {math}`\KNrm^{*}`, which is to say we need a higher
 >
 > steady-state interest rate, and thus we need a lower steady-state
 >
-> capital stock, which is depicted in the figure as {math}`\bar{K}`.
+> capital stock, which is depicted in the figure as {math}`\Steady{\KNrm}`.
 >
 > This makes sense because the finite-horizon consumers in this economy
 >
@@ -621,7 +622,7 @@ designate this model's steady-state {math}`K`.)
 >
 > These results are combined in the figure, which shows that the intersection
 >
-> of the {math}`\dot{C}=0` locus intersects the {math}`\dot{K}=0` locus at point {math}`A`
+> of the {math}`\dot{\CNrm}=0` locus intersects the {math}`\dot{\KNrm}=0` locus at point {math}`A`
 >
 > which corresponds to a lower level of the capital stock than in the
 >
@@ -639,21 +640,21 @@ where {math}`\Debt` is government debt, {math}`\GovSpend` is government spending
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \mathcal{R}_t^{s} = e^{\int_t^{s}\rfree_v dv}
+  e^{\int_t^{\tau}\rfree_\mu d\mu}
 \end{aligned}\end{gathered}
 ```
 
-as the compound interest factor between time {math}`t` and time {math}`s`, the
+as the compound interest factor between time {math}`t` and time {math}`\tau`, the
 government is also required to satisfy the transversality condition
 
 ```{math}
 :label: eq:10
 
-\lim_{t \rightarrow \infty} \Debt_t/\mathcal{R}_t^{s} = 0.
+\lim_{t \rightarrow \infty} \Debt_t/e^{\int_t^{\tau}\rfree_\mu d\mu} = 0.
 ```
 
 Consider the following fiscal policy experiment. Until time {math}`t` there
-has been no government ({math}`\GovSpend_s = \Debt_s = \TaxLev_s=0~\forall~s<t`). At date
+has been no government ({math}`\GovSpend_\tau = \Debt_\tau = \TaxLev_\tau=0~\forall~\tau<t`). At date
 {math}`t` the government issues a quantity {math}`\Debt` of debt and announces that
 future lump sum taxes will be imposed in amounts exactly large enough
 to pay the interest on this debt (so subsequently, {math}`\dot{\Debt}=0`
@@ -664,9 +665,8 @@ debt). Define the new variables
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \mathcal{W} & =  K + \Debt
-\\ \mathcal{Y} & =  Y - \TaxLev
-\\ \mathcal{H} & =  \int_{t}^{\infty} \mathcal{Y}/\hat{\mathcal{R}}_{t}^{s} ds
+  \NetWorth & =  \KNrm + \Debt
+\\ \HNrm - \PDVEff_{t}(\TaxLev) & =  \PDVEff_{t}(\Wage - \TaxLev)
 \end{aligned}\end{gathered}
 ```
 
@@ -677,9 +677,9 @@ specification of the economy to
 :label: eq:Cnew
 
 \begin{gathered}\begin{aligned}
-   C & =  (\pDies+\timeRate) (\mathcal{H} + \mathcal{W})
-\\ \dot{\mathcal{W}} & =  \rfree \mathcal{W} + \mathcal{Y}- C
-\\ \dot{\mathcal{H}} & =  (\rfree+\pDies) \mathcal{H} - \mathcal{Y}
+   \CNrm & =  (\diePrb+\discRte) (\HNrm - \PDVEff_{t}(\TaxLev) + \NetWorth)
+\\ \dot{\NetWorth} & =  \rfree \NetWorth + \Wage - \TaxLev- \CNrm
+\\ \frac{d}{dt}(\HNrm - \PDVEff_{t}(\TaxLev)) & =  (\rfree+\diePrb) (\HNrm - \PDVEff_{t}(\TaxLev)) - (\Wage - \TaxLev)
 \end{aligned}\end{gathered}
 ```
 
@@ -689,9 +689,9 @@ specification of the economy to
 >
 > the distribution of government bonds increases the consumers'
 >
-> wealth {math}`W` by an amount equal to the value of the bonds received,
+> wealth {math}`\KNrm` by an amount equal to the value of the bonds received,
 >
-> resulting in a new definition of wealth {math}`\mathcal{W}` which
+> resulting in a new definition of wealth {math}`\NetWorth` which
 >
 > includes the bonds. On the other hand, the higher value of taxes
 >
@@ -699,7 +699,7 @@ specification of the economy to
 >
 > equal to the present discounted value of the taxes.
 >
-> The change in (redefined) wealth is now  net income {math}`Y-\timeRate`
+> The change in (redefined) wealth is now  net income {math}`\Wage-\discRte`
 >
 > minus consumption.
 
@@ -708,8 +708,8 @@ the economy are
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{C} & =  (\rfree - \timeRate)C - \pDies(\pDies+\timeRate)(K+\Debt)
-\\ \dot{K} & =  K^{\alpha}-\delta K - C
+  \dot{\CNrm} & =  (\rfree - \discRte)\CNrm - \diePrb(\diePrb+\discRte)(\KNrm+\Debt)
+\\ \dot{\KNrm} & =  \KNrm^{\kapShare}-\deprRte \KNrm - \CNrm
 \end{aligned}\end{gathered}
 ```
 
@@ -726,18 +726,18 @@ of the policy on different generations in the economy.
 > :label: eq:dotCnew
 >
 > \begin{gathered}\begin{aligned}
->   \dot{C} & =  (\pDies+\timeRate) (\dot{\mathcal{H}} + \dot{\mathcal{W}})
-> \\ & =  (\pDies+\timeRate)(\rfree \mathcal{W}+(\rfree+\pDies)\mathcal{H}-C)
+>   \dot{\CNrm} & =  (\diePrb+\discRte) (\frac{d}{dt}(\HNrm - \PDVEff_{t}(\TaxLev)) + \dot{\NetWorth})
+> \\ & =  (\diePrb+\discRte)(\rfree \NetWorth+(\rfree+\diePrb)(\HNrm - \PDVEff_{t}(\TaxLev))-\CNrm)
 > \end{aligned}\end{gathered}
 > ```
 >
-> Now solve {eq}`eq:Cnew` for {math}`\mathcal{H}`,
+> Now solve {eq}`eq:Cnew` for {math}`\HNrm - \PDVEff_{t}(\TaxLev)`,
 >
 > ```{math}
 > :label: eq:18
 >
 > \begin{gathered}\begin{aligned}
->   \mathcal{H} & =  \left(\frac{C}{\pDies+ \timeRate}\right)-\mathcal{W}
+>   \HNrm - \PDVEff_{t}(\TaxLev) & =  \left(\frac{\CNrm}{\diePrb+ \discRte}\right)-\NetWorth
 > \end{aligned}\end{gathered}
 > ```
 >
@@ -745,23 +745,23 @@ of the policy on different generations in the economy.
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->   \dot{C} & =  (\pDies+\timeRate)(\rfree \mathcal{W}+(\rfree+\pDies)(C(\pDies+\timeRate)^{-1} - \mathcal{W})-C)
-> \\        & =  (\rfree+\pDies)C - (\pDies+\timeRate)C- \pDies(\pDies+\timeRate)\mathcal{W}
-> \\ & =  (\rfree-\timeRate)C - \pDies(\pDies+\timeRate)(K+\Debt).
+>   \dot{\CNrm} & =  (\diePrb+\discRte)(\rfree \NetWorth+(\rfree+\diePrb)(\CNrm(\diePrb+\discRte)^{-1} - \NetWorth)-\CNrm)
+> \\        & =  (\rfree+\diePrb)\CNrm - (\diePrb+\discRte)\CNrm- \diePrb(\diePrb+\discRte)\NetWorth
+> \\ & =  (\rfree-\discRte)\CNrm - \diePrb(\diePrb+\discRte)(\KNrm+\Debt).
 > \end{aligned}\end{gathered}
 > ```
 >
 > Since we are assuming that {math}`\Debt` is a constant (after the fiscal
 >
-> experiment), any combination of {math}`C` and {math}`W` that would have been on
+> experiment), any combination of {math}`\CNrm` and {math}`\KNrm` that would have been on
 >
-> the {math}`\dot{C}=0` locus before the policy shift now has a value {math}`\dot{C} = -\pDies(\pDies+\timeRate)\Debt`. This means that the {math}`C` that would restore
+> the {math}`\dot{\CNrm}=0` locus before the policy shift now has a value {math}`\dot{\CNrm} = -\diePrb(\diePrb+\discRte)\Debt`. This means that the {math}`\CNrm` that would restore
 >
-> {math}`\dot{C}=0` must be a larger {math}`C`, which says that the {math}`\dot{C}=0`
+> {math}`\dot{\CNrm}=0` must be a larger {math}`\CNrm`, which says that the {math}`\dot{\CNrm}=0`
 >
 > locus shifts up (or, equivalently, to the left). Thus, the new
 >
-> equilibrium will be at a lower value of {math}`K` and a higher interest
+> equilibrium will be at a lower value of {math}`\KNrm` and a higher interest
 >
 > rate.
 >
@@ -769,7 +769,7 @@ of the policy on different generations in the economy.
 >
 > of the original equilibrium. This is because at a given level of the aggregate
 >
-> capital stock, consumers spend more because {math}`\mathcal{W}>W`. Thus,
+> capital stock, consumers spend more because {math}`\NetWorth>\KNrm`. Thus,
 >
 > Ricardian equivalence does not hold in this model, because a tax cut today
 >
@@ -788,7 +788,7 @@ of the policy on different generations in the economy.
 >
 > economy. Prior to time 0, the economy was in its steady-state
 >
-> equilibrium at the level of consumption {math}`C_0` corresponding to the
+> equilibrium at the level of consumption {math}`\CNrm_{0}` corresponding to the
 >
 > equilibrium labeled {math}`A` in the phase diagram. At time 0, the fiscal
 >
@@ -800,48 +800,48 @@ of the policy on different generations in the economy.
 >
 > down the capital stock per capita, and so over time consumption asypmtotically
 >
-> approaches a new, lower equilibrium level of consumption {math}`C'`.
+> approaches a new, lower equilibrium level of consumption {math}`\CNrm'`.
 
 :::{figure} /content/figures/BlanchardFiniteHorizon/BlanchardCDynamics.png
 :::
 
 Blanchard shows that if the model is changed so that each
-consumer's income declines exponentially at rate {math}`\gamma` after
+consumer's income declines exponentially at rate {math}`-\PermGroRte` after
 birth, the result is equivalent to assuming that future labor income
-is discounted at an interest rate that is higher by {math}`\gamma`. He
+is discounted at an interest rate that is higher by {math}`-\PermGroRte`. He
 further shows that the equations of motion of the model change to
 
 ```{math}
 :label: eq:lccdot
 
 \begin{gathered}\begin{aligned}
-  \dot{C} & =  (\alpha K^{\alpha-1}-\delta +\gamma-\timeRate)C-(\pDies+\gamma)(\pDies+\timeRate)K
-\\ \dot{K} & =  K^{\alpha}-\delta K - C.
+  \dot{\CNrm} & =  (\kapShare \KNrm^{\kapShare-1}-\deprRte -\PermGroRte-\discRte)\CNrm-(\diePrb-\PermGroRte)(\diePrb+\discRte)\KNrm
+\\ \dot{\KNrm} & =  \KNrm^{\kapShare}-\deprRte \KNrm - \CNrm.
 \end{aligned}\end{gathered}
 ```
 
-Note that it is possible to rewrite the {math}`\dot{C}=0` locus as
+Note that it is possible to rewrite the {math}`\dot{\CNrm}=0` locus as
 
 ```{math}
 :label: eq:lccdoteq0
 
 \begin{gathered}\begin{aligned}
-  (\alpha K^{\alpha-1}-\delta +\gamma-\timeRate)C & =  (\pDies+\gamma)(\pDies+\timeRate)K
+  (\kapShare \KNrm^{\kapShare-1}-\deprRte -\PermGroRte-\discRte)\CNrm & =  (\diePrb-\PermGroRte)(\diePrb+\discRte)\KNrm
 \end{aligned}\end{gathered}
 ```
 
-Use this equation to show that as {math}`C \rightarrow \infty`, the
-{math}`\dot{C}=0` locus asymptotes to
+Use this equation to show that as {math}`\CNrm \rightarrow \infty`, the
+{math}`\dot{\CNrm}=0` locus asymptotes to
 
 ```{math}
 :label: eq:eqblcr
 
 \begin{gathered}\begin{aligned}
- \rfree = \alpha K^{\alpha-1} - \delta & =  \timeRate - \gamma
+ \rfree = \kapShare \KNrm^{\kapShare-1} - \deprRte & =  \discRte + \PermGroRte
 \end{aligned}\end{gathered}
 ```
 
-Thus, for a large enough value of {math}`\gamma` it is possible that the net
+Thus, for a large enough value of {math}`-\PermGroRte` it is possible that the net
 interest rate in this economy could be negative. Draw a phase diagram
 corresponding to an equilibrium with a negative net interest rate, and
 comment on why this is an interesting case to think about. In
@@ -850,21 +850,21 @@ experiment examined above?
 
 > *Answer:*
 >
-> As {math}`C` goes to infinity on the LHS of {eq}`eq:lccdoteq0`, the only way
+> As {math}`\CNrm` goes to infinity on the LHS of {eq}`eq:lccdoteq0`, the only way
 >
 > the equation can continue to hold is if
 >
 > ```{math}
 > \begin{gathered}\begin{aligned}
->  \lim_{C \rightarrow \infty} (\alpha K^{\alpha-1}-\delta +\gamma-\timeRate) & =  0
+>  \lim_{\CNrm \rightarrow \infty} (\kapShare \KNrm^{\kapShare-1}-\deprRte -\PermGroRte-\discRte) & =  0
 > \end{aligned}\end{gathered}
 > ```
 >
 > which implies {eq}`eq:eqblcr`.
 >
-> The new phase diagram shows the {math}`\dot{C}=0` locus intersecting the
+> The new phase diagram shows the {math}`\dot{\CNrm}=0` locus intersecting the
 >
-> {math}`\dot{K}=0` locus to the right of the maximum of the {math}`\dot{K}=0` locus.
+> {math}`\dot{\KNrm}=0` locus to the right of the maximum of the {math}`\dot{\KNrm}=0` locus.
 >
 > This is implied by the fact that the net interest rate is negative, which
 >
