@@ -323,45 +323,8 @@ Note: The same economy, with {math}`\PtyGroRte=0.03`. From {math}`\kNrm=0.5`, co
 The steady state is a saddle point. Linearize the system there: its Jacobian matrix, the derivatives of {math}`\dot{\kNrm}` and {math}`\dot{\cNrm}` with respect to {math}`\kNrm` and {math}`\cNrm`, has {math}`\partial\dot{\kNrm}/\partial\cNrm = -1` and {math}`\partial\dot{\cNrm}/\partial\cNrm = 0`, so its determinant is {math}`\partial\dot{\cNrm}/\partial\kNrm = \Steady{\cNrm}\fFunc^{\prime\prime}(\Steady{\kNrm})/\CRRA < 0`, and its two eigenvalues have opposite signs: one direction converges to the steady state, and the other diverges. The saddle path is the converging one; the stable eigenvalue, in absolute value, is the model's speed of convergence, which {cite:t}`barro&salaimartin:book`, chapter 2, compare with the speed observed across countries and regions.
 :::
 
+The saddle path has, in general, no analytical solution, so the transition must be computed. The [notebook](RamseyCassKoopmans.ipynb) computes it by the "time elimination" method {cite:p}`Mulligan&sm:transdynam`: along the path, {math}`d\cNrm/d\kNrm = \dot{\cNrm}/\dot{\kNrm}`, a differential equation in {math}`\kNrm` alone, which it solves outward from the steady state, starting along the saddle path's slope there. The notebook derives the method and draws both figures; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb). {cite:t}`judd:book` covers numerical methods for saddle paths more generally.
+
 How much of observed growth can the transition explain? Little, {cite:t}`king&rebelo:trans` argue: with plausible parameters, an economy far enough below its steady state for the transition to account for much of its growth would have implausibly high interest rates early on.
 
 [Decentralizing the Ramsey/Cass-Koopmans Model](#sec:decentralizingrck) shows that, under special conditions, competitive households and firms, taking prices as given, reproduce the planner's allocation, and [The Ramsey/Cass-Koopmans (RCK) Model with Government](#sec:RCKWithGov) adds government spending, taxes and debt.
-
-## Appendix: Numerical Solution
-
-Since the transition has, in general, no analytical solution, its quantitative implications must be computed. This appendix shows how, for students beginning research on growth models.
-
-The most straightforward numerical method for perfect foresight
-models of this kind is the
-"time elimination" method {cite:p}`Mulligan&sm:transdynam`. It starts from
-
-```{math}
-\begin{gathered}\begin{aligned}
-    \left(\frac{d\cNrm/dt}{d\kNrm/dt}\right) &=  d\cNrm/d\kNrm.
-  \end{aligned}\end{gathered}
-```
-
-By {eq}`eq:cdotOc`,
-
-```{math}
-:label: eq:cdot
-
-\begin{gathered}\begin{aligned}
-    \dot{\cNrm} & =   \CRRA^{-1}(\fFunc^{\prime}(\kNrm)-\discRte -(\PopnGroRte+\deprRte)-\CRRA \PtyGroRte)\cNrm ,
-  \end{aligned}\end{gathered}
-```
-
-so
-
-```{math}
-\begin{gathered}\begin{aligned}
-    d\cNrm/d\kNrm & =  \left(\frac{(\kapShare \kNrm^{\kapShare-1}-\discRte -(\PopnGroRte+\deprRte)-\CRRA \PtyGroRte)\cNrm}
-                       {\CRRA(\kNrm^{\kapShare} - \cNrm - (\PtyGroRte +\PopnGroRte+\deprRte) \kNrm)}\right)
-  \end{aligned}\end{gathered}
-```
-
-which is a differential equation with, in general, no analytical solution. Many numerical math packages can solve it, yielding a numerical version of the {math}`\cFunc(\kNrm)` function.
-
-One problem: at the steady state both {math}`\dot{\cNrm}` and {math}`\dot{\kNrm}` are zero, so the right-hand side of this equation is {math}`0/0`, and the solution cannot start there. It starts instead a small step {math}`\epsilon` away from the steady state on each side, along the saddle path's slope there, and integrates the equation outward, away from the steady state: once down toward {math}`\kNrm=0`, yielding {math}`\cFunc_{-}(\kNrm)`, and once up to some large value of {math}`\kNrm`, yielding {math}`\cFunc_{+}(\kNrm)`. The slope comes from the system linearized at the steady state: it is the direction of the eigenvector with the negative eigenvalue, the one direction from which the economy converges. Within {math}`\epsilon` of the steady state, the consumption function is the straight line along that slope.
-
-{cite:t}`judd:book` covers numerical methods for saddle paths more generally. The [notebook](RamseyCassKoopmans.ipynb) solves the model this way and draws both figures; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).
