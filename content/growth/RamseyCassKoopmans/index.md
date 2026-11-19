@@ -21,11 +21,11 @@ States and controls are functions of time; time subscripts appear only where cla
 \end{aligned}\end{gathered}
 ```
 
-to produce output using capital and labor. Under perfect competition firms must make zero profits in equilibrium, which means, by [Euler's theorem](#fact:eulerstheorem), that
-
 :::{margin}
 An important insight here is that all of output is absorbed by payments to labor and to capital; there is nothing left over (say, to fund corporate research to invent new technologies to augment productivity). [What Endogenous Growth Requires](#sec:Endogenous) starts from this point.
 :::
+
+to produce output using capital and labor. Under perfect competition firms must make zero profits in equilibrium, which means, by [Euler's theorem](#fact:eulerstheorem), that
 
 ```{math}
 :label: eq:RCK-outputExhausted

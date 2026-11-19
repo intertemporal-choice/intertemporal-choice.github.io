@@ -159,6 +159,10 @@ sense that the exponent on human capital in the accumulation equation
 for human capital is one. Human capital can be accumulated without
 bound and without diminishing returns.
 
+:::{margin}
+The planner maximizes the discounted sum of CRRA utility from per capita consumption, with time preference rate {math}`\discRte`, counting each date's per capita utility once, as [the RCK model's planner](#eq:RCK-maxprob) does. Lucas weights utility by the size of the population, which replaces {math}`\discRte` with {math}`\discRte-\PopnGroRte` here and in the decentralized growth rate below.
+:::
+
 ## The Ramsey/Cass-Koopmans Version
 
 Lucas does not examine the Solow version of the model with a constant
@@ -172,10 +176,6 @@ present the conclusion, which is that the steady-state growth rate is
 
 \dot{\cNrm}/\cNrm = \CRRA^{-1}(\hCapProd - \discRte).
 ```
-
-:::{margin}
-The planner maximizes the discounted sum of CRRA utility from per capita consumption, with time preference rate {math}`\discRte`, counting each date's per capita utility once, as [the RCK model's planner](#eq:RCK-maxprob) does. Lucas weights utility by the size of the population, which replaces {math}`\discRte` with {math}`\discRte-\PopnGroRte` here and in the decentralized growth rate below.
-:::
 
 :::{margin}
 Human capital grows at the same rate as consumption, so by {eq}`eq:hdot` the time spent working is {math}`\labor = 1-\CRRA^{-1}(\hCapProd-\discRte)/\hCapProd`. It is positive, and utility finite, only if growth is below the return, {math}`\CRRA^{-1}(\hCapProd-\discRte) < \hCapProd`: the condition of the [Rebelo model](#sec:RebeloAK), with {math}`\hCapProd` in place of {math}`\PtyAgg`.
