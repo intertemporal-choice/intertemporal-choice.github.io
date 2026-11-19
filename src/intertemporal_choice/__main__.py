@@ -11,9 +11,9 @@ import matplotlib
 
 matplotlib.use("Agg")  # no display in CI
 
-from intertemporal_choice import accelerator, bubbles, fiscal, fisher, lucas, notation, olg, portfolio, qmodel, ramsey, spreads, style  # noqa: E402
+from intertemporal_choice import accelerator, blanchard, bubbles, fiscal, fisher, lucas, notation, olg, portfolio, qmodel, ramsey, spreads, style  # noqa: E402
 
-MODULES = [style, notation, fisher, portfolio, olg, qmodel, bubbles, accelerator, spreads, lucas, ramsey, fiscal]
+MODULES = [style, notation, fisher, portfolio, olg, qmodel, bubbles, accelerator, spreads, lucas, ramsey, fiscal, blanchard]
 
 logging.basicConfig(level=logging.INFO, format="%(message)s", force=True)
 log = logging.getLogger(__name__)
