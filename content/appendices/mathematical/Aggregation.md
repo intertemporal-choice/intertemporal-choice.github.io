@@ -54,24 +54,24 @@ remains constant.
 
 As above, suppose that the population alive at time {math}`t` is arranged on the unit interval.
 
-The probability of death is {math}`\pDies` (and the probability of not dying is {math}`\PLives = 1-\pDies`).
+The probability of death is {math}`\diePrb` (and the probability of not dying is {math}`\LivPrb = 1-\diePrb`).
 
 Then for a person living at any location {math}`i \in [0,1]`, expected remaining lifetime including the
 current period will be
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  1 + \overbrace{(1-\PDies)}^{\PLives} + (1-\PDies)^{2} + \ldots & =  \left(\frac{1}{1-(1-\PDies)}\right)
-\\ & =  1/\PDies
+  1 + \overbrace{(1-\DiePrb)}^{\LivPrb} + (1-\DiePrb)^{2} + \ldots & =  \left(\frac{1}{1-(1-\DiePrb)}\right)
+\\ & =  1/\DiePrb
 .
 \end{aligned}\end{gathered}
 ```
 
-If a new cohort of size {math}`\PDies` has been born each period since the beginning of time, the total population will be given by the size of a new cohort {math}`\PDies` multiplied by the expected lifetime {math}`\PDies^{-1}`:
+If a new cohort of size {math}`\DiePrb` has been born each period since the beginning of time, the total population will be given by the size of a new cohort {math}`\DiePrb` multiplied by the expected lifetime {math}`\DiePrb^{-1}`:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \PDies \PDies^{-1} & =  1,
+  \DiePrb \DiePrb^{-1} & =  1,
 \end{aligned}\end{gathered}
 ```
 
@@ -80,16 +80,16 @@ so that the mass of the aggregate population is constant at 1, as above.
 ### Continuous Time
 
 Blanchard's original treatment was in continuous time, with a constant
-rate of death {math}`\pDies`, so that the probability of remaining alive (not dead)
+rate of death {math}`\diePrb`, so that the probability of remaining alive (not dead)
 after {math}`t` periods for a consumer born in period 0 is
 
 :::{margin}
-The number of people who will die during the first period in the continuous-time model is measured by the difference between an initial population of size 1 and the size of the population remaining alive after one period, {math}`1-\Alive_{1}=1-e^{-\pDies}`. [ExpEps](#fact:expeps) in the [Math Facts](#fact:mathfactslist) list implies that {math}`e^{-\pDies} \approx 1-\pDies`; therefore the proportion who have died will be approximately {math}`1-(1- \pDies)=\pDies`. Hence for small death rates, in order for the same population to survive for one period in a continuous-time model with death rate {math}`\pDies` and the discrete-time model with death rate {math}`\PDies`, one would need {math}`\pDies \approx \PDies`.
+The number of people who will die during the first period in the continuous-time model is measured by the difference between an initial population of size 1 and the size of the population remaining alive after one period, {math}`1-\Alive_{1}=1-e^{-\diePrb}`. [ExpEps](#fact:expeps) in the [Math Facts](#fact:mathfactslist) list implies that {math}`e^{-\diePrb} \approx 1-\diePrb`; therefore the proportion who have died will be approximately {math}`1-(1- \diePrb)=\diePrb`. Hence for small death rates, in order for the same population to survive for one period in a continuous-time model with death rate {math}`\diePrb` and the discrete-time model with death rate {math}`\DiePrb`, one would need {math}`\diePrb \approx \DiePrb`.
 :::
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \Alive_{t} & =  e^{-\pDies \tNow}
+  \Alive_{t} & =  e^{-\diePrb \tNow}
 \end{aligned}\end{gathered}
 ```
 
@@ -97,22 +97,22 @@ so that the expected life span is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \int_{0}^{\infty} e^{-\pDies \tau} d\tau & =  1/\pDies
+  \int_{0}^{\infty} e^{-\diePrb \tau} d\tau & =  1/\diePrb
 \end{aligned}\end{gathered}
 ```
 
-and if the flow arrival rate of new population is {math}`\pDies` (that is, at each instant a flow of new population arrives at rate {math}`\pDies`) then again the population
+and if the flow arrival rate of new population is {math}`\diePrb` (that is, at each instant a flow of new population arrives at rate {math}`\diePrb`) then again the population
 mass is constant at
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \pDies/\pDies & =  1.
+  \diePrb/\diePrb & =  1.
 \end{aligned}\end{gathered}
 ```
 
 ### Population Growth
 
-Now suppose that the population in the discrete-time model is growing by a factor {math}`\PopGro \approx 1+\popGro` from period to period; if the number of newborns in period 0 was 1, then the number of newborns in period {math}`t` is given by
+Now suppose that the population in the discrete-time model is growing by a factor {math}`\PopGroFac \approx 1+\popGroRte` from period to period; if the number of newborns in period 0 was 1, then the number of newborns in period {math}`t` is given by
 
 :::{margin}
 The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\lnat` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`. In discrete time, where the population grows by the factor {math}`\PopnGroFac` a period, {math}`\PopnGroRte` stands for the net rate {math}`\PopnGroFac-1`, which it approximates when growth is slow.
@@ -120,7 +120,7 @@ The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` i
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \PopGro^{t}.
+  \PopGroFac^{t}.
 \end{aligned}\end{gathered}
 ```
 
@@ -130,7 +130,7 @@ will be of relative size
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  (\PLives/\PopGro)^{\age}
+  (\LivPrb/\PopGroFac)^{\age}
 \end{aligned}\end{gathered}
 ```
 
@@ -140,10 +140,10 @@ The total relative populations will be
 :label: eq:4
 
 \begin{gathered}\begin{aligned}
-  1 + (\PLives/\PopGro) + (\PLives/\PopGro)^{2} + ... & =  \left(\frac{1}{1-\PLives/\PopGro}\right)
+  1 + (\LivPrb/\PopGroFac) + (\LivPrb/\PopGroFac)^{2} + ... & =  \left(\frac{1}{1-\LivPrb/\PopGroFac}\right)
 \end{aligned}\end{gathered}
 ```
 
-so that if in period 0 the population was of size {math}`(1-\PLives/\PopGro)` then the sizes
+so that if in period 0 the population was of size {math}`(1-\LivPrb/\PopGroFac)` then the sizes
 of the relative populations will add up to one even as the absolute population grows by
-the factor {math}`\PopGro`.
+the factor {math}`\PopGroFac`.

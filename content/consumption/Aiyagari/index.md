@@ -22,21 +22,21 @@ Certainty equivalence rules out precautionary saving. Dropping it, when utility 
 Each of a continuum of households, of total mass one, maximizes
 
 ```{math}
-\max ~ \Ex_{0}\left[\sum_{t=0}^{\infty} \DiscFac^{t}\, \uFunc(\cRat_{t})\right], \qquad \uFunc(\cRat) = \frac{\cRat^{1-\CRRA}}{1-\CRRA},
+\max ~ \Ex_{0}\left[\sum_{t=0}^{\infty} \DiscFac^{t}\, \uFunc(\cNrm_{t})\right], \qquad \uFunc(\cNrm) = \frac{\cNrm^{1-\CRRA}}{1-\CRRA},
 ```
 
-with {math}`\DiscFac = 1/(1+\timeRate)`. It supplies an exogenous, random endowment of labor {math}`\labor_{t}` at the wage {math}`\Wage` and holds assets earning the interest rate {math}`\rfree`, so its market resources evolve as
+with {math}`\DiscFac = 1/(1+\discRte)`. It supplies an exogenous, random endowment of labor {math}`\labor_{t}` at the wage {math}`\Wage` and holds assets earning the interest rate {math}`\rfree`, so its market resources evolve as
 
 ```{math}
 :label: eq:Aiyagari-mtp1
 
-\mRat_{t+1} = \Rfree\aRat_{t} + \Wage\labor_{t+1}, \qquad \aRat_{t} = \mRat_{t} - \cRat_{t} \geq \aMin,
+\mNrm_{t+1} = \Rfree\aNrm_{t} + \Wage\labor_{t+1}, \qquad \aNrm_{t} = \mNrm_{t} - \cNrm_{t} \geq \aMin,
 ```
 
-where {math}`\aRat_{t}` is end-of-period assets and {math}`\aMin \leq 0` is the borrowing limit.
+where {math}`\aNrm_{t}` is end-of-period assets and {math}`\aMin \leq 0` is the borrowing limit.
 
 :::{margin}
-Aiyagari's {math}`\mu`, {math}`\rho`, {math}`\lambda`, {math}`l` and {math}`z` (risk aversion, persistence, time preference rate, endowment, resources) are here {math}`\CRRA`, {math}`\tau`, {math}`\timeRate`, {math}`\labor` and {math}`\mRat`.
+Aiyagari's {math}`\mu`, {math}`\rho`, {math}`\lambda`, {math}`l` and {math}`z` (risk aversion, persistence, time preference rate, endowment, resources) are here {math}`\CRRA`, {math}`\tau`, {math}`\discRte`, {math}`\labor` and {math}`\mNrm`.
 :::
 
 The idiosyncratic labor productivity component is the only source of risk. Its logarithm follows a first-order autoregression with persistence {math}`\tau`,
@@ -54,16 +54,16 @@ The [Euler equation](#eq:uPEuler) now holds with equality only when the househol
 ```{math}
 :label: eq:Aiyagari-Euler
 
-\uP(\cRat_{t}) \geq \DiscFac\Rfree\, \Ex_{t}\left[\uP(\cRat_{t+1})\right], \quad \text{with equality whenever } \aRat_{t} > \aMin.
+\uP(\cNrm_{t}) \geq \DiscFac\Rfree\, \Ex_{t}\left[\uP(\cNrm_{t+1})\right], \quad \text{with equality whenever } \aNrm_{t} > \aMin.
 ```
 
-The solution is a consumption function for each level of the endowment, {math}`\cFunc(\mRat, \labor)`. In [the consumption functions figure](#fig:ConsFuncByIncomeState), each follows the 45-degree line until the household prefers to save, and is concave beyond. A household with a low endowment spends less at a given {math}`\mRat`, because a low wage today forecasts low wages to come.
+The solution is a consumption function for each level of the endowment, {math}`\cFunc(\mNrm, \labor)`. In [the consumption functions figure](#fig:ConsFuncByIncomeState), each follows the 45-degree line until the household prefers to save, and is concave beyond. A household with a low endowment spends less at a given {math}`\mNrm`, because a low wage today forecasts low wages to come.
 
 :::{figure} figures/ConsFuncByIncomeState.png
 :name: fig:ConsFuncByIncomeState
 :align: center
 
-The consumption function {math}`\cFunc(\mRat,\labor)` for each of the seven levels of the idiosyncratic labor productivity component, from lowest (dark) to highest (light), at the equilibrium interest rate for Aiyagari's baseline: {math}`\CRRA = 3`, {math}`\tau = 0.6`, {math}`\sigma = 0.2`, {math}`\DiscFac = 0.96`, and no borrowing. Drawn by the chapter's [notebook](Aiyagari.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything.
+The consumption function {math}`\cFunc(\mNrm,\labor)` for each of the seven levels of the idiosyncratic labor productivity component, from lowest (dark) to highest (light), at the equilibrium interest rate for Aiyagari's baseline: {math}`\CRRA = 3`, {math}`\tau = 0.6`, {math}`\sigma = 0.2`, {math}`\DiscFac = 0.96`, and no borrowing. Drawn by the chapter's [notebook](Aiyagari.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything.
 :::
 
 ### How Much May a Household Borrow?
@@ -87,16 +87,16 @@ A household never borrows all the way to this limit: a run of the worst endowmen
 
 ### Why Wealth Stays Bounded
 
-The [perfect foresight](#sec:PerfForesightCRRA) conditions carry over. [Return impatience](#eq:PatR) makes the household's problem well defined, and [growth impatience](#eq:PatWGroCond) keeps wealth bounded relative to income. Income does not grow here, so growth impatience is {math}`(\Rfree\DiscFac)^{1/\CRRA} < 1`, or {math}`\rfree < \timeRate`; it coincides with absolute impatience only for that reason. With {math}`\rfree \leq 0`, as in Aiyagari's most extreme calibration, human wealth is [infinite](#sec:PFwhenFHWfails) and only the borrowing limit keeps the problem well defined. If {math}`\DiscFac\Rfree \geq 1`, consumption and assets grow without bound for almost every household ({cite:t}`cwcUnderUncert`).
+The [perfect foresight](#sec:PerfForesightCRRA) conditions carry over. [Return impatience](#eq:PatR) makes the household's problem well defined, and [growth impatience](#eq:PatWGroCond) keeps wealth bounded relative to income. Income does not grow here, so growth impatience is {math}`(\Rfree\DiscFac)^{1/\CRRA} < 1`, or {math}`\rfree < \discRte`; it coincides with absolute impatience only for that reason. With {math}`\rfree \leq 0`, as in Aiyagari's most extreme calibration, human wealth is [infinite](#sec:PFwhenFHWfails) and only the borrowing limit keeps the problem well defined. If {math}`\DiscFac\Rfree \geq 1`, consumption and assets grow without bound for almost every household ({cite:t}`cwcUnderUncert`).
 
 ## Firms and Factor Prices
 
-Competitive firms produce with {math}`Y = \KLev^{\kapShare}L^{1-\kapShare}`, and capital depreciates at rate {math}`\depr`. As in the [decentralized Ramsey model](#sec:decentralizingrck), the interest rate households earn is the marginal product of capital net of depreciation, and the wage is the [marginal product](#eq:rEqfp) of labor; with [aggregate](#sec:Aggregation) labor {math}`L`,
+Competitive firms produce with {math}`Y = \KLev^{\kapShare}L^{1-\kapShare}`, and capital depreciates at rate {math}`\deprRte`. As in the [decentralized Ramsey model](#sec:decentralizingrck), the interest rate households earn is the marginal product of capital net of depreciation, and the wage is the [marginal product](#eq:rEqfp) of labor; with [aggregate](#sec:Aggregation) labor {math}`L`,
 
 ```{math}
 :label: eq:Aiyagari-Prices
 
-\rfree = \kapShare(\KLev/L)^{\kapShare-1} - \depr, \qquad \Wage = (1-\kapShare)(\KLev/L)^{\kapShare}.
+\rfree = \kapShare(\KLev/L)^{\kapShare-1} - \deprRte, \qquad \Wage = (1-\kapShare)(\KLev/L)^{\kapShare}.
 ```
 
 Inverting the first gives the capital firms want at each interest rate,
@@ -104,7 +104,7 @@ Inverting the first gives the capital firms want at each interest rate,
 ```{math}
 :label: eq:Aiyagari-CapitalDemand
 
-\KLev(\rfree) = L\left(\frac{\kapShare}{\rfree+\depr}\right)^{1/(1-\kapShare)},
+\KLev(\rfree) = L\left(\frac{\kapShare}{\rfree+\deprRte}\right)^{1/(1-\kapShare)},
 ```
 
 a downward-sloping demand curve. The wage moves with the interest rate, so the interest rate affects saving both directly and through the wage.
@@ -117,13 +117,13 @@ a downward-sloping demand curve. The wage moves with the interest rate, so the i
 
 A stationary equilibrium is an interest rate, a wage, consumption functions and a distribution of households over assets and endowments such that households optimize, firms optimize, the distribution reproduces itself, and the capital households hold is the capital firms use.
 
-1. Given {math}`\rfree` and {math}`\Wage`, the consumption functions {math}`\cFunc(\mRat,\labor)` solve the household's problem.
+1. Given {math}`\rfree` and {math}`\Wage`, the consumption functions {math}`\cFunc(\mNrm,\labor)` solve the household's problem.
 2. {math}`\rfree` and {math}`\Wage` satisfy the [firms' first-order conditions](#eq:Aiyagari-Prices).
-3. The distribution of households over {math}`(\aRat,\labor)` is stationary under the consumption functions, the [budget constraint](#eq:Aiyagari-mtp1) and the Markov chain for {math}`\labor`.
-4. Aggregate assets equal the capital stock: {math}`\KLev = \Ex[\aRat]`.
+3. The distribution of households over {math}`(\aNrm,\labor)` is stationary under the consumption functions, the [budget constraint](#eq:Aiyagari-mtp1) and the Markov chain for {math}`\labor`.
+4. Aggregate assets equal the capital stock: {math}`\KLev = \Ex[\aNrm]`.
 :::
 
-Each household's circumstances keep changing; only the distribution is constant. Write {math}`\Ex\aRat(\rfree)` for mean assets in the stationary distribution at the interest rate {math}`\rfree` and the wage it implies.
+Each household's circumstances keep changing; only the distribution is constant. Write {math}`\Ex\aNrm(\rfree)` for mean assets in the stationary distribution at the interest rate {math}`\rfree` and the wage it implies.
 
 :::{prf:proposition} Capital market clearing with uninsured idiosyncratic risk
 :label: res:aiyagari-market-clearing
@@ -134,11 +134,11 @@ The steady-state interest rate equates the capital that households supply to the
 ```{math}
 :label: eq:Aiyagari-Equilibrium
 
-\Ex\aRat(\rfree) = \KLev(\rfree).
+\Ex\aNrm(\rfree) = \KLev(\rfree).
 ```
 :::
 
-With complete markets, the economy would have the [Ramsey/Cass-Koopmans](#sec:RamseyCassKoopmans) steady state: {math}`\rfree = \timeRate`, a horizontal supply of capital at that rate, and an indeterminate distribution of wealth across households. With uninsurable risk, households would accumulate without limit at {math}`\rfree \geq \timeRate`, so the interest rate must be lower. Averaging the Euler equations shows this directly.
+With complete markets, the economy would have the [Ramsey/Cass-Koopmans](#sec:RamseyCassKoopmans) steady state: {math}`\rfree = \discRte`, a horizontal supply of capital at that rate, and an indeterminate distribution of wealth across households. With uninsurable risk, households would accumulate without limit at {math}`\rfree \geq \discRte`, so the interest rate must be lower. Averaging the Euler equations shows this directly.
 
 :::{prf:proposition} Interest rate below time preference
 :label: res:aiyagari-r-below-time-preference
@@ -149,26 +149,26 @@ When some households are at the borrowing limit with positive probability, avera
 ```{math}
 :label: eq:Aiyagari-AggregatedEuler
 
-\Ex[\uP(\cRat)] = \DiscFac\Rfree\, \Ex[\uP(\cRat)] + \Ex[\nu] \quad \Longrightarrow \quad \DiscFac\Rfree = 1 - \frac{\Ex[\nu]}{\Ex[\uP(\cRat)]} < 1.
+\Ex[\uP(\cNrm)] = \DiscFac\Rfree\, \Ex[\uP(\cNrm)] + \Ex[\nu] \quad \Longrightarrow \quad \DiscFac\Rfree = 1 - \frac{\Ex[\nu]}{\Ex[\uP(\cNrm)]} < 1.
 ```
 :::
 
-Here {math}`\nu_{t} = \uP(\cRat_{t}) - \DiscFac\Rfree\Ex_{t}[\uP(\cRat_{t+1})] \geq 0` is the slack in the [Euler equation](#eq:Aiyagari-Euler), positive only at the limit, and in a stationary distribution the average of {math}`\uP(\cRat_{t+1})` equals that of {math}`\uP(\cRat_{t})`.
+Here {math}`\nu_{t} = \uP(\cNrm_{t}) - \DiscFac\Rfree\Ex_{t}[\uP(\cNrm_{t+1})] \geq 0` is the slack in the [Euler equation](#eq:Aiyagari-Euler), positive only at the limit, and in a stationary distribution the average of {math}`\uP(\cNrm_{t+1})` equals that of {math}`\uP(\cNrm_{t})`.
 
-In [the capital supply and demand figure](#fig:CapitalSupplyDemand), supply rises without bound as {math}`\rfree` approaches {math}`\timeRate`, and crosses demand at a lower interest rate and a higher capital stock than complete markets give. General equilibrium limits the effect: the extra capital drives the interest rate down, which makes saving less attractive.
+In [the capital supply and demand figure](#fig:CapitalSupplyDemand), supply rises without bound as {math}`\rfree` approaches {math}`\discRte`, and crosses demand at a lower interest rate and a higher capital stock than complete markets give. General equilibrium limits the effect: the extra capital drives the interest rate down, which makes saving less attractive.
 
 :::{figure} figures/CapitalSupplyDemand.png
 :name: fig:CapitalSupplyDemand
 :align: center
 
-Steady-state supply and demand for capital, with the wage moving with the interest rate. With complete markets the supply of capital is horizontal at the time preference rate {math}`\timeRate`, and the capital stock is {math}`\KLev^{\timeRate}`; with uninsured idiosyncratic risk it is {math}`\KLev^{*}`. Baseline parameters as in [the consumption functions figure](#fig:ConsFuncByIncomeState). Drawn by the chapter's [notebook](Aiyagari.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything.
+Steady-state supply and demand for capital, with the wage moving with the interest rate. With complete markets the supply of capital is horizontal at the time preference rate {math}`\discRte`, and the capital stock is {math}`\KLev^{\discRte}`; with uninsured idiosyncratic risk it is {math}`\KLev^{*}`. Baseline parameters as in [the consumption functions figure](#fig:ConsFuncByIncomeState). Drawn by the chapter's [notebook](Aiyagari.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything.
 :::
 
 Nothing guarantees that supply slopes up everywhere, so the equilibrium need not be unique ({cite:t}`acikgozExistence`); {cite:t}`lightUniqueness` and {cite:t}`achdouHACT` prove uniqueness only under conditions that include relative risk aversion no greater than one.
 
 ## Gross Saving and Net Saving
 
-Aiyagari measured saving gross. Investment, including the replacement of worn-out capital, is divided by output measured before depreciation, so capital's income in the denominator is {math}`(\rfree+\depr)\KLev`. In a steady state without growth, investment just replaces depreciation:
+Aiyagari measured saving gross. Investment, including the replacement of worn-out capital, is divided by output measured before depreciation, so capital's income in the denominator is {math}`(\rfree+\deprRte)\KLev`. In a steady state without growth, investment just replaces depreciation:
 
 :::{prf:proposition} Saving rate in a no-growth Cobb-Douglas steady state
 :label: res:aiyagari-saving-rate
@@ -179,7 +179,7 @@ In a steady state with no growth the saving rate is replacement investment over 
 ```{math}
 :label: eq:Aiyagari-SavingRate
 
-s = \frac{\depr\KLev}{Y} = \frac{\depr\kapShare}{\rfree+\depr}.
+s = \frac{\deprRte\KLev}{Y} = \frac{\deprRte\kapShare}{\rfree+\deprRte}.
 ```
 :::
 
@@ -189,15 +189,15 @@ This is the [gross saving rate](#eq:grossavrate) of the growth model. The consum
 
 Aiyagari's algorithm repeats three steps until the interest rate settles down:
 
-1. Guess an interest rate {math}`\rfree < \timeRate`, and compute the wage from the [firms' first-order conditions](#eq:Aiyagari-Prices).
-2. Solve the household's problem at those prices, and simulate one household for many periods (Aiyagari used 10,000) to find mean assets {math}`\Ex\aRat(\rfree)`.
-3. If {math}`\Ex\aRat(\rfree)` exceeds {math}`\KLev(\rfree)`, lower the guess; if it falls short, raise it.
+1. Guess an interest rate {math}`\rfree < \discRte`, and compute the wage from the [firms' first-order conditions](#eq:Aiyagari-Prices).
+2. Solve the household's problem at those prices, and simulate one household for many periods (Aiyagari used 10,000) to find mean assets {math}`\Ex\aNrm(\rfree)`.
+3. If {math}`\Ex\aNrm(\rfree)` exceeds {math}`\KLev(\rfree)`, lower the guess; if it falls short, raise it.
 
 The [notebook](Aiyagari.ipynb) carries out these steps with the code of the Aiyagari1994QJE REMARK, which builds the households with HARK and, like Aiyagari, simulates them; open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/Aiyagari/Aiyagari.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/Aiyagari/Aiyagari.ipynb) to run it without installing anything.
 
 ## Results
 
-A period is a year; Aiyagari set {math}`\DiscFac = 0.96`, {math}`\kapShare = 0.36` and {math}`\depr = 0.08` ({cite:t}`prescottTheoryAhead`), so that with complete markets {math}`\timeRate = 4.17` percent and the saving rate is 23.67 percent. He varied {math}`\sigma` (0.2, 0.4), {math}`\tau` (0 to 0.9) and {math}`\CRRA` (1, 3, 5), with no borrowing. In the baseline ({math}`\sigma = 0.2`, {math}`\tau = 0.6`, {math}`\CRRA = 3`), uninsured risk lowers the interest rate to 3.86 percent (Aiyagari found 3.88), raises capital by 4.0 percent and the saving rate to 24.28 percent. Aiyagari concluded that for moderate risk aversion, variability and persistence the saving rate rises by at most about three percentage points; only when income is both volatile and persistent is the effect large ({math}`\sigma = 0.4`, {math}`\tau = 0.9`, {math}`\CRRA = 5`: a negative interest rate and a saving rate of 37.6 percent).
+A period is a year; Aiyagari set {math}`\DiscFac = 0.96`, {math}`\kapShare = 0.36` and {math}`\deprRte = 0.08` ({cite:t}`prescottTheoryAhead`), so that with complete markets {math}`\discRte = 4.17` percent and the saving rate is 23.67 percent. He varied {math}`\sigma` (0.2, 0.4), {math}`\tau` (0 to 0.9) and {math}`\CRRA` (1, 3, 5), with no borrowing. In the baseline ({math}`\sigma = 0.2`, {math}`\tau = 0.6`, {math}`\CRRA = 3`), uninsured risk lowers the interest rate to 3.86 percent (Aiyagari found 3.88), raises capital by 4.0 percent and the saving rate to 24.28 percent. Aiyagari concluded that for moderate risk aversion, variability and persistence the saving rate rises by at most about three percentage points; only when income is both volatile and persistent is the effect large ({math}`\sigma = 0.4`, {math}`\tau = 0.9`, {math}`\CRRA = 5`: a negative interest rate and a saving rate of 37.6 percent).
 
 ## What the Calibration Leaves Out
 

@@ -15,38 +15,38 @@ Consider a consumer subject to the dynamic budget constraint
 \bLev_{t+1} = (\bLev_{t}+\yLev_{t}-\cLev_{t})\Rfree
 ```
 
-where {math}`\bLev_{t}` is beginning-of-period bank balances, {math}`\yLev_{t}` is current labor income, and {math}`\Rfree=(1+\rfree)` is the constant interest factor. Actual labor income {math}`\yLev` is permanent labor income {math}`\pLvl` modified by a transitory shock factor {math}`\tShkEmp`:
+where {math}`\bLev_{t}` is beginning-of-period bank balances, {math}`\yLev_{t}` is current labor income, and {math}`\Rfree=(1+\rfree)` is the constant interest factor. Actual labor income {math}`\yLev` is permanent labor income {math}`\pLvl` modified by a transitory shock factor {math}`\tranShkEmp`:
 
 ```{math}
-\yLev_{t+1} = \pLvl_{t+1} \tShkEmp_{t+1}
+\yLev_{t+1} = \pLvl_{t+1} \tranShkEmp_{t+1}
 ```
 
-where {math}`\Ex_{t}[\tShkEmp_{t+n}]=1~\forall~n>0`. Permanent labor income grows by a predictable factor {math}`\WGro` from period to period, subject to a mean-one permanent shock {math}`\psi`:
+where {math}`\Ex_{t}[\tranShkEmp_{t+n}]=1~\forall~n>0`. Permanent labor income grows by a predictable factor {math}`\WGroFac` from period to period, subject to a mean-one permanent shock {math}`\psi`:
 
 ```{math}
-\pLvl_{t+1} = \WGro \pLvl_{t}\psi_{t+1},
+\pLvl_{t+1} = \WGroFac \pLvl_{t}\psi_{t+1},
 ```
 
 so that the expected present discounted value of permanent labor income ("human wealth") for an infinite-horizon consumer is
 
 ```{math}
-\hLev_{t} = \left(\frac{\pLvl_{t}}{1-\WGro/\Rfree}\right).
+\hLev_{t} = \left(\frac{\pLvl_{t}}{1-\WGroFac/\Rfree}\right).
 ```
 
-We carry permanent shocks throughout what follows. The simpler model without them is the restriction {math}`\psi_{t+1}=1~\forall~t`, under which permanent income grows deterministically as {math}`\pLvl_{t+1} = \WGro \pLvl_{t}`; because {math}`\hat{\Psi}_{t+1} \equiv \Psi_{t+1}-1` is then zero, every {math}`\hat{\Psi}` term drops out of the expressions derived below. Both cases are therefore covered by the general expressions.
+We carry permanent shocks throughout what follows. The simpler model without them is the restriction {math}`\psi_{t+1}=1~\forall~t`, under which permanent income grows deterministically as {math}`\pLvl_{t+1} = \WGroFac \pLvl_{t}`; because {math}`\hat{\Psi}_{t+1} \equiv \Psi_{t+1}-1` is then zero, every {math}`\hat{\Psi}` term drops out of the expressions derived below. Both cases are therefore covered by the general expressions.
 
 We will assume that the consumer behaves according to the consumption rule
 
 ```{math}
 :label: eq:DeatonPIH
 
-\cLev_{t} = \underbrace{(\bLev_{t}+(\tShkEmp_{t}-1)\pLvl_{t}+\hLev_{t})}_{\equiv \wAllLev_{t}}\underbrace{(\rfree/\Rfree)}_{\equiv \MPC},
+\cLev_{t} = \underbrace{(\bLev_{t}+(\tranShkEmp_{t}-1)\pLvl_{t}+\hLev_{t})}_{\equiv \wAllLev_{t}}\underbrace{(\rfree/\Rfree)}_{\equiv \MPC},
 ```
 
 where {math}`\MPC` is the "marginal propensity to consume" out of total wealth {math}`\wAllLev`.
 
 :::{margin}
-This is the optimal consumption function, with {math}`\Rfree \Discount = 1`, for a consumer with quadratic utility ({cite:t}`hallRandomWalk`) or with CRRA utility and perfect foresight who anticipates {math}`\tShkEmp_{t+n}=\pShk_{t+n}=1~\forall~n>0`. The [consumption function](#sec:ConsumptionFunction) section derives it under quadratic utility, and the [perfect foresight CRRA](#sec:PerfForesightCRRA) section in the CRRA case. {cite:t}`deatonUnderstandingC` argues that the "Permanent Income Hypothesis" should be **defined** as the hypothesis that consumption is determined according to {eq}`eq:DeatonPIH`; but this differs sharply from {cite:t}`friedmanATheory`'s definition, and has not become universally accepted.
+This is the optimal consumption function, with {math}`\Rfree \DiscFac = 1`, for a consumer with quadratic utility ({cite:t}`hallRandomWalk`) or with CRRA utility and perfect foresight who anticipates {math}`\tranShkEmp_{t+n}=\permShkInd_{t+n}=1~\forall~n>0`. The [consumption function](#sec:ConsumptionFunction) section derives it under quadratic utility, and the [perfect foresight CRRA](#sec:PerfForesightCRRA) section in the CRRA case. {cite:t}`deatonUnderstandingC` argues that the "Permanent Income Hypothesis" should be **defined** as the hypothesis that consumption is determined according to {eq}`eq:DeatonPIH`; but this differs sharply from {cite:t}`friedmanATheory`'s definition, and has not become universally accepted.
 :::
 
 Under these circumstances, the [random walk](#sec:RandomWalk) section shows that consumption will follow a random walk,
@@ -66,27 +66,27 @@ Now assume that the economy is populated by a set of measure one of consumers in
 This equation implies that an aggregate version of equation {eq}`eq:StickyE-rwc` holds,
 
 :::{margin}
-The crucial feature of the model that allows us to aggregate analytically is the linearity of the consumption rule in {math}`p, b,` and {math}`\TShkEmp`.
+The crucial feature of the model that allows us to aggregate analytically is the linearity of the consumption rule in {math}`p, b,` and {math}`\TranShkEmp`.
 :::
 
 ```{math}
 \Delta \CLev_{t+1} = \error_{t+1}.
 ```
 
-In principle, we could allow each individual in this economy to experience a different transitory and permanent shock from every other individual in each period. However, for our purposes it is useful to assume that everyone experiences the same shocks in a given period; that is {math}`\tShkEmp_{t}^{i}=\TShkEmp_{t}~\forall~t` and {math}`\psi_{t}^{i} = \Psi_{t}~\forall~t`.
+In principle, we could allow each individual in this economy to experience a different transitory and permanent shock from every other individual in each period. However, for our purposes it is useful to assume that everyone experiences the same shocks in a given period; that is {math}`\tranShkEmp_{t}^{i}=\TranShkEmp_{t}~\forall~t` and {math}`\psi_{t}^{i} = \Psi_{t}~\forall~t`.
 
-Assuming (here and henceforth) that the growth factor for permanent income is {math}`\WGro=1`, the figures below show the path of consumption and bank balances (the solid dots) for an economy populated by omniscient consumers who in periods {math}`t-n` for {math}`n>0` had experienced {math}`\TShkEmp_{t-n}=\Psi_{t-n}=1`; that is, this economy has had no shocks to income in the past. (For convenience, the consumer is assumed to have arrived in period {math}`t` with {math}`\BLev_{t}=0`). In period {math}`t` the consumer draws {math}`\TShkEmp_{t}=2` and {math}`\Psi_{t}=1`; thereafter {math}`\Psi_{t+n}=\TShkEmp_{t+n}=1`. The figures show {math}`\CLev_{t-2},\CLev_{t-1},\CLev_{t},\Ex_{t}[\CLev_{t+1}],\Ex_{t}[\CLev_{t+2}],\ldots` and the corresponding values for {math}`\BLev`.
+Assuming (here and henceforth) that the growth factor for permanent income is {math}`\WGroFac=1`, the figures below show the path of consumption and bank balances (the solid dots) for an economy populated by omniscient consumers who in periods {math}`t-n` for {math}`n>0` had experienced {math}`\TranShkEmp_{t-n}=\Psi_{t-n}=1`; that is, this economy has had no shocks to income in the past. (For convenience, the consumer is assumed to have arrived in period {math}`t` with {math}`\BLev_{t}=0`). In period {math}`t` the consumer draws {math}`\TranShkEmp_{t}=2` and {math}`\Psi_{t}=1`; thereafter {math}`\Psi_{t+n}=\TranShkEmp_{t+n}=1`. The figures show {math}`\CLev_{t-2},\CLev_{t-1},\CLev_{t},\Ex_{t}[\CLev_{t+1}],\Ex_{t}[\CLev_{t+2}],\ldots` and the corresponding values for {math}`\BLev`.
 
 :::{figure} figures/cPlot.png
 :name: fig:aftershock
 
-Path of {math}`\CLev` after a shock {math}`\TShkEmp_{t}=2`, Omniscient Consumers. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
+Path of {math}`\CLev` after a shock {math}`\TranShkEmp_{t}=2`, Omniscient Consumers. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
 :::
 
 :::{figure} figures/bPlot.png
 :name: fig:epidshock
 
-Path of {math}`\BLev` after a shock {math}`\TShkEmp_{t}=2`, Omniscient Consumers. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
+Path of {math}`\BLev` after a shock {math}`\TranShkEmp_{t}=2`, Omniscient Consumers. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
 :::
 
 Now suppose that not every consumer updates expectations in every period. Instead, expectations are "sticky": each consumer updates with probability {math}`\Pi` in each period. Whether the consumer at location {math}`i` updates in period {math}`t` is determined by the realization of the dichotomous random variable
@@ -121,7 +121,7 @@ Dropping the {math}`i` superscript for notational simplicity, the level of consu
 In periods when expectations are not updated, the consumer continues to spend the same amount as in the most recent period when his expectations **were** updated. If the economy is large the proportion of consumers who update their expectations every period will be {math}`\Pi`. Average consumption among those who are not updating in the current period (for whom {math}`1-\pi_{t}=1`) is then
 
 :::{margin}
-This makes sense because under the {cite:t}`hallRandomWalk` assumptions the expected change in consumption is zero under our assumption that {math}`\Rfree \Discount=1`.
+This makes sense because under the {cite:t}`hallRandomWalk` assumptions the expected change in consumption is zero under our assumption that {math}`\Rfree \DiscFac=1`.
 :::
 
 :::{margin}
@@ -157,16 +157,16 @@ and
 \end{aligned}
 ```
 
-while, defining {math}`\hat{\TShkEmp}=\TShkEmp-1` and {math}`\hat{\Psi}=\Psi-1`,
+while, defining {math}`\hat{\TranShkEmp}=\TranShkEmp-1` and {math}`\hat{\Psi}=\Psi-1`,
 
 ```{math}
 :label: eq:DCtp1Gtp1
 
 \begin{aligned}
-\CLev_{t+1|\tau_{t+1}=t+1} & = \left(\overbrace{(\BLev_{t}+\hat{\TShkEmp}_{t}-\CLev_{t})\Rfree}^{=\BLev_{t+1}}+\hat{\TShkEmp}_{t+1}\right)\MPC+1+\hat{\Psi}_{t+1}
-\\ \CLev_{t+1|\tau_{t+1}=t+1} & = \left((\BLev_{t}+\hat{\TShkEmp}_{t}-\CLev_{t}+\CLev_{t|\tau_{t}=t}-\CLev_{t|\tau_{t}=t})\Rfree+\hat{\TShkEmp}_{t+1}\right)\MPC+1+\hat{\Psi}_{t+1}
-\\ & = \underbrace{\left((\BLev_{t}+\hat{\TShkEmp}_{t}-\CLev_{t|\tau_{t}=t})\Rfree+\hat{\TShkEmp}_{t+1}\right)\MPC+1+\hat{\Psi}_{t+1}}_{=\Ex_{t}[\CLev_{t+1|\tau_{t}=t}]+\hat{\TShkEmp}_{t+1}\MPC+\hat{\Psi}_{t+1}}+(\CLev_{t|\tau_{t}=t}-\CLev_{t})\Rfree\MPC
-\\ & = \CLev_{t|\tau_{t}=t}+\hat{\TShkEmp}_{t+1}\MPC+\hat{\Psi}_{t+1}+(\CLev_{t|\tau_{t}=t}-\CLev_{t})\MPC \Rfree
+\CLev_{t+1|\tau_{t+1}=t+1} & = \left(\overbrace{(\BLev_{t}+\hat{\TranShkEmp}_{t}-\CLev_{t})\Rfree}^{=\BLev_{t+1}}+\hat{\TranShkEmp}_{t+1}\right)\MPC+1+\hat{\Psi}_{t+1}
+\\ \CLev_{t+1|\tau_{t+1}=t+1} & = \left((\BLev_{t}+\hat{\TranShkEmp}_{t}-\CLev_{t}+\CLev_{t|\tau_{t}=t}-\CLev_{t|\tau_{t}=t})\Rfree+\hat{\TranShkEmp}_{t+1}\right)\MPC+1+\hat{\Psi}_{t+1}
+\\ & = \underbrace{\left((\BLev_{t}+\hat{\TranShkEmp}_{t}-\CLev_{t|\tau_{t}=t})\Rfree+\hat{\TranShkEmp}_{t+1}\right)\MPC+1+\hat{\Psi}_{t+1}}_{=\Ex_{t}[\CLev_{t+1|\tau_{t}=t}]+\hat{\TranShkEmp}_{t+1}\MPC+\hat{\Psi}_{t+1}}+(\CLev_{t|\tau_{t}=t}-\CLev_{t})\Rfree\MPC
+\\ & = \CLev_{t|\tau_{t}=t}+\hat{\TranShkEmp}_{t+1}\MPC+\hat{\Psi}_{t+1}+(\CLev_{t|\tau_{t}=t}-\CLev_{t})\MPC \Rfree
 \end{aligned}
 ```
 
@@ -174,7 +174,7 @@ where {eq}`eq:DCtp1Gtp1` follows its predecessor since, among consumers who have
 ```{math}
 \begin{aligned}
 \Delta \CLev_{t+1} & = (1-\Pi) \Delta \CLev_{t}+
-\underbrace{\Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t})}_{=(1-\Pi)\Delta \CLev_{t}}\underbrace{\Rfree\MPC}_{=\rfree} + \underbrace{\Pi\left(\hat{\TShkEmp}_{t+1}\MPC+\hat{\Psi}_{t+1}\right)}_{\equiv \xi_{t+1}}
+\underbrace{\Pi (\CLev_{t|\tau_{t}=t}-\CLev_{t})}_{=(1-\Pi)\Delta \CLev_{t}}\underbrace{\Rfree\MPC}_{=\rfree} + \underbrace{\Pi\left(\hat{\TranShkEmp}_{t+1}\MPC+\hat{\Psi}_{t+1}\right)}_{\equiv \xi_{t+1}}
 \\ & = (1-\Pi) \Delta \CLev_{t}+ (1-\Pi) \rfree \Delta \CLev_{t} + \xi_{t+1}
 \\ & = (1-\Pi) \Rfree \Delta \CLev_{t} + \xi_{t+1}
 \end{aligned}
@@ -184,18 +184,18 @@ where {math}`\xi` is a white noise variable ({math}`\Ex_{t}[\xi_{t+n}]=0~\forall
 
 We are finally in position to show how aggregate consumption and wealth would respond in this economy to a transitory positive shock to aggregate labor income like the one considered above for the omniscient model.
 
-Consider the case of a positive shock of size {math}`\hat{\TShkEmp}_{t}=1`, as before. In the first period consumption rises only by {math}`\Pi \MPC`, rather than the full amount corresponding to the permanent income associated with the new level of wealth. Therefore aggregate wealth in period {math}`t+1` will be greater than it would have been in the omniscient model. Similarly for all subsequent periods. Thus, in contrast with the omniscient model, the sluggish adjustment of consumption to the shock means that the shock has a permanent effect on the level of aggregate wealth, and therefore on the level of aggregate consumption. (The figures below depict the results.)
+Consider the case of a positive shock of size {math}`\hat{\TranShkEmp}_{t}=1`, as before. In the first period consumption rises only by {math}`\Pi \MPC`, rather than the full amount corresponding to the permanent income associated with the new level of wealth. Therefore aggregate wealth in period {math}`t+1` will be greater than it would have been in the omniscient model. Similarly for all subsequent periods. Thus, in contrast with the omniscient model, the sluggish adjustment of consumption to the shock means that the shock has a permanent effect on the level of aggregate wealth, and therefore on the level of aggregate consumption. (The figures below depict the results.)
 
 :::{figure} figures/StickyExpectationsCc.png
 :name: fig:StickyExpectationsCc
 
-Path of {math}`\CLev` after a shock {math}`\TShkEmp_{t}=2`; Sticky Expectations in Red/Gray. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
+Path of {math}`\CLev` after a shock {math}`\TranShkEmp_{t}=2`; Sticky Expectations in Red/Gray. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
 :::
 
 :::{figure} figures/StickyExpectationsCb.png
 :name: fig:StickyExpectationsCb
 
-Path of {math}`\BLev` after a shock {math}`\TShkEmp_{t}=2`; Sticky Expectations in Red/Gray. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
+Path of {math}`\BLev` after a shock {math}`\TranShkEmp_{t}=2`; Sticky Expectations in Red/Gray. Drawn by the chapter's [notebook](StickyExpectationsC.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/StickyExpectationsC/StickyExpectationsC.ipynb).
 :::
 
 The sticky expectations model says that consumption growth today can be statistically related to any variable that is related to lagged consumption growth. In particular, if lagged consumption growth is related to lagged income growth (as it certainly will be), then there **should** be a statistically significant effect of lagged income growth on current consumption growth if expectations are sticky.
@@ -231,22 +231,22 @@ To pursue this interpretation, it is useful to write the budget constraint more 
 ```{math}
 \begin{aligned}
 \BLevBF_{t+1} & = \ALevBF_{t} \Rfree_{t+1}
-\\  \BRat_{t+1}P_{t+1} & = \ARat_{t}P_{t} \Rfree_{t+1}
-\\  \BRat_{t+1} & = \ARat_{t} \underbrace{(\Rfree_{t+1}/\WGro_{t+1})}_{\equiv \Rnorm_{t+1}}
+\\  \BNrm_{t+1}P_{t+1} & = \ANrm_{t}P_{t} \Rfree_{t+1}
+\\  \BNrm_{t+1} & = \ANrm_{t} \underbrace{(\Rfree_{t+1}/\WGroFac_{t+1})}_{\equiv \Rnorm_{t+1}}
 \end{aligned}
 ```
 
-where we permit a time subscript on {math}`\Rfree` and {math}`\WGro` because we want to allow for the possibility that beliefs about the interest rate or growth rate might change over time.
+where we permit a time subscript on {math}`\Rfree` and {math}`\WGroFac` because we want to allow for the possibility that beliefs about the interest rate or growth rate might change over time.
 
 Consider an economy that comes into existence in period {math}`0` with a population of consumers who are identical in every respect, including their beliefs about current and future values of the economy's variables.
 
-First we examine the case where neither {math}`\Rfree` nor {math}`\WGro` can change after date {math}`0`. In that case, we can track the dynamics of believed and actual variables as follows.
+First we examine the case where neither {math}`\Rfree` nor {math}`\WGroFac` can change after date {math}`0`. In that case, we can track the dynamics of believed and actual variables as follows.
 
 ```{math}
 \begin{aligned}
 \bar{\BLevBF}_{t+1} & = \Pi \BLevBF_{t+1} + (1-\Pi) \bar{\ALevBF}_{t} \Rfree
-\\ \bar{\BRat}_{t+1}\bar{P}_{t+1} & = \Pi \BRat_{t+1}P_{t+1} + (1-\Pi) \bar{\ARat}_{t}\bar{P}_{t} \Rfree
-\\ \bar{\BRat}_{t+1} & = \Pi \BRat_{t+1}\underbrace{(P_{t+1}/\bar{P}_{t+1})}_{\equiv Q_{t+1}} + (1-\Pi)\bar{\ARat}_{t} \underbrace{(\Rfree/\WGro \bar{\hat{\Psi}}_{t+1})}_{\equiv \bar{\Rnorm}_{t+1}}
+\\ \bar{\BNrm}_{t+1}\bar{P}_{t+1} & = \Pi \BNrm_{t+1}P_{t+1} + (1-\Pi) \bar{\ANrm}_{t}\bar{P}_{t} \Rfree
+\\ \bar{\BNrm}_{t+1} & = \Pi \BNrm_{t+1}\underbrace{(P_{t+1}/\bar{P}_{t+1})}_{\equiv Q_{t+1}} + (1-\Pi)\bar{\ANrm}_{t} \underbrace{(\Rfree/\WGroFac \bar{\hat{\Psi}}_{t+1})}_{\equiv \bar{\Rnorm}_{t+1}}
 \end{aligned}
 ```
 
@@ -254,8 +254,8 @@ where capturing the dynamics of the ratio of true permanent income to believed p
 
 ```{math}
 \begin{aligned}
-\bar{P}_{t+1} & = \left(\Pi \Psi_{t+1} P_{t} + (1-\Pi) \bar{P}_{t}\right)\WGro
-\\ \bar{\Psi}_{t+1} & \equiv \bar{P}_{t+1}/(\bar{P}_{t} \WGro)
+\bar{P}_{t+1} & = \left(\Pi \Psi_{t+1} P_{t} + (1-\Pi) \bar{P}_{t}\right)\WGroFac
+\\ \bar{\Psi}_{t+1} & \equiv \bar{P}_{t+1}/(\bar{P}_{t} \WGroFac)
 \\ Q_{t+1} & = (\Psi_{t+1}/\bar{\Psi}_{t+1}) Q_{t}
 \end{aligned}
 ```
@@ -264,24 +264,24 @@ and so
 
 ```{math}
 \begin{aligned}
-(\bar{\TShkEmp}_{t+1}-1)\bar{P}_{t+1} & = \Pi (\TShkEmp_{t+1}-1) P_{t+1} + (1-\Pi) (1-1) \bar{P}_{t} \WGro
-\\  \bar{\TShkEmp}_{t+1}-1 & = \Pi (\TShkEmp_{t+1}-1) Q_{t+1}
+(\bar{\TranShkEmp}_{t+1}-1)\bar{P}_{t+1} & = \Pi (\TranShkEmp_{t+1}-1) P_{t+1} + (1-\Pi) (1-1) \bar{P}_{t} \WGroFac
+\\  \bar{\TranShkEmp}_{t+1}-1 & = \Pi (\TranShkEmp_{t+1}-1) Q_{t+1}
 \end{aligned}
 ```
 
-with the crucially useful fact that since by assumption neither {math}`\Rfree` nor {math}`\WGro` is changing, normalized human wealth does not change from
+with the crucially useful fact that since by assumption neither {math}`\Rfree` nor {math}`\WGroFac` is changing, normalized human wealth does not change from
 
 ```{math}
-\hRat = \left(\frac{1}{1-\WGro/\Rfree}\right)
+\hNrm = \left(\frac{1}{1-\WGroFac/\Rfree}\right)
 ```
 
 so that
 
 ```{math}
 \begin{aligned}
-\bar{\HLev}_{t} & = \hRat \bar{P}_{t}
-\\ \HLev_{t} & = \hRat P_{t}
-\\ \bar{\HLev}_{t+1} & = \left(\Pi Q_{t+1} + (1-\Pi)/\bar{\Psi}_{t+1} \right) \hRat \bar{P}_{t+1}
+\bar{\HLev}_{t} & = \hNrm \bar{P}_{t}
+\\ \HLev_{t} & = \hNrm P_{t}
+\\ \bar{\HLev}_{t+1} & = \left(\Pi Q_{t+1} + (1-\Pi)/\bar{\Psi}_{t+1} \right) \hNrm \bar{P}_{t+1}
 \end{aligned}
 ```
 
@@ -289,28 +289,28 @@ so that perceived wealth and consumption will be
 
 ```{math}
 \begin{aligned}
-\bar{\WAllRat}_{t+1} & = \bar{\BRat}_{t+1}+(\bar{\TShkEmp}_{t+1}-1)+\bar{\HRat}_{t+1}
-\\ \bar{\CRat}_{t+1} & = \bar{\WAllRat}_{t+1} \MPC
-\\ \bar{\ARat}_{t+1} & = \bar{\BRat}_{t+1}+\bar{\TShkEmp}_{t+1}-\bar{\CRat}_{t+1}.
+\bar{\ONrm}_{t+1} & = \bar{\BNrm}_{t+1}+(\bar{\TranShkEmp}_{t+1}-1)+\bar{\HNrm}_{t+1}
+\\ \bar{\CNrm}_{t+1} & = \bar{\ONrm}_{t+1} \MPC
+\\ \bar{\ANrm}_{t+1} & = \bar{\BNrm}_{t+1}+\bar{\TranShkEmp}_{t+1}-\bar{\CNrm}_{t+1}.
 \end{aligned}
 ```
 
-Matters are more complex if expectations about {math}`\Rfree` and {math}`\WGro` are allowed to change over time.
+Matters are more complex if expectations about {math}`\Rfree` and {math}`\WGroFac` are allowed to change over time.
 
-Suppose again that we begin our economy in period {math}`0` with population with homogeneous views: Everyone believes {math}`\Rfree=\Rfree^{0}` and {math}`\WGro=\WGro^{0}`; so long as these views are universally held in the population, aggregate dynamics are captured by the foregoing analysis.
+Suppose again that we begin our economy in period {math}`0` with population with homogeneous views: Everyone believes {math}`\Rfree=\Rfree^{0}` and {math}`\WGroFac=\WGroFac^{0}`; so long as these views are universally held in the population, aggregate dynamics are captured by the foregoing analysis.
 
-Suppose, however, that in some period {math}`n>0` the economy's "true" values of {math}`\Rfree` or {math}`\WGro` change. Updating consumers see this change immediately. But nonupdaters will not discover the changed nature of the economy's dynamics until they update again.
+Suppose, however, that in some period {math}`n>0` the economy's "true" values of {math}`\Rfree` or {math}`\WGroFac` change. Updating consumers see this change immediately. But nonupdaters will not discover the changed nature of the economy's dynamics until they update again.
 
 We capture this modification to the model by keeping track of the aggregate values of the variables for the set of consumers who adhere to each differing opinion, along with the population mass associated with the different opinions. Specifically, suppose there are {math}`J` different opinions in the population, each of whom constitutes population mass {math}`\mathcal{L}^{j}_{t}` such that {math}`\sum_{j} \mathcal{L}^{j}_{t} = 1~\forall~t`. Then for each such population, it will be necessary to keep track of their average beliefs about macroeconomic variables.
 
-Suppose, for example, that through period {math}`x` there have been only {math}`j-1` different opinion groups in the population. In period {math}`x+1` either {math}`\WGro` or {math}`\Rfree` changes. We need then to define group {math}`j` by {math}`\Rfree^{j}=\Rfree_{x}` and {math}`\WGro^{j}=\WGro_{x}` and to define {math}`\bar{\ARat}^{j}_{x} \equiv \ARat_{x}`, {math}`\bar{P}^{j}_{x}=P_{x}`, and so on. We will henceforth need to keep track of dynamics of the consumers who remain in belief group {math}`j` by, e.g.,
+Suppose, for example, that through period {math}`x` there have been only {math}`j-1` different opinion groups in the population. In period {math}`x+1` either {math}`\WGroFac` or {math}`\Rfree` changes. We need then to define group {math}`j` by {math}`\Rfree^{j}=\Rfree_{x}` and {math}`\WGroFac^{j}=\WGroFac_{x}` and to define {math}`\bar{\ANrm}^{j}_{x} \equiv \ANrm_{x}`, {math}`\bar{P}^{j}_{x}=P_{x}`, and so on. We will henceforth need to keep track of dynamics of the consumers who remain in belief group {math}`j` by, e.g.,
 
 ```{math}
 \begin{aligned}
 \bar{\BLevBF}^{j}_{t+1} & = \ALevBF^{j}_{t} \Rfree^{j}
-\\ \bar{\BRat}^{j}_{t+1}\bar{P}^{j}_{t+1} & = \bar{\ARat}^{j}_{t}\bar{P}^{j}_{t} \Rfree^{j}
-\\ \bar{\BRat}^{j}_{t+1} & = \bar{\ARat}^{j}_{t} \underbrace{(\Rfree^{j}/\WGro^{j} \bar{\Psi}^{j}_{t+1})}^{j}_{\equiv \bar{\Rnorm}^{j}}
-\\ \bar{P}^{j}_{t+1} & = \bar{P}^{j} \WGro^{j}
+\\ \bar{\BNrm}^{j}_{t+1}\bar{P}^{j}_{t+1} & = \bar{\ANrm}^{j}_{t}\bar{P}^{j}_{t} \Rfree^{j}
+\\ \bar{\BNrm}^{j}_{t+1} & = \bar{\ANrm}^{j}_{t} \underbrace{(\Rfree^{j}/\WGroFac^{j} \bar{\Psi}^{j}_{t+1})}^{j}_{\equiv \bar{\Rnorm}^{j}}
+\\ \bar{P}^{j}_{t+1} & = \bar{P}^{j} \WGroFac^{j}
 \end{aligned}
 ```
 
