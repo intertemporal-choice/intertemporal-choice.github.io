@@ -1,848 +1,417 @@
 (sec:BlanchardFiniteHorizon)=
 # The Blanchard (1985) Model of Perpetual Youth
 
-This chapter analyzes a way to relax the standard assumption of infinite
-lifetimes in the Ramsey/Cass-Koopmans
-growth model. The trick, introduced by
-{cite:t}`blanchardFinite`, is to assume that the economy
-is populated by agents who face a constant probability of death.
+The [Ramsey/Cass-Koopmans model](#sec:RamseyCassKoopmans) assumes that households live forever. {cite:t}`blanchardFinite` showed how to give them finite lives while keeping the model nearly as tractable: every consumer faces the same constant probability of death, whatever the consumer's age, so that someone who has lived a thousand years is no more likely to die in the next year than someone born yesterday. This chapter works out the model and three of its results. Finite horizons lower the steady-state capital stock below the RCK model's [modified golden rule](#eq:RCK-modGoldenRule). They break the Ricardian equivalence that holds in [the RCK model with government](#sec:RCKGov-Debt), so that government debt is net wealth and crowds out capital. And when income falls with age, they can make the interest rate negative and the economy dynamically inefficient, as the [Diamond OLG model](#sec:OLGModel) can be.
 
-Thus, an agent who has lived a thousand years is no more likely to die
-in the next year than an agent who was born yesterday.
+:::{margin}
+[Decentralizing the Ramsey/Cass-Koopmans Model](#sec:decentralizingrck) lists finite lives among the reasons a market economy's allocation can differ from the RCK planner's. The appendix on [Aggregation](#sec:Aggregation) works through the population arithmetic of Blanchard's model in discrete as well as continuous time, and the same device keeps the distribution of income stationary in models whose income shocks are permanent, as the [Aiyagari chapter](#sec:Aiyagari) explains.
+:::
 
-Time is measured continuously. If there is an instantaneous
-probability {math}`\diePrb` of dying, the probability (as viewed by a person
-alive in period {math}`t`) of still being alive (not dead) in period
-{math}`\tau` is
+(sec:BFH-Mortality)=
+## Mortality and the Objective
+
+Time is continuous, and every consumer dies with the same instantaneous probability {math}`\diePrb`, so the probability, as viewed by a consumer alive at date {math}`t`, of still being alive at a later date {math}`\tau` is
 
 ```{math}
-:label: eq:living
+:label: eq:BFH-living
+
+\Alive_{t}^{\tau} = e^{-\diePrb(\tau-t)} .
+```
+
+Since {math}`\diePrb e^{-\diePrb(\tau-t)}` is the density of the date of death, the expected remaining life of a consumer of any age is
+
+```{math}
+\int_{t}^{\infty} (\tau-t)\,\diePrb e^{-\diePrb(\tau-t)}\,d\tau = 1/\diePrb ,
+```
+
+which we call the consumer's "horizon." If the chance of dying is {math}`\diePrb=1/50` a year, the horizon is 50 years.
+
+At every instant a large cohort is born, whose size is normalized to {math}`\diePrb` per unit of time. Of the cohort born at date {math}`s`, the fraction {math}`\Alive_{s}^{t} = e^{-\diePrb(t-s)}` is still alive at {math}`t`. If the economy has existed forever, the population at {math}`t` is the sum of the survivors of every cohort born since {math}`s=-\infty`:
+
+```{math}
+:label: eq:BFH-totpop
+
+\diePrb\int_{-\infty}^{t} \Alive_{s}^{t}\,ds = \int_{-\infty}^{t} \diePrb e^{-\diePrb(t-s)}\,ds = \Big[e^{-\diePrb(t-s)}\Big]_{s=-\infty}^{s=t} = 1 .
+```
+
+Births just offset deaths, and the population is constant at one.
+
+Write {math}`x(s,t)` for the value at date {math}`t` of a variable {math}`x` for a consumer born at date {math}`s`, so that {math}`\cNrm(s,t)` is the consumption at {math}`t` of a consumer born at {math}`s`. A dot is a derivative with respect to the date {math}`t`, for a given date of birth.
+
+Utility is logarithmic, {math}`\uFunc(\cNrm) = \lcNrm`, where {math}`\lnat` is the natural log, and the time preference rate is {math}`\discRte`. Mortality alone makes a consumer discount the future: even with a time preference rate of zero, utility at date {math}`\tau` would count only with the probability {math}`\Alive_{t}^{\tau}` of being alive to enjoy it. With time preference, the two discounts multiply, and at date {math}`t` a consumer born at {math}`s` maximizes
+
+```{math}
+:label: eq:BFH-objfunc
+
+\int_{t}^{\infty} \lcNrm(s,\tau)\,\Alive_{t}^{\tau}e^{-\discRte(\tau-t)}\,d\tau = \int_{t}^{\infty} \lcNrm(s,\tau)\,e^{-\discRteEff(\tau-t)}\,d\tau ,
+```
+
+where {math}`\discRteEff \equiv \discRte+\diePrb` is the survival-inclusive time preference rate. The ring marks a rate that includes survival.
+
+The same holds, approximately, in discrete time. Suppose {math}`t+1` is the last period of life, and that a consumer who dies before {math}`t+1` gets no utility then. With no chance of death, the value of the consumer's problem at {math}`t` would be {math}`\VFunc_{t} = \max \{\uFunc(\cNrm_{t}) + \uFunc(\cNrm_{t+1})/(1+\discRte)\}`; with a probability {math}`\diePrb` of dying between {math}`t` and {math}`t+1`, it is
+
+```{math}
+:label: eq:BFH-discreteApprox
 
 \begin{gathered}\begin{aligned}
-        \Alive_{t}^{\tau} & =  e^{-\diePrb(\tau-t)} . 
+  \VFunc_{t} & = \max \left\{\uFunc(\cNrm_{t}) + \left(\frac{1}{1+\discRte}\right)\left[(1-\diePrb)\uFunc(\cNrm_{t+1}) + \diePrb \cdot 0\right]\right\}
+\\ & = \max \left\{\uFunc(\cNrm_{t}) + \left(\frac{1-\diePrb}{1+\discRte}\right)\uFunc(\cNrm_{t+1})\right\}
+\\ & \approx \max \left\{\uFunc(\cNrm_{t}) + \left(\frac{1}{1+\discRte+\diePrb}\right)\uFunc(\cNrm_{t+1})\right\} .
 \end{aligned}\end{gathered}
 ```
 
-Assuming the instantaneous utility function is {math}`\uFunc(\cNrm) =  \lcNrm`, and that the pure rate of time preference is {math}`\discRte`,
-explain why the objective function at time {math}`t` of an individual
-household in this model will be to maximize
+The consumer behaves almost exactly like one who never dies but has the time preference rate {math}`\discRte+\diePrb`. The approximation drops terms of second order in the rates, {math}`\diePrb\discRte` and {math}`\diePrb^{2}`, which vanish relative to the rates themselves as the period shrinks; in continuous time, {eq}`eq:BFH-objfunc`, it is exact.
+
+(sec:BFH-Insurance)=
+## Insurance and the Budget Constraint
+
+Consumers have no bequest motive: whatever they own when they die gives them no utility. So if someone offered to pay them, while they live, for the right to inherit their net worth when they die, they would gladly take the deal. For a consumer with net worth {math}`\netWorth(s,t)`, who dies at the rate {math}`\diePrb`, that right is worth a flow of {math}`\diePrb\netWorth(s,t)`. Suppose, then, that competitive insurance companies pay each living consumer {math}`\diePrb\netWorth(s,t)` per unit of time in exchange for the consumer's net worth at death: a [life annuity](https://en.wikipedia.org/wiki/Life_annuity). A company with many customers inherits, per unit of time, the net worth of the fraction {math}`\diePrb` of them who die, which pays exactly for its payments to the living, so it makes zero profits.
+
+:::{margin}
+The contract covers debt as well. A consumer with negative net worth pays the company {math}`\diePrb` times the debt, and the company repays the debt when the consumer dies, so lenders are always repaid, and the consumer borrows at {math}`\rfree+\diePrb`.
+:::
+
+From the consumer's standpoint, the insurance raises the interest rate on net worth by {math}`\diePrb`, to the survival-inclusive interest rate {math}`\rfreeEff \equiv \rfree+\diePrb`. A consumer born at {math}`s` receives noncapital (labor) income {math}`\wage(s,t)` at date {math}`t` and takes the path of the interest rate {math}`\rfree_{t}` as given, so, with the insurance, the consumer's net worth evolves as
 
 ```{math}
-:label: eq:objfunc
+:label: eq:BFH-dbc
 
-\int_{t}^{\infty} (\lcNrm_{\tau}) e^{-(\discRte+\diePrb)(\tau-t)} d\tau.
+\dot{\netWorth}(s,t) = \rfreeEff_{t}\netWorth(s,t) + \wage(s,t) - \cNrm(s,t) .
 ```
 
-where {math}`\cNrm_{\tau}` is the consumer's consumption at time {math}`\tau`. For convenience,
-you may wish to define
+(sec:BFH-Consumer)=
+## The Consumer's Problem
+
+The consumer's current-value Hamiltonian is
+
+:::{margin}
+These are [the decentralized RCK household's](#eq:cdotindiv) conditions, with logarithmic utility and the survival-inclusive rates. [Ramsey Growth in Discrete and Continuous Time](#sec:HamiltonianVSDiscrete) derives them and relates each to its discrete-time counterpart.
+:::
 
 ```{math}
-:label: eq:thetahat
-
-\begin{gathered}\begin{aligned}
-        \discRteEff & =  \discRte+\diePrb. 
-\end{aligned}\end{gathered}
+\Ham(\netWorth,\cNrm,\vk) = \lcNrm(s,t) + (\rfreeEff_{t}\netWorth(s,t) + \wage(s,t) - \cNrm(s,t))\vk .
 ```
 
-> *Answer:*
->
->
-> A consumer with a pure time preference rate of {math}`\discRte` will downweight
->
-> the utility he receives conditional on being alive by the probability
->
-> that he is still alive, yielding a discounted utility of
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->         \int_{t}^{\infty} (\lcNrm_{\tau}) \Alive_{t}^{\tau} e^{-\discRte (\tau-t)}d\tau & =  \int_{t}^{\infty} (\lcNrm_{\tau}) e^{-\discRte (\tau-t)} e^{-\diePrb (\tau-t)} d\tau \\
->          & =    \int_{t}^{\infty} (\lcNrm_{\tau}) e^{-(\discRte+\diePrb) (\tau-t)} d\tau
-> \\       & =    \int_{t}^{\infty} (\lcNrm_{\tau}) e^{-\discRteEff (\tau-t)} d\tau
-> \end{aligned}\end{gathered}
-> ```
->
-> where {math}`\discRteEff = \discRte+\diePrb`.
->
-> A similar point holds in the discrete time model. A sensible thing to
->
-> assume is that if you have died before {math}`t+1`, you get zero utility in
->
-> {math}`t+1` and after. Thus, in the two-period context, if the probability
->
-> of death between {math}`t` and {math}`t+1` was zero we would have
->
-> ```{math}
-> \VFunc_{t} = \max \uFunc(\cNrm_{t}) + \left(\frac{1}{1+\discRte}\right) \uFunc(\cNrm_{t+1})
-> ```
->
-> while if there is a probability {math}`\diePrb` of dying between {math}`t` and {math}`t+1`
->
-> value would be:
->
-> ```{math}
-> :label: eq:approx
->
-> \begin{gathered}\begin{aligned}
->    \VFunc_{t} & =  \max \uFunc(\cNrm_{t}) + (1-\diePrb)\left(\frac{1}{1+\discRte}\right) \uFunc(\cNrm_{t+1}) + \diePrb \left(\frac{1}{1+\discRte}\right) \cdot 0 
-> \\   & =  \max \uFunc(\cNrm_{t}) + \left(\frac{1-\diePrb}{1+\discRte}\right) \uFunc(\cNrm_{t+1})
-> \\   & \approx  \max \uFunc(\cNrm_{t}) + \left(\frac{1}{1+\discRte+\diePrb}\right) \uFunc(\cNrm_{t+1})  
-> \end{aligned}\end{gathered}
-> ```
->
-> But behavior in this case is virtually indistinguishable from the
->
-> behavior that would be induced if the consumer had a time preference
->
-> rate of {math}`\discRte+\diePrb`. In continuous time, the approximation in
->
-> {eq}`eq:approx` becomes exact.
-
-If the probability of death is constant, the expected remaining life
-for an agent of any age is given by
-
-```{math}
-\int_{0}^{\infty} \diePrb \tau e^{-\diePrb \tau}d\tau = \diePrb^{-1}.
-```
-
-which we will call the agent's 'horizon.' For example, if the chances
-of dying per year are {math}`\diePrb=1/50`, then the agent's horizon is 50 years.
-
-We will assume that at every instant of time, a large cohort, whose size
-is normalized to be {math}`\diePrb`, is born.
-
-For an economy that has existed forever, explain why the
-formula for the aggregate population at time {math}`t`, {math}`\PopnLvl_{t}`, will be
-
-```{math}
-:label: eq:totpop
-
-\begin{gathered}\begin{aligned}
-        \PopnLvl_{t} & =  \diePrb \int_{-\infty}^{t} \Alive_{s}^{t} ds 
-\end{aligned}\end{gathered}
-```
-
-and show that this formula implies that the population is {math}`\PopnLvl_{t}=1`.
-
-> *Answer:*
->
->
-> The aggregate population will be the sum of the still-alive persons
->
-> from all past generations.
->
-> The proportion of a population born at time {math}`s` that is still living
->
-> at time {math}`\tau` is {math}`\Alive_{s}^{\tau}` by equation {eq}`eq:living`.
->
-> Thus, the absolute size at time {math}`\tau` of a cohort of size {math}`\diePrb` born at
->
-> time {math}`s` is {math}`\diePrb \Alive_{s}^{\tau} = \diePrb e^{-\diePrb (\tau-s)}`. The economy's
->
-> total population will be the sum of the populations of all the cohorts
->
-> that are currently living. Since the economy has existed forever,
->
-> there will be remaining members of every cohort back to {math}`s=-\infty`.
->
-> Thus, indexing each cohort by a time index {math}`s`, {eq}`eq:totpop` is
->
-> simply the sum of the populations of all currently living members of
->
-> every generation.
->
-> Substituting the formula for {math}`\Alive`, the integral becomes
->
-> ```{math}
-> :label: eq:fmhint
->
-> \begin{gathered}\begin{aligned}
->         \PopnLvl_{t} & =  \diePrb \int_{-\infty}^{t} e^{-\diePrb(t-s)} ds 
-> \\        & =  \diePrb \int_{t}^{\infty} e^{-\diePrb(s-t)} ds 
-> \\        & =  \diePrb \int_{0}^{\infty} e^{-\diePrb \tau}d\tau
-> \\        & =  \diePrb \diePrb^{-1}  
-> \\        & =  1 
-> \end{aligned}\end{gathered}
-> ```
->
-> where the third line comes from a change of variables {math}`\tau = s-t`.
-
-Now some notation. We will define variable {math}`x(s,t)` as the value at
-date {math}`t` of the variable {math}`x` for a consumer who was born at date {math}`s`.
-
-Thus, {math}`\cNrm(s,t)` is consumption at {math}`t` of a consumer born at {math}`s`.
-
-Suppose that the consumers in this economy do not have a bequest
-motive. If they have positive assets at the instant when they die,
-they are no happier than if they had zero assets. This means that if
-someone were willing to pay them something while they are still alive
-for the right to inherit their assets whenever they die, these consumers would
-happily take that deal.
-
-For a consumer with wealth {math}`\netWorth(s,t)` who has probability of dying {math}`\diePrb`,
-the flow value of the right to inherit that wealth is {math}`\diePrb \netWorth(s,t)`. We
-will therefore assume that insurance companies exist that pay a
-consumer with wealth {math}`\netWorth(s,t)` an amount {math}`\diePrb \netWorth(s,t)` in exchange for the
-right to receive that consumer's wealth when he dies. (The insurance
-company will make zero profits).
-
-But notice that from the standpoint of the consumer, this is
-equivalent to saying that the interest rate received on wealth is
-higher by amount {math}`\diePrb`.
-
-Now suppose the marginal product of capital in this
-perfectly-competitive economy is constant at {math}`\rfree` and suppose an agent
-born in {math}`s` receives exogenous labor income in period {math}`t` of {math}`\wage(s,t)`.
-
-This plus the insurance scheme implies that the agent's dynamic budget
-constraint is given by
-
-```{math}
-:label: eq:budconstr
-
-\begin{gathered}\begin{aligned}
-        \dot{\netWorth}(s,t) & =  (\rfree+\diePrb) \netWorth(s,t) + \wage(s,t)-\cNrm(s,t) .
-\end{aligned}\end{gathered}
-```
-
-Define the 'effective' interest rate as viewed by a consumer as {math}`\rfreeEff  = \rfree+\diePrb`.
-
-Write the current-value Hamiltonian for the
-individual's maximization problem and use it to show that the growth
-rate of consumption in period {math}`t` for a consumer born at time {math}`s` is
-given by
+The [condition for optimal consumption](#eq:uceqvk), {math}`\partial\Ham/\partial\cNrm = 0`, and the [costate equation](#eq:lamgrow), with the survival-inclusive rates, are
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \left(\frac{\dot{\cNrm}(s,t)}{\cNrm(s,t)}\right) & =  \rfreeEff - \discRteEff
-\\  & =  \rfree-\discRte.     
+  1/\cNrm(s,t) & = \vk ,
+\\ \dot{\vk} & = \discRteEff\vk - \partial\Ham/\partial\netWorth = (\discRteEff-\rfreeEff_{t})\vk .
 \end{aligned}\end{gathered}
 ```
 
-> *Answer:*
->
->
-> The current-value Hamiltonian is written
->
-> ```{math}
-> \Ham(\netWorth,\cNrm,\vk) = \lcNrm(s,t) + (\rfreeEff \netWorth(s,t) + \wage(s,t) - \cNrm(s,t))\vk
-> ```
->
-> so the optimality condition for consumption, {math}`\partial \Ham/\partial \cNrm(s,t) = 0`, implies
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->         1/\cNrm(s,t) & =  \vk
-> \\  - \dot{\cNrm}(s,t)/\cNrm(s,t)^{2} & =  \dot{\vk}       
-> \end{aligned}\end{gathered}
-> ```
->
-> and the costate equation implies
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->         \dot{\vk} & =  \discRteEff \vk - \partial \Ham/\partial \netWorth(s,t)  
-> \\       & =  \discRteEff \vk - \rfreeEff \vk  
-> \\      \left(\frac{\dot{\vk}}{\vk}\right) & =  \discRteEff-\rfreeEff
-> \\  \left(\frac{-\dot{\cNrm}(s,t) \cNrm(s,t)}{\cNrm(s,t)^{2}}\right) & =  \discRteEff-\rfreeEff
-> \\  \left(\frac{\dot{\cNrm}(s,t)}{\cNrm(s,t)}\right) & =  \rfreeEff-\discRteEff 
-> \\   & =  \rfree-\discRte     .
-> \end{aligned}\end{gathered}
-> ```
-
-
-Use the first order condition for consumption and the
-intertemporal budget constraint implied by {eq}`eq:budconstr` to
-show that the level of consumption in time {math}`t` for an individual born
-at time {math}`s` is
+Differentiating the first with respect to time gives {math}`\dot{\vk}/\vk = -\dot{\cNrm}(s,t)/\cNrm(s,t)`, so
 
 ```{math}
-\cNrm(s,t) = \discRteEff(\netWorth(s,t)+\hNrm(s,t))
+:label: eq:BFH-cdot
+
+\dot{\cNrm}(s,t)/\cNrm(s,t) = \rfreeEff_{t}-\discRteEff = \rfree_{t}-\discRte .
 ```
 
-where recall that {math}`\discRteEff=\discRte+\diePrb` and human wealth is
+Death raises the rate at which the consumer discounts the future and, through the annuity, the return on saving, by the same {math}`\diePrb`, and the two cancel. Each consumer's consumption grows at {math}`\rfree-\discRte`, as the infinitely lived household's does in [the decentralized RCK economy](#eq:cdotindiv) and as the [Keynes-Ramsey rule](#eq:cdotOc) has it, with logarithmic utility, {math}`\CRRA=1`, and without population or productivity growth. Finite horizons matter not for how any one consumer's consumption grows, but for how the economy's does, because consumers die and are replaced.
+
+To find the level of consumption, write
 
 ```{math}
-\hNrm(s,t) = \PDVEff_{t}(\wage(s,\cdot))
+\PDVEff_{t}(\bullet) \equiv \int_{t}^{\infty} \bullet_{\tau}\,e^{-\int_{t}^{\tau}\rfreeEff_{\mu}\,d\mu}\,d\tau
 ```
 
-where
+for the present discounted value at date {math}`t` of a flow {math}`\bullet`, at the survival-inclusive interest rate; [the decentralized RCK economy's](#eq:DecRCK-ibc) {math}`\PDV` discounts at {math}`\rfree` instead. With a constant interest rate the discount factor is {math}`e^{-(\rfree+\diePrb)(\tau-t)}`: a payment at {math}`\tau` is discounted at {math}`\rfree+\diePrb`, because the consumer receives it only if still alive then. As in the decentralized economy, the no-Ponzi condition and the transversality condition, which together require {math}`\lim_{\tau\rightarrow\infty} e^{-\int_{t}^{\tau}\rfreeEff_{\mu}\,d\mu}\netWorth(s,\tau) = 0`, make the dynamic budget constraint {eq}`eq:BFH-dbc`, integrated forward, an intertemporal budget constraint that holds with equality,
+
+```{math}
+:label: eq:BFH-ibc
+
+\PDVEff_{t}(\cNrm(s,\cdot)) = \netWorth(s,t) + \hNrm(s,t) :
+```
+
+the present discounted value of consumption equals net worth plus human wealth, {math}`\hNrm(s,t) = \PDVEff_{t}(\wage(s,\cdot))`, the present discounted value of noncapital income. This is the [perfect foresight model's human wealth](#eq:PFCRRA-yfin), at the survival-inclusive interest rate.
+
+By {eq}`eq:BFH-cdot`, consumption at a later date is {math}`\cNrm(s,\tau) = \cNrm(s,t)e^{\int_{t}^{\tau}(\rfreeEff_{\mu}-\discRteEff)\,d\mu}`, so its present discounted value is
+
+```{math}
+\PDVEff_{t}(\cNrm(s,\cdot)) = \int_{t}^{\infty} \cNrm(s,t)e^{\int_{t}^{\tau}\rfreeEff_{\mu}\,d\mu}e^{-\discRteEff(\tau-t)}e^{-\int_{t}^{\tau}\rfreeEff_{\mu}\,d\mu}\,d\tau = \cNrm(s,t)\int_{t}^{\infty} e^{-\discRteEff(\tau-t)}\,d\tau = \cNrm(s,t)/\discRteEff ,
+```
+
+and the intertemporal budget constraint becomes the consumption function
+
+```{math}
+:label: eq:BFH-cFunc
+
+\cNrm(s,t) = \discRteEff(\netWorth(s,t)+\hNrm(s,t)) .
+```
+
+:::{margin}
+The interest rate still moves consumption, through human wealth: the [human wealth effect](#eq:dlogcdr) of the perfect foresight model.
+:::
+
+With logarithmic utility, the consumer spends a constant fraction of total wealth, net worth plus human wealth, whatever the path of interest rates, as in the [perfect foresight model](#eq:PFCRRA-cOfw) with logarithmic utility, whose marginal propensity to consume out of total wealth does not depend on the interest rate either. Here the fraction is the survival-inclusive time preference rate {math}`\discRteEff`: the shorter the horizon, the larger the share of wealth the consumer spends.
+
+(sec:BFH-Aggregation)=
+## Aggregation
+
+An aggregate sums a variable over the cohorts alive. The cohort born at {math}`s` has {math}`\diePrb\Alive_{s}^{t} = \diePrb e^{-\diePrb(t-s)}` members left at {math}`t`, so aggregate consumption is
+
+```{math}
+\CNrm(t) = \int_{-\infty}^{t} \cNrm(s,t)\,\diePrb e^{-\diePrb(t-s)}\,ds ,
+```
+
+and aggregate net worth {math}`\NetWorth(t)`, human wealth {math}`\HNrm(t)` and noncapital income {math}`\Wage(t)` are defined in the same way. Since the population is one, each aggregate is also the average per person, and since nothing in this model grows, aggregates are not bold.
+
+Every consumer spends the same fraction {math}`\discRteEff` of total wealth, so the consumption function {eq}`eq:BFH-cFunc` aggregates exactly:
+
+```{math}
+:label: eq:BFH-cagg
+
+\CNrm(t) = \int_{-\infty}^{t} \discRteEff(\netWorth(s,t)+\hNrm(s,t))\,\diePrb e^{-\diePrb(t-s)}\,ds = \discRteEff(\NetWorth(t)+\HNrm(t)) .
+```
+
+Suppose that every consumer alive receives the same noncapital income, {math}`\wage(s,t) = \Wage(t)`; since the population is one, aggregate noncapital income is also {math}`\Wage(t)`. Every consumer then has the same human wealth, and aggregate human wealth,
+
+```{math}
+\HNrm(t) = \PDVEff_{t}(\Wage) = \int_{t}^{\infty} \Wage(\tau)\,e^{-\int_{t}^{\tau}\rfreeEff_{\mu}\,d\mu}\,d\tau ,
+```
+
+evolves as {math}`\dot{\HNrm} = \rfreeEff\HNrm - \Wage`. It discounts the economy's future noncapital income at {math}`\rfree+\diePrb`, not at {math}`\rfree`, because it counts only the income of the consumers alive now, not that of the generations not yet born.
+
+Aggregate net worth changes for three reasons:
+
+:::{margin}
+This is [Leibniz's rule](https://en.wikipedia.org/wiki/Leibniz_integral_rule) for the derivative of an integral whose upper limit and integrand both depend on {math}`t`: the integrand at {math}`s=t`, plus the integral of the integrand's derivative, which includes the shrinking of each cohort as its members die.
+:::
+
+```{math}
+:label: eq:BFH-Ndot
+
+\dot{\NetWorth}(t) = \diePrb\netWorth(t,t) - \diePrb\NetWorth(t) + \int_{-\infty}^{t} \dot{\netWorth}(s,t)\,\diePrb e^{-\diePrb(t-s)}\,ds .
+```
+
+The first term is the net worth of the cohort being born, of size {math}`\diePrb`, which is zero, since consumers are born with none; the second is the net worth of the consumers dying at the moment, which passes to the insurance companies; and the last is the change in the net worth of everyone else. By {eq}`eq:BFH-dbc` the last is {math}`\rfreeEff\NetWorth + \Wage - \CNrm`, so {math}`\dot{\NetWorth} = \rfree\NetWorth + \Wage - \CNrm`: in the aggregate, the annuity payments to the living, {math}`\diePrb\NetWorth`, are exactly the net worth of the dying.
+
+Collecting, and dropping the date arguments, the aggregate economy is described by
+
+```{math}
+:label: eq:BFH-aggregates
+
+\begin{gathered}\begin{aligned}
+  \CNrm & = \discRteEff(\NetWorth+\HNrm) ,
+\\ \dot{\HNrm} & = \rfreeEff\HNrm - \Wage ,
+\\ \dot{\NetWorth} & = \rfree\NetWorth + \Wage - \CNrm .
+\end{aligned}\end{gathered}
+```
+
+Differentiating the first with respect to time, substituting the other two, and then substituting {math}`\HNrm = \CNrm/\discRteEff - \NetWorth` from the first gives
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \PDVEff_{t}(\bullet) & \equiv  \int_{t}^{\infty} \bullet_{\tau}\, e^{-\int_{t}^{\tau} \rfreeEff_{\mu} d\mu}\, d\tau
-\\ e^{\int_{t}^{\tau} \rfreeEff_{\mu} d\mu} & =  e^{\int_{t}^{\tau} (\rfree_{\mu}+\diePrb) d\mu}
+  \dot{\CNrm} & = \discRteEff(\rfree\NetWorth + \Wage - \CNrm + \rfreeEff\HNrm - \Wage)
+\\ & = \discRteEff(\rfree\NetWorth + \rfreeEff(\CNrm/\discRteEff - \NetWorth) - \CNrm)
+\\ & = (\rfreeEff-\discRteEff)\CNrm - \discRteEff(\rfreeEff-\rfree)\NetWorth ,
 \end{aligned}\end{gathered}
 ```
 
-(the second line is simply the compound interest factor necessary to take
-account of time-varying interest rates; if interest rates are
-constant at {math}`\rfree` it reduces to {math}`e^{(\rfree+\diePrb)(\tau-t)}`, and dividing by it discounts at {math}`\rfree+\diePrb`).
-
-> *Answer:*
->
->
-> The IBC says that the PDV of consumption must equal wealth plus the PDV
->
-> of future labor income:
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->         \PDVEff_{t}(\cNrm(s,\cdot)) & =  \netWorth(s,t) + \PDVEff_{t}(\wage(s,\cdot))
-> \\      \PDVEff_{t}(\cNrm(s,\cdot)) & =  \netWorth(s,t) + \hNrm(s,t).
-> \end{aligned}\end{gathered}
-> ```
->
-> But if {math}`\dot{\cNrm}(s,t)/\cNrm(s,t) = \rfreeEff_{t}-\discRteEff` then
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->         \cNrm(s,\tau) & =  \cNrm(s,t)e^{\int_{t}^{\tau}\rfreeEff_\mu d\mu}e^{-\discRteEff(\tau-t)}
-> \end{aligned}\end{gathered}
-> ```
->
-> implying
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->         \PDVEff_{t}(\cNrm(s,\cdot)) & =  
-> \int_{t}^{\infty} \cNrm(s,t) e^{\int_{t}^{\tau}\rfreeEff_\mu  d\mu}e^{-\discRteEff(\tau-t)}e^{-\int_{t}^{\tau}\rfreeEff_\mu d\mu} d\tau
-> \\         & =  \cNrm(s,t) \int_{t}^{\infty} e^{-\discRteEff(\tau-t)} d\tau
-> \\   & =  \cNrm(s,t)/\discRteEff
-> \end{aligned}\end{gathered}
-> ```
->
-> so that the IBC becomes:
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->         \cNrm(s,t)/\discRteEff & =  \netWorth(s,t)+\hNrm(s,t)  \\
->         \cNrm(s,t) & =  \discRteEff (\netWorth(s,t)+\hNrm(s,t)) .
-> \end{aligned}\end{gathered}
-> ```
-
-Suppose we define upper-case variables as the aggregate value across all
-generations currently living of the corresponding lower-case value, e.g.
-
-aggregate consumption is
+and since {math}`\rfreeEff-\discRteEff = \rfree-\discRte` and {math}`\rfreeEff-\rfree = \diePrb`,
 
 ```{math}
-\begin{gathered}\begin{aligned}
-        \CNrm(t) & =  \int_{-\infty}^{t} \diePrb \cNrm(s,t) \Alive_{s}^{t} ds.
-\end{aligned}\end{gathered}
+:label: eq:BFH-aggCdot
+
+\dot{\CNrm} = (\rfree-\discRte)\CNrm - \diePrb\discRteEff\NetWorth .
 ```
 
-(Easy) Show that the aggregate level of consumption in
-this economy is
+Each surviving consumer's consumption grows at {math}`\rfree-\discRte`, but aggregate consumption grows more slowly, because the population turns over. At each instant the dying, a fraction {math}`\diePrb` of the population drawn at random, consume {math}`\CNrm` on average, while the newborns who replace them, with the same human wealth but no net worth, consume only {math}`\discRteEff\HNrm = \CNrm - \discRteEff\NetWorth` each. The replacement lowers aggregate consumption by {math}`\diePrb\discRteEff\NetWorth` per unit of time: the last term.
+
+:::{margin}
+The same equation follows from aggregating consumption directly, as {eq}`eq:BFH-Ndot` aggregates net worth: {math}`\dot{\CNrm} = \diePrb\cNrm(t,t) - \diePrb\CNrm + (\rfree-\discRte)\CNrm`, with the newborns' consumption {math}`\cNrm(t,t) = \discRteEff\HNrm`.
+:::
+
+(sec:BFH-Phase)=
+## The Phase Diagram
+
+Production uses the RCK model's Cobb-Douglas technology, with no productivity growth and the one unit of labor the population supplies: output is {math}`\KNrm^{\kapShare}`, and capital depreciates at the rate {math}`\deprRte`. Factor markets are competitive, as in [the decentralized RCK economy](#eq:DecRCK-prices), so the interest rate is the net marginal product of capital and noncapital income is the wage:
 
 ```{math}
-:label: eq:cagg
-
-\begin{gathered}\begin{aligned}
-        \CNrm(t) & =  \discRteEff (\NetWorth(t) + \HNrm(t)) . 
-\end{aligned}\end{gathered}
+\rfree = \kapShare\KNrm^{\kapShare-1} - \deprRte, \qquad \Wage = (1-\kapShare)\KNrm^{\kapShare} .
 ```
 
-> *Answer:*
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->         \CNrm(t) & =   \int_{-\infty}^{t} \diePrb \cNrm(s,t) \Alive_{s}^{t} ds \\
->          & =  \int_{-\infty}^{t} \diePrb \discRteEff(\netWorth(s,t)+\hNrm(s,t)) \Alive_{s}^{t} ds \\
->          & =  \discRteEff (\NetWorth(t)+\HNrm(t))
-> \end{aligned}\end{gathered}
-> ```
->
-> from the definition of {math}`\NetWorth(t)` and {math}`\HNrm(t)`.
-
-Suppose all living agents in this economy receive the same noncapital
-income, {math}`\wage(s,t) = \Wage(t)`. Since every member of the population has the
-same income, and the size of the population is one, aggregate income
-will also be {math}`\Wage(t)`. Aggregate human wealth at {math}`t` is therefore
-
-```{math}
-\begin{gathered}\begin{aligned}
-        \HNrm(t) & =  \PDVEff_{t}(\Wage)
-\end{aligned}\end{gathered}
-```
-
-where
-
-```{math}
-\begin{gathered}\begin{aligned}
-        \dot{\HNrm}(t) & =  \rfreeEff_{t} \HNrm(t) - \Wage(t) .
-\end{aligned}\end{gathered}
-```
-
-The differential equation for aggregate wealth can be
-shown to be
-
-```{math}
-:label: eq:Wdot
-
-\begin{gathered}\begin{aligned}
-        \dot{\NetWorth}(t) & =  \diePrb \netWorth(t,t) - \diePrb \NetWorth(t) + \int_{-\infty}^{t} \dot{\netWorth}(s,t) \diePrb e^{-\diePrb(t-s)} ds,
-\end{aligned}\end{gathered}
-```
-
-where {math}`\diePrb \netWorth(t,t)=0` is the wealth of newly born generations, {math}`\diePrb \NetWorth(t)` is
-the wealth of those who are dying at the moment, and the last term is
-the change in wealth for those who neither die nor are born in this
-period. But {eq}`eq:budconstr` implies that
-
-```{math}
-\begin{gathered}\begin{aligned}
-  \int_{-\infty}^{t} \dot{\netWorth}(s,t) \diePrb e^{-\diePrb(t-s)} ds & =  (\rfree+\diePrb) \NetWorth(t) + \Wage(t)-\CNrm(t)
-\end{aligned}\end{gathered}
-```
-
-so {eq}`eq:Wdot` becomes
-
-```{math}
-\begin{gathered}\begin{aligned}
-        \dot{\NetWorth}(t) & =  \rfree \NetWorth(t) + \Wage(t)-\CNrm(t).
-\end{aligned}\end{gathered}
-```
-
-Collecting, writing out {math}`\rfreeEff=\rfree+\diePrb` and {math}`\discRteEff=\discRte+\diePrb`, and
-dropping the {math}`(t)` arguments gives us the following equations for
-aggregate variables:
-
-```{math}
-:label: eq:clevel
-
-\begin{gathered}\begin{aligned}
-        \CNrm & =  (\diePrb+\discRte) (\HNrm+\NetWorth)  \\
-        \dot{\HNrm} & =  (\rfree+\diePrb) \HNrm - \Wage  \\
-        \dot{\NetWorth} & =  \rfree \NetWorth + \Wage - \CNrm
-\end{aligned}\end{gathered}
-```
-
-Use these equations to show that in this economy
-
-```{math}
-:label: eq:aggCdot
-
-\begin{gathered}\begin{aligned}
-        \dot{\CNrm} & =  (\rfree-\discRte) \CNrm - \diePrb(\diePrb+\discRte) \NetWorth
-\end{aligned}\end{gathered}
-```
-
-Hint: Differentiate {eq}`eq:clevel` and substitute out for {math}`\HNrm` by solving
-{eq}`eq:clevel` for {math}`\HNrm`.
-> *Answer:*
->
-> Time differentiate {eq}`eq:clevel` and substitute for {math}`\dot{\HNrm}`,
->
-> {math}`\dot{\NetWorth}`, and {math}`\HNrm` to get
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->         \dot{\CNrm} & =  (\diePrb+\discRte)\left[(\rfree+\diePrb) \HNrm - \Wage + \rfree \NetWorth + \Wage - \CNrm\right]
-> \\       & =  (\diePrb+\discRte)\left[(\rfree+\diePrb) \HNrm + \rfree \NetWorth \right] - \CNrm (\diePrb+\discRte)
-> \\       & =  (\diePrb+\discRte)\left[(\rfree+\diePrb) \left(\frac{\CNrm}{\diePrb+\discRte}-\NetWorth\right)+\rfree \NetWorth\right] - \CNrm (\diePrb+\discRte)
-> \\   & =  (\rfree+\diePrb) \CNrm + (\diePrb+\discRte)\left[    \rfree\NetWorth - (\rfree+\diePrb) \NetWorth \right] - \CNrm(\diePrb+\discRte)
-> \\   & =  (\rfree-\discRte) \CNrm - (\diePrb+\discRte)\diePrb \NetWorth.
-> \end{aligned}\end{gathered}
-> ```
-
-Now assume there is a standard production function, with output {math}`\KNrm^{\kapShare}`
-and output net of depreciation {math}`\FFunc(\KNrm)=\KNrm^{\kapShare}-\deprRte \KNrm`, and assume perfect competition so that the
-net interest rate {math}`\rfree` is equal to the net marginal product of capital,
-
-```{math}
-\rfree = \FFunc^{\prime}(\KNrm) = \kapShare \KNrm^{\kapShare-1}-\deprRte
-```
-
-and, without government debt, the aggregate capital stock at time {math}`t` is the same as aggregate
-nonhuman wealth, {math}`\KNrm(t)=\NetWorth(t)`. The aggregate accumulation equation is
-just the usual
+Without a government, loans between consumers net out, so aggregate net worth is the capital stock, {math}`\NetWorth = \KNrm`, as in [the decentralized RCK economy](#eq:DecRCK-clear), where it reads {math}`\NetWorth = \kNrm`. The factor payments exhaust output net of depreciation, {math}`\rfree\KNrm + \Wage = \KNrm^{\kapShare} - \deprRte\KNrm`, so net worth accumulates as capital does in the RCK model,
 
 ```{math}
 :label: eq:BFH-aggkdot
 
-\begin{gathered}\begin{aligned}
-  \dot{\KNrm} & =  \KNrm^{\kapShare}-\deprRte \KNrm -\CNrm.
-\end{aligned}\end{gathered}
+\dot{\KNrm} = \KNrm^{\kapShare} - \deprRte\KNrm - \CNrm ,
 ```
 
-Show that the following equation
+and {eq}`eq:BFH-aggCdot` becomes {math}`\dot{\CNrm} = (\kapShare\KNrm^{\kapShare-1} - \deprRte - \discRte)\CNrm - \diePrb\discRteEff\KNrm`. Consumption is constant where
 
 ```{math}
-:label: eq:CvsK1
+:label: eq:BFH-CdotEq0
 
-\begin{gathered}\begin{aligned}
-  \diePrb(\diePrb+\discRte) \KNrm      & =  \CNrm(\kapShare \KNrm^{\kapShare-1}-\deprRte-\discRte)
-\end{aligned}\end{gathered}
+\diePrb\discRteEff\KNrm = \CNrm(\kapShare\KNrm^{\kapShare-1} - \deprRte - \discRte) .
 ```
 
-describes the {math}`\dot{\CNrm}=0` locus. Use this equation to show that
+The left side is positive, so the {math}`\dot{\CNrm}=0` locus lies where the interest rate exceeds the time preference rate: to the left of the RCK model's steady state {math}`\Steady{\KNrm}_{\mathrm{RCK}}`, where {math}`\kapShare\KNrm^{\kapShare-1}-\deprRte = \discRte`, the [modified golden rule](#eq:RCK-modGoldenRule) without growth. Solved for consumption, the locus is {math}`\CNrm = \diePrb\discRteEff\KNrm/(\kapShare\KNrm^{\kapShare-1}-\deprRte-\discRte)`, which rises with {math}`\KNrm`: from the origin, where its numerator is zero and its denominator infinite, toward the vertical line at {math}`\Steady{\KNrm}_{\mathrm{RCK}}`, where its denominator is zero. So along the locus
 
 ```{math}
-:label: eq:BFH-1
+:label: eq:BFH-CdotEq0Limits
 
-\begin{gathered}\begin{aligned}
-  \lim_{\CNrm \rightarrow 0} \KNrm & =  0
-\\ \lim_{\CNrm \rightarrow \infty} \KNrm & =  ((\discRte+\deprRte)/\kapShare)^{1/(\kapShare-1)}.
-\end{aligned}\end{gathered}
+\lim_{\CNrm\rightarrow 0} \KNrm = 0, \qquad \lim_{\CNrm\rightarrow\infty} \KNrm = \Steady{\KNrm}_{\mathrm{RCK}} = \left(\frac{\kapShare}{\deprRte+\discRte}\right)^{\frac{1}{1-\kapShare}} .
 ```
 
-> *Answer:*
->
-> Rewriting the {math}`\dot{\CNrm}` equation as a function of {math}`\KNrm` yields
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->   \dot{\CNrm} & =  (\kapShare \KNrm^{\kapShare-1} - \discRte - \deprRte)\CNrm - (\diePrb+\discRte)\diePrb \KNrm.
-> \end{aligned}\end{gathered}
-> ```
->
-> The {math}`\dot{\CNrm}=0` locus is therefore given by
->
-> ```{math}
-> :label: eq:aggCdotmod
->
-> \begin{gathered}\begin{aligned}
->       0 & =  (\kapShare \KNrm^{\kapShare-1}-\discRte-\deprRte) - \diePrb(\diePrb+\discRte) \KNrm/\CNrm
-> \\  \diePrb(\diePrb+\discRte) \KNrm/\CNrm       & =  (\kapShare \KNrm^{\kapShare-1}-\deprRte-\discRte)
-> \\  \diePrb(\diePrb+\discRte) \KNrm      & =  \CNrm(\kapShare \KNrm^{\kapShare-1}-\deprRte-\discRte)
-> \end{aligned}\end{gathered}
-> ```
->
-> In the limit as {math}`\CNrm \rightarrow 0` this expression approaches
->
-> ```{math}
-> :label: eq:2
->
-> \diePrb(\diePrb+\discRte) \KNrm = 0
-> ```
->
-> which can be true only if {math}`\lim_{\CNrm \rightarrow 0} \KNrm = 0`.
->
-> On the other hand, as {math}`\CNrm \rightarrow \infty` we know that {math}`\KNrm`
->
-> must remain finite (because the DBC does not allow infinite
->
-> accumulation of {math}`\KNrm`; infinite {math}`\KNrm` would imply infinite depreciation which
->
-> could never be paid for by a production function with diminishing marginal returns), which means that
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
-> \lim_{\CNrm \rightarrow \infty} \kapShare \KNrm^{\kapShare-1} & =  (\discRte+\deprRte)
-> \\ \KNrm^{*} & =  ((\discRte+\deprRte)/\kapShare)^{1/(\kapShare-1)}.
-> \end{aligned}\end{gathered}
-> ```
+As {math}`\diePrb \rightarrow 0`, the last term of {eq}`eq:BFH-aggCdot` vanishes, and the {math}`\dot{\CNrm}=0` locus becomes a vertical line at {math}`\Steady{\KNrm}_{\mathrm{RCK}}`, like the one in the RCK model's [phase diagram](#fig:RamseySSPlot). Finite horizons bend it to the left, the more so the shorter the horizon. The {math}`\dot{\KNrm}=0` locus, {math}`\CNrm = \KNrm^{\kapShare}-\deprRte\KNrm`, is [the RCK model's](#eq:RCK-kdotEq0) without growth: it rises to a peak at the [golden rule](#eq:RCK-goldenRule) {math}`\GoldRule{\KNrm}`, where {math}`\kapShare\KNrm^{\kapShare-1} = \deprRte` and the interest rate is zero, and falls after it.
 
-Using your results from the previous question and the aggregate
-dynamic budget constraint, draw the phase diagram for this model and
-discuss how and why it differs from the phase diagram for the
-standard Ramsey/Cass-Koopmans model. (please use {math}`\KNrm^{*}` to
-designate the RCK steady-state capital stock and {math}`\Steady{\KNrm}` to
-designate this model's steady-state {math}`\KNrm`.)
+{numref}`fig:BFH-Phase` shows the two loci. They cross at the steady state A, where the capital stock {math}`\Steady{\KNrm}` is below {math}`\Steady{\KNrm}_{\mathrm{RCK}}`, which is itself below the golden rule, and where the interest rate exceeds the time preference rate: by {eq}`eq:BFH-aggCdot`, {math}`(\Steady{\rfree}-\discRte)\Steady{\CNrm} = \diePrb\discRteEff\Steady{\KNrm} > 0`. The economy approaches A along the saddle path, as the RCK economy approaches its steady state along [its saddle path](#fig:RamseySaddlePlot).
 
-> *Answer:*
->
-> Using {eq}`eq:BFH-aggkdot`, the {math}`\dot{\KNrm}=0` locus is
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->   \CNrm & =  \KNrm^{\kapShare}-\deprRte \KNrm
-> \end{aligned}\end{gathered}
-> ```
->
-> which yields the usual hump-shaped {math}`\dot{\KNrm}=0` locus.
-
-:::{figure} /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase1.png
+:::{margin}
+A is a saddle point. The slope of the {math}`\dot{\KNrm}=0` locus at A is the interest rate, {math}`\Steady{\rfree} = \kapShare\Steady{\KNrm}^{\kapShare-1}-\deprRte`. By {eq}`eq:BFH-CdotEq0`, the slope of the {math}`\dot{\CNrm}=0` locus is {math}`\CNrm/\KNrm - \rfree^{\prime}(\KNrm)\CNrm/(\rfree-\discRte)`, which exceeds {math}`\CNrm/\KNrm`, since {math}`\rfree^{\prime}(\KNrm) < 0`; and at A, {math}`\Steady{\CNrm}/\Steady{\KNrm} = \Steady{\KNrm}^{\kapShare-1}-\deprRte` exceeds {math}`\Steady{\rfree}`. The determinant of the system linearized at A, {math}`\Steady{\rfree}-\discRte` times the difference between the first slope and the second, is therefore negative, and its eigenvalues have opposite signs, as in [the RCK model](#fig:RamseySaddlePlot).
 :::
 
-> In the infinite horizon economy we have {math}`\diePrb = 0` and so the
->
-> steady-state capital stock would be the {math}`\KNrm^{*}` where {math}`\kapShare \KNrm^{\kapShare-1}-\deprRte = \discRte`. But since {math}`\KNrm/\CNrm` and {math}`\diePrb(\diePrb+\discRte)` are
->
-> strictly positive, in this finite-horizon economy we would have
->
-> {math}`\dot{\CNrm}/\CNrm < 0` at {math}`\KNrm=\KNrm^{*}`. It is clear therefore that in order
->
-> for {eq}`eq:aggCdotmod` to hold we will need {math}`\kapShare \KNrm^{\kapShare-1}`
->
-> to be larger than it is at {math}`\KNrm^{*}`, which is to say we need a higher
->
-> steady-state interest rate, and thus we need a lower steady-state
->
-> capital stock, which is depicted in the figure as {math}`\Steady{\KNrm}`.
->
-> This makes sense because the finite-horizon consumers in this economy
->
-> discount the future more than the representative agent does, because
->
-> they die but a representative agent does not.
->
-> These results are combined in the figure, which shows that the
->
-> {math}`\dot{\CNrm}=0` locus intersects the {math}`\dot{\KNrm}=0` locus at point {math}`A`
->
-> which corresponds to a lower level of the capital stock than in the
->
-> infinite horizon model.
+Why does a finite horizon lower the capital stock? Finite-horizon consumers discount the future more than the infinitely lived household of the RCK model does, because they die and it does not. Within each life the annuity offsets the extra discounting, so each consumer's consumption grows at {math}`\rfree-\discRte`. But the consumers who hold the economy's net worth are continually replaced by newborns who hold none, and aggregate consumption can be constant only if each consumer's consumption rises, fast enough to offset that turnover. That takes an interest rate above the time preference rate, and so less capital than in the RCK model.
 
-Now consider the introduction of a government that finances spending
-either by lump-sum taxes or by debt. Its dynamic budget constraint is
+:::{figure} figures/BFHPhase.png
+:name: fig:BFH-Phase
+
+The Phase Diagram with Finite Horizons
+
+Note: Aggregate consumption {math}`\CNrm` against the capital stock {math}`\KNrm`, with the values in [the RCK model's phase diagram](#fig:RamseySSPlot), {math}`\kapShare = 0.3`, {math}`\discRte = 0.02` and {math}`\deprRte = 0.08`, and {math}`\diePrb = 0.05`, a horizon of 20 years: with the 50-year horizon above, the steady state, {math}`\Steady{\KNrm} = 4.60`, would sit too close to {math}`\Steady{\KNrm}_{\mathrm{RCK}} = 4.80` for the gap to show. The {math}`\dot{\CNrm}=0` locus rises from the origin and bends up toward the dashed line at {math}`\Steady{\KNrm}_{\mathrm{RCK}}`, the {math}`\dot{\CNrm}=0` locus it becomes when {math}`\diePrb=0`. The hump-shaped {math}`\dot{\KNrm}=0` locus peaks at the golden rule, {math}`\GoldRule{\KNrm} = 6.61`. The loci cross at the steady state A, with capital {math}`\Steady{\KNrm} = 4.09` and consumption {math}`\Steady{\CNrm}`; the saddle path runs through A, and the gray arrows show the direction of motion in each region. The design is after {cite:t}`blanchardFinite`. Drawn by the [notebook](BlanchardFiniteHorizon.ipynb); run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=BlanchardFiniteHorizon.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/BlanchardFiniteHorizon/BlanchardFiniteHorizon.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/BlanchardFiniteHorizon/BlanchardFiniteHorizon.ipynb).
+:::
+
+(sec:BFH-Debt)=
+## Government Debt
+
+Now add a government, which spends {math}`\GovSpend` per unit of time and pays for it with lump-sum taxes of {math}`\TaxLev` per person or by issuing debt {math}`\Debt`, on which it pays the interest rate {math}`\rfree`. As in [the RCK model with government](#sec:RCKGov-Debt), its dynamic budget constraint is
 
 ```{math}
-\dot{\Debt} =  \rfree \Debt + \GovSpend - \TaxLev
+\dot{\Debt} = \GovSpend + \rfree\Debt - \TaxLev .
 ```
 
-where {math}`\Debt` is government debt, {math}`\GovSpend` is government spending, and
-{math}`\TaxLev` is a lump-sum per capita tax. Defining
-
-```{math}
-\begin{gathered}\begin{aligned}
-  e^{\int_t^{\tau}\rfree_\mu d\mu}
-\end{aligned}\end{gathered}
-```
-
-as the compound interest factor between time {math}`t` and time {math}`\tau`, the
-government is also required to satisfy its no-Ponzi condition with equality
+It cannot pay the interest on its debt by borrowing more forever, so it faces a no-Ponzi condition, {math}`\lim_{\tau\rightarrow\infty} e^{-\int_{t}^{\tau}\rfree_{\mu}\,d\mu}\Debt_{\tau} \leq 0` at any date {math}`t`; and it does not end with assets it never uses, so its no-Ponzi condition holds with equality:
 
 ```{math}
 :label: eq:BFH-govDebtLimit
 
-\lim_{\tau \rightarrow \infty} \Debt_\tau/e^{\int_t^{\tau}\rfree_\mu d\mu} = 0.
+\lim_{\tau\rightarrow\infty} e^{-\int_{t}^{\tau}\rfree_{\mu}\,d\mu}\Debt_{\tau} = 0 .
 ```
 
-Consider the following fiscal policy experiment. Until time 0 there
-has been no government ({math}`\GovSpend_\tau = \Debt_\tau = \TaxLev_\tau=0~\forall~\tau<0`). At date
-0 the government issues a quantity {math}`\Debt` of debt and announces that
-future lump sum taxes will be imposed in amounts exactly large enough
-to pay the interest on this debt (so subsequently, {math}`\dot{\Debt}=0`
-forever). The government rebates the proceeds of its sale of debt to
-the public as a per-capita lump sum of {math}`\Debt` per person. The government
-will never engage in any spending (aside from paying interest on the
-debt). Aggregate net worth, and human wealth net of taxes, are now
+Integrating the budget constraint forward with this condition gives the government's intertemporal budget constraint, as in [the RCK model with government](#eq:RCKGov-govibc): the present discounted value of its taxes, discounted at {math}`\rfree`, equals its debt plus the present discounted value of its spending.
+
+Consider the following experiment. Until date 0 there is no government: {math}`\GovSpend=\Debt=\TaxLev=0`. At date 0, unexpectedly, the government issues debt {math}`\Debt` and rebates the proceeds to the public as a lump sum of {math}`\Debt` per person. It announces that from then on it will levy lump-sum taxes just large enough to pay the interest on the debt, {math}`\TaxLev = \rfree\Debt`, so that {math}`\dot{\Debt}=0` forever, and it never spends anything else.
+
+The policy changes the consumers' side of the economy in two ways. Government bonds are a second asset, which must pay the same return as capital, so aggregate net worth now includes them, {math}`\NetWorth = \KNrm+\Debt`, as a household's does in [the RCK model with government](#sec:RCKGov-Debt). And net of taxes, noncapital income is {math}`\Wage-\TaxLev`, and human wealth is {math}`\HNrm - \PDVEff_{t}(\TaxLev)`: human wealth {math}`\HNrm = \PDVEff_{t}(\Wage)`, as before, less the present discounted value of the taxes the consumers alive will pay. The aggregate economy {eq}`eq:BFH-aggregates` becomes
 
 ```{math}
+:label: eq:BFH-debtSystem
+
 \begin{gathered}\begin{aligned}
-  \NetWorth & =  \KNrm + \Debt
-\\ \HNrm - \PDVEff_{t}(\TaxLev) & =  \PDVEff_{t}(\Wage - \TaxLev)
+  \CNrm & = \discRteEff(\KNrm + \Debt + \HNrm - \PDVEff_{t}(\TaxLev)) ,
+\\ \frac{d}{dt}(\HNrm - \PDVEff_{t}(\TaxLev)) & = \rfreeEff(\HNrm - \PDVEff_{t}(\TaxLev)) - (\Wage-\TaxLev) ,
+\\ \dot{\NetWorth} & = \rfree(\KNrm+\Debt) + \Wage - \TaxLev - \CNrm ,
 \end{aligned}\end{gathered}
 ```
 
-Explain why the effect of this policy is to modify the aggregate
-specification of the economy to
+so net worth now accumulates out of income net of taxes, {math}`\rfree(\KNrm+\Debt) + \Wage - \TaxLev`, minus consumption. The steps that led to {eq}`eq:BFH-aggCdot`, with {math}`\KNrm+\Debt` for {math}`\NetWorth`, {math}`\Wage-\TaxLev` for {math}`\Wage` and {math}`\HNrm-\PDVEff_{t}(\TaxLev)` for {math}`\HNrm`, go through unchanged, the taxes canceling as noncapital income did. Since {math}`\dot{\Debt}=0`, capital accumulates as {math}`\dot{\KNrm} = \dot{\NetWorth} = \rfree\KNrm + \Wage - \CNrm + (\rfree\Debt - \TaxLev)`, and the last term is zero because the taxes pay exactly the interest on the debt. So
 
 ```{math}
-:label: eq:Cnew
+:label: eq:BFH-debtDynamics
 
 \begin{gathered}\begin{aligned}
-   \CNrm & =  (\diePrb+\discRte) (\HNrm - \PDVEff_{t}(\TaxLev) + \NetWorth)
-\\ \dot{\NetWorth} & =  \rfree \NetWorth + \Wage - \TaxLev- \CNrm
-\\ \frac{d}{dt}(\HNrm - \PDVEff_{t}(\TaxLev)) & =  (\rfree+\diePrb) (\HNrm - \PDVEff_{t}(\TaxLev)) - (\Wage - \TaxLev)
+  \dot{\CNrm} & = (\rfree-\discRte)\CNrm - \diePrb\discRteEff(\KNrm+\Debt) ,
+\\ \dot{\KNrm} & = \KNrm^{\kapShare} - \deprRte\KNrm - \CNrm .
 \end{aligned}\end{gathered}
 ```
 
-> *Answer:*
->
-> The effect of the government policy is twofold. On the one hand,
->
-> the distribution of government bonds increases the consumers'
->
-> wealth {math}`\KNrm` by an amount equal to the value of the bonds received,
->
-> resulting in a new definition of wealth {math}`\NetWorth` which
->
-> includes the bonds. On the other hand, the higher value of taxes
->
-> off to infinity reduces the consumers' human wealth by an amount
->
-> equal to the present discounted value of the taxes.
->
-> The change in (redefined) wealth is now  net income {math}`\rfree\NetWorth + \Wage - \TaxLev`
->
-> minus consumption.
+The debt leaves the {math}`\dot{\KNrm}=0` locus where it was, but at every combination of capital and consumption it lowers {math}`\dot{\CNrm}` by {math}`\diePrb\discRteEff\Debt`: a point that was on the {math}`\dot{\CNrm}=0` locus now has {math}`\dot{\CNrm} = -\diePrb\discRteEff\Debt`. Since {math}`\dot{\CNrm}` rises with consumption wherever the interest rate exceeds {math}`\discRte`, restoring {math}`\dot{\CNrm}=0` at a given capital stock takes more consumption, so the locus shifts up, or equivalently to the left, as {numref}`fig:BFH-DebtPhase` shows. The new steady state A′, with capital {math}`\Steady{\KNrm}_{\Debt}` and consumption {math}`\Steady{\CNrm}_{\Debt}`, has less capital and a higher interest rate than A. Since A was below the golden rule, its interest rate being above {math}`\discRte`, which is positive, A′ also has less consumption.
 
-Use these equations to show that the new dynamic equations for
-the economy are
+:::{figure} figures/BFHDebtPhase.png
+:name: fig:BFH-DebtPhase
 
-```{math}
-\begin{gathered}\begin{aligned}
-  \dot{\CNrm} & =  (\rfree - \discRte)\CNrm - \diePrb(\diePrb+\discRte)(\KNrm+\Debt)
-\\ \dot{\KNrm} & =  \KNrm^{\kapShare}-\deprRte \KNrm - \CNrm
-\end{aligned}\end{gathered}
-```
+Government Debt in the Phase Diagram
 
-Show how the policy change affects the economy over time, using a
-phase diagram and a diagram showing the dynamics of aggregate
-consumption after the policy is introduced. Explain the impact
-of the policy on different generations in the economy.
-
-> *Answer:*
->
-> Time differentiating {eq}`eq:Cnew` yields
->
-> ```{math}
-> :label: eq:dotCnew
->
-> \begin{gathered}\begin{aligned}
->   \dot{\CNrm} & =  (\diePrb+\discRte) (\frac{d}{dt}(\HNrm - \PDVEff_{t}(\TaxLev)) + \dot{\NetWorth})
-> \\ & =  (\diePrb+\discRte)(\rfree \NetWorth+(\rfree+\diePrb)(\HNrm - \PDVEff_{t}(\TaxLev))-\CNrm)
-> \end{aligned}\end{gathered}
-> ```
->
-> Now solve {eq}`eq:Cnew` for {math}`\HNrm - \PDVEff_{t}(\TaxLev)`,
->
-> ```{math}
-> :label: eq:18
->
-> \begin{gathered}\begin{aligned}
->   \HNrm - \PDVEff_{t}(\TaxLev) & =  \left(\frac{\CNrm}{\diePrb+ \discRte}\right)-\NetWorth
-> \end{aligned}\end{gathered}
-> ```
->
-> and substitute into {eq}`eq:dotCnew` to obtain
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->   \dot{\CNrm} & =  (\diePrb+\discRte)(\rfree \NetWorth+(\rfree+\diePrb)(\CNrm(\diePrb+\discRte)^{-1} - \NetWorth)-\CNrm)
-> \\        & =  (\rfree+\diePrb)\CNrm - (\diePrb+\discRte)\CNrm- \diePrb(\diePrb+\discRte)\NetWorth
-> \\ & =  (\rfree-\discRte)\CNrm - \diePrb(\diePrb+\discRte)(\KNrm+\Debt).
-> \end{aligned}\end{gathered}
-> ```
->
-> Since we are assuming that {math}`\Debt` is a constant (after the fiscal
->
-> experiment), any combination of {math}`\CNrm` and {math}`\KNrm` that would have been on
->
-> the {math}`\dot{\CNrm}=0` locus before the policy shift now has a value {math}`\dot{\CNrm} = -\diePrb(\diePrb+\discRte)\Debt`. This means that the {math}`\CNrm` that would restore
->
-> {math}`\dot{\CNrm}=0` must be a larger {math}`\CNrm`, which says that the {math}`\dot{\CNrm}=0`
->
-> locus shifts up (or, equivalently, to the left). Thus, the new
->
-> equilibrium will be at a lower value of {math}`\KNrm` and a higher interest
->
-> rate.
->
-> The phase diagram shows that the new equilibrium point {math}`A'` is to the left
->
-> of the original equilibrium. This is because at a given level of the aggregate
->
-> capital stock, consumers spend more: they hold the bonds, {math}`\NetWorth>\KNrm`, but will pay only part of the taxes that service them; the rest falls on generations not yet born. Thus,
->
-> Ricardian equivalence does not hold in this model, because a tax cut today
->
-> financed by a future perpetual tax is a transfer of resources from future
->
-> consumers to today's consumers, and there are no altruistic links that
->
-> make current consumers offset this by saving more on behalf of future
->
-> generations.
-
-:::{figure} /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase2.png
+Note: The economy of {numref}`fig:BFH-Phase`, with {math}`\diePrb = 0.05`, zoomed on its steady states. Before the policy, the {math}`\dot{\CNrm}=0` locus (solid) crosses the {math}`\dot{\KNrm}=0` locus at the steady state A, with capital {math}`\Steady{\KNrm}` and consumption {math}`\Steady{\CNrm}`. A debt of half of output at A, {math}`\Debt = 0.76`, shifts the {math}`\dot{\CNrm}=0` locus up and to the left (dashed). At the new steady state A′, capital {math}`\Steady{\KNrm}_{\Debt}` is 2.5 percent below {math}`\Steady{\KNrm}`, consumption {math}`\Steady{\CNrm}_{\Debt}` is below {math}`\Steady{\CNrm}`, and the interest rate is 3.39 percent rather than 3.19. At date 0 consumption jumps from A up onto the saddle path with the debt, and capital and consumption then fall along it to A′ (purple). With the 50-year horizon, {math}`\diePrb = 0.02`, capital would fall only 0.7 percent. The design is after {cite:t}`blanchardFinite`. Drawn by the [notebook](BlanchardFiniteHorizon.ipynb); run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=BlanchardFiniteHorizon.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/BlanchardFiniteHorizon/BlanchardFiniteHorizon.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/BlanchardFiniteHorizon/BlanchardFiniteHorizon.ipynb).
 :::
 
-> The next figure shows the path of consumption per capita in this
->
-> economy. Prior to time 0, the economy was in its steady-state
->
-> equilibrium at the level of consumption {math}`\CNrm_{0}` corresponding to the
->
-> equilibrium labeled {math}`A` in the phase diagram. At time 0, the fiscal
->
-> policy is carried out. The fiscal policy immediately increases
->
-> consumption because it amounts to a transfer of resources from future
->
-> to current generations. However, the higher level of consumption runs
->
-> down the capital stock per capita, and so over time consumption asymptotically
->
-> approaches a new, lower equilibrium level of consumption {math}`\CNrm'`.
+Why does the debt matter? Not because consumers hold the bonds: with {math}`\diePrb=0` they would hold them too, yet the term in {math}`\Debt` would vanish, and the debt would change nothing, as Ricardian equivalence says it must in [the RCK model with government](#sec:RCKGov-Debt). It matters because the consumers alive at date 0 will pay only part of the taxes that service it.
 
-:::{figure} /content/figures/BlanchardFiniteHorizon/BlanchardCDynamics.png
+The government's intertemporal budget constraint makes the taxes worth the debt at the interest rate {math}`\rfree`, {math}`\PDV_{0}(\TaxLev) = \Debt`, with {math}`\PDV`, as in [the RCK model with government](#eq:RCKGov-govibc), the present discounted value at {math}`\rfree`. But the consumers alive discount the taxes at {math}`\rfree+\diePrb`, because they will pay them only while alive, so to them the taxes are worth less than the debt, {math}`\PDVEff_{0}(\TaxLev) < \PDV_{0}(\TaxLev) = \Debt`: with a constant interest rate, {math}`\PDVEff_{0}(\rfree\Debt) = \rfree\Debt/(\rfree+\diePrb)`. The bonds then raise their wealth, net of the taxes they will pay, by {math}`\diePrb\Debt/(\rfree+\diePrb)`, which is zero when {math}`\diePrb=0`. The rest of the taxes falls on generations not yet born, who will pay them without ever having held the bonds. That is the term {math}`-\diePrb\discRteEff\Debt` in {eq}`eq:BFH-debtDynamics`: the consumers who die hold bonds, while the newborns who replace them hold none but owe the same taxes. The policy transfers resources from future generations to the consumers alive today, and there are no altruistic links, such as bequests, that would lead today's consumers to offset the transfer by saving more on behalf of future generations. So government bonds are net wealth, unlike in [the RCK model with government](#eq:famibc), and Ricardian equivalence fails.
+
+{numref}`fig:BFH-DebtConsumption` shows the path of aggregate consumption. Before date 0 the economy is in its steady state A, with consumption {math}`\Steady{\CNrm}`. At date 0 the capital stock cannot jump, but consumption can: it jumps up, onto the saddle path that leads to A′, because the policy transfers resources from future to current generations. The higher consumption runs the capital stock down and raises the interest rate, and consumption falls, below {math}`\Steady{\CNrm}`, approaching asymptotically the new, lower steady-state level {math}`\Steady{\CNrm}_{\Debt}`.
+
+The generations alive at date 0 gain: they receive the bonds and will pay only part of the taxes that service them. The generations born later receive no bonds, pay the taxes all their lives, and work with less capital, at a lower wage.
+
+:::{figure} figures/BFHDebtConsumption.png
+:name: fig:BFH-DebtConsumption
+
+Aggregate Consumption after the Debt Is Issued
+
+Note: The economy and the debt of {numref}`fig:BFH-DebtPhase`. Consumption is at its steady-state level {math}`\Steady{\CNrm}`, at A, until the debt is issued at date 0. It then jumps up 1.2 percent, falls back through {math}`\Steady{\CNrm}` about 12 years later, and approaches the new steady-state level {math}`\Steady{\CNrm}_{\Debt}`, at A′, 0.28 percent below {math}`\Steady{\CNrm}`; the dashed lines mark the two levels. With the 50-year horizon, {math}`\diePrb = 0.02`, consumption would jump 0.34 percent, fall back through its old level about 15 years later, and settle 0.06 percent below it. Drawn by the [notebook](BlanchardFiniteHorizon.ipynb); run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=BlanchardFiniteHorizon.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/BlanchardFiniteHorizon/BlanchardFiniteHorizon.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/BlanchardFiniteHorizon/BlanchardFiniteHorizon.ipynb).
 :::
 
-Blanchard shows that if the model is changed so that each
-consumer's income declines exponentially at rate {math}`-\PermGroRte` after
-birth, the result is equivalent to assuming that future labor income
-is discounted at an interest rate that is higher by {math}`-\PermGroRte`. He
-further shows that the equations of motion of the model change to
+(sec:BFH-FallingIncome)=
+## Income That Falls with Age
+
+Suppose instead that each consumer's noncapital income falls with age: it grows over a life at the rate {math}`\PermGroRte < 0`, so that a consumer born at {math}`s` earns, at date {math}`t`,
 
 ```{math}
-:label: eq:lccdot
+\wage(s,t) = \left(\frac{\diePrb-\PermGroRte}{\diePrb}\right)\Wage(t)e^{\PermGroRte(t-s)} .
+```
+
+The factor in parentheses is a newborn's income relative to the average, and it keeps aggregate noncapital income at {math}`\Wage(t)`: aggregating over the cohorts alive, {math}`\int_{-\infty}^{t} \wage(s,t)\,\diePrb e^{-\diePrb(t-s)}\,ds = \Wage(t)`. A consumer's human wealth is then
+
+```{math}
+\hNrm(s,t) = \PDVEff_{t}(\wage(s,\cdot)) = \left(\frac{\diePrb-\PermGroRte}{\diePrb}\right)e^{\PermGroRte(t-s)}\int_{t}^{\infty} \Wage(\tau)\,e^{-\int_{t}^{\tau}(\rfreeEff_{\mu}-\PermGroRte)\,d\mu}\,d\tau ,
+```
+
+and aggregating it in the same way gives
+
+```{math}
+:label: eq:BFH-fallingH
+
+\HNrm(t) = \int_{t}^{\infty} \Wage(\tau)\,e^{-\int_{t}^{\tau}(\rfreeEff_{\mu}-\PermGroRte)\,d\mu}\,d\tau, \qquad \dot{\HNrm} = (\rfree+\diePrb-\PermGroRte)\HNrm - \Wage .
+```
+
+As {cite:t}`blanchardFinite` shows, falling income is equivalent to discounting future noncapital income at a rate higher by {math}`-\PermGroRte`: at {math}`\rfree+\diePrb-\PermGroRte`, the perfect foresight model's {math}`\rfree-\PermGroRte` with death added. Human wealth is finite when {math}`\rfree+\diePrb > \PermGroRte`, the [finite human wealth condition](#eq:FHWCPF) with death added, which holds whenever {math}`\rfree+\diePrb > 0`, since {math}`\PermGroRte < 0`.
+
+Every consumer still spends {math}`\discRteEff` of total wealth, and newborns still have no net worth, so the aggregate consumption function {eq}`eq:BFH-cagg` and the accumulation of net worth, {math}`\dot{\NetWorth} = \rfree\NetWorth + \Wage - \CNrm`, are unchanged; only {math}`\dot{\HNrm}` is different. The steps that led to {eq}`eq:BFH-aggCdot`, with {math}`\rfreeEff-\PermGroRte` for {math}`\rfreeEff` in {math}`\dot{\HNrm}`, and with {math}`\NetWorth = \KNrm`, now give
+
+```{math}
+:label: eq:BFH-fallingDynamics
 
 \begin{gathered}\begin{aligned}
-  \dot{\CNrm} & =  (\kapShare \KNrm^{\kapShare-1}-\deprRte -\PermGroRte-\discRte)\CNrm-(\diePrb-\PermGroRte)(\diePrb+\discRte)\KNrm
-\\ \dot{\KNrm} & =  \KNrm^{\kapShare}-\deprRte \KNrm - \CNrm.
+  \dot{\CNrm} & = (\kapShare\KNrm^{\kapShare-1}-\deprRte-\PermGroRte-\discRte)\CNrm - (\diePrb-\PermGroRte)\discRteEff\KNrm ,
+\\ \dot{\KNrm} & = \KNrm^{\kapShare} - \deprRte\KNrm - \CNrm ,
 \end{aligned}\end{gathered}
 ```
 
-Note that it is possible to rewrite the {math}`\dot{\CNrm}=0` locus as
+which, with {math}`\PermGroRte=0`, are {eq}`eq:BFH-aggCdot` and {eq}`eq:BFH-aggkdot`. Consumption is constant where
 
 ```{math}
-:label: eq:lccdoteq0
+:label: eq:BFH-fallingCdotEq0
 
-\begin{gathered}\begin{aligned}
-  (\kapShare \KNrm^{\kapShare-1}-\deprRte -\PermGroRte-\discRte)\CNrm & =  (\diePrb-\PermGroRte)(\diePrb+\discRte)\KNrm
-\end{aligned}\end{gathered}
+(\kapShare\KNrm^{\kapShare-1}-\deprRte-\PermGroRte-\discRte)\CNrm = (\diePrb-\PermGroRte)\discRteEff\KNrm .
 ```
 
-Use this equation to show that as {math}`\CNrm \rightarrow \infty`, the
-{math}`\dot{\CNrm}=0` locus asymptotes to
+The right side is positive, so the locus lies where the interest rate exceeds {math}`\discRte+\PermGroRte`. The interest rate falls toward {math}`-\deprRte` as the capital stock grows, so if {math}`\discRte+\PermGroRte > -\deprRte`, some capital stock has the interest rate {math}`\discRte+\PermGroRte`, and as {math}`\CNrm \rightarrow \infty` along the locus the first factor on the left must go to zero: the locus approaches the vertical line where
 
 ```{math}
-:label: eq:eqblcr
+:label: eq:BFH-fallingAsymptote
 
-\begin{gathered}\begin{aligned}
- \rfree = \kapShare \KNrm^{\kapShare-1} - \deprRte & =  \discRte + \PermGroRte
-\end{aligned}\end{gathered}
+\rfree = \kapShare\KNrm^{\kapShare-1}-\deprRte = \discRte+\PermGroRte .
 ```
 
-Thus, for a large enough value of {math}`-\PermGroRte` it is possible that the net
-interest rate in this economy could be negative. Draw a phase diagram
-corresponding to an equilibrium with a negative net interest rate, and
-comment on why this is an interesting case to think about. In
-particular, what new light does it shed on the fiscal policy
-experiment examined above?
+If income falls faster still, the locus has no vertical asymptote and rises without bound only as the capital stock does.
 
-> *Answer:*
->
-> As {math}`\CNrm` goes to infinity on the LHS of {eq}`eq:lccdoteq0`, the only way
->
-> the equation can continue to hold is if
->
-> ```{math}
-> \begin{gathered}\begin{aligned}
->  \lim_{\CNrm \rightarrow \infty} (\kapShare \KNrm^{\kapShare-1}-\deprRte -\PermGroRte-\discRte) & =  0
-> \end{aligned}\end{gathered}
-> ```
->
-> which implies {eq}`eq:eqblcr`.
->
-> The new phase diagram shows the {math}`\dot{\CNrm}=0` locus intersecting the
->
-> {math}`\dot{\KNrm}=0` locus to the right of the maximum of the {math}`\dot{\KNrm}=0` locus.
->
-> This is implied by the fact that the net interest rate is negative, which
->
-> means that output net of depreciation, and with it consumption at every date, could be increased by reducing
->
-> the capital stock.
->
-> The reason this is an interesting case is that in this case it is
->
-> possible for the economy to be in a condition of dynamic inefficiency,
->
-> just as in the Diamond OLG model. The idea
->
-> is to think of declining labor income as a way to generate a 'life cycle'
->
-> saving motive. In such a case the fiscal experiment examined above
->
-> is interesting because it could rescue an economy with too much capital
->
-> from a state of dynamic inefficiency.
+The steady-state interest rate exceeds {math}`\discRte+\PermGroRte`, so it can be negative only if {math}`\PermGroRte < -\discRte`, a necessary condition but not a sufficient one. However fast income falls, the steady-state interest rate stays above {math}`\kapShare(\discRte+\diePrb)-(1-\kapShare)\deprRte`, which it approaches as {math}`\PermGroRte \rightarrow -\infty` and nearly all income arrives at birth. So it can be negative only if depreciation is large enough as well, {math}`(1-\kapShare)\deprRte > \kapShare(\discRte+\diePrb)`. With the values in [the RCK model's phase diagram](#fig:RamseySSPlot), {math}`\kapShare = 0.3`, {math}`\discRte = 0.02` and {math}`\deprRte = 0.08`, and the 50-year horizon above, {math}`\diePrb = 0.02`, it is: the bound is −4.4 percent, and the steady-state interest rate turns negative once income falls by about 3 percent a year with age. {numref}`fig:BFH-FallingIncome` shows such a case, with income falling 5 percent a year: the {math}`\dot{\CNrm}=0` locus crosses the {math}`\dot{\KNrm}=0` locus at the steady state A, to the right of its peak, the golden rule, where the interest rate is negative. Consumers save while young for the years when their income will be lower, a life-cycle motive for saving that the model with flat income lacks, and with income falling fast enough they can save so much that the capital stock exceeds not only {math}`\Steady{\KNrm}_{\mathrm{RCK}}` but the golden rule.
 
-:::{figure} /content/figures/BlanchardFiniteHorizon/BlanchardFiniteHorizPhase3.png
+The economy is then dynamically inefficient, as the [Diamond OLG model](#sec:OLGModel) can be: its interest rate is below its growth rate, which in this model is zero. To the right of the peak, {math}`\rfree = \kapShare\KNrm^{\kapShare-1}-\deprRte < 0`, so output net of depreciation, {math}`\KNrm^{\kapShare}-\deprRte\KNrm`, rises as the capital stock falls: by holding less capital, the economy could consume more at every date, and so could make every generation better off. Falling income is a way to give this model the life-cycle motive for saving that drives the Diamond model, whose consumers earn nothing when old. In such an economy the debt experiment above is all the more interesting: debt still crowds out capital, so it could rescue an economy with too much capital from dynamic inefficiency. (With falling income, and the same tax on everyone, the debt's term in {math}`\dot{\CNrm}` is no longer the {math}`-\diePrb\discRteEff\Debt` of {eq}`eq:BFH-debtDynamics`; at a constant interest rate it is {math}`-\diePrb\discRteEff\Debt(\rfree+\diePrb-\PermGroRte)/(\rfree+\diePrb)`, still negative while {math}`\rfree+\diePrb > 0`.)
+
+:::{margin}
+While the interest rate is negative, the tax that pays the interest on the debt, {math}`\rfree\Debt`, is negative: a transfer. A constant debt satisfies the government's [condition on its debt at infinity](#eq:BFH-govDebtLimit) only if the new steady-state interest rate is positive, that is, only if the debt is large enough to bring the capital stock below the golden rule; otherwise its present discounted value grows without bound.
+:::
+
+:::{figure} figures/BFHFallingIncome.png
+:name: fig:BFH-FallingIncome
+
+The Phase Diagram When Income Falls with Age
+
+Note: Aggregate consumption {math}`\CNrm` against the capital stock {math}`\KNrm`, with the 50-year horizon, {math}`\diePrb = 0.02`, the other values of {numref}`fig:BFH-Phase`, and income falling 5 percent a year with age, {math}`\PermGroRte = -0.05`, so that newborns earn 3.5 times the average. The {math}`\dot{\CNrm}=0` locus rises from the origin toward the dashed line where {math}`\rfree = \discRte+\PermGroRte = -0.03`, {eq}`eq:BFH-fallingAsymptote`, at {math}`\KNrm = 12.9`, and crosses the hump-shaped {math}`\dot{\KNrm}=0` locus at the steady state A, to the right of the hump's peak, the golden rule {math}`\GoldRule{\KNrm} = 6.61`. The interest rate is positive to the left of the golden rule and negative to its right: at A, with capital {math}`\Steady{\KNrm} = 8.20`, it is −1.1 percent. The RCK model's steady state, {math}`\Steady{\KNrm}_{\mathrm{RCK}} = 4.80`, is further left. The saddle path runs through A, and the gray arrows show the direction of motion in each region. The design is after {cite:t}`blanchardFinite`. Drawn by the [notebook](BlanchardFiniteHorizon.ipynb); run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=BlanchardFiniteHorizon.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/BlanchardFiniteHorizon/BlanchardFiniteHorizon.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/BlanchardFiniteHorizon/BlanchardFiniteHorizon.ipynb).
 :::
 
