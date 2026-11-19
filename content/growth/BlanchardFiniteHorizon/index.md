@@ -130,7 +130,10 @@ the present discounted value of consumption equals net worth plus human wealth, 
 By {eq}`eq:BFH-cdot`, consumption at a later date is {math}`\cNrm(s,\tau) = \cNrm(s,t)e^{\int_{t}^{\tau}(\rfreeEff_{\mu}-\discRteEff)\,d\mu}`, so its present discounted value is
 
 ```{math}
-\PDVEff_{t}(\cNrm(s,\cdot)) = \int_{t}^{\infty} \cNrm(s,t)e^{\int_{t}^{\tau}\rfreeEff_{\mu}\,d\mu}e^{-\discRteEff(\tau-t)}e^{-\int_{t}^{\tau}\rfreeEff_{\mu}\,d\mu}\,d\tau = \cNrm(s,t)\int_{t}^{\infty} e^{-\discRteEff(\tau-t)}\,d\tau = \cNrm(s,t)/\discRteEff ,
+\begin{aligned}
+\PDVEff_{t}(\cNrm(s,\cdot)) & = \int_{t}^{\infty} \cNrm(s,t)e^{\int_{t}^{\tau}\rfreeEff_{\mu}\,d\mu}e^{-\discRteEff(\tau-t)}e^{-\int_{t}^{\tau}\rfreeEff_{\mu}\,d\mu}\,d\tau
+\\ & = \cNrm(s,t)\int_{t}^{\infty} e^{-\discRteEff(\tau-t)}\,d\tau = \cNrm(s,t)/\discRteEff ,
+\end{aligned}
 ```
 
 and the intertemporal budget constraint becomes the consumption function
