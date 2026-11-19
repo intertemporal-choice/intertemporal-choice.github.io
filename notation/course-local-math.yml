@@ -14,9 +14,7 @@ project:
   math:
     # --- overrides (102): renderings that differ from the registry's; the course's kept until the sources are substituted
     '\CLev': 'C'  # registry: \boldsymbol{C} via \CLvl; uses book 63 questions 200
-    '\Target': '\check'  # registry: \hat via \TargetNrm; uses book 13 questions 146
     '\CARA': '\alpha'  # registry: \upsilon [cara]; uses book 35 questions 98
-    '\pLevBF': '\mathbf{p}'  # registry: \boldsymbol{p} via \pLvl; uses book 80 questions 32
     '\cLev': 'c'  # registry: \boldsymbol{c} via \cLvl; uses book 43 questions 46
     '\kLev': 'k'  # registry: \boldsymbol{k} via \kLvl; uses book 82 questions 0
     '\Cons': 'C'  # registry: \boldsymbol{C} via \CLvl; uses book 25 questions 46
@@ -24,25 +22,19 @@ project:
     '\PLev': 'P'  # registry: \boldsymbol{P} via \PLvl; uses book 31 questions 30
     '\YLev': 'Y'  # registry: \boldsymbol{Y} via \YLvl; uses book 4 questions 50
     '\Inc': 'Y'  # registry: \boldsymbol{Y} via \YLvl; uses book 28 questions 18
-    '\cLevBF': '\mathbf{c}'  # registry: \boldsymbol{c} via \cLvl; uses book 42 questions 0
     '\KLev': 'K'  # registry: \boldsymbol{K} via \KLvl; uses book 27 questions 10
     '\rport': '\tilde{r}'  # registry: \mathfrak{r}; uses book 30 questions 3
     '\patr': '\text{þ}_{\rfree}'  # registry: \text{\thorn}_{\rfree} via \RPRte; uses book 2 questions 26
     '\cov': '\operatorname{cov}'  # registry: \textup{cov}; uses book 16 questions 10
     '\aLev': 'a'  # registry: \boldsymbol{a} via \aLvl; uses book 13 questions 12
     '\itc': '\zeta'  # registry: \chi via \itcRte [investment-tax-credit]; uses book 12 questions 12
-    '\mLevBF': '\mathbf{m}'  # registry: \boldsymbol{m} via \mLvl; uses book 23 questions 0
     '\Rport': '\tilde{R}'  # registry: \mathfrak{R}; uses book 16 questions 3
     '\bLev': 'b'  # registry: \boldsymbol{b} via \bLvl; uses book 4 questions 14
     '\ValueFunc': 'V'  # registry: \mathrm{V} via \VFunc; uses book 17 questions 0
-    '\bLevBF': '\mathbf{b}'  # registry: \boldsymbol{b} via \bLvl; uses book 15 questions 0
     '\BLev': 'B'  # registry: \boldsymbol{B} via \BLvl; uses book 8 questions 6
     '\MLev': 'M'  # registry: \boldsymbol{M} via \MLvl; uses book 0 questions 14
-    '\oLev': '\pmb{o}'  # registry: \boldsymbol{o} via \oLvl; uses book 13 questions 0
     '\PopLev': '\pmb{N}'  # registry: \boldsymbol{N} via \PopnLvl; uses book 13 questions 0
     '\WAllLev': '\mathbf{O}'  # registry: \boldsymbol{O} via \OLvl; uses book 9 questions 0
-    '\hLevBF': '\mathbf{h}'  # registry: \boldsymbol{h} via \hLvl; uses book 8 questions 0
-    '\aLevBF': '\mathbf{a}'  # registry: \boldsymbol{a} via \aLvl; uses book 7 questions 0
     '\mLev': 'm'  # registry: \boldsymbol{m} via \mLvl; uses book 0 questions 6
     '\SLev': 'S'  # registry: \boldsymbol{S} via \SLvl; uses book 0 questions 6
     '\LLev': 'L'  # registry: \boldsymbol{L} via \LLvl; uses book 5 questions 0
@@ -57,7 +49,6 @@ project:
     '\wAllLev': '\mathbf{o}'  # registry: \boldsymbol{o} via \oLvl; uses book 3 questions 0
     '\WHum': '\HLev'  # registry: \boldsymbol{H} via \HLvl; uses book 0 questions 3
     '\hLev': 'h'  # registry: \boldsymbol{h} via \hLvl; uses book 2 questions 0
-    '\sLevBF': '\mathbf{s}'  # registry: \boldsymbol{s} via \sLvl; uses book 2 questions 0
     '\vInv': '\scriptstyle \Lambda \displaystyle'  # registry: {\scriptstyle \VInv \displaystyle}; uses book 2 questions 0
     '\vLev': 'v'  # registry: \boldsymbol{v} via \vLvl; uses book 2 questions 0
     '\CLevBF': '\mathbf{C}'  # registry: \boldsymbol{C} via \CLvl; uses book 1 questions 0
@@ -120,24 +111,15 @@ project:
     '\dvdnd': 'd'  # uses book 151 questions 213
     '\q': '\koppa'  # uses book 100 questions 156
     '\riskyAlt': '\acute{\mathbf{r}}'  # uses book 82 questions 0
-    '\ptyLev': 'a'  # uses book 26 questions 50
-    '\PtyLab': '\mathrm{Z}'  # uses book 40 questions 30
-    '\vk': '\lambda'  # uses book 66 questions 4
     '\Tax': '\tau'  # uses book 14 questions 55
     '\adj': '\mathrm{j}'  # uses book 64 questions 0
     '\inv': 'i'  # uses book 56 questions 6
     '\kPriceAfterITC': '\mathscr{P}'  # uses book 62 questions 0
-    '\PtyLev': 'A'  # uses book 39 questions 12
     '\var': '\operatorname{var}'  # uses book 2 questions 41
-    '\labShare': '\nu'  # uses book 34 questions 0
     '\edvdnd': '\grave{\dvdnd}'  # uses book 19 questions 14
     '\RiskyAlt': '\acute{\mathbf{R}}'  # uses book 31 questions 0
     '\vFirm': '\mathrm{e}'  # uses book 31 questions 0
     '\Evarr': '\sigma_{\risky}^{2}'  # uses book 18 questions 8
-    '\kapRent': '\varkappa'  # uses book 21 questions 0
-    '\Ham': '\mathcal{H}'  # uses book 14 questions 3
-    '\taxCorp': '\tau'  # uses book 14 questions 0
-    '\TaxLev': 'T'  # uses book 10 questions 3
     '\TaxComb': '\mathcal{T}'  # uses book 10 questions 0
     '\adjPar': '\omega'  # uses book 9 questions 0
     '\argmax': '\operatorname*{arg\,max}'  # uses book 3 questions 3
@@ -146,8 +128,6 @@ project:
     '\TaxCombInv': '\mathcal{T}^{-1}'  # uses book 6 questions 0
     '\rev': '\pi'  # uses book 5 questions 0
     '\divGro': '\mathsf{g}'  # uses book 4 questions 0
-    '\TaxCorp': '\Large \tau'  # uses book 4 questions 0
-    '\RCpnd': '\mathbf{R}'  # uses book 3 questions 0
     '\DivGro': '\mathrm{G}'  # uses book 2 questions 0
     # --- local-local (62): objects the registry lacks: course-local for now
     '\tNow': 't'  # uses book 347 questions 55
@@ -166,14 +146,12 @@ project:
     '\TShk': '\Xi'  # uses book 0 questions 40
     '\Stocks': 'S'  # uses book 18 questions 20
     '\mE': '\mRat^{e}'  # uses book 0 questions 37
-    '\Debt': 'D'  # uses book 13 questions 21
     '\TEnd': 'T'  # uses book 32 questions 0
     '\aSS': 'a'  # uses book 0 questions 28
     '\bNbr': 'b'  # uses book 24 questions 0
     '\hLucas': 'h'  # uses book 24 questions 0
     '\cE': '\cRat^{e}'  # uses book 0 questions 23
     '\taxNetTrans': 'z'  # uses book 21 questions 0
-    '\ek': '\lambda'  # uses book 20 questions 0
     '\RnormWGro': '\mathcal{R}_{\WGro}'  # uses book 20 questions 0
     '\uPmt': '\mu'  # uses book 0 questions 20
     '\GovNW': 'N'  # uses book 0 questions 16
@@ -182,12 +160,9 @@ project:
     '\ShkLogZeroLog': '\cancel{\ShkMeanOneLog}'  # uses book 13 questions 0
     '\vNum': 'v'  # uses book 13 questions 0
     '\empState': '\xi'  # uses book 0 questions 12
-    '\kTarg': '\Target{k}'  # uses book 0 questions 12
+    '\kTarg': '\TargetNrm{k}'  # uses book 0 questions 12
     '\patwGro': '\text{þ}_{\wGro}'  # uses book 12 questions 0
     '\surplus': 'z'  # uses book 12 questions 0
-    '\wNet': 'x'  # uses book 12 questions 0
-    '\save': 's'  # uses book 4 questions 7
-    '\GovSpend': 'X'  # uses book 7 questions 3
     '\hNbr': 'h'  # uses book 9 questions 0
     '\HMin': '\underline{H}'  # uses book 0 questions 8
     '\PIHMPC': '\varkappa'  # uses book 8 questions 0
@@ -201,14 +176,12 @@ project:
     '\aNbr': 'a'  # uses book 5 questions 0
     '\csDiscFac': '\rho'  # uses book 4 questions 0
     '\SeveranceRatio': '\varsigma'  # uses book 0 questions 4
-    '\sTarg': '\Target{\sRat}'  # uses book 0 questions 4
+    '\sTarg': '\TargetNrm{\sRat}'  # uses book 0 questions 4
     '\error': '\epsilon'  # uses book 3 questions 0
     '\rProd': '\mathsf{r}'  # uses book 1 questions 2
     '\uPPP': '\mathrm{u}^{\prime\prime\prime}'  # uses book 3 questions 0
     '\age': 'z'  # uses book 2 questions 0
-    '\debt': 'd'  # uses book 2 questions 0
     '\Hours': '\mathfrak{H}'  # uses book 2 questions 0
-    '\WNet': 'X'  # uses book 2 questions 0
     '\hours': '\mathfrak{h}'  # uses book 1 questions 0
     '\Save': 'S'  # uses book 0 questions 1
     # --- local-retire (2): objects the registry lacks: to retire (plain LaTeX or a registry macro instead)

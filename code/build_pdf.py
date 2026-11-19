@@ -481,8 +481,57 @@ def absolutize_tex() -> list[str]:
     return failures
 
 
+BIB_ENTRY = re.compile(r"(?ms)^@\w+\{[^,\n]*,\n.*?^\}")
+BIB_FIELD = re.compile(r"^(\s*)(\w+)(\s*=\s*)\{(.*)\},?$")
+BARE_URL = re.compile(r"(?<![{/\w])(https?://[^\s{}%\\]+?)(?=[.,;:]?(?:\s|$))")
+
+
+def tidy_bib_entry(entry: str) -> tuple[str, int]:
+    """One entry of MyST's main.bib, with its URLs made breakable.
+
+    MyST's export copies an entry's url into howpublished, and the bibliography prints that as plain text, which
+    LaTeX can't break, so a long URL runs into the margin. The url field itself prints through \\url, which can
+    break. So a howpublished that only repeats the url goes, and a bare URL left in a note or howpublished is
+    wrapped in \\url. Returns the entry and the number of changes.
+    """
+    lines = entry.split("\n")
+    fields = {m.group(2).lower(): m.group(4) for m in map(BIB_FIELD.match, lines) if m}
+    out, n = [], 0
+    for line in lines:
+        m = BIB_FIELD.match(line)
+        if m and m.group(2).lower() == "howpublished" and m.group(4) == fields.get("url"):
+            n += 1
+            continue
+        if m and m.group(2).lower() in ("note", "howpublished"):
+            value, k = BARE_URL.subn(r"\\url{\1}", m.group(4))
+            if k:
+                n += k
+                line = f"{m.group(1)}{m.group(2)}{m.group(3)}{{{value}}}" + ("," if line.rstrip().endswith(",") else "")
+        out.append(line)
+    return "\n".join(out), n
+
+
+def tidy_bib() -> list[str]:
+    """Step 5: make the bibliography's URLs breakable (tidy_bib_entry)."""
+    bib = STAGE / TEX_DIR / "main.bib"
+    if not bib.exists():
+        return [f"{bib} not found: MyST's export no longer writes main.bib"]
+    text, total = bib.read_text(), 0
+
+    def sub(m):
+        nonlocal total
+        entry, n = tidy_bib_entry(m.group(0))
+        total += n
+        return entry
+
+    text = BIB_ENTRY.sub(sub, text)
+    bib.write_text(text)
+    log.info("bibliography URLs made breakable: %d", total)
+    return []
+
+
 def compile_and_copy(root: Path) -> list[str]:
-    """Step 5: rerun latexmk on the fixed LaTeX and copy the results back to exports/."""
+    """Step 6: rerun latexmk on the fixed LaTeX and copy the results back to exports/."""
     tex_dir = STAGE / TEX_DIR
     pdf = tex_dir / f"{NAME}.pdf"
     pdf.unlink(missing_ok=True)
@@ -507,7 +556,7 @@ def build(root: Path) -> list[str]:
     rewrite_staged_link_words()
     if run(["myst", "build", "--pdf"], STAGE, root / MYST_LOG):
         return [f"myst build --pdf failed; see {MYST_LOG}"]
-    return internalize_tex() or absolutize_tex() or compile_and_copy(root)
+    return internalize_tex() or absolutize_tex() or tidy_bib() or compile_and_copy(root)
 
 
 def raises_key_error(fn, *args) -> bool:
@@ -744,10 +793,35 @@ def title_label_failures() -> list[str]:
     return failures
 
 
+def bib_failures() -> list[str]:
+    """Failures of tidy_bib_entry on entries shaped like MyST's main.bib."""
+    u = "https://www.example.org/a/long/path/File.zip"
+    entry = (
+        "@misc{K,\n"
+        f"\tnote = {{Download {u} and open it}},\n"
+        "\ttitle = {T},\n"
+        f"\turl = {{{u}}},\n"
+        f"\thowpublished = {{{u}}},\n"
+        "}"
+    )
+    got, n = tidy_bib_entry(entry)
+    cases = [
+        ("howpublished" in got, "a howpublished repeating the url was kept"),
+        (f"Download \\url{{{u}}} and open it" not in got, "a bare URL in a note was not wrapped in \\url"),
+        (f"\turl = {{{u}}}," not in got, "the url field was changed"),
+        (n != 2, f"{n} changes counted, not 2"),
+    ]
+    kept = f"@misc{{K,\n\thowpublished = {{Mimeo}},\n\tnote = {{see \\url{{{u}}}.}},\n\turl = {{{u}}},\n}}"
+    cases.append((tidy_bib_entry(kept) != (kept, 0), "an entry with nothing to tidy was changed"))
+    end = f"@misc{{K,\n\tnote = {{At {u}.}},\n}}"
+    cases.append((f"At \\url{{{u}}}." not in tidy_bib_entry(end)[0], "a URL before a period was not wrapped, or took the period"))
+    return [msg for bad, msg in cases if bad]
+
+
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
     failures = (fact_failures() + web_only_failures() + margin_failures() + link_words_failures() + title_label_failures() + href_failures()
-                + url_failures() + clear_failures())
+                + url_failures() + clear_failures() + bib_failures())
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")

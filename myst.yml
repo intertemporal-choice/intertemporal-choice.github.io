@@ -218,9 +218,9 @@ project:
           level: 0
         - file: content/growth/RamseyCassKoopmans/index.md
           level: 1
-        - file: content/growth/RCKWithGov.md
-          level: 1
         - file: content/growth/DecentralizingRCK.md
+          level: 1
+        - file: content/growth/RCKWithGov/index.md
           level: 1
         - file: content/growth/Romer86.md
           level: 1
@@ -234,7 +234,7 @@ project:
           level: 1
         - file: content/dsge/index.md
           level: 0
-        - file: content/dsge/BrockMirman.md
+        - file: content/dsge/BrockMirman/index.md
           level: 1
         - file: content/dsge/RBC-Prescott.md
           level: 1
@@ -297,7 +297,7 @@ project:
     MPC: Marginal Propensity to Consume
     PDV: Present Discounted Value
     C-CAPM: Consumption Capital Asset Pricing Model
-    RCK: Ramsey-Cass-Koopmans
+    RCK: Ramsey/Cass-Koopmans
 
 site:
   # The theme is pinned to a release. Named only as `book-theme`, it is fetched from the main branch of

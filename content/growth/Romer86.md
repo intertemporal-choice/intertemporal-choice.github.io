@@ -9,25 +9,25 @@ in which technological progress had largely been treated as completely
 exogenous.
 
 :::{margin}
-See also the prescient paper by {cite:t}`arrowGrowth`; Afred Marshall articulated similar ideas in the late 19th century.
+See also the prescient paper by {cite:t}`arrowGrowth`; Alfred Marshall articulated similar ideas in the late 19th century.
 :::
 
 In Romer's model, firm {math}`j`'s production function is of the form
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  y_{t,j} & =  \PtyLev_{t} \FFunc(\kap_{t,j},\ell_{t,j})
+  \yNrm_{j,t} & =  \PtyAgg_{t} \FFunc(\kNrm_{j,t},\labor_{j,t})
 \end{aligned}\end{gathered}
 ```
 
 where aggregate output-augmenting technological progress is captured by
-{math}`\PtyLev_{t}`. Its capital accumulates without depreciation,
+{math}`\PtyAgg_{t}`. Its capital accumulates without depreciation,
 
 ```{math}
 :label: eq:Kdot
 
 \begin{gathered}\begin{aligned}
-  \dot{\kap}_{t,j} & =  i_{t,j}.
+  \dot{\kNrm}_{j,t} & =  \iNrm_{j,t}.
 \end{aligned}\end{gathered}
 ```
 
@@ -39,17 +39,17 @@ importantly, there is no population growth). Thus, aggregate investment is, e.g.
 :label: eq:Romer-1
 
 \begin{gathered}\begin{aligned}
-  I_{t} & =  \int_{0}^{1} i_{t,j} dj
+  \ILvl_{t} & =  \int_{0}^{1} \iNrm_{j,t} dj
 .
 \end{aligned}\end{gathered}
 ```
 
 Romer assumes that the aggregate stock of knowledge in the economy is
-proportional to the cumulative sum of past aggregate investment
+proportional to the cumulative sum of past aggregate investment. Measured in units that make the factor of proportionality one,
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \Xi_{t} & =   \int_{-\infty}^{t} I_v dv 
+  \Knwl_{t} & =   \int_{-\infty}^{t} \ILvl_{\tau} d\tau 
 \end{aligned}\end{gathered}
 ```
 
@@ -57,7 +57,7 @@ which, not coincidentally, is identical to the size of the aggregate capital sto
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  K_{t} & =   \int_{-\infty}^{t} I_v dv .
+  \KLvl_{t} & =   \int_{-\infty}^{t} \ILvl_{\tau} d\tau .
 \end{aligned}\end{gathered}
 ```
 
@@ -66,34 +66,34 @@ productivity via
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \PtyLev_{t} & =  \Xi_{t}^{\eta}
+  \PtyAgg_{t} & =  \Knwl_{t}^{\extElas}
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\eta < 1`. Thus, suppressing the {math}`t` subscript, the firm-level
+where {math}`\extElas < 1`. Thus, suppressing the {math}`t` subscript, the firm-level
 Cobb-Douglas production function can be written
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  y_{j} & =  \kap_{j}^{\kapShare}\ell_{j}^{1-\kapShare}\Xi^{\eta}
+  \yNrm_{j} & =  \kNrm_{j}^{\kapShare}\labor_{j}^{1-\kapShare}\Knwl^{\extElas}
 \end{aligned}\end{gathered}
 ```
 
-which is CRS at the firm level in {math}`(k,\ell)` holding aggregate knowledge {math}`\Xi` fixed.
+which is CRS at the firm level in {math}`(\kNrm,\labor)` holding aggregate knowledge {math}`\Knwl` fixed.
 
 Aggregate output is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \YLev & =  {\Kap}^\kapShare \Labor^{1-\kapShare} \Xi^{\eta}
+  \YLvl & =  {\KLvl}^\kapShare \LLvl^{1-\kapShare} \Knwl^{\extElas}
 \end{aligned}\end{gathered}
 ```
 
-Dividing by the size of the labor force {math}`L` (or, equivalently, normalizing to {math}`L=1`), we have
+Dividing by the size of the labor force {math}`\LLvl` (or, equivalently, normalizing to {math}`\LLvl=1`), we have
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \yRat & =  k^{\kapShare}\Xi^{\eta}.
+  \yNrm & =  \kNrm^{\kapShare}\Knwl^{\extElas}.
 \end{aligned}\end{gathered}
 ```
 
@@ -101,32 +101,32 @@ Now assume that households maximize a typical CRRA utility function,
 but each household ignores the trivial effect its own investment
 decision has on aggregate knowledge. Thus from the individual
 firm/consumer's perspective, the marginal product of capital is
-{math}`\kapShare \kap_{t,i}^{\kapShare-1}
- \ell_{t,i}^{1-\kapShare}\Xi_{t}^{\eta}`. If we normalize the model by
-assuming that the aggregate quantity of labor adds upt to {math}`L_{t}=1`,
+{math}`\kapShare \kNrm_{j,t}^{\kapShare-1}
+ \labor_{j,t}^{1-\kapShare}\Knwl_{t}^{\extElas}`. If we normalize the model by
+assuming that the aggregate quantity of labor adds up to {math}`\LLvl_{t}=1`,
 we can set up and solve the Hamiltonian to obtain
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{c}_{t,i}/c_{t,i} & =  \CRRA^{-1}(\kapShare \kap_{t,i}^{\kapShare-1} \Xi_{t}^{\eta} - \timeRate).
+  \dot{\cNrm}_{j,t}/\cNrm_{j,t} & =  \CRRA^{-1}(\kapShare \kNrm_{j,t}^{\kapShare-1} \Knwl_{t}^{\extElas} - \discRte).
 \end{aligned}\end{gathered}
 ```
 
-But if all households are identical and {math}`\Xi_{t}=K_{t}`, this means that aggregate consumption
+But if all households are identical and {math}`\Knwl_{t}=\KLvl_{t}`, this means that aggregate consumption
 per capita evolves according to
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{c}_{t}/c_{t} & =  \CRRA^{-1}(\kapShare \kap_{t}^{\kapShare-1}\Xi_{t}^{\eta}  - \timeRate)
-\\  & =  \CRRA^{-1}(\kapShare \kap_{t}^{\kapShare+\eta-1}  - \timeRate).
+  \dot{\cNrm}_{t}/\cNrm_{t} & =  \CRRA^{-1}(\kapShare \kNrm_{t}^{\kapShare-1}\Knwl_{t}^{\extElas}  - \discRte)
+\\  & =  \CRRA^{-1}(\kapShare \kNrm_{t}^{\kapShare+\extElas-1}  - \discRte).
 \end{aligned}\end{gathered}
 ```
 
-A balanced growth path can occur in this economy if {math}`\kapShare+\eta=1`, in which case
+A balanced growth path can occur in this economy if {math}`\kapShare+\extElas=1`, in which case
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{c}_{t}/c_{t} & =  \CRRA^{-1}(\kapShare  - \timeRate)
+  \dot{\cNrm}_{t}/\cNrm_{t} & =  \CRRA^{-1}(\kapShare  - \discRte)
 \end{aligned}\end{gathered}
 ```
 
@@ -138,7 +138,7 @@ social planner is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{c}_{t}/c_{t} & =  \CRRA^{-1}(\kapShare +\eta - \timeRate),
+  \dot{\cNrm}_{t}/\cNrm_{t} & =  \CRRA^{-1}(\kapShare +\extElas - \discRte),
 \end{aligned}\end{gathered}
 ```
 

@@ -14,18 +14,18 @@ While economists have begun to grapple seriously with models of the rule of law 
 
 Many of the field's important themes were first touched on in *The Wealth of Nations*. Economists' attention to the topic since has been decidedly episodic: there was not really a separate field of long-run growth until the 1950s, when the foundations of its modern study were laid by {cite:t}`solow:contribution`. An intense burst of theoretical and empirical work followed, lasting until the late 1960s, when growth theory went into decline. In the mid-1980s, a couple of influential papers by Paul Romer {cite:p}`romer:growth,romerEndogenous` relaunched the study of growth into the limelight, where it has remained ever since.
 
-The Ramsey-Cass-Koopmans model is the workhorse of this chapter. A representative
+The Ramsey/Cass-Koopmans model is the workhorse of this part. A representative
 household chooses consumption over an infinite horizon, with capital as the only state
 variable. Equilibrium traces a saddle path in the consumption-capital plane. The first
-several handouts stay inside that framework and add pieces to it: government purchases
-and taxation, and a decentralization that lets competitive markets reproduce the
-planner's allocation.
+several chapters stay inside that framework and add pieces to it: a decentralization
+that lets competitive markets reproduce the planner's allocation, and government
+purchases and taxation.
 
 We then turn to the model's central embarrassment. Unless productivity growth arrives
 from outside, the model predicts no long-run growth in per capita income at all (the
 thing it was built to explain enters as an assumption).
 The endogenous growth literature answers by finding some factor that households can
-accumulate without bound, and the handouts on Romer, Rebelo, and Lucas each pick a
-different candidate. A final handout swaps the infinitely lived household for Blanchard's
+accumulate without bound, and the chapters on Romer, Rebelo, and Lucas each pick a
+different candidate. A final chapter swaps the infinitely lived household for Blanchard's
 perpetual youth structure, which restores a finite planning horizon while keeping the
 model tractable.

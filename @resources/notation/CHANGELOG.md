@@ -3,6 +3,157 @@
 Versioning: SemVer on `notation.yml`'s `meta.version`. MAJOR = change to an
 existing rendering or meaning; MINOR = additions; PATCH = gloss/typo fixes.
 
+## v14.2.0 — 2026-11-18
+
+MINOR: additions, and two notes clarified. Rows for the course's growth module. The owner, in the
+cc:course-choice session (as relayed by it), 07:12:05 EST: "I want you to consult with jd_econ-ark-tools to add
+any new notation you need to the global registry".
+- **`\Knwl` = 𝒦,** the aggregate stock of knowledge (Romer 1986); 07:04:39 EST: "use the 𝒦 for it".
+- **`\BalGroEndog` = 𝖦 and `\balGroEndog` = 𝗀,** the endogenous growth factor and rate, replacing γ
+  (07:06:24 EST: "one of the variants of G/g we are already using"). They print as `\PermGroFac` and
+  `\PermGroRte` on purpose (𝗀 < 𝗋 is the finite-human-wealth form), so they are scoped to documents that
+  write neither (letter-locality).
+- **`\hCap` = 𝗁 and `\hCapAvg` = 𝗁_a,** human capital per worker and its economy-wide average (Lucas 1988).
+- **`\extElas` = η,** the elasticity of a firm's output with respect to an aggregate stock it takes as given.
+- **`\hCapProd` = φ,** the productivity of study time, scoped to documents that write no `\eprem` (φ).
+- **`\labShare` = ν,** labor's Cobb-Douglas exponent (its share only when α + ν = 1).
+- **`\rfreeEff` = 𝗋̊, `\discRteEff` = ϑ̊, `\PDVEff` = ℙ̊,** Blanchard's survival-inclusive rates (𝗋 + 𝖽,
+  ϑ + 𝖽) and the present value at 𝗋̊.
+- **`\SLvl` = 𝑺,** aggregate saving, 𝒀 − 𝑪: a row for the existing generic macro; its rate is 𝗌 (`\savRte`).
+- Glosses: `\kapShare`'s is capital's Cobb-Douglas exponent (its share only under constant returns); the
+  `mpc-min` row's note on `\kap` now says the powerlaw pages' `\kap` is not the shared `\kap` (k); the
+  `\VFuncCts` row's note says the book wrote the object as a raw 𝒱 until the book session converted it.
+
+## v14.1.0 — 2026-11-17
+
+MINOR: additions only. Seven rows for objects the course defined itself. The owner, in the
+cc:course-choice session (as relayed by it), 22:41:19 EST: "6. make registry rows for these".
+- **`\Ham` = ℋ,** the current-value Hamiltonian.
+- **`\vk` = λ,** the costate on capital: the marginal value of a unit of capital.
+- **`\kapRent` = ϰ,** the rental rate of capital, f′(k). The `\ADElas` row had passed over ϰ as too close to the
+  MPC κ; the chapters that write `\kapRent` (HallJorgenson, DecentralizingRCK) write no κ.
+- Four more of the course's own definitions, on the owner's word in this session, 22:55:52 EST: "yes, I approve of
+  these additions to the registry":
+  - **`\VFuncCts` = 𝒱,** the continuous-time value function;
+  - **`\GovSpend` = X,** government spending;
+  - **`\TaxLev` = T,** a lump-sum tax, scoped to documents that write no terminal period T (`\prdT`);
+  - **`\Debt` = D,** government debt.
+
+## v14.0.0 — 2026-11-17
+
+MAJOR: the saving rate prints differently.
+- **The saving rate `\savRte` prints sans-serif 𝗌** (was the word sav). The owner, in the questions session (as
+  relayed by cc:course-choice for it), 17:16:42 EST, choosing from a menu: "𝗌, sans-serif s (Recommended)". It replaces
+  his 2026-11-03 "The word sav". Sans serif is the registry's face for rates (𝗋, 𝗀); 𝗌 stays distinct from italic s
+  (`\sNrm`). It shows in the questions repo's OLG-SavingAndGrowth and the book's LucasGrowth.
+- `econark-shortcuts.sty`'s `\ProvidesPackage` line names the registry's release (v14.0.0). It had said v9.0.0 since
+  2026-11-04; cc_texmf-local found it, and the course passed it on.
+- `tests/check_sync.py` now fails when that line's version differs from `notation.yml`'s `meta.version`.
+
+## v13.0.0 — 2026-11-17
+
+MAJOR: a macro is renamed and the old name removed; nothing prints differently.
+- **The natural log's macro is `\lnat`,** printing ℓ, renamed from `\logOp`, which is removed. The 104
+  `\l<letter>Nrm`/`\l<letter>Lvl` macros, `\lPtyLab`, `\lPtyAgg` and `\PopnGroRte` (ℓ𝛯) are built on it. The owner,
+  in the book session (as relayed by it), 20:48:12 EST: "I really hate '\logOp'.  Maybe $\ln$ is infeasible
+  because $\ln$ is already a defined macro?  If so, can't we just use, say, \lnat?  If not, let's just use $\ln$".
+  `\ln` is a built-in of LaTeX and KaTeX that prints "ln", so `\lnat`.
+- No document outside this registry on jhu-dell writes `\logOp`; the book's nine uses switch when it syncs.
+
+## v12.0.0 — 2026-11-17
+
+MAJOR: two macros are removed.
+- **`\PtyLev` (italic A) and `\lPtyLev` (ℓA) are retired** in favor of `\PtyAgg` (𝖠, sans-serif A) and `\lPtyAgg`
+  (ℓ𝖠), which name the same object, the productivity that multiplies total output. The owner, 20:25:34 EST: "I
+  don't see that we need both \PtyLev and \PtyAgg.  Unless you can give a good argument for why we should keep
+  both, let's retire \PtyLev in favor of \PtyAgg".
+- No document took `\PtyLev` from the registry; it was added in v11.1.0 the same day. The course, which defines its
+  own `\PtyLev` = A, renames its uses to `\PtyAgg`.
+
+## v11.2.0 — 2026-11-17
+
+MINOR: additions only; nothing that already exists prints differently.
+- **`\PtyAgg` = 𝖠 (sans-serif A),** productivity that multiplies total output, Y = 𝖠 F(K, L), with its log
+  `\lPtyAgg` = ℓ𝖠. The owner, in the book session (as relayed by it), 20:16:27 EST: "OK, I want two alternatives:
+  \PtyLab should be the Z that multiplies labor, and \PtyAgg should be the sans-serif A that multiplies total
+  output." It names the same object as v11.1.0's `\PtyLev` (italic A), which is unchanged until the owner says
+  whether it prints 𝖠 or goes.
+- **Letter-locality** (terminology.yml): the accent-locality rule now holds for letters. A letter may name more than
+  one object, each in a row scoped to the documents that use it, provided no document uses two; where one must, the
+  row without a scope keeps the letter; π, r and R keep one meaning everywhere. The owner, 20:17:39 EST: "yes,
+  extend the rule".
+- **The course's local definitions** (terminology.yml) either adopt something from the registry or are proposed as
+  new rows. The owner, 20:03:23 EST.
+- **The registry always wins** (terminology.yml): where a document prints an object differently from the registry,
+  the document takes the registry's print; a different print comes only from re-ruling the row for every document.
+  The owner, 20:22:56 EST: "registry always wins".
+
+## v11.1.0 — 2026-11-17
+
+**Productivity, globalized:** two new rows, so every document defines the productivity parameters the same way. The
+owner, in this session: 18:40:56 EST, "I'm particularly keen on globalizing the definitions of these productivity
+technical change parameters."; 18:44:25 EST, "italic Z; start with the productivity rows". MINOR: additions only.
+- **`\PtyLab` = Z,** labor-augmenting (Harrod-neutral) productivity, Y = F(K, Z L): italic by rule C, plain because it
+  is a normalizer (rule B). It grows by `\PtyGroFac` (roman G). The course has printed it upright, through its own
+  definition; its Z turns italic when it drops that definition.
+- **`\PtyLev` = A,** total-factor (Hicks-neutral) productivity, Y = A F(K, L); with Cobb-Douglas, A = Z^(1−α).
+- **Their logs,** `\lPtyLab` = ℓZ and `\lPtyLev` = ℓA, in `econark-shortcuts.sty`. The course's lower-case `\ptyLev` =
+  a, where it means log A, gives way to `\lPtyLev` (no lower case for logs, 2026-11-15).
+- Rule B's normalizer clause names `\PtyLab` instead of describing the course's upright Z.
+
+## v11.0.0 — 2026-11-17
+
+The owner's rulings of 2026-11-17 in this session, after a request relayed from the session for the course's
+problem-set questions (15:55:31 EST) to free n for net worth. Adopted here at 17:02:11 EST ("merge it now"). MAJOR: five renderings change.
+- **Labor is italic l:** `\labor` = l (was ℓ). 16:53:08 EST: "let's change labor to use the regular (computer modern)
+  l.  Then we can use \ell for the natural log". TractableBufferStock (ten uses) and NARK's table print l; the leisure
+  row's z = 1 − l follows.
+- **ℓ is the natural log:** `\logOp` = ℓ (was log), so the 104 log macros print ℓc, ℓ𝒄, ℓ𝑲 (were log c, log 𝒄).
+- **The population growth rate is ℓ𝛯,** the log of the factor 𝛯 (was n). 16:38:44 EST: "I want to use \varXi instead
+  of \Xi for the growth factor for the population, and '\ell\varXi' for the growth rate (with an explanation for the
+  notation when it is first introduced)." The factor has printed 𝛯 since v10.0.0. ξ is untouched.
+- **Net worth is sans-serif:** `\netWorth` = 𝗇 and `\NetWorth` = 𝖭 (were s and S). 16:43:09 EST: "Net worth is the
+  sans-serif upper and lower case n.  You should NOT attempt to replace all the counting n's, just leave them alone."
+  Counting indices stay italic n, raw.
+
+## v10.3.0 — 2026-11-17
+
+**Net worth takes its own macros: `\netWorth` = s and `\NetWorth` = S.** v10.1.0's savings row wrote net worth with
+NARK's generic `\sNrm`. The owner, in the Intertemporal Choice book's session, 2026-11-17 09:29:25 EST: "I don't want
+to use \sNrm and \SNrm -- I want to use the new net-worth symbols from the registry"; he chose the names there from a
+menu, "\netWorth, \NetWorth (Recommended)". The row is now `net-worth` (its gloss keeps his word "savings"), with
+`\NetWorth` in a new row, `net-worth-aggregate`; both macros are also in econark-shortcuts.sty, beside `\savRte`.
+`\sNrm` and `\SNrm` are generic shortcuts again. Nothing prints differently, and no consumer had taken v10.1.0's
+`\sNrm` as net worth (the book and the course's handouts were at v10.0.0), so this is MINOR.
+
+## v10.2.0 — 2026-11-17
+
+Three requests from the owner of 2026-11-16, relayed by the Intertemporal Choice course's session (cc:course-choice).
+The owner adopted them in this session on 2026-11-17 at 09:13:50 EST ("One PR, merge when CI green (Recommended)"), choosing there an italic 𝛱 ("Italic 𝛱 (Recommended)") and to include the tool as drafted ("Include it as drafted (Recommended)"). MINOR: one new row; nothing that prints changes. Merged after v10.1.0 (the savings row, #60), which took that number first.
+- **Rule B's normalizer clause** (`terminology.yml`): bold marks a level that can be or will be divided by a
+  normalizer; a normalizer itself is never bold. Labor-augmenting productivity Z, in k = 𝑲/(Z𝑳), is one; labor 𝑳,
+  population 𝑵 and permanent income 𝒑 are levels and stay bold. The owner, 09:37:55 EST: "Variables are boldface only
+  when they are levels THAT CAN BE OR WILL BE DIVIDED BY A NORMALIZER.  Z will never be divided by a normalizer.  It
+  is, itself, a normalizer." Comments say so beside the level macros, at `\PtyGroFac` (the growth of Z), and in
+  `econark-shortcuts-principles.md`. `\ZLvl` is a generic level Z, not productivity.
+- **A new row, the probability of updating expectations:** `\UpdatePrb` = 𝛱 (HARK-style name UpdatePrb, as
+  BufferStockStickyExp's and HAFiscal's code write it), italic by rule C. It is scoped to documents that write no
+  inflation π, as the π convention requires. The owner chose "Registry row, prints Π" (20:02:01 EST).
+- **`sst_notebook.py`**, beside `econark-math.yml`, with its guide `sst_notebook.md`: a notebook written with the
+  registry's macros (`Name_SST.ipynb` or `.md`) generates the notebook people open, with every macro spelled out, and
+  carries a hidden definitions cell so that it renders in Jupyter too. It was written and tested in the session for
+  the course's problem-set questions; the owner placed it here ("econ-ark-tools, beside the registry", 20:13:29 EST).
+
+## v10.1.0 — 2026-11-17
+
+**New row: savings, s and S, net worth (assets minus debt).** The owner, in the Intertemporal Choice book's session,
+2026-11-17 09:09:57 EST: "Let's revise the registry to allow "S" and "s" for aggregate and individual "savings" as a
+measure of assets minus debt (net worth)." It replaces w, which he had chosen at 09:03:24 EST and withdrew because the
+wage 𝖶 appears in many of the same equations. `\sNrm` = s for the individual; by rules A and B, `\SNrm` = S for the
+aggregate and `\sLvl`, `\SLvl` for the levels, all already defined, without a meaning, in econark-shortcuts.sty.
+"Savings" is the stock; "saving" stays the flow, whose rate is sav (`\savRte`). An addition: nothing prints
+differently.
+
 ## v10.0.0 — 2026-11-15
 
 **The owner's rulings of 2026-11-15 in the Intertemporal Choice course's session (cc:course-choice),** typed or

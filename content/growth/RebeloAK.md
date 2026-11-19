@@ -2,12 +2,12 @@
 # The Rebelo AK Growth Model
 
 {cite:t}`rebelo:long` examines a model in which a social planner maximizes the discounted sum of utility
-in an economy with an {math}`AK` production function:
+in an economy with an {math}`\PtyAgg\KLvl` production function:
 
 ```{math}
 :label: eq:Rebelo-maxutil
 
-\max_{\{C\}_{0}^{\infty}} \int_0^{\infty} \util(C) e^{-\timeRate t} dt
+\max_{\{\CLvl\}_{0}^{\infty}} \int_0^{\infty} \uFunc(\CLvl) e^{-\discRte t} dt
 ```
 
 subject to
@@ -15,7 +15,7 @@ subject to
 ```{math}
 :label: eq:Rebelo-kdot
 
-\dot{K} = AK - C,
+\dot{\KLvl} = \PtyAgg\KLvl - \CLvl,
 ```
 
 where we have assumed zero population growth and zero depreciation
@@ -30,14 +30,14 @@ requires
 :label: eq:Rebelo-cgrow
 
 \begin{gathered}\begin{aligned}
-  \dot{C}/C & =  \CRRA^{-1}(A - \timeRate).
+  \dot{\CLvl}/\CLvl & =  \CRRA^{-1}(\PtyAgg - \discRte).
 \end{aligned}\end{gathered}
 ```
 
 Note that this equation comes about because the marginal product of
-capital in this model is always {math}`A = \rProd`, because {math}`\fFunc^{\prime}(K) = A`. Note
+capital in this model is always {math}`\PtyAgg = \rfree`. Note
 further that according to this equation, the growth rate of consumption
-is always the same; unlike the Cass-Koopmans model with a normal
+is always the same; unlike the Ramsey/Cass-Koopmans model with a normal
 production function, this model has no transitional dynamics.
 
 We can also use {eq}`eq:Rebelo-kdot` to obtain an expression for the
@@ -47,18 +47,18 @@ steady-state growth rate:
 :label: eq:Rebelo-ssg
 
 \begin{gathered}\begin{aligned}
-  \dot{K}/K & =  A - C/K.
+  \dot{\KLvl}/\KLvl & =  \PtyAgg - \CLvl/\KLvl.
 \end{aligned}\end{gathered}
 ```
 
-If the model has a steady-state growth rate of {math}`\gamma = \dot{K}/K`,
+If the model has a steady-state growth rate of {math}`\balGroEndog = \dot{\KLvl}/\KLvl`,
 this equation implies that
 
 ```{math}
 :label: eq:Rebelo-1
 
 \begin{gathered}\begin{aligned}
-  C/K & =  A - \gamma.
+  \CLvl/\KLvl & =  \PtyAgg - \balGroEndog.
 \end{aligned}\end{gathered}
 ```
 
@@ -68,10 +68,10 @@ This is a model with a constant saving rate, because
 :label: eq:Rebelo-2
 
 \begin{gathered}\begin{aligned}
-  S/AK & =  (AK - C)/AK
-\\ & =  1 - A^{-1} (C/K)
-\\ & =  \gamma/A
-\\ \gamma & =  A (S/AK).
+  \SLvl/\PtyAgg\KLvl & =  (\PtyAgg\KLvl - \CLvl)/\PtyAgg\KLvl
+\\ & =  1 - \PtyAgg^{-1} (\CLvl/\KLvl)
+\\ & =  \balGroEndog/\PtyAgg
+\\ \balGroEndog & =  \PtyAgg (\SLvl/\PtyAgg\KLvl).
 \end{aligned}\end{gathered}
 ```
 
@@ -85,15 +85,15 @@ solution is that
 :label: eq:rebelo-impatience
 
 \begin{gathered}\begin{aligned}
-  \CRRA^{-1}(A-\timeRate) & <  A.
+  \CRRA^{-1}(\PtyAgg-\discRte) & <  \PtyAgg.
 \end{aligned}\end{gathered}
 ```
 
-Recalling that {math}`A` is effectively the real interest rate
+Recalling that {math}`\PtyAgg` is effectively the real interest rate
 in this model, this equation can be interpreted as the
-'impatience' condition that we imposed in the infinite
+return impatience condition that we imposed in the infinite
 horizon perfect foresight consumption model. In fact,
-the Rebelo {math}`AK` model is essentially just a way of
+the Rebelo {math}`\PtyAgg\KLvl` model is essentially just a way of
 reinterpreting the perfect foresight infinite horizon
 consumption problem as a model for economic growth.
 
