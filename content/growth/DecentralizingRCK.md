@@ -152,6 +152,7 @@ So human wealth is finite, and the economy cannot save too much: its interest ra
 
 The two coincide because the household maximizes the planner's objective and, in equilibrium, its budget constraint is the planner's resource constraint: factors are paid their marginal products, so the interest rate the household earns is the net marginal product of capital that the planner trades off against consumption. This is an instance of the [first fundamental theorem of welfare economics](https://en.wikipedia.org/wiki/Fundamental_theorems_of_welfare_economics#First_Fundamental_Theorem): with competitive and complete markets and no externalities, a competitive equilibrium is Pareto efficient, and when households are identical, the efficient allocation that treats them alike is the planner's; {cite:t}`romer:text`, section 2.4, makes this argument for this model. The result is convenient: a planner's problem, usually the easier one to solve, can be read as describing a market economy, as long as we are careful about the assumptions.
 
+(sec:DecRCK-Failures)=
 ## When the Market and the Planner Differ
 
 The equivalence fails when a household's budget constraint or objective differs from the planner's in a way that matters. Wikipedia lists [common failures](https://en.wikipedia.org/wiki/Fundamental_theorems_of_welfare_economics#Common_failures_of_the_assumptions) of the welfare theorem's assumptions; four arise in this book:

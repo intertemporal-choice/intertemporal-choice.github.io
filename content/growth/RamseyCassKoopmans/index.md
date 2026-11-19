@@ -24,7 +24,7 @@ States and controls are functions of time; time subscripts appear only where cla
 to produce output using capital and labor. Under perfect competition firms must make zero profits in equilibrium, which means, by [Euler's theorem](#fact:eulerstheorem), that
 
 :::{margin}
-An important insight here is that all of output is absorbed by payments to labor and to capital; there is nothing left over (say, to fund corporate research to invent new technologies to augment productivity).
+An important insight here is that all of output is absorbed by payments to labor and to capital; there is nothing left over (say, to fund corporate research to invent new technologies to augment productivity). [What Endogenous Growth Requires](#sec:Endogenous) starts from this point.
 :::
 
 ```{math}
@@ -178,14 +178,14 @@ subject to
 whose current-value Hamiltonian is
 
 :::{margin}
-If the Hamiltonian is new to you, Peter Thompson's [lecture notes on optimal control](https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf) derive the method from the economics of a firm's capital problem, and later work through this model. Wikipedia's [worked example of the RCK model](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model), linked from the two optimization conditions, uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero.
+If the Hamiltonian is new to you, Peter Thompson's [lecture notes on optimal control](https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf) derive the method from the economics of a firm's capital problem, and later work through this model. Wikipedia's [worked example of the RCK model](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model) uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero.
 :::
 
 ```{math}
 \Ham(\kNrm,\cNrm,\vk) = \uFunc(\cNrm) + (\kNrm^{\kapShare} - \cNrm - (\PopnGroRte+\PtyGroRte+\deprRte)\kNrm)\vk.
 ```
 
-The [current-value Hamiltonian optimization condition](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model) for consumption requires {math}`\partial 
+The [current-value Hamiltonian optimization condition](#eq:uceqvk) for consumption requires {math}`\partial 
  \Ham/\partial \cNrm = 0`:
 
 ```{math}
@@ -198,7 +198,7 @@ The [current-value Hamiltonian optimization condition](https://en.wikipedia.org/
 \end{aligned}\end{gathered}
 ```
 
-The [current-value Hamiltonian optimization condition](https://en.wikipedia.org/wiki/Hamiltonian_\(control_theory\)#Example:_Ramsey%E2%80%93Cass%E2%80%93Koopmans_model) for capital, the costate equation, requires:
+The [current-value Hamiltonian optimization condition](#eq:lamgrow) for capital, the costate equation, requires:
 
 :::{margin}
 In the book's mathematical appendices, [Ramsey Growth in Discrete and Continuous Time](#sec:HamiltonianVSDiscrete) derives the Hamiltonian's conditions for a version of this model without productivity growth and shows how each relates to the discrete-time Bellman approach.

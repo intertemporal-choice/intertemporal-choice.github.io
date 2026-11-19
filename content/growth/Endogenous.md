@@ -1,5 +1,5 @@
 (sec:Endogenous)=
-# Generic Analysis of Endogenous Growth Models
+# What Endogenous Growth Requires
 
 The neoclassical theory of economic growth, as formulated
 by {cite:t}`solow:contribution`, and {cite:t}`cass:growth`-{cite:t}`koopmans:growth`, attributes virtually all long-run growth to technological
@@ -17,13 +17,13 @@ are the simplest existing models of firm behavior, with
 well-understood implications.
 
 :::{margin}
-In a framework with constant returns to scale, perfect competition, and no externalities, it is impossible to incorporate an economic theory of {math}`\PtyGroRte`, the growth rate of labor-augmenting productivity, because all income is exhausted by payments to {math}`\KLvl` and {math}`\LLvl`.
+In a framework with constant returns to scale, perfect competition, and no externalities, it is impossible to incorporate an economic theory of {math}`\PtyGroRte`, the growth rate of labor-augmenting productivity in the [RCK model](#sec:RamseyCassKoopmans), because all income is exhausted by payments to {math}`\KLvl` and {math}`\LLvl`.
 :::
 
 But models with perfect competition require
 constant returns to scale, and say that all factors of production are
 paid their marginal product; and [Euler's Theorem](#fact:eulerstheorem) says that the sum of the factor payments
-exhausts all output:
+exhausts all output, as in the [RCK model](#eq:RCK-outputExhausted):
 
 ```{math}
 :label: eq:EulersTheorem
@@ -81,10 +81,10 @@ In continuous time, the growth of the capital stock is given by
 \end{aligned}\end{gathered}
 ```
 
-Suppose further that population growth is constant at
+Everyone supplies one unit of labor inelastically, so labor {math}`\LLvl_t` is also the population. Suppose further that population growth is constant at
 
 ```{math}
-:label: eq:n
+:label: eq:Endo-popGro
 
 \begin{gathered}\begin{aligned}
   \dot{\LLvl}_t/\LLvl_t & =  \PopnGroRte,
@@ -121,7 +121,7 @@ satisfy
 \end{aligned}\end{gathered}
 ```
 
-for some constant {math}`\balGroEndog`. (The value of {math}`\PtyAgg` does not affect the conclusions
+for some constant {math}`\balGroEndog`, the endogenous counterpart of the RCK model's {math}`\PtyGroRte`. (The value of {math}`\PtyAgg` does not affect the conclusions
 from here on, and so we will assume without loss of generality that {math}`\PtyAgg=1`). From {eq}`eq:dbcpc`, this implies
 that
 
@@ -160,7 +160,7 @@ be different from zero endogenously.
         In the Solow case {math}`\kapShare = 1-\labShare`, so the second term in {eq}`eq:AKeqn` vanishes.
         :::
 
-    2.  {math}`\labShare = 0, \kapShare = 1`: {cite:t}`rebelo:long` {math}`\PtyAgg\KLvl` growth model
+    2.  {math}`\labShare = 0, \kapShare = 1`: {cite:t}`rebelo:long` [{math}`\PtyAgg\KLvl` growth model](#sec:RebeloAK)
 
 2.  {math}`\labShare+\kapShare > 1` (Increasing Returns Models)
 
@@ -184,9 +184,11 @@ be different from zero endogenously.
 
         2.  {math}`\PopnGroRte=0 \rightarrow 0 = 0` which can be satisfied for any {math}`\balGroEndog`
 
+The catalog leaves out three cases: decreasing returns, {math}`\labShare+\kapShare < 1`, where a growing population makes {math}`\balGroEndog` negative; {math}`\kapShare > 1`, where no steady state is stable; and a shrinking population, {math}`\PopnGroRte < 0`, under which per capita income grows only with decreasing returns, and falls with increasing ones.
+
 So whatever the details of endogenous growth models may be, in the end
-any model that generates perpetual growth without exogenous
-technological progress must be mathematically reducible to a form like
+any model that generates steady-state growth without exogenous
+technological progress or a shrinking population must be mathematically reducible to a form like
 that of either the Rebelo {math}`\PtyAgg\KLvl` model, increasing returns with {math}`\kapShare < 1` and a growing population, or increasing returns with {math}`\kapShare = 1` and a constant population.
 
 It is worth delving a bit further into why the Solow case cannot
@@ -205,10 +207,10 @@ that are capable of generating perpetual growth in a way that makes any
 sense: the Rebelo {math}`\PtyAgg\KLvl` model, and increasing returns with {math}`\kapShare = 1` and a constant population.
 
 :::{margin}
-Increasing returns with {math}`\kapShare = 1` and a constant population is taken up in the [Romer (1986) model](#sec:Romer86) chapter.
+Increasing returns with {math}`\kapShare = 1` and a constant population is taken up in the [Romer (1986) model](#sec:Romer86) chapter. There this chapter's {math}`\kapShare`, the exponent on aggregate capital, is capital's share of income plus the elasticity of a knowledge externality, Romer's {math}`\kapShare+\extElas`, which balanced growth requires to be one.
 :::
 
 What this means is that any model that aims to permit perpetual
 long-run growth must ultimately boil down to a structure in which
 there are constant returns to scale for some set of factors of
-production that can jointly be accumulated forever.
+production that can jointly be accumulated forever. In the [Rebelo](#sec:RebeloAK) and [Romer (1986)](#sec:Romer86) models that set is capital alone; in the [Lucas model](#sec:LucasGrowth) it is physical and human capital together.
