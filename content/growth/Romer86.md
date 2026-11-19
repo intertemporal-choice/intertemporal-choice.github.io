@@ -18,7 +18,7 @@ In Romer's model, firm {math}`j`'s production function is of the form
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \yNrm_{j,t} & =  \PtyAgg_{t} \FFunc(\kNrm_{j,t},\labor_{j,t})
+  \yNrm_{j,t} & =  \PtyAgg_{t} \FFunc(\kNrm_{j,t},\labor_{j,t}) ,
 \end{aligned}\end{gathered}
 ```
 
@@ -51,7 +51,7 @@ proportional to the cumulative sum of past aggregate investment. Measured in uni
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \Knwl_{t} & =   \int_{-\infty}^{t} \ILvl_{\tau} d\tau 
+  \Knwl_{t} & =   \int_{-\infty}^{t} \ILvl_{\tau} d\tau ,
 \end{aligned}\end{gathered}
 ```
 
@@ -68,7 +68,7 @@ productivity via
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \PtyAgg_{t} & =  \Knwl_{t}^{\extElas}
+  \PtyAgg_{t} & =  \Knwl_{t}^{\extElas} ,
 \end{aligned}\end{gathered}
 ```
 
@@ -77,7 +77,7 @@ Cobb-Douglas production function can be written
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \yNrm_{j} & =  \kNrm_{j}^{\kapShare}\labor_{j}^{1-\kapShare}\Knwl^{\extElas}
+  \yNrm_{j} & =  \kNrm_{j}^{\kapShare}\labor_{j}^{1-\kapShare}\Knwl^{\extElas} ,
 \end{aligned}\end{gathered}
 ```
 
@@ -87,7 +87,7 @@ Aggregate output is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \YLvl & =  {\KLvl}^\kapShare \LLvl^{1-\kapShare} \Knwl^{\extElas} = \KLvl^{\kapShare+\extElas} \LLvl^{1-\kapShare}
+  \YLvl & =  {\KLvl}^\kapShare \LLvl^{1-\kapShare} \Knwl^{\extElas} = \KLvl^{\kapShare+\extElas} \LLvl^{1-\kapShare} .
 \end{aligned}\end{gathered}
 ```
 
@@ -130,7 +130,7 @@ A balanced growth path can occur in this economy if {math}`\kapShare+\extElas=1`
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{\cNrm}_{t}/\cNrm_{t} & =  \CRRA^{-1}(\kapShare  - \discRte)
+  \dot{\cNrm}_{t}/\cNrm_{t} & =  \CRRA^{-1}(\kapShare  - \discRte) ,
 \end{aligned}\end{gathered}
 ```
 

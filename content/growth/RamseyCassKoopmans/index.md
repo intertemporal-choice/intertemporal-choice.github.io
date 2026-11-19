@@ -41,7 +41,7 @@ The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` i
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{\LLvl}/\LLvl & =  \PopnGroRte
+  \dot{\LLvl}/\LLvl & =  \PopnGroRte ,
 \end{aligned}\end{gathered}
 ```
 
@@ -74,7 +74,7 @@ Aggregate capital accumulates according to
 Lower case variables are the upper case version divided by efficiency units, so {math}`\yNrm = \YLvl/(\PtyLab \LLvl) = (\KLvl/(\PtyLab \LLvl))^{\kapShare} = \kNrm^{\kapShare}`. Since {math}`\kNrm = \KLvl/(\PtyLab \LLvl)`,
 
 :::{margin}
-NOT per-capita; this makes the '[balanced growth](#sec:RCK-SteadyState)' path a steady state.
+NOT per capita; this makes the "[balanced growth](#sec:RCK-SteadyState)" path a steady state.
 :::
 
 ```{math}
@@ -132,7 +132,7 @@ But {math}`\CLvl/\LLvl = \PtyLab (\CLvl/(\PtyLab \LLvl))= \PtyLab \cNrm`. Recall
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \PtyLab _{t} & =  \PtyLab _{0}e^{\PtyGroRte t}
+  \PtyLab _{t} & =  \PtyLab _{0}e^{\PtyGroRte t} ,
 \end{aligned}\end{gathered}
 ```
 
@@ -278,7 +278,7 @@ zero. By {eq}`eq:RCK-kdot`, {math}`\dot{\kNrm}=0` implies
 :label: eq:RCK-kdotEq0
 
 \begin{gathered}\begin{aligned}
-  \cNrm & =  \fFunc(\kNrm) - (\PtyGroRte +\PopnGroRte+\deprRte) \kNrm 
+  \cNrm & =  \fFunc(\kNrm) - (\PtyGroRte +\PopnGroRte+\deprRte) \kNrm ,
 \end{aligned}\end{gathered}
 ```
 

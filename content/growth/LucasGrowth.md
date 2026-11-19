@@ -6,19 +6,19 @@
 ```{math}
 :label: eq:aggY
 
-\YLvl = \PtyAgg \KLvl^{\kapShare} (\labor \hCap \LLvl)^{1-\kapShare}
+\YLvl = \PtyAgg \KLvl^{\kapShare} (\labor \hCap \LLvl)^{1-\kapShare} ,
 ```
 
 where {math}`\YLvl`, {math}`\PtyAgg`, {math}`\KLvl` and {math}`\LLvl` are as usually defined, {math}`0 < \kapShare < 1`, {math}`\labor` is the proportion of total labor time
-spent working, and {math}`\hCap` is what Lucas calls the stock of 'human
-capital.'
+spent working, and {math}`\hCap` is what Lucas calls the stock of "human
+capital."
 
-The production function can be rewritten in per-capita terms as
+The production function can be rewritten in per capita terms as
 
 ```{math}
 :label: eq:pcy
 
-\yNrm = \PtyAgg \kNrm^\kapShare (\labor \hCap)^{1-\kapShare}
+\yNrm = \PtyAgg \kNrm^\kapShare (\labor \hCap)^{1-\kapShare} ,
 ```
 
 which is a constant returns to scale production function in
@@ -50,10 +50,10 @@ while {math}`\hCap` accumulates according to
 ## Discussion
 
 Before analyzing the model, an aside. {cite:t}`mankiw:growth` has persuasively
-argued for defining 'knowledge' as the sum
+argued for defining "knowledge" as the sum
 total of technological and scientific discoveries (what is
 written in textbooks, scholarly journals, websites, and the like),
-and defining 'human capital' as the stock of knowledge
+and defining "human capital" as the stock of knowledge
 that has been transmitted from those sources into human brains via
 studying.
 
@@ -80,11 +80,11 @@ Here we can think of {math}`\labor` as the fraction of the population
 engaged in useful work to produce goods and services, while proportion
 {math}`1-\labor` is not working in conventional boring jobs that require
 asking customers questions like "Would you like
-fries with that?" but instead is producing 'knowledge' by
+fries with that?" but instead is producing "knowledge" by
 conducting scientific and technological research.
 
 The other interpretation is at the level of an individual agent. Such
-an agent can be thought of as operating his or her own production
+an agent can be thought of as operating their own production
 function of the form in {eq}`eq:pcy`, where {math}`(1-\labor)` is now interpreted as the proportion of the time this individual spends studying and {math}`\labor` is the time spent working.
 
 From the point of view of
@@ -102,7 +102,7 @@ model as a tool for normative than for positive analysis.
 
 ## The Solow Version
 
-We analyze first the 'Solow' version of the model, in which
+We analyze first the "Solow" version of the model, in which
 the saving rate is exogenously fixed at {math}`\savRte`. Thus the
 capital accumulation equation becomes
 
@@ -122,7 +122,7 @@ rate in this model (if one exists) requires a constant
 ratio of {math}`\kNrm` to {math}`\hCap`. Thus, {math}`\kNrm` and {math}`\hCap` must be growing
 at the same rate in equilibrium.
 
-Further insight can be obtained by rewriting the per-capita production function as
+Further insight can be obtained by rewriting the per capita production function as
 
 ```{math}
 :label: eq:CRSprodfunc
@@ -132,7 +132,7 @@ Further insight can be obtained by rewriting the per-capita production function 
 \end{aligned}\end{gathered}
 ```
 
-If we define a measure of 'broad capital' as the combination
+If we define a measure of "broad capital" as the combination
 of physical capital and human capital,
 
 ```{math}
@@ -150,7 +150,7 @@ the model becomes
 ```
 
 So if {math}`\labor` is constant and if {math}`\kNrm` and {math}`\hCap` are growing at the same rate,
-then the exponent on 'broad capital' is 1, and we are effectively back
+then the exponent on "broad capital" is 1, and we are effectively back
 at the usual [Rebelo {math}`\PtyAgg \KLvl` model](#sec:RebeloAK).
 
 The key assumption that permits this to work is the accumulation
@@ -168,7 +168,7 @@ The planner maximizes the discounted sum of CRRA utility from per capita consump
 Lucas does not examine the Solow version of the model with a constant
 saving rate, but instead the version in which a social planner solves
 for the optimal perfect foresight paths of the two state variables {math}`\kNrm`
-and {math}`\hCap`. It's not worth going through the math here; I'll just
+and {math}`\hCap`. It's not worth going through the math here; we'll just
 present the conclusion, which is that the steady-state growth rate is
 
 ```{math}
@@ -178,7 +178,7 @@ present the conclusion, which is that the steady-state growth rate is
 ```
 
 :::{margin}
-Human capital grows at the same rate as consumption, so by {eq}`eq:hdot` the time spent working is {math}`\labor = 1-\CRRA^{-1}(\hCapProd-\discRte)/\hCapProd`. It is positive, and utility finite, only if growth is below the return, {math}`\CRRA^{-1}(\hCapProd-\discRte) < \hCapProd`: the condition of the [Rebelo model](#sec:RebeloAK), with {math}`\hCapProd` in place of {math}`\PtyAgg`.
+Human capital grows at the same rate as consumption, so by {eq}`eq:hdot` the time spent working is {math}`\labor = 1-\CRRA^{-1}(\hCapProd-\discRte)/\hCapProd`. It is positive, and utility finite, only if growth is below the return, {math}`\CRRA^{-1}(\hCapProd-\discRte) < \hCapProd`: the condition of the [Rebelo model](#sec:RebeloAK), with {math}`\hCapProd` in place of {math}`\PtyAgg`. It is below one, and growth positive, only if {math}`\hCapProd > \discRte`.
 :::
 
 Note that this confirms the crucial role of the CRS accumulation
@@ -195,7 +195,7 @@ the individual's production function is
 ```{math}
 :label: eq:pcyext
 
-\yNrm_i = \PtyAgg \kNrm_{i}^{\kapShare} (\labor _{i}\hCap_{i})^{1-\kapShare} \hCapAvg^{\extElas}
+\yNrm_i = \PtyAgg \kNrm_{i}^{\kapShare} (\labor _{i}\hCap_{i})^{1-\kapShare} \hCapAvg^{\extElas} ,
 ```
 
 where {math}`\hCapAvg` is average human capital in the population (and the
