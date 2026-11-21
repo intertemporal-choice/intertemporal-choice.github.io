@@ -178,7 +178,6 @@ project:
     '\sTarg': '\TargetNrm{\sRat}'  # uses book 0 questions 4
     '\error': '\epsilon'  # uses book 3 questions 0
     '\rProd': '\mathsf{r}'  # uses book 1 questions 2
-    '\age': '\mathrm{s}'  # age: upright s (Chris, 2026-11-21), until the registry's requested row; uses book 21 questions 0
     '\Hours': '\mathfrak{H}'  # uses book 2 questions 0
     '\hours': '\mathfrak{h}'  # uses book 1 questions 0
     '\Save': 'S'  # uses book 0 questions 1
