@@ -12,7 +12,7 @@ The good news is that you already understand the subtlest and hardest parts of t
 Consider a representative household whose goal is to maximize
 
 ```{math}
-\Ex_{t} \left[\sum_{t=0}^{\infty} \Discount^{t}\uFunc(\cons_{t},\leisure_{t})      \right]
+\Ex_{t} \left[\sum_{t=0}^{\infty} \DiscFac^{t}\uFunc(\cNrm_{t},\leisure_{t})      \right]
 ```
 
 where {math}`\leisure_{t}` is the fraction of time the representative agent spends at leisure (not working); the
@@ -29,9 +29,9 @@ Assume that the structure of the utility function is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \uFunc(\cons,\leisure) & =  \left(\frac{(\cons^{1-\zeta}\leisure^{\zeta})^{1-\CRRA}}{1-\CRRA}\right)
-\\  \uFunc^{\cons}     & =  (\cons^{1-\zeta}\leisure^{\zeta})^{-\CRRA}\cons^{-\zeta}\leisure^{\zeta}(1-\zeta)
-\\  \uFunc^{\leisure }  & =  (\cons^{1-\zeta}\leisure^{\zeta})^{-\CRRA}\cons^{1-\zeta}\leisure^{\zeta-1}\zeta.
+        \uFunc(\cNrm,\leisure) & =  \left(\frac{(\cNrm^{1-\zeta}\leisure^{\zeta})^{1-\CRRA}}{1-\CRRA}\right)
+\\  \uFunc^{\cNrm}     & =  (\cNrm^{1-\zeta}\leisure^{\zeta})^{-\CRRA}\cNrm^{-\zeta}\leisure^{\zeta}(1-\zeta)
+\\  \uFunc^{\leisure }  & =  (\cNrm^{1-\zeta}\leisure^{\zeta})^{-\CRRA}\cNrm^{1-\zeta}\leisure^{\zeta-1}\zeta.
 \end{aligned}\end{gathered}
 ```
 
@@ -44,7 +44,7 @@ Since the time endowment is one, resources are {math}`\Wage_{t} \cdot 1`.
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \inc_{t} & =  \Wage_{t}.
+        \yNrm_{t} & =  \Wage_{t}.
 \end{aligned}\end{gathered}
 ```
 
@@ -73,7 +73,7 @@ should be
 :label: eq:RBC-focwucul
 
 \begin{gathered}\begin{aligned}
-        \left(\frac{\Wage_{t}}{1}\right) & =  \left(\frac{\uFunc^{\leisure }_{t}}{\uFunc^{\cons}_{t}}\right).
+        \left(\frac{\Wage_{t}}{1}\right) & =  \left(\frac{\uFunc^{\leisure }_{t}}{\uFunc^{\cNrm}_{t}}\right).
 \end{aligned}\end{gathered}
 ```
 
@@ -82,7 +82,7 @@ To see this, note that the consumer's goal is to
 ```{math}
 :label: eq:RBC-intramax
 
-\max_{\{\cons_{t},\leisure_{t}\}} \uFunc(\cons_{t},\leisure_{t})     .
+\max_{\{\cNrm_{t},\leisure_{t}\}} \uFunc(\cNrm_{t},\leisure_{t})     .
 ```
 
 Suppose the consumer has decided to spend a given amount {math}`\chi_{t}` in period {math}`t`
@@ -90,7 +90,7 @@ on a combination of consumption and leisure,
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \cons_{t}+\Wage_{t}\leisure_{t} & =  \chi_{t}
+        \cNrm_{t}+\Wage_{t}\leisure_{t} & =  \chi_{t}
 \end{aligned}\end{gathered}
 ```
 
@@ -106,8 +106,8 @@ for which the FOC is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        - \uFunc^{\cons}_{t}\Wage_{t} + \uFunc_{t}^{\leisure } & =  0
-\\      \Wage_{t} & =  (\uFunc^{\leisure }_{t}/\uFunc_{t}^{\cons}).
+        - \uFunc^{\cNrm}_{t}\Wage_{t} + \uFunc_{t}^{\leisure } & =  0
+\\      \Wage_{t} & =  (\uFunc^{\leisure }_{t}/\uFunc_{t}^{\cNrm}).
 \end{aligned}\end{gathered}
 ```
 
@@ -115,9 +115,9 @@ Returning to {eq}`eq:RBC-focwucul`
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \left(\frac{\Wage_{t}}{1}\right) & =  \left(\frac{\uFunc^{\leisure }_{t}}{\uFunc^{\cons}_{t}}\right)
-\\ \Wage_{t} & =  \left(\frac{\cons_{t}^{1-\zeta}\leisure_{t}^{\zeta-1}}{\cons_{t}^{-\zeta}\leisure^{\zeta}_{t}}\right)\left(\frac{\zeta}{1-\zeta}\right)
-\\  & =  \left(\frac{\cons_{t}}{\leisure_{t}}\right)\left(\frac{\zeta}{1-\zeta}\right)
+        \left(\frac{\Wage_{t}}{1}\right) & =  \left(\frac{\uFunc^{\leisure }_{t}}{\uFunc^{\cNrm}_{t}}\right)
+\\ \Wage_{t} & =  \left(\frac{\cNrm_{t}^{1-\zeta}\leisure_{t}^{\zeta-1}}{\cNrm_{t}^{-\zeta}\leisure^{\zeta}_{t}}\right)\left(\frac{\zeta}{1-\zeta}\right)
+\\  & =  \left(\frac{\cNrm_{t}}{\leisure_{t}}\right)\left(\frac{\zeta}{1-\zeta}\right)
 \end{aligned}\end{gathered}
 ```
 
@@ -127,7 +127,7 @@ or
 :label: eq:wlc
 
 \begin{gathered}\begin{aligned}
-        \Wage_{t}\leisure_{t}/\cons_{t} & =  \left(\frac{\zeta}{1-\zeta}\right)      .
+        \Wage_{t}\leisure_{t}/\cNrm_{t} & =  \left(\frac{\zeta}{1-\zeta}\right)      .
 \end{aligned}\end{gathered}
 ```
 
@@ -141,7 +141,7 @@ of a trend in {math}`\leisure`) or on micro data (like intertemporal elasticitie
 estimated using household data). So how is {math}`\zeta` calibrated?
 
 If wages are defined as per unit of labor, then if on average consumption
-roughly equals labor income {math}`\cons = (1-\leisure)\Wage` we have
+roughly equals labor income {math}`\cNrm = (1-\leisure)\Wage` we have
 
 ```{math}
 \begin{gathered}\begin{aligned}
@@ -155,13 +155,13 @@ roughly equals labor income {math}`\cons = (1-\leisure)\Wage` we have
 So {math}`\zeta` should be calibrated to be equal to the proportion of their
 available (i.e.  non-sleep) time people spend not working. A 40-hour
 work week (along with 8 hours of sleep a day) would yield {math}`\zeta = 2/3`. Among other taste parameters, Prescott chooses log utility
-({math}`\lim_{\CRRA \rightarrow 1}\uFunc(\cons)`) and {math}`\Discount = 0.96.`
+({math}`\lim_{\CRRA \rightarrow 1}\uFunc(\cNrm)`) and {math}`\DiscFac = 0.96.`
 
 The aggregate production function is assumed to be Cobb-Douglas,
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \Kap_{t+1} & =  \overbrace{\daleth}^{1-\depr} \Kap_{t}+\Inc_{t}-\Cons_{t}  \\
+        \Kap_{t+1} & =  \overbrace{\daleth}^{1-\deprRte} \Kap_{t}+\Inc_{t}-\Cons_{t}  \\
         \Inc_{t} & =  \PtyAgg_{t}\Kap_{t}^{1-\labShare}\Labor_{t}^{\labShare}
 \end{aligned}\end{gathered}
 ```
@@ -181,7 +181,7 @@ shares and perfect competition imply
 
 so that labor's share of GDP is roughly constant. Prescott sets
 labor's share to a constant 64 percent, and chooses a depreciation
-rate of {math}`\depr = 0.10`.
+rate of {math}`\deprRte = 0.10`.
 
 The crucial assumption, however, is about the productivity process,
 since 'technology shocks' are assumed to drive business cycles.
@@ -208,7 +208,7 @@ Prescott 'estimates' a productivity process that takes the form
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \hat{\PtyAgg}_{t} & =  \ptyGro_{t} + \epsilon_{t}
+        \hat{\PtyAgg}_{t} & =  \ptyGroRte_{t} + \epsilon_{t}
 \end{aligned}\end{gathered}
 ```
 
@@ -221,15 +221,15 @@ solution. With log utility, the social planner's problem is
 ```{math}
 :label: eq:objlog
 
-\max \Ex_{t}\left[\sum_{t=0}^{\infty}\Discount^{t} \left((1-\zeta) \log \cons_{t} + \zeta \log (1-\labor_{t})\right)\right]
+\max \Ex_{t}\left[\sum_{t=0}^{\infty}\DiscFac^{t} \left((1-\zeta) \log \cNrm_{t} + \zeta \log (1-\labor_{t})\right)\right]
 ```
 
 subject to
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \kap_{t+1} & =  \daleth \kap_{t}+\PtyAgg_{t}\kap_{t}^{1-\labShare}\labor_{t}^{\labShare} - \cons_{t}  \\
-        \hat{\PtyAgg}_{t} & =  \ptyGro + \epsilon_{t}.
+        \kap_{t+1} & =  \daleth \kap_{t}+\PtyAgg_{t}\kap_{t}^{1-\labShare}\labor_{t}^{\labShare} - \cNrm_{t}  \\
+        \hat{\PtyAgg}_{t} & =  \ptyGroRte + \epsilon_{t}.
 \end{aligned}\end{gathered}
 ```
 
@@ -286,15 +286,15 @@ To see this formally, consider again the first order conditions from
 the maximization problem. We showed in {eq}`eq:wlc` that
 
 :::{margin}
-Intuition: u must be unchanged if {math}`\leisure` increases one and {math}`\cons` decreases by {math}`\Wage_{t}`.
+Intuition: u must be unchanged if {math}`\leisure` increases one and {math}`\cNrm` decreases by {math}`\Wage_{t}`.
 :::
 
 ```{math}
 :label: eq:wlcttp1
 
 \begin{gathered}\begin{aligned}
-        \Wage_{t}\leisure_{t}/\cons_{t} & =  \left(\frac{\zeta}{1-\zeta}\right)  \\
-         & =  \Wage_{t+1}\leisure_{t+1}/\cons_{t+1}.
+        \Wage_{t}\leisure_{t}/\cNrm_{t} & =  \left(\frac{\zeta}{1-\zeta}\right)  \\
+         & =  \Wage_{t+1}\leisure_{t+1}/\cNrm_{t+1}.
 \end{aligned}\end{gathered}
 ```
 
@@ -303,8 +303,8 @@ and leisure the intertemporal FOC will imply that
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        1/\cons_{t}   & =  \Rfree_{t+1}\Discount /\cons_{t+1}
-\\  \cons_{t+1}   & =  \Rfree_{t+1}\Discount \cons_{t}.
+        1/\cNrm_{t}   & =  \Rfree_{t+1}\DiscFac /\cNrm_{t+1}
+\\  \cNrm_{t+1}   & =  \Rfree_{t+1}\DiscFac \cNrm_{t}.
 \end{aligned}\end{gathered}
 ```
 
@@ -312,9 +312,9 @@ Combining this with {eq}`eq:wlcttp1` gives
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \Wage_{t}\leisure_{t} & =  \Wage_{t+1}\leisure_{t+1}/\Rfree_{t+1}\Discount  \\
-        \leisure_{t+1}/\leisure_{t} & =  \left(\frac{\Rfree_{t+1}\Discount}{\Wage_{t+1}/\Wage_{t}}\right)  \\
-        \hat{\leisure }_{t+1} & \approx  -\hat{\Wage }_{t+1}+(\rfree_{t+1}-\DiscRate)
+        \Wage_{t}\leisure_{t} & =  \Wage_{t+1}\leisure_{t+1}/\Rfree_{t+1}\DiscFac  \\
+        \leisure_{t+1}/\leisure_{t} & =  \left(\frac{\Rfree_{t+1}\DiscFac}{\Wage_{t+1}/\Wage_{t}}\right)  \\
+        \hat{\leisure }_{t+1} & \approx  -\hat{\Wage }_{t+1}+(\rfree_{t+1}-\discRte)
 \end{aligned}\end{gathered}
 ```
 
@@ -346,8 +346,8 @@ What this equation tells us is that there are two ways to make {math}`\leisure_{
 
         ```{math}
         \begin{gathered}\begin{aligned}
-                        \Wage_{t}\leisure_{t}/\cons_{t} & =  \Wage_{t+1}\leisure_{t+1}/\cons_{t+1}  \\
-                        \cons_{t+1}/\cons_{t} & =  \Wage_{t+1}\leisure_{t+1}/\Wage_{t}\leisure_{t}
+                        \Wage_{t}\leisure_{t}/\cNrm_{t} & =  \Wage_{t+1}\leisure_{t+1}/\cNrm_{t+1}  \\
+                        \cNrm_{t+1}/\cNrm_{t} & =  \Wage_{t+1}\leisure_{t+1}/\Wage_{t}\leisure_{t}
                 \end{aligned}\end{gathered}
         ```
 

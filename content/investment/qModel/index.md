@@ -31,7 +31,7 @@ We neglect tax depreciation because, as shown in the [Hall-Jorgenson](#HallJorge
 | {math}`\rev_{t} = \fFunc(k_{t})\TaxFree` | - | After tax revenues |
 | {math}`i_{t}` | - | Investment in period {math}`t` (affects capital stock in period {math}`t+1`) |
 | {math}`j_{t} = \adj(i_{t},k_{t})` | - | AdJustment costs incurred in period {math}`t`; smooth and convex |
-| {math}`\Discount=\Rfree^{-1}` | - | Discount factor for future profits (inverse of interest factor) |
+| {math}`\DiscFac=\Rfree^{-1}` | - | Discount factor for future profits (inverse of interest factor) |
 | {math}`\itc` | - | Investment tax credit (ITC) |
 | {math}`\PostITC` | - | {math}`=1-\itc` = Cost of investment after ITC |
 
@@ -39,9 +39,9 @@ The price of one unit of investment is {math}`\kPrice_{t}`: what the firm pays f
 
 | Symbol | | Definition |
 | --- | --- | --- |
-| {math}`\xpend_{t} = (i_{t}+j_{t})\kPriceAfterITC_{t+1}\Discount` | - | Total after-tax period-{math}`t` spending on investment |
-| {math}`\depr` | - | Depreciation rate |
-| {math}`\daleth` | - | Depreciation factor {math}`=(1-\depr)` |
+| {math}`\xpend_{t} = (i_{t}+j_{t})\kPriceAfterITC_{t+1}\DiscFac` | - | Total after-tax period-{math}`t` spending on investment |
+| {math}`\deprRte` | - | Depreciation rate |
+| {math}`\daleth` | - | Depreciation factor {math}`=(1-\deprRte)` |
 | {math}`\omega` | - | Adjustment cost parameter |
 
 (The-Problem)=
@@ -51,7 +51,7 @@ Firms maximize the net profits payable to shareholders, definable as the present
 
 ```{math}
 \begin{aligned}
-\vFirm_{t}(k_{t}) & = \max_{\{i\}_{t}^{\infty}}~\Ex_{t}\left[\sum_{n=0}^{\infty} \Discount^{n} \left(\rev_{t+n}-\xpend_{t+n}\right)\right].
+\vFirm_{t}(k_{t}) & = \max_{\{i\}_{t}^{\infty}}~\Ex_{t}\left[\sum_{n=0}^{\infty} \DiscFac^{n} \left(\rev_{t+n}-\xpend_{t+n}\right)\right].
 \end{aligned}
 ```
 
@@ -77,8 +77,8 @@ The Bellman equation for the firm's value can be derived from
 :label: eq:nudef
 
 \begin{aligned}
-\vFirm_{t}(k_{t}) & = \max_{i_{t}}~ \rev_{t}-\xpend_{t}+\Discount \Ex_{t}\left[\max_{\{i\}_{t+1}^{\infty}}\sum_{n=0}^{\infty} \Discount^{n} \left(\pi_{t+1+n}-\xpend_{t+1+n}\right)\right] \\
-& = \max_{i_{t}}~ \rev_{t}-\xpend_{t}+\Discount \Ex_{t}[\vFirm_{t+1}(k_{t}\daleth + i_{t})]
+\vFirm_{t}(k_{t}) & = \max_{i_{t}}~ \rev_{t}-\xpend_{t}+\DiscFac \Ex_{t}\left[\max_{\{i\}_{t+1}^{\infty}}\sum_{n=0}^{\infty} \DiscFac^{n} \left(\pi_{t+1+n}-\xpend_{t+1+n}\right)\right] \\
+& = \max_{i_{t}}~ \rev_{t}-\xpend_{t}+\DiscFac \Ex_{t}[\vFirm_{t+1}(k_{t}\daleth + i_{t})]
 \end{aligned}
 ```
 
@@ -88,7 +88,7 @@ which is equivalent to
 :label: eq:nuequiv
 
 \begin{aligned}
-\vFirm_{t}(k_{t}) & = \max_{k_{t+1}} \left\{ \rev_{t}-(\overbrace{k_{t+1}-k_{t}\daleth}^{=i_{t}}+\overbrace{\adj(k_{t+1}-k_{t}\daleth,k_{t})}^{\text{costs of adjustment}})\kPriceAfterITC_{t+1}\Discount+\Discount \Ex_{t}[\vFirm_{t+1}(k_{t+1})]\right\}
+\vFirm_{t}(k_{t}) & = \max_{k_{t+1}} \left\{ \rev_{t}-(\overbrace{k_{t+1}-k_{t}\daleth}^{=i_{t}}+\overbrace{\adj(k_{t+1}-k_{t}\daleth,k_{t})}^{\text{costs of adjustment}})\kPriceAfterITC_{t+1}\DiscFac+\DiscFac \Ex_{t}[\vFirm_{t+1}(k_{t+1})]\right\}
 \end{aligned}
 ```
 
@@ -102,11 +102,11 @@ We implicitly assume in the following derivations that the structure of the {mat
 :label: eq:qMod-iFOC
 
 \begin{aligned}
-(1+j_{t}^{i})\kPriceAfterITC_{t+1}\Discount & = \Discount \Ex_{t}[\vFirm_{t+1}^{k}(k_{t+1})].
+(1+j_{t}^{i})\kPriceAfterITC_{t+1}\DiscFac & = \DiscFac \Ex_{t}[\vFirm_{t+1}^{k}(k_{t+1})].
 \end{aligned}
 ```
 
-Thus: The PDV of the marginal cost (after tax, including adjustment costs) of an additional unit of investment should match the discounted expected marginal value of the resulting extra capital. (Recall that investment performed today {math}`i_{t}` is paid for tomorrow at price {math}`\kPriceAfterITC_{t+1}` so today's cost is {math}`\kPriceAfterITC_{t+1}\Discount`.)
+Thus: The PDV of the marginal cost (after tax, including adjustment costs) of an additional unit of investment should match the discounted expected marginal value of the resulting extra capital. (Recall that investment performed today {math}`i_{t}` is paid for tomorrow at price {math}`\kPriceAfterITC_{t+1}` so today's cost is {math}`\kPriceAfterITC_{t+1}\DiscFac`.)
 
 Recalling that {math}`\pi_{t} = \TaxFree\fFunc(k_{t})`, the [Envelope theorem](#sec:Envelope) applied to {eq}`eq:nuequiv` gives
 
@@ -114,7 +114,7 @@ Recalling that {math}`\pi_{t} = \TaxFree\fFunc(k_{t})`, the [Envelope theorem](#
 :label: eq:qMod-envelope
 
 \begin{aligned}
-\vFirm_{t}^{k}(k_{t}) & = \TaxFree\fFunc^{k}(k_{t}) + ((1 + j_{t}^{i})\daleth-j_{t}^{k})\kPriceAfterITC_{t+1}\Discount
+\vFirm_{t}^{k}(k_{t}) & = \TaxFree\fFunc^{k}(k_{t}) + ((1 + j_{t}^{i})\daleth-j_{t}^{k})\kPriceAfterITC_{t+1}\DiscFac
 \end{aligned}
 ```
 
@@ -124,7 +124,7 @@ and equivalently for period {math}`t+1` so that {eq}`eq:qMod-iFOC` can be rewrit
 :label: eq:qMod-iEuler
 
 \begin{aligned}
-(1+j_{t}^{i})\kPriceAfterITC_{t+1} & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) +( \daleth + j_{t+1}^{i}-\depr j_{t+1}^{i} -j_{t+1}^{k})\kPriceAfterITC_{t+2}\Discount].
+(1+j_{t}^{i})\kPriceAfterITC_{t+1} & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) +( \daleth + j_{t+1}^{i}-\deprRte j_{t+1}^{i} -j_{t+1}^{k})\kPriceAfterITC_{t+2}\DiscFac].
 \end{aligned}
 ```
 
@@ -134,11 +134,11 @@ It will be useful to define the *net investment ratio* as the Greek letter {math
 :label: eq:iotaDef
 
 \begin{aligned}
-\iota_{t} & = (i_{t}/k_{t} - \depr)
+\iota_{t} & = (i_{t}/k_{t} - \deprRte)
 \end{aligned}
 ```
 
-which measures how much investment differs from the proportion {math}`\depr` necessary to maintain the capital stock unchanged. It has derivatives
+which measures how much investment differs from the proportion {math}`\deprRte` necessary to maintain the capital stock unchanged. It has derivatives
 
 ```{math}
 :label: eq:iotai
@@ -146,15 +146,15 @@ which measures how much investment differs from the proportion {math}`\depr` nec
 \begin{aligned}
 \iota_{t}^{i} & = (1/k_{t}) \\
 \iota_{t}^{k} & = - (i_{t}/k_{t})/k_{t} \\
-& = - (\iota_{t}+\depr)/k_{t}.
+& = - (\iota_{t}+\deprRte)/k_{t}.
 \end{aligned}
 ```
 
-We now specify a convex (quadratic) adjustment cost function centered around the depreciation rate {math}`\depr`. The rationale for this centering is that when {math}`i_{t} = \depr k_{t}` (investment exactly replaces depreciated capital), the firm is simply maintaining its existing capital stock and incurs no adjustment costs. Adjustment costs arise only when the firm deviates from this "replacement investment" benchmark:
+We now specify a convex (quadratic) adjustment cost function centered around the depreciation rate {math}`\deprRte`. The rationale for this centering is that when {math}`i_{t} = \deprRte k_{t}` (investment exactly replaces depreciated capital), the firm is simply maintaining its existing capital stock and incurs no adjustment costs. Adjustment costs arise only when the firm deviates from this "replacement investment" benchmark:
 
 ```{math}
 \begin{aligned}
-\adj(i_{t},k_{t}) & = (k_{t}/2) \left(\frac{i_{t}-\depr k_{t}}{k_{t}}\right)^{2}\omega \\
+\adj(i_{t},k_{t}) & = (k_{t}/2) \left(\frac{i_{t}-\deprRte k_{t}}{k_{t}}\right)^{2}\omega \\
 & = (k_{t}/2) \iota_{t}^{2}\omega
 \end{aligned}
 ```
@@ -167,10 +167,10 @@ with derivatives (using {eq}`eq:iotai` to simplify)
 \begin{aligned}
 \adj^{i} & = k \iota\omega\iota^{i} \\
 & = \iota\omega \\
-\adj^{k} & = \left(\iota^{2}/2 - k \iota(\iota+\depr)/k\right)\omega \\
-& = \left(\iota^{2}/2 - \iota(\iota+\depr)\right)\omega \\
-& = -\left(\iota^{2}/2 + \iota \depr\right)\omega \\
-\adj^{i} - \depr \adj^{i} - \adj^{k} & = \left(\iota - \depr \iota + \left(\iota^{2}/2 + \iota \depr\right)\right)\omega \\
+\adj^{k} & = \left(\iota^{2}/2 - k \iota(\iota+\deprRte)/k\right)\omega \\
+& = \left(\iota^{2}/2 - \iota(\iota+\deprRte)\right)\omega \\
+& = -\left(\iota^{2}/2 + \iota \deprRte\right)\omega \\
+\adj^{i} - \deprRte \adj^{i} - \adj^{k} & = \left(\iota - \deprRte \iota + \left(\iota^{2}/2 + \iota \deprRte\right)\right)\omega \\
 & = \left(\iota + \iota^2/2\right)\omega \\
 & = \adj^{i}+(\omega/2)\iota^{2}
 \end{aligned}
@@ -182,7 +182,7 @@ so the Euler equation for investment {eq}`eq:qMod-iEuler` can be written
 :label: eq:iEuler2
 
 \begin{aligned}
-(1+\adj_{t}^{i})\kPriceAfterITC_{t+1} & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) +( \daleth + \adj_{t+1}^{i}+(\omega/2)\iota^{2}_{t+1})\kPriceAfterITC_{t+2}\Discount].
+(1+\adj_{t}^{i})\kPriceAfterITC_{t+1} & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) +( \daleth + \adj_{t+1}^{i}+(\omega/2)\iota^{2}_{t+1})\kPriceAfterITC_{t+2}\DiscFac].
 \end{aligned}
 ```
 
@@ -190,26 +190,26 @@ To begin interpreting this equation, consider first the case where the costs of 
 
 ```{math}
 \begin{aligned}
-\kPriceAfterITC_{t+1} & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) + \daleth \kPriceAfterITC_{t+2}\Discount].
+\kPriceAfterITC_{t+1} & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1}) + \daleth \kPriceAfterITC_{t+2}\DiscFac].
 \end{aligned}
 ```
 
-Simplifying further, suppose that capital prices are constant at {math}`\kPrice_{t}=1` and the ITC is unchanging so that the after-tax price of capital is constant at {math}`\kPriceAfterITC`. Then since {math}`1+\rfree+\depr \approx 1/\Discount \daleth`, the equation becomes
+Simplifying further, suppose that capital prices are constant at {math}`\kPrice_{t}=1` and the ITC is unchanging so that the after-tax price of capital is constant at {math}`\kPriceAfterITC`. Then since {math}`1+\rfree+\deprRte \approx 1/\DiscFac \daleth`, the equation becomes
 
 ```{math}
 :label: eq:qMod-KSS
 
 \begin{aligned}
-\kPriceAfterITC & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1})] + \kPriceAfterITC\Discount \daleth \\
-(\rfree+\depr)\kPriceAfterITC & \approx \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1})].
+\kPriceAfterITC & = \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1})] + \kPriceAfterITC\DiscFac \daleth \\
+(\rfree+\deprRte)\kPriceAfterITC & \approx \Ex_{t}[\TaxFree\fFunc^{k}(k_{t+1})].
 \end{aligned}
 ```
 
-This says that the cost of buying one unit of capital, {math}`\kPriceAfterITC`, is equal to the opportunity cost in lost interest plus the value lost to depreciation, {math}`(\rfree+\depr)`, which must match the (after-tax) payoff from ownership of that capital. This corresponds exactly to the formula for the equilibrium cost of capital in the [Hall-Jorgenson](#sec:HallJorgenson) model: In the presence of an investment tax credit at rate {math}`\itc`, the after-tax price of capital is {math}`\kPriceAfterITC=\PostITC`, and the firm will adjust its holdings of capital to the point where
+This says that the cost of buying one unit of capital, {math}`\kPriceAfterITC`, is equal to the opportunity cost in lost interest plus the value lost to depreciation, {math}`(\rfree+\deprRte)`, which must match the (after-tax) payoff from ownership of that capital. This corresponds exactly to the formula for the equilibrium cost of capital in the [Hall-Jorgenson](#sec:HallJorgenson) model: In the presence of an investment tax credit at rate {math}`\itc`, the after-tax price of capital is {math}`\kPriceAfterITC=\PostITC`, and the firm will adjust its holdings of capital to the point where
 
 ```{math}
 \begin{aligned}
-\PostITC(\rfree+\depr)/\TaxFree & = \fFunc^{k}(k).
+\PostITC(\rfree+\deprRte)/\TaxFree & = \fFunc^{k}(k).
 \end{aligned}
 ```
 
@@ -219,20 +219,20 @@ Now define {math}`\vk_{t} \equiv \vFirm_{t}^{k}` as the marginal value to the fi
 :label: eq:lambdadyn
 
 \begin{aligned}
-\vk_{t} & = \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\Discount+\Discount \daleth \Ex_{t}[\vk_{t+1}] \\
-& \approx \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\Discount+(1-\depr-\rfree) \Ex_{t}[\vk_{t}+\vk_{t+1}-\vk_{t}] \\
-& = \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\Discount+(1-\depr-\rfree) (\vk_{t}+\Ex_{t}[\Delta \vk_{t+1}] ) \\
-(\rfree+\depr) \vk_{t} & \approx \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\Discount + \Ex_{t}[\Delta \vk_{t+1}]
+\vk_{t} & = \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\DiscFac+\DiscFac \daleth \Ex_{t}[\vk_{t+1}] \\
+& \approx \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\DiscFac+(1-\deprRte-\rfree) \Ex_{t}[\vk_{t}+\vk_{t+1}-\vk_{t}] \\
+& = \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\DiscFac+(1-\deprRte-\rfree) (\vk_{t}+\Ex_{t}[\Delta \vk_{t+1}] ) \\
+(\rfree+\deprRte) \vk_{t} & \approx \TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\DiscFac + \Ex_{t}[\Delta \vk_{t+1}]
 \end{aligned}
 ```
 
-where the last approximation uses [SmallSmallZero](#fact:smallsmallzero) in the form {math}`(\rfree+\depr) \Ex_{t}[\Delta \vk_{t+1}] \approx 0`. Equation {eq}`eq:lambdadyn` can be rearranged as
+where the last approximation uses [SmallSmallZero](#fact:smallsmallzero) in the form {math}`(\rfree+\deprRte) \Ex_{t}[\Delta \vk_{t+1}] \approx 0`. Equation {eq}`eq:lambdadyn` can be rearranged as
 
 ```{math}
 :label: eq:Edl
 
 \begin{aligned}
-\Ex_{t}[\Delta \vk_{t+1}] & \approx \rfree \vk_{t} - \left[\TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\Discount-\depr \vk_{t} \right].
+\Ex_{t}[\Delta \vk_{t+1}] & \approx \rfree \vk_{t} - \left[\TaxFree\fFunc^{k}(k_{t})- j_{t}^{k}\kPriceAfterITC_{t+1}\DiscFac-\deprRte \vk_{t} \right].
 \end{aligned}
 ```
 
@@ -248,7 +248,7 @@ Now consider the case where {math}`\Ex_{t} [\Delta \vk_{t+1}] < 0`, because
 
 ```{math}
 \begin{aligned}
-\rfree \vk_{t} & < \left[\TaxFree\fFunc^{k}(k_{t})-\kPriceAfterITC_{t+1}\Discount j_{t}^{k}-\depr \vk_{t} \right].
+\rfree \vk_{t} & < \left[\TaxFree\fFunc^{k}(k_{t})-\kPriceAfterITC_{t+1}\DiscFac j_{t}^{k}-\deprRte \vk_{t} \right].
 \end{aligned}
 ```
 
@@ -274,7 +274,7 @@ The investment first order condition {eq}`eq:qMod-iFOC` implies
 
 ```{math}
 \begin{aligned}
-(1+\adj^{i})\kPriceAfterITC_{t+1}\Discount & = \Discount \vk_{t+1} \\
+(1+\adj^{i})\kPriceAfterITC_{t+1}\DiscFac & = \DiscFac \vk_{t+1} \\
 1+\iota_{t}\omega & = \q_{t+1}
 \end{aligned}
 ```
@@ -284,7 +284,7 @@ which constitutes the implicit definition of a function
 ```{math}
 \begin{aligned}
 \pmb{\iota}(\q_{t+1}) & \equiv (\q_{t+1}-1)/\omega \\
-i_{t} & = (\pmb{\iota}(\q_{t+1})+\depr)k_{t}
+i_{t} & = (\pmb{\iota}(\q_{t+1})+\deprRte)k_{t}
 \end{aligned}
 ```
 
@@ -305,7 +305,7 @@ Marginal {math}`\q` is the value of one more unit of capital relative to its pri
 \q_{t} = \frac{\vk_{t}}{\kPriceAfterITC_{t}} = \frac{\vFirm_{t}(k_{t})}{\kPriceAfterITC_{t} k_{t}} = Q_{t}.
 ```
 
-Marginal {math}`\q` then equals average {math}`Q`, which can be measured from the stock market. The adjustment cost function used below, {math}`\adj = (k/2)\omega(i/k-\depr)^{2}`, is homogeneous of degree one, so the condition comes down to revenue. With the production function of the figures, {math}`\fFunc(k) = k^{\alpha}` with {math}`\alpha < 1`, it fails: decreasing returns give the firm rents, which add to its market value without adding to the value of a marginal unit of capital, so average {math}`Q` exceeds marginal {math}`\q`.
+Marginal {math}`\q` then equals average {math}`Q`, which can be measured from the stock market. The adjustment cost function used below, {math}`\adj = (k/2)\omega(i/k-\deprRte)^{2}`, is homogeneous of degree one, so the condition comes down to revenue. With the production function of the figures, {math}`\fFunc(k) = k^{\alpha}` with {math}`\alpha < 1`, it fails: decreasing returns give the firm rents, which add to its market value without adding to the value of a marginal unit of capital, so average {math}`Q` exceeds marginal {math}`\q`.
 
 (Phase-Diagrams)=
 ## Phase Diagrams
@@ -319,8 +319,8 @@ The capital accumulation equation can be rewritten as
 :label: eq:qMod-kdyn
 
 \begin{aligned}
-k_{t+1} & = (1-\depr) k_{t} + i_{t} \\
-\Delta k_{t+1} & = i_{t} - \depr k_{t} \\
+k_{t+1} & = (1-\deprRte) k_{t} + i_{t} \\
+\Delta k_{t+1} & = i_{t} - \deprRte k_{t} \\
 & = \pmb{\iota}(\q_{t+1}) k_{t}.
 \end{aligned}
 ```
@@ -342,9 +342,9 @@ Recalling that {math}`\kPriceAfterITC_{t+1}=\Delta \kPriceAfterITC_{t+1} + \kPri
 :label: eq:qdel
 
 \begin{aligned}
-(\rfree+\depr) \q_{t} & = \TaxFree\fFunc^{k}(k_{t})/\kPriceAfterITC_{t} - j_{t}^{k}(\Delta \kPriceAfterITC_{t+1}+\kPriceAfterITC_{t})\Discount/\kPriceAfterITC_{t} + \Ex_{t} \left[\left(\frac{ \vk_{t+1}}{\kPriceAfterITC_{t}}\right)-\left(\frac{ \vk_{t}}{\kPriceAfterITC_{t}}\right)\right] \\
-& \approx \TaxFree\fFunc^{k}(k_{t})/\kPriceAfterITC_{t} - (1+\nabla \kPriceAfterITC_{t+1})j_{t}^{k}\Discount + \Ex_{t} \left[\left(\frac{ \vk_{t+1}}{\kPriceAfterITC_{t+1}}(1+\nabla \kPriceAfterITC_{t+1})\right)-\q_{t}\right] \\
-& = \TaxFree\fFunc^{k}(k_{t})/\kPriceAfterITC_{t} - (1+\nabla \kPriceAfterITC_{t+1})j_{t}^{k}\Discount + \Ex_{t} \left[(1+\nabla \kPriceAfterITC_{t+1})\q_{t+1}-\q_{t}\right].
+(\rfree+\deprRte) \q_{t} & = \TaxFree\fFunc^{k}(k_{t})/\kPriceAfterITC_{t} - j_{t}^{k}(\Delta \kPriceAfterITC_{t+1}+\kPriceAfterITC_{t})\DiscFac/\kPriceAfterITC_{t} + \Ex_{t} \left[\left(\frac{ \vk_{t+1}}{\kPriceAfterITC_{t}}\right)-\left(\frac{ \vk_{t}}{\kPriceAfterITC_{t}}\right)\right] \\
+& \approx \TaxFree\fFunc^{k}(k_{t})/\kPriceAfterITC_{t} - (1+\nabla \kPriceAfterITC_{t+1})j_{t}^{k}\DiscFac + \Ex_{t} \left[\left(\frac{ \vk_{t+1}}{\kPriceAfterITC_{t+1}}(1+\nabla \kPriceAfterITC_{t+1})\right)-\q_{t}\right] \\
+& = \TaxFree\fFunc^{k}(k_{t})/\kPriceAfterITC_{t} - (1+\nabla \kPriceAfterITC_{t+1})j_{t}^{k}\DiscFac + \Ex_{t} \left[(1+\nabla \kPriceAfterITC_{t+1})\q_{t+1}-\q_{t}\right].
 \end{aligned}
 ```
 
@@ -354,17 +354,17 @@ Now assuming that {math}`\Delta \q_{t+1}`, {math}`\nabla \kPriceAfterITC_{t+1}`,
 :label: eq:dq
 
 \begin{aligned}
-\Ex_{t} \left[ \Delta \q_{t+1}\right] & \approx (\rfree+\depr-\nabla \kPriceAfterITC_{t+1}) \q_{t} - [\TaxFree\fFunc^{k}(k_{t})/\kPriceAfterITC_{t}-j^{k}_{t}\Discount].
+\Ex_{t} \left[ \Delta \q_{t+1}\right] & \approx (\rfree+\deprRte-\nabla \kPriceAfterITC_{t+1}) \q_{t} - [\TaxFree\fFunc^{k}(k_{t})/\kPriceAfterITC_{t}-j^{k}_{t}\DiscFac].
 \end{aligned}
 ```
 
-Simplifying further, if the ITC is unchanging, and the pretax price of capital is unchanging at {math}`\kPrice_{t+1}=\kPrice_{t} = 1`, and {math}`\depr=0`, equation {eq}`eq:dq` becomes
+Simplifying further, if the ITC is unchanging, and the pretax price of capital is unchanging at {math}`\kPrice_{t+1}=\kPrice_{t} = 1`, and {math}`\deprRte=0`, equation {eq}`eq:dq` becomes
 
 ```{math}
 :label: eq:qdyn
 
 \begin{aligned}
-\Ex_{t}[\Delta \q_{t+1}] & \approx \rfree \q_{t} - \fFunc^{k}(k_{t})/\TaxComb_{t} + j_{t}^{k}\Discount
+\Ex_{t}[\Delta \q_{t+1}] & \approx \rfree \q_{t} - \fFunc^{k}(k_{t})/\TaxComb_{t} + j_{t}^{k}\DiscFac
 \end{aligned}
 ```
 
@@ -428,7 +428,7 @@ Note first that none of the tax terms has changed, and in the long run there is 
 
 Obviously in order to get from an initial capital stock of {math}`\check{k}_{<}` to a larger equilibrium capital stock of {math}`\check{k}_{\geq}` the firm will need to engage in investment in excess of the depreciation rate, incurring costs of adjustment. In the absence of a change in the environment, *expected* costs of adjustment will always be declining toward zero, because the firm's capital stock will always be moving toward its equilibrium value in which those costs are zero.
 
-So we can tell the story as follows. Suppose that leading up to period {math}`t` the firm was in its steady-state. When the productivity shock occurs, the marginal product of capital, {math}`\Psi\fFunc^{k}`, jumps up: not because the production function {math}`\fFunc` has changed, but because productivity {math}`\Psi`, which multiplies it, has jumped. {math}`j_{t}^{k}` had been zero (because the firm was at steady state), but now the firm wishes it had more capital because extra capital would reduce future adjustment costs (the firm knows that its old steady-state capital stock is now too small, so it will have to be engaging in {math}`\iota > 0` for a while), so {math}`j_{t}^{k}` becomes negative (that is, the firm knows that having more capital will reduce the adjustment costs associated with the higher investment that it will be undertaking). The combination {math}`\TaxCombInv \Psi\fFunc^{k}_{t} - j^{k}_{t} \Discount` therefore becomes a larger positive number, so at the initial level of {math}`\q` the RHS of {eq}`eq:qdyn` would imply {math}`\Ex_{t}[\Delta \q_{t+1}]` less than zero, so the new {math}`\Ex_{t}[\Delta \q_{t+1}]=0` locus must be higher (because the equilibrating value of {math}`\q` is higher for any {math}`k`). The saddle path is therefore also higher. So {math}`\q`, and therefore {math}`\iota`, jump up instantly when the new higher level of productivity is revealed, corresponding also to an immediate increase in the firm's share price (the marginal valuation of an additional unit of capital), since {math}`\TaxComb` has not changed.
+So we can tell the story as follows. Suppose that leading up to period {math}`t` the firm was in its steady-state. When the productivity shock occurs, the marginal product of capital, {math}`\Psi\fFunc^{k}`, jumps up: not because the production function {math}`\fFunc` has changed, but because productivity {math}`\Psi`, which multiplies it, has jumped. {math}`j_{t}^{k}` had been zero (because the firm was at steady state), but now the firm wishes it had more capital because extra capital would reduce future adjustment costs (the firm knows that its old steady-state capital stock is now too small, so it will have to be engaging in {math}`\iota > 0` for a while), so {math}`j_{t}^{k}` becomes negative (that is, the firm knows that having more capital will reduce the adjustment costs associated with the higher investment that it will be undertaking). The combination {math}`\TaxCombInv \Psi\fFunc^{k}_{t} - j^{k}_{t} \DiscFac` therefore becomes a larger positive number, so at the initial level of {math}`\q` the RHS of {eq}`eq:qdyn` would imply {math}`\Ex_{t}[\Delta \q_{t+1}]` less than zero, so the new {math}`\Ex_{t}[\Delta \q_{t+1}]=0` locus must be higher (because the equilibrating value of {math}`\q` is higher for any {math}`k`). The saddle path is therefore also higher. So {math}`\q`, and therefore {math}`\iota`, jump up instantly when the new higher level of productivity is revealed, corresponding also to an immediate increase in the firm's share price (the marginal valuation of an additional unit of capital), since {math}`\TaxComb` has not changed.
 
 The jump in the share price does not last. {math}`\vk` falls back, period after period, all the way to its old value, {math}`\kPriceAfterITC`. The firm ends up larger, not more valuable per unit of capital, because it keeps adding capital until one more unit is worth exactly what it costs. That the share price of a firm whose productivity has permanently risen should fall is less strange than it sounds: {math}`\vk-\kPriceAfterITC` is, roughly, the discounted value of the extra profits that a unit of capital will earn while the firm is still smaller than its new steady state, and with each period of investment fewer of those extra profits remain ahead.
 

@@ -6,7 +6,7 @@
 The social planner's goal is to solve the problem:
 
 ```{math}
-\max ~~ \Ex\left[ \sum_{n=0}^{\infty} \Discount^{n} \log \Cons_{t+n}\right]
+\max ~~ \Ex\left[ \sum_{n=0}^{\infty} \DiscFac^{n} \log \Cons_{t+n}\right]
 ```
 
 ```{math}
@@ -27,16 +27,16 @@ In this model the capital stock is not useful as a state variable: Because capit
 The first step is to rewrite the problem in Bellman equation form
 
 ```{math}
-\Value_{t}(\Inc_{t}) = \max_{\Cons_{t}} ~~ \log \Cons_{t} + \Discount \Ex_{t} [\Value_{t+1}(\Inc_{t+1})]
+\VFunc_{t}(\Inc_{t}) = \max_{\Cons_{t}} ~~ \log \Cons_{t} + \DiscFac \Ex_{t} [\VFunc_{t+1}(\Inc_{t+1})]
 ```
 
 and take the first order condition:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \uP(\Cons_{t}) & =  \Discount \Ex_{t}\left[\PtyAgg_{t+1} \kapShare \Kap_{t+1}^{\kapShare-1} \uP(\Cons_{t+1})\right]  \\
-        \frac{1}{\Cons_{t}} & =  \Discount \Ex_{t}\left[\frac{\PtyAgg_{t+1} \kapShare \Kap_{t+1}^{\kapShare-1}}{\Cons_{t+1}}\right]  \\
-        1 & =  \Discount \Ex_{t} \left[\underbrace{\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}}_{\equiv \Risky_{t+1}}\frac{\Cons_{t}}{\Cons_{t+1}}\right]
+        \uP(\Cons_{t}) & =  \DiscFac \Ex_{t}\left[\PtyAgg_{t+1} \kapShare \Kap_{t+1}^{\kapShare-1} \uP(\Cons_{t+1})\right]  \\
+        \frac{1}{\Cons_{t}} & =  \DiscFac \Ex_{t}\left[\frac{\PtyAgg_{t+1} \kapShare \Kap_{t+1}^{\kapShare-1}}{\Cons_{t+1}}\right]  \\
+        1 & =  \DiscFac \Ex_{t} \left[\underbrace{\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}}_{\equiv \Risky_{t+1}}\frac{\Cons_{t}}{\Cons_{t+1}}\right]
 \end{aligned}\end{gathered}
 ```
 
@@ -44,21 +44,21 @@ where our definition of {math}`\Risky_{t+1}` helps clarify the relationship of t
 to the usual consumption Euler equation (and you should think about why this is the
 right definition of the interest factor in this model).
 
-Now we show that this FOC is satisfied by the consumption function {math}`\Cons_{t} = \MPC \Inc_{t}`, where {math}`\MPC = 1-\kapShare \Discount`. To see this, note
+Now we show that this FOC is satisfied by the consumption function {math}`\Cons_{t} = \MPC \Inc_{t}`, where {math}`\MPC = 1-\kapShare \DiscFac`. To see this, note
 first that the proposed consumption rule implies that {math}`\Kap_{t+1} = (1-\MPC) \Inc_{t}`.
 
 The first order condition says
 
 ```{math}
 \begin{gathered}\begin{aligned}
-1  & =  \Discount \Ex_{t} \left[\kapShare \frac{\PtyAgg_{t+1} \Kap_{t+1}^{\kapShare}}{\Kap_{t+1}}\frac{\MPC \Inc_{t}}{\MPC \Inc_{t+1}}\right]
-\\  & =  \Discount \Ex_{t} \left[\kapShare \frac{\Inc_{t+1}}{\Kap_{t+1}}\frac{\MPC \Inc_{t}}{\MPC \Inc_{t+1}}\right]
-\\ & =  \Discount \phantom{\Ex_{t}} \left[\kapShare \frac{\Inc_{t}}{\Kap_{t+1}}\right]
-\\ & =  \Discount \phantom{\Ex_{t}} \left[\kapShare \frac{\Inc_{t}}{\Inc_{t}-\Cons_{t}}\right]
-\\ & =  \Discount \phantom{\Ex_{t}} \left[\kapShare \frac{\Inc_{t}}{\Inc_{t}(1-\MPC)}\right]
-\\ & =  \Discount \phantom{\Ex_{t}} \left[\kapShare \frac{1}{(1-\MPC)}\right]
-\\ (1-\MPC) & =  \kapShare \Discount
-\\ \MPC     & =  1-\kapShare \Discount.
+1  & =  \DiscFac \Ex_{t} \left[\kapShare \frac{\PtyAgg_{t+1} \Kap_{t+1}^{\kapShare}}{\Kap_{t+1}}\frac{\MPC \Inc_{t}}{\MPC \Inc_{t+1}}\right]
+\\  & =  \DiscFac \Ex_{t} \left[\kapShare \frac{\Inc_{t+1}}{\Kap_{t+1}}\frac{\MPC \Inc_{t}}{\MPC \Inc_{t+1}}\right]
+\\ & =  \DiscFac \phantom{\Ex_{t}} \left[\kapShare \frac{\Inc_{t}}{\Kap_{t+1}}\right]
+\\ & =  \DiscFac \phantom{\Ex_{t}} \left[\kapShare \frac{\Inc_{t}}{\Inc_{t}-\Cons_{t}}\right]
+\\ & =  \DiscFac \phantom{\Ex_{t}} \left[\kapShare \frac{\Inc_{t}}{\Inc_{t}(1-\MPC)}\right]
+\\ & =  \DiscFac \phantom{\Ex_{t}} \left[\kapShare \frac{1}{(1-\MPC)}\right]
+\\ (1-\MPC) & =  \kapShare \DiscFac
+\\ \MPC     & =  1-\kapShare \DiscFac.
 \end{aligned}\end{gathered}
 ```
 
@@ -72,8 +72,8 @@ this model says that the dynamics of the capital stock are given by
 
 \begin{gathered}\begin{aligned}
    \Kap_{t+1} & =  (1-\MPC) \Inc_{t}
-\\ & =  \kapShare\Discount \PtyAgg_{t}\Kap_{t}^{\kapShare}
-\\ \lnat\Kap_{t+1} & =  \log \kapShare\Discount + \lPtyAgg_{t} + \kapShare \lnat\Kap_{t}
+\\ & =  \kapShare\DiscFac \PtyAgg_{t}\Kap_{t}^{\kapShare}
+\\ \lnat\Kap_{t+1} & =  \log \kapShare\DiscFac + \lPtyAgg_{t} + \kapShare \lnat\Kap_{t}
 \end{aligned}\end{gathered}
 ```
 
@@ -90,8 +90,8 @@ of output can be obtained from
 \begin{gathered}\begin{aligned}
   \lnat\Inc_{t+1} & =  \lPtyAgg_{t+1} + \kapShare \lnat\Kap_{t+1}
 \\ & =  \kapShare \lnat\Kap_{t+1} + \lPtyAgg_{t+1}
-\\ & =  \kapShare (\log \kapShare \Discount \Inc_{t}) + \lPtyAgg_{t+1}
-\\ & =  \kapShare (\lnat\Inc_{t} + \log \kapShare \Discount ) + \lPtyAgg_{t+1}
+\\ & =  \kapShare (\log \kapShare \DiscFac \Inc_{t}) + \lPtyAgg_{t+1}
+\\ & =  \kapShare (\lnat\Inc_{t} + \log \kapShare \DiscFac ) + \lPtyAgg_{t+1}
 \end{aligned}\end{gathered}
 ```
 
@@ -157,13 +157,13 @@ with {math}`\PtyAgg_{t} = 1 ~ \forall ~ t`. The consumption Euler equation is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \frac{\Cons_{t+1}}{\Cons_{t}} & =  (\Discount \Rfree_{t+1})^{1/\CRRA}  \\
+        \frac{\Cons_{t+1}}{\Cons_{t}} & =  (\DiscFac \Rfree_{t+1})^{1/\CRRA}  \\
 \end{aligned}\end{gathered}
 ```
 
 But this is an economy with no technological progress, so the steady-state
 interest rate must take on the value such that {math}`\Cons_{t+1}/\Cons_{t}=1`. Thus we
-must have {math}`\Discount \Rfree = 1` or {math}`\Rfree = 1/\Discount`.
+must have {math}`\DiscFac \Rfree = 1` or {math}`\Rfree = 1/\DiscFac`.
 
 We can further derive the steady state level of capital of a nonstochastic version of the model in which {math}`\lPtyAgg_{t}=\lPtyAgg~\forall~t`
 from {eq}`eq:BM-kDyn`:
@@ -172,9 +172,9 @@ from {eq}`eq:BM-kDyn`:
 :label: eq:BM-kSS
 
 \begin{gathered}\begin{aligned}
-  \lnat\Kap & =  \log \kapShare\Discount  + \lPtyAgg + \kapShare \lnat\Kap
-  \\ (1-\kapShare) \lnat\Kap & =  \log \kapShare\Discount + \lPtyAgg
-\\ \lnat\Kap & =  \frac{\log \kapShare\Discount + \lPtyAgg}{1-\kapShare}
+  \lnat\Kap & =  \log \kapShare\DiscFac  + \lPtyAgg + \kapShare \lnat\Kap
+  \\ (1-\kapShare) \lnat\Kap & =  \log \kapShare\DiscFac + \lPtyAgg
+\\ \lnat\Kap & =  \frac{\log \kapShare\DiscFac + \lPtyAgg}{1-\kapShare}
 \end{aligned}\end{gathered}
 ```
 
@@ -190,11 +190,11 @@ We consider here the last of these, which we will show reduces (in this special 
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  1 & =  \Discount \Ex_{t} \left[\underbrace{\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}}_{\equiv \Risky_{t+1}}\frac{\Cons_{t}}{\Cons_{t+1}}\right]
-  \\   1 & =  \Discount \Ex_{t} \left[\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}\frac{\Inc_{t}}{\Inc_{t+1}}\right]
-  \\   1 & =  \Discount \Ex_{t} \left[\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}\frac{\PtyAgg_{t} \Kap_{t}^{\kapShare}}{\PtyAgg_{t+1} \Kap_{t+1}^{\kapShare}}\right]
-  \\   1 & =  \Discount \Ex_{t} \left[\kapShare \Kap_{t+1}^{\kapShare-1}\frac{\PtyAgg_{t} \Kap_{t}^{\kapShare}}{\Kap_{t+1}^{\kapShare}}\right]
-  \\   1 & =  \Discount \left[\kapShare \Kap_{t+1}^{\kapShare-1}\frac{\PtyAgg_{t} \Kap_{t}^{\kapShare}}{\Kap_{t+1}^{\kapShare}}\right]
+  1 & =  \DiscFac \Ex_{t} \left[\underbrace{\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}}_{\equiv \Risky_{t+1}}\frac{\Cons_{t}}{\Cons_{t+1}}\right]
+  \\   1 & =  \DiscFac \Ex_{t} \left[\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}\frac{\Inc_{t}}{\Inc_{t+1}}\right]
+  \\   1 & =  \DiscFac \Ex_{t} \left[\kapShare \PtyAgg_{t+1} \Kap_{t+1}^{\kapShare-1}\frac{\PtyAgg_{t} \Kap_{t}^{\kapShare}}{\PtyAgg_{t+1} \Kap_{t+1}^{\kapShare}}\right]
+  \\   1 & =  \DiscFac \Ex_{t} \left[\kapShare \Kap_{t+1}^{\kapShare-1}\frac{\PtyAgg_{t} \Kap_{t}^{\kapShare}}{\Kap_{t+1}^{\kapShare}}\right]
+  \\   1 & =  \DiscFac \left[\kapShare \Kap_{t+1}^{\kapShare-1}\frac{\PtyAgg_{t} \Kap_{t}^{\kapShare}}{\Kap_{t+1}^{\kapShare}}\right]
 \end{aligned}\end{gathered}
 ```
 
@@ -202,8 +202,8 @@ where the expectations operator disappears because no variables are stochastic (
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  1 & =  \Discount \kapShare \PtyAgg_{t} \TargetNrm{\Kap}_{t}^{\kapShare-1}
-\\ \lnat\TargetNrm{\Kap} & =  \frac{\log \Discount \kapShare + \lPtyAgg_{t}}{1-\kapShare}
+  1 & =  \DiscFac \kapShare \PtyAgg_{t} \TargetNrm{\Kap}_{t}^{\kapShare-1}
+\\ \lnat\TargetNrm{\Kap} & =  \frac{\log \DiscFac \kapShare + \lPtyAgg_{t}}{1-\kapShare}
 \end{aligned}\end{gathered}
 ```
 

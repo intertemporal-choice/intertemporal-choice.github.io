@@ -5,35 +5,35 @@ The intertemporal budget constraint for an infinite-horizon representative agent
 
 ```{math}
 \begin{aligned}
-\PDV_{t}(C) & = \Wmid_{t}+ \overbrace{\PDV_{t}(Y)}^{\equiv \Whum_{t}} \\
-& = \WRat_{t}
+\PDV_{t}(C) & = \BNrm_{t}+ \overbrace{\PDV_{t}(Y)}^{\equiv \HNrm_{t}} \\
+& = \ONrm_{t}
 \end{aligned}
 ```
 
-where {math}`\Wmid_{t}` is the consumer's beginning-of-period stock of physical assets, {math}`\Whum_{t}` is human wealth, and {math}`\WRat_{t}` is total wealth, human and nonhuman.
+where {math}`\BNrm_{t}` is the consumer's beginning-of-period stock of physical assets, {math}`\HNrm_{t}` is human wealth, and {math}`\ONrm_{t}` is total wealth, human and nonhuman.
 
 {math}`\Rfree_{t+1}` is the riskless, but time-varying, return factor at {math}`t+1`, and so we can define the dynamic budget constraint for total wealth as
 
 ```{math}
 :label: eq:CM-dbc
 
-\WRat_{t+1} = (\WRat_{t}-\CRat_{t})\Rfree_{t+1}.
+\ONrm_{t+1} = (\ONrm_{t}-\CNrm_{t})\Rfree_{t+1}.
 ```
 
-{cite:t}`cmModel` show that the dynamic budget constraint can be manipulated to generate an expression relating the current levels of wealth and consumption to future interest rates. First, divide both sides of {eq}`eq:CM-dbc` by {math}`\WRat_{t}` to obtain
+{cite:t}`cmModel` show that the dynamic budget constraint can be manipulated to generate an expression relating the current levels of wealth and consumption to future interest rates. First, divide both sides of {eq}`eq:CM-dbc` by {math}`\ONrm_{t}` to obtain
 
 ```{math}
 \begin{aligned}
-\left(\frac{\WRat_{t+1}}{\WRat_{t}}\right) & = \left(1-\frac{\CRat_{t}}{\WRat_{t}}\right)\Rfree_{t+1} \\
-\Delta \wRat_{t+1} & \approx \rfree_{t+1}+ \log(1-\exp(c_{t}-\wRat_{t})),
+\left(\frac{\ONrm_{t+1}}{\ONrm_{t}}\right) & = \left(1-\frac{\CNrm_{t}}{\ONrm_{t}}\right)\Rfree_{t+1} \\
+\Delta \oNrm_{t+1} & \approx \rfree_{t+1}+ \log(1-\exp(c_{t}-\oNrm_{t})),
 \end{aligned}
 ```
 
-where the lower-case variables represent the logarithms of their upper-case equivalents. Define {math}`x_{t} \equiv c_{t}-\wRat_{t}` and assume that any variations in interest rates over time are stationary, {math}`\lim_{n \rightarrow \infty} \Ex_{t}[\Rfree_{t+n}] = \Rfree`. In this case, the ratio of consumption to total wealth {math}`x_{t}` will be a stationary variable. It seems reasonable, therefore, to consider a Taylor expansion of the DBC around the steady-state value for {math}`c_{t}-\wRat_{t}`, which we will designate as {math}`x`
+where the lower-case variables represent the logarithms of their upper-case equivalents. Define {math}`x_{t} \equiv c_{t}-\oNrm_{t}` and assume that any variations in interest rates over time are stationary, {math}`\lim_{n \rightarrow \infty} \Ex_{t}[\Rfree_{t+n}] = \Rfree`. In this case, the ratio of consumption to total wealth {math}`x_{t}` will be a stationary variable. It seems reasonable, therefore, to consider a Taylor expansion of the DBC around the steady-state value for {math}`c_{t}-\oNrm_{t}`, which we will designate as {math}`x`
 
 ```{math}
 \begin{aligned}
-\Delta \wRat_{t+1} & \approx \rfree_{t+1} + \log(1-\exp(x_{t})) \\
+\Delta \oNrm_{t+1} & \approx \rfree_{t+1} + \log(1-\exp(x_{t})) \\
 & \approx \rfree_{t+1} + \log(1-\exp(x))+\left(\frac{d}{dx}\log(1-\exp(x))\right)(x_{t}-x) \\
 & = \rfree_{t+1} + \log(1-\exp(x))-\left(\frac{\exp(x)}{1-\exp(x)}\right)(x_{t}-x),
 \end{aligned}
@@ -49,12 +49,12 @@ or, for simplicity defining a constant {math}`\xi = 1-\exp(x)` (which will be a 
 :label: eq:dw1
 
 \begin{aligned}
-\Delta \wRat_{t+1} & \approx \rfree_{t+1} + \log \xi +\left(\frac{1-\exp(x)-1}{\xi}\right)(x_{t}-x) \\
+\Delta \oNrm_{t+1} & \approx \rfree_{t+1} + \log \xi +\left(\frac{1-\exp(x)-1}{\xi}\right)(x_{t}-x) \\
 & = \rfree_{t+1} + \log \xi +\left(\frac{\xi-1}{\xi}\right)(x_{t}-x) \\
 & = \rfree_{t+1} + \log \xi +\left(1-\frac{1}{\xi}\right)(x_{t}-x) \\
-& = \log \xi - (1-1/\xi) x + \rfree_{t+1}+\left(1-\frac{1}{\xi}\right)(c_{t}-\wRat_{t}) \\
-& = \underbrace{\log \xi - (1-1/\xi) \log \xi}_{\equiv k} + \rfree_{t+1}+\left(1-\frac{1}{\xi}\right)(c_{t}-\wRat_{t}) \\
-& = k + \rfree_{t+1}+\left(1-\frac{1}{\xi}\right)(c_{t}-\wRat_{t}).
+& = \log \xi - (1-1/\xi) x + \rfree_{t+1}+\left(1-\frac{1}{\xi}\right)(c_{t}-\oNrm_{t}) \\
+& = \underbrace{\log \xi - (1-1/\xi) \log \xi}_{\equiv k} + \rfree_{t+1}+\left(1-\frac{1}{\xi}\right)(c_{t}-\oNrm_{t}) \\
+& = k + \rfree_{t+1}+\left(1-\frac{1}{\xi}\right)(c_{t}-\oNrm_{t}).
 \end{aligned}
 ```
 
@@ -64,29 +64,29 @@ But the definition of the change in wealth is
 :label: eq:dw2
 
 \begin{aligned}
-\Delta \wRat_{t} & = \wRat_{t+1}-\wRat_{t} \\
-& = \wRat_{t+1}-c_{t+1}+c_{t+1}-c_{t}+c_{t} -\wRat_{t} \\
-& = \Delta c_{t+1}+(c_{t}-\wRat_{t})-(c_{t+1}-\wRat_{t+1})
+\Delta \oNrm_{t} & = \oNrm_{t+1}-\oNrm_{t} \\
+& = \oNrm_{t+1}-c_{t+1}+c_{t+1}-c_{t}+c_{t} -\oNrm_{t} \\
+& = \Delta c_{t+1}+(c_{t}-\oNrm_{t})-(c_{t+1}-\oNrm_{t+1})
 \end{aligned}
 ```
 
-Now set {eq}`eq:dw2` equal to {eq}`eq:dw1` and solve for {math}`c_{t}-\wRat_{t}` to get
+Now set {eq}`eq:dw2` equal to {eq}`eq:dw1` and solve for {math}`c_{t}-\oNrm_{t}` to get
 
 ```{math}
 \begin{aligned}
-\Delta c_{t+1}+(c_{t}-\wRat_{t})-(c_{t+1}-\wRat_{t+1}) & = k + \rfree_{t+1}+\left(1-\frac{1}{\xi}\right)(c_{t}-\wRat_{t}) \\
-(c_{t}-\wRat_{t})\left[1-\left(1-\frac{1}{\xi}\right) \right] & = k + \rfree_{t+1} + (c_{t+1}-\wRat_{t+1}) \\
-c_{t}-\wRat_{t} & = \xi(\rfree_{t+1}-\Delta c_{t+1}) + \xi (c_{t+1}-\wRat_{t+1}) + \xi k.
+\Delta c_{t+1}+(c_{t}-\oNrm_{t})-(c_{t+1}-\oNrm_{t+1}) & = k + \rfree_{t+1}+\left(1-\frac{1}{\xi}\right)(c_{t}-\oNrm_{t}) \\
+(c_{t}-\oNrm_{t})\left[1-\left(1-\frac{1}{\xi}\right) \right] & = k + \rfree_{t+1} + (c_{t+1}-\oNrm_{t+1}) \\
+c_{t}-\oNrm_{t} & = \xi(\rfree_{t+1}-\Delta c_{t+1}) + \xi (c_{t+1}-\oNrm_{t+1}) + \xi k.
 \end{aligned}
 ```
 
-Of course, an equivalent expression can be derived for {math}`c_{t+1}-\wRat_{t+1}`; repeated substitution leads to
+Of course, an equivalent expression can be derived for {math}`c_{t+1}-\oNrm_{t+1}`; repeated substitution leads to
 
 ```{math}
 :label: eq:ibcapprox
 
 \begin{aligned}
-c_{t}-\wRat_{t} & = \xi(\rfree_{t+1}-\Delta c_{t+1}) + \xi (\xi (\rfree_{t+2}-\Delta c_{t+2}) + \xi (c_{t+2}-\wRat_{t+2}) + \xi k) + \xi k \\
+c_{t}-\oNrm_{t} & = \xi(\rfree_{t+1}-\Delta c_{t+1}) + \xi (\xi (\rfree_{t+2}-\Delta c_{t+2}) + \xi (c_{t+2}-\oNrm_{t+2}) + \xi k) + \xi k \\
 & = \sum_{j=1}^{\infty} \xi^{j}(\rfree_{t+j}-\Delta c_{t+j})+\xi k/(1-\xi).
 \end{aligned}
 ```
@@ -97,8 +97,8 @@ This equation is purely the result of the dynamic budget constraint; so far we h
 
 ```{math}
 \begin{aligned}
-\left(\frac{{C}_{t+1}}{\CRat_{t}}\right) & = (\Rfree_{t+1}\Discount)^{1/\CRRA} \\
-\Delta c_{t+1} & = \underbrace{\CRRA^{-1} \log \Discount}_{\equiv \mu} + \CRRA^{-1} \rfree_{t+1}
+\left(\frac{{C}_{t+1}}{\CNrm_{t}}\right) & = (\Rfree_{t+1}\DiscFac)^{1/\CRRA} \\
+\Delta c_{t+1} & = \underbrace{\CRRA^{-1} \log \DiscFac}_{\equiv \mu} + \CRRA^{-1} \rfree_{t+1}
 \end{aligned}
 ```
 
@@ -107,16 +107,16 @@ where {math}`\CRRA^{-1}` is the intertemporal elasticity of substitution. This e
 ```{math}
 :label: eq:cw
 
-c_{t}-\wRat_{t} = (1-\CRRA^{-1})\sum_{j=1}^{\infty} \xi^{j}\rfree_{t+j}+\xi (k-\mu)/(1-\xi).
+c_{t}-\oNrm_{t} = (1-\CRRA^{-1})\sum_{j=1}^{\infty} \xi^{j}\rfree_{t+j}+\xi (k-\mu)/(1-\xi).
 ```
 
-All of these results were derived under the assumption of perfect foresight: Interest rates vary over time, but the consumer knows in advance what the pattern of variation will be. If we wish to allow for truly stochastic interest rates, things get somewhat more complicated. Recall that if interest rates are fixed at {math}`\Rfree` and income grows by factor {math}`\WGro` from period to period, human wealth is
+All of these results were derived under the assumption of perfect foresight: Interest rates vary over time, but the consumer knows in advance what the pattern of variation will be. If we wish to allow for truly stochastic interest rates, things get somewhat more complicated. Recall that if interest rates are fixed at {math}`\Rfree` and income grows by factor {math}`\WGroFac` from period to period, human wealth is
 
 ```{math}
 \begin{aligned}
-\Whum_{t} & = \left(\frac{Y_{t}}{1-\WGro/\Rfree}\right) \\
-& \approx \left(\frac{Y_{t}}{\rfree-\wGro}\right).
+\HNrm_{t} & = \left(\frac{Y_{t}}{1-\WGroFac/\Rfree}\right) \\
+& \approx \left(\frac{Y_{t}}{\rfree-\WGroRte}\right).
 \end{aligned}
 ```
 
-{cite:t}`summersCapTax` showed that a permanent change in interest rates has an enormous effect on the value of human wealth. In a model with stochastic interest rates, there is still a large human wealth effect even if interest rates eventually return to some "natural" rate following a shock. Thus, a proper analysis of the effect of changes in interest rates must take account of the effect of that change not only on the expectations of future interest rates on the RHS of {eq}`eq:cw` but also on the level of total wealth {math}`\wRat_{t}` on the LHS of that equation.
+{cite:t}`summersCapTax` showed that a permanent change in interest rates has an enormous effect on the value of human wealth. In a model with stochastic interest rates, there is still a large human wealth effect even if interest rates eventually return to some "natural" rate following a shock. Thus, a proper analysis of the effect of changes in interest rates must take account of the effect of that change not only on the expectations of future interest rates on the RHS of {eq}`eq:cw` but also on the level of total wealth {math}`\oNrm_{t}` on the LHS of that equation.

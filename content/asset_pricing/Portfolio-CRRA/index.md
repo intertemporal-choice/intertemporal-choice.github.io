@@ -3,7 +3,7 @@
 
 {cite:t}`merton:restat` and {cite:t}`samuelson:portfolio` study the optimal portfolio choice of a consumer with constant relative risk aversion {math}`\CRRA`.[^fn-utility] This consumer has assets at the end of period {math}`t` equal to {math}`a_{t}` and is deciding how much to invest in a risky asset[^fn-multi-asset] with a lognormally distributed return factor {math}`\Risky_{t+1}`, whose log is
 
-[^fn-utility]: {math}`\uFunc(\cRat) = (1-\CRRA)^{-1}\cRat^{1-\CRRA}`.
+[^fn-utility]: {math}`\uFunc(\cNrm) = (1-\CRRA)^{-1}\cNrm^{1-\CRRA}`.
 
 [^fn-multi-asset]: Both papers present the solution in the case with a single risky asset. {cite:t}`merton:restat` also derives the optimality conditions for many risky assets, a case Merton solved explicitly in a 1971 paper in the *Journal of Economic Theory*. For two risky assets, see [CRRA Portfolio Choice with Two Risky Assets](#sec:Portfolio-Multi-CRRA).
 

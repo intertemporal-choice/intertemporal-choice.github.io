@@ -2,7 +2,7 @@
 
 The source notebook, the SST (single source of truth), is written the way the book writes
 everything: every economic object by its macro (rule D, Chris Carroll 2026-11-15),
-`\\CRRA`, `\\kap`, `\\ptyGro`. Those macros are defined by the registry and the course block,
+`\\CRRA`, `\\kap`, `\\ptyGroRte`. Those macros are defined by the registry and the course block,
 which the website reads but Colab, Binder, JupyterLite, GitHub and VS Code do not. So the
 notebook students open, `<Chapter>.ipynb` beside the chapter, is generated from the SST: the
 same cells, ids and outputs, with each macro in its Markdown math spelled out in the LaTeX it

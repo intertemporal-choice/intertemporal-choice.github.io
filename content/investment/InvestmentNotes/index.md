@@ -83,12 +83,12 @@ and proposed that investment should obey the rule
 :label: eq:InvNotes-1
 
 \begin{cases}
- i_{t}-\depr k_{t} > 0 & \text{if $Q_{t} > 1$}
-\\ i_{t}-\depr k_{t} < 0 & \text{if $Q_{t} < 1$}
+ i_{t}-\deprRte k_{t} > 0 & \text{if $Q_{t} > 1$}
+\\ i_{t}-\deprRte k_{t} < 0 & \text{if $Q_{t} < 1$}
 \end{cases}
 ```
 
-where {math}`i_{t}-\depr k_{t}` is net investment: gross investment {math}`i_{t}` minus the depreciation {math}`\depr k_{t}` of the existing capital stock. That is, firms which have a value greater than what it would cost to reproduce their capital should be growing, while firms which are not worth what it would cost to reproduce them should be shrinking.
+where {math}`i_{t}-\deprRte k_{t}` is net investment: gross investment {math}`i_{t}` minus the depreciation {math}`\deprRte k_{t}` of the existing capital stock. That is, firms which have a value greater than what it would cost to reproduce their capital should be growing, while firms which are not worth what it would cost to reproduce them should be shrinking.
 
 Tobin's {math}`Q` is now one of the basic tools of financial market analysis; it is used regularly as one of several tools designed to try to assess firms' prospects.
 

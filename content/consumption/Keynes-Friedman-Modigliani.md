@@ -21,8 +21,8 @@ The modern theory of consumption began as an argument about a single empirical r
 :label: eq:KFM-KeynesianC
 
 \begin{aligned}
-\cRat_{t} & = \alpha_{0} + \alpha_{1} \yRat_{t} \\
-\Delta \cRat_{t} & = \alpha_{1} \Delta \yRat_{t}
+\cNrm_{t} & = \alpha_{0} + \alpha_{1} \yNrm_{t} \\
+\Delta \cNrm_{t} & = \alpha_{1} \Delta \yNrm_{t}
 \end{aligned}
 ```
 
@@ -51,8 +51,8 @@ The disagreement between the levels and the first-difference estimates is the mo
 
 ```{math}
 \begin{aligned}
-\yRat_{i} & = p_{i} + \theta_{i} \\
-\cRat_{i} & = p_{i} + u_{i}
+\yNrm_{i} & = p_{i} + \theta_{i} \\
+\cNrm_{i} & = p_{i} + u_{i}
 \end{aligned}
 ```
 

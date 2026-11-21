@@ -5,7 +5,7 @@ The chapter's [notebook](LucasAssetPrice.ipynb) solves the model for every case 
 
 ## Introduction/Setup
 
-{cite:t}`lucas:assetpricing` considers an economy populated by infinitely many identical individual consumers, in which the only assets are a set of identical infinitely-lived trees. Aggregate output is the fruit that falls from the trees, and cannot be stored (it would rot!); because {math}`\uFunc^{\prime}(\cRat)>0~\forall~\cRat`, the fruit is all eaten:
+{cite:t}`lucas:assetpricing` considers an economy populated by infinitely many identical individual consumers, in which the only assets are a set of identical infinitely-lived trees. Aggregate output is the fruit that falls from the trees, and cannot be stored (it would rot!); because {math}`\uFunc^{\prime}(\cNrm)>0~\forall~\cNrm`, the fruit is all eaten:
 
 :::{margin}
 As in [Aggregation](#sec:Aggregation).
@@ -14,10 +14,10 @@ As in [Aggregation](#sec:Aggregation).
 ```{math}
 :label: eq:CeqY
 
-\cRat_{t}\Pop_{t} = \dvdnd_{t}\Kap_{t}
+\cNrm_{t}\Pop_{t} = \dvdnd_{t}\Kap_{t}
 ```
 
-where {math}`\cRat_{t}` is consumption of fruit per person, {math}`\Pop_{t}` is the population, {math}`\Kap_{t}` measures the stock of trees, and {math}`\dvdnd_{t}` is the exogenous output of fruit that drops from each tree. A crucial assumption is that the stock of trees is exogenous: you cannot consume a little less fruit and have more trees next period. In a given year, each tree produces exactly the same amount of fruit as every other tree, but {math}`\dvdnd_{t}` varies from year to year depending on the weather. An economy like this, in which output arrives without any deliberate actions on the part of residents, is called an "endowment" economy (or, sometimes, an "exchange" economy).
+where {math}`\cNrm_{t}` is consumption of fruit per person, {math}`\Pop_{t}` is the population, {math}`\Kap_{t}` measures the stock of trees, and {math}`\dvdnd_{t}` is the exogenous output of fruit that drops from each tree. A crucial assumption is that the stock of trees is exogenous: you cannot consume a little less fruit and have more trees next period. In a given year, each tree produces exactly the same amount of fruit as every other tree, but {math}`\dvdnd_{t}` varies from year to year depending on the weather. An economy like this, in which output arrives without any deliberate actions on the part of residents, is called an "endowment" economy (or, sometimes, an "exchange" economy).
 
 :::{margin}
 The alternative is a "production" economy, in which factors of production (labor, capital, maybe land, maybe knowledge) combine somehow to generate the output.
@@ -49,7 +49,7 @@ Consumer {math}`i` maximizes
 ```{math}
 :label: eq:origprob
 
-\vFunc({m}_{t}^{i}) = \max ~ \Ex_{t}^{i}\left[\sum_{n=0}^{\infty} \DiscFac^{n} \uFunc(\cRat_{t+n}^{i}) \right]
+\vFunc({m}_{t}^{i}) = \max ~ \Ex_{t}^{i}\left[\sum_{n=0}^{\infty} \DiscFac^{n} \uFunc(\cNrm_{t+n}^{i}) \right]
 ```
 
 subject to
@@ -95,14 +95,14 @@ The [Envelope theorem](#sec:Envelope) tells us that {math}`\vFunc^{\prime}({m}_{
 ```{math}
 :label: eq:pofci
 
-\uFunc^{\prime}(c_{t}^{i}) = \DiscFac \Ex_{t}^{i}\left[\uFunc^{\prime}(\cRat_{t+1}^{i})\left(\frac{{\Price}_{t+1}+\dvdnd_{t+1}}{\Price_{t}}\right)\right]
+\uFunc^{\prime}(c_{t}^{i}) = \DiscFac \Ex_{t}^{i}\left[\uFunc^{\prime}(\cNrm_{t+1}^{i})\left(\frac{{\Price}_{t+1}+\dvdnd_{t+1}}{\Price_{t}}\right)\right]
 ```
 
 ```{math}
 \Price_{t} = \DiscFac \Ex_{t}^{i}
 \left[
   \left(
-    \frac{\uFunc^{\prime}(\cRat_{t+1}^{i})}{\uFunc^{\prime}(\cRat_{t}^{i})}
+    \frac{\uFunc^{\prime}(\cNrm_{t+1}^{i})}{\uFunc^{\prime}(\cNrm_{t}^{i})}
   \right)
   \left({\Price}_{t+1}+\dvdnd_{t+1}\right)
 \right].
@@ -110,13 +110,13 @@ The [Envelope theorem](#sec:Envelope) tells us that {math}`\vFunc^{\prime}({m}_{
 
 ## Aggregation
 
-Since all consumers are identical, {math}`c_{t}^{i} = c_{t}^{j}~\forall~i,j`, so henceforth we just call consumption per capita {math}`\cRat_{t}`. Since aggregate consumption must equal aggregate production because fruit cannot be stored, normalizing the population to {math}`\Pop_{t}=1 ~\forall ~ t` and stock of trees to {math}`\Kap_{t}=1 ~\forall~t`, equation {eq}`eq:CeqY` becomes:
+Since all consumers are identical, {math}`c_{t}^{i} = c_{t}^{j}~\forall~i,j`, so henceforth we just call consumption per capita {math}`\cNrm_{t}`. Since aggregate consumption must equal aggregate production because fruit cannot be stored, normalizing the population to {math}`\Pop_{t}=1 ~\forall ~ t` and stock of trees to {math}`\Kap_{t}=1 ~\forall~t`, equation {eq}`eq:CeqY` becomes:
 
 ```{math}
-\cRat_{t} = \dvdnd_{t}.
+\cNrm_{t} = \dvdnd_{t}.
 ```
 
-Substituting {math}`\cRat_{t}` and {math}`\cRat_{t+1}` for {math}`c_{t}^{i}` and {math}`c_{t+1}^{i}` in {eq}`eq:pofci` and then substituting {math}`\dvdnd_{t}` for {math}`\cRat_{t}` we get
+Substituting {math}`\cNrm_{t}` and {math}`\cNrm_{t+1}` for {math}`c_{t}^{i}` and {math}`c_{t+1}^{i}` in {eq}`eq:pofci` and then substituting {math}`\dvdnd_{t}` for {math}`\cNrm_{t}` we get
 
 ```{math}
 :label: eq:pofd
@@ -140,7 +140,7 @@ which is called the "stochastic discount factor" because (a) it is stochastic (t
 \Price_{t} = \Ex_{t}\left[\SDF_{t,t+1}\left({\Price}_{t+1}+\dvdnd_{t+1}\right)\right].
 ```
 
-The letter is the Old English eth, {math}`\SDF`, the sibling of the thorn {math}`\Pat` that marks the [absolute patience factor](#eq:AIC); like {math}`\Pat` it names a factor, and its log, the stochastic discount rate, is the small eth {math}`\sdf`.
+The letter is the Old English eth, {math}`\SDF`, the sibling of the thorn {math}`\APFac` that marks the [absolute patience factor](#eq:AIC); like {math}`\APFac` it names a factor, and its log, the stochastic discount rate, is the small eth {math}`\sdf`.
 
 A corresponding equation will hold in period {math}`t+1` (and in period {math}`t+2` and beyond):
 
@@ -170,7 +170,7 @@ So, the price of the asset is the present discounted value of the stream of futu
 
 ## Specializing the Model
 
-This is as far as we can go without making explicit assumptions about the structure of utility. If utility is CRRA, {math}`\uFunc(\cRat)=(1-\CRRA)^{-1}\cRat^{1-\CRRA},` substituting {math}`\uFunc^{\prime}(\dvdnd)=\dvdnd^{-\CRRA}` into {eq}`eq:pofd` yields
+This is as far as we can go without making explicit assumptions about the structure of utility. If utility is CRRA, {math}`\uFunc(\cNrm)=(1-\CRRA)^{-1}\cNrm^{1-\CRRA},` substituting {math}`\uFunc^{\prime}(\dvdnd)=\dvdnd^{-\CRRA}` into {eq}`eq:pofd` yields
 
 ```{math}
 :label: eq:pofdCRRA
@@ -192,18 +192,18 @@ and the particularly special case of logarithmic utility (which Lucas emphasizes
 \end{aligned}
 ```
 
-If the price-dividend ratio is bounded (there is no [bubble](#sec:Bubbles)), the limit term in this equation goes to zero. Using the usual definition of the time preference factor as {math}`\DiscFac = 1/(1+\timeRate)`, where {math}`\timeRate` is the time preference rate, the equilibrium price is:
+If the price-dividend ratio is bounded (there is no [bubble](#sec:Bubbles)), the limit term in this equation goes to zero. Using the usual definition of the time preference factor as {math}`\DiscFac = 1/(1+\discRte)`, where {math}`\discRte` is the time preference rate, the equilibrium price is:
 
 ```{math}
 :label: eq:pWithLogU
 
-\Price_{t} = \dvdnd_{t}\left(\frac{\DiscFac}{1-\DiscFac} \right) = \dvdnd_{t}\left(\frac{1}{1/\DiscFac-1} \right) = \dvdnd_{t}\left(\frac{1}{1+\timeRate-1} \right) = \frac{\dvdnd_{t}}{\timeRate}
+\Price_{t} = \dvdnd_{t}\left(\frac{\DiscFac}{1-\DiscFac} \right) = \dvdnd_{t}\left(\frac{1}{1/\DiscFac-1} \right) = \dvdnd_{t}\left(\frac{1}{1+\discRte-1} \right) = \frac{\dvdnd_{t}}{\discRte}
 ```
 
-or, equivalently, the "dividend-price ratio" is always {math}`\dvdnd_{t}/\Price_{t} = \timeRate`.
+or, equivalently, the "dividend-price ratio" is always {math}`\dvdnd_{t}/\Price_{t} = \discRte`.
 
 :::{margin}
-With CRRA utility and IID dividends the solution is {math}`\dvdnd_{t}^{\CRRA}/\Price_{t} = \timeRate/\edvdnd`, where {math}`\edvdnd \equiv \Ex_{t}[\dvdnd_{t+n}^{1-\CRRA}]` (see [When Dividends are IID](#When-Dividends-are-IID)).
+With CRRA utility and IID dividends the solution is {math}`\dvdnd_{t}^{\CRRA}/\Price_{t} = \discRte/\edvdnd`, where {math}`\edvdnd \equiv \Ex_{t}[\dvdnd_{t+n}^{1-\CRRA}]` (see [When Dividends are IID](#When-Dividends-are-IID)).
 :::
 
 It may surprise you that the equilibrium price of trees today does not depend on the expected level of fruit output in the future. If the weather was bad this year, but is expected to return to normal next year (and, by definition, is expected to be equal to normal in subsequent years), you might think that the price today would mostly reflect the "normal" value of fruit production that the trees produce, not the (temporarily low) value that happens to obtain today.
@@ -250,13 +250,13 @@ One of the subtler entries in {cite:t}`aristotleFallacies`'s catalog of common h
 
 The Lucas model provides a counterexample. From the standpoint of any individual (atomistic) agent, it is quite true that a decision to save one more unit will yield greater future resources, in the amount {math}`\Risky_{t+1}`. But from the standpoint of the society as a whole, if everyone decided to do the same thing (save one more unit), there would be no effect on aggregate resources in period {math}`t+1`. Put another way, for any individual agent, it appears that the "marginal product of capital" is {math}`\Risky_{t+1}`, but for the society as a whole the marginal product of capital is zero.
 
-The proposition that the return for society as a whole must be the same as the return that is available to individuals is an error because it implicitly assumes that there are no general equilibrium effects of a generalized desire to save more (or, more broadly, that there is no interaction between the decisions one person makes and the outcomes for another person). In the Lucas model, if everyone's preferences change (e.g., {math}`\timeRate` goes down for everyone), the price of trees rises just enough to offset the increased desire for ownership of future dividends (since there is a fixed supply of assets to be owned, the demand must be reconciled with that preexisting supply).
+The proposition that the return for society as a whole must be the same as the return that is available to individuals is an error because it implicitly assumes that there are no general equilibrium effects of a generalized desire to save more (or, more broadly, that there is no interaction between the decisions one person makes and the outcomes for another person). In the Lucas model, if everyone's preferences change (e.g., {math}`\discRte` goes down for everyone), the price of trees rises just enough to offset the increased desire for ownership of future dividends (since there is a fixed supply of assets to be owned, the demand must be reconciled with that preexisting supply).
 
 Aristotle was a smart guy!
 
 ## Analytical and Numerical Solutions
 
-The model has analytical solutions (such as {math}`\Price_{t} = \dvdnd_{t}/\timeRate`) or approximate analytical solutions only in very special circumstances; [Analytical Solutions in CRRA Utility Case](#Appendix-Analytical-Solutions-in-CRRA-Utility-Case) derives them. When dividends follow an AR(1) process there is no closed form, though [When Dividends Follow an AR(1) Process](#When-Dividends-Follow-an-AR-1-Process) gives an exact series. The chapter's [notebook](LucasAssetPrice.ipynb) solves that case numerically, by iterating {eq}`eq:pofdCRRA` to its fixed point, and checks the solution against the series and against the closed forms of the polar cases.
+The model has analytical solutions (such as {math}`\Price_{t} = \dvdnd_{t}/\discRte`) or approximate analytical solutions only in very special circumstances; [Analytical Solutions in CRRA Utility Case](#Appendix-Analytical-Solutions-in-CRRA-Utility-Case) derives them. When dividends follow an AR(1) process there is no closed form, though [When Dividends Follow an AR(1) Process](#When-Dividends-Follow-an-AR-1-Process) gives an exact series. The chapter's [notebook](LucasAssetPrice.ipynb) solves that case numerically, by iterating {eq}`eq:pofdCRRA` to its fixed point, and checks the solution against the series and against the closed forms of the polar cases.
 
 (Appendix-Analytical-Solutions-in-CRRA-Utility-Case)=
 ## Appendix: Analytical Solutions in CRRA Utility Case
@@ -300,14 +300,14 @@ To make further progress, suppose that the IID process for dividends is a mean-o
 \edvdnd = e^{\CRRA(\CRRA-1)(1/2)\sigma^{2}}
 ```
 
-and since {math}`\DiscFac^{-1} = 1+\timeRate`, {eq}`eq:PtCRRA` becomes
+and since {math}`\DiscFac^{-1} = 1+\discRte`, {eq}`eq:PtCRRA` becomes
 
 ```{math}
-\frac{\Price_{t}}{\dvdnd_{t}^{\CRRA}} = \left(\frac{e^{\CRRA(\CRRA-1)(1/2)\sigma^{2}}}{\timeRate}\right)
+\frac{\Price_{t}}{\dvdnd_{t}^{\CRRA}} = \left(\frac{e^{\CRRA(\CRRA-1)(1/2)\sigma^{2}}}{\discRte}\right)
 ```
 
 ```{math}
-\Price_{t} = \left(\frac{\dvdnd_{t}^{\CRRA} e^{\CRRA(\CRRA-1)(1/2)\sigma^{2}}}{\timeRate}\right)
+\Price_{t} = \left(\frac{\dvdnd_{t}^{\CRRA} e^{\CRRA(\CRRA-1)(1/2)\sigma^{2}}}{\discRte}\right)
 ```
 
 So the log is
@@ -315,7 +315,7 @@ So the log is
 ```{math}
 :label: eq:PtLogIID
 
-\log \Price_{t} = \CRRA \log \dvdnd_{t} + \CRRA(\CRRA-1)(1/2)\sigma^{2} - \log \timeRate
+\log \Price_{t} = \CRRA \log \dvdnd_{t} + \CRRA(\CRRA-1)(1/2)\sigma^{2} - \log \discRte
 ```
 
 and thus the variances obey
@@ -329,7 +329,7 @@ and thus the variances obey
 Given that {math}`\CRRA > 1`, this derivation yields some interesting insights:
 
 1. (the log of) asset prices will be more volatile than (the log of) dividends
-2. An increase in risk aversion {math}`\CRRA` increases the price {math}`\Price_{t}` at any given {math}`\dvdnd_{t} \geq 1`, and the average price, {math}`\Ex[\Price_{t}] = e^{\CRRA(\CRRA-1)\sigma^{2}}/\timeRate` (because {math}`\CRRA(\CRRA-1)\sigma^{2}/2 > 0` and an increase in {math}`\CRRA` increases its size)
+2. An increase in risk aversion {math}`\CRRA` increases the price {math}`\Price_{t}` at any given {math}`\dvdnd_{t} \geq 1`, and the average price, {math}`\Ex[\Price_{t}] = e^{\CRRA(\CRRA-1)\sigma^{2}}/\discRte` (because {math}`\CRRA(\CRRA-1)\sigma^{2}/2 > 0` and an increase in {math}`\CRRA` increases its size)
 
 The second point is surprising, so it bears repeating: an *increase* in risk aversion *increases* the price of the risky asset. The constant in {eq}`eq:PtLogIID` shows why. It splits as {math}`\CRRA(\CRRA-1)\sigma^{2}/2 = \CRRA(\CRRA+1)\sigma^{2}/2 - \CRRA\sigma^{2}`. The first part is the fall in the riskless rate that risk brings, mostly through precaution, which raises the value of every future dividend. The second is the tree's risk premium: the tree pays the most when consumption is high and marginal utility low, which lowers its price. A higher {math}`\CRRA` raises the first part by more than the second whenever {math}`\CRRA > 1/2`. The term {math}`\CRRA \log \dvdnd_{t}` is substitution: when {math}`\dvdnd_{t} > 1`, consumption is expected to fall back toward its mean, and the less willing consumers are to substitute over time, the further the riskless rate must fall to keep them from saving against the fall. That is why the result needs {math}`\dvdnd_{t} \geq 1`. It does not correspond very well to the common narrative in which market analysts often attribute a decline in asset prices to "increased risk aversion." The result depends, however, on the absence of growth: with growing dividends it can reverse (see [When Dividends Follow a Random Walk](#When-Dividends-Follow-a-Random-Walk)).
 
@@ -358,23 +358,23 @@ so that
 \frac{\Price_{t}}{\dvdnd_{t}} = \frac{\DiscFac \edvdnd}{1-\DiscFac \edvdnd} = \frac{1}{(\DiscFac \edvdnd)^{-1}-1}
 ```
 
-and, since {math}`(\DiscFac \edvdnd)^{-1} = (1+\timeRate)e^{-\CRRA(\CRRA-1)\sigma^{2}/2} \approx 1+\timeRate-\CRRA(\CRRA-1)\sigma^{2}/2`,
+and, since {math}`(\DiscFac \edvdnd)^{-1} = (1+\discRte)e^{-\CRRA(\CRRA-1)\sigma^{2}/2} \approx 1+\discRte-\CRRA(\CRRA-1)\sigma^{2}/2`,
 
 ```{math}
 :label: eq:PtLogRW
 
-\log \Price_{t} \approx \log \dvdnd_{t}  - \log (\timeRate -  (1/2)\CRRA (\CRRA-1) \sigma^{2})
+\log \Price_{t} \approx \log \dvdnd_{t}  - \log (\discRte -  (1/2)\CRRA (\CRRA-1) \sigma^{2})
 ```
 
-Compared with {eq}`eq:PtLogIID`, the {math}`\CRRA` multiplying {math}`\log \dvdnd_{t}` is gone, so the variances of the *changes* in log prices and log dividends are now the same. Risk also enters differently, in the denominator, where it matters far more: at {math}`\CRRA=3`, {math}`\sigma=0.1` and {math}`\timeRate=0.04` the price-dividend ratio is 108, against 25.8 with IID dividends at {math}`\dvdnd_{t}=1` and {math}`1/\timeRate=25` with no risk at all. The 108 is the exact ratio, {math}`1/((\DiscFac \edvdnd)^{-1}-1)`; the approximation {eq}`eq:PtLogRW` gives {math}`1/(0.04-0.03)=100`, because its denominator is the small difference between two rates, and the second-order terms it drops change that difference by 7 percent. The price is finite only if {math}`\DiscFac \edvdnd < 1`, approximately {math}`\timeRate > \CRRA(\CRRA-1)\sigma^{2}/2`. The surprising result that the price-dividend ratio increases when risk aversion increases continues to hold.
+Compared with {eq}`eq:PtLogIID`, the {math}`\CRRA` multiplying {math}`\log \dvdnd_{t}` is gone, so the variances of the *changes* in log prices and log dividends are now the same. Risk also enters differently, in the denominator, where it matters far more: at {math}`\CRRA=3`, {math}`\sigma=0.1` and {math}`\discRte=0.04` the price-dividend ratio is 108, against 25.8 with IID dividends at {math}`\dvdnd_{t}=1` and {math}`1/\discRte=25` with no risk at all. The 108 is the exact ratio, {math}`1/((\DiscFac \edvdnd)^{-1}-1)`; the approximation {eq}`eq:PtLogRW` gives {math}`1/(0.04-0.03)=100`, because its denominator is the small difference between two rates, and the second-order terms it drops change that difference by 7 percent. The price is finite only if {math}`\DiscFac \edvdnd < 1`, approximately {math}`\discRte > \CRRA(\CRRA-1)\sigma^{2}/2`. The surprising result that the price-dividend ratio increases when risk aversion increases continues to hold.
 
-That result, like the one for IID dividends, depends on the absence of growth. If log dividend growth has mean {math}`\pGro-\sigma^{2}/2` instead, so that dividends are expected to grow by the factor {math}`\PGro = e^{\pGro}`, the same steps give
+That result, like the one for IID dividends, depends on the absence of growth. If log dividend growth has mean {math}`\PermGroRte-\sigma^{2}/2` instead, so that dividends are expected to grow by the factor {math}`\PermGroFac = e^{\PermGroRte}`, the same steps give
 
 ```{math}
-\frac{\Price_{t}}{\dvdnd_{t}} \approx \frac{1}{\timeRate+(\CRRA-1)(\pGro-\CRRA\sigma^{2}/2)},
+\frac{\Price_{t}}{\dvdnd_{t}} \approx \frac{1}{\discRte+(\CRRA-1)(\PermGroRte-\CRRA\sigma^{2}/2)},
 ```
 
-so a higher {math}`\CRRA` raises the ratio only if {math}`(\CRRA-1/2)\sigma^{2} > \pGro`. With CRRA utility, a higher {math}`\CRRA` is also a lower elasticity of intertemporal substitution: when dividends, and so consumption, are expected to grow, consumers who are less willing to substitute over time want to borrow against the future, which pushes the riskless rate up and prices down. For consumption, whose expected growth and standard deviation are both about 0.02 a year, a higher {math}`\CRRA` lowers the price for any {math}`\CRRA` below about 50. In a growing economy, then, the model does deliver the narrative of prices falling because risk aversion rose, but through the riskless rate rather than through risk premia.
+so a higher {math}`\CRRA` raises the ratio only if {math}`(\CRRA-1/2)\sigma^{2} > \PermGroRte`. With CRRA utility, a higher {math}`\CRRA` is also a lower elasticity of intertemporal substitution: when dividends, and so consumption, are expected to grow, consumers who are less willing to substitute over time want to borrow against the future, which pushes the riskless rate up and prices down. For consumption, whose expected growth and standard deviation are both about 0.02 a year, a higher {math}`\CRRA` lowers the price for any {math}`\CRRA` below about 50. In a growing economy, then, the model does deliver the narrative of prices falling because risk aversion rose, but through the riskless rate rather than through risk premia.
 
 (When-Dividends-Follow-an-AR-1-Process)=
 ### When Dividends Follow an AR(1) Process
@@ -393,7 +393,7 @@ x_{t+1} = \tau x_{t} + \err_{t+1}, \qquad \err_{t+1} \sim \mathcal{N}(-\sigma^{2
 
 which contains both earlier cases: {math}`\tau=0` is the IID assumption and {math}`\tau=1` is the random walk.
 
-Rather than guess at a price-dividend ratio, we price each future dividend separately and add up (the guess-and-verify route of [When Dividends Follow a Random Walk](#When-Dividends-Follow-a-Random-Walk) needs a constant ratio, and there is not one to find here). The Lucas price is the present discounted value of the dividend stream evaluated at the consumer's own marginal utility, so with {math}`\cRat=\dvdnd` and {math}`\uFunc^{\prime}(\cRat)=\cRat^{-\CRRA}`,
+Rather than guess at a price-dividend ratio, we price each future dividend separately and add up (the guess-and-verify route of [When Dividends Follow a Random Walk](#When-Dividends-Follow-a-Random-Walk) needs a constant ratio, and there is not one to find here). The Lucas price is the present discounted value of the dividend stream evaluated at the consumer's own marginal utility, so with {math}`\cNrm=\dvdnd` and {math}`\uFunc^{\prime}(\cNrm)=\cNrm^{-\CRRA}`,
 
 ```{math}
 :label: eq:strips
@@ -413,6 +413,6 @@ Substituting {eq}`eq:AR1strip` into {eq}`eq:strips` gives the price-dividend rat
 
 The two polar cases fall out. Setting {math}`\tau=1` makes {math}`S_{n}=Q_{n}=n` and kills the {math}`x_{t}` term, so every strip is {math}`\edvdnd^{n}` and the sum collapses to the constant ratio of [When Dividends Follow a Random Walk](#When-Dividends-Follow-a-Random-Walk). Setting {math}`\tau=0` makes {math}`S_{n}=Q_{n}=1` for every {math}`n\geq 1`, leaving {math}`\dvdnd_{t}^{\CRRA-1}\edvdnd \DiscFac/(1-\DiscFac)`, which is {eq}`eq:PtCRRA` written as a price-dividend ratio.
 
-Except in the random walk limit, the price-dividend ratio depends on {math}`\dvdnd_{t}`, through the {math}`(\tau^{n}-1)x_{t}` term, as it already does with IID dividends, where it is {math}`\dvdnd_{t}^{\CRRA-1}` times a constant. Only when {math}`\tau=1` does the level of dividends carry no information about their growth; only then is the ratio constant, except with logarithmic utility, which makes it constant for every {math}`\tau`. At {math}`\dvdnd_{t}=1`, where the term is zero, raising {math}`\tau` raises the ratio, steeply as {math}`\tau` nears one: at {math}`\CRRA=3`, {math}`\sigma=0.1` and {math}`\timeRate=0.04` it runs 25.8, 26.4, 29.5, 47.6, 80.8 and 108 for {math}`\tau=0, 0.6, 0.9, 0.99, 0.999` and {math}`1`. Persistence lets the risk of distant dividends accumulate, and with {math}`\CRRA>1` risk raises a dividend's value, as with [IID dividends](#When-Dividends-are-IID); mean reversion is what stops the accumulation and keeps the ratio modest. The random walk is the end of that climb, not a break from it: the ratio is continuous in {math}`\tau` at one.
+Except in the random walk limit, the price-dividend ratio depends on {math}`\dvdnd_{t}`, through the {math}`(\tau^{n}-1)x_{t}` term, as it already does with IID dividends, where it is {math}`\dvdnd_{t}^{\CRRA-1}` times a constant. Only when {math}`\tau=1` does the level of dividends carry no information about their growth; only then is the ratio constant, except with logarithmic utility, which makes it constant for every {math}`\tau`. At {math}`\dvdnd_{t}=1`, where the term is zero, raising {math}`\tau` raises the ratio, steeply as {math}`\tau` nears one: at {math}`\CRRA=3`, {math}`\sigma=0.1` and {math}`\discRte=0.04` it runs 25.8, 26.4, 29.5, 47.6, 80.8 and 108 for {math}`\tau=0, 0.6, 0.9, 0.99, 0.999` and {math}`1`. Persistence lets the risk of distant dividends accumulate, and with {math}`\CRRA>1` risk raises a dividend's value, as with [IID dividends](#When-Dividends-are-IID); mean reversion is what stops the accumulation and keeps the ratio modest. The random walk is the end of that climb, not a break from it: the ratio is continuous in {math}`\tau` at one.
 
 Away from {math}`\dvdnd_{t}=1`, persistence has a second effect. A dividend above its mean is expected to fall back, and with {math}`\CRRA>1` the income effect of that coming scarcity outweighs the substitution effect of the lower return, so the ratio is high; more persistence slows the expected fall, and so weakens the effect. At {math}`\dvdnd_{t}=2` this second effect wins until {math}`\tau` is close to one: the ratio falls from 103.0 at {math}`\tau=0` to 99.4, 89.3 and 73.2 at {math}`\tau=0.6, 0.9` and {math}`0.99`, before rising back toward 108 as {math}`\tau` approaches one.

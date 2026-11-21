@@ -4,7 +4,7 @@
 {cite:t}`hall&jorgenson:i` consider the problem of a firm that produces output using capital {math}`\kap` as its only input,
 
 ```{math}
-\inc = \fFunc(\kap)
+\yNrm = \fFunc(\kap)
 ```
 
 and which obtains its capital {math}`\kap` from a market in which a unit of capital can be rented for a unit of time at rate {math}`\kapRent_{t}`.
@@ -23,19 +23,19 @@ yielding first order conditions
 \begin{gathered}\begin{aligned}
 \fFunc^{\prime}(\kap_{t}) & =  \kapRent_{t}
 \\        \kapShare \kap_{t}^{\kapShare-1} & =  \kapRent_{t}  \\
-         (\inc_{t}/\kap_{t}) \kapShare & =  \kapRent_{t}  \\
-        \kap_{t} & =  (\inc_{t}/\kapRent_{t})\kapShare .
+         (\yNrm_{t}/\kap_{t}) \kapShare & =  \kapRent_{t}  \\
+        \kap_{t} & =  (\yNrm_{t}/\kapRent_{t})\kapShare .
 \end{aligned}\end{gathered}
 ```
 
-This equation says the level of capital is always instantly adjusted to {math}`\inc_{t}` and {math}`\kapRent_{t}`, with no costs of adjustment.
+This equation says the level of capital is always instantly adjusted to {math}`\yNrm_{t}` and {math}`\kapRent_{t}`, with no costs of adjustment.
 
 What determines the cost of capital? In the simple case with no taxes and no capital market frictions of any kind, an investor must be indifferent between putting their money in the bank and earning interest at rate {math}`\rfree`, and buying a unit of capital, renting it out at rate {math}`\kapRent_{t}`, and then reselling it the next period.
 
-Let {math}`\Price_{t}` be the purchase price of one unit of capital at date {math}`t` (distinct from the rental rate, and typically much larger); in continuous time, the rate of change of {math}`\Price_{t}` is {math}`\dot{\Price}_{t}`. Assume that capital depreciates geometrically at rate {math}`\depr`. The net profit from the *continuous time* purchase-and-rent strategy is the income from renting, minus the loss from depreciation, plus the capital gain from the change in the price of capital:
+Let {math}`\Price_{t}` be the purchase price of one unit of capital at date {math}`t` (distinct from the rental rate, and typically much larger); in continuous time, the rate of change of {math}`\Price_{t}` is {math}`\dot{\Price}_{t}`. Assume that capital depreciates geometrically at rate {math}`\deprRte`. The net profit from the *continuous time* purchase-and-rent strategy is the income from renting, minus the loss from depreciation, plus the capital gain from the change in the price of capital:
 
 ```{math}
-\kapRent_{t}-\depr \Price_{t}+\dot{\Price}_{t}.
+\kapRent_{t}-\deprRte \Price_{t}+\dot{\Price}_{t}.
 ```
 
 Thus, the no-arbitrage condition is
@@ -44,8 +44,8 @@ Thus, the no-arbitrage condition is
 :label: eq:ctarb
 
 \begin{gathered}\begin{aligned}
-        \rfree \Price_{t} & =  \kapRent_{t} - \depr \Price_{t} + \dot{\Price}_{t}
-\\  (\rfree+\depr) \Price_{t} & =  \kapRent_{t}+\dot{\Price}_{t}     .
+        \rfree \Price_{t} & =  \kapRent_{t} - \deprRte \Price_{t} + \dot{\Price}_{t}
+\\  (\rfree+\deprRte) \Price_{t} & =  \kapRent_{t}+\dot{\Price}_{t}     .
 \end{aligned}\end{gathered}
 ```
 
@@ -55,8 +55,8 @@ Now to simplify our lives we will assume constant capital goods prices, {math}`\
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \kap_{t} & =  \kapShare \inc_{t}/\kapRent_{t}  \\
-         & =  \frac{\kapShare \inc_{t}}{(\rfree+\depr)\Price_{t}}.
+        \kap_{t} & =  \kapShare \yNrm_{t}/\kapRent_{t}  \\
+         & =  \frac{\kapShare \yNrm_{t}}{(\rfree+\deprRte)\Price_{t}}.
 \end{aligned}\end{gathered}
 ```
 
@@ -78,7 +78,7 @@ Assume that if the firm sells the capital, it must repay the ITC on a pro-rata b
 Now let's rewrite the arbitrage equation {eq}`eq:ctarb` taking account of taxes. The rental income {math}`\kapRent_{t}` must be multiplied by {math}`(1-\TaxRte)` because the capital-rental business must pay taxes too:
 
 ```{math}
-(\rfree+\depr) \hat{\Price}_{t} = (1-\TaxRte) \kapRent_{t}+\dot{\hat{\Price}}_{t}.
+(\rfree+\deprRte) \hat{\Price}_{t} = (1-\TaxRte) \kapRent_{t}+\dot{\hat{\Price}}_{t}.
 ```
 
 If we simplify again by assuming that {math}`\dot{\hat{\Price}}_{t}=0`, we have the Hall-Jorgenson cost of capital,
@@ -86,21 +86,21 @@ If we simplify again by assuming that {math}`\dot{\hat{\Price}}_{t}=0`, we have 
 ```{math}
 :label: eq:hjUserCost
 
-\kapRent_{t} = (\rfree+\depr)\Price_{t}\frac{1-\itc-\TaxRte z}{1-\TaxRte}.
+\kapRent_{t} = (\rfree+\deprRte)\Price_{t}\frac{1-\itc-\TaxRte z}{1-\TaxRte}.
 ```
 
-(If the price of capital is changing, the same steps give {math}`\kapRent_{t} = (\rfree+\depr-\dot{\Price}_{t}/\Price_{t})\Price_{t}(1-\itc-\TaxRte z)/(1-\TaxRte)`.)
+(If the price of capital is changing, the same steps give {math}`\kapRent_{t} = (\rfree+\deprRte-\dot{\Price}_{t}/\Price_{t})\Price_{t}(1-\itc-\TaxRte z)/(1-\TaxRte)`.)
 
 Two special cases show why the deductions matter so much. If investment can be deducted in full at once ("expensing"), {math}`z=1`, and with no ITC
 
 ```{math}
-\kapRent_{t} = (\rfree+\depr)\Price_{t},
+\kapRent_{t} = (\rfree+\deprRte)\Price_{t},
 ```
 
-so the corporate tax has no effect on the cost of capital, and so none on the capital stock. The government takes the share {math}`\TaxRte` of the returns, but it also pays the same share of the cost; this is the neutrality of a tax on cash flow {cite:p}`brownCashFlowTax`. If instead the deductions match the true economic depreciation of the capital, a deduction of {math}`\depr` per period on capital that is itself depreciating at the rate {math}`\depr`, then {math}`z = \depr/(\rfree+\depr)` and
+so the corporate tax has no effect on the cost of capital, and so none on the capital stock. The government takes the share {math}`\TaxRte` of the returns, but it also pays the same share of the cost; this is the neutrality of a tax on cash flow {cite:p}`brownCashFlowTax`. If instead the deductions match the true economic depreciation of the capital, a deduction of {math}`\deprRte` per period on capital that is itself depreciating at the rate {math}`\deprRte`, then {math}`z = \deprRte/(\rfree+\deprRte)` and
 
 ```{math}
-\kapRent_{t} = \left(\frac{\rfree}{1-\TaxRte}+\depr\right)\Price_{t},
+\kapRent_{t} = \left(\frac{\rfree}{1-\TaxRte}+\deprRte\right)\Price_{t},
 ```
 
 so the tax falls in full on the return to capital, which must be {math}`\rfree/(1-\TaxRte)` before tax to pay {math}`\rfree` after it. Actual tax codes lie in between. No general investment tax credit has been enacted since the repeal of 1986, so the credit itself has not been a business-cycle tool for decades. Its place has been taken by "bonus depreciation," an immediate deduction of a fraction {math}`b` of the cost of new equipment, the rest being depreciated on the usual schedule. Financially that is an investment tax credit in all but name: it raises {math}`z` by {math}`b(1-z_{0})`, where {math}`z_{0}` is the present value of the deductions the firm would otherwise have taken, and the next paragraph shows that this is a credit at the rate {math}`\TaxRte b(1-z_{0})`. It was enacted as stimulus after the 2001 recession (30 percent in 2002, 50 percent in 2003) and in the Great Recession (50 percent from 2008, 100 percent in 2010-2011), and then made a fixture: 100 percent from 2017 under the Tax Cuts and Jobs Act, falling by 20 percentage points a year after 2022, and 100 percent again, permanently, for property acquired after 19 January 2025 (Public Law 119-21). {cite:t}`hsITC` measure the response to the first episode. A temporary subsidy barely changes the value of a unit of long-lived capital, so the quantity of investment has to do the adjusting, and it did: they estimate an elasticity of 6 to 14 with respect to the tax-adjusted price of capital. {cite:t}`hmsBonus` find that about half of the equipment bought was imported, so the stimulus to domestic production was smaller than the response of investment.
@@ -115,24 +115,24 @@ Much of what is known about how strongly investment responds to the cost of capi
 The arbitrage argument can also be made as the solution of the firm's optimization problem, which brings out the parallel with the consumer's problem {cite:p}`jorgensonCapitalTheory`. In discrete time, a firm with no taxes that buys capital at the price {math}`\Price_{t}` and discounts by the riskless interest factor {math}`\Rfree = 1+\rfree` solves
 
 ```{math}
-\max_{\{\inv_{t}\}} \sum_{t=0}^{\infty} \Rfree^{-t}\left[\fFunc(\kap_{t}) - \Price_{t}\inv_{t}\right] \quad \text{s.t.} \quad \kap_{t+1} = (1-\depr)\kap_{t}+\inv_{t}.
+\max_{\{\inv_{t}\}} \sum_{t=0}^{\infty} \Rfree^{-t}\left[\fFunc(\kap_{t}) - \Price_{t}\inv_{t}\right] \quad \text{s.t.} \quad \kap_{t+1} = (1-\deprRte)\kap_{t}+\inv_{t}.
 ```
 
-Buying one more unit of capital at {math}`t` costs {math}`\Price_{t}`; it raises output next period by {math}`\fFunc^{\prime}(\kap_{t+1})`, and what is left of it after depreciation can then be sold for {math}`(1-\depr)\Price_{t+1}`. At the optimum the firm is indifferent to that purchase:
+Buying one more unit of capital at {math}`t` costs {math}`\Price_{t}`; it raises output next period by {math}`\fFunc^{\prime}(\kap_{t+1})`, and what is left of it after depreciation can then be sold for {math}`(1-\deprRte)\Price_{t+1}`. At the optimum the firm is indifferent to that purchase:
 
 ```{math}
 :label: eq:hjEuler
 
-\Rfree = \frac{\fFunc^{\prime}(\kap_{t+1})+(1-\depr)\Price_{t+1}}{\Price_{t}}.
+\Rfree = \frac{\fFunc^{\prime}(\kap_{t+1})+(1-\deprRte)\Price_{t+1}}{\Price_{t}}.
 ```
 
 This is the consumer's Euler equation in the firm's clothes. The consumer equates the interest factor to the marginal rate of substitution, {math}`\Rfree = \uFunc^{\prime}(c_{t})/(\DiscFac\uFunc^{\prime}(c_{t+1}))`, and the firm equates it to the return on a unit of capital. Rearranging,
 
 ```{math}
-\fFunc^{\prime}(\kap_{t+1}) = \Rfree\Price_{t} - (1-\depr)\Price_{t+1} = (\rfree+\depr)\Price_{t} - (1-\depr)\Delta\Price_{t+1} \approx (\rfree+\depr)\Price_{t} - \Delta\Price_{t+1},
+\fFunc^{\prime}(\kap_{t+1}) = \Rfree\Price_{t} - (1-\deprRte)\Price_{t+1} = (\rfree+\deprRte)\Price_{t} - (1-\deprRte)\Delta\Price_{t+1} \approx (\rfree+\deprRte)\Price_{t} - \Delta\Price_{t+1},
 ```
 
-the discrete-time counterpart of the user cost {math}`\kapRent_{t} = (\rfree+\depr)\Price_{t}-\dot{\Price}_{t}` in {eq}`eq:ctarb`.
+the discrete-time counterpart of the user cost {math}`\kapRent_{t} = (\rfree+\deprRte)\Price_{t}-\dot{\Price}_{t}` in {eq}`eq:ctarb`.
 
 ## What the Model Leaves Out
 
@@ -140,8 +140,8 @@ Note that so far we have not derived a formula for investment; we have derived a
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \inv_{t-1} & =  \kap_{t}-\kap_{t-1}+\depr \kap_{t-1}  \\
-         & =  \left(\Delta \frac{\inc_{t}}{\kapRent_{t}}\right)\kapShare+\depr \kap_{t-1}
+        \inv_{t-1} & =  \kap_{t}-\kap_{t-1}+\deprRte \kap_{t-1}  \\
+         & =  \left(\Delta \frac{\yNrm_{t}}{\kapRent_{t}}\right)\kapShare+\deprRte \kap_{t-1}
 \end{aligned}\end{gathered}
 ```
 
