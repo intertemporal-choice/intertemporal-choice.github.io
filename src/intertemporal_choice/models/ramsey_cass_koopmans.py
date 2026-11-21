@@ -60,6 +60,8 @@ def saddle_slope(e):
         [c * e.alpha * (e.alpha - 1) * k ** (e.alpha - 2) / e.rho, 0.0],  # d cdot/dk, d cdot/dc
     ])
     values, vectors = np.linalg.eig(jacobian)
+    # A saddle point's eigenvalues are real, but numpy (from 2.5) returns them as complex numbers.
+    values, vectors = values.real, vectors.real
     stable = vectors[:, np.argmin(values)]
     return stable[1] / stable[0]
 
