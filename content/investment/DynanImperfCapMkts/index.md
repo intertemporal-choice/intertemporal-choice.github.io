@@ -211,7 +211,7 @@ The spread between the yields on Moody's seasoned Baa-rated and Aaa-rated corpor
 :::
 
 [The nonfinancial figure](#fig:NonfinancialBonds) and [the financial figure](#fig:FinancialBonds), from the third chapter
-of Matthew Raskin's 2013 Johns Hopkins dissertation, plot the yields on five-year bonds of
+of Matthew Raskin's Johns Hopkins dissertation {cite:p}`raskinUnconventional`, plot the yields on five-year bonds of
 nonfinancial and of financial firms, by credit rating, against the five-year Treasury
 yield, from 1997 to 2013. The spread over Treasuries is larger the lower the rating, and in
 the financial crisis of 2008–09 it widened enormously, most of all for the lowest-rated
@@ -226,12 +226,12 @@ premium predicts economic activity.
 :name: fig:NonfinancialBonds
 :align: center
 
-Yields on five-year Treasury and nonfinancial corporate bonds, by credit rating. From the third chapter of Matthew Raskin's 2013 Johns Hopkins dissertation.
+Yields on five-year Treasury and nonfinancial corporate bonds, by credit rating. From the third chapter of Matthew Raskin's Johns Hopkins dissertation {cite:p}`raskinUnconventional`.
 :::
 
 :::{figure} /content/figures/Imperfections/FinancialBonds.png
 :name: fig:FinancialBonds
 :align: center
 
-Yields on five-year Treasury and financial corporate bonds, by credit rating. From the third chapter of Matthew Raskin's 2013 Johns Hopkins dissertation.
+Yields on five-year Treasury and financial corporate bonds, by credit rating. From the third chapter of Matthew Raskin's Johns Hopkins dissertation {cite:p}`raskinUnconventional`.
 :::
