@@ -3,9 +3,6 @@ math:
   # Everything else this chapter writes comes from the shared notation (econ-ark-tools, @resources/notation).
   # Kept here: three symbols that wait on Chris (Pi's face, the check, the crossed-out c), and the two loci's
   # labels, which have no registry row.
-  # \GPRtehFix stays too, for the PDF: the course-local block gives \thorn as a bare þ, which the registry's
-  # \thorn_{\WGroRtehFix} puts in math mode, where pdflatex drops it. It goes when that override does.
-  '\GPRtehFix': '\APRte_{\WGroRtehFix}'
   '\GPRteAdj': '\check{\APRte}_{\WGroRtehFix}'
   '\dcEqZero': '\Delta\cNrmE=0'
   '\dmEqZero': '\Delta\mNrmE=0'
