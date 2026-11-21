@@ -41,7 +41,6 @@ project:
     '\pat': '\text{þ}'  # registry: \text{\thorn} via \APRte; uses book 1 questions 4
     '\BLevBF': '\mathbf{B}'  # registry: \boldsymbol{B} via \BLvl; uses book 4 questions 0
     '\sLev': 's'  # registry: \boldsymbol{s} via \sLvl; uses book 0 questions 4
-    '\thorn': 'þ'  # registry: \text{þ} [thorn-glyph]; uses book 0 questions 4
     '\yLev': 'y'  # registry: \boldsymbol{y} via \yLvl; uses book 4 questions 0
     '\ALevBF': '\mathbf{A}'  # registry: \boldsymbol{A} via \ALvl; uses book 3 questions 0
     '\HLev': 'H'  # registry: \boldsymbol{H} via \HLvl; uses book 3 questions 0

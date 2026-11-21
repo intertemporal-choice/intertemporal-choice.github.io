@@ -772,7 +772,7 @@ MACROS = {
     '\\tax': '\\tau',
     '\\taxFree': '\\cancel{\\tax}',
     '\\taxNetTrans': 'z',
-    '\\thorn': 'þ',
+    '\\thorn': '\\text{þ}',
     '\\tightness': '\\mathrm{tgt}',
     '\\timeRate': '\\discRte',
     '\\tranShkAll': '\\tranShkInd',
