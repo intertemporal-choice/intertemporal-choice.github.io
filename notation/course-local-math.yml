@@ -165,7 +165,6 @@ project:
     '\surplus': 'z'  # uses book 12 questions 0
     '\hNbr': 'h'  # uses book 9 questions 0
     '\HMin': '\underline{H}'  # uses book 0 questions 8
-    '\PIHMPC': '\varkappa'  # uses book 8 questions 0
     '\sE': '\sRat^{e}'  # uses book 0 questions 8
     '\xpend': '\xi'  # uses book 8 questions 0
     '\PatWGro': '\textbf{Þ}_{\WGro}'  # uses book 7 questions 0
@@ -179,7 +178,6 @@ project:
     '\sTarg': '\TargetNrm{\sRat}'  # uses book 0 questions 4
     '\error': '\epsilon'  # uses book 3 questions 0
     '\rProd': '\mathsf{r}'  # uses book 1 questions 2
-    '\uPPP': '\mathrm{u}^{\prime\prime\prime}'  # uses book 3 questions 0
     '\age': 'z'  # uses book 2 questions 0
     '\Hours': '\mathfrak{H}'  # uses book 2 questions 0
     '\hours': '\mathfrak{h}'  # uses book 1 questions 0
