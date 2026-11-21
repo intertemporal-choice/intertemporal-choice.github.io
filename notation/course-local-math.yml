@@ -44,7 +44,6 @@ project:
     '\yLev': 'y'  # registry: \boldsymbol{y} via \yLvl; uses book 4 questions 0
     '\ALevBF': '\mathbf{A}'  # registry: \boldsymbol{A} via \ALvl; uses book 3 questions 0
     '\HLev': 'H'  # registry: \boldsymbol{H} via \HLvl; uses book 3 questions 0
-    '\Thorn': 'Þ'  # registry: \text{Þ}; uses book 0 questions 3
     '\wAllLev': '\mathbf{o}'  # registry: \boldsymbol{o} via \oLvl; uses book 3 questions 0
     '\WHum': '\HLev'  # registry: \boldsymbol{H} via \HLvl; uses book 0 questions 3
     '\hLev': 'h'  # registry: \boldsymbol{h} via \hLvl; uses book 2 questions 0

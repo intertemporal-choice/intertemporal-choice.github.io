@@ -322,7 +322,7 @@ MACROS = {
     '\\TaxLev': 'T',
     '\\TaxRate': 't',
     '\\TaxRte': '\\tau',
-    '\\Thorn': 'Þ',
+    '\\Thorn': '\\text{Þ}',
     '\\TranShkAgg': '\\varTheta',
     '\\TranShkAggStd': '\\std_{\\TranShkAgg}',
     '\\TranShkAggVar': '\\std^{2}_{\\TranShkAgg}',
