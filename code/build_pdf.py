@@ -24,8 +24,10 @@ whenever a page moves, so the Markdown is left alone and the fix happens here:
      to a whole page in the PDF, `\\href{/content/...}`, becomes one inside it too; check
      that every such link has its label. Then rewrite every remaining `\\href{/` to an
      absolute URL on the site, and check that each one names a page the book actually has
-  5. rerun MyST's own latexmk command and copy the PDF (with its .tex and logs) back
-     to exports/
+  5. tidy the bibliography, and map each character the text font lacks (the prime in E′) to
+     something it can print; then rerun MyST's own latexmk command, copy the PDF (with its
+     .tex and logs) back to exports/, and fail if LaTeX's log says a character was still
+     left out
 
 `--self-test` runs the rewriting and checking functions against input they should
 change or reject, and fails if any of them does not.
@@ -101,6 +103,11 @@ INCLUDE = re.compile(r"^\\include\{([^}]+)\}", re.MULTILINE)
 DEFINED_LABEL = re.compile(r"\\label\{([^}]+)\}")
 USED_LABEL = re.compile(r"\\hyperref\[([^\]]+)\]")
 SITE_HREF = re.compile(r"\\href\{" + re.escape(SITE) + r"(/[^}#\\]*)")
+# Characters the PDF's text font (Latin Modern, T1) lacks, with what prints in their place. XeLaTeX drops a
+# character its font lacks, with only a line in its log: the prime that names a new point in a figure, E′ or A′,
+# printed E or A.
+TEXT_GLYPHS = {"′": r"\ensuremath{{}^{\prime}}"}
+MISSING_CHAR = re.compile(r'^Missing character: There is no (.+?) \("([0-9A-F]+)\) in font ([^!]+)!', re.MULTILINE)
 
 
 def slug(name: str) -> str:
@@ -544,8 +551,38 @@ def tidy_bib() -> list[str]:
     return []
 
 
+def map_glyphs(tex: str) -> str:
+    """The main .tex, with each character of TEXT_GLYPHS mapped to what prints in its place, by newunicodechar."""
+    if "\\begin{document}" not in tex:
+        raise KeyError("\\begin{document}")
+    maps = "".join(f"\\newunicodechar{{{ch}}}{{{glyph}}}\n" for ch, glyph in TEXT_GLYPHS.items())
+    return tex.replace("\\begin{document}", "\\usepackage{newunicodechar}\n" + maps + "\\begin{document}", 1)
+
+
+def map_glyphs_tex() -> list[str]:
+    """Step 6: give the characters the text font lacks something to print (TEXT_GLYPHS)."""
+    main = STAGE / TEX_DIR / f"{NAME}.tex"
+    try:
+        main.write_text(map_glyphs(main.read_text()))
+    except KeyError:
+        return [f"{main.name} has no \\begin{{document}} to put the character maps before"]
+    log.info("characters mapped for the text font: %d", len(TEXT_GLYPHS))
+    return []
+
+
+def missing_glyphs(latex_log: str) -> list[str]:
+    """Each character LaTeX's log says a font lacks, which the PDF therefore leaves out, once, with its count."""
+    found: dict[tuple[str, str, str], int] = {}
+    for m in MISSING_CHAR.finditer(latex_log):
+        found[m.groups()] = found.get(m.groups(), 0) + 1
+    return [
+        f"the PDF leaves out {ch} (U+{code}) {n} time(s): font {font} lacks it; map it in TEXT_GLYPHS"
+        for (ch, code, font), n in found.items()
+    ]
+
+
 def compile_and_copy(root: Path) -> list[str]:
-    """Step 6: rerun latexmk on the fixed LaTeX and copy the results back to exports/."""
+    """Step 7: rerun latexmk on the fixed LaTeX, copy the results back to exports/, and check no character is lost."""
     tex_dir = STAGE / TEX_DIR
     pdf = tex_dir / f"{NAME}.pdf"
     pdf.unlink(missing_ok=True)
@@ -559,7 +596,7 @@ def compile_and_copy(root: Path) -> list[str]:
             shutil.copytree(STAGE / rel, root / rel)
     shutil.copyfile(pdf, root / PDF)
     log.info("wrote %s", PDF)
-    return []
+    return missing_glyphs((tex_dir / f"{NAME}.log").read_text(errors="replace"))
 
 
 def build(root: Path) -> list[str]:
@@ -570,7 +607,7 @@ def build(root: Path) -> list[str]:
     rewrite_staged_link_words()
     if run(["myst", "build", "--pdf"], STAGE, root / MYST_LOG):
         return [f"myst build --pdf failed; see {MYST_LOG}"]
-    return internalize_tex() or absolutize_tex() or tidy_bib() or compile_and_copy(root)
+    return internalize_tex() or absolutize_tex() or tidy_bib() or map_glyphs_tex() or compile_and_copy(root)
 
 
 def raises_key_error(fn, *args) -> bool:
@@ -843,10 +880,28 @@ def bib_failures() -> list[str]:
     return [msg for bad, msg in cases if bad]
 
 
+def glyph_failures() -> list[str]:
+    """Failures of map_glyphs and missing_glyphs on a preamble and on log lines shaped like XeLaTeX's."""
+    tex = "\\usepackage{lmodern}\n\\begin{document}\nE′\n\\end{document}\n"
+    got = map_glyphs(tex)
+    head, _, body = got.partition("\\begin{document}")
+    line = "Missing character: There is no ′ (\"2032) in font ec-lmr10!"
+    cases = [
+        ("\\usepackage{newunicodechar}" not in head, "newunicodechar was not loaded before \\begin{document}"),
+        ("\\newunicodechar{′}{" not in head, "the prime was not mapped before \\begin{document}"),
+        (body != "\nE′\n\\end{document}\n", "the document's body was changed"),
+        (not raises_key_error(map_glyphs, "no document here"), "a .tex without \\begin{document} was not rejected"),
+        (missing_glyphs(f"x\n{line}\n{line}\ny\n") != ["the PDF leaves out ′ (U+2032) 2 time(s): font ec-lmr10 lacks it; map it in TEXT_GLYPHS"],
+         "two missing primes in a log were not reported once, with their count"),
+        (missing_glyphs("Overfull \\hbox\nno missing characters\n") != [], "a log without missing characters reported one"),
+    ]
+    return [msg for bad, msg in cases if bad]
+
+
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
     failures = (fact_failures() + web_only_failures() + margin_failures() + link_words_failures() + title_label_failures() + href_failures()
-                + url_failures() + clear_failures() + bib_failures())
+                + url_failures() + clear_failures() + bib_failures() + glyph_failures())
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")
