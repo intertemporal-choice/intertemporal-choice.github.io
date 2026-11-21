@@ -139,36 +139,36 @@ If there is perpetual population growth, it is possible to finance a positive ra
 \surplus_{1,t} = \Surplus_{1,t}/L_{t}
 ```
 
-and assume there is constant population growth, {math}`\PopGro=L_{t+1}/L_{t}`. If we assume that Social Security taxes per capita are constant, then we can achieve a positive rate of return on Social Security contributions equal to the growth rate of population:
+and assume there is constant population growth, {math}`\PopGroFac=L_{t+1}/L_{t}`. If we assume that Social Security taxes per capita are constant, then we can achieve a positive rate of return on Social Security contributions equal to the growth rate of population:
 
 ```{math}
 \begin{aligned}
 \surplus_{2,t+1} & = \Surplus_{2,t+1}/L_{t} \\
 & = -\Surplus_{1,t+1}/L_{t} \\
 & = -\left(\frac{\Surplus_{1,t+1}}{L_{t+1}}\right)\left(\frac{L_{t+1}}{L_{t}}\right) \\
-& = -\surplus_{1,t+1}\PopGro = -\surplus_{1,t}\PopGro.
+& = -\surplus_{1,t+1}\PopGroFac = -\surplus_{1,t}\PopGroFac.
 \end{aligned}
 ```
 
-Not only does this prove that it is *possible* for the Social Security system to pay a rate of return equal to the rate of population growth; it proves that the *only* rate of return that is consistent with constant per-capita taxes on the young is a rate of return of {math}`\PopGro`. In an economy with perpetual population growth, it is not only possible but *necessary* to pay a positive return.
+Not only does this prove that it is *possible* for the Social Security system to pay a rate of return equal to the rate of population growth; it proves that the *only* rate of return that is consistent with constant per-capita taxes on the young is a rate of return of {math}`\PopGroFac`. In an economy with perpetual population growth, it is not only possible but *necessary* to pay a positive return.
 
 ### Effects of Productivity Growth and Population Growth
 
-Suppose there is wage growth {math}`{\WGro}` between {math}`t` and {math}`t+1`, and suppose that workers contribute a constant *percentage* of their incomes to the Social Security system, {math}`\surplus_{1,t} = \zeta \Wage_{1,t}`. In this case it is possible to earn a rate of return on SS contributions equal to the product of the growth factor for wages and the growth factor for population:
+Suppose there is wage growth {math}`{\WGroFac}` between {math}`t` and {math}`t+1`, and suppose that workers contribute a constant *percentage* of their incomes to the Social Security system, {math}`\surplus_{1,t} = \zeta \Wage_{1,t}`. In this case it is possible to earn a rate of return on SS contributions equal to the product of the growth factor for wages and the growth factor for population:
 
 ```{math}
 \begin{aligned}
 \surplus_{1,t} & = \zeta \Wage_{1,t} \\
-\Wage_{1,t+1} & = {\WGro}\Wage_{1,t} \\
+\Wage_{1,t+1} & = {\WGroFac}\Wage_{1,t} \\
 \surplus_{2,t+1} & = -\Surplus_{1,t+1}/L_{t} \\
 & = -(\Surplus_{1,t+1}/L_{t+1})(L_{t+1}/L_{t}) \\
-& = -\zeta \underbrace{\Wage_{1,t+1}}_{= {\WGro} \Wage_{1,t}} \PopGro \\
-& = -\zeta \Wage_{1,t}{\WGro} \PopGro \\
-& = -\surplus_{1,t} {\WGro}\PopGro
+& = -\zeta \underbrace{\Wage_{1,t+1}}_{= {\WGroFac} \Wage_{1,t}} \PopGroFac \\
+& = -\zeta \Wage_{1,t}{\WGroFac} \PopGroFac \\
+& = -\surplus_{1,t} {\WGroFac}\PopGroFac
 \end{aligned}
 ```
 
-so viewed from the perspective of the young generation in period {math}`t`, their Social Security contributions are returned to them larger by a factor of {math}`{\WGro}\PopGro` than what they paid in; the effective rate of return is therefore {math}`{\WGro}\PopGro`.
+so viewed from the perspective of the young generation in period {math}`t`, their Social Security contributions are returned to them larger by a factor of {math}`{\WGroFac}\PopGroFac` than what they paid in; the effective rate of return is therefore {math}`{\WGroFac}\PopGroFac`.
 
 ### Generational Accounts in a Growing Economy
 
@@ -177,10 +177,10 @@ Now consider the per-capita generational accounts in an economy with constant po
 ```{math}
 \begin{aligned}
 \bar{z}_{t} & = \surplus_{1,t}+\surplus_{2,t+1}/\Rfree_{t+1} \\
-& = \zeta \Wage_{1,t}- {\WGro}\PopGro \zeta \Wage_{1,t}/\Rfree_{t+1} \\
-& = \zeta \Wage_{1,t}\left(1 - {\WGro}\PopGro/\Rfree_{t+1}\right) \\
-& = \zeta \Wage_{1,t}\left(\frac{\Rfree_{t+1} - {\WGro}\PopGro}{\Rfree_{t+1}}\right).
+& = \zeta \Wage_{1,t}- {\WGroFac}\PopGroFac \zeta \Wage_{1,t}/\Rfree_{t+1} \\
+& = \zeta \Wage_{1,t}\left(1 - {\WGroFac}\PopGroFac/\Rfree_{t+1}\right) \\
+& = \zeta \Wage_{1,t}\left(\frac{\Rfree_{t+1} - {\WGroFac}\PopGroFac}{\Rfree_{t+1}}\right).
 \end{aligned}
 ```
 
-Note that this expression will be *negative* if {math}`{\WGro}\PopGro>\Rfree_{t+1}`, meaning that the introduction of a Social Security system with a positive tax rate {math}`\zeta` actually *improves* the lifetime budget constraint! This is another way of seeing that an economy is *dynamically inefficient* if the return factor for capital {math}`\Rfree` is less than the product of the population growth and productivity growth factors. (Or, using approximations, the rate of return is less than the sum of the population growth rate and the productivity growth rate).
+Note that this expression will be *negative* if {math}`{\WGroFac}\PopGroFac>\Rfree_{t+1}`, meaning that the introduction of a Social Security system with a positive tax rate {math}`\zeta` actually *improves* the lifetime budget constraint! This is another way of seeing that an economy is *dynamically inefficient* if the return factor for capital {math}`\Rfree` is less than the product of the population growth and productivity growth factors. (Or, using approximations, the rate of return is less than the sum of the population growth rate and the productivity growth rate).

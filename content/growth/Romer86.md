@@ -1,12 +1,14 @@
 (sec:Romer86)=
-# The Romer (1986) Model of Growth
+# The Romer (1986) Model
 
 {cite:t}`romer:growth` relaunched the growth literature with a paper that
-presented a model of increasing returns in which there was a stable
-positive equilibrium growth rate that resulted from endogenous accumulation
-of knowledge. This was an important break with the existing literature,
+presented a model of increasing returns in which the endogenous accumulation
+of knowledge lets per capita output grow without bound, at a rate
+that can rise over time. This was an important break with the existing literature,
 in which technological progress had largely been treated as completely
-exogenous.
+exogenous. The special case studied here, in which the exponents on capital and on
+knowledge, {math}`\kapShare` and {math}`\extElas` below, sum to one, gives a
+constant growth rate.
 
 :::{margin}
 See also the prescient paper by {cite:t}`arrowGrowth`; Alfred Marshall articulated similar ideas in the late 19th century.
@@ -16,7 +18,7 @@ In Romer's model, firm {math}`j`'s production function is of the form
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \yNrm_{j,t} & =  \PtyAgg_{t} \FFunc(\kNrm_{j,t},\labor_{j,t})
+  \yNrm_{j,t} & =  \PtyAgg_{t} \FFunc(\kNrm_{j,t},\labor_{j,t}) ,
 \end{aligned}\end{gathered}
 ```
 
@@ -24,7 +26,7 @@ where aggregate output-augmenting technological progress is captured by
 {math}`\PtyAgg_{t}`. Its capital accumulates without depreciation,
 
 ```{math}
-:label: eq:Kdot
+:label: eq:Romer-kdot
 
 \begin{gathered}\begin{aligned}
   \dot{\kNrm}_{j,t} & =  \iNrm_{j,t}.
@@ -36,7 +38,7 @@ as in the [Aggregation](#sec:Aggregation) appendix (and,
 importantly, there is no population growth). Thus, aggregate investment is, e.g.,
 
 ```{math}
-:label: eq:Romer-1
+:label: eq:Romer-aggInv
 
 \begin{gathered}\begin{aligned}
   \ILvl_{t} & =  \int_{0}^{1} \iNrm_{j,t} dj
@@ -49,7 +51,7 @@ proportional to the cumulative sum of past aggregate investment. Measured in uni
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \Knwl_{t} & =   \int_{-\infty}^{t} \ILvl_{\tau} d\tau 
+  \Knwl_{t} & =   \int_{-\infty}^{t} \ILvl_{\tau} d\tau ,
 \end{aligned}\end{gathered}
 ```
 
@@ -66,7 +68,7 @@ productivity via
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \PtyAgg_{t} & =  \Knwl_{t}^{\extElas}
+  \PtyAgg_{t} & =  \Knwl_{t}^{\extElas} ,
 \end{aligned}\end{gathered}
 ```
 
@@ -75,7 +77,7 @@ Cobb-Douglas production function can be written
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \yNrm_{j} & =  \kNrm_{j}^{\kapShare}\labor_{j}^{1-\kapShare}\Knwl^{\extElas}
+  \yNrm_{j} & =  \kNrm_{j}^{\kapShare}\labor_{j}^{1-\kapShare}\Knwl^{\extElas} ,
 \end{aligned}\end{gathered}
 ```
 
@@ -85,9 +87,11 @@ Aggregate output is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \YLvl & =  {\KLvl}^\kapShare \LLvl^{1-\kapShare} \Knwl^{\extElas}
+  \YLvl & =  {\KLvl}^\kapShare \LLvl^{1-\kapShare} \Knwl^{\extElas} = \KLvl^{\kapShare+\extElas} \LLvl^{1-\kapShare} .
 \end{aligned}\end{gathered}
 ```
+
+With {math}`\Knwl = \KLvl`, its exponents sum to {math}`1+\extElas`, so the economy has increasing returns to scale, and its population is constant: with {math}`\kapShare+\extElas` as its exponent on capital, it is the case of increasing returns with a constant population in the [generic analysis of endogenous growth](#sec:Endogenous), where steady-state growth requires the exponent on capital to be one.
 
 Dividing by the size of the labor force {math}`\LLvl` (or, equivalently, normalizing to {math}`\LLvl=1`), we have
 
@@ -126,7 +130,7 @@ A balanced growth path can occur in this economy if {math}`\kapShare+\extElas=1`
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \dot{\cNrm}_{t}/\cNrm_{t} & =  \CRRA^{-1}(\kapShare  - \discRte)
+  \dot{\cNrm}_{t}/\cNrm_{t} & =  \CRRA^{-1}(\kapShare  - \discRte) ,
 \end{aligned}\end{gathered}
 ```
 
@@ -146,6 +150,8 @@ because the social planner would take into account the fact that
 the externalities imply that there are higher returns to capital
 accumulation at the social level than at the individual level.
 
+Both growth rates are the RCK model's [Keynes-Ramsey rule](#eq:cdotOc) with no population growth, productivity growth or depreciation, and with a return to capital in place of {math}`\fFunc^{\prime}(\kNrm)`: the private return {math}`\kapShare` for the market, and the social return {math}`\kapShare+\extElas=1` for the planner, to whom the economy, {math}`\YLvl=\KLvl`, is the [Rebelo model](#sec:RebeloAK) with a marginal product of capital of one. As in the Rebelo model, each solution is well defined only if consumption grows more slowly than the return to capital, the [return impatience condition](#eq:PatR): {math}`\CRRA^{-1}(\kapShare-\discRte) < \kapShare` for the market, whose interest rate is {math}`\rfree=\kapShare`, and {math}`\CRRA^{-1}(1-\discRte) < 1` for the planner.
+
 Thus, this model implies that capital accumulation should be subsidized
 if the social planner wants to induce the private economy to move toward
-the social optimum.
+the social optimum. The externality is the first of the failures of the welfare theorem's assumptions listed in [Decentralizing the Ramsey/Cass-Koopmans Model](#sec:DecRCK-Failures), and it drives the same kind of wedge between the private and the social return to saving as a [tax on capital income](#sec:RCKGov-CapitalTax) does in the RCK model with government.

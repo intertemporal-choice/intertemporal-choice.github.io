@@ -13,7 +13,7 @@ The economy has the following features:
 
 1. Two generations are alive at any point in time, the young (age 1) and old (age 2). A period is a generation, taken to be 36 years, so annual rates compound. Since {math}`2 \times 36 = 72`, the [rule of 72](#fact:ruleof72) does the compounding in your head: a rate of {math}`x` percent a year multiplies a quantity by about {math}`2^{x/2}` over a generation. Population growth of 1 percent a year makes each generation about {math}`\sqrt{2} \approx 1.41` times as large as the last (exactly {math}`1.01^{36} \approx 1.43`), and a discount factor of 0.96 a year, discounting at about 4 percent a year, is about {math}`2^{-2} = 1/4` a period (exactly {math}`0.96^{36} \approx 0.23`).
 
-2. The size of the *young* generation in period {math}`t` is given by {math}`\PopLev_{t}=\PopLev_{0}\PopGro^{t}` (note that {math}`\PopLev` denotes only the young population, not the entire population, and this formula assumes constant population growth since time 0).
+2. The size of the *young* generation in period {math}`t` is given by {math}`\PopLev_{t}=\PopLev_{0}\PopGroFac^{t}` (note that {math}`\PopLev` denotes only the young population, not the entire population, and this formula assumes constant population growth since time 0).
 
 3. Households work only in the first period of life, earning the wage {math}`\Wage_{1,t}`. They earn no income in the second period of life ({math}`\Wage_{2,t+1}=0`).
 
@@ -60,7 +60,7 @@ In this case we can solve for wages and interest rates:
 The individual's maximization problem yields the Euler equation ({math}`\Rfree = 1+\rfree`; despite its lower case, {math}`\rfree` is not a per-capita quantity):
 
 ```{math}
-\uFunc^{\prime}(\cLev_{1,t}) = \Discount \Rfree_{t+1} \uFunc^{\prime}(\cLev_{2,t+1}).
+\uFunc^{\prime}(\cLev_{1,t}) = \DiscFac \Rfree_{t+1} \uFunc^{\prime}(\cLev_{2,t+1}).
 ```
 
 Now let's assume that utility is logarithmic, {math}`\CRRA = 1`. With no income when old, a change in the interest rate does not revalue the young's human wealth, all of which is their current wage, and with logarithmic utility its income and substitution effects cancel (see [the Fisher two-period model](#sec:2PeriodLCModel)); so the young save the same share of their wage, {math}`\Wage_{1,t} = \Wage_{t}`, whatever the interest rate. (With {math}`\CRRA \neq 1`, saving would depend on {math}`\Rfree_{t+1}`, which depends on {math}`\kLev_{t+1}` itself, and the accumulation equation would be implicit.) Beginning with consumption in levels and then moving to per-capita, this implies
@@ -69,21 +69,21 @@ Now let's assume that utility is logarithmic, {math}`\CRRA = 1`. With no income 
 :label: eq:ktp1
 
 \begin{aligned}
-\cLev_{1,t} & = \frac{\Wage_{1,t} + \overbrace{\Wage_{2,t+1}}^{=0}/\Rfree_{t+1}}{1+\Discount} \\
-\cLev_{1,t} & = \frac{\Wage_{1,t}}{1+\Discount} \\
+\cLev_{1,t} & = \frac{\Wage_{1,t} + \overbrace{\Wage_{2,t+1}}^{=0}/\Rfree_{t+1}}{1+\DiscFac} \\
+\cLev_{1,t} & = \frac{\Wage_{1,t}}{1+\DiscFac} \\
 {\aLev}_{1,t} & = \Wage_{1,t}-\cLev_{1,t} \\
-& = \Wage_{1,t}(1-1/(1+\Discount)) \\
-& = \Wage_{1,t}(\Discount/(1+\Discount)) \\
-& = (1-\kapShare) \kLev_{t}^{\kapShare}\left(\frac{\Discount}{1+\Discount}\right) \\
-\overbrace{\kLev_{t+1}}^{={\aLev}_{1,t}/\PopGro} & = \kLev_{t}^{\kapShare}\left[\frac{(1-\kapShare)\Discount}{\PopGro(1+\Discount)}\right] \\
-\frac{d\kLev_{t+1}}{d\kLev_{t}} & = \kLev_{t}^{\kapShare-1}\left[\frac{\kapShare (1-\kapShare) \Discount}{\PopGro(1+\Discount)}\right].
+& = \Wage_{1,t}(1-1/(1+\DiscFac)) \\
+& = \Wage_{1,t}(\DiscFac/(1+\DiscFac)) \\
+& = (1-\kapShare) \kLev_{t}^{\kapShare}\left(\frac{\DiscFac}{1+\DiscFac}\right) \\
+\overbrace{\kLev_{t+1}}^{={\aLev}_{1,t}/\PopGroFac} & = \kLev_{t}^{\kapShare}\left[\frac{(1-\kapShare)\DiscFac}{\PopGroFac(1+\DiscFac)}\right] \\
+\frac{d\kLev_{t+1}}{d\kLev_{t}} & = \kLev_{t}^{\kapShare-1}\left[\frac{\kapShare (1-\kapShare) \DiscFac}{\PopGroFac(1+\DiscFac)}\right].
 \end{aligned}
 ```
 
 The steady-state will be the point where {math}`\kLev_{t+1}=\kLev_{t}`. For convenience, define a constant
 
 ```{math}
-\mathcal{Q} = \frac{(1-\kapShare) \Discount}{\PopGro(1+\Discount)},
+\mathcal{Q} = \frac{(1-\kapShare) \DiscFac}{\PopGroFac(1+\DiscFac)},
 ```
 
 allowing us to rewrite {eq}`eq:ktp1` as
@@ -124,17 +124,17 @@ As a preliminary, let's define the lifetime utility experienced by the young gen
 ```{math}
 :label: eq:lifeUtil
 
-\vLev_{t} = \uFunc(\cLev_{1,t})+\Discount \uFunc(\cLev_{2,t+1}).
+\vLev_{t} = \uFunc(\cLev_{1,t})+\DiscFac \uFunc(\cLev_{2,t+1}).
 ```
 
 Suppose our definition of optimality reflects the choices that would be made by a benevolent social planner who maximizes a social welfare function of the form
 
 :::{margin}
-The old at time {math}`t` are generation {math}`t-1`, so the planner weights their old-age utility by their own {math}`\Discount` and, as an earlier generation, by {math}`\beth^{-1}`. With any other weight the planner at {math}`t` would value the old relative to the young differently than the planner at {math}`t-1` did, and would revise that planner's plan: the problem would be time inconsistent.
+The old at time {math}`t` are generation {math}`t-1`, so the planner weights their old-age utility by their own {math}`\DiscFac` and, as an earlier generation, by {math}`\beth^{-1}`. With any other weight the planner at {math}`t` would value the old relative to the young differently than the planner at {math}`t-1` did, and would revise that planner's plan: the problem would be time inconsistent.
 :::
 
 ```{math}
-\VLev_{t} = \beth^{-1}\Discount \uFunc(\cLev_{2,t}) + \sum_{j=0}^{\infty} \beth^{j} \vLev_{t+j}
+\VLev_{t} = \beth^{-1}\DiscFac \uFunc(\cLev_{2,t}) + \sum_{j=0}^{\infty} \beth^{j} \vLev_{t+j}
 ```
 
 subject to the economy's aggregate resource constraint
@@ -152,7 +152,7 @@ The idea is that the social planner cares about every generation's lifetime happ
 It is possible to show (using methods not described in this section; see {cite:t}`blanchard&fischer:text` for details) that the socially optimal steady state is characterized by the equation
 
 ```{math}
-1+\fFunc^{\prime}(\bar{\kLev}^{*}) = \PopGro \beth^{-1}
+1+\fFunc^{\prime}(\bar{\kLev}^{*}) = \PopGroFac \beth^{-1}
 ```
 
 In the case of our Cobb-Douglas production function, this becomes
@@ -161,15 +161,15 @@ In the case of our Cobb-Douglas production function, this becomes
 :label: eq:OLG-planner-steady-state
 
 \begin{aligned}
-(\bar{\kLev}^{*})^{\kapShare-1}\kapShare & = \PopGro \beth^{-1} - 1 \\
-\bar{\kLev}^{*} & = \left(\frac{\PopGro \beth^{-1} - 1}{\kapShare}\right)^{1/(\kapShare-1)}.
+(\bar{\kLev}^{*})^{\kapShare-1}\kapShare & = \PopGroFac \beth^{-1} - 1 \\
+\bar{\kLev}^{*} & = \left(\frac{\PopGroFac \beth^{-1} - 1}{\kapShare}\right)^{1/(\kapShare-1)}.
 \end{aligned}
 ```
 
 Comparing this to the outcome that will actually arise,
 
 ```{math}
-\bar{\kLev} = \left(\frac{\PopGro(1+\Discount)}{(1-\kapShare) \Discount}\right)^{1/(\kapShare-1)},
+\bar{\kLev} = \left(\frac{\PopGroFac(1+\DiscFac)}{(1-\kapShare) \DiscFac}\right)^{1/(\kapShare-1)},
 ```
 
 our point is that there is no particular relationship between the socially optimal outcome and the actual equilibrium outcome that will arise if the social planner is not involved. The actual outcome could have too little capital or too much, and there is no reason to expect it to be the "right" amount.
@@ -183,7 +183,7 @@ To examine Pareto efficiency, start by dividing the aggregate resource constrain
 ```{math}
 :label: eq:OLG-resources-per-worker
 
-\kLev_{t} + \fFunc(\kLev_{t}) = \PopGro \kLev_{t+1} + \cLev_{1,t} + \cLev_{2,t}/\PopGro
+\kLev_{t} + \fFunc(\kLev_{t}) = \PopGroFac \kLev_{t+1} + \cLev_{1,t} + \cLev_{2,t}/\PopGroFac
 ```
 
 Define an index of aggregate per capita consumption as
@@ -191,16 +191,16 @@ Define an index of aggregate per capita consumption as
 ```{math}
 :label: eq:OLG-consumption-index
 
-\cLev_{t} = \cLev_{1,t} + \cLev_{2,t}/\PopGro
+\cLev_{t} = \cLev_{1,t} + \cLev_{2,t}/\PopGroFac
 ```
 
 In steady state, {math}`\kLev_{t+1}=\kLev_{t}=\bar{\kLev}`, so if {math}`\bar{\cLev}` is the steady-state level of {math}`\cLev_{t}` then the resource constraint implies
 
 ```{math}
 \begin{aligned}
-\bar{\kLev} + \fFunc(\bar{\kLev}) & = \PopGro \bar{\kLev} + \bar{\cLev} \\
-\fFunc(\bar{\kLev}) & = \underbrace{(\PopGro-1)}_{\approx\popGro}\bar{\kLev}+\bar{\cLev} \\
-\fFunc(\bar{\kLev})-\popGro \bar{\kLev} & = \bar{\cLev}
+\bar{\kLev} + \fFunc(\bar{\kLev}) & = \PopGroFac \bar{\kLev} + \bar{\cLev} \\
+\fFunc(\bar{\kLev}) & = \underbrace{(\PopGroFac-1)}_{\approx\popGroRte}\bar{\kLev}+\bar{\cLev} \\
+\fFunc(\bar{\kLev})-\popGroRte \bar{\kLev} & = \bar{\cLev}
 \end{aligned}
 ```
 
@@ -211,32 +211,32 @@ The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` i
 Now consider the effects of a change in {math}`\bar{\kLev}` on {math}`\bar{\cLev}`:
 
 ```{math}
-\left(\frac{d \bar{\cLev}}{d \bar{\kLev}}\right) = \fFunc^{\prime}(\bar{\kLev})-\popGro.
+\left(\frac{d \bar{\cLev}}{d \bar{\kLev}}\right) = \fFunc^{\prime}(\bar{\kLev})-\popGroRte.
 ```
 
 There exists a {math}`\bar{\kLev}` which maximizes per-capita steady-state consumption:
 
 ```{math}
-\max_{\bar{\kLev}} ~ \fFunc(\bar{\kLev}) - \popGro \bar{\kLev}
+\max_{\bar{\kLev}} ~ \fFunc(\bar{\kLev}) - \popGroRte \bar{\kLev}
 ```
 
 whose solution is obtained from the FOC
 
 ```{math}
 \begin{aligned}
-\kapShare \bar{\kLev}^{\kapShare-1} & = \popGro \\
-\bar{\kLev}^{**} & = (\popGro/\kapShare)^{1/(\kapShare-1)},
+\kapShare \bar{\kLev}^{\kapShare-1} & = \popGroRte \\
+\bar{\kLev}^{**} & = (\popGroRte/\kapShare)^{1/(\kapShare-1)},
 \end{aligned}
 ```
 
 and note that this means that for {math}`\bar{\kLev} > \bar{\kLev}^{**}` an extra bit of capital actually requires a *decline* in steady-state consumption. An economy in this circumstance of excessive saving is called "dynamically inefficient." It is Pareto inefficient: it can cut capital per worker to {math}`\bar{\kLev}^{**}` once, giving the capital released to the generations alive at the time, and every later generation then consumes more, because {math}`d\bar{\cLev}/d\bar{\kLev} < 0` beyond {math}`\bar{\kLev}^{**}`. Every generation can be made better off.
 
-Since {math}`\rfree = \fFunc^{\prime}(\bar{\kLev})`, the economy is dynamically inefficient exactly when its interest rate is below the population growth rate, {math}`\rfree < \popGro`. In this model {math}`\fFunc^{\prime}(\bar{\kLev}) = \kapShare\bar{\kLev}^{\kapShare-1} = \kapShare/\mathcal{Q}`, so the steady-state interest rate is
+Since {math}`\rfree = \fFunc^{\prime}(\bar{\kLev})`, the economy is dynamically inefficient exactly when its interest rate is below the population growth rate, {math}`\rfree < \popGroRte`. In this model {math}`\fFunc^{\prime}(\bar{\kLev}) = \kapShare\bar{\kLev}^{\kapShare-1} = \kapShare/\mathcal{Q}`, so the steady-state interest rate is
 
 ```{math}
 :label: eq:OLG-steady-state-interest-rate
 
-\bar{\rfree} = \frac{\kapShare\PopGro(1+\Discount)}{(1-\kapShare)\Discount}.
+\bar{\rfree} = \frac{\kapShare\PopGroFac(1+\DiscFac)}{(1-\kapShare)\DiscFac}.
 ```
 
 With the calibration of {numref}`fig:OLGModelDynamics`, it is 4.5 percent a year, against population growth of 1 percent. Over a generation, by the rule of 72, that is an interest factor of about {math}`2^{4.5/2} \approx 4.8` (exactly 4.83), against a population growth factor of about 1.41: the economy is dynamically efficient by a wide margin, with capital only 4 percent of the golden rule's. Inefficiency takes very patient households, a low capital share and fast population growth together, and {cite:t}`amszDynamicEfficiency` find that actual economies are dynamically efficient. Dynamic inefficiency is the condition under which pay-as-you-go [Social Security](#sec:SocSecAndKAccum) can make every generation better off, and under which [bubbles](#sec:Bubbles) can last.
@@ -245,9 +245,9 @@ Note further that there is actually a {math}`\bar{\kLev}` so large that consumpt
 
 ```{math}
 \begin{aligned}
-\bar{\kLev}^{\kapShare} & = \popGro \bar{\kLev} \\
-\bar{\kLev}^{\kapShare-1} & = \popGro \\
-\bar{\kLev} & = \popGro^{1/(\kapShare-1)}.
+\bar{\kLev}^{\kapShare} & = \popGroRte \bar{\kLev} \\
+\bar{\kLev}^{\kapShare-1} & = \popGroRte \\
+\bar{\kLev} & = \popGroRte^{1/(\kapShare-1)}.
 \end{aligned}
 ```
 

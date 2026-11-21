@@ -15,7 +15,7 @@ In this case, the value of all the firm's shares {math}`s_{t}` (the equity value
 
 ```{math}
 \begin{aligned}
-  \hat{\vFirm}_{t}(s_{t}) & = \max_{\{i\}_{t}^{\infty}}~\Ex_{t}\left[\sum_{n=0}^{\infty} \Discount^{n} \left(\pi_{t+n}-\xpend_{t+n}\right)\right].
+  \hat{\vFirm}_{t}(s_{t}) & = \max_{\{i\}_{t}^{\infty}}~\Ex_{t}\left[\sum_{n=0}^{\infty} \DiscFac^{n} \left(\pi_{t+n}-\xpend_{t+n}\right)\right].
 \end{aligned}
 ```
 
@@ -25,11 +25,11 @@ Now suppose the firm decides to deviate, just a little bit, from this dividend p
 
 ```{math}
 \begin{aligned}
-  \max_{\{i\}_{t}^{\infty}}~\Ex_{t}\left[\sum_{n=0}^{\infty} \Discount^{n} \left(\pi_{t+n}-\xpend_{t+n}\right)\right]+ \lambda_{t} - \Rfree\Discount \lambda_{t},
+  \max_{\{i\}_{t}^{\infty}}~\Ex_{t}\left[\sum_{n=0}^{\infty} \DiscFac^{n} \left(\pi_{t+n}-\xpend_{t+n}\right)\right]+ \lambda_{t} - \Rfree\DiscFac \lambda_{t},
 \end{aligned}
 ```
 
-but since by assumption {math}`\Discount = \Rfree^{-1}` this expression reduces to the original expression.
+but since by assumption {math}`\DiscFac = \Rfree^{-1}` this expression reduces to the original expression.
 
 The point can be extended to show that the firm can raise an arbitrary amount of money in one period, paying it back in another, or vice versa, without having any effect on its value or its optimal investment plans.
 

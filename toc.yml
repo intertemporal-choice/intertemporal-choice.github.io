@@ -86,11 +86,13 @@ project:
         - file: content/growth/RCKWithGov/index.md
           children:
             - file: content/growth/RCKWithGov/RCKWithGov.ipynb
-        - file: content/growth/Romer86.md
         - file: content/growth/Endogenous.md
         - file: content/growth/RebeloAK.md
+        - file: content/growth/Romer86.md
         - file: content/growth/LucasGrowth.md
-        - file: content/growth/BlanchardFiniteHorizon.md
+        - file: content/growth/BlanchardFiniteHorizon/index.md
+          children:
+            - file: content/growth/BlanchardFiniteHorizon/BlanchardFiniteHorizon.ipynb
     - file: content/dsge/index.md
       children:
         - file: content/dsge/BrockMirman/index.md

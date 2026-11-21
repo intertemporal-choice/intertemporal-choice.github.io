@@ -53,24 +53,24 @@ Rewrite the consumption Euler equation {eq}`eq:CCAPM-ceuler`, for a single risky
 ```{math}
 :label: eq:EPP-ceulerport
 
-\uFunc^{\prime}(c_{t}) = \Ex_{t}\left[\Discount (\Rfree + \riskyshare_{t} [\Risky_{t+1} - \Rfree])\uFunc^{\prime}({c}_{t+1})\right]
+\uFunc^{\prime}(c_{t}) = \Ex_{t}\left[\DiscFac (\Rfree + \riskyshare_{t} [\Risky_{t+1} - \Rfree])\uFunc^{\prime}({c}_{t+1})\right]
 ```
 
-and note that from {eq}`eq:CCAPM-shareeuler` we know that {math}`\Ex_{t}[\Discount \riskyshare_{t}(\Risky_{t+1}-\Rfree)\uFunc^{\prime}({c}_{t+1})] = 0` so that {eq}`eq:EPP-ceulerport` reduces to the ordinary Euler equation
+and note that from {eq}`eq:CCAPM-shareeuler` we know that {math}`\Ex_{t}[\DiscFac \riskyshare_{t}(\Risky_{t+1}-\Rfree)\uFunc^{\prime}({c}_{t+1})] = 0` so that {eq}`eq:EPP-ceulerport` reduces to the ordinary Euler equation
 
 ```{math}
 \begin{aligned}
-\uFunc^{\prime}(c_{t}) & = \Ex_{t}[\Discount \Rfree \uFunc^{\prime}({c}_{t+1})] \\
-1 & = \Discount \Rfree \Ex_{t}[ ({c}_{t+1}/c_{t})^{-\CRRA}]
+\uFunc^{\prime}(c_{t}) & = \Ex_{t}[\DiscFac \Rfree \uFunc^{\prime}({c}_{t+1})] \\
+1 & = \DiscFac \Rfree \Ex_{t}[ ({c}_{t+1}/c_{t})^{-\CRRA}]
 \end{aligned}
 ```
 
 Using the same approximations ([ExpEps](#fact:expeps) and [TaylorOne](#fact:taylorone)), we get the standard approximation to the Euler equation,
 
 ```{math}
-\Ex_{t}[\Delta \log c_{t+1}] \approx (1/\CRRA) (\rfree - \timeRate)
+\Ex_{t}[\Delta \log c_{t+1}] \approx (1/\CRRA) (\rfree - \discRte)
 ```
 
-The "riskfree rate puzzle" is that average consumption growth per capita has been about 1.5 percent (in the US in the postwar period) while real riskfree interest rates have been at most 1 percent. Even if we assume a time preference rate of {math}`\timeRate=0` (no impatience at all, i.e. {math}`\Discount=1`), the only way this equation can hold is if {math}`\CRRA` is a very small number: with a riskless rate of at most 1 percent and growth of 1.5 percent, {math}`\CRRA \leq 2/3`. Of course, this is precisely the opposite of the conclusion of the equity premium puzzle, which implies the {math}`\CRRA` must be very large.
+The "riskfree rate puzzle" is that average consumption growth per capita has been about 1.5 percent (in the US in the postwar period) while real riskfree interest rates have been at most 1 percent. Even if we assume a time preference rate of {math}`\discRte=0` (no impatience at all, i.e. {math}`\DiscFac=1`), the only way this equation can hold is if {math}`\CRRA` is a very small number: with a riskless rate of at most 1 percent and growth of 1.5 percent, {math}`\CRRA \leq 2/3`. Of course, this is precisely the opposite of the conclusion of the equity premium puzzle, which implies the {math}`\CRRA` must be very large.
 
 The riskfree rate puzzle might in principle be explicable by [overlapping generations](#sec:OLGModel), whose riskless rate is not pinned down by a representative consumer's Euler equation and can even fall below the growth rate, though in practice it is hard to make that work well. A precautionary saving motive also cuts against the puzzle, by adding a variance term to consumption growth.

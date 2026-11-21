@@ -46,7 +46,7 @@ def draw_phase(ax, k, kdot0_low, kdot0_high, steady, saddle, temporary, returnin
     ax.plot(k, kdot0_low, color="C0")
     ax.plot(k, kdot0_high, color="C0", linestyle="--")
     for c, words, va, dy in ((kdot0_low, "low", "bottom", 5), (kdot0_high, "high", "top", -6)):
-        ax.annotate(tex(r"$\dot{\kap}=0$") + f", {spending} {words}", (k[0], c[0]), xytext=(4, dy),
+        ax.annotate(tex(r"$\dot{\kNrm}=0$") + f", {spending} {words}", (k[0], c[0]), xytext=(4, dy),
                     textcoords="offset points", ha="left", va=va, color="C0")
     ax.axvline(k_bar, color="C1")
     ax.annotate(tex(r"$\dot{\cNrm}=0$"), (k_bar, 0.97), xycoords=("data", "axes fraction"), xytext=(4, 0),
@@ -80,7 +80,7 @@ def draw_phase(ax, k, kdot0_low, kdot0_high, steady, saddle, temporary, returnin
     ax.set_ylim(*c_range)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_xlabel(tex(r"$\kap$"), loc="right")
+    ax.set_xlabel(tex(r"$\kNrm$"), loc="right")
     ax.set_ylabel(tex(r"$\cNrm$"), loc="top", rotation=0)
 
 
@@ -91,7 +91,7 @@ def draw_paths(axes, t, temporary, permanent, t_end):
     percent); t_end: the date the temporary increase ends. The temporary increase is drawn solid
     brown and the permanent one dashed purple; the shaded band marks the dates spending is high in
     the temporary experiment."""
-    rows = (("c", tex(r"$\cNrm$")), ("k", tex(r"$\kap$")), ("r", tex(r"$\rfree$") + " (percent)"))
+    rows = (("c", tex(r"$\cNrm$")), ("k", tex(r"$\kNrm$")), ("r", tex(r"$\rfree$") + " (percent)"))
     for ax, (key, label) in zip(axes, rows):
         ax.axvspan(0, t_end, color="0.92", zorder=0)
         ax.plot(t, permanent[key], color=PERMANENT, linestyle="--", linewidth=1.6)

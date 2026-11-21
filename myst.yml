@@ -222,15 +222,15 @@ project:
           level: 1
         - file: content/growth/RCKWithGov/index.md
           level: 1
-        - file: content/growth/Romer86.md
-          level: 1
         - file: content/growth/Endogenous.md
           level: 1
         - file: content/growth/RebeloAK.md
           level: 1
+        - file: content/growth/Romer86.md
+          level: 1
         - file: content/growth/LucasGrowth.md
           level: 1
-        - file: content/growth/BlanchardFiniteHorizon.md
+        - file: content/growth/BlanchardFiniteHorizon/index.md
           level: 1
         - file: content/dsge/index.md
           level: 0

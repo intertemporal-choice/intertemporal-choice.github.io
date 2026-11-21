@@ -10,7 +10,7 @@ Consider a firm characterized by the following:
 | {math}`\inv_{t}` | Investment in period {math}`t` |
 | {math}`\jFunc(i,k)` | Adjustment costs associated with investment {math}`\inv` given capital {math}`k` |
 | {math}`\xpend_{t} = \inv_{t}+\adj_{t}` | Expenditures (purchases plus adjustment costs) on investment |
-| {math}`\Discount=1/\Rfree` | Discount factor for future profits (inverse of interest factor) |
+| {math}`\DiscFac=1/\Rfree` | Discount factor for future profits (inverse of interest factor) |
 
 Taxes are left out here to keep the algebra transparent; the [{math}`\q` model](#sec:qModel) section works through the same problem with corporate taxes and an investment tax credit.
 
@@ -18,7 +18,7 @@ Suppose that the firm's goal is to pick the sequence {math}`\iFunc_{t}` that sol
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \vFirm(\kap_{t}) & =  \max_{\{\iFunc\}_{t}^{\infty}}~\sum_{n=0}^{\infty} \Discount^{n} \left(f_{t+n}-\inv_{t+n}-\adj_{t+n}\right)
+  \vFirm(\kap_{t}) & =  \max_{\{\iFunc\}_{t}^{\infty}}~\sum_{n=0}^{\infty} \DiscFac^{n} \left(f_{t+n}-\inv_{t+n}-\adj_{t+n}\right)
 \end{aligned}\end{gathered}
 ```
 
@@ -32,7 +32,7 @@ subject to the transition equation for capital,
 \end{aligned}\end{gathered}
 ```
 
-where {math}`\DeprFac = (1-\depr)` is the amount of capital left after one period of depreciation at rate {math}`\depr`. {math}`\vFirm_{t}` is the value of the profit-maximizing firm: If capital markets are efficient this is the equity value that the firm would command if somebody wanted to buy it.
+where {math}`\DeprFac = (1-\deprRte)` is the amount of capital left after one period of depreciation at rate {math}`\deprRte`. {math}`\vFirm_{t}` is the value of the profit-maximizing firm: If capital markets are efficient this is the equity value that the firm would command if somebody wanted to buy it.
 
 :::{margin}
 There are some small differences between the formulation of the model here and in the [marginal q model](#sec:qModel) section. Here, investment costs are paid at the time of investment and the depreciation factor applies to {math}`(\kap_{t}+\inv_{t})` rather than just {math}`\kap_{t}`. These changes simplify the computational solution without changing any key results.
@@ -42,9 +42,9 @@ The firm's Bellman equation can be written:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \vFirm_{t}(\kap_{t}) & =  \max_{\{\iFunc\}_{t}^{\infty}}~\sum_{n=0}^{\infty} \Discount^{n} \left(f_{t+n}-\inv_{t+n}-\adj_{t+n}\right)
-  \\ & =  \max_{\{\inv_{t}\}}~ f_{t}-\inv_{t}-\jFunc(\inv_{t},\kap_{t})+\Discount \left[\max_{\{i\}_{t+1}^{\infty}}\sum_{n=0}^{\infty} \Discount^{n} \left(f_{t+1+n}-\inv_{t+1+n}-\adj_{t+1+n}\right)\right]
-\\ & =  \max_{\{\inv_{t}\}}~ f_{t}-\inv_{t}-\jFunc(\inv_{t},\kap_{t})+\Discount \vFirm_{t+1}\left((\kap_{t}+\inv_{t})\DeprFac\right)
+  \vFirm_{t}(\kap_{t}) & =  \max_{\{\iFunc\}_{t}^{\infty}}~\sum_{n=0}^{\infty} \DiscFac^{n} \left(f_{t+n}-\inv_{t+n}-\adj_{t+n}\right)
+  \\ & =  \max_{\{\inv_{t}\}}~ f_{t}-\inv_{t}-\jFunc(\inv_{t},\kap_{t})+\DiscFac \left[\max_{\{i\}_{t+1}^{\infty}}\sum_{n=0}^{\infty} \DiscFac^{n} \left(f_{t+1+n}-\inv_{t+1+n}-\adj_{t+1+n}\right)\right]
+\\ & =  \max_{\{\inv_{t}\}}~ f_{t}-\inv_{t}-\jFunc(\inv_{t},\kap_{t})+\DiscFac \vFirm_{t+1}\left((\kap_{t}+\inv_{t})\DeprFac\right)
 \end{aligned}\end{gathered}
 ```
 
@@ -56,8 +56,8 @@ The first order condition for optimal investment implies:
 :label: eq:Entrep-iFOC
 
 \begin{gathered}\begin{aligned}
-  0 & =  -1 -j^{\inv}_{t} + \DeprFac\Discount \vFirm_{t+1}^{\kap}(\kap_{t+1})
-\\ 1+j^{\inv}_{t} & =  \DeprFac\Discount \vFirm_{t+1}^{\kap}(\kap_{t+1})
+  0 & =  -1 -j^{\inv}_{t} + \DeprFac\DiscFac \vFirm_{t+1}^{\kap}(\kap_{t+1})
+\\ 1+j^{\inv}_{t} & =  \DeprFac\DiscFac \vFirm_{t+1}^{\kap}(\kap_{t+1})
 \end{aligned}\end{gathered}
 ```
 
@@ -69,8 +69,8 @@ The Envelope theorem says
 :label: eq:iEnvelope
 
 \begin{gathered}\begin{aligned}
-  \vFirm_{t}^{\kap}(\kap_{t}) & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Discount \vFirm_{t+1}^{\kap}(\kap_{t+1})\overbrace{\left(\frac{\partial \kap_{t+1}}{\partial \kap_{t}}\right)}^{\DeprFac}
-\\  & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\underbrace{\Discount \DeprFac \vFirm_{t+1}^{\kap}(\kap_{t+1})}_{=(1+\adj_{t}^{\inv})}
+  \vFirm_{t}^{\kap}(\kap_{t}) & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\DiscFac \vFirm_{t+1}^{\kap}(\kap_{t+1})\overbrace{\left(\frac{\partial \kap_{t+1}}{\partial \kap_{t}}\right)}^{\DeprFac}
+\\  & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\underbrace{\DiscFac \DeprFac \vFirm_{t+1}^{\kap}(\kap_{t+1})}_{=(1+\adj_{t}^{\inv})}
 \end{aligned}\end{gathered}
 ```
 
@@ -80,7 +80,7 @@ where the underbraced term follows from {eq}`eq:Entrep-iFOC`. So the correspondi
 :label: eq:Entrep-iEuler
 
 \begin{gathered}\begin{aligned}
- (1+\adj_{t}^{\inv})  & = \left( \fFunc^{\kap}(\kap_{t+1})+(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap})\right)\DeprFac\Discount
+ (1+\adj_{t}^{\inv})  & = \left( \fFunc^{\kap}(\kap_{t+1})+(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap})\right)\DeprFac\DiscFac
 \end{aligned}\end{gathered}
 ```
 
@@ -96,7 +96,7 @@ If {math}`j^{\inv}_{t} = j^{\inv}_{t+1} = j^{\kap}_{t+1}` then {eq}`eq:Entrep-iE
 :label: eq:kSSimplicit
 
 \begin{gathered}\begin{aligned}
- 1 & = \overbrace{\Discount}^{=\Rfree^{-1}} \DeprFac\left[\fFunc^{\kap}(\check{k})+1\right]
+ 1 & = \overbrace{\DiscFac}^{=\Rfree^{-1}} \DeprFac\left[\fFunc^{\kap}(\check{k})+1\right]
 \\ \Rfree & =  \DeprFac (1+\fFunc^{\kap}(\check{k}))
 \end{aligned}\end{gathered}
 ```
@@ -111,10 +111,10 @@ Rewrite {eq}`eq:iEnvelope` as
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \vk_{t} & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Discount \DeprFac (\vk_{t}+\vk_{t+1}-\vk_{t})
-\\ & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Discount \DeprFac (\vk_{t}+\Delta \vk_{t+1})
-\\ (1-\Discount\DeprFac) \vk_{t} & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Delta \vk_{t+1}
-\\ \vk_{t} & =  \frac{\fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Delta \vk_{t+1}}{(1-\Discount\DeprFac)}
+  \vk_{t} & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\DiscFac \DeprFac (\vk_{t}+\vk_{t+1}-\vk_{t})
+\\ & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\DiscFac \DeprFac (\vk_{t}+\Delta \vk_{t+1})
+\\ (1-\DiscFac\DeprFac) \vk_{t} & =  \fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Delta \vk_{t+1}
+\\ \vk_{t} & =  \frac{\fFunc^{\kap}(\kap_{t}) - \adj_{t}^{\kap}+\Delta \vk_{t+1}}{(1-\DiscFac\DeprFac)}
 \end{aligned}\end{gathered}
 ```
 
@@ -124,7 +124,7 @@ and the phase diagram is constructed using the {math}`\Delta \vk_{t+1} = 0` locu
 :label: eq:lamNearSS
 
 \begin{gathered}\begin{aligned}
- \vk_{t} & =  \frac{\fFunc^{\kap}(\kap_{t})}{(1-\Discount\DeprFac)}
+ \vk_{t} & =  \frac{\fFunc^{\kap}(\kap_{t})}{(1-\DiscFac\DeprFac)}
 \end{aligned}\end{gathered}
 ```
 
@@ -146,7 +146,7 @@ The steady state of the model will be the point at which {math}`\kap_{t+1}=\kap_
 
 \begin{gathered}\begin{aligned}
   \check{\kap} & =  (\check{\kap}+\check{i})\DeprFac
-\\ \check{i} & =  (1-\DeprFac)\check{\kap}/\DeprFac = (\depr/\DeprFac) \check{\kap}
+\\ \check{i} & =  (1-\DeprFac)\check{\kap}/\DeprFac = (\deprRte/\DeprFac) \check{\kap}
 \end{aligned}\end{gathered}
 ```
 
@@ -154,7 +154,7 @@ and solving {eq}`eq:kSSimplicit` for {math}`\fFunc^{\kap}(\check{k})`
 
 ```{math}
 \begin{gathered}\begin{aligned}
- \left(\frac{(1 - \Discount\DeprFac)}{\Discount \DeprFac}\right) & =   \fFunc^{\kap}(\check{k})
+ \left(\frac{(1 - \DiscFac\DeprFac)}{\DiscFac \DeprFac}\right) & =   \fFunc^{\kap}(\check{k})
 \end{aligned}\end{gathered}
 ```
 
@@ -168,13 +168,13 @@ which can be substituted into {eq}`eq:lamNearSS` to obtain the steady-state valu
 
 ## The Entrepreneur's Problem
 
-We now wish to modify the problem in two ways. First, we have been assuming that the firm has only physical capital, and no financial assets. Second, we have been assuming that the manager running the firm only cares about the PDV of profits; suppose instead we want to assume that the firm is a small business run by an entrepreneur who must live off the dividends of the firm, and thus they are maximizing the discounted sum of utility from dividends {math}`\utilFunc(\cRat_t)` rather than just the level of discounted profits. (Note that we designate dividends by {math}`\cRat_{t}`; dividends were not explicitly chosen in the {math}`\q`-model version of the problem, because the Modigliani-Miller theorem says that the firm's value is unaffected by its dividend policy).
+We now wish to modify the problem in two ways. First, we have been assuming that the firm has only physical capital, and no financial assets. Second, we have been assuming that the manager running the firm only cares about the PDV of profits; suppose instead we want to assume that the firm is a small business run by an entrepreneur who must live off the dividends of the firm, and thus they are maximizing the discounted sum of utility from dividends {math}`\uFunc(\cNrm_t)` rather than just the level of discounted profits. (Note that we designate dividends by {math}`\cNrm_{t}`; dividends were not explicitly chosen in the {math}`\q`-model version of the problem, because the Modigliani-Miller theorem says that the firm's value is unaffected by its dividend policy).
 
 We call the maximizer running this firm the "entrepreneur." The entrepreneur's level of monetary assets {math}`m_{t}` evolves according to
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  m_{t+1} & =  f_{t+1}+\left(m_{t}-\inv_{t}-\adj_{t}-\cRat_{t}\right)\Rfree.
+  m_{t+1} & =  f_{t+1}+\left(m_{t}-\inv_{t}-\adj_{t}-\cNrm_{t}\right)\Rfree.
 \end{aligned}\end{gathered}
 ```
 
@@ -184,7 +184,7 @@ The entrepreneur's Bellman equation can now be written
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \vFunc_{t}(\kap_{t},m_{t}) & =  \max_{\{\inv_{t},\cRat_{t}\}}~~\utilFunc(\cRat_{t}) +\Discount \vFunc_{t+1}(\kap_{t+1},m_{t+1})
+  \vFunc_{t}(\kap_{t},m_{t}) & =  \max_{\{\inv_{t},\cNrm_{t}\}}~~\uFunc(\cNrm_{t}) +\DiscFac \vFunc_{t+1}(\kap_{t+1},m_{t+1})
 \end{aligned}\end{gathered}
 ```
 
@@ -192,9 +192,9 @@ The entrepreneur's Bellman equation can now be written
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \vFunc_{t}(\kap_{t},m_{t}) & =  \max_{\{i,c\}_{t}^{\infty}} \sum_{n=0}^{\infty} \Discount^{n} \utilFunc(\cRat_{t+n})
-\\ & =  \max_{\{i,c\}_{t}^{\infty}} \left(\utilFunc(\cRat_{t})+\Discount\sum_{n=0}^{\infty} \Discount^{n} \utilFunc(\cRat_{t+1+n})\right)
-\\ & =  \max_{\{\inv_{t},\cRat_{t}\}}~~\utilFunc(\cRat_{t})+\Discount \vFunc_{t+1}(\kap_{t+1},m_{t+1}).
+  \vFunc_{t}(\kap_{t},m_{t}) & =  \max_{\{i,c\}_{t}^{\infty}} \sum_{n=0}^{\infty} \DiscFac^{n} \uFunc(\cNrm_{t+n})
+\\ & =  \max_{\{i,c\}_{t}^{\infty}} \left(\uFunc(\cNrm_{t})+\DiscFac\sum_{n=0}^{\infty} \DiscFac^{n} \uFunc(\cNrm_{t+1+n})\right)
+\\ & =  \max_{\{\inv_{t},\cNrm_{t}\}}~~\uFunc(\cNrm_{t})+\DiscFac \vFunc_{t+1}(\kap_{t+1},m_{t+1}).
 \end{aligned}\end{gathered}
 ```
 
@@ -204,13 +204,13 @@ Assume that {math}`\fFunc` and {math}`\jFunc` do not depend directly on {math}`m
 
 Then we will have
 
-(Here {math}`\cRat_{t}` is the firm's dividend payout, so {math}`\uP(\cRat_{t})` is the marginal utility of a dividend dollar.)
+(Here {math}`\cNrm_{t}` is the firm's dividend payout, so {math}`\uP(\cNrm_{t})` is the marginal utility of a dividend dollar.)
 
-FOC wrt {math}`\cRat_{t}`:
+FOC wrt {math}`\cNrm_{t}`:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-\uP(\cRat_{t}) & =  \Rfree\Discount \vNum^{m}_{t+1}
+\uP(\cNrm_{t}) & =  \Rfree\DiscFac \vNum^{m}_{t+1}
 \end{aligned}\end{gathered}
 ```
 
@@ -218,7 +218,7 @@ Envelope wrt {math}`m_{t}`:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \vNum_{t}^{m} & =  \Rfree\Discount \vNum_{t+1}^{m}
+  \vNum_{t}^{m} & =  \Rfree\DiscFac \vNum_{t+1}^{m}
 \end{aligned}\end{gathered}
 ```
 
@@ -226,14 +226,14 @@ and combining the FOC with the Envelope theorem we get the usual
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \vNum^{m}_{t} & =  \Rfree \Discount \vNum^{m}_{t+1}
-\\ & =  \uP(\cRat_{t})
-\\ & =  \Rfree\Discount \uP(\cRat_{t+1})
-\\ & =  \uP(\cRat_{t+1})
+  \vNum^{m}_{t} & =  \Rfree \DiscFac \vNum^{m}_{t+1}
+\\ & =  \uP(\cNrm_{t})
+\\ & =  \Rfree\DiscFac \uP(\cNrm_{t+1})
+\\ & =  \uP(\cNrm_{t+1})
 \end{aligned}\end{gathered}
 ```
 
-where the last line follows because we have assumed {math}`\Rfree\Discount=1`.
+where the last line follows because we have assumed {math}`\Rfree\DiscFac=1`.
 
 ## Alternative Formulation
 
@@ -243,7 +243,7 @@ Now note that the value function can be rewritten as
 :label: eq:vOfmtp1
 
 \begin{gathered}\begin{aligned}
-  \vFunc_{t}(\kap_{t},m_{t}) & =  \max_{\{\inv_{t},m_{t+1}\}}~~\utilFunc((f_{t+1}-m_{t+1})/\Rfree+m_{t}-\inv_{t}-\adj_{t}) +\Discount \vFunc_{t+1}(\kap_{t+1},m_{t+1})
+  \vFunc_{t}(\kap_{t},m_{t}) & =  \max_{\{\inv_{t},m_{t+1}\}}~~\uFunc((f_{t+1}-m_{t+1})/\Rfree+m_{t}-\inv_{t}-\adj_{t}) +\DiscFac \vFunc_{t+1}(\kap_{t+1},m_{t+1})
 \end{aligned}\end{gathered}
 ```
 
@@ -257,7 +257,7 @@ For the version in {eq}`eq:vOfmtp1` the FOC with respect to {math}`\inv_{t}` is
 :label: eq:iFOCGen
 
 \begin{gathered}\begin{aligned}
-  \uP(\cRat_{t})((1+\adj_{t}^{\inv})-f_{t+1}^{\kap}\DeprFac/\Rfree)& =  \DeprFac\Discount \vNum_{t+1}^{\kap}
+  \uP(\cNrm_{t})((1+\adj_{t}^{\inv})-f_{t+1}^{\kap}\DeprFac/\Rfree)& =  \DeprFac\DiscFac \vNum_{t+1}^{\kap}
 \end{aligned}\end{gathered}
 ```
 
@@ -265,7 +265,7 @@ For the version in {eq}`eq:vOfmtp1` the FOC with respect to {math}`\inv_{t}` is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \uP(\cRat_{t})\left(\left(\frac{\partial f_{t+1}}{\partial \kap_{t+1}}\frac{\partial \kap_{t+1}}{\partial \inv_{t}}\right)/\Rfree-\frac{\partial \inv_{t}}{\partial \inv_{t}}-\frac{\partial \adj_{t}}{\partial \inv_{t}}\right)+\Discount\left(\frac{\partial \kap_{t+1}}{\partial \inv_{t}}\right)\vFunc^{\kap}_{t+1}(\kap_{t+1},m_{t+1})
+  \uP(\cNrm_{t})\left(\left(\frac{\partial f_{t+1}}{\partial \kap_{t+1}}\frac{\partial \kap_{t+1}}{\partial \inv_{t}}\right)/\Rfree-\frac{\partial \inv_{t}}{\partial \inv_{t}}-\frac{\partial \adj_{t}}{\partial \inv_{t}}\right)+\DiscFac\left(\frac{\partial \kap_{t+1}}{\partial \inv_{t}}\right)\vFunc^{\kap}_{t+1}(\kap_{t+1},m_{t+1})
 \end{aligned}\end{gathered}
 ```
 
@@ -273,7 +273,7 @@ For the version in {eq}`eq:vOfmtp1` the FOC with respect to {math}`\inv_{t}` is
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \uP(\cRat_{t})(f_{t+1}^{\kap}\DeprFac/\Rfree-1-\adj_{t}^{\inv})+\Discount\DeprFac \vNum_{t+1}^{\kap}&=0
+  \uP(\cNrm_{t})(f_{t+1}^{\kap}\DeprFac/\Rfree-1-\adj_{t}^{\inv})+\DiscFac\DeprFac \vNum_{t+1}^{\kap}&=0
 \end{aligned}\end{gathered}
 ```
 
@@ -287,7 +287,7 @@ Now we can use the envelope theorem with respect to {math}`\kap_{t}` to show tha
 :label: eq:kEnvelopeGen
 
 \begin{gathered}\begin{aligned}
-  \vNum_{t}^{\kap} & =  \uP(\cRat_t)(f_{t+1}^{\kap}\DeprFac/\Rfree-\adj_{t}^{\kap})+\Discount \DeprFac \vNum_{t+1}^{\kap}
+  \vNum_{t}^{\kap} & =  \uP(\cNrm_t)(f_{t+1}^{\kap}\DeprFac/\Rfree-\adj_{t}^{\kap})+\DiscFac \DeprFac \vNum_{t+1}^{\kap}
 \end{aligned}\end{gathered}
 ```
 
@@ -295,7 +295,7 @@ This can be seen by directly taking the derivative of the RHS of {eq}`eq:vOfmtp1
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \uP(\cRat_{t})\left(\left(\frac{\partial f_{t+1}}{\partial \kap_{t+1}}\frac{\partial \kap_{t+1}}{\partial \kap_{t}}\right)/\Rfree-\frac{\partial \adj_{t}}{\partial \kap_{t}}\right)+ \Discount \left(\frac{\partial \kap_{t+1}}{\partial \kap_{t}}\right) \vNum_{t+1}^{\kap}
+  \uP(\cNrm_{t})\left(\left(\frac{\partial f_{t+1}}{\partial \kap_{t+1}}\frac{\partial \kap_{t+1}}{\partial \kap_{t}}\right)/\Rfree-\frac{\partial \adj_{t}}{\partial \kap_{t}}\right)+ \DiscFac \left(\frac{\partial \kap_{t+1}}{\partial \kap_{t}}\right) \vNum_{t+1}^{\kap}
 \end{aligned}\end{gathered}
 ```
 
@@ -309,7 +309,7 @@ Now we can combine {eq}`eq:iFOCGen` and {eq}`eq:kEnvelopeGen` to derive the Eule
 :label: eq:iEulerGen
 
 \begin{gathered}\begin{aligned}
-   (1+\adj_{t}^{\inv}) & = \DeprFac\Discount \left[ \fFunc^{\kap}(\kap_{t+1})+(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap})\right]
+   (1+\adj_{t}^{\inv}) & = \DeprFac\DiscFac \left[ \fFunc^{\kap}(\kap_{t+1})+(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap})\right]
 .
 \end{aligned}\end{gathered}
 ```
@@ -320,9 +320,9 @@ Now we can combine {eq}`eq:iFOCGen` and {eq}`eq:kEnvelopeGen` to derive the Eule
 :label: eq:vkEqup
 
 \begin{gathered}\begin{aligned}
-  \vNum_{t}^{\kap} & =  \uP(\cRat_{t})(f_{t+1}^{\kap}\DeprFac/\Rfree-\adj_{t}^{\kap})+\overbrace{\DeprFac \Discount \vNum_{t+1}^{\kap}}^{= \uP(\cRat_{t})((1+\adj_{t}^{\inv})-f_{t+1}^{\kap}\DeprFac /\Rfree)}
-\\ & =  \uP(\cRat_{t})(f_{t+1}^{\kap}\DeprFac/\Rfree-\adj_{t}^{\kap})+\uP(\cRat_{t})((1+\adj_{t}^{\inv})-f_{t+1}^{\kap}\DeprFac /\Rfree)
-\\ & =  \uP(\cRat_{t})\left(1+\adj_{t}^{\inv}-\adj_{t}^{\kap}\right)
+  \vNum_{t}^{\kap} & =  \uP(\cNrm_{t})(f_{t+1}^{\kap}\DeprFac/\Rfree-\adj_{t}^{\kap})+\overbrace{\DeprFac \DiscFac \vNum_{t+1}^{\kap}}^{= \uP(\cNrm_{t})((1+\adj_{t}^{\inv})-f_{t+1}^{\kap}\DeprFac /\Rfree)}
+\\ & =  \uP(\cNrm_{t})(f_{t+1}^{\kap}\DeprFac/\Rfree-\adj_{t}^{\kap})+\uP(\cNrm_{t})((1+\adj_{t}^{\inv})-f_{t+1}^{\kap}\DeprFac /\Rfree)
+\\ & =  \uP(\cNrm_{t})\left(1+\adj_{t}^{\inv}-\adj_{t}^{\kap}\right)
 \end{aligned}\end{gathered}
 ```
 
@@ -330,13 +330,13 @@ which means that we can rewrite {eq}`eq:iFOCGen` substituting the rolled-forward
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \uP(\cRat_{t})((1+\adj_{t}^{\inv})-f_{t+1}^{\kap}\DeprFac/\Rfree)& =  \DeprFac\Discount \vNum_{t+1}^{\kap}
-\\  & =  \DeprFac\Discount \uP(\cRat_{t+1})\left(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap}\right)
-\\   (1+\adj_{t}^{\inv}) & = \DeprFac\Discount \left[ \fFunc^{\kap}(\kap_{t+1})+(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap})\right]
+  \uP(\cNrm_{t})((1+\adj_{t}^{\inv})-f_{t+1}^{\kap}\DeprFac/\Rfree)& =  \DeprFac\DiscFac \vNum_{t+1}^{\kap}
+\\  & =  \DeprFac\DiscFac \uP(\cNrm_{t+1})\left(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap}\right)
+\\   (1+\adj_{t}^{\inv}) & = \DeprFac\DiscFac \left[ \fFunc^{\kap}(\kap_{t+1})+(1+\adj_{t+1}^{\inv}-\adj_{t+1}^{\kap})\right]
 \end{aligned}\end{gathered}
 ```
 
-where the last line follows because with {math}`\Rfree\Discount=1` we know that {math}`\cRat_{t+1}=\cRat_{t}` implying {math}`\uP(\cRat_{t+1})=\uP(\cRat_{t})`.
+where the last line follows because with {math}`\Rfree\DiscFac=1` we know that {math}`\cNrm_{t+1}=\cNrm_{t}` implying {math}`\uP(\cNrm_{t+1})=\uP(\cNrm_{t})`.
 
 ## Observational Equivalence
 
@@ -391,7 +391,7 @@ The cost-of-adjustment function differs slightly from the [marginal q model](#se
 
 \begin{gathered}\begin{aligned}
 \fFunc(k,\labor)&= \Psi k^\kapShare \labor^{1-\kapShare} \\
-\jFunc(i,\kap)&=\frac{\omega k}{2}\left(\frac{i}{k}-\frac{\depr}{\DeprFac}\right)^2
+\jFunc(i,\kap)&=\frac{\omega k}{2}\left(\frac{i}{k}-\frac{\deprRte}{\DeprFac}\right)^2
 \end{aligned}\end{gathered}
 ```
 
@@ -425,8 +425,8 @@ we can rewrite the investment Euler equation as
 
 ```{math}
 \begin{gathered}\begin{aligned}
- (1+j_{t}^{i}) & = \DeprFac\Discount \left( \fFunc^{k}(k_{t+1})+(1+j_{t+1}^{i}-j_{t+1}^{k})\right)\\
- \left(1+\omega\left(\frac{\overbrace{i_t}^{z_{t}-k_{t}}}{k_t}-\frac{\depr}{\DeprFac}\right)\right) & = \DeprFac\Discount \left( \fFunc^{k}(k_{t+1})+(1+j_{t+1}^{i}-j_{t+1}^{k})\right)
+ (1+j_{t}^{i}) & = \DeprFac\DiscFac \left( \fFunc^{k}(k_{t+1})+(1+j_{t+1}^{i}-j_{t+1}^{k})\right)\\
+ \left(1+\omega\left(\frac{\overbrace{i_t}^{z_{t}-k_{t}}}{k_t}-\frac{\deprRte}{\DeprFac}\right)\right) & = \DeprFac\DiscFac \left( \fFunc^{k}(k_{t+1})+(1+j_{t+1}^{i}-j_{t+1}^{k})\right)
 \end{aligned}\end{gathered}
 ```
 
@@ -434,8 +434,8 @@ so that
 
 ```{math}
 \begin{gathered}\begin{aligned}
-\frac{z_t}{k_t}-1 & =\DeprFac\Discount\left( \fFunc^{k}(k_{t+1})+(1+j_{t+1}^{i}-j_{t+1}^{k})\right)/\omega-1/\omega+\depr/\DeprFac\\
-k_t&=\frac{z_t}{\DeprFac\Discount\left( \fFunc^{k}(k_{t+1})+(1+j_{t+1}^{i}-j_{t+1}^{k})\right)/\omega-1/\omega+\depr/\DeprFac+1}.
+\frac{z_t}{k_t}-1 & =\DeprFac\DiscFac\left( \fFunc^{k}(k_{t+1})+(1+j_{t+1}^{i}-j_{t+1}^{k})\right)/\omega-1/\omega+\deprRte/\DeprFac\\
+k_t&=\frac{z_t}{\DeprFac\DiscFac\left( \fFunc^{k}(k_{t+1})+(1+j_{t+1}^{i}-j_{t+1}^{k})\right)/\omega-1/\omega+\deprRte/\DeprFac+1}.
 \end{aligned}\end{gathered}
 ```
 
@@ -465,7 +465,7 @@ while the steady-state value of {math}`\vk` comes from substituting {math}`\chec
 
 ```{math}
 \begin{gathered}\begin{aligned}
-  \check{\vFirm} & =  \sum_{n=0}^{\infty} (\fFunc(\check{\kap})-\check{i})\Discount^{n}
+  \check{\vFirm} & =  \sum_{n=0}^{\infty} (\fFunc(\check{\kap})-\check{i})\DiscFac^{n}
 \\ & =  (\Rfree/\rfree)(\fFunc(\check{\kap}) - \check{i}).
 \end{aligned}\end{gathered}
 ```
@@ -482,7 +482,7 @@ where the {math}`\check{~}` identifies variables at the steady state and {math}`
 
 ```{math}
 \begin{gathered}\begin{aligned}
-    (j^{ii}_t i^k_t+j^{ik}_t) = \DeprFac\Discount\left(f^{kk}_{\hat{t}}\DeprFac(1+i^k_t)+(j^{ik}_{\hat{t}}\DeprFac(1+i^k_t)+j^{ii}_{\hat{t}}i^k_{\hat{t}}
+    (j^{ii}_t i^k_t+j^{ik}_t) = \DeprFac\DiscFac\left(f^{kk}_{\hat{t}}\DeprFac(1+i^k_t)+(j^{ik}_{\hat{t}}\DeprFac(1+i^k_t)+j^{ii}_{\hat{t}}i^k_{\hat{t}}
 -j^{kk}_{\hat{t}}\DeprFac(1+i^k_t)-j^{ki}_{\hat{t}}i^k_{\hat{t}})\right)
 \end{aligned}\end{gathered}
 ```
@@ -493,7 +493,7 @@ which at the steady-state where {math}`i^{k}_{\hat{t}}=i^{k}_{t}=\check{i}^{k}` 
 :label: eq:iEulerSS
 
 \begin{gathered}\begin{aligned}
-    (j^{ii}_t \check{i}^k+j^{ik}_t)=\DeprFac\Discount\left(f^{kk}_{\hat{t}}\DeprFac(1+\check{i}^k)+(j^{ik}_{\hat{t}}\DeprFac(1+\check{i}^k)+j^{ii}_{\hat{t}}\check{i}^k-j^{kk}_{\hat{t}}\DeprFac(1+\check{i}^k)
+    (j^{ii}_t \check{i}^k+j^{ik}_t)=\DeprFac\DiscFac\left(f^{kk}_{\hat{t}}\DeprFac(1+\check{i}^k)+(j^{ik}_{\hat{t}}\DeprFac(1+\check{i}^k)+j^{ii}_{\hat{t}}\check{i}^k-j^{kk}_{\hat{t}}\DeprFac(1+\check{i}^k)
     -j^{ki}_{\hat{t}}\check{i}^k)\right)
 \end{aligned}\end{gathered}
 ```
@@ -504,7 +504,7 @@ Finally since the problem is solved under perfect foresight the entrepreneur's c
 
 ```{math}
 \begin{gathered}\begin{aligned}
-    \cons_t=\left(\frac{\Rfree-(\Rfree\Discount)^{1/\CRRA}}{\Rfree}\right)(m_t+\vFirm_{t}(k_{t})-f_t)
+    \cNrm_t=\left(\frac{\Rfree-(\Rfree\DiscFac)^{1/\CRRA}}{\Rfree}\right)(m_t+\vFirm_{t}(k_{t})-f_t)
 \end{aligned}\end{gathered}
 ```
 

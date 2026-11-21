@@ -16,7 +16,7 @@ from intertemporal_choice.notation import tex
 # Labels are written with the book's macros and spelled out by notation.tex, so the figures print
 # whatever the book prints: the steady state is the registry's \Steady, a bar. The golden rule stays
 # Unicode, in italic text, as the figures have printed it.
-STEADY = tex(r"$\Steady{\kap}$")   # k̄
+STEADY = tex(r"$\Steady{\kNrm}$")   # k̄
 GOLDEN = "k\u033f"                 # k̿, k with a double bar
 
 
@@ -25,8 +25,8 @@ def _axes(ax, k_max, c_max):
     ax.set_ylim(0, c_max)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_xlabel(tex(r"$\kap$"), loc="right")
-    ax.set_ylabel(tex(r"$\cons$"), loc="top", rotation=0)
+    ax.set_xlabel(tex(r"$\kNrm$"), loc="right")
+    ax.set_ylabel(tex(r"$\cNrm$"), loc="top", rotation=0)
 
 
 def _tick(ax, k, label):
@@ -37,7 +37,7 @@ def _tick(ax, k, label):
 
 def draw_loci(ax, k, loci, golden=None, c_max=None):
     """The kdot = 0 curve and the cdot/c = 0 line of each economy in `loci`, a dict from its label
-    (such as tex(r"$\\ptyGro$ low")) to (c on the kdot = 0 curve at each k, its steady state k̄). The first
+    (such as tex(r"$\\ptyGroRte$ low")) to (c on the kdot = 0 curve at each k, its steady state k̄). The first
     economy is drawn solid and labeled to the right of its lines, the others dashed and labeled to
     the left, so that no label crosses a line. The first economy's steady state is marked k̄ on the
     axis; `golden`, if given, is its golden rule k̿, marked on the axis with a dotted line up to the
@@ -48,10 +48,10 @@ def draw_loci(ax, k, loci, golden=None, c_max=None):
         first = index == 0
         style = "-" if first else "--"
         ax.plot(k, c, color="C0", linestyle=style)
-        ax.annotate(tex(r"$\dot{\kap}=0$") + f", {label}", (k_max, c[-1]), xytext=(-4, 5 if first else -6),
+        ax.annotate(tex(r"$\dot{\kNrm}=0$") + f", {label}", (k_max, c[-1]), xytext=(-4, 5 if first else -6),
                     textcoords="offset points", ha="right", va="bottom" if first else "top", color="C0")
         ax.axvline(steady, color="C1", linestyle=style)
-        ax.annotate(tex(r"$\dot{\cons}/\cons=0$") + f", {label}", (steady, 0.08), xycoords=("data", "axes fraction"),
+        ax.annotate(tex(r"$\dot{\cNrm}/\cNrm=0$") + f", {label}", (steady, 0.08), xycoords=("data", "axes fraction"),
                     xytext=(4 if first else -4, 0), textcoords="offset points", ha="left" if first else "right",
                     color="C1")
     first_c, first_steady = next(iter(loci.values()))
@@ -82,10 +82,10 @@ def draw_saddle(ax, k, c_kdot0, steady, saddle, paths, golden=None, c_max=None):
     k_max = k[-1]
     c_max = c_max or 1.6 * np.max(c_kdot0)
     ax.plot(k, c_kdot0, color="C0")
-    ax.annotate(tex(r"$\dot{\kap}=0$"), (k_max, c_kdot0[-1]), xytext=(-4, -6), textcoords="offset points",
+    ax.annotate(tex(r"$\dot{\kNrm}=0$"), (k_max, c_kdot0[-1]), xytext=(-4, -6), textcoords="offset points",
                 ha="right", va="top", color="C0")
     ax.axvline(steady[0], color="C1")
-    ax.annotate(tex(r"$\dot{\cons}/\cons=0$"), (steady[0], 0.97), xycoords=("data", "axes fraction"), xytext=(4, 0),
+    ax.annotate(tex(r"$\dot{\cNrm}/\cNrm=0$"), (steady[0], 0.97), xycoords=("data", "axes fraction"), xytext=(4, 0),
                 textcoords="offset points", ha="left", va="top", color="C1")
     k_s, c_s = saddle
     ax.plot(k_s, c_s, color="black", linewidth=2.2)

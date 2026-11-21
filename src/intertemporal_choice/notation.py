@@ -1,9 +1,9 @@
 """The book's notation, spelled out: its macros expanded into the LaTeX they print.
 
-The book writes every economic object with its macro (`\\CRRA`, `\\kap`, `\\ptyGro`), and the
+The book writes every economic object with its macro (`\\CRRA`, `\\kap`, `\\ptyGroRte`), and the
 registry and the course block decide what each one prints. The website reads those
 definitions; matplotlib and a notebook opened in Colab do not. `tex` spells the macros out, so
-a figure label written `tex(r"$\\ptyGro$ low")` prints whatever the book prints for
+a figure label written `tex(r"$\\ptyGroRte$ low")` prints whatever the book prints for
 productivity growth, and follows a change of notation without an edit.
 
 The definitions are in `_notation_macros.py`, which code/notebook_math.py writes from the
@@ -78,7 +78,7 @@ def expand(tex: str, macros: dict[str, str] = MACROS, _depth: int = 0) -> str:
             argument, i = _argument(tex, i)
             body = body.replace(f"#{n}", argument)
         text = expand(body, macros, _depth + 1)
-        # A control word must not run into the letters around it: \alpha\kap is \alpha k, not \alphak.
+        # A control word must not run into the letters around it: \alpha\kNrm is \alpha k, not \alphak.
         if text[:1].isalpha() and out and ENDS_IN_CONTROL_WORD.search(out[-1]):
             text = " " + text
         if ENDS_IN_CONTROL_WORD.search(text) and tex[i : i + 1].isalpha():
@@ -88,7 +88,7 @@ def expand(tex: str, macros: dict[str, str] = MACROS, _depth: int = 0) -> str:
 
 
 def tex(text: str) -> str:
-    """A label written with the book's macros, as matplotlib can print it: tex(r"$\\kap$") is "$k$"."""
+    """A label written with the book's macros, as matplotlib can print it: tex(r"$\\kNrm$") is "$k$"."""
     return expand(text)
 
 
@@ -120,6 +120,6 @@ def self_test() -> list[str]:
         failures.append("notation: a macro defined by itself was not refused")
     except ValueError:
         pass
-    if "\\CRRA" not in MACROS or tex(r"$\kap$") != "$k$":
-        failures.append("notation: the book's definitions are missing, or \\kap does not print k")
+    if "\\CRRA" not in MACROS or tex(r"$\kNrm$") != "$k$":
+        failures.append("notation: the book's definitions are missing, or \\kNrm does not print k")
     return failures

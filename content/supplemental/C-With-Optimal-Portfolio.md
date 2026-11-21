@@ -6,7 +6,7 @@ The [consumption out of risky assets](#sec:CRRA-RateRisk) section shows that for
 ```{math}
 :label: eq:MPC
 
-\MPC \approx {\riskyAlt}-\CRRA^{-1}(\riskyAlt-\DiscRate) - (\CRRA-1)\left(\sigma_{\riskyAlt}^{2}/2\right)
+\MPC \approx {\riskyAlt}-\CRRA^{-1}(\riskyAlt-\discRte) - (\CRRA-1)\left(\sigma_{\riskyAlt}^{2}/2\right)
 ```
 
 where the precautionary effect of financial risk on the MPC is captured by the {math}`-(\CRRA-1)\left(\sigma_{\riskyAlt}^{2}/2\right)` term. Since {math}`\CRRA > 1` by assumption, this equation yields the plausible conclusion that an increase in *unavoidable* financial risk {math}`\sigma_{\riskyAlt}^{2}` reduces the level of consumption.
@@ -105,10 +105,10 @@ As with the change in the riskfree rate analyzed in the [perfect foresight CRRA]
 :label: eq:MPCsub
 
 \begin{aligned}
-\MPC & \approx {\rport}-\CRRA^{-1}(\rport-\DiscRate) - (\CRRA-1)\left(\sigma_{\rport}^{2}/2\right) \\
-& = \CRRA^{-1}\DiscRate+{\rport}(1-\CRRA^{-1}) - (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
-& = \CRRA^{-1}\DiscRate+(\rfree+\EpremLog^{2}/\CRRA \sigma^{2}_{\riskyAlt})(1-\CRRA^{-1}) - (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
-& = \rfree-\CRRA^{-1}(\rfree-\DiscRate)+\underbrace{(\CRRA-1)(\EpremLog^{2}/\CRRA^{2} \sigma^{2}_{\riskyAlt})}_{\text{net inc and sub effect}} - (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\MPC & \approx {\rport}-\CRRA^{-1}(\rport-\discRte) - (\CRRA-1)\left(\sigma_{\rport}^{2}/2\right) \\
+& = \CRRA^{-1}\discRte+{\rport}(1-\CRRA^{-1}) - (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
+& = \CRRA^{-1}\discRte+(\rfree+\EpremLog^{2}/\CRRA \sigma^{2}_{\riskyAlt})(1-\CRRA^{-1}) - (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
+& = \rfree-\CRRA^{-1}(\rfree-\discRte)+\underbrace{(\CRRA-1)(\EpremLog^{2}/\CRRA^{2} \sigma^{2}_{\riskyAlt})}_{\text{net inc and sub effect}} - (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
 .
 \end{aligned}
 ```
@@ -118,7 +118,7 @@ Thus, for {math}`\CRRA > 1` the income effect outweighs the substitution effect 
 Note, finally, that the net of the income and substitution effects is (remarkably) of exactly the same functional form as the precautionary effect, but of opposite sign and twice as large. So the combination of all three effects (income, substitution, precautionary) yields:
 
 ```{math}
-\MPC \approx \rfree-\CRRA^{-1}(\rfree-\DiscRate)+ (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
+\MPC \approx \rfree-\CRRA^{-1}(\rfree-\discRte)+ (\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right)
 ```
 
 and we can see that the overall effect of the increase in financial risk is to reduce the marginal propensity to consume because the net of the income and substitution effects channels outweighs the precautionary effect (see the [perfect foresight CRRA](#sec:PerfForesightCRRA) section for a refresher on income and substitution effects, as well as human wealth effects (which are absent here but could easily be added by giving the consumer an expected stream of future noncapital income)).
@@ -129,11 +129,11 @@ Finally, in addition to the effects on consumption, we are interested in the eff
 
 ```{math}
 \begin{aligned}
-\rport - \MPC & \approx \CRRA^{-1}(\rport-\DiscRate)+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
-& = \CRRA^{-1}\left(\frac{\EpremLog^{2}}{\CRRA \sigma^{2}_{\riskyAlt}}+\rfree-\DiscRate\right)+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
-& = \CRRA^{-1}(\rfree-\DiscRate) + \frac{\EpremLog^{2}}{\CRRA^{2} \sigma^{2}_{\riskyAlt}}+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
-& = \CRRA^{-1}(\rfree-\DiscRate) + \frac{\EpremLog^{2}/\CRRA^{2}}{ \sigma^{2}_{\riskyAlt}}+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
-& = \CRRA^{-1}(\rfree-\DiscRate) + \left(\frac{\CRRA+1}{2}\right)\left(\frac{\EpremLog^{2}}{\sigma^{2}_{\riskyAlt}\CRRA^{2}}\right)
+\rport - \MPC & \approx \CRRA^{-1}(\rport-\discRte)+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
+& = \CRRA^{-1}\left(\frac{\EpremLog^{2}}{\CRRA \sigma^{2}_{\riskyAlt}}+\rfree-\discRte\right)+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
+& = \CRRA^{-1}(\rfree-\discRte) + \frac{\EpremLog^{2}}{\CRRA^{2} \sigma^{2}_{\riskyAlt}}+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
+& = \CRRA^{-1}(\rfree-\discRte) + \frac{\EpremLog^{2}/\CRRA^{2}}{ \sigma^{2}_{\riskyAlt}}+(\CRRA-1)\left(\frac{(\EpremLog/\CRRA)^{2}}{2 \sigma_{\riskyAlt}^{2}}\right) \\
+& = \CRRA^{-1}(\rfree-\discRte) + \left(\frac{\CRRA+1}{2}\right)\left(\frac{\EpremLog^{2}}{\sigma^{2}_{\riskyAlt}\CRRA^{2}}\right)
 \end{aligned}
 ```
 

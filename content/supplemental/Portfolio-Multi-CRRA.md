@@ -1,15 +1,15 @@
 (sec:Portfolio-Multi-CRRA)=
 # CRRA Portfolio Choice with Two Risky Assets
 
-{cite:t}`merton:restat` and {cite:t}`samuelson:portfolio` study optimal portfolio allocation for a consumer with Constant Relative Risk Aversion utility {math}`\uFunc(\cRat) = (1-\CRRA)^{-1}\cRat^{1-\CRRA}` who can choose between a safe and a risky investment option; Merton also derives the optimality conditions for a choice among many risky investment options.
+{cite:t}`merton:restat` and {cite:t}`samuelson:portfolio` study optimal portfolio allocation for a consumer with Constant Relative Risk Aversion utility {math}`\uFunc(\cNrm) = (1-\CRRA)^{-1}\cNrm^{1-\CRRA}` who can choose between a safe and a risky investment option; Merton also derives the optimality conditions for a choice among many risky investment options.
 
-Using their framework, here we study a consumer who has wealth {math}`\aRat_{t}` at the end of period {math}`t`, and is deciding how much to invest in two risky assets with lognormally distributed return factors {math}`\Risky_{t+1}=(\Risky_{1,t+1}, \Risky_{2,t+1})'`. As in [Portfolio Choice with CRRA Utility](#sec:Portfolio-CRRA), {math}`\risky_{i} \equiv \log \Ex_{t}[\Risky_{i,t+1}]` is the log of asset {math}`i`'s expected return factor, so the log returns are jointly normally distributed, {math}`\log \Risky_{t+1} = \risky_{t+1}=(\risky_{1,t+1}, \risky_{2,t+1})' \sim \mathcal{N}(\mu,\Sigma)`, with means {math}`\mu=(\risky_1-\sigma^{2}_{1}/2, \risky_2-\sigma^{2}_{2}/2)'` and covariance matrix
+Using their framework, here we study a consumer who has wealth {math}`\aNrm_{t}` at the end of period {math}`t`, and is deciding how much to invest in two risky assets with lognormally distributed return factors {math}`\Risky_{t+1}=(\Risky_{1,t+1}, \Risky_{2,t+1})'`. As in [Portfolio Choice with CRRA Utility](#sec:Portfolio-CRRA), {math}`\risky_{i} \equiv \log \Ex_{t}[\Risky_{i,t+1}]` is the log of asset {math}`i`'s expected return factor, so the log returns are jointly normally distributed, {math}`\log \Risky_{t+1} = \risky_{t+1}=(\risky_{1,t+1}, \risky_{2,t+1})' \sim \mathcal{N}(\mu,\Sigma)`, with means {math}`\mu=(\risky_1-\sigma^{2}_{1}/2, \risky_2-\sigma^{2}_{2}/2)'` and covariance matrix
 
 ```{math}
 \Sigma=\left(\begin{array}{cc}\sigma_1^2 & \sigma_{12} \\ \sigma_{12}& \sigma_2^2\end{array}\right).
 ```
 
-If the period-{math}`t` consumer invests proportion {math}`\riskyshare_i` of {math}`\aRat_{t}` in risky asset {math}`i`, {math}`i=1,2` (so that {math}`\riskyshare_{1}=(1-\riskyshare_{2})` and vice-versa), spending all available resources in the last period of life {math}`t+1` will yield:
+If the period-{math}`t` consumer invests proportion {math}`\riskyshare_i` of {math}`\aNrm_{t}` in risky asset {math}`i`, {math}`i=1,2` (so that {math}`\riskyshare_{1}=(1-\riskyshare_{2})` and vice-versa), spending all available resources in the last period of life {math}`t+1` will yield:
 
 :::{margin}
 The portfolio allocation solution obtained below carries back, by induction, to earlier periods of life, as {cite:t}`samuelsonFallacy` and {cite:t}`samuelsonJudgment` famously emphasized.
@@ -18,7 +18,7 @@ The portfolio allocation solution obtained below carries back, by induction, to 
 ```{math}
 :label: eq:PortMulti-RportDef
 
-\cRat_{t+1}  =  \underbrace{(\riskyshare \cdot \Risky_{t+1} )}_{\equiv \Rport_{t+1}} \aRat_{t}
+\cNrm_{t+1}  =  \underbrace{(\riskyshare \cdot \Risky_{t+1} )}_{\equiv \Rport_{t+1}} \aNrm_{t}
 ```
 
 where {math}`\Rport_{t+1}` is the portfolio-weighted return factor.
@@ -41,8 +41,8 @@ Using this approximation, the expectation as of date {math}`t` of utility at dat
 :label: eq:PortMulti-exputil
 
 \begin{aligned}
-  \Ex_{t}[\uFunc(\cRat_{t+1})] & \approx  (1-\CRRA)^{-1}\Ex_{t}\left[\left(\aRat_{t}e^{\risky_{1,t+1}}e^{\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1})+\riskyshare_2(1-\riskyshare_2)\eta /2}\right)^{1-\CRRA}\right]
-\\                      & \approx  \underbrace{ (1-\CRRA)^{-1}\aRat_{t}^{1-\CRRA}}_{\text{constant $< 0$}}\underbrace{e^{ (1-\CRRA)\riskyshare_2(1-\riskyshare_2)\eta/2}\Ex_{t}\left[e^{(\risky_{1,t+1}+\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1}))  (1-\CRRA)}\right]}_{\text{portfolio return utility factor}}
+  \Ex_{t}[\uFunc(\cNrm_{t+1})] & \approx  (1-\CRRA)^{-1}\Ex_{t}\left[\left(\aNrm_{t}e^{\risky_{1,t+1}}e^{\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1})+\riskyshare_2(1-\riskyshare_2)\eta /2}\right)^{1-\CRRA}\right]
+\\                      & \approx  \underbrace{ (1-\CRRA)^{-1}\aNrm_{t}^{1-\CRRA}}_{\text{constant $< 0$}}\underbrace{e^{ (1-\CRRA)\riskyshare_2(1-\riskyshare_2)\eta/2}\Ex_{t}\left[e^{(\risky_{1,t+1}+\riskyshare_2 (\risky_{2,t+1}-\risky_{1,t+1}))  (1-\CRRA)}\right]}_{\text{portfolio return utility factor}}
   \end{aligned}
 ```
 
