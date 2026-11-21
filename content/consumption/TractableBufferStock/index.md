@@ -668,7 +668,7 @@ The econometric problem here is that there is an *omitted variable* from the reg
 
 #### A Final Experiment
 
-We now consider a final experiment: A decrease in the time preference rate. To reduce clutter, we drop the {math}`\Delta \cNrmE_{t+1}=0` locus from the phase diagram from {numref}`fig:TBS-PhaseDiag`, and everywhere drop the {math}`e` superscripts. (In exam questions, a figure like this might be referred to as the "simplified consumption phase diagram" or just "the consumption diagram").
+We now consider a final experiment: A decrease in the time preference rate. To reduce clutter, we drop the {math}`\Delta \cNrmE_{t+1}=0` locus from the phase diagram from {numref}`fig:TBS-PhaseDiag`, and everywhere drop the {math}`e` superscripts.
 
 {numref}`fig:TBS-DecreaseTheta` depicts the effect on the employed consumer's spending by showing each successive point in time as a dot. Starting at time 0 from the steady-state level of consumption, the decrease in the future discounting rate (an increase in patience) causes an instantaneous drop in the level of consumption. Starting from this diminished base, consumption growth is subsequently faster than before the drop in {math}`\discRte`.
 
