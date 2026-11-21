@@ -492,16 +492,30 @@ def tidy_bib_entry(entry: str) -> tuple[str, int]:
     MyST's export copies an entry's url into howpublished, and the bibliography prints that as plain text, which
     LaTeX can't break, so a long URL runs into the margin. The url field itself prints through \\url, which can
     break. So a howpublished that only repeats the url goes, and a bare URL left in a note or howpublished is
-    wrapped in \\url. Returns the entry and the number of changes.
+    wrapped in \\url.
+
+    Two more repairs. A note that only repeats the url prints the address a second time after the url field's, so
+    it goes too: economics.bib gives many entries note = {\\url{...}} for styles that print no url, and MyST's
+    export strips the \\url, so the note arrives bare. And MyST exports a thesis as @misc, which the style prints
+    without its type or school; an @misc with a school is made @phdthesis again, which prints the type field ("PhD
+    dissertation") and the school. The style lowercases a type ("Phd"), and the export drops the braces that stop
+    it, so the type is braced again. Returns the entry and the number of changes.
     """
     lines = entry.split("\n")
     fields = {m.group(2).lower(): m.group(4) for m in map(BIB_FIELD.match, lines) if m}
     out, n = [], 0
+    if lines[0].lower().startswith("@misc{") and "school" in fields:
+        lines[0] = "@phdthesis{" + lines[0][len("@misc{"):]
+        n += 1
+    url = fields.get("url")
     for line in lines:
         m = BIB_FIELD.match(line)
-        if m and m.group(2).lower() == "howpublished" and m.group(4) == fields.get("url"):
+        if m and url and (m.group(2).lower(), m.group(4)) in (("howpublished", url), ("note", url), ("note", f"\\url{{{url}}}")):
             n += 1
             continue
+        if m and m.group(2).lower() == "type" and lines[0].startswith("@phdthesis{") and not m.group(4).startswith("{"):
+            n += 1
+            line = f"{m.group(1)}{m.group(2)}{m.group(3)}{{{{{m.group(4)}}}}}" + ("," if line.rstrip().endswith(",") else "")
         if m and m.group(2).lower() in ("note", "howpublished"):
             value, k = BARE_URL.subn(r"\\url{\1}", m.group(4))
             if k:
@@ -512,7 +526,7 @@ def tidy_bib_entry(entry: str) -> tuple[str, int]:
 
 
 def tidy_bib() -> list[str]:
-    """Step 5: make the bibliography's URLs breakable (tidy_bib_entry)."""
+    """Step 5: tidy MyST's bibliography: breakable URLs, no URL printed twice, theses as theses (tidy_bib_entry)."""
     bib = STAGE / TEX_DIR / "main.bib"
     if not bib.exists():
         return [f"{bib} not found: MyST's export no longer writes main.bib"]
@@ -526,7 +540,7 @@ def tidy_bib() -> list[str]:
 
     text = BIB_ENTRY.sub(sub, text)
     bib.write_text(text)
-    log.info("bibliography URLs made breakable: %d", total)
+    log.info("bibliography fields tidied: %d", total)
     return []
 
 
@@ -815,6 +829,17 @@ def bib_failures() -> list[str]:
     cases.append((tidy_bib_entry(kept) != (kept, 0), "an entry with nothing to tidy was changed"))
     end = f"@misc{{K,\n\tnote = {{At {u}.}},\n}}"
     cases.append((f"At \\url{{{u}}}." not in tidy_bib_entry(end)[0], "a URL before a period was not wrapped, or took the period"))
+    thesis = f"@misc{{K,\n\tnote = {{{u}}},\n\tschool = {{S}},\n\ttype = {{PhD dissertation}},\n\turl = {{{u}}},\n}}"
+    got, n = tidy_bib_entry(thesis)
+    cases += [
+        (not got.startswith("@phdthesis{K,"), "an @misc with a school was not made @phdthesis"),
+        ("note" in got, "a note that only repeats the url was kept"),
+        (f"\turl = {{{u}}}," not in got or "school" not in got, "the thesis lost its url or school"),
+        ("\ttype = {{PhD dissertation}}," not in got, "the thesis's type was not braced against lowercasing"),
+        (n != 3, f"{n} changes counted on the thesis, not 3"),
+    ]
+    wrapped = f"@article{{K,\n\tnote = {{\\url{{{u}}}}},\n\turl = {{{u}}},\n}}"
+    cases.append(("note" in tidy_bib_entry(wrapped)[0], "a note that only repeats the url in \\url was kept"))
     return [msg for bad, msg in cases if bad]
 
 
