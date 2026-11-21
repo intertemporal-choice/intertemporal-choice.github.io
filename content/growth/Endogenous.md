@@ -22,7 +22,7 @@ In a framework with constant returns to scale, perfect competition, and no exter
 
 But models with perfect competition require
 constant returns to scale, and say that all factors of production are
-paid their marginal product; and [Euler's Theorem](#fact:eulerstheorem) says that the sum of the factor payments
+paid their marginal product; and [Euler's theorem](#fact:eulerstheorem) says that the sum of the factor payments
 exhausts all output, as in the [RCK model](#eq:RCK-outputExhausted):
 
 ```{math}
@@ -61,7 +61,7 @@ with a Cobb-Douglas aggregate production function in capital and labor:
 :label: eq:prodfn
 
 \begin{gathered}\begin{aligned}
-  \YLvl_t & =  \PtyAgg \KLvl_t^\kapShare \LLvl_t^\labShare
+  \YLvl_t & =  \PtyAgg \KLvl_t^\kapShare \LLvl_t^\labShare ,
 \end{aligned}\end{gathered}
 ```
 
@@ -95,8 +95,8 @@ Everyone supplies one unit of labor inelastically, so labor {math}`\LLvl_t` is a
 The population growth rate is written {math}`\PopnGroRte`: {math}`\PopnGroFac` is the population's growth factor and {math}`\lnat` is the natural log, so {math}`\PopnGroRte = \log \PopnGroFac`.
 :::
 
-and as usual define per-capita variables as the aggregate normalized
-by population, e.g. {math}`\kNrm_t = \KLvl_t/\LLvl_t`. Then the aggregate per-capita accumulation
+and as usual define per capita variables as the aggregate normalized
+by population, e.g. {math}`\kNrm_t = \KLvl_t/\LLvl_t`. Then the aggregate per capita accumulation
 equation can be rewritten
 
 ```{math}

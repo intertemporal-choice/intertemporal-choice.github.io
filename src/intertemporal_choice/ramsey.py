@@ -16,7 +16,7 @@ from intertemporal_choice.notation import tex
 # Labels are written with the book's macros and spelled out by notation.tex, so the figures print
 # whatever the book prints: the steady state is the registry's \Steady, a bar. The golden rule stays
 # Unicode, in italic text, as the figures have printed it.
-STEADY = tex(r"$\Steady{\kap}$")   # k̄
+STEADY = tex(r"$\Steady{\kNrm}$")   # k̄
 GOLDEN = "k\u033f"                 # k̿, k with a double bar
 
 
@@ -25,7 +25,7 @@ def _axes(ax, k_max, c_max):
     ax.set_ylim(0, c_max)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_xlabel(tex(r"$\kap$"), loc="right")
+    ax.set_xlabel(tex(r"$\kNrm$"), loc="right")
     ax.set_ylabel(tex(r"$\cNrm$"), loc="top", rotation=0)
 
 
@@ -48,7 +48,7 @@ def draw_loci(ax, k, loci, golden=None, c_max=None):
         first = index == 0
         style = "-" if first else "--"
         ax.plot(k, c, color="C0", linestyle=style)
-        ax.annotate(tex(r"$\dot{\kap}=0$") + f", {label}", (k_max, c[-1]), xytext=(-4, 5 if first else -6),
+        ax.annotate(tex(r"$\dot{\kNrm}=0$") + f", {label}", (k_max, c[-1]), xytext=(-4, 5 if first else -6),
                     textcoords="offset points", ha="right", va="bottom" if first else "top", color="C0")
         ax.axvline(steady, color="C1", linestyle=style)
         ax.annotate(tex(r"$\dot{\cNrm}/\cNrm=0$") + f", {label}", (steady, 0.08), xycoords=("data", "axes fraction"),
@@ -82,7 +82,7 @@ def draw_saddle(ax, k, c_kdot0, steady, saddle, paths, golden=None, c_max=None):
     k_max = k[-1]
     c_max = c_max or 1.6 * np.max(c_kdot0)
     ax.plot(k, c_kdot0, color="C0")
-    ax.annotate(tex(r"$\dot{\kap}=0$"), (k_max, c_kdot0[-1]), xytext=(-4, -6), textcoords="offset points",
+    ax.annotate(tex(r"$\dot{\kNrm}=0$"), (k_max, c_kdot0[-1]), xytext=(-4, -6), textcoords="offset points",
                 ha="right", va="top", color="C0")
     ax.axvline(steady[0], color="C1")
     ax.annotate(tex(r"$\dot{\cNrm}/\cNrm=0$"), (steady[0], 0.97), xycoords=("data", "axes fraction"), xytext=(4, 0),
