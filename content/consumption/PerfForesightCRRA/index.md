@@ -571,7 +571,7 @@ this can be rewritten as
 \end{aligned}
 ```
 
-(where the last approximations come from the assumptions that {math}`1/\PermGroFac \approx 1` and that {math}`\rfree\patr`, the product of two small rates, is zero, so that {math}`\rfree+\patr\Rfree \approx \rfree+\patr = \CRRA^{-1}(\rfree-\discRte)` by {eq}`eq:patrApprox`). The saving *rate* (for which we use the letter {math}`\srate` to distinguish it from {math}`\sNrm` above) is the ratio of saving to *total* income (not just labor income):
+(where the last approximations come from the assumptions that {math}`1/\PermGroFac \approx 1` and that {math}`\rfree\patr`, the product of two small rates, is zero, so that {math}`\rfree+\patr\Rfree \approx \rfree+\patr = \CRRA^{-1}(\rfree-\discRte)` by {eq}`eq:patrApprox`). The saving *rate* (for which we use the letter {math}`\savRte` to distinguish it from {math}`\sNrm` above) is the ratio of saving to *total* income (not just labor income):
 
 ```{math}
 \savRte_{\tNow} = \left(\frac{\GPRte/(\rfree - \PermGroRte)+ \CRRA^{-1}(\rfree-\discRte)\aNrm_{\tNow-1}}{1+ \rfree \aNrm_{\tNow-1}}\right).

@@ -246,32 +246,32 @@ Now we want to compare this to the two period lifetime model with no labor suppl
 ```
 so leisure moves in the opposite direction from wages, which means labor supply {math}`\labor = 1-z` moves in the same direction as wages. This makes intuitive sense: You want to work harder when work pays better.
 
-To make further progress, assume {math}`\Rfree\DiscFac=1` and define wage growth as {math}`\WGro=\Wage_{2}/\Wage_{1}=(1+\wGro)`. Assume that young people tend to work about half of their waking hours {math}`\labor_{1}=(1/2)` (remember vacations, weekends, etc!). Note that under these assumptions we can rewrite {eq}`eq:LabSup` as
+To make further progress, assume {math}`\Rfree\DiscFac=1` and define wage growth as {math}`\WGroFac=\Wage_{2}/\Wage_{1}=(1+\WGroRte)`. Assume that young people tend to work about half of their waking hours {math}`\labor_{1}=(1/2)` (remember vacations, weekends, etc!). Note that under these assumptions we can rewrite {eq}`eq:LabSup` as
 
 ```{math}
 :label: eq:LabSupNewer
 
 \begin{aligned}
-(1-\labor_{2})\WGro & = (1-\labor_{1}) \\
-\wGro & = (1+\wGro) \labor_{2} - \labor_{1} \\
-\labor_{2} & = (\wGro + \labor_{1})/(1+\wGro) \\
-& = (2 \wGro + 1)/2(1+\wGro)
+(1-\labor_{2})\WGroFac & = (1-\labor_{1}) \\
+\WGroRte & = (1+\WGroRte) \labor_{2} - \labor_{1} \\
+\labor_{2} & = (\WGroRte + \labor_{1})/(1+\WGroRte) \\
+& = (2 \WGroRte + 1)/2(1+\WGroRte)
 \end{aligned}
 ```
 
-Empirically, wages in the U.S. tend to grow between youth and middle age by a factor of {math}`\WGro \approx 2-4` (depending on occupation and education), so {math}`\wGro \approx 1-3`, but labor supply is about the same for 55 year olds as for 25 year olds, {math}`\labor_{2} \approx \labor_{1}`.
+Empirically, wages in the U.S. tend to grow between youth and middle age by a factor of {math}`\WGroFac \approx 2-4` (depending on occupation and education), so {math}`\WGroRte \approx 1-3`, but labor supply is about the same for 55 year olds as for 25 year olds, {math}`\labor_{2} \approx \labor_{1}`.
 
-Suppose for analysis that {math}`\wGro=2`. Then {eq}`eq:LabSupNewer` becomes
+Suppose for analysis that {math}`\WGroRte=2`. Then {eq}`eq:LabSupNewer` becomes
 ```{math}
 \labor_{2} = (5/6)
 ```
 so the theory says middle aged people work more than young people by {math}`(2/6)/(3/6)=2/3`. This is of course absurd: it implies that middle aged people would barely have time to breathe because they were working so hard.
 
-One objection to this analysis is that it assumed {math}`\Rfree\DiscFac=1`, which implies that consumption when young equals consumption when middle aged. In fact, on average consumption grows by about the same amount as wages between youth and middle age. So perhaps the right assumption is {math}`\Rfree\DiscFac/\WGro = 1`. Under this assumption, we obviously have {math}`\labor_{2}=\labor_{1}`, matching the empirical fact.
+One objection to this analysis is that it assumed {math}`\Rfree\DiscFac=1`, which implies that consumption when young equals consumption when middle aged. In fact, on average consumption grows by about the same amount as wages between youth and middle age. So perhaps the right assumption is {math}`\Rfree\DiscFac/\WGroFac = 1`. Under this assumption, we obviously have {math}`\labor_{2}=\labor_{1}`, matching the empirical fact.
 
-However, there is predictably different wage growth across occupations and education groups. Write {math}`\WGro_{i}=\WGro\Gamma_{i}`, where {math}`\Gamma_{i}` now will differ for people in different occupations indexed by {math}`i`, and plausible values range from {math}`\Gamma=0.5` (manual laborers) to {math}`\Gamma=1.5` (doctors), leaving the average value of {math}`\Gamma` across the two groups at {math}`\Gamma=1`. It is an empirical fact that the magnitude of variations in labor supply across these groups is rather small, both in youth and in middle age.
+However, there is predictably different wage growth across occupations and education groups. Write {math}`\WGroFac_{i}=\WGroFac\Gamma_{i}`, where {math}`\Gamma_{i}` now will differ for people in different occupations indexed by {math}`i`, and plausible values range from {math}`\Gamma=0.5` (manual laborers) to {math}`\Gamma=1.5` (doctors), leaving the average value of {math}`\Gamma` across the two groups at {math}`\Gamma=1`. It is an empirical fact that the magnitude of variations in labor supply across these groups is rather small, both in youth and in middle age.
 
-Assuming {math}`\Rfree\DiscFac/\WGro=1`, rewrite {eq}`eq:LabSup` for each occupation as
+Assuming {math}`\Rfree\DiscFac/\WGroFac=1`, rewrite {eq}`eq:LabSup` for each occupation as
 ```{math}
 (1-\labor_{2})\Gamma_{i} = (1-\labor_{1})
 ```

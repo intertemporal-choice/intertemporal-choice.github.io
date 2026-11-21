@@ -35,7 +35,7 @@ heading as \chapter.
 reached from here. MyST only ever injects 14 hardcoded packages, has no configuration
 key for others, and \usepackage is already an error stub by the time a body block runs,
 so only the template preamble could load them. Left undefined, LaTeX drops the wrapper
-and prints the bare symbol, which would make Carroll's bliss point \cancel{\cRat}
+and prints the bare symbol, which would make Carroll's bliss point \cancel{\cNrm}
 identical to ordinary consumption and \kPriceAfterITC identical to the ordinary price.
 KaTeX supports both natively, so the website is unaffected and these fallbacks stay out
 of its way. Replace them with the real packages if the template is ever vendored.

@@ -1,9 +1,9 @@
 """The book's notation, spelled out: its macros expanded into the LaTeX they print.
 
-The book writes every economic object with its macro (`\\CRRA`, `\\kap`, `\\ptyGro`), and the
+The book writes every economic object with its macro (`\\CRRA`, `\\kap`, `\\ptyGroRte`), and the
 registry and the course block decide what each one prints. The website reads those
 definitions; matplotlib and a notebook opened in Colab do not. `tex` spells the macros out, so
-a figure label written `tex(r"$\\ptyGro$ low")` prints whatever the book prints for
+a figure label written `tex(r"$\\ptyGroRte$ low")` prints whatever the book prints for
 productivity growth, and follows a change of notation without an edit.
 
 The definitions are in `_notation_macros.py`, which code/notebook_math.py writes from the

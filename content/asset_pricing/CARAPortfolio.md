@@ -3,7 +3,7 @@
 
 Consider a consumer with Constant Absolute Risk Aversion
 utility
-{math}`\uFunc(\cRat) = -\CARA^{-1} e^{-\alpha \cRat_{}}`, with assets
+{math}`\uFunc(\cNrm) = -\CARA^{-1} e^{-\alpha \cNrm_{}}`, with assets
 {math}`\aLev_{T-1}` who is deciding how much to invest in a risky security that
 will earn a normally distributed stochastic return factor {math}`\Risky_{T} \sim
 \mathcal{N}(\Risky,\sigma^{2})` versus a safe asset that will earn return factor
@@ -22,7 +22,7 @@ of resources. If the consumer invests an absolute amount of money \${math}`\Stoc
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \cRat_{T} & =  \Stocks \Risky_{T}+( \aLev_{T-1}-\Stocks)\Rfree  \\
+        \cNrm_{T} & =  \Stocks \Risky_{T}+( \aLev_{T-1}-\Stocks)\Rfree  \\
          & =   \aLev_{T-1}\Rfree + (\Risky_{T}-\Rfree)\Stocks
 \end{aligned}\end{gathered}
 ```
@@ -33,7 +33,7 @@ where {math}`\Risky_{T}-\Rfree` is the "excess return" realized in period {math}
 :label: eq:CARA-exputil
 
 \begin{gathered}\begin{aligned}
-        \Ex_{T-1}[\uFunc(\cRat_{T})] & =  \Ex_{T-1}[-\CARA^{-1}e^{-\alpha( \aLev_{T-1}\Rfree+(\Risky_{T}-\Rfree)\Stocks)}]
+        \Ex_{T-1}[\uFunc(\cNrm_{T})] & =  \Ex_{T-1}[-\CARA^{-1}e^{-\alpha( \aLev_{T-1}\Rfree+(\Risky_{T}-\Rfree)\Stocks)}]
 \\ & =  -\CARA^{-1}e^{-\alpha( \aLev_{T-1}\Rfree)} \Ex_{T-1}[e^{-\alpha(\Risky_{T}-\Rfree)\Stocks}]
 \\ & =  -\CARA^{-1}e^{-\alpha( \aLev_{T-1}\Rfree)} e^{-\alpha\Stocks(\Risky-\Rfree)+(\alpha\Stocks)^{2}\sigma^{2}/2}
 \\ & =  -\CARA^{-1} e^{-\alpha( \aLev_{T-1}\Rfree)}

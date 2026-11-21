@@ -5,9 +5,9 @@ Consider a representative agent solving the joint consumption and portfolio allo
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \vFunc(\mRat_{t}) & =  \max \uFunc(c_{t}) + \Ex_{t}\left[\sum_{n=1}^{\infty} \Discount^{n} \uFunc(c_{t+n}) \right]
+        \vFunc(\mNrm_{t}) & =  \max \uFunc(c_{t}) + \Ex_{t}\left[\sum_{n=1}^{\infty} \DiscFac^{n} \uFunc(c_{t+n}) \right]
 \\  & \text{s.t.}
-\\      \mRat_{t+1} & =  (\mRat_{t}-c_{t})\Rport_{t+1} + y_{t+1}
+\\      \mNrm_{t+1} & =  (\mNrm_{t}-c_{t})\Rport_{t+1} + y_{t+1}
 \\      \Rport_{t+1} & =  \sum_{i=1}^{m}\riskyshare_{t,i}\Risky_{t+1,i}+\left(1-\sum_{i=1}^{m} \riskyshare_{t,i}\right)\Rfree
 \end{aligned}\end{gathered}
 ```
@@ -18,7 +18,7 @@ As usual, the objective can be rewritten in recursive form:
 
 ```{math}
 \begin{gathered}\begin{aligned}
-        \vFunc(\mRat_{t}) & =  \max_{\{c_{t},\riskyshare_{t,1},\riskyshare_{t,2},\ldots\}} \uFunc(c_{t}) +\Discount \Ex_{t}\left[\vFunc(\Rport_{t+1}(\mRat_{t}-c_{t})+{y}_{t+1})\right]
+        \vFunc(\mNrm_{t}) & =  \max_{\{c_{t},\riskyshare_{t,1},\riskyshare_{t,2},\ldots\}} \uFunc(c_{t}) +\DiscFac \Ex_{t}\left[\vFunc(\Rport_{t+1}(\mNrm_{t}-c_{t})+{y}_{t+1})\right]
 \end{aligned}\end{gathered}
 ```
 
@@ -28,7 +28,7 @@ The first order condition with respect to {math}`c_{t}` is
 :label: eq:CCAPM-cfoc
 
 \begin{gathered}\begin{aligned}
-        \uFunc^{\prime}(c_{t}) & =  \Discount \Ex_{t}[\Rport_{t+1}\vFunc^{\prime}(\mRat_{t+1})]
+        \uFunc^{\prime}(c_{t}) & =  \DiscFac \Ex_{t}[\Rport_{t+1}\vFunc^{\prime}(\mNrm_{t+1})]
 \end{aligned}\end{gathered}
 ```
 
@@ -38,7 +38,7 @@ and the FOC with respect to {math}`\riskyshare_{t,i}` is
 :label: eq:CCAPM-sharefoc
 
 \begin{gathered}\begin{aligned}
-        \Ex_{t}[(\Risky_{t+1,i}-\Rfree)\vFunc^{\prime}(\mRat_{t+1})] & =  0
+        \Ex_{t}[(\Risky_{t+1,i}-\Rfree)\vFunc^{\prime}(\mNrm_{t+1})] & =  0
 \end{aligned}\end{gathered}
 ```
 
@@ -48,7 +48,7 @@ But the usual logic of the [Envelope theorem](#sec:Envelope) tells us that
 :label: eq:CCAPM-envelope
 
 \begin{gathered}\begin{aligned}
-        \uFunc^{\prime}(c_{t+1}) & =  \vFunc^{\prime}(\mRat_{t+1}),
+        \uFunc^{\prime}(c_{t+1}) & =  \vFunc^{\prime}(\mNrm_{t+1}),
 \end{aligned}\end{gathered}
 ```
 
@@ -58,7 +58,7 @@ so, substituting {eq}`eq:CCAPM-envelope` into {eq}`eq:CCAPM-cfoc` and {eq}`eq:CC
 :label: eq:CCAPM-ceuler
 
 \begin{gathered}\begin{aligned}
-        \uFunc^{\prime}(c_{t}) & =  \Ex_{t}\left[\Discount \Rport_{t+1} \uFunc^{\prime}({c}_{t+1})\right]
+        \uFunc^{\prime}(c_{t}) & =  \Ex_{t}\left[\DiscFac \Rport_{t+1} \uFunc^{\prime}({c}_{t+1})\right]
 \end{aligned}\end{gathered}
 ```
 

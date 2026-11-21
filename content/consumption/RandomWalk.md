@@ -12,31 +12,31 @@ See the [Envelope theorem](#sec:Envelope) section for the derivation of the Eule
 ```{math}
 :label: eq:uPEuler
 
-\uFunc^{\prime}(\cRat_{t}) = \Discount \Rfree \Ex_{t}[\uFunc^{\prime}(\cRat_{t+1})].
+\uFunc^{\prime}(\cNrm_{t}) = \DiscFac \Rfree \Ex_{t}[\uFunc^{\prime}(\cNrm_{t+1})].
 ```
 
 Suppose the utility function is quadratic:
 
 ```{math}
-\uFunc(\cRat) = -(1/2) (\cancel{\cRat}-\cRat)^{2}
+\uFunc(\cNrm) = -(1/2) (\cancel{\cNrm}-\cNrm)^{2}
 ```
 
-where {math}`\cancel{\cRat}` is the "bliss point" level of consumption. Marginal utility is
+where {math}`\cancel{\cNrm}` is the "bliss point" level of consumption. Marginal utility is
 
 :::{margin}
-Assume that the consumer is sufficiently poor that it will be impossible for them ever to achieve consumption as large as {math}`\cancel{\cRat}`.
+Assume that the consumer is sufficiently poor that it will be impossible for them ever to achieve consumption as large as {math}`\cancel{\cNrm}`.
 :::
 
 ```{math}
-\uFunc^{\prime}(\cRat) = (\cancel{\cRat}-\cRat)
+\uFunc^{\prime}(\cNrm) = (\cancel{\cNrm}-\cNrm)
 ```
 
-and suppose further that {math}`\Rfree \Discount = 1` so that {eq}`eq:uPEuler` becomes
+and suppose further that {math}`\Rfree \DiscFac = 1` so that {eq}`eq:uPEuler` becomes
 
 ```{math}
 \begin{aligned}
-  (\cancel{\cRat}-\cRat_{t})  & =  \Ex_{t}[(\cancel{\cRat}-\cRat_{t+1})]
-\\ \Ex_{t}[\cRat_{t+1}] & =  \cRat_{t}.
+  (\cancel{\cNrm}-\cNrm_{t})  & =  \Ex_{t}[(\cancel{\cNrm}-\cNrm_{t+1})]
+\\ \Ex_{t}[\cNrm_{t+1}] & =  \cNrm_{t}.
 \end{aligned}
 ```
 
@@ -44,15 +44,15 @@ Defining the innovation to consumption as
 
 ```{math}
 \begin{aligned}
-  \epsilon_{t+1} & =  \cRat_{t+1}-\cRat_{t}
-\\ & \equiv  \Delta \cRat_{t+1},
+  \epsilon_{t+1} & =  \cNrm_{t+1}-\cNrm_{t}
+\\ & \equiv  \Delta \cNrm_{t+1},
 \end{aligned}
 ```
 
 the random walk proposition is simply that the expectation of consumption changes is zero:
 
 ```{math}
-\Ex_{t}[\Delta \cRat_{t+1}] = 0.
+\Ex_{t}[\Delta \cNrm_{t+1}] = 0.
 ```
 
-This means that no information known to the consumer when the consumption choice {math}`\cRat_{t}` was made can have any predictive power for how consumption will change between period {math}`t` and {math}`t+1` (or for any date beyond {math}`t+1`).
+This means that no information known to the consumer when the consumption choice {math}`\cNrm_{t}` was made can have any predictive power for how consumption will change between period {math}`t` and {math}`t+1` (or for any date beyond {math}`t+1`).

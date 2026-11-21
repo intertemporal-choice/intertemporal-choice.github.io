@@ -8,7 +8,7 @@ The basic ideas in this section are derived from {cite:t}`mankiw:durgoods`. See 
 :::
 
 ```{math}
-\max \sum_{s=t}^{T} \Discount^{s-t} \uFunc(c_{s},d_{s})
+\max \sum_{s=t}^{T} \DiscFac^{s-t} \uFunc(c_{s},d_{s})
 ```
 
 where {math}`d_{s}` is the stock of the durable good, and all other variables are as usually defined.
@@ -36,7 +36,7 @@ The dynamic budget constraint subtracts expenditures on durables from available 
 Bellman's equation is
 
 ```{math}
-\vFunc_{t}({m}_{t},d_{t-1}) = \max_{\{c_{t},{x}_{t}\}} \left[\uFunc(c_{t},d_{t}) + \Discount \vFunc_{t+1}({m}_{t+1},d_{t})\right],
+\vFunc_{t}({m}_{t},d_{t-1}) = \max_{\{c_{t},{x}_{t}\}} \left[\uFunc(c_{t},d_{t}) + \DiscFac \vFunc_{t+1}({m}_{t+1},d_{t})\right],
 ```
 
 where {math}`d_{t-1}` is the state variable because the level of durables in period {math}`t` is not determined until you choose spending on durables in that period. Equivalently, treating {math}`d_{t}` directly as the control variable:
@@ -44,7 +44,7 @@ where {math}`d_{t-1}` is the state variable because the level of durables in per
 ```{math}
 :label: eq:bell
 
-\vFunc_{t}({m}_{t},d_{t-1}) = \max_{\{c_{t},d_{t}\}} \left[\uFunc(c_{t},d_{t}) + \Discount \vFunc_{t+1}({m}_{t+1},d_{t})\right],
+\vFunc_{t}({m}_{t},d_{t-1}) = \max_{\{c_{t},d_{t}\}} \left[\uFunc(c_{t},d_{t}) + \DiscFac \vFunc_{t+1}({m}_{t+1},d_{t})\right],
 ```
 
 subject to
@@ -56,7 +56,7 @@ subject to
 or (substituting this into {eq}`eq:bell`),
 
 ```{math}
-\vFunc_{t}({m}_{t},d_{t-1}) = \max_{\{c_{t},d_{t}\}} \left\{\uFunc(c_{t},d_{t}) + \Discount \vFunc_{t+1}(({m}_{t}-c_{t}-(d_{t}-(1-\delta)d_{t-1}))\Rfree+y_{t+1},d_{t})\right\}.
+\vFunc_{t}({m}_{t},d_{t-1}) = \max_{\{c_{t},d_{t}\}} \left\{\uFunc(c_{t},d_{t}) + \DiscFac \vFunc_{t+1}(({m}_{t}-c_{t}-(d_{t}-(1-\delta)d_{t-1}))\Rfree+y_{t+1},d_{t})\right\}.
 ```
 
 Since this equation has two control variables, {math}`c_{t}` and {math}`d_{t}`, there are two first order conditions:
@@ -65,8 +65,8 @@ wrt {math}`c_{t}`:
 
 ```{math}
 \begin{aligned}
-\uFunc_{t}^{c} - \Rfree\Discount \vFunc^{{m}}_{t+1}& = 0 \\
-\uFunc_{t}^{c}& = \Rfree\Discount \vFunc^{{m}}_{t+1}
+\uFunc_{t}^{c} - \Rfree\DiscFac \vFunc^{{m}}_{t+1}& = 0 \\
+\uFunc_{t}^{c}& = \Rfree\DiscFac \vFunc^{{m}}_{t+1}
 \end{aligned}
 ```
 
@@ -75,7 +75,7 @@ wrt {math}`d_{t}`:
 ```{math}
 :label: eq:ud
 
-\uFunc_{t}^{d} = \Discount(\Rfree \vFunc_{t+1}^{{m}} - \vFunc^{d}_{t+1}) = \Rfree\Discount \vFunc_{t+1}^{{m}}-\Discount \vFunc^{d}_{t+1}.
+\uFunc_{t}^{d} = \DiscFac(\Rfree \vFunc_{t+1}^{{m}} - \vFunc^{d}_{t+1}) = \Rfree\DiscFac \vFunc_{t+1}^{{m}}-\DiscFac \vFunc^{d}_{t+1}.
 ```
 
 Note that when taking the derivative with respect to {math}`c_{t}` you assume that {math}`\partial d_{t}/\partial c_{t} = 0` and vice versa. Although the first order conditions will define a relationship between the *optimal* values of {math}`c_{t}` and {math}`d_{t}`, there is no *mechanical* link that applies at this point.
@@ -95,7 +95,7 @@ Now we want to apply the Envelope theorem. Basically, the Envelope theorem says 
                       \frac{\partial c_{t}}{\partial {m}_{t}}
           +       \frac{\partial {m}_{t+1}}{\partial d_{t}}
                       \frac{\partial d_{t}}{\partial {m}_{t}}
-                \right] \Discount \vFunc^{{m}}_{t+1} + \Discount
+                \right] \DiscFac \vFunc^{{m}}_{t+1} + \DiscFac
                       \vFunc^{d}_{t+1} \frac{\partial d_{t}}{\partial
                       {m}_{t}}
 \end{aligned}
@@ -106,7 +106,7 @@ but the Envelope theorem tells us to ignore all the terms that involve {math}`\p
 ```{math}
 :label: eq:vxtEqvxtp1
 
-\vFunc_{t}^{{m}} = \Rfree \Discount \vFunc_{t+1}^{{m}}
+\vFunc_{t}^{{m}} = \Rfree \DiscFac \vFunc_{t+1}^{{m}}
 ```
 
 Applying the same Envelope theorem logic for {math}`d_{t-1}` yields:
@@ -119,8 +119,8 @@ Both here and in {eq}`eq:vmt`, the derivative {math}`\vFunc^{d}_{t}` should be u
 :label: eq:vdvsvx
 
 \begin{aligned}
-\vFunc_{t}^{d}  & = \Rfree(1-\delta) \Discount \vFunc^{{m}}_{t+1} \\
-     & = (1-\delta)  \Rfree \Discount \vFunc_{t+1}^{{m}} \\
+\vFunc_{t}^{d}  & = \Rfree(1-\delta) \DiscFac \vFunc^{{m}}_{t+1} \\
+     & = (1-\delta)  \Rfree \DiscFac \vFunc_{t+1}^{{m}} \\
      & = (1-\delta) \vFunc^{{m}}_{t}
 \end{aligned}
 ```
@@ -134,17 +134,17 @@ Now we want to try to derive a relationship between the contemporaneous marginal
 ```{math}
 :label: eq:beqns
 
-\uFunc^{d}_{t} = \Rfree \Discount \vFunc^{{m}}_{t+1} - \Discount \vFunc^{d}_{t+1}.
+\uFunc^{d}_{t} = \Rfree \DiscFac \vFunc^{{m}}_{t+1} - \DiscFac \vFunc^{d}_{t+1}.
 ```
 
-and {math}`\Rfree \Discount \vFunc^{{m}}_{t+1} = \uFunc^{c}_{t}` and from {eq}`eq:vdvsvx` {math}`\vFunc_{t+1}^{d} = (1-\delta) \vFunc^{{m}}_{t+1}`. Substituting these into {eq}`eq:beqns`:
+and {math}`\Rfree \DiscFac \vFunc^{{m}}_{t+1} = \uFunc^{c}_{t}` and from {eq}`eq:vdvsvx` {math}`\vFunc_{t+1}^{d} = (1-\delta) \vFunc^{{m}}_{t+1}`. Substituting these into {eq}`eq:beqns`:
 
 ```{math}
 :label: eq:uprimeeqn
 
 \begin{aligned}
- \uFunc_{t}^{d} & =  \uFunc_{t}^{c}-\Discount(1-\delta) \vFunc_{t+1}^{{m}} \\
- & = \uFunc_{t}^{c} - \frac{(1-\delta)}{\Rfree} \Rfree\Discount \vFunc_{t+1}^{{m}}  \\
+ \uFunc_{t}^{d} & =  \uFunc_{t}^{c}-\DiscFac(1-\delta) \vFunc_{t+1}^{{m}} \\
+ & = \uFunc_{t}^{c} - \frac{(1-\delta)}{\Rfree} \Rfree\DiscFac \vFunc_{t+1}^{{m}}  \\
  & = \left[1-\frac{(1-\delta)}{\Rfree}\right] \uFunc_{t}^{c} \\
  & = \left[\frac{\rfree + \delta}{\Rfree}\right]   \uFunc_{t}^{c}
 \end{aligned}
