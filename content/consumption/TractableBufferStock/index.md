@@ -1,22 +1,19 @@
 ---
 math:
   # Everything else this chapter writes comes from the shared notation (econ-ark-tools, @resources/notation).
-  # Kept here: four symbols that wait on Chris (the birth date's tau, Pi's face, the check, the crossed-out c), and
-  # the two loci's labels, which have no registry row. \GPRtehFix stays too, for the PDF: the course-local block
-  # gives \thorn as a bare þ, which the registry's \thorn_{\WGroRtehFix} puts in math mode, where pdflatex drops it.
-  # It goes when that override does.
+  # Kept here: three symbols that wait on Chris (Pi's face, the check, the crossed-out c), and the two loci's
+  # labels, which have no registry row.
+  # \GPRtehFix stays too, for the PDF: the course-local block gives \thorn as a bare þ, which the registry's
+  # \thorn_{\WGroRtehFix} puts in math mode, where pdflatex drops it. It goes when that override does.
   '\GPRtehFix': '\APRte_{\WGroRtehFix}'
   '\GPRteAdj': '\check{\APRte}_{\WGroRtehFix}'
   '\dcEqZero': '\Delta\cNrmE=0'
   '\dmEqZero': '\Delta\mNrmE=0'
   '\straight': '\Pi'
-  '\tThen': '\tau'
   '\psavFunc': '\cancel{\cFunc}'
 ---
 (sec:TractableBufferStock)=
 # A Tractable Model of Buffer Stock Saving
-
-A companion notebook in the Econ-ARK DemARK collection, [Tractable Buffer Stock (interactive)](https://econ-ark.org/materials/tractablebufferstock-interactive), lets you vary the model's parameters and watch the consumption function and target wealth respond. HARK solves the model as its [`TractableConsumerType`](https://github.com/econ-ark/HARK/blob/main/examples/TractableBufferStockModel/TractableConsumerType.ipynb), and this chapter's figures are drawn with that class by its [figure notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 
 ## Introduction
 
@@ -26,6 +23,12 @@ This chapter illustrates the logic of precautionary saving by assuming that indi
 The model simplifies many of the key results in {cite:t}`carroll:brookings` and {cite:t}`BufferStockTheory` using a discrete-time version of the elegant continuous-time model of {cite:t}`toche:urisk`. For a brief summary of the precautionary saving literature, see {cite:t}`CarrollKimballPSPW`; for a more rigorous treatment of the theoretical issues, see {cite:t}`BufferStockTheory`.
 :::
 
+Two assumptions make the model tractable. Unemployment is permanent, so an unemployed consumer has a perfect foresight problem whose solution is linear in resources. And the income of a consumer who stays employed grows just fast enough that a change in the risk of unemployment leaves expected human wealth unchanged, so the change is a pure change in uncertainty.
+
+We show that a consumer who is sufficiently impatient has a target ratio of wealth to income, at which impatience, pulling wealth down, is balanced by prudence, which grows stronger as wealth falls; and that the consumption function is concave. The model then shows why estimates of the consumption Euler equation can mislead and, for a small open economy, how a transfer to each newborn generation (a "stake") lets a representative agent describe the behavior of many households. The appendix derives the results and describes how the model is solved numerically.
+
+A companion notebook in the Econ-ARK DemARK collection, [Tractable Buffer Stock (interactive)](https://econ-ark.org/materials/tractablebufferstock-interactive), lets you vary the model's parameters and watch the consumption function and target wealth respond. HARK solves the model as its [`TractableConsumerType`](https://github.com/econ-ark/HARK/blob/main/examples/TractableBufferStockModel/TractableConsumerType.ipynb), and this chapter's figures are drawn with that class by its [figure notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+
 ## The Microeconomic Consumer's Problem
 
 The aggregate wage {math}`\Wage_{t}` grows by a constant factor {math}`\WGroFac` every period, reflecting exogenous labor productivity improvements:
@@ -34,7 +37,7 @@ The aggregate wage {math}`\Wage_{t}` grows by a constant factor {math}`\WGroFac`
 \Wage_{t+1} = \WGroFac \Wage_{t}.
 ```
 
-The consumer lives in a small open economy, so there is a constant interest factor {math}`\Rfree`. Defining {math}`\mLvl` as **m**arket resources (net worth plus current income), {math}`\aLvl` as end-of-period **a**ssets **a**fter **a**ll **a**ctions **a**re **a**ccomplished (specifically, after the consumption decision), and {math}`\bLvl` as **b**ank **b**alances **b**efore receipt of labor income, the dynamic budget constraint (DBC) can be decomposed into the following elements:
+The consumer lives in a small open economy, so there is a constant interest factor {math}`\Rfree`. Defining {math}`\mLvl` as **m**arket resources (net worth plus current income), {math}`\aLvl` as end-of-period **a**ssets **a**fter **a**ll **a**ctions **a**re **a**ccomplished (specifically, after the consumption decision), and {math}`\bLvl` as **b**ank **b**alances **b**efore receipt of labor income, the dynamic budget constraint can be decomposed into the following elements:
 
 ```{math}
 :label: eq:TBS-DBC
@@ -64,7 +67,7 @@ Once a person becomes unemployed, that person can never become employed again (i
 The solution to the unemployed consumer's optimization problem is
 
 :::{margin}
-See the [perfect foresight CRRA](#sec:PerfForesightCRRA) section for a derivation, noting that human wealth is zero for the unemployed consumer.
+See [perfect foresight CRRA](#sec:PerfForesightCRRA) for a derivation, noting that human wealth is zero for the unemployed consumer.
 :::
 
 ```{math}
@@ -76,7 +79,7 @@ See the [perfect foresight CRRA](#sec:PerfForesightCRRA) section for a derivatio
 where the {math}`u` superscript signifies the consumer's (un)employment status; {math}`\MPC` is the marginal propensity to consume for the perfect foresight consumer, which is strictly below the MPC for the problem with uncertainty ({cite:p}`carroll&kimball:concavity`); and {math}`\RPFac` is what {cite:t}`BufferStockTheory` calls the "return patience factor."
 
 :::{margin}
-The Old English letter {math}`\APFac = (\Rfree \DiscFac)^{1/\CRRA}`, which looks like a combination of {math}`\Rfree, \DiscFac,` and {math}`\CRRA`, designates the "absolute patience factor," which determines whether consumption rises ({math}`\APFac > 1`), stays the same ({math}`\APFac = 1`), or falls ({math}`\APFac < 1`) in the perfect foresight problem (see the [perfect foresight CRRA](#sec:PerfForesightCRRA) section). Terms like this are defined in {cite:t}`BufferStockTheory`, which we henceforth do not cite each time a new term is introduced; see it for further definition and discussion.
+The Old English letter {math}`\APFac = (\Rfree \DiscFac)^{1/\CRRA}`, which looks like a combination of {math}`\Rfree, \DiscFac,` and {math}`\CRRA`, designates the "absolute patience factor," which determines whether consumption rises ({math}`\APFac > 1`), stays the same ({math}`\APFac = 1`), or falls ({math}`\APFac < 1`) in the perfect foresight problem (see [perfect foresight CRRA](#sec:PerfForesightCRRA)). Terms like this are defined in {cite:t}`BufferStockTheory`, which we henceforth do not cite each time a new term is introduced; see it for further definition and discussion.
 :::
 
 We now impose the "return impatience condition" (RIC),
@@ -87,14 +90,14 @@ We now impose the "return impatience condition" (RIC),
 \underbrace{\left(\frac{(\Rfree \DiscFac)^{1/\CRRA}}{\Rfree}\right)}_{= \RPFac} < 1
 ```
 
-which deserves its name because it is the condition that guarantees that {math}`\MPC > 0`: the consumer must not be *so* patient that, given the interest rate, a boost to resources fails to boost spending. An alternative (equally correct) interpretation is that the condition guarantees that the PDV of consumption for the unemployed consumer is not infinity.
+which deserves its name because it is the condition that guarantees that {math}`\MPC > 0`: the consumer must not be *so* patient that, given the interest rate, a boost to resources fails to boost spending. An alternative (equally correct) interpretation is that the condition guarantees that the present discounted value of consumption for the unemployed consumer is not infinity.
 
 :::{margin}
 "Pathologically patient" consumers who do not satisfy this condition can be thought of as people who would hoard any incremental resources in order to enable even more extra spending in the distant future.
 :::
 
 :::{margin}
-For a perfect foresight consumer, the [perfect foresight CRRA](#sec:PerfForesightCRRA) section shows that consumption grows by the factor {math}`\APFac = (\Rfree\DiscFac)^{1/\CRRA}`, so if we do not impose the RIC, consumption would "want" to grow by a factor greater than the factor {math}`\Rfree` by which it is being discounted.
+For a perfect foresight consumer, [perfect foresight CRRA](#sec:PerfForesightCRRA) shows that consumption grows by the factor {math}`\APFac = (\Rfree\DiscFac)^{1/\CRRA}`, so if we do not impose the RIC, consumption would "want" to grow by a factor greater than the factor {math}`\Rfree` by which it is being discounted.
 :::
 
 For many purposes (not least, the calibration of the model), it turns out to be useful to alternatively express impatience conditions like {eq}`eq:TBS-RIC` in terms of the upper bound of the range of time preference factors {math}`\bar{\DiscFac}` that satisfy the condition; solving {eq}`eq:TBS-RIC` for {math}`\DiscFac`, we designate this object
@@ -170,11 +173,11 @@ so that the *expected* labor income growth factor for employed consumers is the 
 \end{aligned}
 ```
 
-which is the reason for {eq}`eq:TBS-meanPreserve`'s assumption about the growth of individual labor productivity: It implies that an increase in {math}`\urate` is a pure increase in uncertainty with no effect on the PDV of expected labor income ("human wealth"); an increase in {math}`\urate` therefore constitutes a "mean-preserving spread" in human wealth.
+which is the reason for {eq}`eq:TBS-meanPreserve`'s assumption about the growth of individual labor productivity: It implies that an increase in {math}`\urate` is a pure increase in uncertainty with no effect on the present discounted value of expected labor income ("human wealth"); an increase in {math}`\urate` therefore constitutes a "mean-preserving spread" in human wealth.
 
 #### First Order Optimality Condition
 
-The same solution methods used in the [perfect foresight CRRA](#sec:PerfForesightCRRA) section can be applied here too (take the first order condition with respect to {math}`\cLvl`, use the [Envelope theorem](#sec:Envelope)); the only difference is the need to keep the expectations operator in place. Using {math}`\bullet` as a placeholder for "e" or "u," the usual steps lead to the standard consumption Euler equation:
+The same solution methods used in [perfect foresight CRRA](#sec:PerfForesightCRRA) can be applied here too (take the first order condition with respect to {math}`\cLvl`, use the [Envelope theorem](#sec:Envelope)); the only difference is the need to keep the expectations operator in place. Using {math}`\bullet` as a placeholder for "e" or "u," the usual steps lead to the standard consumption Euler equation:
 
 ```{math}
 :label: eq:TBS-ctp1Oct
@@ -209,7 +212,7 @@ It will be useful now to define a "growth patience factor" (terminology justifie
 \GPFachFix = \left(\frac{(\Rfree\DiscFac)^{1/\CRRA}}{\WGroFachFix}\right),
 ```
 
-which is the factor by which {math}`{\cNrm}^{\EmpLbl}` would grow in the perfect foresight version of the model with permanent income growth factor {math}`\WGroFachFix` (again see the [perfect foresight CRRA](#sec:PerfForesightCRRA) section). Using this, {eq}`eq:TBS-Explicit` can be written as
+which is the factor by which {math}`{\cNrm}^{\EmpLbl}` would grow in the perfect foresight version of the model with permanent income growth factor {math}`\WGroFachFix` (again see [perfect foresight CRRA](#sec:PerfForesightCRRA)). Using this, {eq}`eq:TBS-Explicit` can be written as
 
 ```{math}
 :label: eq:TBS-BeforePFStep
@@ -269,13 +272,13 @@ We noted above that for any given {math}`\mNrmE_{t}`, an increase in uncertainty
 \end{aligned}
 ```
 
-Expected consumption grows faster than in the perfect foresight model by an amount proportional to {math}`\CRRA+1`, the coefficient of relative prudence of CRRA utility, and to {math}`\urate\cGap_{t+1}^{2}`, approximately the variance of the proportional change in consumption. Furthermore, because a profile with faster expected consumption *growth* can only exhibit the *same expected PDV* if that faster growth *starts* from a lower initial consumption *level*, we know that for any given initial value of {math}`\mNrmE`, the introduction of a risk of becoming unemployed {math}`\urate` induces a (precautionary) decline in consumption (and corresponding increase in saving).
+Expected consumption grows faster than in the perfect foresight model by an amount proportional to {math}`\CRRA+1`, the coefficient of relative prudence of CRRA utility, and to {math}`\urate\cGap_{t+1}^{2}`, approximately the variance of the proportional change in consumption. Furthermore, because a profile with faster expected consumption *growth* can only exhibit the *same expected present discounted value* if that faster growth *starts* from a lower initial consumption *level*, we know that for any given initial value of {math}`\mNrmE`, the introduction of a risk of becoming unemployed {math}`\urate` induces a (precautionary) decline in consumption (and corresponding increase in saving).
 
 Furthermore, under the (compelling) assumption that {math}`\CRRA > 1`, {eq}`eq:TBS-cedelapprox` implies that a consumer with a higher degree of prudence (larger {math}`\CRRA` and therefore larger {math}`\prudEx`) will anticipate a greater increment to consumption growth as a consequence of the introduction of uncertainty. This reflects the greater precautionary saving motive induced by a higher degree of prudence.
 
 #### Finding the Target
 
-The target level of {math}`\mNrm^{\EmpLbl}` (if one exists) will be the point of intersection between the {math}`\dcEqZero` and {math}`\dmEqZero` loci. Here and below, a variable without a time subscript denotes its steady-state value.
+The target level of {math}`\mNrm^{\EmpLbl}` (if one exists) will be the point of intersection between the {math}`\dcEqZero` and {math}`\dmEqZero` loci. Here and below, a variable without a time subscript denotes its value on a locus along which it does not change from one period to the next; the target itself is marked with a hat, as in {math}`\mTrgNrm^{\EmpLbl}`.
 
 The {math}`\dcEqZero` locus can be characterized by substituting {math}`{\cNrm}^{\EmpLbl}_{t+1}={\cNrm}^{\EmpLbl}_{t} \equiv {\cNrm}^{\EmpLbl}`:
 
@@ -298,7 +301,7 @@ which boils down to
 {\cNrm}^{\EmpLbl} = \cNrm^{\UnempLbl}_{t+1} \straight .
 ```
 
-The importance of the linearity of the consumption function of the unemployed consumer now becomes evident: It means that the RHS of {eq}`eq:TBS-cRatEtfmcRatUtp1` is linear in {math}`\cNrm^{\EmpLbl}_{t}`:
+The importance of the linearity of the consumption function of the unemployed consumer now becomes evident: It means that the right-hand side of {eq}`eq:TBS-cRatEtfmcRatUtp1` is linear in {math}`\cNrm^{\EmpLbl}_{t}`:
 
 ```{math}
 :label: eq:TBS-PSTerm
@@ -306,7 +309,7 @@ The importance of the linearity of the consumption function of the unemployed co
 \cNrm^{\EmpLbl}_{t} = \overbrace{(\mNrm^{\EmpLbl}_{t}-{\cNrm}^{\EmpLbl}_{t})\RNrmByG \MPC}^{\cNrm^{\UnempLbl}_{t+1}} \straight .
 ```
 
-We know that {math}`\mNrmE_{t}-{\cNrm}^{\EmpLbl}_{t} > 0` because a consumer in these circumstances (facing possible perpetual unemployment) will never borrow (see below for a full discussion of this point). Since the RIC imposes {math}`\MPC>0`, {eq}`eq:TBS-PSTerm` tells us that steady-state consumption (if it exists) is a positive finite number so long as {math}`\straight > 0`. That holds if and only if the numerator on the LHS of {eq}`eq:TBS-straightDef` is a positive finite number, which requires
+We know that {math}`\mNrmE_{t}-{\cNrm}^{\EmpLbl}_{t} > 0` because a consumer in these circumstances (facing possible perpetual unemployment) will never borrow (see [consumption function](#fig:TBS-cFunc)). Since the RIC imposes {math}`\MPC>0`, {eq}`eq:TBS-PSTerm` tells us that steady-state consumption (if it exists) is a positive finite number so long as {math}`\straight > 0`. That holds if and only if the numerator on the left-hand side of {eq}`eq:TBS-straightDef` is a positive finite number, which requires
 
 :::{margin}
 Under some parameter values, the model has solutions under which the consumer always spends less than the amount that would leave {math}`\mNrmE` constant, and so accumulates forever.
@@ -340,7 +343,7 @@ In the limit as {math}`\urate` approaches zero, {eq}`eq:TBS-GICExistsSoln` reduc
 \GPFachFix < 1 ,
 ```
 
-which, as in the [perfect foresight CRRA](#sec:PerfForesightCRRA) section, we call a "growth impatience condition" (GIC) by analogy to the "return impatience condition" {eq}`eq:TBS-RIC` imposed earlier. The [perfect foresight CRRA](#sec:PerfForesightCRRA) section shows that the limit of {eq}`eq:TBS-GICExistsSoln` as {math}`\urate \downarrow 0`, {math}`\WGroFac > \APFac`, ensures that a consumer facing no uncertainty is sufficiently impatient that his wealth-to-permanent-income ratio will fall over time. We label the weaker condition {eq}`eq:TBS-GICExistsSoln` the "GIC-TBS" (the version of the GIC required for the employed consumer's consumption function to exist in the Tractable Buffer Stock model). It will always hold if the plain-vanilla {math}`\GICWGro` holds because {math}`\urate \geq 0`. A target level of wealth requires more: the {math}`\GIChFix`, {math}`\GPFachFix < 1` (see below), which is stronger than the GIC-TBS but weaker than the {math}`\GICWGro`, because {math}`\WGroFachFix \geq \WGroFac`. Thus, a consumer who, in the absence of uncertainty, would satisfy both the RIC and the {math}`\GICWGro`, will have a positive finite target level of wealth when uncertainty is introduced.
+which, as in [perfect foresight CRRA](#sec:PerfForesightCRRA), we call a "growth impatience condition" (GIC) by analogy to the "return impatience condition" {eq}`eq:TBS-RIC` imposed earlier. [Perfect foresight CRRA](#sec:PerfForesightCRRA) shows that the limit of {eq}`eq:TBS-GICExistsSoln` as {math}`\urate \downarrow 0`, {math}`\WGroFac > \APFac`, ensures that a consumer facing no uncertainty is sufficiently impatient that their wealth-to-permanent-income ratio will fall over time. We label the weaker condition {eq}`eq:TBS-GICExistsSoln` the "GIC-TBS" (the version of the GIC required for the employed consumer's consumption function to exist in the Tractable Buffer Stock model). It will always hold if the plain-vanilla {math}`\GICWGro` holds because {math}`\urate \geq 0`. A target level of wealth requires more: the {math}`\GIChFix`, {math}`\GPFachFix < 1`, which is stronger than the GIC-TBS but weaker than the {math}`\GICWGro`, because {math}`\WGroFachFix \geq \WGroFac`. Thus, a consumer who, in the absence of uncertainty, would satisfy both the RIC and the {math}`\GICWGro`, will have a positive finite target level of wealth when uncertainty is introduced.
 
 :::{margin}
 See the [appendix on conditions for a target](#sec:TBS-mTargExists) for a proof that, given the RIC, the {math}`\GIChFix` condition is both necessary and sufficient for the existence of a target level of wealth.
@@ -379,7 +382,7 @@ or, since {math}`\WGroRtehFix \approx \WGroRte+\urate`,
 
 #### Why Increased Unemployment Risk Increases Effective Growth Impatience
 
-Equation {eq}`eq:TBS-GICrateUsingwGro` becomes easier to satisfy (in the sense of requiring a lower {math}`\discRte`) as {math}`\urate` increases, since in both places where {math}`\urate` appears on the LHS it is with a negative coefficient.
+Equation {eq}`eq:TBS-GICrateUsingwGro` becomes easier to satisfy (in the sense of requiring a lower {math}`\discRte`) as {math}`\urate` increases, since in both places where {math}`\urate` appears on the left-hand side it is with a negative coefficient.
 
 The reason the two appearances of {math}`\urate` have not been combined in {eq}`eq:TBS-GICrateUsingwGro` is that the separate terms reflect two logically distinct effects. The first appearance, where {math}`\urate` is premultiplied by {math}`-\CRRA^{-1}`, can be interpreted as capturing the sense in which an increase in {math}`\urate` is like an increase in the discounting of the future (the coefficient on {math}`\urate` is the same as that on {math}`\discRte`). This downweighting of the future occurs precisely because that future might not occur (if the consumer becomes unemployed). The effect is much like the increase in discounting that occurs when a positive probability of death is introduced in consumption problems, cf. {cite:t}`blanchardFinite`.
 
@@ -408,7 +411,7 @@ Briefly, this is accomplished as follows. We can obtain the {math}`\dcEqZero` lo
 \end{aligned}
 ```
 
-Now we need to use a normalized version of the DBC (equation {eq}`eq:TBS-MLevtp1`),
+Now we need to use a normalized version of the dynamic budget constraint (equation {eq}`eq:TBS-MLevtp1`),
 
 ```{math}
 :label: eq:TBS-metp1
@@ -430,39 +433,11 @@ to derive the {math}`\mNrmE_{t+1}=\mNrmE_{t}=\mNrmE` locus (also referred to as 
 
 The steady-state levels of {math}`\mNrmE` and {math}`{\cNrm}^{\EmpLbl}` are the values of these two variables at which both {eq}`eq:TBS-mDelEqZero` and {eq}`eq:TBS-cDelEqZero` hold. This is just a set of two linear equations and two unknowns, and with a bit of algebra can be solved explicitly.
 
-In the special case of logarithmic utility ({math}`\CRRA = 1`), the [approximation appendix](#sec:TBS-mTargApprox) shows that (under some strong assumptions) an approximation to target market resources will be given by
-
-```{math}
-:label: eq:TBS-mTargetLogCase
-
-\mTrgNrm^{\EmpLbl} \approx 1 + \left(\frac{1}{(\WGroRtehFix-\rfree)+\discRte(1+(\WGroRtehFix+\discRte-\rfree)/\urate)}\right)
-```
-
-and that the RIC and the {math}`\GIChFix` guarantee that the denominator of the fraction is a positive number.
-
-This expression encapsulates several of the key intuitions of the model. The "human wealth effect" of growth (cf. {cite:t}`summersCapTax`) is captured by the first {math}`\WGroRtehFix` term in the denominator; clearly, for any calibration for which the denominator is a positive number, increasing {math}`\WGroRtehFix` will increase the size of the denominator and therefore reduce the target level of wealth. The human wealth effect of interest rates is correspondingly captured by the {math}`-\rfree` term. An increase in the future discounting rate, {math}`\discRte`, will also increase the size of the denominator and therefore reduce target wealth. Finally, holding {math}`\WGroRtehFix` fixed, a reduction in unemployment risk will boost {math}`(\WGroRtehFix+\discRte-\rfree)/\urate` and therefore reduce target wealth. Under this chapter's design, though, {math}`\WGroRtehFix \approx \WGroRte+\urate` moves with {math}`\urate` to keep human wealth fixed; substituting it, the derivative of the denominator with respect to {math}`\urate` is {math}`1-\discRte(\WGroRte+\discRte-\rfree)/\urate^{2}`, so a reduction in unemployment risk reduces target wealth only if {math}`\discRte(\WGroRte+\discRte-\rfree) > \urate^{2}`, as it does at the benchmark values of these parameters.
-
-:::{margin}
-Under {math}`\log` utility ({math}`\CRRA=1`), {math}`(\WGroRtehFix+\discRte-\rfree) > 0` is (approximately) the {math}`\GIChFix`, {math}`\WGroRtehFix > \CRRA^{-1}(\rfree-\discRte)`; the weaker GIC-TBS {eq}`eq:TBS-GICrateUsingwGro` does not guarantee it.
-:::
-
-The assumption of log utility is restrictive, and probably does not capture sufficient aversion to consumption fluctuations. Fortunately, another special case helps to illuminate the effect of higher levels of prudence. The [approximation appendix](#sec:TBS-mTargApprox) shows that, in the special case where {math}`\discRte=\rfree`, the target level of wealth will be approximable by
-
-```{math}
-:label: eq:TBS-mTargetrEqdelta
-
-\mTrgNrm \approx 1 + \left(\frac{1}{(\WGroRtehFix-\rfree)+\discRte(1+(\WGroRtehFix/\urate)(1-(\WGroRtehFix/\urate)\prudEx))}\right)
-```
-
-which is like {eq}`eq:TBS-mTargetLogCase` (with {math}`\discRte-\rfree=0`) but with the addition of the final term involving {math}`\prudEx` which measures the amount by which prudence exceeds the logarithmic benchmark. An increase in {math}`\prudEx` reduces the denominator of {eq}`eq:TBS-mTargetrEqdelta` and thereby boosts the target level of wealth: Exactly what would be expected from an increase in the intensity of the precautionary motive.
-
-Note that the different effects *interact* with each other, in the sense that the strength of, say, the human wealth effect will vary depending on the values of the other parameters. The ways in which these interactions make intuitive sense will repay deep reflection. (Hint: How much I care about the future governs the power that future events have in determining my targets; use the formula to think about why).
-
-#### Conditions Required for a Perfect Foresight Solution; Existence of Target {math}`\mNrmE`
+#### Finite Human Wealth and the Existence of a Target
 
 Interestingly, the limit of the buffer stock model as {math}`\urate \downarrow 0` is *not* the perfect foresight solution obtained when {math}`\urate` is exactly equal to zero.
 
-The [perfect foresight CRRA](#sec:PerfForesightCRRA) section shows that in the perfect foresight context, it is necessary to impose the Finite Human Wealth Condition {math}`\Rfree > \WGroFac` (henceforth, {math}`\FHWCWGro`) to obtain a sensible solution. But if the {math}`\FHWCWGro` holds, the {math}`\GICWGro` is strictly stronger than the RIC, because the combination {math}`\APFac/\WGroFac < 1` and {math}`\Rfree > \WGroFac` obviously implies {math}`\APFac/\Rfree < 1`. If we substitute {math}`\WGroFachFix` for {math}`\WGroFac`, we can define the corresponding version of the condition in the case where growth is {math}`\WGroFachFix`: the {math}`\FHWChFix`.
+[Perfect foresight CRRA](#sec:PerfForesightCRRA) shows that in the perfect foresight context, it is necessary to impose the Finite Human Wealth Condition {math}`\Rfree > \WGroFac` (henceforth, {math}`\FHWCWGro`) to obtain a sensible solution. But if the {math}`\FHWCWGro` holds, the {math}`\GICWGro` is strictly stronger than the RIC, because the combination {math}`\APFac/\WGroFac < 1` and {math}`\Rfree > \WGroFac` obviously implies {math}`\APFac/\Rfree < 1`. If we substitute {math}`\WGroFachFix` for {math}`\WGroFac`, we can define the corresponding version of the condition in the case where growth is {math}`\WGroFachFix`: the {math}`\FHWChFix`.
 
 :::{margin}
 The [appendix to the perfect foresight CRRA section](#sec:PFwhenFHWfails) shows that if the {math}`\FHWCWGro` fails, the limit of the perfect foresight model is {math}`\cFunc(\mNrm)=\infty \forall \mNrm`, which is not a useful or plausible solution.
@@ -489,6 +464,36 @@ The conditions used in this chapter, and what each guarantees, are summarized be
 | {math}`\GIChFix` | {math}`\GPFachFix < 1` | {math}`\DiscFac < \WGroFachFix^{\CRRA}/\Rfree` | {math}`\CRRA^{-1}(\rfree-\discRte) < \WGroRtehFix` | with the RIC, a target {math}`\mTrgNrm^{\EmpLbl}` exists (necessary and sufficient) |
 | GIC-TBS | {math}`\GPFachFix(1-\urate)^{1/\CRRA} < 1` | {math}`\DiscFac < \WGroFachFix^{\CRRA}/(\Rfree(1-\urate))` | {math}`\CRRA^{-1}(\rfree-\discRte-\urate) < \WGroRte+\urate` | {math}`\straight > 0`: the employed consumer's consumption function exists |
 
+#### Approximations to the Target
+
+In the special case of logarithmic utility ({math}`\CRRA = 1`), the [approximation appendix](#sec:TBS-mTargApprox) shows that (under some strong assumptions) an approximation to target market resources will be given by
+
+```{math}
+:label: eq:TBS-mTargetLogCase
+
+\mTrgNrm^{\EmpLbl} \approx 1 + \left(\frac{1}{(\WGroRtehFix-\rfree)+\discRte(1+(\WGroRtehFix+\discRte-\rfree)/\urate)}\right)
+```
+
+and that the RIC and the {math}`\GIChFix` guarantee that the denominator of the fraction is a positive number.
+
+This expression encapsulates several of the key intuitions of the model. The "human wealth effect" of growth (cf. {cite:t}`summersCapTax`) is captured by the first {math}`\WGroRtehFix` term in the denominator; clearly, for any calibration for which the denominator is a positive number, increasing {math}`\WGroRtehFix` will increase the size of the denominator and therefore reduce the target level of wealth. The human wealth effect of interest rates is correspondingly captured by the {math}`-\rfree` term. An increase in the future discounting rate, {math}`\discRte`, will also increase the size of the denominator and therefore reduce target wealth. Finally, holding {math}`\WGroRtehFix` fixed, a reduction in unemployment risk will boost {math}`(\WGroRtehFix+\discRte-\rfree)/\urate` and therefore reduce target wealth. Under this chapter's design, though, {math}`\WGroRtehFix \approx \WGroRte+\urate` moves with {math}`\urate` to keep human wealth fixed; substituting it, the derivative of the denominator with respect to {math}`\urate` is {math}`1-\discRte(\WGroRte+\discRte-\rfree)/\urate^{2}`, so a reduction in unemployment risk reduces target wealth only if {math}`\discRte(\WGroRte+\discRte-\rfree) > \urate^{2}`, as it does at the benchmark values of these parameters.
+
+:::{margin}
+Under {math}`\log` utility ({math}`\CRRA=1`), {math}`(\WGroRtehFix+\discRte-\rfree) > 0` is (approximately) the {math}`\GIChFix`, {math}`\WGroRtehFix > \CRRA^{-1}(\rfree-\discRte)`; the weaker GIC-TBS {eq}`eq:TBS-GICrateUsingwGro` does not guarantee it.
+:::
+
+The assumption of log utility is restrictive, and probably does not capture sufficient aversion to consumption fluctuations. Fortunately, another special case helps to illuminate the effect of higher levels of prudence. The [approximation appendix](#sec:TBS-mTargApprox) shows that, in the special case where {math}`\discRte=\rfree`, the target level of wealth will be approximable by
+
+```{math}
+:label: eq:TBS-mTargetrEqdelta
+
+\mTrgNrm^{\EmpLbl} \approx 1 + \left(\frac{1}{(\WGroRtehFix-\rfree)+\discRte(1+(\WGroRtehFix/\urate)(1-(\WGroRtehFix/\urate)\prudEx))}\right)
+```
+
+which is like {eq}`eq:TBS-mTargetLogCase` (with {math}`\discRte-\rfree=0`) but with the addition of the final term involving {math}`\prudEx` which measures the amount by which prudence exceeds the logarithmic benchmark. An increase in {math}`\prudEx` reduces the denominator of {eq}`eq:TBS-mTargetrEqdelta` and thereby boosts the target level of wealth: Exactly what would be expected from an increase in the intensity of the precautionary motive.
+
+Note that the different effects *interact* with each other, in the sense that the strength of, say, the human wealth effect will vary depending on the values of the other parameters. The ways in which these interactions make intuitive sense will repay deep reflection. (Hint: how much a consumer cares about the future governs the power that future events have in determining the target; use the formula to think about why.)
+
 #### The Phase Diagram
 
 The figures use a benchmark calibration chosen to show the model's features clearly rather than for realism: {math}`\urate = 0.005`, {math}`\discRte = 0.10` (so {math}`\DiscFac = 1/1.10`), {math}`\Rfree = 1.03`, {math}`\WGroFac = 1` and {math}`\CRRA = 2` (and, for the small open economy, {math}`\PopnGroFac = 1.01`). It implies {math}`\RPFac \approx 0.939`, so {math}`\MPC \approx 0.061`; {math}`\GPFachFix \approx 0.963`, so the {math}`\GIChFix` holds; and a target {math}`\mTrgNrm^{\EmpLbl} \approx 5.48`, with {math}`\cTrgNrm^{\EmpLbl} \approx 1.11`.
@@ -498,7 +503,7 @@ The figures use a benchmark calibration chosen to show the model's features clea
 :::{figure} figures/PhaseDiag.png
 :name: fig:TBS-PhaseDiag
 
-Phase Diagram. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Phase Diagram. The {math}`\dcEqZero` and {math}`\dmEqZero` loci cross at the target; the stable arm through it is the consumption function, and the arrows show the direction of motion in each region. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 The {math}`\Delta \mNrmE = 0` locus, given in {eq}`eq:TBS-mDelEqZero`, indicates, for a given level of {math}`\mNrmE`, how much consumption {math}`{\cNrm}^{\EmpLbl}` would be exactly the right amount to leave {math}`\mNrmE` unchanged. Call this the "permanently sustainable consumption locus," or for short "sustainable consumption." For any given {math}`\mNrmE`, consuming an amount less than the "sustainable" level will cause wealth to rise (and conversely for points above {math}`\Delta \mNrmE =0`). This provides the logic for the horizontal arrows of motion in the diagram: Above the sustainable consumption locus they point left, and below they point right.
@@ -513,7 +518,7 @@ The consequences of this are easiest to see in the logarithmic case whose consum
 
 #### The Consumption Function
 
-{numref}`fig:TBS-cFunc` shows the optimal consumption function {math}`\cFunc(m)` for an employed consumer (dropping the {math}`e` superscript to reduce clutter). This is actually just the stable arm in the phase diagram. (Think about why). Also plotted are the 45 degree line along which {math}`\cNrm = \mNrmE_{t}` as well as the function
+{numref}`fig:TBS-cFunc` shows the optimal consumption function {math}`\cFunc(m)` for an employed consumer (dropping the {math}`e` superscript to reduce clutter). This is actually just the stable arm in the phase diagram. (Think about why). Also plotted are the 45 degree line along which {math}`\cNrm = \mNrm` as well as the function
 
 ```{math}
 \bar{\cFunc}(\mNrm) = (\mNrm-1+\hNrm)\MPC
@@ -534,7 +539,7 @@ This limiting result requires that we impose the {math}`\FHWCWGro` ({math}`\WGro
 :::{figure} figures/cFunc.png
 :name: fig:TBS-cFunc
 
-The Consumption Function. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+The Consumption Function. The consumption function lies below the 45 degree line and below the perfect foresight consumption function {math}`\bar{\cFunc}`, which it approaches as {math}`\mNrmE` grows. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 Note that {math}`\cFunc(\mNrm)` is *concave*. That is, the marginal propensity to consume {math}`\MPCFunc(\mNrm) \equiv d \cFunc(\mNrm)/d \mNrm` is higher at low levels of {math}`m`. This is because of the increase in the intensity of the precautionary motive as resources {math}`\mNrm` decline; the consequences of becoming unemployed with little wealth are very painful. The MPC is high at low levels of {math}`\mNrm` because at low levels of {math}`\mNrm` the *relaxation* in the intensity of the precautionary motive with each extra bit of {math}`\mNrm` is quite large ({cite:p}`kimball:smallandlarge`). This diminution in the precautionary motive translates into an increase in consumption; for {math}`m`-poor consumers even a modest increase in {math}`\mNrm` can give a substantial boost to {math}`c`.
@@ -543,7 +548,7 @@ Note that {math}`\cFunc(\mNrm)` is *concave*. That is, the marginal propensity t
 {cite:t}`carroll&kimball:concavity` prove that the consumption function must be concave for almost all commonly-used assumptions about risk and utility functions.
 :::
 
-This point is clearest as {math}`\mNrm` approaches zero. Note that the consumption function always remains below the 45 degree line. This is because if the consumer were to spend all his resources in period {math}`t`, {math}`c_{t}=\mNrm_{t}`, then if he became unemployed next period he would have {math}`\mNrmU_{t+1}=(\mNrm_{t}-c_{t})\RNrmByG=0` which would induce {math}`\cNrmU_{t+1}= \MPC \mNrmU_{t+1}=0`, yielding negative infinite utility. Thus the consumer will never spend all of his resources; he will always leave at least a little bit for next period in case of disaster (unemployment).
+This point is clearest as {math}`\mNrm` approaches zero. Note that the consumption function always remains below the 45 degree line. This is because if the consumer were to spend all of their resources in period {math}`t`, {math}`c_{t}=\mNrm_{t}`, then on becoming unemployed next period they would have {math}`\mNrmU_{t+1}=(\mNrm_{t}-c_{t})\RNrmByG=0` which would induce {math}`\cNrmU_{t+1}= \MPC \mNrmU_{t+1}=0`, yielding negative infinite utility. Thus the consumer will never spend all of their resources, and will always leave at least a little bit for next period in case of disaster (unemployment).
 
 :::{margin}
 This is an implication not just of the CRRA utility function used here but of the general class of continuously differentiable utility functions that satisfy the usual *Inada condition* {math}`\uFunc^{\prime}(0) = \infty`.
@@ -579,7 +584,7 @@ Thus consumption growth is equal to what it would be in the absence of uncertain
 :::{figure} figures/GrowthA.png
 :name: fig:TBS-GrowthA
 
-Income and Consumption Growth. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Income and Consumption Growth. The growth of consumption for a consumer who stays employed falls as {math}`\mNrmE` rises and equals income growth {math}`\WGroRtehFix` at the target; its excess over the perfect foresight rate is the precautionary increment. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 Next, note that the point where the consumption growth locus meets the income growth line is labeled {math}`\mTrgNrm`. This is because the place where consumption growth is equal to income growth is at the target value of {math}`\mNrmE`.
@@ -588,12 +593,14 @@ Next, note that the point where the consumption growth locus meets the income gr
 
 We are finally in position to get an intuitive understanding of how the model works, and why there is a target wealth ratio. On the one hand, consumers are growth-impatient. This prevents their wealth-to-income ratio from heading off to infinity. On the other hand, consumers have a precautionary motive that intensifies more and more as the level of wealth gets lower and lower. At some point the precautionary motive gets strong enough to counterbalance impatience. The point where impatience matches prudence defines the target wealth-to-income ratio.
 
+#### Comparative Statics
+
 Now consider the results of increasing the interest rate to {math}`\grave{\rfree}>\rfree`, depicted in {numref}`fig:TBS-GrowthB`. Obviously the perfect foresight consumption growth locus will shift up, to {math}`\CRRA^{-1}(\grave{\rfree}-\discRte)`, inducing a corresponding increase in the consumption growth locus for a consumer who stays employed. But we have not changed the expected growth rate of income. It is clear from the figure, therefore, that the new target level of cash-on-hand {math}`\grave{\mTrgNrm}^{\EmpLbl}` will be greater than the original target. That is, an increase in the interest rate increases the target level of wealth, as would be expected on intuitive grounds: in the benchmark calibration, raising {math}`\rfree` by 0.04 raises {math}`\mTrgNrm^{\EmpLbl}` from 5.48 to 6.89.
 
 :::{figure} figures/GrowthB.png
 :name: fig:TBS-GrowthB
 
-Effect of An Increase In {math}`\rfree`. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Effect of An Increase In {math}`\rfree`. A higher interest rate raises the perfect foresight growth rate and shifts the consumption growth curve up, so the target rises. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 The next exercise, shown in {numref}`fig:TBS-cGroIncreaseMhoPlot`, is an increase in the risk of unemployment {math}`\urate`. The principal effect we are interested in is the upward shift in the consumption growth locus (for a consumer who stays employed) to {math}`\Delta \grave{\cLvl}_{t+1}`. If the household starts at the original target level of resources {math}`\mTrgNrm`, the size of the upward shift at that point is captured by the arrow originating at {math}`\{\mTrgNrm,\WGroRtehFix\}`.
@@ -603,7 +610,7 @@ In the absence of other consequences of the rise in {math}`\urate`, the effect o
 :::{figure} figures/cGroIncreaseMhoPlot.png
 :name: fig:TBS-cGroIncreaseMhoPlot
 
-Effect of an Increase in {math}`\urate`. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Effect of an Increase in {math}`\urate`. Higher unemployment risk shifts the consumption growth curve up and raises income growth {math}`\WGroRtehFix` for consumers who stay employed; at the benchmark calibration the target rises. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 #### Death to the Log-Linearized Consumption Euler Equation!
@@ -634,7 +641,7 @@ How can we reconcile these two expressions for consumption growth? Only by reali
 
 We can use this equation to understand the relationship between parameters and steady-state levels of wealth, by noting that {math}`\cGap_{t+1}(\mNrmE_{t})` is a downward-sloping function of {math}`\mNrmE_{t}` (see {numref}`fig:TBS-GrowthA` again). This is because at low levels of current wealth, much of the spending of employed consumers is financed by their current income. If they lose that income, they will have no choice but to cut consumption drastically; this is reflected in a large value of {math}`\cGap_{t+1}`.
 
-For example, an increase in the growth rate of income implies that the RHS of equation {eq}`eq:TBS-prectermSS` increases. The new target level of {math}`\mTrgNrm` must be lower, because lower wealth induces greater consumption risk and a corresponding increase in the LHS of {eq}`eq:TBS-prectermSS`. This is how the human wealth effect works in this framework: Consumers who anticipate faster income growth will hold less market wealth.
+For example, an increase in the growth rate of income implies that the right-hand side of equation {eq}`eq:TBS-prectermSS` increases. The new target level of {math}`\mTrgNrm` must be lower, because lower wealth induces greater consumption risk and a corresponding increase in the left-hand side of {eq}`eq:TBS-prectermSS`. This is how the human wealth effect works in this framework: Consumers who anticipate faster income growth will hold less market wealth.
 
 The fact that consumption growth equals income growth in the steady-state poses major problems for empirical attempts to estimate the Euler equation. To see why, suppose we had a collection of countries indexed by {math}`i`, identical in all respects except that they have different interest rates {math}`\rfree_{i}`. Then in the spirit of {cite:t}`hallSubstitution`, one might be tempted to estimate an equation:
 
@@ -672,7 +679,7 @@ We could also analyze the effects on growth, but the results would be essentiall
 :::{figure} figures/DecreaseTheta.png
 :name: fig:TBS-DecreaseTheta
 
-Effect of Lower {math}`\discRte` On Consumption Function. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Effect of Lower {math}`\discRte` On Consumption Function. The new consumption function lies below the original; from the original target, consumption drops, and the consumer then moves along the new function to the higher new target. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 Eventually consumption approaches its new, higher equilibrium ratio to permanent income at a new, higher level of equilibrium {math}`\mNrmE` (in the benchmark calibration, lowering {math}`\discRte` from 0.10 to 0.08 raises {math}`\mTrgNrm^{\EmpLbl}` from 5.48 to 7.19 and {math}`\cTrgNrm^{\EmpLbl}` from 1.11 to 1.15). This higher level of consumption is financed in the long run by the higher interest income earned on the higher level of wealth.
@@ -684,19 +691,19 @@ Note again, however, that equilibrium steady-state consumption growth is still e
 :::{figure} figures/cPathAfterThetaDrop.png
 :name: fig:TBS-cPathAfterThetaDrop
 
-Path of {math}`{\cNrm}^{\EmpLbl}` Before and After {math}`\discRte` Decline. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Path of {math}`{\cNrm}^{\EmpLbl}` Before and After {math}`\discRte` Decline. Consumption drops when {math}`\discRte` falls, then rises to a higher steady-state ratio. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 :::{figure} figures/mPathAfterThetaDrop.png
 :name: fig:TBS-mPathAfterThetaDrop
 
-Path of {math}`\mNrmE` Before and After {math}`\discRte` Decline. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Path of {math}`\mNrmE` Before and After {math}`\discRte` Decline. Market resources rise gradually to the higher new target. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 :::{figure} figures/MPCPathAfterThetaDrop.png
 :name: fig:TBS-MPCPathAfterThetaDrop
 
-Marginal Propensity to Consume {math}`\MPCFunc(\mNrm_{t})` Before and After {math}`\discRte` Decline. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Marginal Propensity to Consume {math}`\MPCFunc(\mNrm_{t})` Before and After {math}`\discRte` Decline. The MPC drops when {math}`\discRte` falls and keeps falling as wealth accumulates, staying above the perfect foresight MPC {math}`\MPC`. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 ## A Macroeconomic Interpretation
@@ -723,29 +730,29 @@ Each person is part of a single "generation" of households born at the same time
 
 We assume that total production by the (surviving) members of a generation grows by the factor {math}`\WGroFac` every period. If total production is to grow despite a shrinking number of surviving members of the generation, production *per active capita* must grow by {math}`\WGroFac/\erate` as per {eq}`eq:TBS-meanPreserve`.
 
-Consider the economy in some period 0 in which the size of the newborn population and the wage rate have been normalized to {math}`\PopnLvl_{0,0} = \Wage_{0} = 1`. If the economy has existed for {math}`-\tThen` periods (where {math}`\tThen` is a negative number, indicating that the economy was created before period 0), the ratio of the total population to the population of newborns will be
+Consider the economy in some period 0 in which the size of the newborn population and the wage rate have been normalized to {math}`\PopnLvl_{0,0} = \Wage_{0} = 1`, and index each generation by its age {math}`\age`, the number of periods since its birth. If the economy was created {math}`\bar{\age}` periods before period 0, so that its oldest generation has age {math}`\bar{\age}`, the ratio of the total population to the population of newborns will be
 
 ```{math}
-1 + (\erate/\PopnGroFac)+ (\erate/\PopnGroFac)^{2}+ ... +(\erate/\PopnGroFac)^{-\tThen} = \left(\frac{1-(\erate/\PopnGroFac)^{-\tThen+1}}{1-(\erate/\PopnGroFac)}\right)
+1 + (\erate/\PopnGroFac)+ (\erate/\PopnGroFac)^{2}+ ... +(\erate/\PopnGroFac)^{\bar{\age}} = \left(\frac{1-(\erate/\PopnGroFac)^{\bar{\age}+1}}{1-(\erate/\PopnGroFac)}\right)
 ```
 
-whose limit is a finite number so long as {math}`\erate/\PopnGroFac < 1`, which we require.
+whose limit as {math}`\bar{\age} \rightarrow \infty` is a finite number so long as {math}`\erate/\PopnGroFac < 1`, which we require.
 
 Relative to the labor income of period 0's newborn cohort ({math}`\PopnLvl_{0,0} \Wage_{0} = 1`), the total labor income in period 0 of the generation born in period {math}`-1` is {math}`\PopnGroFac^{-1}`; the sum of the incomes of all of the two-period-old individuals is {math}`\PopnGroFac^{-2}`, and so on; total labor income for all generations in the economy in period 0 is
 
 ```{math}
 :label: eq:TBS-LabIncTot
 
-1 + \PopnGroFac^{-1}+ \PopnGroFac^{-2}+ ...+\PopnGroFac^{\tThen} = \left(\frac{1-(\PopnGroFac^{-1})^{-\tThen+1}}{1-\PopnGroFac^{-1}}\right) ,
+1 + \PopnGroFac^{-1}+ \PopnGroFac^{-2}+ ...+\PopnGroFac^{-\bar{\age}} = \left(\frac{1-(\PopnGroFac^{-1})^{\bar{\age}+1}}{1-\PopnGroFac^{-1}}\right) ,
 ```
 
-which is finite so long as either population growth is positive {math}`\PopnGroFac>1` (which we will assume) or the economy has existed for a finite period of time ({math}`\tThen > -\infty`). In either case, the *proportion* of aggregate income accounted for by a generation born at any specific moment declines toward zero as time passes (old generations never die, they just fade away).
+which is finite so long as either population growth is positive {math}`\PopnGroFac>1` (which we will assume) or the economy has existed for a finite period of time ({math}`\bar{\age} < \infty`). In either case, the *proportion* of aggregate income accounted for by a generation born at any specific moment declines toward zero as time passes (old generations never die, they just fade away).
 
 In the balanced growth equilibrium, the growth factor for aggregate population will therefore be {math}`\PopnGroFac` and output per capita will increase by {math}`\WGroFac` per period. Total labor income therefore grows by {math}`\PopnGroFac \WGroFac.`
 
 ### Stakes
 
-We now examine this model under two assumptions about the initial "stake" of newborns in the economy. (We use "stake" to designate a transfer received by newborns). This is explicitly *not* an inheritance, as we have assumed that individuals have no bequest motive and newborns are unrelated to anyone in the existing population. Our motivation is to make the model more tractable, rather than to represent an important feature of the real world; we later perform simulations designed to show that the characteristics of the model with no "stake" are qualitatively and quantitatively similar to those of the more tractable model with the "stake" that makes the model tractable.
+We now examine this model under two assumptions about the initial "stake" of newborns in the economy. (We use "stake" to designate a transfer received by newborns). This is explicitly *not* an inheritance, as we have assumed that individuals have no bequest motive and newborns are unrelated to anyone in the existing population. Our motivation is to make the model more tractable, rather than to represent an important feature of the real world; the model without a "stake" can only be solved by simulation, and {numref}`fig:TBS-SOENoStakescPath` shows how its aggregate consumption evolves when households start with no wealth.
 
 #### A "Stake" That Yields a Representative Agent
 
@@ -816,24 +823,24 @@ If the economy has experienced multiple shocks, it will be necessary to retain a
 :::{figure} figures/SOEStakescPathAfterThetaDropPlot.png
 :name: fig:TBS-SOEStakescPathAfterThetaDropPlot
 
-Aggregate {math}`\CNrm` in PE/SOE Economy Before and After {math}`\discRte` Decline. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Aggregate {math}`\CNrm` in a Small Open Economy Before and After {math}`\discRte` Decline. With stakes, aggregate consumption behaves like an individual's: it drops, then rises to a higher ratio. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 #### No Stake
 
-The polar alternative to assuming that newborns get a "stake" is to assume that newborns enter the economy with zero assets. Analysis of this version of the model must be performed using simulation methods, because households of different ages will have different levels of assets. (With a concave and nonanalytical consumption function, analytical aggregation cannot be performed.)
+The polar alternative to assuming that newborns get a "stake" is to assume that newborns enter the economy with zero assets. Analysis of this version of the model must be performed using simulation methods, because households of different ages will have different levels of assets. (Because the consumption function is concave and has no closed form, aggregation cannot be done analytically.)
 
-Our simulation procedure assumes that at date 0 the economy has existed forever (so that the age distribution of relative populations and productivities are at their steady-state values), but saving has been impossible prior to period 0. With everyone's {math}`\bNrmE_{t}=0`, the ratio of market resources to permanent labor income is the same for all individuals:
+Our simulation procedure assumes that at date 0 the economy has existed forever (so that the age distribution of relative populations and productivities are at their steady-state values), but saving has been impossible prior to period 0. With everyone's {math}`\bNrmE_{t}=0`, the ratio of market resources to permanent labor income is the same for all individuals, whatever their age {math}`\age`:
 
 :::{margin}
 In periods before 0, unemployment presumably would have meant immediate death by starvation; we think of this more as a starting point for the simulations than as a realistic description of a plausible economy.
 :::
 
 ```{math}
-\mNrmE_{0,\tThen} = 1 .
+\mNrmE_{0,-\age} = 1 .
 ```
 
-The consumption ratio in period 0 is therefore {math}`\cFunc(1)` for every household (regardless of age), while the level of per-capita labor income for a generation that is {math}`-\tThen` periods old is {math}`\erate^{\tThen}`. The population of such workers is {math}`(\erate/\PopnGroFac)^{-\tThen}`, so aggregate consumption will be given by the per-capita consumption ratio, multiplied by the per-capita level of permanent income, multiplied by the population of workers still alive:
+The consumption ratio in period 0 is therefore {math}`\cFunc(1)` for every household (regardless of age), while the level of per-capita labor income for a generation of age {math}`\age` is {math}`\erate^{-\age}`. The population of such workers is {math}`(\erate/\PopnGroFac)^{\age}`, so aggregate consumption will be given by the per-capita consumption ratio, multiplied by the per-capita level of permanent income, multiplied by the population of workers still alive:
 
 :::{margin}
 The absolute level of wages will have grown by {math}`\WGroFac/\erate` per period for these households since their birth, but we have normalized by the level of wages for period-0 newborns, which cancels the {math}`\WGroFac` from the expression.
@@ -841,8 +848,8 @@ The absolute level of wages will have grown by {math}`\WGroFac/\erate` per perio
 
 ```{math}
 \begin{aligned}
-  \CLvl_{0} & =  \sum_{\tThen=0}^{-\infty} \cFunc(1) \erate^{\tThen} (\erate/\PopnGroFac)^{-\tThen}
-\\ & =  \cFunc(1) \sum_{\tThen=0}^{-\infty}  \PopnGroFac^{\tThen}
+  \CLvl_{0} & =  \sum_{\age=0}^{\infty} \cFunc(1) \erate^{-\age} (\erate/\PopnGroFac)^{\age}
+\\ & =  \cFunc(1) \sum_{\age=0}^{\infty}  \PopnGroFac^{-\age}
 \\ & =  \cFunc(1) \left(\frac{1}{1-\PopnGroFac^{-1}}\right)
 .
 \end{aligned}
@@ -850,12 +857,12 @@ The absolute level of wages will have grown by {math}`\WGroFac/\erate` per perio
 
 The longer a generation lives, the more time it will have had to save toward its target level of wealth; but newborns always begin life with no assets. After period 0, therefore, age-heterogeneity in assets and consumption ratios creeps into the population.
 
-The foregoing discussion contains (in some cases implicitly) all the assumptions necessary to conduct a simulation of this economy. {numref}`fig:TBS-SOENoStakescPath` shows the path of the ratio {math}`\CLvl_{t}/\Wage_{t}\PopnLvl_{t}` starting from period 0 for an economy under our benchmark parameterization that generated our earlier figures. The only extra parameter required beyond those used before is {math}`\PopnGroFac`; we choose {math}`\PopnGroFac=1.01` corresponding roughly to the postwar population growth rate in the United States.
+The foregoing discussion contains (in some cases implicitly) all the assumptions necessary to conduct a simulation of this economy. {numref}`fig:TBS-SOENoStakescPath` shows the path of {math}`\CNrm_{t}`, aggregate consumption as a ratio to aggregate labor income, starting from period 0 for an economy under our benchmark parameterization that generated our earlier figures. The only extra parameter required beyond those used before is {math}`\PopnGroFac`; we choose {math}`\PopnGroFac=1.01` corresponding roughly to the postwar population growth rate in the United States.
 
 :::{figure} figures/SOENoStakescPath.png
 :name: fig:TBS-SOENoStakescPath
 
-Path of Aggregate {math}`\CNrm` in Stakeless PE/SOE Economy From Date 0. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Path of Aggregate {math}`\CNrm` in a Small Open Economy Without Stakes From Date 0. Starting with no wealth, aggregate consumption rises quickly toward its steady-state ratio as households build their buffer stocks. Drawn by the chapter's [notebook](TractableBufferStock.ipynb); open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 :::
 
 ## Appendix
@@ -908,7 +915,7 @@ which is equivalent to
 \overbrace{\RNrmByG \MPC \straight}^{= \cLocusSlope} > \RNrmByG-1
 ```
 
-where the LHS is (proportional to) the slope of {math}`\dcEqZero` and the RHS is (proportional to) the slope of {math}`\dmEqZero`.
+where the left-hand side is (proportional to) the slope of {math}`\dcEqZero` and the right-hand side is (proportional to) the slope of {math}`\dmEqZero`.
 
 For any fixed {math}`\urate` and {math}`\WGroFac` and {math}`\Rfree` we can find some {math}`\WGroShortfall` for which {math}`\WGroFac = \Rfree (1-\WGroShortfall \urate)`, and using this {math}`\WGroShortfall` it turns out to be useful to rewrite
 
@@ -961,7 +968,7 @@ Thus, we can conclude that, when the {math}`\FHWChFix` fails (that is, if {math}
 
 #### Conditions Under Which a Target Exists When the {math}`\FHWChFix` Holds
 
-In the case where the {math}`\FHWChFix` holds ({math}`\WGroShortfall > 1`), we need the RHS of {eq}`eq:TBS-alphaReq` not merely to be positive, but to exceed a specific positive number, {math}`(\WGroShortfall-1)\urate/(1-\urate)`:
+In the case where the {math}`\FHWChFix` holds ({math}`\WGroShortfall > 1`), we need the right-hand side of {eq}`eq:TBS-alphaReq` not merely to be positive, but to exceed a specific positive number, {math}`(\WGroShortfall-1)\urate/(1-\urate)`:
 
 ```{math}
 :label: eq:TBS-GPFacRawReqForTarget
@@ -979,7 +986,7 @@ In the case where the {math}`\FHWChFix` holds ({math}`\WGroShortfall > 1`), we n
 
 and the boundary will be the point at which this expression holds with equality.
 
-An increase in impatience caused by an increase in the pure time preference rate {math}`\discRte` (equivalently, a reduction in {math}`\DiscFac`) has the effect of reducing growth-patience (the LHS of {eq}`eq:TBS-GPFacRawReqForTarget`) and of increasing the RHS. This means that there will be some time preference rate sufficiently large (some {math}`\DiscFac` sufficiently small) to guarantee that the condition holds with equality. Then {eq}`eq:TBS-GPFacRawReqForTarget` will always be satisfied by any {math}`\DiscFac` satisfying
+An increase in impatience caused by an increase in the pure time preference rate {math}`\discRte` (equivalently, a reduction in {math}`\DiscFac`) has the effect of reducing growth-patience (the left-hand side of {eq}`eq:TBS-GPFacRawReqForTarget`) and of increasing the right-hand side. This means that there will be some time preference rate sufficiently large (some {math}`\DiscFac` sufficiently small) to guarantee that the condition holds with equality. Then {eq}`eq:TBS-GPFacRawReqForTarget` will always be satisfied by any {math}`\DiscFac` satisfying
 
 ```{math}
 :label: eq:TBS-DiscountMaxGICWhenFHWCTBSHolds
@@ -1027,7 +1034,7 @@ or taking logs we have approximately
 \MPC \straight > \rfree-\WGroRtehFix .
 ```
 
-The LHS captures the slope of the {math}`\dcEqZero` locus, which is {math}`\MPC` modified by {math}`\straight`, whose difference from 1 captures the degree of growth (im)patience. The RHS captures the slope of the {math}`\dmEqZero` locus. Recall that the inequality captures the fact that a target {math}`\mTrgNrm^{\EmpLbl}` exists if these two loci intercept, which happens if the slope of {math}`\dcEqZero` exceeds that of {math}`\dmEqZero`.
+The left-hand side captures the slope of the {math}`\dcEqZero` locus, which is {math}`\MPC` modified by {math}`\straight`, whose difference from 1 captures the degree of growth (im)patience. The right-hand side captures the slope of the {math}`\dmEqZero` locus. Recall that the inequality captures the fact that a target {math}`\mTrgNrm^{\EmpLbl}` exists if these two loci intercept, which happens if the slope of {math}`\dcEqZero` exceeds that of {math}`\dmEqZero`.
 
 :::{margin}
 "Captures" does not mean "is equal to." Equation {eq}`eq:TBS-cDelEqZero` provides the actual formula for the slope.
@@ -1053,7 +1060,7 @@ Note that if the {math}`\GIChFix` fails so that {math}`\straight < 1`, the slope
 \left(\frac{(\Rfree \DiscFac (1-\urate))^{1/\CRRA}}{\WGroFac/(1-\urate)}\right) = \left(\frac{(\Rfree \DiscFac (1-\urate))^{1/\CRRA}}{\WGroFachFix}\right) < 1 .
 ```
 
-Expanding on a discussion in the main text, the numerator in the leftmost expression reflects the sense in which the unemployment risk acts in a manner similar to the effect of an extra degree of discounting (reflecting the fact that the relevant condition applies only so long as the consumer remains in employment, a condition whose probability is {math}`(1-\urate)`), while the denominator reflects the mechanical effect in which the relevant measure of growth is boosted by the adjustment that preserves human wealth. Writing the perfect foresight version of the growth patience factor as {math}`\APFac_{\WGroFac}` (which is just the limit as {math}`\urate \downarrow 0`), we can see that the expression on the LHS is just {math}`\APFac_{\WGroFac}(1-\urate)^{1+1/\CRRA}` which is smaller than {math}`\APFac_{\WGroFac}` because {math}`\urate>0` and {math}`1+\CRRA^{-1} > 0`. So, the GIC-TBS holds whenever the plain-vanilla {math}`\GICWGro` holds, but not vice-versa; there are parametric configurations in which a perfect-foresight consumer with income growth rate {math}`\WGroFac` would not satisfy the relevant {math}`\GICWGro` (so, their wealth-to-income ratio would go to infinity), but the same consumer facing the same human wealth but with an unemployment risk {math}`\urate` would have a well-defined consumption function, and a finite target wealth-to-income ratio so long as the {math}`\GIChFix` holds, as it can even when the {math}`\GICWGro` fails, because {math}`\WGroFachFix = \WGroFac/(1-\urate) > \WGroFac`.
+Expanding on a discussion in the main text, the numerator in the leftmost expression reflects the sense in which the unemployment risk acts in a manner similar to the effect of an extra degree of discounting (reflecting the fact that the relevant condition applies only so long as the consumer remains in employment, a condition whose probability is {math}`(1-\urate)`), while the denominator reflects the mechanical effect in which the relevant measure of growth is boosted by the adjustment that preserves human wealth. Writing the perfect foresight version of the growth patience factor as {math}`\APFac_{\WGroFac}` (which is just the limit as {math}`\urate \downarrow 0`), we can see that the expression on the left-hand side is just {math}`\APFac_{\WGroFac}(1-\urate)^{1+1/\CRRA}` which is smaller than {math}`\APFac_{\WGroFac}` because {math}`\urate>0` and {math}`1+\CRRA^{-1} > 0`. So, the GIC-TBS holds whenever the plain-vanilla {math}`\GICWGro` holds, but not vice-versa; there are parametric configurations in which a perfect-foresight consumer with income growth rate {math}`\WGroFac` would not satisfy the relevant {math}`\GICWGro` (so, their wealth-to-income ratio would go to infinity), but the same consumer facing the same human wealth but with an unemployment risk {math}`\urate` would have a well-defined consumption function, and a finite target wealth-to-income ratio so long as the {math}`\GIChFix` holds, as it can even when the {math}`\GICWGro` fails, because {math}`\WGroFachFix = \WGroFac/(1-\urate) > \WGroFac`.
 
 The easiest way to understand all of this is graphically. A *Mathematica* notebook in the handout's repository, [`When-FHWC-Holds.nb`](https://github.com/llorracc/TractableBufferStock/blob/main/Code/Mathematica/Examples/ManipulateParameters/When-FHWC-Holds.nb) ({cite:t}`When-FHWC-Holds`), shows how this works for alternative values of {math}`\DiscFac`.
 
@@ -1220,7 +1227,7 @@ But since the RIC guarantees {math}`\RPRte<0` and the {math}`\GIChFix` guarantee
 In more detail: For the second-order Taylor approximation in {eq}`eq:TBS-zetaExp`, we implicitly assume that the absolute value of the second-order term is much smaller than that of the first-order one, i.e. {math}`|\CRRA^{-1} (\straight^{\CRRA}-1) | \geq |(\CRRA^{-1})(\CRRA^{-1}-1)((\straight^{\CRRA}-1)^{2}/2)|`. Substituting {eq}`eq:TBS-hatpi`, the above could be simplified to {math}`1 \geq (-\GPRtehFix/\urate)\prudEx`, therefore we have {math}`\GPRteAdj < 0`. This simple justification is based on the confidence that we have proved above that RIC and {math}`\GIChFix` guarantee the denominator of the fraction in {eq}`eq:TBS-mTarget` is positive.
 :::
 
-The same set of derivations imply that we can replace the denominator in {eq}`eq:TBS-mTargetApprox` with the negative of the RHS of {eq}`eq:TBS-newDenom`, yielding a more compact expression for the target level of resources,
+The same set of derivations imply that we can replace the denominator in {eq}`eq:TBS-mTargetApprox` with the negative of the right-hand side of {eq}`eq:TBS-newDenom`, yielding a more compact expression for the target level of resources,
 
 ```{math}
 :label: eq:TBS-mTargetCompact

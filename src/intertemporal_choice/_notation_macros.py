@@ -400,7 +400,7 @@ MACROS = {
     '\\aVecMin': '{a}_{1}',
     '\\adj': '\\mathrm{j}',
     '\\adjPar': '\\omega',
-    '\\age': 'z',
+    '\\age': '\\mathrm{s}',
     '\\argmax': '\\operatorname*{arg\\,max}',
     '\\arvl': '\\prec',
     '\\avg': '\\bar',
