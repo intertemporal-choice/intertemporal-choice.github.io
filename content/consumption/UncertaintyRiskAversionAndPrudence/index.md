@@ -1,10 +1,3 @@
----
-math:
-  # The chapter's own object, which the shared registry lacks: the end-of-period value function, in
-  # BufferStockTheory's notation.
-  '\vEndFunc': '\mathfrak{v}'
----
-
 (sec:UncertaintyRiskAversionAndPrudence)=
 # Uncertainty, Risk Aversion, and Prudence
 
