@@ -1,5 +1,5 @@
 (sec:LucasGrowth)=
-# The Lucas Growth Model
+# The Lucas (1988) Model
 
 {cite:t}`lucasGrowth` presents a growth model in which output is generated via a production function of the form
 
@@ -57,7 +57,7 @@ and defining 'human capital' as the stock of knowledge
 that has been transmitted from those sources into human brains via
 studying.
 
-Recall {cite:t}`rebelo:long`'s key insight about endogenous growth models: In order
+Recall {cite:t}`rebelo:long`'s [key insight](#sec:Endogenous) about endogenous growth models: In order
 to produce perpetual growth, there must be a factor or a combination
 of factors that can be accumulated indefinitely without diminishing
 returns. Mankiw points out that since lifetimes are finite, there is a
@@ -136,7 +136,7 @@ If we define a measure of 'broad capital' as the combination
 of physical capital and human capital,
 
 ```{math}
-:label: eq:kappa
+:label: eq:Lucas-broadCap
 
 \kNrm^\kapShare \hCap^{1-\kapShare},
 ```
@@ -151,13 +151,17 @@ the model becomes
 
 So if {math}`\labor` is constant and if {math}`\kNrm` and {math}`\hCap` are growing at the same rate,
 then the exponent on 'broad capital' is 1, and we are effectively back
-at the usual Rebelo {math}`\PtyAgg \KLvl` model.
+at the usual [Rebelo {math}`\PtyAgg \KLvl` model](#sec:RebeloAK).
 
 The key assumption that permits this to work is the accumulation
 equation for human capital, which is itself like an {math}`\PtyAgg \KLvl` model, in the
 sense that the exponent on human capital in the accumulation equation
 for human capital is one. Human capital can be accumulated without
 bound and without diminishing returns.
+
+:::{margin}
+The planner maximizes the discounted sum of CRRA utility from per capita consumption, with time preference rate {math}`\discRte`, counting each date's per capita utility once, as [the RCK model's planner](#eq:RCK-maxprob) does. Lucas weights utility by the size of the population, which replaces {math}`\discRte` with {math}`\discRte-\PopnGroRte` here and in the decentralized growth rate below.
+:::
 
 ## The Ramsey/Cass-Koopmans Version
 
@@ -174,13 +178,13 @@ present the conclusion, which is that the steady-state growth rate is
 ```
 
 :::{margin}
-The planner maximizes the discounted sum of CRRA utility from per capita consumption, with time preference rate {math}`\discRte`, counting each date's per capita utility once, as the RCK model's planner does. Lucas weights utility by the size of the population, which replaces {math}`\discRte` with {math}`\discRte-\PopnGroRte` here and in the decentralized growth rate below.
+Human capital grows at the same rate as consumption, so by {eq}`eq:hdot` the time spent working is {math}`\labor = 1-\CRRA^{-1}(\hCapProd-\discRte)/\hCapProd`. It is positive, and utility finite, only if growth is below the return, {math}`\CRRA^{-1}(\hCapProd-\discRte) < \hCapProd`: the condition of the [Rebelo model](#sec:RebeloAK), with {math}`\hCapProd` in place of {math}`\PtyAgg`.
 :::
 
 Note that this confirms the crucial role of the CRS accumulation
 equation for human capital: The key parameter that corresponds to
 the interest rate is {math}`\hCapProd`, the parameter that determines the efficiency
-of human capital accumulation in equation {eq}`eq:hdot`.
+of human capital accumulation in equation {eq}`eq:hdot`. So {eq}`eq:Lucas-ssg` is the RCK model's [Keynes-Ramsey rule](#eq:cdotOc), consumption growth equal to {math}`\CRRA^{-1}` times the excess of a return over the time preference rate, with the return {math}`\hCapProd` on time spent building human capital.
 
 Lucas also solves a version of the model in which there is an
 externality to human capital. The idea here is that each person
@@ -195,7 +199,7 @@ the individual's production function is
 ```
 
 where {math}`\hCapAvg` is average human capital in the population (and the
-other variables reflect the values for the individual).
+other variables reflect the values for the individual), and {math}`\extElas` is the elasticity of the individual's output with respect to {math}`\hCapAvg`, as {math}`\extElas` is with respect to knowledge in [Romer's model](#sec:Romer86).
 
 Working through the decentralized solution, Lucas shows that the
 steady-state growth rate of human capital for an individual consumer
@@ -233,6 +237,10 @@ consumption (that is, if the intertemporal elasticity of substitution
 and therefore growth. If consumers have an intertemporal elasticity
 of less than one, the income effect outweighs the substitution effect,
 saving falls, and human capital grows more slowly. In every case, physical capital, output and consumption per capita grow faster than they would without the externality.
+
+:::{margin}
+The externality is the first of the failures of the welfare theorem's assumptions listed in [Decentralizing the Ramsey/Cass-Koopmans Model](#sec:DecRCK-Failures): the private return to human capital falls short of its social return, the same kind of wedge that a [tax on capital income](#sec:RCKGov-CapitalTax) drives between the private and the social return to saving in the RCK model with government.
+:::
 
 Lucas also shows that this decentralized solution is suboptimal,
 because individual consumers do not obtain the full benefits to
