@@ -1,7 +1,7 @@
 (sec:Aiyagari)=
 # Aiyagari: Precautionary Saving in GE
 
-The [decentralization of the Ramsey/Cass-Koopmans model](#sec:decentralizingrck) showed that an economy of many households behaves exactly like a single representative household, provided every household is identical and can insure any risk at an actuarially fair rate. Real households face large uninsurable risks to their own incomes, that are mostly unrelated to what happens to everyone else in the economy. A [prudent](#sec:RiskAndPSPremia) household facing such risk saves for precautionary reasons, and [buffer stock models](#sec:BufferStockAgeProfiles) show how much. This chapter asks what happens when a whole economy consists of such households, and their saving sets the interest rate and the wage.
+The [decentralization of the Ramsey/Cass-Koopmans model](#sec:decentralizingrck) showed that an economy of many households behaves exactly like a single representative household, provided every household is identical and can insure any risk at an actuarially fair rate. Real households face large uninsurable risks to their own incomes, that are mostly unrelated to what happens to everyone else in the economy. A [prudent](#sec:RiskAndPSPremia) household facing such risk saves for precautionary reasons, and buffer stock models {cite:p}`BufferStockTheory` show how much. This chapter asks what happens when a whole economy consists of such households, and their saving sets the interest rate and the wage.
 
 :::{margin}
 Graduate students might consider whether anyone has offered them an insurance contract offering them a guarantee that they will receive the mean average income of the members of their cohort of economics PhD students.
