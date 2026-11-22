@@ -1,10 +1,10 @@
 (sec:RamseyCassKoopmans)=
 # The Ramsey/Cass-Koopmans (RCK) Model
 
-{cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth, presented here for an economy with exogenous "labor-augmenting" technological progress. For the facts the model is meant to explain, and the Solow model it builds on, see the undergraduate textbook of {cite:t}`ashrafWeilGrowth`.
+{cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth, presented here for an economy with exogenous "labor-augmenting" technological progress.
 
 :::{margin}
-Graduate textbook treatments are in {cite:t}`blanchard&fischer:text`, chapter 2, {cite:t}`barro&salaimartin:book`, chapter 2, and {cite:t}`acemogluGrowth`, chapter 8.
+For the facts the model is meant to explain, and the Solow model it builds on, see the undergraduate textbook of {cite:t}`ashrafWeilGrowth`. Graduate textbook treatments are in {cite:t}`blanchard&fischer:text`, chapter 2, {cite:t}`barro&salaimartin:book`, chapter 2, and {cite:t}`acemogluGrowth`, chapter 8.
 :::
 
 ## The Budget Constraint
@@ -103,7 +103,11 @@ A first candidate for the best steady state is the one with the highest {math}`\
 \frac{d\cNrm}{d\kNrm} = \fFunc^{\prime}(\kNrm) - (\PtyGroRte +\PopnGroRte+\deprRte) = 0 ,
 ```
 
-and since {math}`d^{2}\cNrm/d\kNrm^{2} = \fFunc^{\prime\prime}(\kNrm) < 0`, this is a maximum. The capital stock that satisfies it, {math}`\GoldRule{\kNrm}`, obeys the "golden rule" of {cite:t}`phelps:golden`, an article well worth reading:
+and since {math}`d^{2}\cNrm/d\kNrm^{2} = \fFunc^{\prime\prime}(\kNrm) < 0`, this is a maximum. The capital stock that satisfies it, {math}`\GoldRule{\kNrm}`, obeys the "golden rule" of {cite:t}`phelps:golden`:
+
+:::{margin}
+Phelps called it the "golden rule" on the grounds that every generation does unto its successors what it would want its ancestors to have done unto it. You might worry that the argument doesn't make sense, because what is really being equalized across generations is consumption per efficiency unit of labor, and no extant texts of the Christian New Testament quote Jesus as having said "do unto other efficiency units of labor as you, an efficiency unit of labor yourself, would have liked the ancestral efficiency units to have done unto you." Keep reading.
+:::
 
 ```{math}
 :label: eq:RCK-goldenRule
@@ -111,7 +115,13 @@ and since {math}`d^{2}\cNrm/d\kNrm^{2} = \fFunc^{\prime\prime}(\kNrm) < 0`, this
 \fFunc^{\prime}(\GoldRule{\kNrm}) = \PtyGroRte +\PopnGroRte+\deprRte .
 ```
 
-One more unit of {math}`\kNrm` adds {math}`\fFunc^{\prime}(\kNrm)` to output, but holding it steady as effective labor grows and capital depreciates takes {math}`\PtyGroRte +\PopnGroRte+\deprRte` more investment; consumption is highest where the two are equal. With the Cobb-Douglas {math}`\fFunc(\kNrm) = \kNrm^{\kapShare}`, the golden rule is {math}`\GoldRule{\kNrm} = \left(\kapShare/(\PtyGroRte +\PopnGroRte+\deprRte)\right)^{1/(1-\kapShare)}`.
+One more unit of {math}`\kNrm` adds {math}`\fFunc^{\prime}(\kNrm)` to output, but holding it steady as effective labor grows and capital depreciates takes {math}`\PtyGroRte +\PopnGroRte+\deprRte` more investment; consumption is highest where the two are equal. With the Cobb-Douglas {math}`\fFunc(\kNrm) = \kNrm^{\kapShare}`, the golden rule is
+
+```{math}
+:label: eq:RCK-goldenRuleCobbDouglas
+
+\GoldRule{\kNrm} = \left(\kapShare/(\PtyGroRte +\PopnGroRte+\deprRte)\right)^{1/(1-\kapShare)} .
+```
 
 ## The Social Planner's Problem
 
@@ -191,11 +201,15 @@ The [current-value Hamiltonian optimization condition](#eq:uceqvk) for consumpti
 ```{math}
 :label: eq:RCK-H1A
 
-\begin{gathered}\begin{aligned}
-  \cNrm^{-\CRRA} & =  \vk   \\
-  -\CRRA \cNrm^{-\CRRA-1}\dot{\cNrm} & =  \dot{\vk} 
-                                       .
-\end{aligned}\end{gathered}
+\cNrm^{-\CRRA} = \vk ,
+```
+
+which can be differentiated with respect to time to obtain
+
+```{math}
+:label: eq:RCK-margUtilDot
+
+-\CRRA \cNrm^{-\CRRA-1}\dot{\cNrm} = \dot{\vk} .
 ```
 
 The [current-value Hamiltonian optimization condition](#eq:lamgrow) for capital, the costate equation, requires:
@@ -212,7 +226,7 @@ In the book's mathematical appendices, [Ramsey Growth in Discrete and Continuous
 \end{aligned}\end{gathered}
 ```
 
-Since {eq}`eq:RCK-H1A` gives {math}`\dot{\vk}/\vk = -\CRRA\dot{\cNrm}/\cNrm`, this is
+Since {eq}`eq:RCK-H1A` and {eq}`eq:RCK-margUtilDot` give {math}`\dot{\vk}/\vk = -\CRRA\dot{\cNrm}/\cNrm`, this is
 
 ```{math}
 :label: eq:cdotOc
@@ -247,7 +261,11 @@ and capital all grow at rate {math}`\PtyGroRte`.
 \fFunc^{\prime}(\Steady{\kNrm}) = \discRte +\PopnGroRte+\deprRte+\CRRA \PtyGroRte .
 ```
 
-This is the "modified golden rule" of {cite:t}`blanchard&fischer:text`, chapter 2. Comparing it with the [golden rule](#eq:RCK-goldenRule), {math}`\fFunc^{\prime}(\Steady{\kNrm}) - \fFunc^{\prime}(\GoldRule{\kNrm}) = \discRte - (1-\CRRA)\PtyGroRte`, so {math}`\Steady{\kNrm} < \GoldRule{\kNrm}` exactly when {math}`\discRte > (1-\CRRA)\PtyGroRte`: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
+This is what {cite:t}`cassTurnpike` named the "modified golden rule." Comparing it with the [golden rule](#eq:RCK-goldenRule), {math}`\fFunc^{\prime}(\Steady{\kNrm}) - \fFunc^{\prime}(\GoldRule{\kNrm}) = \discRte - (1-\CRRA)\PtyGroRte`, so {math}`\Steady{\kNrm} < \GoldRule{\kNrm}` exactly when {math}`\discRte > (1-\CRRA)\PtyGroRte`: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
+
+:::{margin}
+"Keep reading" might have given you hope that optimizing consumption per person, rather than per efficiency unit, would fix the "golden-rule-per-efficiency-unit" problem. Nope. The trouble is that we study only "balanced growth" equilibria, in which labor productivity grows at a constant rate forever. Suppose instead that AI brings a century of amazing technological progress, after which everything that conduces to growth *has* been discovered and {math}`\PtyLab` stops growing. The generations born a century from now and later will be enormously richer than we are, which would justify massive consumption now. Just sayin'.
+:::
 
 Using {math}`\fFunc^{\prime}(\kNrm) = \kapShare \kNrm^{\kapShare-1}`, the modified golden rule gives an analytical formula for the steady state:
 
