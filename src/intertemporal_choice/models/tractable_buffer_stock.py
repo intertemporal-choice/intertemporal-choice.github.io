@@ -73,10 +73,15 @@ class Solution:
 
     def c(self, m):
         """Consumption of an employed consumer: the stable arm."""
-        return self.arm(m)
+        return self.arm(self.on_arm(m))
 
     def mpc(self, m):
-        return self.arm(m, 1)
+        return self.arm(self.on_arm(m), 1)
+
+    def on_arm(self, m):
+        if np.max(m) > self.arm.x[-1]:  # beyond the last point reverse shooting found
+            raise ValueError(f"c is computed only up to m = {self.arm.x[-1]:.1f}; beyond it, use HARK's TractableConsumerType")
+        return m
 
     def c_locus(self, m):
         """Where consumption does not change: c = m zeta / (1 + zeta), zeta = R_norm kappa Pi."""
