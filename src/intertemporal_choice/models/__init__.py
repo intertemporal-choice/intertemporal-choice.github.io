@@ -5,7 +5,7 @@
 
 import importlib
 
-__all__ = ["lucas_asset_price", "ramsey_cass_koopmans"]
+__all__ = ["lucas_asset_price", "ramsey_cass_koopmans", "tractable_buffer_stock"]
 
 
 def __getattr__(name):

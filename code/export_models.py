@@ -52,6 +52,7 @@ MODELS_DIR = ROOT / "src" / "intertemporal_choice" / "models"
 MODELS = [
     "content/asset_pricing/LucasAssetPrice/LucasAssetPrice.ipynb",
     "content/growth/RamseyCassKoopmans/RamseyCassKoopmans_SST.ipynb",
+    "content/consumption/TractableBufferStock/TractableBufferStock.ipynb",
 ]
 ALLOWED = (ast.Import, ast.ImportFrom, ast.FunctionDef, ast.ClassDef, ast.Assign, ast.AnnAssign)
 IMPORT_BUDGET = 2.0  # seconds: importing a model must not compute anything that takes long
