@@ -36,7 +36,12 @@ dependencies = [
 # questions that use it (Aiyagari), run in Colab or locally, never in the browser.
 [project.optional-dependencies]
 hark = [
-    "econ-ark>=0.17.0",
+    # HARK is pinned to the commit whose tools the book uses, not to a release (Chris Carroll, 2026-11-21:
+    # "we should not be locked into 0.17.2"). Now: econ-ark/HARK main at the merge of #1888, the closed
+    # forms for the MPC at target and at m = 0 that TractableBufferStock's notebook uses. When a chapter
+    # needs a pull request not yet merged, pin HARK's development fork, llorracc/HARK, where each pull
+    # request is a branch, at a commit that one of the fork's choice-book/ tags keeps.
+    "econ-ark @ git+https://github.com/econ-ark/HARK@57276c75a60d01a4a48ce4dcb1abefbaae8c3a97",
     # econ-ark 0.17.2 imports sympy without declaring it, so a fresh install of the book's
     # package (Colab, Binder, a downloaded notebook) failed at `import HARK...`. Drop this once
     # an econ-ark release declares it.

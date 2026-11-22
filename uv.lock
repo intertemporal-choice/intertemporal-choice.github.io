@@ -550,28 +550,25 @@ wheels = [
 [[package]]
 name = "econ-ark"
 version = "0.17.2"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/econ-ark/HARK?rev=57276c75a60d01a4a48ce4dcb1abefbaae8c3a97#57276c75a60d01a4a48ce4dcb1abefbaae8c3a97" }
 dependencies = [
-    { name = "interpolation" },
+    { name = "interpolation", marker = "sys_platform != 'emscripten'" },
     { name = "joblib" },
     { name = "legacy-cgi", marker = "python_full_version >= '3.13'" },
     { name = "matplotlib" },
     { name = "networkx" },
-    { name = "numba" },
+    { name = "numba", marker = "sys_platform != 'emscripten'" },
     { name = "numpy" },
     { name = "optimagic" },
     { name = "pandas" },
     { name = "pyyaml" },
-    { name = "quantecon" },
+    { name = "quantecon", marker = "sys_platform != 'emscripten'" },
     { name = "scipy" },
     { name = "seaborn" },
     { name = "sequence-jacobian" },
     { name = "statsmodels" },
+    { name = "sympy" },
     { name = "xarray" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/a2/d0/1962148c0c287bbe4e96dffdcfefa794eb290a2769ded08bf9d1e93a2703/econ_ark-0.17.2.tar.gz", hash = "sha256:2ba04af415cdcd204842afc1fbffcd3ea96d3af8f73046c45c0976686c501c5c", size = 19083958, upload-time = "2026-05-01T21:51:29.221Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/0e/49/6a0c154bdb1bb8cedcee627f5450af96237d10544e14a46d942ecdb92e54/econ_ark-0.17.2-py3-none-any.whl", hash = "sha256:e3906d0010f7c2cf1b71288a737bbd2e448e315314ce781dac5488e6be6822e3", size = 2306149, upload-time = "2026-05-01T21:51:26.558Z" },
 ]
 
 [[package]]
@@ -803,8 +800,8 @@ name = "interpolation"
 version = "2.2.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numba" },
-    { name = "scipy" },
+    { name = "numba", marker = "sys_platform != 'emscripten'" },
+    { name = "scipy", marker = "sys_platform != 'emscripten'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/12/95/f50095a06b6867b883493832e01fde6e653e18f85c37cd542ee630ce1cd4/interpolation-2.2.7.tar.gz", hash = "sha256:ec7ffd912e9354b67d9b65f8ecbf9136b1fdfdba03ad65765410db9e4c1537c4", size = 64877, upload-time = "2024-07-12T19:35:32.133Z" }
 wheels = [
@@ -851,7 +848,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "aiyagari1994qje", marker = "extra == 'hark'", git = "https://github.com/econ-ark/Aiyagari1994QJE?rev=66ae8be37402a223ca789363191cca243b8f7324" },
-    { name = "econ-ark", marker = "extra == 'hark'", specifier = ">=0.17.0" },
+    { name = "econ-ark", marker = "extra == 'hark'", git = "https://github.com/econ-ark/HARK?rev=57276c75a60d01a4a48ce4dcb1abefbaae8c3a97" },
     { name = "ipywidgets", specifier = ">=7.6" },
     { name = "matplotlib", specifier = ">=3.8" },
     { name = "numpy", specifier = ">=2.0" },
@@ -1714,8 +1711,8 @@ name = "numba"
 version = "0.67.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "llvmlite" },
-    { name = "numpy" },
+    { name = "llvmlite", marker = "sys_platform != 'emscripten'" },
+    { name = "numpy", marker = "sys_platform != 'emscripten'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7a/90/2544f4e3a61e501d6c9a5418fd4b905323222693d54a02cab0106a0af865/numba-0.67.0.tar.gz", hash = "sha256:cd75aa535b33fa05d9d930b1ae8af9f97a2881e96d72dfb38ec9b78284d9f851", size = 2836515, upload-time = "2026-08-11T23:04:00.174Z" }
 wheels = [
@@ -2264,11 +2261,11 @@ name = "quantecon"
 version = "0.11.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numba" },
-    { name = "numpy" },
-    { name = "requests" },
-    { name = "scipy" },
-    { name = "sympy" },
+    { name = "numba", marker = "sys_platform != 'emscripten'" },
+    { name = "numpy", marker = "sys_platform != 'emscripten'" },
+    { name = "requests", marker = "sys_platform != 'emscripten'" },
+    { name = "scipy", marker = "sys_platform != 'emscripten'" },
+    { name = "sympy", marker = "sys_platform != 'emscripten'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/c2/63/f9290514f6b6ae44ca4b91c029f77eb85c7d88db052b8318269c36d0985a/quantecon-0.11.4.tar.gz", hash = "sha256:e6837088c3dedaf713a7998f1892db4043069cd53664cf2a48602e66cc1f3087", size = 290932, upload-time = "2026-07-15T02:27:33.92Z" }
 wheels = [
