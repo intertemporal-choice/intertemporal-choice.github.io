@@ -47,10 +47,10 @@ hark = [
     # an econ-ark release declares it.
     "sympy>=1.14.0",
     # The Aiyagari chapter's notebook computes its figures and numbers with the code of Econ-ARK's
-    # Aiyagari1994QJE REMARK, pinned to the commit of its v1.1.0 tag. PyPI refuses a package with
+    # Aiyagari1994QJE REMARK, pinned to the commit of its v1.1.1 tag. PyPI refuses a package with
     # a direct-URL dependency, even in an add-on; this package is published as files on the
     # book's site instead (Chris Carroll, 2026-11-13: "not on pypi").
-    "aiyagari1994qje @ git+https://github.com/econ-ark/Aiyagari1994QJE@66ae8be37402a223ca789363191cca243b8f7324",
+    "aiyagari1994qje @ git+https://github.com/econ-ark/Aiyagari1994QJE@e109e8f7c0c92d76337eb2da3a1b44e7abd5c91f",
 ]
 
 # The figure notebooks import shared code from src/intertemporal_choice/, which `uv sync`

@@ -15,8 +15,8 @@ resolution-markers = [
 
 [[package]]
 name = "aiyagari1994qje"
-version = "1.1.0"
-source = { git = "https://github.com/econ-ark/Aiyagari1994QJE?rev=66ae8be37402a223ca789363191cca243b8f7324#66ae8be37402a223ca789363191cca243b8f7324" }
+version = "1.1.1"
+source = { git = "https://github.com/econ-ark/Aiyagari1994QJE?rev=e109e8f7c0c92d76337eb2da3a1b44e7abd5c91f#e109e8f7c0c92d76337eb2da3a1b44e7abd5c91f" }
 dependencies = [
     { name = "econ-ark" },
     { name = "matplotlib" },
@@ -847,7 +847,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "aiyagari1994qje", marker = "extra == 'hark'", git = "https://github.com/econ-ark/Aiyagari1994QJE?rev=66ae8be37402a223ca789363191cca243b8f7324" },
+    { name = "aiyagari1994qje", marker = "extra == 'hark'", git = "https://github.com/econ-ark/Aiyagari1994QJE?rev=e109e8f7c0c92d76337eb2da3a1b44e7abd5c91f" },
     { name = "econ-ark", marker = "extra == 'hark'", git = "https://github.com/econ-ark/HARK?rev=57276c75a60d01a4a48ce4dcb1abefbaae8c3a97" },
     { name = "ipywidgets", specifier = ">=7.6" },
     { name = "matplotlib", specifier = ">=3.8" },
