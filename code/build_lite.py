@@ -59,6 +59,7 @@ NOTEBOOKS = [
     "content/growth/RCKWithGov/RCKWithGov.ipynb",
     "content/growth/BlanchardFiniteHorizon/BlanchardFiniteHorizon.ipynb",
     "content/investment/qModel/qModel.ipynb",
+    "content/consumption/TractableBufferStock/TractableBufferStock.ipynb",
 ]
 BROWSER_KERNEL = {"name": "python", "display_name": "Python (Pyodide)", "language": "python"}
 RUN_FIRST = "**First, choose Run \u2192 Run All Cells in the menu above.**"
