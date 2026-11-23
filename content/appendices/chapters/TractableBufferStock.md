@@ -32,8 +32,9 @@ which leads directly to the chapter's [approximation to consumption growth](#eq:
 (sec:TBS-mTargExists)=
 ## A Target Exists If and Only If the {math}`\GIChFix` Holds
 
-Given the RIC, the employed consumer has a target {math}`\mTrgNrm^{\EmpLbl}` if and only if the {math}`\GIChFix` holds. The first part below proves this from the two loci. The next two reach the same conclusion through the two cases of the {math}`\FHWChFix`, which also give the bound on {math}`\DiscFac`. The last shows that the {math}`\dcEqZero` locus exists under a weaker condition, and that the consumption function exists even when that condition fails.
+Given the RIC, the employed consumer has a target {math}`\mTrgNrm^{\EmpLbl}` if and only if the {math}`\GIChFix` holds. This is proved from [the two loci](#sec:TractableBufferStock-LociCross), and again through the two cases of the {math}`\FHWChFix`, [where it fails](#sec:TractableBufferStock-TargetWhenFHWChFixFails) and [where it holds](#sec:TractableBufferStock-TargetWhenFHWChFixHolds), which also give the bound on {math}`\DiscFac`. [The subsection on the {math}`\dcEqZero` locus](#sec:TractableBufferStock-cLocusExists) shows that the locus exists under a weaker condition, the GIC-TBS, and that the consumption function exists, given the RIC, for {math}`\CRRA > 1`, and for {math}`\CRRA < 1` when {math}`\DiscFac \WGroFachFix^{1-\CRRA} \erate < 1`, even when the GIC-TBS fails.
 
+(sec:TractableBufferStock-LociCross)=
 ### The Loci Cross If and Only If the {math}`\GIChFix` Holds
 
 At a steady-state value of {math}`\mNrmE`, both {math}`\dcEqZero` and {math}`\dmEqZero` hold (the chapter's [{math}`\dcEqZero` locus](#eq:TBS-cDelEqZero) and [{math}`\dmEqZero` locus](#eq:TBS-mDelEqZero)); for convenience defining {math}`\cLocusSlope \equiv \RNrmByG \MPC \straight`,
@@ -70,7 +71,7 @@ Since {math}`\MPC = 1-\RPFac` and {math}`\RNrmByG\RPFac = \GPFachFix`, {math}`\R
 \cLocusSlope-(\RNrmByG-1) = \RNrmByG\MPC(\straight-1)+(1-\GPFachFix) .
 ```
 
-At {math}`\GPFachFix=1` both terms are zero: the two loci are parallel, and no target exists. More generally, {math}`\straight-1` has the sign of {math}`1-\GPFachFix` (from the chapter's [definition of {math}`\straight`](#eq:TBS-straightDef)), and the RIC makes {math}`\RNrmByG\MPC` positive, so both terms have the sign of {math}`1-\GPFachFix`. Given the RIC, then, {eq}`eq:TBS-cDelEq0SlopeCondAlt` holds, and a target exists, if and only if {math}`\GPFachFix < 1`, the {math}`\GIChFix`.
+At {math}`\GPFachFix=1` both terms are zero: the two loci are parallel, and no target exists. More generally, {math}`\straight-1` has the sign of {math}`1-\GPFachFix` (from the chapter's [definition of {math}`\straight`](#eq:TBS-straightDef)), and the RIC makes {math}`\RNrmByG\MPC` positive, so both terms have the sign of {math}`1-\GPFachFix`; if the chapter's [GIC-TBS](#eq:TBS-GICExistsSoln) fails, there is no {math}`\dcEqZero` locus, and the {math}`\GIChFix` fails too. Given the RIC, then, {eq}`eq:TBS-cDelEq0SlopeCondAlt` holds, and a target exists, if and only if {math}`\GPFachFix < 1`, the {math}`\GIChFix`.
 
 For any fixed {math}`\urate` and {math}`\WGroFac` and {math}`\Rfree` we can find some {math}`\WGroShortfall` for which {math}`\WGroFac = \Rfree (1-\WGroShortfall \urate)`, and using this {math}`\WGroShortfall` it turns out to be useful to rewrite
 
@@ -101,6 +102,7 @@ Multiplying both sides of {eq}`eq:TBS-cDelEq0SlopeCondAlt` by {math}`\RNrmByG^{-
 \end{aligned}
 ```
 
+(sec:TractableBufferStock-TargetWhenFHWChFixFails)=
 ### A Target Always Exists When the {math}`\FHWChFix` Fails
 
 Since {math}`0 < \urate < 1` and {math}`\MPC>0` (as guaranteed by the RIC), {eq}`eq:TBS-alphaReq` is satisfied whenever the {math}`\FHWChFix` fails ({math}`\WGroShortfall \leq 1`) and {math}`\straight > 0`. We now show that under these conditions, {math}`\straight>0`.
@@ -121,6 +123,7 @@ so when the {math}`\FHWChFix` fails, {math}`\RNrmByG \leq 1` and {math}`\GPFachF
 
 Thus, when the {math}`\FHWChFix` fails (that is, if {math}`\WGroShortfall \leq 1`), a target {math}`\TargetNrm{\mNrm}^{\EmpLbl}` exists: given the RIC, the failure of the {math}`\FHWChFix` implies the {math}`\GIChFix`.
 
+(sec:TractableBufferStock-TargetWhenFHWChFixHolds)=
 ### When the {math}`\FHWChFix` Holds, a Target Exists If and Only If {math}`\DiscFac < \WGroFachFix^{\CRRA}/\Rfree`
 
 In the case where the {math}`\FHWChFix` holds ({math}`\WGroShortfall > 1`), we need the right-hand side of {eq}`eq:TBS-alphaReq` not merely to be positive, but to exceed a specific positive number, {math}`(\WGroShortfall-1)\urate/(1-\urate)`:
@@ -141,7 +144,7 @@ In the case where the {math}`\FHWChFix` holds ({math}`\WGroShortfall > 1`), we n
 
 and the boundary will be the point at which this expression holds with equality.
 
-An increase in impatience caused by an increase in the pure time preference rate {math}`\discRte` (equivalently, a reduction in {math}`\DiscFac`) has the effect of reducing growth-patience (the left-hand side of {eq}`eq:TBS-GPFacRawReqForTarget`) and of increasing the right-hand side. Since the condition holds when {math}`\DiscFac` is small enough, there is a threshold {math}`\DiscFacMaxGICWhenFHWCTBSHolds` at which it holds with equality, and {eq}`eq:TBS-GPFacRawReqForTarget` is satisfied by every {math}`\DiscFac` below it:
+An increase in impatience caused by an increase in the pure time preference rate {math}`\discRte` (equivalently, a reduction in {math}`\DiscFac`) has the effect of reducing growth-patience (the left-hand side of {eq}`eq:TBS-GPFacRawReqForTarget`) and of increasing the right-hand side. Since the condition holds when {math}`\DiscFac` is small enough, there is a threshold {math}`\DiscFacMaxGICWhenFHWCTBSHolds` at which its two sides are equal, and {eq}`eq:TBS-GPFacRawReqForTarget` is satisfied by every {math}`\DiscFac` below it:
 
 ```{math}
 :label: eq:TBS-DiscountMaxGICWhenFHWCTBSHolds
@@ -149,7 +152,7 @@ An increase in impatience caused by an increase in the pure time preference rate
 \DiscFac < \DiscFacMaxGICWhenFHWCTBSHolds .
 ```
 
-Since we have assumed the RIC (so that {math}`\MPC > 0`), as {math}`\urate \downarrow 0`, {eq}`eq:TBS-GPFacRawReqForTarget` asymptotes to the {math}`\GIChFix` for any given value of {math}`\DiscFac`. (As {math}`\WGroShortfall \downarrow 1`, {math}`\RNrmByG \rightarrow 1` and {math}`\GPFachFix \rightarrow \RPFac < 1`, so under the RIC the requirement holds automatically, as it does when {math}`\WGroShortfall \leq 1`; the bound on {math}`\DiscFac` derived below approaches the RIC's, {math}`\Rfree^{\CRRA-1}`.)
+Since we have assumed the RIC (so that {math}`\MPC > 0`), as {math}`\urate \downarrow 0`, {eq}`eq:TBS-GPFacRawReqForTarget` asymptotes to the {math}`\GIChFix` for any given value of {math}`\DiscFac`. (As {math}`\WGroShortfall \downarrow 1`, {math}`\RNrmByG \rightarrow 1` and {math}`\GPFachFix \rightarrow \RPFac < 1`, so under the RIC the requirement holds automatically, as it does when {math}`\WGroShortfall \leq 1`; the [bound on {math}`\DiscFac`](#eq:TBS-DiscountMaxGICWhenFHWCTBSHoldsAndGICPGroIsExactlySatisfied) approaches the RIC's, {math}`\Rfree^{\CRRA-1}`.)
 
 The apparently harder case is when {math}`\WGroShortfall>1` and {math}`\urate > 0`. But note that we will have found {math}`\DiscFacMaxGICWhenFHWCTBSHolds` if we can find the corresponding {math}`\MPC` at which the first term in the square brackets of [the requirement for a target](#eq:TBS-GPFacRawReqForTarget) reaches 1:
 
@@ -167,7 +170,7 @@ The apparently harder case is when {math}`\WGroShortfall>1` and {math}`\urate > 
 .\end{aligned}
 ```
 
-At this value of {math}`\DiscFac` the bracketed term is 0, so the right-hand side of {eq}`eq:TBS-GPFacRawReqForTarget` is 1. By {eq}`eq:TBS-RnormFromAlpha`, the expression {math}`1-(\WGroShortfall-1)\urate/(1-\urate)` in {eq}`eq:TBS-DiscountMaxGICWhenFHWCTBSHoldsAndGICPGroIsExactlySatisfied` equals {math}`\RNrmByG^{-1}`, so {math}`\DiscFacMaxGICWhenFHWCTBSHolds = \Rfree^{\CRRA-1}\RNrmByG^{-\CRRA} = \WGroFachFix^{\CRRA}/\Rfree`, at which {math}`\GPFachFix = 1`: the requirement holds with equality, and {math}`\DiscFacMaxGICWhenFHWCTBSHolds=\DiscFacMaxGIChFix`. So the {math}`\GIChFix` is the definitive boundary, as the loci showed directly: a finite target {math}`\mNrmE` exists so long as {math}`\DiscFac < \DiscFacMaxGIChFix = \WGroFachFix^{\CRRA}/\Rfree`.
+At this value of {math}`\DiscFac` the bracketed term is 0, so the right-hand side of {eq}`eq:TBS-GPFacRawReqForTarget` is 1. By {eq}`eq:TBS-RnormFromAlpha`, the expression {math}`1-(\WGroShortfall-1)\urate/(1-\urate)` in {eq}`eq:TBS-DiscountMaxGICWhenFHWCTBSHoldsAndGICPGroIsExactlySatisfied` equals {math}`\RNrmByG^{-1}`, so {math}`\DiscFacMaxGICWhenFHWCTBSHolds = \Rfree^{\CRRA-1}\RNrmByG^{-\CRRA} = \WGroFachFix^{\CRRA}/\Rfree`, at which {math}`\GPFachFix = 1`: the requirement's two sides are equal, and {math}`\DiscFacMaxGICWhenFHWCTBSHolds=\DiscFacMaxGIChFix`. So the {math}`\GIChFix` is the definitive boundary, as the loci showed directly: a finite target {math}`\mNrmE` exists so long as {math}`\DiscFac < \DiscFacMaxGIChFix = \WGroFachFix^{\CRRA}/\Rfree`.
 
 (sec:TractableBufferStock-cLocusExists)=
 ### The {math}`\dcEqZero` Locus Exists Under the Weaker GIC-TBS
@@ -196,7 +199,7 @@ The left-hand side captures the slope of the {math}`\dcEqZero` locus, which is {
 "Captures" does not mean "is equal to." The chapter's [{math}`\dcEqZero` locus](#eq:TBS-cDelEqZero) gives the actual formula for the slope.
 :::
 
-If the consumer is "growth patience poised" (that is, {math}`\GPFachFix = 1`), then {math}`\straight = 1` and the left-hand side of {eq}`eq:TBS-cDelEq0SlopeCondLog` is the {math}`\MPC` that characterizes the perfect foresight consumption function. As the start of this section showed from the exact condition, the two loci are then parallel, and no target exists.
+If the consumer is "growth patience poised" (that is, {math}`\GPFachFix = 1`), then {math}`\straight = 1` and the left-hand side of {eq}`eq:TBS-cDelEq0SlopeCondLog` is the {math}`\MPC` that characterizes the perfect foresight consumption function. As the [subsection on when the loci cross](#sec:TractableBufferStock-LociCross) showed from the exact condition, the two loci are then parallel, and no target exists.
 
 As noted above, if the consumer is growth-impatient ({math}`\GPFachFix < 1`) then {math}`\straight > 1` and the slope of {math}`\dcEqZero` is monotonically increased as the degree of growth-impatience increases (so that target {math}`\TargetNrm{\mNrm}^{\EmpLbl}` is diminished).
 
@@ -212,7 +215,9 @@ Note that if the {math}`\GIChFix` fails so that {math}`\straight < 1`, the slope
 
 Expanding on the chapter's [discussion of why unemployment risk increases growth impatience](#sec:TBS-URiskGrowthImpatience), the numerator in the leftmost expression reflects the sense in which the unemployment risk acts in a manner similar to the effect of an extra degree of discounting (reflecting the fact that the relevant condition applies only so long as the consumer remains in employment, a condition whose probability is {math}`(1-\urate)`), while the denominator reflects the mechanical effect in which the relevant measure of growth is boosted by the adjustment that preserves human wealth. Writing the perfect foresight version of the growth patience factor as {math}`\APFac_{\WGroFac}` (which is just the limit as {math}`\urate \downarrow 0`), we can see that the expression on the left-hand side is just {math}`\APFac_{\WGroFac}(1-\urate)^{1+1/\CRRA}` which is smaller than {math}`\APFac_{\WGroFac}` because {math}`\urate>0` and {math}`1+\CRRA^{-1} > 0`. So, the GIC-TBS holds whenever the plain-vanilla {math}`\GICWGro` holds, but not vice-versa; there are parametric configurations in which a perfect-foresight consumer with income growth rate {math}`\WGroFac` would not satisfy the relevant {math}`\GICWGro` (so, their wealth-to-income ratio would go to infinity), but the same consumer facing the same human wealth but with an unemployment risk {math}`\urate` would have an upward-sloping {math}`\dcEqZero` locus, and a finite target wealth-to-income ratio so long as the {math}`\GIChFix` holds, as it can even when the {math}`\GICWGro` fails, because {math}`\WGroFachFix = \WGroFac/(1-\urate) > \WGroFac`.
 
-Unlike the {math}`\dcEqZero` locus, the employed consumer's consumption function exists, given the RIC, whether or not the GIC-TBS holds. If the GIC-TBS fails, {math}`\WGroFachFix \leq (\Rfree\DiscFac(1-\urate))^{1/\CRRA} < (\Rfree\DiscFac)^{1/\CRRA} < \Rfree`, the last by the RIC, so the {math}`\FHWChFix` holds: human wealth would be finite even if income grew by {math}`\WGroFachFix` forever. Because the employed consumer's future income always lies between the unemployed consumer's and that of a consumer sure to stay employed, the consumption function {math}`\cFunc(\mNrm)` then exists and is bounded below by {math}`\MPC\mNrm`, what an unemployed consumer with the same resources spends, and above by the perfect foresight consumption function with income growing by {math}`\WGroFachFix` forever.
+Unlike the {math}`\dcEqZero` locus, the employed consumer's consumption function exists, given the RIC, for {math}`\CRRA > 1`, and for {math}`\CRRA < 1` when {math}`\DiscFac \WGroFachFix^{1-\CRRA} \erate < 1`, whether or not the GIC-TBS holds. Solve the problem for a finite horizon, at the end of which the consumer spends everything, and let the horizon lengthen. Because utility is negative when {math}`\CRRA > 1`, each period added to the horizon lowers value. But at every horizon the employed consumer's value is at least that of an unemployed consumer with the same resources, since the employed consumer could always spend what the unemployed one would. And as the horizon lengthens, the unemployed consumer's value falls toward {math}`\uFunc(\MPC\mNrm)/\MPC`, its [value with no end to the horizon](#sec:TractableBufferStock-ValueFunction), which the RIC keeps finite. So the employed consumer's value functions, falling and bounded below, converge; since they are concave, so do their slopes (the limit is differentiable, since it solves the Bellman equation with spending strictly between zero and resources), and with them, through the envelope condition, the consumption functions. The limiting consumption function is neither zero nor infinite: it is at least {math}`\MPC\mNrm`, what an unemployed consumer with the same resources spends, because the employed consumer's future income is never less than an unemployed consumer's, and at most {math}`\mNrm`, because the consumer never borrows. None of this uses the GIC-TBS. {cite:t}`BufferStockTheory` proves the analogous result for {math}`\CRRA > 1`, by a contraction mapping, in a model whose zero-income events are transitory; there the RIC can be weakened to a weak return impatience condition together with a finite value of autarky, because a consumer with no income today can expect income tomorrow.
+
+When {math}`\CRRA < 1`, utility is positive, and the value functions rise as the horizon lengthens instead. The argument then needs them bounded above, which requires {math}`\DiscFac \WGroFachFix^{1-\CRRA} \erate < 1`, the condition that [the derivation of the value function](#sec:TractableBufferStock-ValueFunction) assumes when {math}`\CRRA < 1`: otherwise an employed consumer who spent each period's income as it arrived would already have infinite value. The RIC alone does not ensure it: with {math}`\CRRA = 0.5`, {math}`\DiscFac = 0.96`, {math}`\Rfree = 1.04`, {math}`\WGroFac = 1.1` and {math}`\urate = 0.01`, the RIC holds, and the loci cross, but {math}`\DiscFac \WGroFachFix^{1-\CRRA} \erate \approx 1.0018`, so the employed consumer's value is infinite. But the condition is also enough: spending never exceeds resources, which after {math}`t` periods of employment are at most {math}`(\mNrm+t)\max\{\Rfree,\WGroFachFix\}^{t}` times current income and, once the consumer is unemployed, grow at most by the factor {math}`\Rfree` a period, so value is bounded by a series that converges because {math}`\DiscFac \erate \max\{\Rfree,\WGroFachFix\}^{1-\CRRA} < 1`, by the condition and the RIC, and {math}`\DiscFac \Rfree^{1-\CRRA} < 1`, which is equivalent to the RIC.
 
 (sec:TBS-mTargExact)=
 ## The Exact Formula for Target {math}`\mNrm`
@@ -374,7 +379,7 @@ this means that we need:
 But since the RIC guarantees {math}`\RPRte<0` and the {math}`\GIChFix` guarantees {math}`\GPRtehFix<0` (which, so long as {math}`(-\GPRtehFix/\urate)\prudEx < 1`, in turn guarantees {math}`\GPRteAdj < 0`), this condition must hold.
 
 :::{margin}
-In more detail: the second-order Taylor approximation in {eq}`eq:TBS-zetaExp` assumes that the second-order term is smaller in absolute value than the first-order one, {math}`|\CRRA^{-1} (\straight^{\CRRA}-1) | > |(\CRRA^{-1})(\CRRA^{-1}-1)((\straight^{\CRRA}-1)^{2}/2)|`. For {math}`\CRRA \geq 1`, substituting {eq}`eq:TBS-hatpi` turns this into {math}`(-\GPRtehFix/\urate)\prudEx < 1`, which with the {math}`\GIChFix` gives {math}`\GPRteAdj < 0`. The exact denominator, in {eq}`eq:TBS-mTarget`, is positive under the RIC and the {math}`\GIChFix` alone, as shown above.
+In more detail: the second-order Taylor approximation in {eq}`eq:TBS-zetaExp` assumes that the second-order term is smaller in absolute value than the first-order one, {math}`|\CRRA^{-1} (\straight^{\CRRA}-1) | > |(\CRRA^{-1})(\CRRA^{-1}-1)((\straight^{\CRRA}-1)^{2}/2)|`. For {math}`\CRRA \geq 1`, substituting {eq}`eq:TBS-hatpi` turns this into {math}`(-\GPRtehFix/\urate)\prudEx < 1`, which with the {math}`\GIChFix` gives {math}`\GPRteAdj < 0`. The exact denominator, in {eq}`eq:TBS-mTarget`, is positive under the RIC and the {math}`\GIChFix` alone.
 :::
 
 The same set of derivations imply that we can replace the denominator in {eq}`eq:TBS-mTargetApprox` with the negative of the right-hand side of {eq}`eq:TBS-newDenom`, yielding a more compact expression for the target level of resources,
@@ -447,6 +452,7 @@ How good are these approximations? The table compares each with the exact target
 
 The chapter's notebook solves the model by *reverse shooting*: it starts at the target and runs the model's dynamics backward. This section derives the equations it uses.
 
+(sec:TractableBufferStock-ReverseShooting)=
 ### The Reverse-Shooting Equations
 
 To solve the model by the method of *reverse shooting*, we need {math}`{\cNrm}^{\EmpLbl}_{t}` as a function of {math}`{\cNrm}^{\EmpLbl}_{t+1}`. Starting with the chapter's [normalized Euler equation](#eq:TBS-BeforePFStep):
@@ -523,7 +529,7 @@ yielding from {eq}`eq:TBS-naturalMPC` a quadratic equation in {math}`\MPCE`:
 which has exactly one solution for {math}`\MPCE` in the interval {math}`(0,1)`, which is the MPC at target wealth; its other solution is negative.
 
 :::{margin}
-The chapter's figures come from its notebook, which computes this solution by {eq}`eq:TBS-MPCatTarget` below and then constructs the consumption function by reverse shooting. Its results have been checked against those of HARK's `TractableConsumerType`, which solves the model by the same method.
+The chapter's figures come from its notebook, which computes this solution by {eq}`eq:TBS-MPCatTarget` and then constructs the consumption function by reverse shooting. Its results have been checked against those of HARK's `TractableConsumerType`, which solves the model by the same method.
 :::
 
 To see this, and to solve the equation, write {math}`\natural = \natural^{\EmpLbl}\MPCE+\natural^{\UnempLbl}`, where {math}`\natural^{\EmpLbl} \equiv \DiscFacAlt\RNrmByG\erate` and {math}`\natural^{\UnempLbl} \equiv \DiscFacAlt\RNrmByG\urate\straight^{\CRRA+1}\MPC` are both positive. Then {eq}`eq:TBS-quadraticForTargetMPC` is
@@ -696,6 +702,6 @@ This holds whenever human wealth is finite, that is, under the {math}`\FHWCWGro`
 x_{t} = (\WGroFac/\Rfree)(1+x_{t+1}) ,
 ```
 
-in which the unemployment risk has dropped out, because {math}`(1-\urate)\RNrmByG^{-1} = \WGroFac/\Rfree`. As wealth grows, {math}`x` therefore approaches the fixed point {math}`(\WGroFac/\Rfree)/(1-\WGroFac/\Rfree) = \hNrm-1` when {math}`\WGroFac < \Rfree`, and {math}`\cFunc(\mNrm)` approaches {math}`\bar{\cFunc}(\mNrm)`: the proportion of consumption financed out of (uncertain) labor income approaches zero, and the precautionary effect, which is proportional to the square of that proportion, vanishes. {math}`\WGroFachFix` sets only the speed of convergence. Since {math}`\mNrm_{t+1} \approx \GPFachFix\mNrm_{t}` at large {math}`\mNrm`, {math}`\bar{\cFunc}(\mNrm)-\cFunc(\mNrm)` falls like {math}`\mNrm` raised to the power {math}`-\min\{1, \log(\Rfree/\WGroFac)/\log(\WGroFachFix/\APFac)\}`, as numerical solutions confirm; when {math}`\WGroFac < \Rfree \leq \WGroFachFix` that power can be close to zero, and the convergence very slow.
+in which the unemployment risk has dropped out, because {math}`(1-\urate)\RNrmByG^{-1} = \WGroFac/\Rfree`. As wealth grows, {math}`x` therefore approaches the fixed point {math}`(\WGroFac/\Rfree)/(1-\WGroFac/\Rfree) = \hNrm-1` when {math}`\WGroFac < \Rfree`, and {math}`\cFunc(\mNrm)` approaches {math}`\bar{\cFunc}(\mNrm)`: the proportion of consumption financed out of (uncertain) labor income approaches zero, and the precautionary effect, which is proportional to the square of that proportion, vanishes. {math}`\WGroFachFix` sets only the speed of convergence. Since {math}`\mNrm_{t+1} \approx \GPFachFix\mNrm_{t}` at large {math}`\mNrm`, {math}`\bar{\cFunc}(\mNrm)-\cFunc(\mNrm)` falls like {math}`\mNrm` raised to the power {math}`-\min\{1, \log(\Rfree/\WGroFac)/\log(\WGroFachFix/\APFac)\}` when the {math}`\GIChFix` holds, and like {math}`1/\mNrm` when it fails, as numerical solutions confirm; when {math}`\WGroFac < \Rfree \leq \WGroFachFix` that power can be close to zero, and the convergence very slow.
 
 When {math}`\WGroFac \geq \Rfree`, human wealth is infinite and {math}`\bar{\cFunc}` is not defined. The consumption function then approaches the unemployed consumer's {math}`\MPC\mNrm` only in ratio: {math}`\cFunc(\mNrm)/(\MPC\mNrm) \rightarrow 1`, but {math}`\cFunc(\mNrm)-\MPC\mNrm` grows without bound, like {math}`\mNrm` raised to the power {math}`\log(\WGroFac/\Rfree)/\log(\WGroFachFix/\APFac)` (like {math}`\log \mNrm` when {math}`\WGroFac = \Rfree`). The solution of the perfect foresight problem with liquidity constraints, which {cite:t}`parkLiqConstrContinuous` treats in continuous time, shares that limit in ratio, but differs from {math}`\cFunc(\mNrm)` by an amount that also grows without bound.
