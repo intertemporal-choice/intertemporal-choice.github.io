@@ -109,6 +109,7 @@ project:
     - file: content/appendices/chapters/index.md
       children:
         - file: content/appendices/chapters/PerfForesightCRRA.md
+        - file: content/appendices/chapters/TractableBufferStock.md
     # Notes that supplement the main chapters. Listed for the website only; the
     # PDF export in myst.yml deliberately omits this part.
     - file: content/supplemental/index.md

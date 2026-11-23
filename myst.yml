@@ -250,6 +250,8 @@ project:
           level: 0
         - file: content/appendices/chapters/PerfForesightCRRA.md
           level: 1
+        - file: content/appendices/chapters/TractableBufferStock.md
+          level: 1
 
   # No `jupyter` block. The book carries no executable pages: a reader runs a chapter's
   # notebook in Colab or Binder, or, for the notebooks that need only what Pyodide has, in the
