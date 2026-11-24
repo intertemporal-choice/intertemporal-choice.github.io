@@ -141,7 +141,7 @@ If a person who is employed in period {math}`t` ({math}`\tranShkAll_{t}=1`) is s
 \mLvl^{\EmpLbl}_{t+1} = (\mLvl^{\EmpLbl}_{t}-\cLvl^{\EmpLbl}_{t})\Rfree+\Wage_{t+1}\labor_{t+1}.
 ```
 
-But employed consumers face a constant risk {math}`\urate` of becoming unemployed. It will be convenient to define {math}`\erate\equiv 1-\urate` as the probability that a consumer does *not* become unemployed. Whether the consumer is employed or not, the consumer's labor productivity {math}`\labor` is well-defined: For convenience, {math}`\labor` is assumed to grow by a factor {math}`\erate^{-1}` every period,
+But employed consumers face a constant risk {math}`\urate` of becoming unemployed. It will be convenient to define {math}`\erate\equiv 1-\urate` as the probability that a consumer does *not* become unemployed. Whether the consumer is employed or not, their labor productivity {math}`\labor` is well-defined: For convenience, {math}`\labor` is assumed to grow by a factor {math}`\erate^{-1}` every period,
 
 :::{margin}
 "Labor productivity" is purely hypothetical for a consumer who is unemployed; but defining it even for unemployed consumers simplifies notation and some later analysis.
@@ -169,7 +169,11 @@ so that the *expected* labor income growth factor for employed consumers is the 
 \end{aligned}
 ```
 
-which is the reason for {eq}`eq:TBS-meanPreserve`'s assumption about the growth of individual labor productivity: It implies that an increase in {math}`\urate` is a pure increase in uncertainty with no effect on the present discounted value of expected labor income ("human wealth"); an increase in {math}`\urate` therefore constitutes a "mean-preserving spread" in human wealth.
+which is the reason for {eq}`eq:TBS-meanPreserve`'s assumption about the growth of individual labor productivity: An increase in {math}`\urate` is a pure increase in uncertainty with no effect on the present discounted value of expected labor income ("human wealth"); an increase in {math}`\urate` therefore constitutes a "mean-preserving spread" in human wealth.
+
+:::{margin}
+In a model with more realistic shocks – like a lognormal distribution of permanent shocks – a mean-preserving increase in uncertainty might constitute, say, a spread in the distribution of permanent shocks.
+:::
 
 #### First Order Optimality Condition
 
@@ -395,7 +399,7 @@ Note that although {math}`\urate` is our measure of uncertainty, neither of thes
 
 #### The Target Level of {math}`\mNrmE`
 
-The [appendix on conditions for a target](#sec:TBS-mTargExists) demonstrates that, given the RIC, the {math}`\GIChFix` is necessary and sufficient for the existence of a target value of market resources {math}`\mTrgNrm^{\EmpLbl}`; the weaker GIC-TBS guarantees only that the {math}`\dcEqZero` locus exists and slopes upward, while for {math}`\CRRA > 1`, and for {math}`\CRRA < 1` when {math}`\DiscFac\WGroFachFix^{1-\CRRA}(1-\urate) < 1`, the consumption function exists whether or not the GIC-TBS holds. The [appendix on the exact target formula](#sec:TBS-mTargExact) solves for an explicit formula for that target.
+The [appendix on conditions for a target](#sec:TBS-mTargExists) demonstrates that, given the RIC, the {math}`\GIChFix` is necessary and sufficient for the existence of a target value of market resources {math}`\mTrgNrm^{\EmpLbl}`; the weaker GIC-TBS guarantees only that the {math}`\dcEqZero` locus exists and slopes upward, while for {math}`\CRRA > 1`, the consumption function exists whether or not the GIC-TBS holds. The [appendix on the exact target formula](#sec:TBS-mTargExact) solves for an explicit formula for that target.
 
 Briefly, this is accomplished as follows. We can obtain the {math}`\dcEqZero` locus by substituting {math}`{\cNrm}^{\EmpLbl}_{\prdt+1}={\cNrm}^{\EmpLbl}_{\prdt}={\cNrm}^{\EmpLbl}` into equation {eq}`eq:TBS-PSTerm`:
 
@@ -442,13 +446,13 @@ The [appendix to perfect foresight CRRA](#sec:PFwhenFHWfails) shows that if the 
 
 It turns out that in the buffer stock model, we can relax the requirement that human wealth is finite.
 
-We pointed out above that {eq}`eq:TBS-GICExistsSoln`, which is necessary for the existence of a steady-state level of consumption, reduces to the {math}`\GIChFix` in the case being considered here, the limit as {math}`\urate \downarrow 0`. The interesting question is therefore what happens when the {math}`\FHWCWGro` does not hold (that is {math}`\WGroFac > \Rfree`).
+The [GIC-TBS](#eq:TBS-GICExistsSoln), which is necessary for the existence of a steady-state level of consumption, reduces to the {math}`\GIChFix` in the case being considered here, the limit as {math}`\urate \downarrow 0`. The interesting question is therefore what happens when the {math}`\FHWCWGro` does not hold (that is {math}`\WGroFac > \Rfree`).
 
 Given that the {math}`\GICWGro` holds, if the {math}`\FHWCWGro` does not hold the RIC may or may not hold: {math}`\WGroFac > \Rfree` implies that {math}`\APFac/\Rfree > \APFac/\WGroFac` but {math}`1 > \APFac/\WGroFac` could be consistent with {math}`\APFac/\Rfree` being greater or less than one. But recall that our assumption is that the unemployed consumer is assumed to behave according to the perfect foresight model with human wealth equal to zero. We must therefore impose the RIC in order to obtain a nondegenerate solution.
 
 For any finite horizon, human wealth is finite, and there is a positive probability that income will be zero over the remainder of the horizon. This puts a strict bound on the extent to which consumers are willing to rely for current consumption upon future income that is unbounded in expectation (as the horizon extends) but potentially bounded in practice. In effect, the precautionary motive introduces a self-imposed borrowing constraint that prevents the (arbitrarily large) amount of future income from being something the consumer is willing to borrow against.
 
-The consequence is that, given the RIC, the limiting model (as {math}`\urate \downarrow 0`) exhibits, for {math}`\CRRA > 1`, and for {math}`\CRRA < 1` when {math}`\DiscFac\WGroFachFix^{1-\CRRA}(1-\urate) < 1`, a solution with a unique finite target {math}`\mNrmE` so long as the {math}`\GIChFix` holds, *even if human wealth is infinite*; in this case the {math}`\dmEqZero` locus is downward sloping (because {math}`\Rfree < \WGroFachFix` means {math}`\RNrmByG < 1`, so its slope {math}`1-\RNrmByG^{-1}` in {eq}`eq:TBS-mDelEqZero` is negative) while the {math}`\dcEqZero` locus is upward sloping (as guaranteed by the [GIC-TBS](#eq:TBS-GICExistsSoln), which the {math}`\GIChFix` implies). Thus, a target {math}`\mNrmE` will exist. (The {math}`\GIChFix` holds automatically here: {math}`\RNrmByG < 1` and the RIC give {math}`\GPFachFix = \RNrmByG\RPFac < \RPFac < 1`.)
+The consequence is that, given the RIC, the limiting model (as {math}`\urate \downarrow 0`) exhibits, for {math}`\CRRA > 1`, a solution with a unique finite target {math}`\mNrmE` so long as the {math}`\GIChFix` holds, *even if human wealth is infinite*; in this case the {math}`\dmEqZero` locus is downward sloping (because {math}`\Rfree < \WGroFachFix` means {math}`\RNrmByG < 1`, so its slope {math}`1-\RNrmByG^{-1}` in [the locus's equation](#eq:TBS-mDelEqZero) is negative) while the {math}`\dcEqZero` locus is upward sloping (as guaranteed by the [GIC-TBS](#eq:TBS-GICExistsSoln), which the {math}`\GIChFix` implies). Thus, a target {math}`\mNrmE` will exist. (The {math}`\GIChFix` holds automatically here: {math}`\RNrmByG < 1` and the RIC give {math}`\GPFachFix = \RNrmByG\RPFac < \RPFac < 1`.)
 
 The conditions used in this chapter, and what each guarantees, are summarized below. They nest: the {math}`\GICWGro` implies the {math}`\GIChFix`, which implies the GIC-TBS.
 
@@ -869,7 +873,7 @@ The [appendix](#sec:TractableBufferStock-Appendix) derives nine further results,
 
 - *[Approximate consumption growth](#sec:TBS-CGroApprox).* Taylor approximations turn the employed consumer's Euler equation into {math}`{\cNrm}^{\EmpLbl}_{t+1}/{\cNrm}^{\EmpLbl}_{t} \approx \GPFachFix\left(1+\urate(1+\prudEx\cGap_{t+1})\cGap_{t+1}\right)`, the approximation this chapter uses, where {math}`\prudEx = (\CRRA-1)/2`.
 - *[A target exists if and only if the {math}`\GIChFix` holds](#sec:TBS-mTargExists).* Given the RIC, the employed consumer has a target {math}`\mTrgNrm^{\EmpLbl}` if and only if {math}`\GPFachFix < 1`, that is, {math}`\DiscFac < \WGroFachFix^{\CRRA}/\Rfree`. When the {math}`\FHWChFix` fails ({math}`\WGroFachFix \geq \Rfree`), the RIC implies the {math}`\GIChFix`, so a target always exists.
-- *[The {math}`\dcEqZero` locus exists under a weaker condition](#sec:TractableBufferStock-cLocusExists).* Given the RIC, the {math}`\dcEqZero` locus exists, and slopes upward, if and only if the GIC-TBS, {math}`\GPFachFix(1-\urate)^{1/\CRRA} < 1`, holds, while for {math}`\CRRA > 1`, and for {math}`\CRRA < 1` when {math}`\DiscFac\WGroFachFix^{1-\CRRA}(1-\urate) < 1`, the employed consumer's consumption function exists whether or not the GIC-TBS holds. The GIC-TBS can hold even when the perfect foresight {math}`\GICWGro` fails. When the GIC-TBS holds but the {math}`\GIChFix` fails, there is no target, and the ratio of wealth to income grows forever.
+- *[The {math}`\dcEqZero` locus exists under a weaker condition](#sec:TractableBufferStock-cLocusExists).* Given the RIC, the {math}`\dcEqZero` locus exists, and slopes upward, if and only if the GIC-TBS, {math}`\GPFachFix(1-\urate)^{1/\CRRA} < 1`, holds, while for {math}`\CRRA > 1`, the employed consumer's consumption function exists whether or not the GIC-TBS holds. The GIC-TBS can hold even when the perfect foresight {math}`\GICWGro` fails. When the GIC-TBS holds but the {math}`\GIChFix` fails, there is no target, and the ratio of wealth to income grows forever.
 - *[The exact target](#sec:TBS-mTargExact).* The target is {math}`\mTrgNrm^{\EmpLbl} = 1 + \Rfree/(\WGroFachFix+\Rfree\MPC\straight-\Rfree)`, whose denominator the RIC and the {math}`\GIChFix` make positive. As the unemployment risk vanishes, the target approaches 1 if the perfect foresight {math}`\GICWGro` holds, and a finite value above 1 if {math}`\APFac_{\WGroFac} = 1`.
 - *[Approximate formulas for the target](#sec:TBS-mTargApprox).* Taylor approximations give simple formulas for the target, such as {math}`\mTrgNrm^{\EmpLbl} \approx 1 + 1/\left((\WGroRtehFix-\rfree)+\discRte(1+(\WGroRtehFix+\discRte-\rfree)/\urate)\right)` under logarithmic utility. Under logarithmic utility they are close; otherwise they are reliable only when the consumer is barely growth-impatient relative to the unemployment risk: rough when {math}`\discRte=\rfree`, and useless at the benchmark calibration.
 - *[The MPC at the target and as {math}`\mNrm` approaches zero](#sec:TractableBufferStock-MPC).* The MPC at the target is the root in (0, 1) of a quadratic, which has a closed form. As {math}`\mNrm` approaches zero, the MPC approaches {math}`\MPC/(\MPC+\RPFac\urate^{1/\CRRA})`, which lies between the perfect foresight {math}`\MPC` and 1.
