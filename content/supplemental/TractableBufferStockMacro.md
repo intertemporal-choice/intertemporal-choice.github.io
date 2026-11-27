@@ -45,7 +45,7 @@ In the balanced growth equilibrium, the growth factor for aggregate population w
 
 ## Stakes
 
-We now examine this model under two assumptions about the initial "stake" of newborns in the economy. (We use "stake" to designate a transfer received by newborns). This is explicitly *not* an inheritance, as we have assumed that individuals have no bequest motive and newborns are unrelated to anyone in the existing population. Our motivation is to make the model more tractable, rather than to represent an important feature of the real world; the model without a "stake" can only be solved by simulation, and {numref}`fig:TBS-SOENoStakescPath` shows how its aggregate consumption evolves when households start with no wealth.
+We now examine this model under two assumptions about the initial "stake" of newborns in the economy. (We use "stake" to designate a transfer received by newborns). This is explicitly *not* an inheritance, as we have assumed that individuals have no bequest motive and newborns are unrelated to anyone in the existing population. Our motivation is to make the model more tractable, rather than to represent an important feature of the real world; the model without a "stake" can only be solved by simulation, and {numref}`fig:TBS-SOENoStakescPath` shows how its aggregate consumption evolves when households start with no wealth. Both figures are drawn by the chapter's [notebook](../consumption/TractableBufferStock/TractableBufferStock.ipynb); run it in your browser, with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=TractableBufferStock.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
 
 ### A "Stake" That Yields a Representative Agent
 
@@ -115,8 +115,11 @@ If the economy has experienced multiple shocks, it will be necessary to retain a
 
 :::{figure} /content/consumption/TractableBufferStock/figures/SOEStakescPathAfterThetaDropPlot.png
 :name: fig:TractableBufferStockMacro-SOEStakescPath
+:class: note-under
 
-Aggregate {math}`\CNrm` in a Small Open Economy Before and After {math}`\discRte` Decline. With stakes, aggregate consumption behaves like an individual's: it drops, then rises to a higher ratio. Drawn by the chapter's [notebook](../consumption/TractableBufferStock/TractableBufferStock.ipynb); run it in your browser, with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=TractableBufferStock.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Aggregate {math}`\CNrm` in a Small Open Economy Before and After {math}`\discRte` Decline
+
+Note: With stakes, aggregate consumption behaves like an individual's: it drops, then rises to a higher ratio.
 :::
 
 ### No Stake
@@ -154,7 +157,10 @@ The foregoing discussion contains (in some cases implicitly) all the assumptions
 
 :::{figure} /content/consumption/TractableBufferStock/figures/SOENoStakescPath.png
 :name: fig:TBS-SOENoStakescPath
+:class: note-under
 
-Path of Aggregate {math}`\CNrm` in a Small Open Economy Without Stakes From Date 0. Starting with no wealth, aggregate consumption rises quickly toward its steady-state ratio as households build their buffer stocks. Drawn by the chapter's [notebook](../consumption/TractableBufferStock/TractableBufferStock.ipynb); run it in your browser, with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=TractableBufferStock.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+Path of Aggregate {math}`\CNrm` in a Small Open Economy Without Stakes From Date 0
+
+Note: Starting with no wealth, aggregate consumption rises quickly toward its steady-state ratio as households build their buffer stocks.
 :::
 

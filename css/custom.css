@@ -26,3 +26,21 @@ article.article-grid > blockquote p {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
+/* A figure marked :class: note-under shows its title above the image and its "Note:" just under it, in small type
+   (Chris, 2026-11-27: "Any OTHER content can be a paragraph beginning "Note:" under the figure, in a smaller font than
+   the main text and with the minimum possible distance between the figure and the subsequent note"). The theme writes
+   the title and the note as two figcaptions after the image; the note's is already small. The negative margin, a
+   percentage of the width, takes back the white border below the plot, which scales with the image. */
+figure.note-under {
+  display: flex;
+  flex-direction: column;
+}
+figure.note-under > figcaption.group {
+  order: -1;
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+figure.note-under > figcaption.text-sm {
+  margin-top: -1.5%;
+}
