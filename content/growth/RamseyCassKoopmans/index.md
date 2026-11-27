@@ -4,7 +4,7 @@
 {cite:t}`ramseySave`, followed much later by {cite:t}`cass:growth` and {cite:t}`koopmans:growth`, formulated the canonical model of optimal growth, presented here for an economy with exogenous "labor-augmenting" technological progress.
 
 :::{margin}
-For the facts the model is meant to explain, and the Solow model it builds on, see the undergraduate textbook of {cite:t}`ashrafWeilGrowth`. Graduate textbook treatments are in {cite:t}`blanchard&fischer:text`, chapter 2, {cite:t}`barro&salaimartin:book`, chapter 2, and {cite:t}`acemogluGrowth`, chapter 8.
+For the facts the model is meant to explain, and the Solow model it builds on, see the undergraduate textbook of {cite:t}`ashrafWeilGrowth`. Graduate textbook treatments are in {cite:t}`blanchard&fischer:text`, chapter 2, {cite:t}`barro&salaimartin:book`, chapter 2, and {cite:t}`acemogluGrowth`, chapter 8. [Notation in Other Treatments](#sec:RCK-notationCrosswalk) translates the symbols of {cite:t}`romer:text` and {cite:t}`acemogluGrowth` into this chapter's.
 :::
 
 ## The Budget Constraint
@@ -195,6 +195,19 @@ If the Hamiltonian is new to you, Peter Thompson's [lecture notes on optimal con
 \Ham(\kNrm,\cNrm,\vk) = \uFunc(\cNrm) + (\kNrm^{\kapShare} - \cNrm - (\PopnGroRte+\PtyGroRte+\deprRte)\kNrm)\vk.
 ```
 
+The maximum principle gives the conditions that an optimal path satisfies. Here {math}`\kNrm` is the state variable, {math}`\cNrm` the control, {math}`\vk` the costate (the shadow value of capital, in units of utility), and {math}`\discRte-(1-\CRRA)\PtyGroRte` the rate at which the objective discounts. The conditions are:
+
+:::{margin}
+{cite:t}`acemogluGrowth`, chapter 7, states and proves the maximum principle, including its transversality condition.
+:::
+
+- optimization: the control maximizes the Hamiltonian at each date, {math}`\partial\Ham/\partial\cNrm = 0`;
+- the costate equation: {math}`\dot{\vk} = (\discRte-(1-\CRRA)\PtyGroRte)\vk - \partial\Ham/\partial\kNrm`;
+- the state equation: {math}`\dot{\kNrm} = \partial\Ham/\partial\vk`, which restates the constraint;
+- transversality: {math}`\lim_{t\rightarrow\infty} e^{-(\discRte-(1-\CRRA)\PtyGroRte)t}\vk_{t}\kNrm_{t} = 0`.
+
+Any problem with one state and one control has the same four conditions, with its own payoff, constraint and discount rate in place of these.
+
 The [current-value Hamiltonian optimization condition](#eq:uceqvk) for consumption requires {math}`\partial 
  \Ham/\partial \cNrm = 0`:
 
@@ -301,7 +314,14 @@ zero. By {eq}`eq:RCK-kdot`, {math}`\dot{\kNrm}=0` implies
 ```
 
 and the {math}`\dot{\cNrm}/\cNrm=0` locus is the constant {math}`\Steady{\kNrm}` found above.
-The two loci divide the diagram into its phases, as {numref}`fig:RamseySSPlot` shows.
+The two loci, drawn in {numref}`fig:RamseySSPlot` for two rates of productivity growth, divide the diagram into four regions, and the same two equations give the direction of motion in each. Above the {math}`\dot{\kNrm}=0` locus, consumption takes more than {eq}`eq:RCK-kdotEq0` leaves room for, so by {eq}`eq:RCK-kdot` {math}`\dot{\kNrm}<0`; below it, {math}`\dot{\kNrm}>0`. To the left of {math}`\Steady{\kNrm}`, {math}`\fFunc^{\prime}(\kNrm)` is above its steady-state value, because {math}`\fFunc^{\prime\prime}<0`, so by {eq}`eq:cdotOc` {math}`\dot{\cNrm}>0`; to the right of {math}`\Steady{\kNrm}`, {math}`\dot{\cNrm}<0`. So the economy moves:
+
+- up and to the right, below the {math}`\dot{\kNrm}=0` locus and to the left of {math}`\Steady{\kNrm}`;
+- up and to the left, above the locus and to the left of {math}`\Steady{\kNrm}`;
+- down and to the left, above the locus and to the right of {math}`\Steady{\kNrm}`;
+- down and to the right, below the locus and to the right of {math}`\Steady{\kNrm}`.
+
+Only in the regions where it moves up and to the right, or down and to the left, does the economy head toward the steady state, and those are the regions the saddle path of {numref}`fig:RamseySaddlePlot` runs through.
 
 :::{figure} figures/RamseySSPlot.png
 :name: fig:RamseySSPlot
@@ -327,7 +347,30 @@ The transversality condition is an optimality condition, not the intertemporal b
 \end{aligned}\end{gathered}
 ```
 
+This is the maximum principle's transversality condition, rewritten with the interest rate: integrating the costate equation gives {math}`e^{-(\discRte-(1-\CRRA)\PtyGroRte)t}\vk_{t} = \vk_{0}e^{-\int_{0}^{t}(\rfree_{\tau}-\PopnGroRte-\PtyGroRte)\,d\tau}`.
+
 {numref}`fig:RamseySaddlePlot` shows three paths for {math}`\cNrm` and {math}`\kNrm` that satisfy the dynamic equations for consumption and assets, {eq}`eq:cdotOc` and {eq}`eq:RCK-kdot`, all from the same {math}`\kNrm_{0}`. The path that starts above the "saddle path" (the middle one) runs capital to zero in finite time, after which consumption would have to collapse, which the Euler equation forbids. The path that starts below it accumulates capital past the golden rule, toward the point where the {math}`\dot{\kNrm}=0` locus meets the {math}`\kNrm` axis, with consumption falling toward zero; there the interest rate is below {math}`\PopnGroRte+\PtyGroRte`, so the discount term grows without bound and the [transversality condition](#eq:tvc) fails. Only the saddle path satisfies all three conditions.
+
+Why exactly one path? The steady state is a saddle point. Near it, the dynamics are those of the linearized system, whose Jacobian matrix, the derivatives of {math}`\dot{\kNrm}` and {math}`\dot{\cNrm}` with respect to {math}`\kNrm` and {math}`\cNrm` at the steady state, is
+
+```{math}
+:label: eq:RCK-Jacobian
+
+\begin{pmatrix} \partial\dot{\kNrm}/\partial\kNrm & \partial\dot{\kNrm}/\partial\cNrm \\ \partial\dot{\cNrm}/\partial\kNrm & \partial\dot{\cNrm}/\partial\cNrm \end{pmatrix}
+  = \begin{pmatrix} \discRte-(1-\CRRA)\PtyGroRte & -1 \\ \Steady{\cNrm}\fFunc^{\prime\prime}(\Steady{\kNrm})/\CRRA & 0 \end{pmatrix} .
+```
+
+The top left entry is {math}`\fFunc^{\prime}(\Steady{\kNrm})-(\PtyGroRte+\PopnGroRte+\deprRte)`, simplified with the [modified golden rule](#eq:RCK-modGoldenRule). The bottom right entry is zero because {math}`\dot{\cNrm}` is proportional to {math}`\fFunc^{\prime}(\kNrm)-(\discRte+\PopnGroRte+\deprRte+\CRRA\PtyGroRte)`, which is zero at the steady state. The determinant, the product of the two eigenvalues, is {math}`\Steady{\cNrm}\fFunc^{\prime\prime}(\Steady{\kNrm})/\CRRA<0`, so one eigenvalue is negative and the other positive. In the direction that belongs to the positive one, the economy moves away from the steady state; in the direction that belongs to the negative one, it converges. Capital cannot jump, but consumption can, so from each {math}`\kNrm_{0}` exactly one {math}`\cNrm_{0}` starts the economy in the converging direction: the saddle path.
+
+On the saddle path near the steady state, the gap {math}`\kNrm-\Steady{\kNrm}` shrinks at a constant rate, the absolute value of the negative eigenvalue:
+
+```{math}
+:label: eq:RCK-convergenceSpeed
+
+\frac{1}{2}\left(\sqrt{(\discRte-(1-\CRRA)\PtyGroRte)^{2}-4\Steady{\cNrm}\fFunc^{\prime\prime}(\Steady{\kNrm})/\CRRA}-(\discRte-(1-\CRRA)\PtyGroRte)\right) .
+```
+
+This is the model's speed of convergence. With the notebook's parameters it is 0.14: the gap closes at 14 percent a year, so half of it is gone in five years. {cite:t}`barro&salaimartin:book`, chapter 2, compare the speed with the roughly 2 percent a year that they estimate across countries and across regions within countries. With the notebook's other parameters, the model's speed is that low only if capital's share {math}`\kapShare` is about 0.8, far above the notebook's 0.3.
 
 :::{figure} figures/RamseySaddlePlot.png
 :name: fig:RamseySaddlePlot
@@ -337,12 +380,38 @@ Transition to the Steady State
 Note: The same economy, with {math}`\PtyGroRte=0.03`. From {math}`\kNrm=0.5`, consumption 10 percent above the saddle path runs the capital stock down to zero, and consumption 10 percent below it accumulates capital past the golden rule, marked by the dotted line. Drawn by the [notebook](RamseyCassKoopmans.ipynb); run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb).
 :::
 
-:::{margin}
-The steady state is a saddle point. Linearize the system there: its Jacobian matrix, the derivatives of {math}`\dot{\kNrm}` and {math}`\dot{\cNrm}` with respect to {math}`\kNrm` and {math}`\cNrm`, has {math}`\partial\dot{\kNrm}/\partial\cNrm = -1` and {math}`\partial\dot{\cNrm}/\partial\cNrm = 0`, so its determinant is {math}`\partial\dot{\cNrm}/\partial\kNrm = \Steady{\cNrm}\fFunc^{\prime\prime}(\Steady{\kNrm})/\CRRA < 0`, and its two eigenvalues have opposite signs: one direction converges to the steady state, and the other diverges. The saddle path is the converging one; the stable eigenvalue, in absolute value, is the model's speed of convergence, which {cite:t}`barro&salaimartin:book`, chapter 2, compare with the speed observed across countries and regions.
-:::
 
 The saddle path has, in general, no analytical solution, so the transition must be computed. The [notebook](RamseyCassKoopmans.ipynb) computes it by the "time elimination" method {cite:p}`Mulligan&sm:transdynam`: along the path, {math}`d\cNrm/d\kNrm = \dot{\cNrm}/\dot{\kNrm}`, a differential equation in {math}`\kNrm` alone, which it solves outward from the steady state, starting along the saddle path's slope there. The notebook derives the method and draws both figures; run it in your browser with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=RamseyCassKoopmans.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/growth/RamseyCassKoopmans/RamseyCassKoopmans.ipynb). {cite:t}`judd:book` covers numerical methods for saddle paths more generally.
 
 How much of observed growth can the transition explain? Little, {cite:t}`king&rebelo:trans` argue: with plausible parameters, an economy far enough below its steady state for the transition to account for much of its growth would have implausibly high interest rates early on.
 
+(sec:RCK-Experiment)=
+## A Fall in the Time Preference Rate
+
+The phase diagram's main use is to work out how the economy responds to a change. Suppose the economy is in its steady state when the time preference rate {math}`\discRte` falls, unexpectedly and permanently. By the [modified golden rule](#eq:RCK-modGoldenRule), {math}`\Steady{\kNrm}` rises, so the {math}`\dot{\cNrm}/\cNrm=0` locus moves to the right; the {math}`\dot{\kNrm}=0` locus, {eq}`eq:RCK-kdotEq0`, does not involve {math}`\discRte`, so it stays where it was.
+
+Capital is accumulated, so {math}`\kNrm` cannot jump, but {math}`\cNrm` can, and it must jump onto the new saddle path, since every other path either fails the [transversality condition](#eq:tvc) or runs capital to zero. The old steady state is now to the left of the new {math}`\Steady{\kNrm}`, where the new saddle path lies below the {math}`\dot{\kNrm}=0` locus, so {math}`\cNrm` jumps down. From there the economy moves up and to the right along the new saddle path: {math}`\cNrm` and {math}`\kNrm` both rise, and the interest rate {math}`\rfree` falls as {math}`\kNrm` rises. The new steady state has more capital and, since the new {math}`\Steady{\kNrm}` is still below the golden rule, more consumption.
+
+More patient households give up consumption now to build capital, and are repaid with more consumption later. Per capita consumption, {math}`\cNrm\PtyLab`, jumps down in the same proportion as {math}`\cNrm`, grows faster than {math}`\PtyGroRte` during the transition, and grows at {math}`\PtyGroRte` again once the economy reaches the new steady state.
+
 [Decentralizing the Ramsey/Cass-Koopmans Model](#sec:decentralizingrck) shows that, under special conditions, competitive households and firms, taking prices as given, reproduce the planner's allocation, and [The Ramsey/Cass-Koopmans (RCK) Model with Government](#sec:RCKWithGov) adds government spending, taxes and debt.
+
+(sec:RCK-notationCrosswalk)=
+## Notation in Other Treatments
+
+{cite:t}`romer:text`, chapter 2, and {cite:t}`acemogluGrowth`, chapter 8, write the model with different symbols. Both write {math}`\rho` for the time preference rate and {math}`\theta` for relative risk aversion, while this chapter writes variants of the same two letters the other way round: {math}`\discRte` for the time preference rate and {math}`\CRRA` for relative risk aversion.
+
+| | This chapter | Romer | Acemoglu |
+|---|:---:|:---:|:---:|
+| time preference rate | {math}`\discRte` | {math}`\rho` | {math}`\rho` |
+| relative risk aversion | {math}`\CRRA` | {math}`\theta` | {math}`\theta` |
+| labor-augmenting productivity | {math}`\PtyLab` | {math}`A` | {math}`A` |
+| productivity growth rate | {math}`\PtyGroRte` | {math}`g` | {math}`g` |
+| population growth rate | {math}`\PopnGroRte` | {math}`n` | {math}`n` |
+| depreciation rate | {math}`\deprRte` | none | {math}`\delta` |
+| capital per efficiency unit | {math}`\kNrm` | {math}`k` | {math}`k` |
+| consumption per efficiency unit | {math}`\cNrm` | {math}`c` | {math}`c` |
+| consumption per person | {math}`\CLvl/\LLvl` | {math}`C` | {math}`\tilde{c}` |
+| rate that discounts {math}`\uFunc(\cNrm)` | {math}`\discRte-(1-\CRRA)\PtyGroRte` | {math}`\rho-n-(1-\theta)g` | {math}`\rho-n-(1-\theta)g` |
+
+Romer assumes no depreciation. The last row differs because both books weight each date's utility by the size of the population, which this chapter does not.
