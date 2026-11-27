@@ -24,8 +24,9 @@ whenever a page moves, so the Markdown is left alone and the fix happens here:
      to a whole page in the PDF, `\\href{/content/...}`, becomes one inside it too; check
      that every such link has its label. Then rewrite every remaining `\\href{/` to an
      absolute URL on the site, and check that each one names a page the book actually has
-  5. tidy the bibliography, and map each character the text font lacks (the prime in E′) to
-     something it can print; then rerun MyST's own latexmk command, copy the PDF (with its
+  5. tidy the bibliography, map each character the text font lacks (the prime in E′) to
+     something it can print, and put the title of each figure marked note-under above it and its
+     "Note:" in small type just under it; then rerun MyST's own latexmk command, copy the PDF (with its
      .tex and logs) back to exports/, and fail if LaTeX's log says a character was still
      left out
 
@@ -570,6 +571,85 @@ def map_glyphs_tex() -> list[str]:
     return []
 
 
+# A figure marked `:class: note-under` puts its title above the image and its "Note:" paragraph just under it, in
+# small type (Chris, 2026-11-27: "Any OTHER content can be a paragraph beginning "Note:" under the figure, in a smaller
+# font than the main text and with the minimum possible distance between the figure and the subsequent note"). MyST
+# writes the title and the note into one \caption under the image, so this step rearranges those figures.
+NOTE_UNDER_OPTIONS = re.compile(r"^:::\{figure\}[^\n]*\n((?::[A-Za-z-]+:[^\n]*\n)+)", re.M)
+FIGURE_ENV = re.compile(r"(\\begin\{figure\}(?:\[[^\]]*\])?\n)(.*?)(\\end\{figure\})", re.S)
+
+
+def note_under_labels(text: str) -> set[str]:
+    """The labels of the figures in a page's Markdown that are marked note-under."""
+    labels = set()
+    for m in NOTE_UNDER_OPTIONS.finditer(text):
+        options = m.group(1)
+        name = re.search(r"^:name: (\S+)", options, re.M)
+        if name and re.search(r"^:class:.*\bnote-under\b", options, re.M):
+            labels.add(name.group(1))
+    return labels
+
+
+def balanced(text: str, i: int) -> tuple[str, int]:
+    """The text inside the brace group that opens at text[i], and the index just after it."""
+    if text[i] != "{":
+        raise ValueError("no brace group here")
+    depth, j = 0, i
+    while j < len(text):
+        c = text[j]
+        if c == "\\":
+            j += 2
+            continue
+        depth += {"{": 1, "}": -1}.get(c, 0)
+        if depth == 0:
+            return text[i + 1:j], j + 1
+        j += 1
+    raise ValueError("unbalanced braces")
+
+
+def notes_under(tex: str, labels: set[str]) -> tuple[str, int]:
+    """Each figure whose label is in `labels`: the title alone in a caption above the image, then the note, if any,
+    in small ragged-right type as wide as the image, pulled up close under it. Other figures are left alone."""
+    count = 0
+
+    def fix(m):
+        nonlocal count
+        head, body, tail = m.groups()
+        label = re.search(r"\\label\{([^}]*)\}", body)
+        graphic = re.search(r"\\includegraphics(?:\[([^\]]*)\])?\{[^}]*\}", body)
+        caption = re.search(r"\\caption(?:\[[^\]]*\])?\{", body)
+        if not (label and label.group(1) in labels and graphic and caption):
+            return m.group(0)
+        inner, _ = balanced(body, caption.end() - 1)
+        title, sep, note = inner.partition("\n\nNote:")
+        width = re.search(r"width=([^,\]]+)", graphic.group(1) or "")
+        width = width.group(1) if width else "\\linewidth"
+        parts = ["\\centering\n", "\\captionsetup{position=top}\n", f"\\caption[]{{{title.strip()}}}\n",
+                 f"\\label{{{label.group(1)}}}\n", graphic.group(0) + "\n"]
+        if sep:
+            parts.append(f"\\par\\vspace{{-0.3\\baselineskip}}\n\\begin{{minipage}}{{{width}}}\\small\\raggedright Note:{note}\\end{{minipage}}\n")
+        count += 1
+        return head + "".join(parts) + tail
+
+    return FIGURE_ENV.sub(fix, tex), count
+
+
+def notes_under_tex() -> list[str]:
+    """Step 7: rearrange the figures marked note-under (NOTE_UNDER_OPTIONS) in the generated LaTeX."""
+    labels = set()
+    for md in STAGE.rglob("*.md"):
+        if "_build" not in md.relative_to(STAGE).parts:
+            labels |= note_under_labels(md.read_text())
+    done = 0
+    for tex_file in (STAGE / TEX_DIR).glob("*.tex"):
+        new, n = notes_under(tex_file.read_text(), labels)
+        if n:
+            tex_file.write_text(new)
+            done += n
+    log.info("figures with their note under them: %d of %d marked", done, len(labels))
+    return []
+
+
 def missing_glyphs(latex_log: str) -> list[str]:
     """Each character LaTeX's log says a font lacks, which the PDF therefore leaves out, once, with its count."""
     found: dict[tuple[str, str, str], int] = {}
@@ -607,7 +687,7 @@ def build(root: Path) -> list[str]:
     rewrite_staged_link_words()
     if run(["myst", "build", "--pdf"], STAGE, root / MYST_LOG):
         return [f"myst build --pdf failed; see {MYST_LOG}"]
-    return internalize_tex() or absolutize_tex() or tidy_bib() or map_glyphs_tex() or compile_and_copy(root)
+    return internalize_tex() or absolutize_tex() or tidy_bib() or map_glyphs_tex() or notes_under_tex() or compile_and_copy(root)
 
 
 def raises_key_error(fn, *args) -> bool:
@@ -898,10 +978,31 @@ def glyph_failures() -> list[str]:
     return [msg for bad, msg in cases if bad]
 
 
+def notes_under_failures() -> list[str]:
+    """Failures of note_under_labels and notes_under on a marked figure and an unmarked one."""
+    md = (":::{figure} figures/a.png\n:name: fig:A\n:class: note-under\n\nPhase Diagram\n\nNote: The loci cross.\n:::\n\n"
+          ":::{figure} figures/b.png\n:name: fig:B\n\nOther\n:::\n")
+    fig = ("\\begin{figure}[!htbp]\n\\centering\n\\includegraphics[width=0.7\\linewidth]{files/a.png}\n"
+           "\\caption[]{Phase Diagram\n\nNote: The {loci} cross.}\n\\label{fig:A}\n\\end{figure}\n")
+    other = fig.replace("fig:A", "fig:B")
+    got, n = notes_under(fig + other, note_under_labels(md))
+    first, rest = got.split("\\end{figure}\n", 1)
+    cases = [
+        (note_under_labels(md) != {"fig:A"}, "the marked figure's label was not the only one found"),
+        (n != 1, f"{n} figures were rearranged, not 1"),
+        ("\\caption[]{Phase Diagram}" not in first, "the caption is not the title alone"),
+        ("\\caption" in first and first.index("\\caption") > first.index("\\includegraphics"), "the title is not above the image"),
+        ("\\begin{minipage}{0.7\\linewidth}\\small\\raggedright Note: The {loci} cross.\\end{minipage}" not in first,
+         "the note is not under the image, in small type, as wide as the image"),
+        (rest != other, "an unmarked figure was changed"),
+    ]
+    return [msg for bad, msg in cases if bad]
+
+
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
     failures = (fact_failures() + web_only_failures() + margin_failures() + link_words_failures() + title_label_failures() + href_failures()
-                + url_failures() + clear_failures() + bib_failures() + glyph_failures())
+                + url_failures() + clear_failures() + bib_failures() + glyph_failures() + notes_under_failures())
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")

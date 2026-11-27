@@ -35,7 +35,10 @@ code/build_site.py). MyST does not: a figure whose file is stale builds and depl
      that chapter, and carries outputs; and both the chapter and the notebook's own page link
      to open the notebook in Colab and in Binder (Chris, 2026-10-12), so a reader can run it
      without installing anything; and so does the caption of every figure the notebook draws
-     (Chris, 2026-10-21: "the caption of each figure or table should have a link to the notebook")
+     (Chris, 2026-10-21: "the caption of each figure or table should have a link to the notebook").
+     A figure marked `:class: note-under` may instead have the links anywhere on its page, since its
+     page states them once at the start (Chris, 2026-11-27: "The captions should not repeat something
+     stated at the start, about colab and binder and jupyterlite")
   7. the figures are current. A notebook the build re-ran (its code or the environment
      changed) redrew its figures over the committed files, so a file that now differs from
      the committed one beyond a small tolerance means the notebook was changed without its
@@ -211,6 +214,12 @@ def drawing_notebook(repo: Path, src: str) -> str | None:
 def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, repo: Path) -> list[str]:
     """Figures that are not one image drawn by the chapter's notebook or exempt."""
     problems = []
+    page_urls = link_urls(mdast)
+
+    def launch_urls(fig) -> set[str]:
+        """The links that count for a figure's launch links: its caption's, and its page's if it is note-under."""
+        note_under = "note-under" in str(fig.get("class") or "").split()
+        return link_urls(fig) | (page_urls if note_under else set())
 
     def image_problem(src: str | None, what: str) -> None:
         src = src or ""
@@ -263,14 +272,14 @@ def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, re
         if FIGURE_FILE.match(src) and chapter and notebook_beside(repo, location):
             # A figure drawn by the chapter's notebook links to it in its caption.
             rel = f"{Path(location.lstrip('/')).parent}/{chapter.group(1)}.ipynb"
-            urls = link_urls(fig)
+            urls = launch_urls(fig)
             for service, url in launch_links(rel).items():
                 if url not in urls:
                     problems.append(f"{slug}: {name}'s caption has no link to open {rel} in {service} ({url})")
         drawn_by = drawing_notebook(repo, src)
         if drawn_by:
             # Another chapter's figure links, in its caption, to the notebook that draws it.
-            urls = link_urls(fig)
+            urls = launch_urls(fig)
             for service, url in launch_links(drawn_by).items():
                 if url not in urls:
                     problems.append(f"{slug}: {name}'s caption has no link to open {drawn_by} in {service} ({url})")
@@ -491,8 +500,8 @@ def self_test_site() -> list[str]:
 
 
 # Synthetic page nodes for the figure self-test.
-def _fig(*children, label="fig:t"):
-    return {"type": "container", "kind": "figure", "label": label, "children": list(children)}
+def _fig(*children, label="fig:t", cls=None):
+    return {"type": "container", "kind": "figure", "label": label, "children": list(children), **({"class": cls} if cls else {})}
 
 
 def _img(src, placeholder=False):
@@ -539,6 +548,9 @@ def self_test_figures() -> list[str]:
             "an exempt static image": (plain, _fig(_img(static))),
             "an exempt remote image pinned to a commit": (at_a, _fig(_img(remote))),
             "another chapter's figure, linked to the notebook that draws it": (plain, _fig(_img("/content/part/A/figures/a.png"), caption)),
+            "a note-under figure whose page, not its caption, links the notebook": (
+                at_a, {"type": "root", "children": [{"type": "paragraph", "children": caption["children"]},
+                                                    _fig(_img("figures/a.png"), cls="note-under")]}),
         }
         bad = {
             "an embedded notebook output": (at_a, _fig(_out(*png))),
@@ -556,6 +568,10 @@ def self_test_figures() -> list[str]:
             "another chapter's figure whose caption has no launch links": (plain, _fig(_img("/content/part/A/figures/a.png"))),
             "another chapter's figure whose caption links Colab but not Binder": (plain, _fig(_img("/content/part/A/figures/a.png"), colab_caption)),
             "a figure from a chapter with no notebook": (plain, _fig(_img("/content/part/B/figures/x.png"), caption)),
+            "an unmarked figure whose page, but not its caption, links the notebook": (
+                at_a, {"type": "root", "children": [{"type": "paragraph", "children": caption["children"]},
+                                                    _fig(_img("figures/a.png"))]}),
+            "a note-under figure whose page doesn't link the notebook": (at_a, _fig(_img("figures/a.png"), cls="note-under")),
         }
         for name, (location, node) in good.items():
             if figure_problems("p", location, node, exempt, set(), repo):
