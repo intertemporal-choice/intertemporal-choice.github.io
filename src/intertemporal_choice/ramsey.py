@@ -69,18 +69,43 @@ def _arrow(ax, k, c, color, at=-1):
                 arrowprops={"arrowstyle": "-|>", "color": color, "lw": 1.8, "mutation_scale": 14})
 
 
+# The arrows of motion: light, so the paths stay readable.
+MOTION = {"color": "0.55", "lw": 1.0, "mutation_scale": 9}
+
+
+def _motion(ax, k, c_kdot0, steady, saddle, k_max, c_max):
+    """The direction of motion in each of the four regions the loci make, as a pair of arrows from a point
+    in the region: one horizontal (kdot's sign: right below the kdot = 0 curve, left above it) and one
+    vertical (cdot's sign: up left of the steady state, down right of it). Above the curve, a point lies
+    between the curve and the saddle path where the path is above the curve, so as to clear both. Each arrow
+    is tagged "motion"."""
+    k_bar = steady[0]
+    dk, dc = 0.06 * k_max, 0.06 * c_max
+    for k_at, up in ((0.5 * k_bar, True), (k_bar + 0.75 * (k_max - k_bar), False)):
+        locus = np.interp(k_at, k, c_kdot0)
+        on_saddle = np.interp(k_at, *saddle)
+        above = (locus + on_saddle) / 2 if on_saddle - locus > 3 * dc else locus + 0.6 * (c_max - locus)
+        for c_at, right in ((0.3 * locus, True), (above, False)):
+            for to in ((k_at + (dk if right else -dk), c_at), (k_at, c_at + (dc if up else -dc))):
+                ax.annotate("", to, xytext=(k_at, c_at), gid="motion",
+                            arrowprops={"arrowstyle": "-|>", "shrinkA": 0, "shrinkB": 0, **MOTION})
+
+
 # The paths off the saddle path: purple and brown, not red and green, which color-blind readers
 # confuse, and neither close to the blue kdot = 0 curve or the orange cdot/c = 0 line.
 PATH_COLORS = ("C4", "C5")
 
 
-def draw_saddle(ax, k, c_kdot0, steady, saddle, paths, golden=None, c_max=None):
+def draw_saddle(ax, k, c_kdot0, steady, saddle, paths, golden=None, c_max=None, motion=False):
     """The phase diagram: the kdot = 0 curve (c_kdot0 at each k), the cdot/c = 0 line at the steady
     state, the saddle path `saddle` = (k, c) with arrows toward the steady state, and `paths`, each
     a path (k, c) in time order, with an arrow at its end. `golden`, if given, is the golden rule
-    k̿, marked on the axis with a dotted line up to the top of the kdot = 0 curve."""
+    k̿, marked on the axis with a dotted line up to the top of the kdot = 0 curve. `motion` adds the
+    direction of motion in each of the four regions, as light pairs of arrows."""
     k_max = k[-1]
     c_max = c_max or 1.6 * np.max(c_kdot0)
+    if motion:
+        _motion(ax, k, c_kdot0, steady, saddle, k_max, c_max)
     ax.plot(k, c_kdot0, color="C0")
     ax.annotate(tex(r"$\dot{\kNrm}=0$"), (k_max, c_kdot0[-1]), xytext=(-4, -6), textcoords="offset points",
                 ha="right", va="top", color="C0")
@@ -133,5 +158,19 @@ def self_test() -> list[str]:
     arrows = [a for a in ax.texts if a.arrow_patch is not None]
     if len(arrows) != 4:
         failures.append("ramsey: draw_saddle does not put an arrow on each branch of the saddle path and each path")
+    plt.close(fig)
+
+    fig, ax = plt.subplots()
+    draw_saddle(ax, k, curve(0.03), (2.25, 1.0), (k_s, 0.45 * k_s**0.5), paths, golden=3.7, motion=True)
+    motion = [a for a in ax.texts if a.get_gid() == "motion"]
+    if len(motion) != 8 or len([a for a in ax.texts if a.arrow_patch is not None]) != 12:
+        failures.append("ramsey: draw_saddle(motion=True) does not add a pair of arrows in each of the four regions")
+    for a in motion:  # each arrow points the way the loci say: right below kdot = 0, up left of the steady state
+        (k0, c0), (k1, c1) = a.xyann, a.xy
+        locus = np.interp(k0, k, curve(0.03))
+        if k1 != k0 and (k1 > k0) != (c0 < locus):
+            failures.append("ramsey: a horizontal arrow of motion points against kdot's sign")
+        if c1 != c0 and (c1 > c0) != (k0 < 2.25):
+            failures.append("ramsey: a vertical arrow of motion points against cdot's sign")
     plt.close(fig)
     return failures
