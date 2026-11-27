@@ -20,7 +20,9 @@ content/<part>/<Chapter>/<Chapter>.ipynb, into the chapter's figures/ folder (se
 code/build_site.py). MyST does not: a figure whose file is stale builds and deploys. So:
 
   4. every figure is exactly one image: `figures/<name>.png` beside a chapter that has its
-     notebook, or an image listed in code/figure_exemptions.txt; no notebook output is
+     notebook, `/content/<part>/<Chapter>/figures/<name>.png` drawn by that chapter's notebook
+     (a Supplemental Note showing a chapter's figure, its caption linking the notebook), or an
+     image listed in code/figure_exemptions.txt; no notebook output is
      embedded, and no image appears outside a figure unless it is exempt
   5. the exemptions list stays honest: each entry has a kind (`exception`, data that cannot
      be obtained; `pending`, not yet ported; `remote`, drawn by a REMARK whose CI regenerates
@@ -88,6 +90,8 @@ TOLERANCE = 3.0
 ASSET = re.compile(r'(?:href|src)="(/[^"]*)"')
 REFRESH = re.compile(r'<meta http-equiv="refresh"', re.IGNORECASE)
 CHAPTER_LOCATION = re.compile(r"^/content/[^/]+/([^/]+)/index\.md$")
+# Another chapter's figure, shown on a page that is not that chapter (a Supplemental Note).
+CHAPTER_FIGURE = re.compile(r"^/(content/[^/]+/([^/]+))/figures/[A-Za-z0-9][A-Za-z0-9_-]*\.png$")
 NOTEBOOK_LOCATION = re.compile(r"^/content/[^/]+/([^/]+)/\1\.ipynb$")
 FIGURE_FILE = re.compile(r"^figures/[A-Za-z0-9][A-Za-z0-9_-]*\.png$")
 
@@ -195,6 +199,15 @@ def notebook_beside(repo: Path, location: str) -> bool:
     return bool(m) and (repo / location.lstrip("/")).parent.joinpath(f"{m.group(1)}.ipynb").is_file()
 
 
+def drawing_notebook(repo: Path, src: str) -> str | None:
+    """The notebook that draws another chapter's figure at `src`, relative to the repository, if it exists."""
+    m = CHAPTER_FIGURE.match(src)
+    if not m:
+        return None
+    rel = f"{m.group(1)}/{m.group(2)}.ipynb"
+    return rel if (repo / rel).is_file() else None
+
+
 def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, repo: Path) -> list[str]:
     """Figures that are not one image drawn by the chapter's notebook or exempt."""
     problems = []
@@ -220,6 +233,12 @@ def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, re
                 problems.append(
                     f"{slug}: {what} uses {src}, but the page is not a chapter with its notebook"
                     " beside it (content/<part>/<Chapter>/<Chapter>.ipynb)"
+                )
+        elif CHAPTER_FIGURE.match(src):
+            if not drawing_notebook(repo, src):
+                problems.append(
+                    f"{slug}: {what} uses {src}, but no notebook beside that chapter draws it"
+                    " (content/<part>/<Chapter>/<Chapter>.ipynb)"
                 )
         else:
             problems.append(
@@ -248,6 +267,13 @@ def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, re
             for service, url in launch_links(rel).items():
                 if url not in urls:
                     problems.append(f"{slug}: {name}'s caption has no link to open {rel} in {service} ({url})")
+        drawn_by = drawing_notebook(repo, src)
+        if drawn_by:
+            # Another chapter's figure links, in its caption, to the notebook that draws it.
+            urls = link_urls(fig)
+            for service, url in launch_links(drawn_by).items():
+                if url not in urls:
+                    problems.append(f"{slug}: {name}'s caption has no link to open {drawn_by} in {service} ({url})")
 
     def visit(node) -> None:
         if isinstance(node, list):
@@ -512,6 +538,7 @@ def self_test_figures() -> list[str]:
             "a notebook-drawn figure beside its chapter": (at_a, _fig(_img("figures/a.png"), caption)),
             "an exempt static image": (plain, _fig(_img(static))),
             "an exempt remote image pinned to a commit": (at_a, _fig(_img(remote))),
+            "another chapter's figure, linked to the notebook that draws it": (plain, _fig(_img("/content/part/A/figures/a.png"), caption)),
         }
         bad = {
             "an embedded notebook output": (at_a, _fig(_out(*png))),
@@ -526,6 +553,9 @@ def self_test_figures() -> list[str]:
             "an image from somewhere else": (at_a, _fig(_img("../pictures/a.png"))),
             "an unlisted image outside a figure": (plain, {"type": "root", "children": [_img("/x.png")]}),
             "an unlisted remote image": (at_a, _fig(_img(remote.replace("/r.png", "/s.png")))),
+            "another chapter's figure whose caption has no launch links": (plain, _fig(_img("/content/part/A/figures/a.png"))),
+            "another chapter's figure whose caption links Colab but not Binder": (plain, _fig(_img("/content/part/A/figures/a.png"), colab_caption)),
+            "a figure from a chapter with no notebook": (plain, _fig(_img("/content/part/B/figures/x.png"), caption)),
         }
         for name, (location, node) in good.items():
             if figure_problems("p", location, node, exempt, set(), repo):
