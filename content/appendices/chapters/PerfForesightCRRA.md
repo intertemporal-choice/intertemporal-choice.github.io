@@ -48,9 +48,7 @@ Consumption is proportional to overall wealth {math}`\oLvl_{t}`, the sum of huma
   \uFunc^{\prime}(\MPC_{t} \oLvl_{t}) & = \Rfree \DiscFac \uFunc^{\prime}(\MPC_{t+1}\overbrace{\oLvl_{t}(1-\MPC_{t})\Rfree}^{\oLvl_{t+1}})
 \\ \MPC_{t} \oLvl_{t} & = (\Rfree \DiscFac)^{-1/\CRRA} \MPC_{t+1}\oLvl_{t}(1-\MPC_{t}) \Rfree
 \\ \underbrace{\Rfree^{-1} (\Rfree \DiscFac)^{1/\CRRA}}_{\RPFac} \MPC_{t}  & =  \MPC_{t+1}(1-\MPC_{t})
-\\ (\RPFac \MPC_{t})^{-1}  & =  \MPC_{t+1}^{-1}(1-\MPC_{t})^{-1}
-\\ (1-\MPC_{t}) \MPC_{t}^{-1}  & = \RPFac  \MPC_{t+1}^{-1}
-\\ \MPC_{t}^{-1}-1  & = \RPFac  \MPC_{t+1}^{-1}
+\\ \MPC_{t}^{-1}-1 = (1-\MPC_{t}) \MPC_{t}^{-1}  & = \RPFac  \MPC_{t+1}^{-1}
 \\ \MPC_{t}^{-1}  & = 1+\RPFac  \MPC_{t+1}^{-1}
 \end{aligned}
 ```
