@@ -134,6 +134,53 @@ def draw_saddle(ax, k, c_kdot0, steady, saddle, paths, golden=None, c_max=None, 
     _axes(ax, k_max, c_max)
 
 
+def draw_time_pref_fall(ax, k, c_kdot0, old, new, saddle, golden=None, c_range=None):
+    """A fall in the time preference rate, around the steady states: the kdot = 0 curve (c_kdot0 at each k; it does
+    not involve the time preference rate, so it does not move), the old cdot/c = 0 line at the old steady state
+    `old` = (k̄, c̄) dashed, the new one at `new` solid, the new saddle path `saddle` = (k, c) with an arrow on each
+    branch toward the new steady state, and the jump: with k fixed, consumption falls from the old steady state onto
+    the new saddle path. `golden`, if given, is the golden rule k̿. `c_range` is (c_min, c_max) for the view; the
+    saddle path is drawn where it is in view. Returns consumption just after the jump."""
+    k_min, k_max = k[0], k[-1]
+    c_min, c_max = c_range or (0, 1.6 * np.max(c_kdot0))
+    ax.plot(k, c_kdot0, color="C0")
+    ax.annotate(tex(r"$\dot{\kNrm}=0$"), (k_max, c_kdot0[-1]), xytext=(-4, -6), textcoords="offset points",
+                ha="right", va="top", color="C0")
+    ax.axvline(old[0], color="C1", linestyle="--")
+    ax.annotate(tex(r"$\dot{\cNrm}/\cNrm=0$") + ", old", (old[0], 0.97), xycoords=("data", "axes fraction"),
+                xytext=(-4, 0), textcoords="offset points", ha="right", va="top", color="C1")
+    ax.axvline(new[0], color="C1")
+    ax.annotate(tex(r"$\dot{\cNrm}/\cNrm=0$") + ", new", (new[0], 0.04), xycoords=("data", "axes fraction"),
+                xytext=(4, 0), textcoords="offset points", ha="left", va="bottom", color="C1")
+    k_s, c_s = saddle
+    inside = (c_s >= c_min) & (c_s <= c_max)  # the part of the saddle path in view
+    k_s, c_s = k_s[inside], c_s[inside]
+    ax.plot(k_s, c_s, color="black", linewidth=2.2)
+    ax.annotate("new saddle path", (k_s[-1], c_s[-1]), xytext=(6, -2), textcoords="offset points", ha="left",
+                va="top")
+    for side in (k_s < new[0], k_s > new[0]):  # an arrow on each branch, pointing at the new steady state
+        kb, cb = k_s[side], c_s[side]
+        order = np.argsort(np.abs(kb - new[0]))[::-1]  # far to near
+        _arrow(ax, kb[order], cb[order], "black", at=len(order) // 3)
+    c_jump = np.interp(old[0], k_s, c_s)
+    ax.annotate("", (old[0], c_jump), xytext=old,
+                arrowprops={"arrowstyle": "-|>", "color": PATH_COLORS[0], "lw": 1.8, "mutation_scale": 14,
+                            "shrinkA": 4, "shrinkB": 0})
+    ax.plot(*old, "o", markerfacecolor="white", markeredgecolor="black", markersize=6)
+    ax.plot(*new, "o", color="black", markersize=5)
+    for k_at, word, side in ((old[0], "old ", "right"), (new[0], "new ", "left")):  # apart, so they don't collide
+        # upright, so the word doesn't read as variables; k̄ is math, italic on its own
+        ax.annotate(word + STEADY, (k_at, 0), xytext=(0, -4), textcoords="offset points", ha=side, va="top",
+                    xycoords=("data", "axes fraction"), fontsize=12)
+    if golden is not None:
+        ax.plot([golden, golden], [c_min, np.interp(golden, k, c_kdot0)], color="0.4", linestyle=":", linewidth=1.2)
+        _tick(ax, golden, GOLDEN)
+    _axes(ax, k_max, c_max)
+    ax.set_xlim(k_min, k_max)
+    ax.set_ylim(c_min, c_max)
+    return c_jump
+
+
 def self_test() -> list[str]:
     import matplotlib.pyplot as plt
 
@@ -172,5 +219,20 @@ def self_test() -> list[str]:
             failures.append("ramsey: a horizontal arrow of motion points against kdot's sign")
         if c1 != c0 and (c1 > c0) != (k0 < 2.25):
             failures.append("ramsey: a vertical arrow of motion points against cdot's sign")
+    plt.close(fig)
+
+    fig, ax = plt.subplots()
+    kk = np.linspace(1.6, 4.0, 60)
+    k_s = np.linspace(1.6, 4.0, 40)
+    c_jump = draw_time_pref_fall(ax, kk, kk**0.3 - 0.12 * kk, (2.25, 1.0), (2.45, 1.01), (k_s, 0.6 + 0.17 * k_s),
+                                 golden=3.7, c_range=(0.85, 1.1))
+    # the kdot = 0 curve, two cdot = 0 lines, the saddle path, the two steady states, the golden rule
+    if len(ax.get_lines()) != 7:
+        failures.append("ramsey: draw_time_pref_fall does not draw both loci, the saddle path, both steady states and the golden rule")
+    jumps = [a for a in ax.texts if a.arrow_patch is not None and a.xy[0] == a.xyann[0] == 2.25]
+    if len(jumps) != 1 or not jumps[0].xy[1] < jumps[0].xyann[1] or not np.isclose(c_jump, 0.6 + 0.17 * 2.25):
+        failures.append("ramsey: draw_time_pref_fall does not draw consumption jumping straight down onto the new saddle path")
+    if ax.get_xlim() != (1.6, 4.0) or ax.get_ylim() != (0.85, 1.1):
+        failures.append("ramsey: draw_time_pref_fall does not show the view it is given")
     plt.close(fig)
     return failures
