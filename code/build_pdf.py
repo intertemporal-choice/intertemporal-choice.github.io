@@ -230,12 +230,16 @@ def pdf_article_list(config: str) -> list[str]:
     return [a["file"] for e in exports if "pdf" in e.get("format", "") for a in e.get("articles", [])]
 
 
+RAW_LABEL = re.compile(r"\{raw:latex\}`\\label\{([^}]+)\}`")  # left by margins_to_footnotes
+
+
 def pdf_labels(root: Path) -> set[str]:
-    """Every label on a page the PDF has."""
+    """Every label on a page the PDF has, including those margins_to_footnotes moved into footnotes."""
     labels = set()
     for rel in pdf_article_list((root / "myst.yml").read_text()):
         if rel.endswith(".md"):
-            labels |= {a or b for a, b in LABEL_DEF.findall((root / rel).read_text())}
+            text = (root / rel).read_text()
+            labels |= {a or b for a, b in LABEL_DEF.findall(text)} | set(RAW_LABEL.findall(text))
     return labels
 
 
@@ -359,7 +363,11 @@ FENCE_LINE = re.compile(r"^\s*(`{3,}|:{3,})")
 def margins_to_footnotes(text: str) -> tuple[str, int]:
     """Each `{margin}` note as a footnote: its marker at the end of the last line of prose before
     it (outside any fenced block, and not a heading or a label), its text as the definition, where
-    the note was. MyST's PDF export drops margin notes; the site keeps them in the margin."""
+    the note was. MyST's PDF export drops margin notes; the site keeps them in the margin.
+    A target line `(label)=` as the note's first line (where the site gives the note's paragraph the id),
+    or just above the note, moves into its footnote as a raw \\label, so links to
+    the note land on the footnote: MyST's LaTeX writes no \\label for a target on a paragraph or a
+    margin note (Chris, 2026-11-27: each figure's "[live version]" links to the figures' margin note)."""
     lines = text.split("\n")
     fenced, inside = [False] * len(lines), None  # which lines sit inside a fenced block
     for i, line in enumerate(lines):
@@ -374,6 +382,10 @@ def margins_to_footnotes(text: str) -> tuple[str, int]:
     notes = []
     for number, m in enumerate(MARGIN.finditer(text), 1):
         first = text[: m.start()].count("\n")
+        above = next((j for j in range(first - 1, -1, -1) if lines[j].strip()), None)
+        target = re.fullmatch(r"\((\S+)\)=", lines[above].strip()) if above is not None else None
+        if target:
+            lines[above] = ""
         anchor = next((j for j in range(first - 1, -1, -1)
                        if lines[j].strip() and not fenced[j] and not lines[j].lstrip().startswith("#")
                        and not re.fullmatch(r"\(\S+\)=", lines[j].strip())), None)
@@ -382,7 +394,11 @@ def margins_to_footnotes(text: str) -> tuple[str, int]:
         label = f"marginnote{number}"
         lines[anchor] = lines[anchor].rstrip() + f"[^{label}]"
         body = m.group(1).strip("\n").split("\n")
-        definition = [f"[^{label}]: {body[0]}"] + [("    " + line) if line.strip() else "" for line in body[1:]]
+        inner = re.fullmatch(r"\((\S+)\)=", body[0].strip())
+        if inner and len(body) > 1:
+            target, body = inner, body[1:]
+        keep = f"{{raw:latex}}`\\label{{{target.group(1)}}}`" if target else ""
+        definition = [f"[^{label}]: {keep}{body[0]}"] + [("    " + line) if line.strip() else "" for line in body[1:]]
         notes.append((first, m.group(0).count("\n") + 1, definition))
     for first, length, definition in reversed(notes):
         lines[first : first + length] = definition
@@ -820,6 +836,10 @@ def margin_failures() -> list[str]:
                                      "P.[^marginnote1]\n\n[^marginnote1]: First.\n\n    Second, $x$.\n"),
         "a note after a heading": ("Earlier.\n\n## Head\n\n:::{margin}\nN.\n:::\n",
                                    "Earlier.[^marginnote1]\n\n## Head\n\n[^marginnote1]: N.\n"),
+        "a note whose first line is a target": ("Text.\n\n:::{margin}\n(note-y)=\nRun it.\n:::\n",
+                                               "Text.[^marginnote1]\n\n[^marginnote1]: {raw:latex}`\\label{note-y}`Run it.\n"),
+        "a note with a target above it": ("Text.\n\n(note-x)=\n:::{margin}\nRun it.\n:::\n",
+                                          "Text.[^marginnote1]\n\n\n[^marginnote1]: {raw:latex}`\\label{note-x}`Run it.\n"),
     }
     failures = [f"{name} became {margins_to_footnotes(given)[0]!r}"
                 for name, (given, want) in cases.items() if margins_to_footnotes(given)[0] != want]

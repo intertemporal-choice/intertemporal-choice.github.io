@@ -9,6 +9,11 @@ Loosely following {cite:t}`cjSOE` (with some simplifications), this note extends
 
 where the first subscript denotes the date being examined and the second denotes the period of birth of the generation being examined.
 
+:::{margin}
+(TractableBufferStockMacro-FigureNotebook)=
+This note's figures are drawn by the chapter's [notebook](../consumption/TractableBufferStock/TractableBufferStock.ipynb); run it in your browser, with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=TractableBufferStock.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+:::
+
 We make strong assumptions that permit straightforward aggregation. The first such assumption is that newly unemployed households immediately migrate out of the country (think of British retirees moving to southern Spain). This means that macroeconomic variables will reflect only the circumstances of employed consumers, rather than a blend of the employed and the unemployed.
 
 :::{margin}
@@ -45,7 +50,7 @@ In the balanced growth equilibrium, the growth factor for aggregate population w
 
 ## Stakes
 
-We now examine this model under two assumptions about the initial "stake" of newborns in the economy. (We use "stake" to designate a transfer received by newborns). This is explicitly *not* an inheritance, as we have assumed that individuals have no bequest motive and newborns are unrelated to anyone in the existing population. Our motivation is to make the model more tractable, rather than to represent an important feature of the real world; the model without a "stake" can only be solved by simulation, and {numref}`fig:TBS-SOENoStakescPath` shows how its aggregate consumption evolves when households start with no wealth. Both figures are drawn by the chapter's [notebook](../consumption/TractableBufferStock/TractableBufferStock.ipynb); run it in your browser, with nothing to install, in [JupyterLite](https://intertemporal-choice.github.io/lite/notebooks/index.html?path=TractableBufferStock.ipynb), or open it in [Colab](https://colab.research.google.com/github/intertemporal-choice/intertemporal-choice.github.io/blob/main/content/consumption/TractableBufferStock/TractableBufferStock.ipynb) or [Binder](https://mybinder.org/v2/gh/intertemporal-choice/intertemporal-choice.github.io/main?labpath=content/consumption/TractableBufferStock/TractableBufferStock.ipynb).
+We now examine this model under two assumptions about the initial "stake" of newborns in the economy. (We use "stake" to designate a transfer received by newborns). This is explicitly *not* an inheritance, as we have assumed that individuals have no bequest motive and newborns are unrelated to anyone in the existing population. Our motivation is to make the model more tractable, rather than to represent an important feature of the real world; the model without a "stake" can only be solved by simulation, and {numref}`fig:TBS-SOENoStakescPath` shows how its aggregate consumption evolves when households start with no wealth.
 
 ### A "Stake" That Yields a Representative Agent
 
@@ -119,7 +124,7 @@ If the economy has experienced multiple shocks, it will be necessary to retain a
 
 Aggregate {math}`\CNrm` in a Small Open Economy Before and After {math}`\discRte` Decline
 
-Note: With stakes, aggregate consumption behaves like an individual's: it drops, then rises to a higher ratio.
+Note: With stakes, aggregate consumption behaves like an individual's: it drops, then rises to a higher ratio. [[live version]](#TractableBufferStockMacro-FigureNotebook)
 :::
 
 ### No Stake
@@ -161,6 +166,6 @@ The foregoing discussion contains (in some cases implicitly) all the assumptions
 
 Path of Aggregate {math}`\CNrm` in a Small Open Economy Without Stakes From Date 0
 
-Note: Starting with no wealth, aggregate consumption rises quickly toward its steady-state ratio as households build their buffer stocks.
+Note: Starting with no wealth, aggregate consumption rises quickly toward its steady-state ratio as households build their buffer stocks. [[live version]](#TractableBufferStockMacro-FigureNotebook)
 :::
 
