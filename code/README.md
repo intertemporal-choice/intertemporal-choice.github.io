@@ -148,8 +148,28 @@ website's cross-references stay internal and follow pages when they move.
 Links into Supplemental Notes, which the PDF omits, work the same way. They resolve
 once the site carrying those pages has been deployed.
 
-`--self-test` checks the link rewriting, and the reimplementation of MyST's URL and
-anchor slugs, against cases they must handle.
+`--strict` also fails if LaTeX's log has an error (in either of the forms LaTeX prints one), an
+undefined reference or citation, a label defined twice, or an overfull line or page; without it
+they are reported but do not fail. CI's thorough flow runs it.
+
+`--self-test` checks the link rewriting, the reimplementation of MyST's URL and anchor slugs, and
+the strict check, against cases they must handle.
+
+### Releasing the PDF
+
+The PDF is not committed. CI builds it in the thorough flow, which runs only on a release-candidate
+tag (Chris Carroll, 2026-11-27: "I want to run lite on pushes to main, and thorough only on candidate
+tagged releases"). To release one, tag a commit on main and push the tag:
+
+    git tag v2026.11.28-rc1 && git push origin v2026.11.28-rc1
+
+The tag's run builds the site and runs every check, as on a push to main, and then builds the PDF
+with `--strict`, using TeX Live 2023 from Ubuntu 24.04. If everything passes, the PDF becomes the
+GitHub Release for the tag, marked latest, and main is redeployed. Every deploy serves the latest
+release's PDF at `https://intertemporal-choice.github.io/intertemporal-choice.pdf`, linked from the
+front page and from `content/BookPDF.md`. If anything fails, nothing is released and the site keeps
+the last good PDF: fix it on main and tag the next candidate (`-rc2`). The run keeps LaTeX's log and
+MyST's as the artifact `pdf-logs`.
 
 ## `release_package.py`
 

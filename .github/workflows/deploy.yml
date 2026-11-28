@@ -2,12 +2,23 @@
 # Ensure your GitHub Pages settings for this repository are set to deploy with **GitHub Actions**.
 
 name: MyST GitHub Pages Deploy
+# Two flows (Chris Carroll, 2026-11-27: "I want to run lite on pushes to main, and thorough only on candidate tagged
+# releases"):
+#  - lite: the build job, its checks and, on main, the deploy. Runs on every push to main and every pull request.
+#  - thorough: a release-candidate tag, v<date>-rcN (v2026.11.28-rc1), runs the same build job and then the pdf job,
+#    which builds the book's PDF and fails on any problem in LaTeX's log. If both pass, publish-pdf releases the PDF
+#    under the tag and redeploys main, so the site serves it at once (his choice, 2026-11-28). A tag never
+#    deploys its own commit, which main may have moved past. Every deploy serves the latest released PDF.
 on:
   push:
     # Runs on pushes targeting the default branch
     branches: [main]
-  # Pull requests run the build and its checks; only a push to main deploys.
+    # and on release-candidate tags: the thorough flow
+    tags: ['v*-rc*']
+  # Pull requests run the build and its checks; only main deploys.
   pull_request:
+  # Redeploys main: publish-pdf runs it once it has released a PDF, and it can be run by hand from the Actions tab.
+  workflow_dispatch:
 env:
   # `BASE_URL` determines, relative to the root of the domain, the URL that your site is served from.
   # E.g., if your site lives at `https://mydomain.org/myproject`, set `BASE_URL=/myproject`.
@@ -17,12 +28,12 @@ env:
 # Read-only by default: the build job runs pull-request code. Only deploy writes to Pages.
 permissions:
   contents: read
-# Pushes to main run one at a time, and a newer push replaces one still waiting, so the last site deployed is
-# always main's newest commit. (With only the deploy job queued, builds ran side by side, and an older commit
-# whose build was slower deployed last, over the newer site.) Each pull-request run is its own group, so those
-# still run side by side.
+# Runs on main (pushes and redeploys) run one at a time, and a newer one replaces one still waiting, so the last
+# site deployed is always main's newest commit. (With only the deploy job queued, builds ran side by side, and an
+# older commit whose build was slower deployed last, over the newer site.) Each pull-request or tag run is its own
+# group, so those still run side by side.
 concurrency:
-  group: ${{ github.event_name == 'push' && 'pushes-to-main' || github.run_id }}
+  group: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && 'pushes-to-main' || github.run_id }}
   cancel-in-progress: false
 jobs:
   build:
@@ -116,7 +127,7 @@ jobs:
         name: Stage the package files
         run: >-
           uv run python code/release_package.py stage _build/html/packages
-          ${{ github.event_name == 'push' && '--release _release' || '' }}
+          ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && '--release _release' || '' }}
       - name: Hand the new release to the release job
         if: steps.package.outputs.version != ''
         uses: actions/upload-artifact@v4
@@ -130,6 +141,21 @@ jobs:
       # code/verify_build.py.
       - name: Verify the built site
         run: uv run python code/verify_build.py
+      # The book's PDF, which only the thorough flow builds: a deploy serves the latest GitHub Release's copy at
+      # /intertemporal-choice.pdf, so a lite deploy keeps it. Before the first release there is none to serve; once
+      # there is one, failing to fetch it fails the build, so a deploy never drops the PDF the site serves.
+      - name: Add the latest released PDF to the site
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          releases=$(gh release list --repo "$GITHUB_REPOSITORY" --exclude-drafts --exclude-pre-releases --limit 1 --json tagName --jq length)
+          if [ "$releases" = "0" ]; then
+            echo "::warning::no release of the book's PDF yet, so the site serves none; tag a release candidate to make one"
+            exit 0
+          fi
+          gh release download --repo "$GITHUB_REPOSITORY" --pattern intertemporal-choice.pdf --dir _build/html
+          echo "serving the PDF of release $(gh release view --repo "$GITHUB_REPOSITORY" --json tagName --jq .tagName)"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -140,7 +166,7 @@ jobs:
   # a file there. See code/release_package.py.
   release:
     needs: build
-    if: github.event_name == 'push' && needs.build.outputs.version != ''
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.build.outputs.version != ''
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -158,7 +184,7 @@ jobs:
     # package file that the `packages` branch does not keep.
     needs: [build, release]
     if: >-
-      github.event_name == 'push' && !cancelled() && needs.build.result == 'success'
+      github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && !cancelled() && needs.build.result == 'success'
       && (needs.release.result == 'success' || needs.release.result == 'skipped')
     permissions:
       pages: write
@@ -178,3 +204,80 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # The thorough flow's PDF, on a release-candidate tag only, once the build and its checks have passed. TeX comes from
+  # Ubuntu 24.04's packages: TeX Live 2023, the release the PDF is checked with by hand, which has everything the
+  # PDF uses (MyST's plain_latex_book template, Latin Modern). code/build_pdf.py --strict fails on a LaTeX error,
+  # an undefined reference or citation, a label defined twice, an overfull line or page, or a character a font lacks.
+  pdf:
+    needs: build
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && contains(github.ref_name, '-rc')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # A candidate is a commit on main: the site is main, so a PDF from anywhere else would not match it.
+      - name: The tagged commit is on main
+        run: |
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/main \
+            || { echo "::error::$GITHUB_REF_NAME tags ${GITHUB_SHA::7}, which is not on main; tag a commit on main"; exit 1; }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install TeX
+        run: >-
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends
+          texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended lmodern latexmk
+      - name: Install the locked environment
+        run: uv sync --locked
+      - name: Build the PDF, failing on any problem in LaTeX's log
+        run: uv run python code/build_pdf.py --strict
+      - name: Keep the logs with the run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-logs
+          path: |
+            exports/intertemporal-choice_pdf_tex/intertemporal-choice.log
+            _build/pdf-src-myst.log
+            _build/pdf-src-latexmk.log
+          if-no-files-found: ignore
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: book-pdf
+          path: exports/intertemporal-choice.pdf
+          if-no-files-found: error
+          retention-days: 7
+
+  # A candidate that passed: its PDF becomes the GitHub Release for its tag, marked latest, and main is redeployed so
+  # the site serves it at once. Running the flow again on the same tag replaces the release's PDF.
+  publish-pdf:
+    needs: pdf
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: book-pdf
+      - name: Release the PDF under the tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" intertemporal-choice.pdf --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" intertemporal-choice.pdf --repo "$GITHUB_REPOSITORY" --verify-tag --latest \
+              --title "$GITHUB_REF_NAME" --notes "The book as a PDF, built from ${GITHUB_SHA::7} and checked by the thorough flow."
+          fi
+      - name: Redeploy main, so the site serves the new PDF
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main
