@@ -30,8 +30,10 @@ article.article-grid > blockquote p {
 /* A figure marked :class: note-under shows its title above the image and its "Note:" just under it, in small type
    (Chris, 2026-11-27: "Any OTHER content can be a paragraph beginning "Note:" under the figure, in a smaller font than
    the main text and with the minimum possible distance between the figure and the subsequent note"). The theme writes
-   the title and the note as two figcaptions after the image; the note's is already small. The negative margin, a
-   percentage of the width, takes back the white border below the plot, which scales with the image. */
+   the title and the note as two figcaptions after the image; the note's is already small. The note starts right below
+   the image's box, and the white band at the bottom of each PNG is the gap. It must not start higher: the image keeps
+   its white background in dark mode, where the note's text is light, so a line drawn over the band disappears (Chris,
+   2026-11-28: "the first line of the note's text is printed halfway underneath the rendered figure"). */
 figure.note-under {
   display: flex;
   flex-direction: column;
@@ -42,5 +44,5 @@ figure.note-under > figcaption.group {
   margin-bottom: 0.25rem;
 }
 figure.note-under > figcaption.text-sm {
-  margin-top: -1.5%;
+  margin-top: 0;
 }

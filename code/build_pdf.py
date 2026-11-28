@@ -647,7 +647,9 @@ def notes_under(tex: str, labels: set[str]) -> tuple[str, int]:
         parts = ["\\centering\n", "\\captionsetup{position=top}\n", f"\\caption[]{{{title.strip()}}}\n",
                  f"\\label{{{label.group(1)}}}\n", graphic.group(0) + "\n"]
         if sep:
-            parts.append(f"\\par\\vspace{{-0.3\\baselineskip}}\n\\begin{{minipage}}{{{width}}}\\small\\raggedright Note:{note}\\end{{minipage}}\n")
+            # Below the image, never pulled up into it: its white margin is the gap (Chris, 2026-11-28, on the site's
+            # notes: "the first line of the note's text is printed halfway underneath the rendered figure").
+            parts.append(f"\\par\n\\begin{{minipage}}{{{width}}}\\small\\raggedright Note:{note}\\end{{minipage}}\n")
         count += 1
         return head + "".join(parts) + tail
 
