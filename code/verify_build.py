@@ -36,9 +36,12 @@ code/build_site.py). MyST does not: a figure whose file is stale builds and depl
      to open the notebook in Colab and in Binder (Chris, 2026-10-12), so a reader can run it
      without installing anything; and so does the caption of every figure the notebook draws
      (Chris, 2026-10-21: "the caption of each figure or table should have a link to the notebook").
-     A figure marked `:class: note-under` may instead have the links anywhere on its page, since its
-     page states them once at the start (Chris, 2026-11-27: "The captions should not repeat something
-     stated at the start, about colab and binder and jupyterlite")
+     A figure marked `:class: note-under` states them once instead: its note ends with a
+     "[live version]" link to a margin note on its page, and that margin note carries the links
+     (Chris, 2026-11-27, 22:11:09 EST: "Let's make a first marginfootnote that indicates the links
+     for the notebook that generates the figures, and then the last sentence of the notes for each
+     figure can just be "[live version]" with a link to that first marginnote"; asked whether the
+     check should require it, 23:02:44 EST: "yes require such a link")
   7. the figures are current. A notebook the build re-ran (its code or the environment
      changed) redrew its figures over the committed files, so a file that now differs from
      the committed one beyond a small tolerance means the notebook was changed without its
@@ -211,15 +214,70 @@ def drawing_notebook(repo: Path, src: str) -> str | None:
     return rel if (repo / rel).is_file() else None
 
 
+LIVE_VERSION = "[live version]"
+NOT_TARGETS = {"cite", "citeGroup", "crossReference", "footnoteReference", "link"}  # carry identifiers, but name others
+
+
+def text_of(node) -> str:
+    return "".join(n.get("value", "") for n in descendants(node) if n.get("type") == "text")
+
+
+def live_version_target(fig: dict) -> str | None:
+    """The identifier a figure's note links to with its closing "[live version]", if the note ends with one."""
+    legends = [c for c in fig.get("children", []) if isinstance(c, dict) and c.get("type") == "legend"]
+    paragraphs = [n for n in descendants(legends[-1]) if n.get("type") == "paragraph"] if legends else []
+    if not paragraphs:
+        return None
+    tail = [c for c in paragraphs[-1].get("children", [])
+            if not (c.get("type") == "text" and not c.get("value", "").strip())]
+    last = tail[-1] if tail else {}
+    if text_of(last).strip() != LIVE_VERSION:
+        return None
+    if last.get("type") == "crossReference":
+        return last.get("identifier")
+    url = str(last.get("url", "")) if last.get("type") == "link" else ""
+    return url[1:].lower() if url.startswith("#") else None
+
+
+def margin_targets(mdast) -> dict[str, dict]:
+    """Each target inside a margin note (an aside), its identifier mapped to that note."""
+    targets = {}
+    for aside in (n for n in descendants(mdast) if n.get("type") == "aside"):
+        for n in descendants(aside):
+            if n.get("identifier") and n.get("type") not in NOT_TARGETS:
+                targets[n["identifier"]] = aside
+    return targets
+
+
 def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, repo: Path) -> list[str]:
     """Figures that are not one image drawn by the chapter's notebook or exempt."""
     problems = []
-    page_urls = link_urls(mdast)
+    margin_notes = margin_targets(mdast)
 
-    def launch_urls(fig) -> set[str]:
-        """The links that count for a figure's launch links: its caption's, and its page's if it is note-under."""
-        note_under = "note-under" in str(fig.get("class") or "").split()
-        return link_urls(fig) | (page_urls if note_under else set())
+    def launch_urls(fig, name) -> tuple[set[str] | None, str]:
+        """The links that count for a figure's launch links, and where they are: its caption's, or, for a
+        note-under figure, those of the margin note its note's closing "[live version]" links to. None, with
+        the problem reported, if a note-under figure's note has no such link."""
+        if "note-under" not in str(fig.get("class") or "").split():
+            return link_urls(fig), "caption"
+        target = live_version_target(fig)
+        if target is None:
+            problems.append(f'{slug}: {name} is note-under, but its note does not end with a "{LIVE_VERSION}"'
+                            " link to the margin note that links its notebook")
+            return None, ""
+        if target not in margin_notes:
+            problems.append(f'{slug}: {name}\'s "{LIVE_VERSION}" links to {target!r}, which is not in a margin note'
+                            " on its page")
+            return None, ""
+        return link_urls(margin_notes[target]), f'margin note (its "{LIVE_VERSION}" target, {target})'
+
+    def check_launch(fig, name, rel) -> None:
+        urls, where = launch_urls(fig, name)
+        if urls is None:
+            return
+        for service, url in launch_links(rel).items():
+            if url not in urls:
+                problems.append(f"{slug}: {name}'s {where} has no link to open {rel} in {service} ({url})")
 
     def image_problem(src: str | None, what: str) -> None:
         src = src or ""
@@ -271,18 +329,11 @@ def figure_problems(slug: str, location: str, mdast, exempt: dict, used: set, re
         chapter = CHAPTER_LOCATION.match(location)
         if FIGURE_FILE.match(src) and chapter and notebook_beside(repo, location):
             # A figure drawn by the chapter's notebook links to it in its caption.
-            rel = f"{Path(location.lstrip('/')).parent}/{chapter.group(1)}.ipynb"
-            urls = launch_urls(fig)
-            for service, url in launch_links(rel).items():
-                if url not in urls:
-                    problems.append(f"{slug}: {name}'s caption has no link to open {rel} in {service} ({url})")
+            check_launch(fig, name, f"{Path(location.lstrip('/')).parent}/{chapter.group(1)}.ipynb")
         drawn_by = drawing_notebook(repo, src)
         if drawn_by:
             # Another chapter's figure links, in its caption, to the notebook that draws it.
-            urls = launch_urls(fig)
-            for service, url in launch_links(drawn_by).items():
-                if url not in urls:
-                    problems.append(f"{slug}: {name}'s caption has no link to open {drawn_by} in {service} ({url})")
+            check_launch(fig, name, drawn_by)
 
     def visit(node) -> None:
         if isinstance(node, list):
@@ -543,14 +594,31 @@ def self_test_figures() -> list[str]:
         caption = {"type": "caption", "children": [{"type": "link", "url": u} for u in launch_links("content/part/A/A.ipynb").values()]}
         colab_caption = {"type": "caption", "children": [{"type": "link", "url": launch_links("content/part/A/A.ipynb")["Colab"]}]}
 
+        def live(target="a-notebook", last=True, as_link=False):
+            """A note ending (or not, `last=False`) with "[live version]" linking `target`."""
+            ref = ({"type": "link", "url": f"#{target}"} if as_link else {"type": "crossReference", "identifier": target})
+            ref["children"] = [{"type": "text", "value": LIVE_VERSION}]
+            tail = [ref, {"type": "text", "value": " "}] + ([] if last else [{"type": "text", "value": "More."}])
+            return {"type": "legend", "children": [{"type": "paragraph", "children": [{"type": "text", "value": "Note: x. "}, *tail]}]}
+
+        def margin(links=caption["children"], target="a-notebook"):
+            return {"type": "aside", "children": [{"type": "paragraph", "identifier": target, "children": list(links)}]}
+
+        def page(*children):
+            return {"type": "root", "children": list(children)}
+
+        under = lambda note, src="figures/a.png": _fig(_img(src), note, cls="note-under")
+
         good = {
             "a notebook-drawn figure beside its chapter": (at_a, _fig(_img("figures/a.png"), caption)),
             "an exempt static image": (plain, _fig(_img(static))),
             "an exempt remote image pinned to a commit": (at_a, _fig(_img(remote))),
             "another chapter's figure, linked to the notebook that draws it": (plain, _fig(_img("/content/part/A/figures/a.png"), caption)),
-            "a note-under figure whose page, not its caption, links the notebook": (
-                at_a, {"type": "root", "children": [{"type": "paragraph", "children": caption["children"]},
-                                                    _fig(_img("figures/a.png"), cls="note-under")]}),
+            'a note-under figure whose note ends with "[live version]" to the margin note that links the notebook': (
+                at_a, page(margin(), under(live()))),
+            'the same, with "[live version]" a plain link to the margin note': (at_a, page(margin(), under(live(as_link=True)))),
+            "another chapter's note-under figure, whose margin note links the notebook that draws it": (
+                plain, page(margin(), under(live(), "/content/part/A/figures/a.png"))),
         }
         bad = {
             "an embedded notebook output": (at_a, _fig(_out(*png))),
@@ -572,6 +640,14 @@ def self_test_figures() -> list[str]:
                 at_a, {"type": "root", "children": [{"type": "paragraph", "children": caption["children"]},
                                                     _fig(_img("figures/a.png"))]}),
             "a note-under figure whose page doesn't link the notebook": (at_a, _fig(_img("figures/a.png"), cls="note-under")),
+            'a note-under figure whose page links the notebook, but whose note has no "[live version]"': (
+                at_a, page({"type": "paragraph", "children": caption["children"]}, under(None))),
+            'a note-under figure whose "[live version]" is not the note\'s last words': (at_a, page(margin(), under(live(last=False)))),
+            'a note-under figure whose "[live version]" links a paragraph outside any margin note': (
+                at_a, page({"type": "paragraph", "identifier": "a-notebook", "children": caption["children"]}, under(live()))),
+            'a note-under figure whose "[live version]" links a margin note that links Colab but not Binder': (
+                at_a, page(margin(colab_caption["children"]), under(live()))),
+            'a note-under figure whose "[live version]" links a target that is not there': (at_a, page(margin(), under(live("elsewhere")))),
         }
         for name, (location, node) in good.items():
             if figure_problems("p", location, node, exempt, set(), repo):
