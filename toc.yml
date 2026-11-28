@@ -125,3 +125,6 @@ project:
         - file: content/supplemental/Equiprobable.md
         - file: content/supplemental/Equiprobable-Returns.md
         - file: content/supplemental/TractableBufferStockMacro.md
+    # The page that links the book's PDF, which CI's thorough flow builds and releases (see
+    # .github/workflows/deploy.yml). Website only: the PDF export in myst.yml leaves it out.
+    - file: content/BookPDF.md

@@ -30,10 +30,14 @@ whenever a page moves, so the Markdown is left alone and the fix happens here:
      .tex and logs) back to exports/, and fail if LaTeX's log says a character was still
      left out
 
+`--strict` also fails if LaTeX's log has an error, an undefined reference or citation, a
+label defined twice, or an overfull line or page; without it they are reported but do not
+fail. The thorough flow in CI runs it on a release candidate before publishing the PDF.
+
 `--self-test` runs the rewriting and checking functions against input they should
 change or reject, and fails if any of them does not.
 
-Usage: uv run python code/build_pdf.py [--self-test]
+Usage: uv run python code/build_pdf.py [--strict | --self-test]
 """
 
 import argparse
@@ -677,6 +681,27 @@ def missing_glyphs(latex_log: str) -> list[str]:
     ]
 
 
+# What --strict fails on in LaTeX's log, besides a character a font lacks (missing_glyphs). latexmk runs LaTeX with
+# -file-line-error, which prints an error as `./file.tex:12: message` rather than `! message`, so both are matched.
+LATEX_PROBLEMS = {
+    "errors": re.compile(r"^(?:! |[^\s:]+\.(?:tex|sty|cls|bbl|aux|def|cfg|fd):\d+: ).*", re.MULTILINE),
+    "undefined references or citations": re.compile(
+        r"^(?:LaTeX|Package natbib) Warning: (?:(?:Reference|Citation) `|There were undefined).*", re.MULTILINE),
+    "labels defined twice": re.compile(r"^LaTeX Warning: (?:Label `|There were multiply-defined).*", re.MULTILINE),
+    "overfull lines or pages": re.compile(r"^Overfull \\[hv]box.*", re.MULTILINE),
+}
+
+
+def latex_problems(latex_log: str) -> list[str]:
+    """Each kind of problem --strict fails on that LaTeX's log has, once, with its count and its first instance."""
+    problems = []
+    for kind, pattern in LATEX_PROBLEMS.items():
+        found = pattern.findall(latex_log)
+        if found:
+            problems.append(f"LaTeX's log has {len(found)} {kind}; the first: {found[0].strip()}")
+    return problems
+
+
 def compile_and_copy(root: Path) -> list[str]:
     """Step 7: rerun latexmk on the fixed LaTeX, copy the results back to exports/, and check no character is lost."""
     tex_dir = STAGE / TEX_DIR
@@ -695,7 +720,19 @@ def compile_and_copy(root: Path) -> list[str]:
     return missing_glyphs((tex_dir / f"{NAME}.log").read_text(errors="replace"))
 
 
-def build(root: Path) -> list[str]:
+def build(root: Path, strict: bool = False) -> list[str]:
+    problems = build_steps(root)
+    if problems:
+        return problems
+    found = latex_problems((root / TEX_DIR / f"{NAME}.log").read_text(errors="replace"))
+    if not strict:
+        for problem in found:
+            log.warning("%s (--strict fails on this)", problem)
+        return []
+    return found
+
+
+def build_steps(root: Path) -> list[str]:
     stage(root)
     rewrite_staged_facts()
     rewrite_staged_web_only()
@@ -1019,10 +1056,31 @@ def notes_under_failures() -> list[str]:
     return [msg for bad, msg in cases if bad]
 
 
+def latex_failures() -> list[str]:
+    """--strict must pass a clean log and catch each kind of problem, an error in either form included."""
+    clean = ("This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023)\n"
+             "Underfull \\hbox (badness 10000) in paragraph at lines 1--2\n"
+             "Package inputenc Warning: inputenc package ignored with utf8 based engines.\n"
+             "Package pdftexcmds Info: \\pdfdraftmode not found.\n")
+    cases = {
+        "an error printed with its file and line": "./intertemporal-choice-content.growth.a.tex:12: Undefined control sequence.\n",
+        "an error printed the plain way": "! Emergency stop.\n",
+        "an undefined reference": "LaTeX Warning: Reference `eq:x' on page 3 undefined on input line 9.\n",
+        "an undefined citation": "Package natbib Warning: Citation `romer:text' on page 3 undefined on input line 9.\n",
+        "a label defined twice": "LaTeX Warning: Label `fig:a' multiply defined.\n",
+        "an overfull line": "Overfull \\hbox (12.3pt too wide) in paragraph at lines 4--5\n",
+        "an overfull page": "Overfull \\vbox (3.0pt too high) has occurred while \\output is active\n",
+    }
+    failures = [f"--strict rejected a clean log: {latex_problems(clean)}"] if latex_problems(clean) else []
+    failures += [f"--strict missed {name}" for name, text in cases.items() if len(latex_problems(clean + text)) != 1]
+    return failures
+
+
 def self_test() -> bool:
     """Every rewrite and check must act on input it is supposed to act on."""
     failures = (fact_failures() + web_only_failures() + margin_failures() + link_words_failures() + title_label_failures() + href_failures()
-                + url_failures() + clear_failures() + bib_failures() + glyph_failures() + notes_under_failures())
+                + url_failures() + clear_failures() + bib_failures() + glyph_failures() + notes_under_failures()
+                + latex_failures())
     for f in failures:
         log.error("SELF-TEST FAIL: %s", f)
     log.info("self-test %s", "FAILED" if failures else "passed")
@@ -1032,12 +1090,14 @@ def self_test() -> bool:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--self-test", action="store_true")
+    parser.add_argument("--strict", action="store_true",
+                        help="also fail on errors, undefined references or citations, labels defined twice and overfull boxes")
     args = parser.parse_args()
 
     if args.self_test:
         sys.exit(0 if self_test() else 1)
 
-    problems = build(Path.cwd())
+    problems = build(Path.cwd(), strict=args.strict)
     for p in problems:
         log.error("FAIL: %s", p)
     sys.exit(1 if problems else 0)

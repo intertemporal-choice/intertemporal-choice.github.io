@@ -16,6 +16,8 @@ The notes originated from Christopher Carroll's [graduate macroeconomics lecture
 These materials are free to read. Under their CC BY-NC-ND 4.0 license, instructors at other institutions are welcome to share them unchanged in non-commercial teaching. Adapted versions need the authors' permission.
 :::
 
+The whole book except the Supplemental Notes is also available as a [single PDF](https://intertemporal-choice.github.io/intertemporal-choice.pdf).
+
 ## Contents
 
 ### Consumption
